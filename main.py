@@ -271,6 +271,9 @@ class AplicacionEstadistica:
         elif numero == 8:
             # Para el octavo tema: Visualización para salud II: gráficos numéricos
             self.ejecutar_ova_visualizacion_numerica()
+        elif numero == 18:
+            # Para el tema 18: Dashboard descriptivo básico
+            self.ejecutar_ova_dashboard()
         else:
             # Para otros temas, mostrar mensaje informativo
             messagebox.showinfo(
@@ -3837,6 +3840,308 @@ class AplicacionEstadistica:
     def funcion_configuracion(self):
         """Función del botón Configuración"""
         messagebox.showinfo("Configuración", "Función de Configuración activada")
+
+    def ejecutar_ova_dashboard(self):
+        """Ejecuta la OVA de Dashboard descriptivo básico en la misma pantalla"""
+        try:
+            # Limpiar la pantalla actual
+            for widget in self.root.winfo_children():
+                widget.destroy()
+            
+            # Configurar la pantalla para mostrar el contenido de la OVA
+            self.root.title("OVA 18: Dashboard Descriptivo Básico")
+            self.root.configure(bg='#f8f9fa')
+            
+            # Crear interfaz de la OVA en la misma pantalla
+            self.mostrar_ova_dashboard_en_pantalla()
+            
+        except Exception as e:
+            messagebox.showerror(
+                "Error", 
+                f"Error al cargar la OVA:\n{str(e)}"
+            )
+    
+    def mostrar_ova_dashboard_en_pantalla(self):
+        """Muestra el contenido de la OVA en la pantalla principal"""
+        
+        # Header de la OVA
+        header_ova = tk.Frame(self.root, bg='#1e3a8a', height=120)
+        header_ova.pack(fill='x', pady=(0, 20))
+        header_ova.pack_propagate(False)
+        
+        # Título principal de la OVA
+        titulo_ova = tk.Label(
+            header_ova,
+            text="OVA 18: Dashboard Descriptivo Básico",
+            font=('Arial', 24, 'bold'),
+            bg='#1e3a8a',
+            fg='white'
+        )
+        titulo_ova.pack(pady=30)
+        
+        # Subtítulo
+        subtitulo_ova = tk.Label(
+            header_ova,
+            text="Universidad Antonio Nariño - Estadística Descriptiva para Ciencias de la Salud",
+            font=('Arial', 12),
+            bg='#1e3a8a',
+            fg='#bfdbfe'
+        )
+        subtitulo_ova.pack()
+        
+        # Frame principal con scrollbar
+        main_frame = tk.Frame(self.root, bg='#f8f9fa')
+        main_frame.pack(fill='both', expand=True, padx=20)
+        
+        # Canvas y scrollbar
+        canvas = tk.Canvas(main_frame, bg='#f8f9fa', highlightthickness=0)
+        scrollbar = tk.Scrollbar(main_frame, orient="vertical", command=canvas.yview)
+        scrollable_frame = tk.Frame(canvas, bg='#f8f9fa')
+        
+        scrollable_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+        
+        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+        
+        # Contenido de la OVA
+        self.crear_contenido_ova_dashboard(scrollable_frame)
+        
+        # Configurar scrollbar
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+        
+        # Configurar scroll con mouse
+        def _on_mousewheel(event):
+            canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        
+        canvas.bind_all("<MouseWheel>", _on_mousewheel)
+        
+        # Botón para volver al menú principal
+        btn_volver = tk.Button(
+            self.root,
+            text="← Volver al Menú Principal",
+            font=('Arial', 12, 'bold'),
+            bg='#dc2626',
+            fg='white',
+            command=self.volver_al_menu_principal,
+            relief='flat',
+            padx=20,
+            pady=10
+        )
+        btn_volver.pack(pady=20)
+        
+        # Configurar hover para el botón
+        self.configurar_hover(btn_volver)
+    
+    def crear_contenido_ova_dashboard(self, parent_frame):
+        """Crea el contenido de la OVA de Dashboard descriptivo básico"""
+        
+        # Título principal
+        titulo = tk.Label(
+            parent_frame,
+            text="Dashboard Descriptivo Básico",
+            font=('Arial', 20, 'bold'),
+            bg='#f8f9fa',
+            fg='#1f2937'
+        )
+        titulo.pack(pady=20)
+        
+        # Descripción
+        descripcion = tk.Label(
+            parent_frame,
+            text="En este módulo aprenderás a crear y interpretar dashboards descriptivos para ciencias de la salud.",
+            font=('Arial', 14),
+            bg='#f8f9fa',
+            fg='#6b7280',
+            wraplength=800,
+            justify='center'
+        )
+        descripcion.pack(pady=(0, 20))
+        
+        # Objetivos
+        objetivos_frame = tk.Frame(parent_frame, bg='#ebf8ff', relief='solid', borderwidth=1)
+        objetivos_frame.pack(fill='x', pady=10, padx=20)
+        
+        tk.Label(
+            objetivos_frame,
+            text="Objetivos de Aprendizaje:",
+            font=('Arial', 16, 'bold'),
+            bg='#ebf8ff',
+            fg='#1f2937'
+        ).pack(pady=(20, 10))
+        
+        objetivos = [
+            "• Comprender los principios del modelo C(H)ANGE",
+            "• Aplicar estadística descriptiva en dashboards de salud",
+            "• Interpretar indicadores clave de rendimiento (KPIs)",
+            "• Crear visualizaciones efectivas para datos clínicos"
+        ]
+        
+        for objetivo in objetivos:
+            tk.Label(
+                objetivos_frame,
+                text=objetivo,
+                font=('Arial', 12),
+                bg='#ebf8ff',
+                fg='#374151'
+            ).pack(anchor='w', padx=20, pady=2)
+        
+        # Modelo C(H)ANGE
+        modelo_frame = tk.Frame(parent_frame, bg='#f0fdf4', relief='solid', borderwidth=1)
+        modelo_frame.pack(fill='x', pady=10, padx=20)
+        
+        tk.Label(
+            modelo_frame,
+            text="Modelo C(H)ANGE:",
+            font=('Arial', 16, 'bold'),
+            bg='#f0fdf4',
+            fg='#1f2937'
+        ).pack(pady=(20, 10))
+        
+        modelo_items = [
+            ("C", "#dc2626", "Combinatoria en muestreo"),
+            ("A", "#2563eb", "Álgebra en fórmulas estadísticas"),
+            ("N", "#ca8a04", "Números y medidas de tendencia"),
+            ("G", "#9333ea", "Geometría en visualizaciones"),
+            ("E", "#16a34a", "Estadística aplicada")
+        ]
+        
+        for letra, color, descripcion in modelo_items:
+            item_frame = tk.Frame(modelo_frame, bg='#f0fdf4')
+            item_frame.pack(fill='x', padx=20, pady=2)
+            
+            tk.Label(
+                item_frame,
+                text=letra,
+                font=('Arial', 14, 'bold'),
+                bg=color,
+                fg='white',
+                width=3,
+                height=1
+            ).pack(side='left', padx=(0, 10))
+            
+            tk.Label(
+                item_frame,
+                text=descripcion,
+                font=('Arial', 12),
+                bg='#f0fdf4',
+                fg='#374151'
+            ).pack(side='left')
+        
+        # KPIs
+        kpis_frame = tk.Frame(parent_frame, bg='#f8f9fa')
+        kpis_frame.pack(fill='x', pady=20)
+        
+        tk.Label(
+            kpis_frame,
+            text="Indicadores Clave de Rendimiento (KPIs):",
+            font=('Arial', 16, 'bold'),
+            bg='#f8f9fa',
+            fg='#1f2937'
+        ).pack(pady=(0, 10))
+        
+        kpi_data = [
+            ("Casos COVID-19", "1,247", "#2563eb"),
+            ("Casos Diabetes", "892", "#16a34a"),
+            ("Casos Hipertensión", "1,456", "#ca8a04"),
+            ("Casos Críticos", "97", "#dc2626")
+        ]
+        
+        kpi_cards_frame = tk.Frame(kpis_frame, bg='#f8f9fa')
+        kpi_cards_frame.pack()
+        
+        for i, (titulo, valor, color) in enumerate(kpi_data):
+            card_frame = tk.Frame(kpi_cards_frame, bg=color, relief='solid', borderwidth=1)
+            card_frame.grid(row=0, column=i, padx=10, pady=10)
+            card_frame.configure(width=150, height=100)
+            card_frame.pack_propagate(False)
+            
+            tk.Label(
+                card_frame,
+                text=titulo,
+                font=('Arial', 10, 'bold'),
+                bg=color,
+                fg='white'
+            ).pack(pady=(15, 5))
+            
+            tk.Label(
+                card_frame,
+                text=valor,
+                font=('Arial', 18, 'bold'),
+                bg=color,
+                fg='white'
+            ).pack(pady=5)
+        
+        # Botones interactivos
+        botones_frame = tk.Frame(parent_frame, bg='#f8f9fa')
+        botones_frame.pack(fill='x', pady=20)
+        
+        btn_analizar = tk.Button(
+            botones_frame,
+            text="Analizar Caso Clínico",
+            font=('Arial', 12, 'bold'),
+            bg='#2563eb',
+            fg='white',
+            command=self.analizar_caso_clinico,
+            relief='flat',
+            padx=20,
+            pady=10
+        )
+        btn_analizar.pack(side='left', padx=10)
+        
+        btn_ejercicio = tk.Button(
+            botones_frame,
+            text="Ejercicio Práctico",
+            font=('Arial', 12, 'bold'),
+            bg='#16a34a',
+            fg='white',
+            command=self.ejercicio_practico,
+            relief='flat',
+            padx=20,
+            pady=10
+        )
+        btn_ejercicio.pack(side='left', padx=10)
+        
+        btn_evaluacion = tk.Button(
+            botones_frame,
+            text="Evaluación",
+            font=('Arial', 12, 'bold'),
+            bg='#dc2626',
+            fg='white',
+            command=self.evaluacion_dashboard,
+            relief='flat',
+            padx=20,
+            pady=10
+        )
+        btn_evaluacion.pack(side='left', padx=10)
+        
+        # Configurar hover para los botones
+        for btn in [btn_analizar, btn_ejercicio, btn_evaluacion]:
+            self.configurar_hover(btn)
+    
+    def analizar_caso_clinico(self):
+        """Analiza un caso clínico del dashboard"""
+        messagebox.showinfo(
+            "Análisis de Caso Clínico",
+            "Caso: Servicio de Emergencias\n\nDatos:\n• Total de pacientes: 1,247\n• Tiempo promedio de espera: 45 minutos\n• Tasa de ocupación: 87%\n\nAnálisis: Los indicadores sugieren una alta demanda del servicio con tiempos de espera moderados."
+        )
+    
+    def ejercicio_practico(self):
+        """Muestra un ejercicio práctico"""
+        messagebox.showinfo(
+            "Ejercicio Práctico",
+            "Calcula las medidas de tendencia central para:\nDatos: 25, 30, 35, 40, 45, 50, 55, 60, 65, 70\n\nRespuestas:\n• Media = 47.5\n• Mediana = 47.5\n• Desviación estándar = 15.14"
+        )
+    
+    def evaluacion_dashboard(self):
+        """Inicia la evaluación del dashboard"""
+        messagebox.showinfo(
+            "Evaluación",
+            "La evaluación incluirá 5 preguntas sobre:\n\n• Funciones de dashboards descriptivos\n• Modelo C(H)ANGE\n• Medidas estadísticas\n• Interpretación de KPIs\n• Principios de visualización\n\n¡Preparado para comenzar!"
+        )
 
 def main():
     """Función principal"""
