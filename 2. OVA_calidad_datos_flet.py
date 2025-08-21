@@ -711,7 +711,30 @@ class OVAApp:
         self.exercise1_feedback = ft.Container(visible=False)
         self.exercise2_feedback = ft.Container(visible=False)
         self.exercise3_feedback = ft.Container(visible=False)
-        
+
+        # Controles del Ejercicio 3 (definidos previamente para evitar operador ':=')
+        self._tmp_var_name = ft.TextField(hint_text="estado_civil", width=200)
+        self._tmp_var_type = ft.Dropdown(
+            width=200,
+            options=[
+                ft.dropdown.Option("categorical", "Categórica"),
+                ft.dropdown.Option("numerical", "Numérica"),
+                ft.dropdown.Option("date", "Fecha"),
+            ]
+        )
+        self._tmp_var_values = ft.TextField(
+            hint_text="1 = Soltero, 2 = Casado, 3 = Divorciado, 4 = Viudo",
+            multiline=True,
+            min_lines=2,
+            max_lines=3
+        )
+        self._tmp_var_desc = ft.TextField(
+            hint_text="Estado civil del paciente al momento del ingreso",
+            multiline=True,
+            min_lines=2,
+            max_lines=3
+        )
+ 
         return ft.Column([
             ft.Text("Práctica Guiada Paso a Paso", size=28, weight=ft.FontWeight.BOLD),
             
@@ -852,37 +875,20 @@ class OVAApp:
                                 ft.Row([
                                     ft.Column([
                                         ft.Text("Nombre de la Variable:", weight=ft.FontWeight.BOLD, size=12),
-                                        self.var_name_field := ft.TextField(hint_text="estado_civil", width=200)
+                                        self._tmp_var_name
                                     ], expand=True),
                                     ft.Column([
                                         ft.Text("Tipo de Variable:", weight=ft.FontWeight.BOLD, size=12),
-                                        self.var_type_dropdown := ft.Dropdown(
-                                            width=200,
-                                            options=[
-                                                ft.dropdown.Option("categorical", "Categórica"),
-                                                ft.dropdown.Option("numerical", "Numérica"),
-                                                ft.dropdown.Option("date", "Fecha"),
-                                            ]
-                                        )
+                                        self._tmp_var_type
                                     ], expand=True)
                                 ]),
                                 ft.Column([
                                     ft.Text("Valores Válidos:", weight=ft.FontWeight.BOLD, size=12),
-                                    self.var_values_field := ft.TextField(
-                                        hint_text="1 = Soltero, 2 = Casado, 3 = Divorciado, 4 = Viudo",
-                                        multiline=True,
-                                        min_lines=2,
-                                        max_lines=3
-                                    )
+                                    self._tmp_var_values
                                 ]),
                                 ft.Column([
                                     ft.Text("Descripción:", weight=ft.FontWeight.BOLD, size=12),
-                                    self.var_description_field := ft.TextField(
-                                        hint_text="Estado civil del paciente al momento del ingreso",
-                                        multiline=True,
-                                        min_lines=2,
-                                        max_lines=3
-                                    )
+                                    self._tmp_var_desc
                                 ])
                             ]),
                             padding=15,
@@ -995,10 +1001,10 @@ class OVAApp:
         page.update()
 
     def check_exercise3(self, page):
-        var_name = self.var_name_field.value
-        var_type = self.var_type_dropdown.value
-        var_values = self.var_values_field.value
-        var_description = self.var_description_field.value
+        var_name = self._tmp_var_name.value
+        var_type = self._tmp_var_type.value
+        var_values = self._tmp_var_values.value
+        var_description = self._tmp_var_desc.value
         
         if var_name and var_type == "categorical" and var_values and var_description:
             self.exercise3_feedback.content = ft.Container(
