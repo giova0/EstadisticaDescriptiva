@@ -28,9 +28,9 @@ def main(page: ft.Page):
             for control in avatar_container.controls:
                 if isinstance(control, ft.Container):
                     if control.data == avatar_tipo:
-                        control.border = ft.border.all(3, ft.Colors.AMBER)
+                        control.border = ft.border.all(3, ft.Colors.BLUE_700)
                     else:
-                        control.border = ft.border.all(1, ft.Colors.GREY_600)
+                        control.border = ft.border.all(2, ft.Colors.GREY_400)
             page.update()
         return on_click
     
@@ -44,26 +44,23 @@ def main(page: ft.Page):
         # Aquí agregarías la lógica para mostrar la ayuda
     
     def mostrar_pantalla_inicio():
-        """Crear la pantalla de inicio con el libro"""
+        """Crear la pantalla de inicio con imagen de fondo completa"""
         
-        # Contenedor principal con imagen y botón
-        fondo_container = ft.Column([
-            # Imagen de fondo reducida
-            ft.Container(
-                alignment=ft.alignment.center,
-                content=ft.Image(
-                    src="https://i.postimg.cc/02sy0XKB/portada-Estadistica-6.png",
-                    width=page.window_width * 0.9,
-                    height=page.window_height * 0.75,
-                    fit=ft.ImageFit.CONTAIN,
-                )
+        # Contenedor principal con imagen de fondo completa y botón superpuesto
+        fondo_container = ft.Stack([
+            # Imagen de fondo que ocupa toda la pantalla
+            ft.Image(
+                src="https://i.postimg.cc/rw0Q9BF2/portada1-6.png",
+                width=page.window_width,
+                height=page.window_height,
+                fit=ft.ImageFit.COVER,
             ),
-            # Espacio entre imagen y botón
-            ft.Container(height=20),
-            # Botón de ingreso en la parte inferior derecha
+            # Botón superpuesto en la esquina inferior derecha
             ft.Container(
-                alignment=ft.alignment.center_right,
-                margin=ft.margin.only(right=50),
+                width=page.window_width,
+                height=page.window_height,
+                alignment=ft.alignment.bottom_right,
+                padding=ft.padding.only(right=50, bottom=50),
                 content=ft.ElevatedButton(
                     "INGRESAR",
                     width=200,
@@ -76,7 +73,7 @@ def main(page: ft.Page):
                     on_click=ir_a_seleccion_avatar
                 )
             )
-        ], alignment=ft.MainAxisAlignment.CENTER)
+        ])
         
         page.add(fondo_container)
         page.update()
@@ -97,33 +94,81 @@ def main(page: ft.Page):
         # Crear contenedores de avatares
         avatar_controls = []
         for avatar in avatares:
-            avatar_control = ft.Container(
-                width=80,
-                height=100,
-                bgcolor="#2d3748",
-                border_radius=8,
-                border=ft.border.all(1, ft.Colors.GREY_600),
-                data=avatar["nombre"],
-                content=ft.Column([
-                    ft.Container(height=8),
-                    ft.Container(
+            # Usar imágenes reales para todas las carreras
+            if avatar["nombre"] == "Medicina":
+                contenido_imagen = ft.Container(
+                    width=50,
+                    height=50,
+                    border_radius=25,
+                    content=ft.Image(
+                        src="https://i.postimg.cc/0QCSDVYg/estudiante-medicina.png",
                         width=50,
                         height=50,
-                        bgcolor=avatar["color"],
-                        border_radius=25,
-                        content=ft.Icon(
-                            avatar["icono"],
-                            size=25,
-                            color=ft.Colors.WHITE
-                        ),
-                        alignment=ft.alignment.center
+                        fit=ft.ImageFit.COVER,
+                        border_radius=25
                     ),
-                    ft.Container(height=3),
+                    alignment=ft.alignment.center
+                )
+            elif avatar["nombre"] == "Enfermería":
+                contenido_imagen = ft.Container(
+                    width=50,
+                    height=50,
+                    border_radius=25,
+                    content=ft.Image(
+                        src="https://i.postimg.cc/bvkkNydw/estudiante-enfermeria.png",
+                        width=50,
+                        height=50,
+                        fit=ft.ImageFit.COVER,
+                        border_radius=25
+                    ),
+                    alignment=ft.alignment.center
+                )
+            elif avatar["nombre"] == "Fisioterapia":
+                contenido_imagen = ft.Container(
+                    width=50,
+                    height=50,
+                    border_radius=25,
+                    content=ft.Image(
+                        src="https://i.postimg.cc/13fztHRz/fisioterapia-2.png",
+                        width=50,
+                        height=50,
+                        fit=ft.ImageFit.COVER,
+                        border_radius=25
+                    ),
+                    alignment=ft.alignment.center
+                )
+            elif avatar["nombre"] == "Odontología":
+                contenido_imagen = ft.Container(
+                    width=50,
+                    height=50,
+                    border_radius=25,
+                    content=ft.Image(
+                        src="https://i.postimg.cc/G3gw214k/odontologo-1.png",
+                        width=50,
+                        height=50,
+                        fit=ft.ImageFit.COVER,
+                        border_radius=25
+                    ),
+                    alignment=ft.alignment.center
+                )
+            
+            avatar_control = ft.Container(
+                width=90,
+                height=120,
+                bgcolor=ft.Colors.GREY_100,
+                border_radius=8,
+                border=ft.border.all(2, ft.Colors.GREY_400),
+                data=avatar["nombre"],
+                content=ft.Column([
+                    ft.Container(height=10),
+                    contenido_imagen,
+                    ft.Container(height=8),
                     ft.Text(
                         avatar["nombre"],
-                        size=10,
-                        color=ft.Colors.WHITE,
-                        text_align=ft.TextAlign.CENTER
+                        size=12,
+                        color=ft.Colors.GREY_800,
+                        text_align=ft.TextAlign.CENTER,
+                        weight=ft.FontWeight.W_500
                     )
                 ], alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                 on_click=seleccionar_avatar(avatar["nombre"])
@@ -140,7 +185,7 @@ def main(page: ft.Page):
         contenido = ft.Container(
             width=page.window_width,
             height=page.window_height,
-            bgcolor="#0a0a0a",
+            bgcolor=ft.Colors.WHITE,
             content=ft.Column([
                 ft.Container(height=40),
                 
@@ -159,7 +204,7 @@ def main(page: ft.Page):
                 ft.Text(
                     "¡Selecciona tu avatar y comienza la aventura!",
                     size=14,
-                    color=ft.Colors.WHITE70,
+                    color=ft.Colors.GREY_700,
                     text_align=ft.TextAlign.CENTER
                 ),
                 
@@ -169,7 +214,7 @@ def main(page: ft.Page):
                 ft.Text(
                     "Elige tu avatar de Aventurero:",
                     size=18,
-                    color=ft.Colors.LIGHT_BLUE_300,
+                    color=ft.Colors.BLUE_700,
                     text_align=ft.TextAlign.CENTER
                 ),
                 
