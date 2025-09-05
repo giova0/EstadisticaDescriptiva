@@ -198,21 +198,21 @@ class OVAAsimetriaCurtosis:
             content=ft.Row([
                 ft.Column([
                     ft.Text("OVA 6: Asimetría, Curtosis y Normalidad Práctica", 
-                           size=24, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                           size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                     ft.Text("Estadística Descriptiva para Ciencias de la Salud", 
-                           size=14, color=ft.colors.WHITE70)
+                           size=14, color=ft.Colors.WHITE70)
                 ], expand=True),
                 ft.Container(
                     content=ft.Column([
-                        ft.Icon(ft.icons.ANALYTICS, size=30, color=ft.colors.WHITE),
-                        ft.Text("Modelo C(H)ANGE", size=12, color=ft.colors.WHITE)
+                        ft.Icon(ft.Icons.ANALYTICS, size=30, color=ft.Colors.WHITE),
+                        ft.Text("Modelo C(H)ANGE", size=12, color=ft.Colors.WHITE)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.WHITE24,
+                    bgcolor=ft.Colors.WHITE24,
                     padding=10,
                     border_radius=8
                 )
             ]),
-            bgcolor=ft.colors.BLUE_700,
+            bgcolor=ft.Colors.BLUE_700,
             padding=20
         )
         
@@ -229,19 +229,19 @@ class OVAAsimetriaCurtosis:
                 self.progress_bar
             ]),
             padding=10,
-            bgcolor=ft.colors.WHITE
+            bgcolor=ft.Colors.WHITE
         )
         
         # Navigation
         self.nav_buttons = []
         nav_items = [
-            ("Introducción", "intro", ft.icons.PLAY_CIRCLE),
-            ("Teoría", "theory", ft.icons.BOOK),
-            ("Simulador", "simulator", ft.icons.SETTINGS),
-            ("Casos Clínicos", "cases", ft.icons.LOCAL_HOSPITAL),
-            ("Práctica", "practice", ft.icons.COMPUTER),
-            ("Evaluación", "evaluation", ft.icons.QUIZ),
-            ("Recursos", "resources", ft.icons.DOWNLOAD)
+            ("Introducción", "intro", ft.Icons.PLAY_CIRCLE),
+            ("Teoría", "theory", ft.Icons.BOOK),
+            ("Simulador", "simulator", ft.Icons.SETTINGS),
+            ("Casos Clínicos", "cases", ft.Icons.LOCAL_HOSPITAL),
+            ("Práctica", "practice", ft.Icons.COMPUTER),
+            ("Evaluación", "evaluation", ft.Icons.QUIZ),
+            ("Recursos", "resources", ft.Icons.DOWNLOAD)
         ]
         
         for name, section_id, icon in nav_items:
@@ -250,8 +250,8 @@ class OVAAsimetriaCurtosis:
                 icon=icon,
                 on_click=lambda e, s=section_id: self.show_section(s),
                 style=ft.ButtonStyle(
-                    bgcolor=ft.colors.BLUE_100 if section_id == "intro" else ft.colors.WHITE,
-                    color=ft.colors.BLUE_700 if section_id == "intro" else ft.colors.BLACK
+                    bgcolor=ft.Colors.BLUE_100 if section_id == "intro" else ft.Colors.WHITE,
+                    color=ft.Colors.BLUE_700 if section_id == "intro" else ft.Colors.BLACK
                 )
             )
             self.nav_buttons.append(btn)
@@ -262,7 +262,7 @@ class OVAAsimetriaCurtosis:
                 scroll=ft.ScrollMode.AUTO
             ),
             padding=10,
-            bgcolor=ft.colors.WHITE
+            bgcolor=ft.Colors.WHITE
         )
         
         # Content area
@@ -292,11 +292,11 @@ class OVAAsimetriaCurtosis:
         sections = ["intro", "theory", "simulator", "cases", "practice", "evaluation", "resources"]
         for i, btn in enumerate(self.nav_buttons):
             if sections[i] == section_id:
-                btn.style.bgcolor = ft.colors.BLUE_100
-                btn.style.color = ft.colors.BLUE_700
+                btn.style.bgcolor = ft.Colors.BLUE_100
+                btn.style.color = ft.Colors.BLUE_700
             else:
-                btn.style.bgcolor = ft.colors.WHITE
-                btn.style.color = ft.colors.BLACK
+                btn.style.bgcolor = ft.Colors.WHITE
+                btn.style.color = ft.Colors.BLACK
         
         # Update content
         if section_id == "intro":
@@ -334,33 +334,33 @@ class OVAAsimetriaCurtosis:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.TRACK_CHANGES, color=ft.colors.BLUE_700),
+                            ft.Icon(ft.Icons.TRACK_CHANGES, color=ft.Colors.BLUE_700),
                             ft.Text("Objetivos de Aprendizaje", size=20, weight=ft.FontWeight.BOLD)
                         ]),
                         ft.Column([
                             ft.Row([
-                                ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN),
+                                ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN),
                                 ft.Text("Diagnosticar la forma de distribución mediante coeficientes", 
                                         size=14, expand=True)
                             ]),
                             ft.Row([
-                                ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN),
+                                ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN),
                                 ft.Text("Interpretar histogramas en contextos clínicos", 
                                         size=14, expand=True)
                             ]),
                             ft.Row([
-                                ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN),
+                                ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN),
                                 ft.Text("Aplicar transformaciones de datos apropiadas", 
                                         size=14, expand=True)
                             ]),
                             ft.Row([
-                                ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN),
+                                ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN),
                                 ft.Text("Evaluar la normalidad práctica en datos de salud", 
                                         size=14, expand=True)
                             ])
                         ])
                     ]),
-                    bgcolor=ft.colors.WHITE,
+                    bgcolor=ft.Colors.WHITE,
                     padding=20,
                     border_radius=10,
                     expand=True,
@@ -371,64 +371,64 @@ class OVAAsimetriaCurtosis:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.SCHEDULE, color=ft.colors.PURPLE_700),
+                            ft.Icon(ft.Icons.SCHEDULE, color=ft.Colors.PURPLE_700),
                             ft.Text("Estructura del Módulo", size=20, weight=ft.FontWeight.BOLD)
                         ]),
                         ft.Column([
                             ft.Container(
                                 content=ft.Row([
-                                    ft.Icon(ft.icons.PLAY_ARROW, color=ft.colors.BLUE),
+                                    ft.Icon(ft.Icons.PLAY_ARROW, color=ft.Colors.BLUE),
                                     ft.Column([
                                         ft.Text("Introducción", weight=ft.FontWeight.BOLD),
-                                        ft.Text("5-10 minutos", size=12, color=ft.colors.GREY_600)
+                                        ft.Text("5-10 minutos", size=12, color=ft.Colors.GREY_600)
                                     ])
                                 ]),
-                                bgcolor=ft.colors.BLUE_50,
+                                bgcolor=ft.Colors.BLUE_50,
                                 padding=10,
                                 border_radius=8,
                                 margin=ft.margin.only(bottom=5)
                             ),
                             ft.Container(
                                 content=ft.Row([
-                                    ft.Icon(ft.icons.BOOK, color=ft.colors.GREEN),
+                                    ft.Icon(ft.Icons.BOOK, color=ft.Colors.GREEN),
                                     ft.Column([
                                         ft.Text("Microlección Interactiva", weight=ft.FontWeight.BOLD),
-                                        ft.Text("15-30 minutos", size=12, color=ft.colors.GREY_600)
+                                        ft.Text("15-30 minutos", size=12, color=ft.Colors.GREY_600)
                                     ])
                                 ]),
-                                bgcolor=ft.colors.GREEN_50,
+                                bgcolor=ft.Colors.GREEN_50,
                                 padding=10,
                                 border_radius=8,
                                 margin=ft.margin.only(bottom=5)
                             ),
                             ft.Container(
                                 content=ft.Row([
-                                    ft.Icon(ft.icons.COMPUTER, color=ft.colors.PURPLE),
+                                    ft.Icon(ft.Icons.COMPUTER, color=ft.Colors.PURPLE),
                                     ft.Column([
                                         ft.Text("Práctica Guiada", weight=ft.FontWeight.BOLD),
-                                        ft.Text("30-60 minutos", size=12, color=ft.colors.GREY_600)
+                                        ft.Text("30-60 minutos", size=12, color=ft.Colors.GREY_600)
                                     ])
                                 ]),
-                                bgcolor=ft.colors.PURPLE_50,
+                                bgcolor=ft.Colors.PURPLE_50,
                                 padding=10,
                                 border_radius=8,
                                 margin=ft.margin.only(bottom=5)
                             ),
                             ft.Container(
                                 content=ft.Row([
-                                    ft.Icon(ft.icons.QUIZ, color=ft.colors.ORANGE),
+                                    ft.Icon(ft.Icons.QUIZ, color=ft.Colors.ORANGE),
                                     ft.Column([
                                         ft.Text("Evaluación", weight=ft.FontWeight.BOLD),
-                                        ft.Text("10-15 minutos", size=12, color=ft.colors.GREY_600)
+                                        ft.Text("10-15 minutos", size=12, color=ft.Colors.GREY_600)
                                     ])
                                 ]),
-                                bgcolor=ft.colors.ORANGE_50,
+                                bgcolor=ft.Colors.ORANGE_50,
                                 padding=10,
                                 border_radius=8
                             )
                         ])
                     ]),
-                    bgcolor=ft.colors.WHITE,
+                    bgcolor=ft.Colors.WHITE,
                     padding=20,
                     border_radius=10,
                     expand=True
@@ -439,16 +439,16 @@ class OVAAsimetriaCurtosis:
             ft.Container(
                 content=ft.Column([
                     ft.Text("¿Por qué es importante en Ciencias de la Salud?", 
-                           size=18, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                           size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                     ft.Row([
                         ft.Container(
                             content=ft.Column([
-                                ft.Icon(ft.icons.FAVORITE, size=30, color=ft.colors.WHITE),
-                                ft.Text("Datos Clínicos", weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                                ft.Icon(ft.Icons.FAVORITE, size=30, color=ft.Colors.WHITE),
+                                ft.Text("Datos Clínicos", weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                                 ft.Text("Los valores de laboratorio raramente siguen distribuciones normales", 
-                                        size=12, color=ft.colors.WHITE70)
+                                        size=12, color=ft.Colors.WHITE70)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.WHITE24,
+                            bgcolor=ft.Colors.WHITE24,
                             padding=15,
                             border_radius=8,
                             expand=True,
@@ -456,12 +456,12 @@ class OVAAsimetriaCurtosis:
                         ),
                         ft.Container(
                             content=ft.Column([
-                                ft.Icon(ft.icons.MEDICATION, size=30, color=ft.colors.WHITE),
-                                ft.Text("Farmacocinética", weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                                ft.Icon(ft.Icons.MEDICATION, size=30, color=ft.Colors.WHITE),
+                                ft.Text("Farmacocinética", weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                                 ft.Text("Las concentraciones pueden mostrar asimetría que afecta dosificación", 
-                                        size=12, color=ft.colors.WHITE70)
+                                        size=12, color=ft.Colors.WHITE70)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.WHITE24,
+                            bgcolor=ft.Colors.WHITE24,
                             padding=15,
                             border_radius=8,
                             expand=True,
@@ -469,12 +469,12 @@ class OVAAsimetriaCurtosis:
                         ),
                         ft.Container(
                             content=ft.Column([
-                                ft.Icon(ft.icons.CORONAVIRUS, size=30, color=ft.colors.WHITE),
-                                ft.Text("Epidemiología", weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                                ft.Icon(ft.Icons.CORONAVIRUS, size=30, color=ft.Colors.WHITE),
+                                ft.Text("Epidemiología", weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                                 ft.Text("Tiempos de incubación presentan distribuciones asimétricas", 
-                                        size=12, color=ft.colors.WHITE70)
+                                        size=12, color=ft.Colors.WHITE70)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.WHITE24,
+                            bgcolor=ft.Colors.WHITE24,
                             padding=15,
                             border_radius=8,
                             expand=True,
@@ -482,7 +482,7 @@ class OVAAsimetriaCurtosis:
                         )
                     ])
                 ]),
-                bgcolor=ft.colors.BLUE_700,
+                bgcolor=ft.Colors.BLUE_700,
                 padding=20,
                 border_radius=10,
                 margin=ft.margin.only(top=20)
@@ -497,45 +497,45 @@ class OVAAsimetriaCurtosis:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.BALANCE, color=ft.colors.BLUE_700),
+                            ft.Icon(ft.Icons.BALANCE, color=ft.Colors.BLUE_700),
                             ft.Text("Asimetría (Skewness)", size=18, weight=ft.FontWeight.BOLD)
                         ]),
                         ft.Text("Mide la falta de simetría en la distribución de los datos.", size=14),
                         ft.Container(
                             content=ft.Column([
-                                ft.Text("Fórmula:", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                ft.Text("Fórmula:", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                                 ft.Text("Skewness = Σ[(xi - x̄)³/n] / s³", 
-                                        font_family="Courier", bgcolor=ft.colors.WHITE, 
-                                        size=12, color=ft.colors.BLACK)
+                                        font_family="Courier", bgcolor=ft.Colors.WHITE, 
+                                        size=12, color=ft.Colors.BLACK)
                             ]),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=10,
                             border_radius=8
                         ),
                         ft.Column([
                             ft.Row([
-                                ft.Container(width=15, height=15, bgcolor=ft.colors.GREEN, border_radius=2),
+                                ft.Container(width=15, height=15, bgcolor=ft.Colors.GREEN, border_radius=2),
                                 ft.Text("Simétrica: ≈ 0", size=12)
                             ]),
                             ft.Row([
-                                ft.Container(width=15, height=15, bgcolor=ft.colors.ORANGE, border_radius=2),
+                                ft.Container(width=15, height=15, bgcolor=ft.Colors.ORANGE, border_radius=2),
                                 ft.Text("Asimetría positiva: > 0", size=12)
                             ]),
                             ft.Row([
-                                ft.Container(width=15, height=15, bgcolor=ft.colors.RED, border_radius=2),
+                                ft.Container(width=15, height=15, bgcolor=ft.Colors.RED, border_radius=2),
                                 ft.Text("Asimetría negativa: < 0", size=12)
                             ])
                         ]),
                         ft.Container(
                             content=ft.Text("Ejemplo clínico: Los niveles de glucosa suelen mostrar asimetría positiva debido a valores extremos altos en diabéticos.", 
                                           size=12),
-                            bgcolor=ft.colors.YELLOW_50,
+                            bgcolor=ft.Colors.YELLOW_50,
                             padding=10,
                             border_radius=8,
-                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400))
+                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400))
                         )
                     ]),
-                    bgcolor=ft.colors.WHITE,
+                    bgcolor=ft.Colors.WHITE,
                     padding=15,
                     border_radius=10,
                     expand=True,
@@ -546,45 +546,45 @@ class OVAAsimetriaCurtosis:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.TERRAIN, color=ft.colors.GREEN_700),
+                            ft.Icon(ft.Icons.TERRAIN, color=ft.Colors.GREEN_700),
                             ft.Text("Curtosis (Kurtosis)", size=18, weight=ft.FontWeight.BOLD)
                         ]),
                         ft.Text("Mide el grado de concentración de los datos alrededor de la media.", size=14),
                         ft.Container(
                             content=ft.Column([
-                                ft.Text("Fórmula:", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                                ft.Text("Fórmula:", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                                 ft.Text("Kurtosis = Σ[(xi - x̄)⁴/n] / s⁴ - 3", 
-                                        font_family="Courier", bgcolor=ft.colors.WHITE, 
-                                        size=12, color=ft.colors.BLACK)
+                                        font_family="Courier", bgcolor=ft.Colors.WHITE, 
+                                        size=12, color=ft.Colors.BLACK)
                             ]),
-                            bgcolor=ft.colors.GREEN_50,
+                            bgcolor=ft.Colors.GREEN_50,
                             padding=10,
                             border_radius=8
                         ),
                         ft.Column([
                             ft.Row([
-                                ft.Container(width=15, height=15, bgcolor=ft.colors.BLUE, border_radius=2),
+                                ft.Container(width=15, height=15, bgcolor=ft.Colors.BLUE, border_radius=2),
                                 ft.Text("Mesocúrtica: ≈ 0", size=12)
                             ]),
                             ft.Row([
-                                ft.Container(width=15, height=15, bgcolor=ft.colors.PURPLE, border_radius=2),
+                                ft.Container(width=15, height=15, bgcolor=ft.Colors.PURPLE, border_radius=2),
                                 ft.Text("Leptocúrtica: > 0", size=12)
                             ]),
                             ft.Row([
-                                ft.Container(width=15, height=15, bgcolor=ft.colors.PINK, border_radius=2),
+                                ft.Container(width=15, height=15, bgcolor=ft.Colors.PINK, border_radius=2),
                                 ft.Text("Platicúrtica: < 0", size=12)
                             ])
                         ]),
                         ft.Container(
                             content=ft.Text("Ejemplo clínico: La presión arterial puede mostrar curtosis elevada debido a concentración de valores normales.", 
                                           size=12),
-                            bgcolor=ft.colors.YELLOW_50,
+                            bgcolor=ft.Colors.YELLOW_50,
                             padding=10,
                             border_radius=8,
-                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400))
+                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400))
                         )
                     ]),
-                    bgcolor=ft.colors.WHITE,
+                    bgcolor=ft.Colors.WHITE,
                     padding=15,
                     border_radius=10,
                     expand=True,
@@ -595,38 +595,38 @@ class OVAAsimetriaCurtosis:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.SHOW_CHART, color=ft.colors.PURPLE_700),
+                            ft.Icon(ft.Icons.SHOW_CHART, color=ft.Colors.PURPLE_700),
                             ft.Text("Normalidad Práctica", size=18, weight=ft.FontWeight.BOLD)
                         ]),
                         ft.Text("Evaluación práctica de si los datos siguen distribución normal.", size=14),
                         ft.Container(
                             content=ft.Column([
-                                ft.Text("Criterios Prácticos:", weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                                ft.Text("Criterios Prácticos:", weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
                                 ft.Text("• |Asimetría| < 2", size=12),
                                 ft.Text("• |Curtosis| < 7", size=12),
                                 ft.Text("• Inspección visual", size=12),
                                 ft.Text("• Pruebas de normalidad", size=12)
                             ]),
-                            bgcolor=ft.colors.PURPLE_50,
+                            bgcolor=ft.Colors.PURPLE_50,
                             padding=10,
                             border_radius=8
                         ),
                         ft.Column([
                             ft.Text("Métodos de Evaluación:", weight=ft.FontWeight.BOLD),
-                            ft.Row([ft.Icon(ft.icons.BAR_CHART, color=ft.colors.BLUE), ft.Text("Histograma", size=12)]),
-                            ft.Row([ft.Icon(ft.icons.SHOW_CHART, color=ft.colors.GREEN), ft.Text("Q-Q Plot", size=12)]),
-                            ft.Row([ft.Icon(ft.icons.CALCULATE, color=ft.colors.ORANGE), ft.Text("Shapiro-Wilk", size=12)])
+                            ft.Row([ft.Icon(ft.Icons.BAR_CHART, color=ft.Colors.BLUE), ft.Text("Histograma", size=12)]),
+                            ft.Row([ft.Icon(ft.Icons.SHOW_CHART, color=ft.Colors.GREEN), ft.Text("Q-Q Plot", size=12)]),
+                            ft.Row([ft.Icon(ft.Icons.CALCULATE, color=ft.Colors.ORANGE), ft.Text("Shapiro-Wilk", size=12)])
                         ]),
                         ft.Container(
                             content=ft.Text("Importante: En muestras grandes (n>30), pequeñas desviaciones pueden no ser clínicamente relevantes.", 
                                           size=12),
-                            bgcolor=ft.colors.YELLOW_50,
+                            bgcolor=ft.Colors.YELLOW_50,
                             padding=10,
                             border_radius=8,
-                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400))
+                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400))
                         )
                     ]),
-                    bgcolor=ft.colors.WHITE,
+                    bgcolor=ft.Colors.WHITE,
                     padding=15,
                     border_radius=10,
                     expand=True
@@ -637,17 +637,17 @@ class OVAAsimetriaCurtosis:
             ft.Container(
                 content=ft.Column([
                     ft.Row([
-                        ft.Icon(ft.icons.TRANSFORM, color=ft.colors.INDIGO_700),
+                        ft.Icon(ft.Icons.TRANSFORM, color=ft.Colors.INDIGO_700),
                         ft.Text("Transformaciones de Datos", size=20, weight=ft.FontWeight.BOLD)
                     ]),
                     ft.Row([
                         ft.Container(
                             content=ft.Column([
-                                ft.Text("Logarítmica", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
-                                ft.Text("y = log(x)", size=12, color=ft.colors.BLUE_700),
+                                ft.Text("Logarítmica", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
+                                ft.Text("y = log(x)", size=12, color=ft.Colors.BLUE_700),
                                 ft.Text("Reduce asimetría positiva. Útil para concentraciones.", size=10)
                             ]),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=10,
                             border_radius=8,
                             expand=True,
@@ -655,11 +655,11 @@ class OVAAsimetriaCurtosis:
                         ),
                         ft.Container(
                             content=ft.Column([
-                                ft.Text("Raíz Cuadrada", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
-                                ft.Text("y = √x", size=12, color=ft.colors.GREEN_700),
+                                ft.Text("Raíz Cuadrada", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
+                                ft.Text("y = √x", size=12, color=ft.Colors.GREEN_700),
                                 ft.Text("Para datos de conteo. Común en epidemiología.", size=10)
                             ]),
-                            bgcolor=ft.colors.GREEN_50,
+                            bgcolor=ft.Colors.GREEN_50,
                             padding=10,
                             border_radius=8,
                             expand=True,
@@ -667,11 +667,11 @@ class OVAAsimetriaCurtosis:
                         ),
                         ft.Container(
                             content=ft.Column([
-                                ft.Text("Recíproca", weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
-                                ft.Text("y = 1/x", size=12, color=ft.colors.PURPLE_700),
+                                ft.Text("Recíproca", weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
+                                ft.Text("y = 1/x", size=12, color=ft.Colors.PURPLE_700),
                                 ft.Text("Para asimetría extrema. Cuidado con interpretación.", size=10)
                             ]),
-                            bgcolor=ft.colors.PURPLE_50,
+                            bgcolor=ft.Colors.PURPLE_50,
                             padding=10,
                             border_radius=8,
                             expand=True,
@@ -679,11 +679,11 @@ class OVAAsimetriaCurtosis:
                         ),
                         ft.Container(
                             content=ft.Column([
-                                ft.Text("Box-Cox", weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800),
-                                ft.Text("y = (x^λ - 1)/λ", size=12, color=ft.colors.ORANGE_700),
+                                ft.Text("Box-Cox", weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800),
+                                ft.Text("y = (x^λ - 1)/λ", size=12, color=ft.Colors.ORANGE_700),
                                 ft.Text("Transformación óptima automática.", size=10)
                             ]),
-                            bgcolor=ft.colors.ORANGE_50,
+                            bgcolor=ft.Colors.ORANGE_50,
                             padding=10,
                             border_radius=8,
                             expand=True,
@@ -691,7 +691,7 @@ class OVAAsimetriaCurtosis:
                         )
                     ])
                 ]),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=20,
                 border_radius=10,
                 margin=ft.margin.only(top=20)
@@ -762,10 +762,10 @@ class OVAAsimetriaCurtosis:
                         ft.Container(
                             content=ft.Column([
                                 ft.Text("Estadísticas Calculadas", 
-                                       size=14, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                       size=14, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                                 self.stats_display
                             ]),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=10,
                             border_radius=8
                         ),
@@ -773,20 +773,20 @@ class OVAAsimetriaCurtosis:
                         ft.Container(
                             content=ft.Column([
                                 ft.Row([
-                                    ft.Icon(ft.icons.SMART_TOY, color=ft.colors.BLUE_800),
-                                    ft.Text("Asistente IA", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800)
+                                    ft.Icon(ft.Icons.SMART_TOY, color=ft.Colors.BLUE_800),
+                                    ft.Text("Asistente IA", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800)
                                 ]),
                                 self.ai_interpretation
                             ]),
-                            bgcolor=ft.colors.LIGHT_BLUE_50,
+                            bgcolor=ft.Colors.LIGHT_BLUE_50,
                             padding=10,
                             border_radius=8,
-                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.BLUE))
+                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.BLUE))
                         )
                     ]),
                     width=300,
                     padding=20,
-                    bgcolor=ft.colors.GREY_50,
+                    bgcolor=ft.Colors.GREY_50,
                     border_radius=10
                 ),
                 
@@ -797,17 +797,17 @@ class OVAAsimetriaCurtosis:
                         ft.Row([
                             ft.ElevatedButton(
                                 "Nueva Muestra",
-                                icon=ft.icons.REFRESH,
+                                icon=ft.Icons.REFRESH,
                                 on_click=self.generate_new_sample,
-                                bgcolor=ft.colors.BLUE_600,
-                                color=ft.colors.WHITE
+                                bgcolor=ft.Colors.BLUE_600,
+                                color=ft.Colors.WHITE
                             ),
                             ft.ElevatedButton(
                                 "Exportar Datos",
-                                icon=ft.icons.DOWNLOAD,
+                                icon=ft.Icons.DOWNLOAD,
                                 on_click=self.export_simulation_data,
-                                bgcolor=ft.colors.GREEN_600,
-                                color=ft.colors.WHITE
+                                bgcolor=ft.Colors.GREEN_600,
+                                color=ft.Colors.WHITE
                             )
                         ])
                     ]),
@@ -881,8 +881,8 @@ class OVAAsimetriaCurtosis:
                 content=ft.Column([
                     ft.Row([
                         ft.Container(
-                            content=ft.Icon(ft.icons.FAVORITE, size=30, color=ft.colors.BLUE_600),
-                            bgcolor=ft.colors.BLUE_100,
+                            content=ft.Icon(ft.Icons.FAVORITE, size=30, color=ft.Colors.BLUE_600),
+                            bgcolor=ft.Colors.BLUE_100,
                             padding=10,
                             border_radius=25
                         ),
@@ -901,10 +901,10 @@ class OVAAsimetriaCurtosis:
                     ft.Container(
                         content=ft.Text("Pregunta: ¿Qué puede concluir sobre la distribución de los niveles de colesterol?", 
                                        size=12, weight=ft.FontWeight.BOLD),
-                        bgcolor=ft.colors.YELLOW_50,
+                        bgcolor=ft.Colors.YELLOW_50,
                         padding=10,
                         border_radius=8,
-                        border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400))
+                        border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400))
                     ),
                     ft.RadioGroup(
                         content=ft.Column([
@@ -917,11 +917,11 @@ class OVAAsimetriaCurtosis:
                         "Verificar Respuesta",
                         on_click=lambda e: self.check_case_answer(e, "case1", "b", 
                             "¡Correcto! Con asimetría = 1.23 y media > mediana, hay asimetría positiva moderada."),
-                        bgcolor=ft.colors.BLUE_600,
-                        color=ft.colors.WHITE
+                        bgcolor=ft.Colors.BLUE_600,
+                        color=ft.Colors.WHITE
                     )
                 ]),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=20,
                 border_radius=10,
                 margin=ft.margin.only(bottom=20)
@@ -932,8 +932,8 @@ class OVAAsimetriaCurtosis:
                 content=ft.Column([
                     ft.Row([
                         ft.Container(
-                            content=ft.Icon(ft.icons.ACCESS_TIME, size=30, color=ft.colors.GREEN_600),
-                            bgcolor=ft.colors.GREEN_100,
+                            content=ft.Icon(ft.Icons.ACCESS_TIME, size=30, color=ft.Colors.GREEN_600),
+                            bgcolor=ft.Colors.GREEN_100,
                             padding=10,
                             border_radius=25
                         ),
@@ -952,10 +952,10 @@ class OVAAsimetriaCurtosis:
                     ft.Container(
                         content=ft.Text("Pregunta: ¿Qué transformación sería más apropiada si necesitáramos normalizar estos datos?", 
                                        size=12, weight=ft.FontWeight.BOLD),
-                        bgcolor=ft.colors.YELLOW_50,
+                        bgcolor=ft.Colors.YELLOW_50,
                         padding=10,
                         border_radius=8,
-                        border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400))
+                        border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400))
                     ),
                     ft.RadioGroup(
                         content=ft.Column([
@@ -968,11 +968,11 @@ class OVAAsimetriaCurtosis:
                         "Verificar Respuesta",
                         on_click=lambda e: self.check_case_answer(e, "case2", "c", 
                             "¡Correcto! Los valores están dentro de rangos aceptables para normalidad práctica."),
-                        bgcolor=ft.colors.GREEN_600,
-                        color=ft.colors.WHITE
+                        bgcolor=ft.Colors.GREEN_600,
+                        color=ft.Colors.WHITE
                     )
                 ]),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=20,
                 border_radius=10
             )
@@ -983,7 +983,7 @@ class OVAAsimetriaCurtosis:
         # Esta función necesitaría acceso al RadioGroup específico
         # Por simplicidad, mostraremos la explicación directamente
         self.page.show_snack_bar(
-            ft.SnackBar(content=ft.Text(explanation), bgcolor=ft.colors.GREEN)
+            ft.SnackBar(content=ft.Text(explanation), bgcolor=ft.Colors.GREEN)
         )
 
     def create_practice_section(self):
@@ -1013,8 +1013,8 @@ class OVAAsimetriaCurtosis:
         # Results display
         self.practice_results = ft.Container(
             content=ft.Text("Ingrese datos para ver los resultados del análisis", 
-                           size=14, color=ft.colors.GREY_600),
-            bgcolor=ft.colors.GREY_50,
+                           size=14, color=ft.Colors.GREY_600),
+            bgcolor=ft.Colors.GREY_50,
             padding=20,
             border_radius=8
         )
@@ -1037,10 +1037,10 @@ class OVAAsimetriaCurtosis:
                         self.data_input,
                         ft.ElevatedButton(
                             "Analizar Datos",
-                            icon=ft.icons.ANALYTICS,
+                            icon=ft.Icons.ANALYTICS,
                             on_click=self.analyze_practice_data,
-                            bgcolor=ft.colors.BLUE_600,
-                            color=ft.colors.WHITE,
+                            bgcolor=ft.Colors.BLUE_600,
+                            color=ft.Colors.WHITE,
                             width=200
                         )
                     ]),
@@ -1065,7 +1065,7 @@ class OVAAsimetriaCurtosis:
                     ft.Text("Visualización", size=18, weight=ft.FontWeight.BOLD),
                     self.practice_chart
                 ]),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=20,
                 border_radius=8,
                 margin=ft.margin.only(top=20)
@@ -1115,13 +1115,13 @@ class OVAAsimetriaCurtosis:
                     ft.Container(
                         content=ft.Column([
                             ft.Text("Estadísticas Descriptivas", 
-                                   weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                   weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                             ft.Row([ft.Text("Tamaño de muestra:"), ft.Text(str(stats_dict['n']), font_family="Courier")]),
                             ft.Row([ft.Text("Media:"), ft.Text(f"{stats_dict['mean']:.3f}", font_family="Courier")]),
                             ft.Row([ft.Text("Mediana:"), ft.Text(f"{stats_dict['median']:.3f}", font_family="Courier")]),
                             ft.Row([ft.Text("Desviación estándar:"), ft.Text(f"{stats_dict['std']:.3f}", font_family="Courier")])
                         ]),
-                        bgcolor=ft.colors.BLUE_50,
+                        bgcolor=ft.Colors.BLUE_50,
                         padding=10,
                         border_radius=8,
                         expand=True
@@ -1129,11 +1129,11 @@ class OVAAsimetriaCurtosis:
                     ft.Container(
                         content=ft.Column([
                             ft.Text("Forma de la Distribución", 
-                                   weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                                   weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                             ft.Row([ft.Text("Asimetría:"), ft.Text(f"{stats_dict['skewness']:.3f}", font_family="Courier")]),
                             ft.Row([ft.Text("Curtosis:"), ft.Text(f"{stats_dict['kurtosis']:.3f}", font_family="Courier")])
                         ]),
-                        bgcolor=ft.colors.GREEN_50,
+                        bgcolor=ft.Colors.GREEN_50,
                         padding=10,
                         border_radius=8,
                         expand=True
@@ -1143,19 +1143,19 @@ class OVAAsimetriaCurtosis:
                     content=ft.Column([
                         ft.Text("Evaluación de Normalidad", 
                                weight=ft.FontWeight.BOLD, 
-                               color=ft.colors.GREEN_800 if is_normal else ft.colors.ORANGE_800),
+                               color=ft.Colors.GREEN_800 if is_normal else ft.Colors.ORANGE_800),
                         ft.Text(
                             "✅ Los datos muestran normalidad práctica aceptable." if is_normal 
                             else "⚠️ Los datos se desvían de la normalidad. Considere métodos no paramétricos.",
                             size=12,
-                            color=ft.colors.GREEN_700 if is_normal else ft.colors.ORANGE_700
+                            color=ft.Colors.GREEN_700 if is_normal else ft.Colors.ORANGE_700
                         )
                     ]),
-                    bgcolor=ft.colors.GREEN_50 if is_normal else ft.colors.ORANGE_50,
+                    bgcolor=ft.Colors.GREEN_50 if is_normal else ft.Colors.ORANGE_50,
                     padding=10,
                     border_radius=8,
                     border=ft.border.only(left=ft.border.BorderSide(4, 
-                        ft.colors.GREEN_400 if is_normal else ft.colors.ORANGE_400))
+                        ft.Colors.GREEN_400 if is_normal else ft.Colors.ORANGE_400))
                 )
             ])
             
@@ -1182,7 +1182,7 @@ class OVAAsimetriaCurtosis:
         # Question container
         self.question_container = ft.Container(
             content=self.create_quiz_question(0),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=10
         )
@@ -1190,17 +1190,17 @@ class OVAAsimetriaCurtosis:
         # Navigation buttons
         self.prev_btn = ft.ElevatedButton(
             "Anterior",
-            icon=ft.icons.ARROW_BACK,
+            icon=ft.Icons.ARROW_BACK,
             on_click=self.previous_question,
             disabled=True
         )
         
         self.next_btn = ft.ElevatedButton(
             "Siguiente",
-            icon=ft.icons.ARROW_FORWARD,
+            icon=ft.Icons.ARROW_FORWARD,
             on_click=self.next_question,
-            bgcolor=ft.colors.ORANGE_600,
-            color=ft.colors.WHITE
+            bgcolor=ft.Colors.ORANGE_600,
+            color=ft.Colors.WHITE
         )
         
         # Results container
@@ -1245,7 +1245,7 @@ class OVAAsimetriaCurtosis:
         return ft.Column([
             ft.Text(f"Pregunta {index + 1} de {len(self.quiz_questions)}", 
                    size=16, weight=ft.FontWeight.BOLD),
-            ft.Text(question["question"], size=14, color=ft.colors.GREY_700),
+            ft.Text(question["question"], size=14, color=ft.Colors.GREY_700),
             ft.RadioGroup(
                 content=ft.Column([
                     ft.Radio(value=str(i), label=option) 
@@ -1298,15 +1298,15 @@ class OVAAsimetriaCurtosis:
             content=ft.Column([
                 ft.Text("¡Correcto!" if is_correct else "Incorrecto", 
                        weight=ft.FontWeight.BOLD,
-                       color=ft.colors.GREEN_800 if is_correct else ft.colors.RED_800),
+                       color=ft.Colors.GREEN_800 if is_correct else ft.Colors.RED_800),
                 ft.Text(question["explanation"], size=12,
-                       color=ft.colors.GREEN_700 if is_correct else ft.colors.RED_700)
+                       color=ft.Colors.GREEN_700 if is_correct else ft.Colors.RED_700)
             ]),
-            bgcolor=ft.colors.GREEN_50 if is_correct else ft.colors.RED_50,
+            bgcolor=ft.Colors.GREEN_50 if is_correct else ft.Colors.RED_50,
             padding=10,
             border_radius=8,
             border=ft.border.only(left=ft.border.BorderSide(4, 
-                ft.colors.GREEN_400 if is_correct else ft.colors.RED_400))
+                ft.Colors.GREEN_400 if is_correct else ft.Colors.RED_400))
         )
         
         self.question_container.content.controls.append(feedback)
@@ -1328,13 +1328,13 @@ class OVAAsimetriaCurtosis:
         percentage = (correct_answers / len(self.quiz_questions)) * 100
         
         if percentage >= 80:
-            result_color = ft.colors.GREEN
+            result_color = ft.Colors.GREEN
             message = "¡Excelente! Has demostrado un dominio sólido de los conceptos."
         elif percentage >= 60:
-            result_color = ft.colors.ORANGE
+            result_color = ft.Colors.ORANGE
             message = "Buen trabajo. Revisa los temas donde tuviste dificultades."
         else:
-            result_color = ft.colors.RED
+            result_color = ft.Colors.RED
             message = "Necesitas repasar los conceptos. Te recomendamos revisar la teoría."
         
         self.quiz_results_container.content = ft.Container(
@@ -1346,11 +1346,11 @@ class OVAAsimetriaCurtosis:
                 ft.ElevatedButton(
                     "Reiniciar Evaluación",
                     on_click=self.restart_quiz,
-                    bgcolor=ft.colors.BLUE_600,
-                    color=ft.colors.WHITE
+                    bgcolor=ft.Colors.BLUE_600,
+                    color=ft.Colors.WHITE
                 )
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=8,
             border=ft.border.only(left=ft.border.BorderSide(4, result_color))
@@ -1378,18 +1378,18 @@ class OVAAsimetriaCurtosis:
                 # Hoja de referencia
                 ft.Container(
                     content=ft.Column([
-                        ft.Icon(ft.icons.DESCRIPTION, size=40, color=ft.colors.BLUE_600),
+                        ft.Icon(ft.Icons.DESCRIPTION, size=40, color=ft.Colors.BLUE_600),
                         ft.Text("Hoja de Referencia Rápida", weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
                         ft.Text("Fórmulas y criterios de interpretación", size=12, text_align=ft.TextAlign.CENTER),
                         ft.ElevatedButton(
                             "Descargar PDF",
-                            icon=ft.icons.DOWNLOAD,
+                            icon=ft.Icons.DOWNLOAD,
                             on_click=self.download_cheat_sheet,
-                            bgcolor=ft.colors.BLUE_600,
-                            color=ft.colors.WHITE
+                            bgcolor=ft.Colors.BLUE_600,
+                            color=ft.Colors.WHITE
                         )
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.WHITE,
+                    bgcolor=ft.Colors.WHITE,
                     padding=20,
                     border_radius=10,
                     expand=True,
@@ -1399,18 +1399,18 @@ class OVAAsimetriaCurtosis:
                 # Plantillas
                 ft.Container(
                     content=ft.Column([
-                        ft.Icon(ft.icons.TABLE_CHART, size=40, color=ft.colors.GREEN_600),
+                        ft.Icon(ft.Icons.TABLE_CHART, size=40, color=ft.Colors.GREEN_600),
                         ft.Text("Plantillas de Datos", weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
                         ft.Text("Plantillas Excel/CSV para análisis", size=12, text_align=ft.TextAlign.CENTER),
                         ft.ElevatedButton(
                             "Descargar Excel",
-                            icon=ft.icons.DOWNLOAD,
+                            icon=ft.Icons.DOWNLOAD,
                             on_click=self.download_templates,
-                            bgcolor=ft.colors.GREEN_600,
-                            color=ft.colors.WHITE
+                            bgcolor=ft.Colors.GREEN_600,
+                            color=ft.Colors.WHITE
                         )
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.WHITE,
+                    bgcolor=ft.Colors.WHITE,
                     padding=20,
                     border_radius=10,
                     expand=True,
@@ -1420,18 +1420,18 @@ class OVAAsimetriaCurtosis:
                 # Scripts
                 ft.Container(
                     content=ft.Column([
-                        ft.Icon(ft.icons.CODE, size=40, color=ft.colors.PURPLE_600),
+                        ft.Icon(ft.Icons.CODE, size=40, color=ft.Colors.PURPLE_600),
                         ft.Text("Scripts de Análisis", weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
                         ft.Text("Código R y Python", size=12, text_align=ft.TextAlign.CENTER),
                         ft.ElevatedButton(
                             "Descargar Código",
-                            icon=ft.icons.DOWNLOAD,
+                            icon=ft.Icons.DOWNLOAD,
                             on_click=self.download_scripts,
-                            bgcolor=ft.colors.PURPLE_600,
-                            color=ft.colors.WHITE
+                            bgcolor=ft.Colors.PURPLE_600,
+                            color=ft.Colors.WHITE
                         )
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.WHITE,
+                    bgcolor=ft.Colors.WHITE,
                     padding=20,
                     border_radius=10,
                     expand=True

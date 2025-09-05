@@ -94,53 +94,53 @@ class OVAInequidadesSalud:
             content=ft.Row([
                 ft.Column([
                     ft.Row([
-                        ft.Icon(ft.icons.TRENDING_UP, size=30, color=ft.colors.WHITE),
+                        ft.Icon(ft.Icons.TRENDING_UP, size=30, color=ft.Colors.WHITE),
                         ft.Text("Visualización de Inequidades en Salud", 
-                               size=24, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE)
+                               size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE)
                     ]),
                     ft.Text("Objeto Virtual de Aprendizaje - Modelo C(H)ANGE + IA", 
-                           size=14, color=ft.colors.WHITE70)
+                           size=14, color=ft.Colors.WHITE70)
                 ], expand=True),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("Duración estimada", size=12, color=ft.colors.WHITE70),
-                        ft.Text("2-4 horas", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE)
+                        ft.Text("Duración estimada", size=12, color=ft.Colors.WHITE70),
+                        ft.Text("2-4 horas", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.WHITE24,
+                    bgcolor=ft.Colors.WHITE24,
                     padding=10,
                     border_radius=8
                 )
             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-            bgcolor=ft.colors.BLUE_700,
+            bgcolor=ft.Colors.BLUE_700,
             padding=20,
             height=100
         )
 
     def create_progress_bar(self):
-        self.progress_text = ft.Text("0% completado", size=12, color=ft.colors.GREY_600)
-        self.progress_bar = ft.ProgressBar(value=0, color=ft.colors.BLUE_600, height=8)
+        self.progress_text = ft.Text("0% completado", size=12, color=ft.Colors.GREY_600)
+        self.progress_bar = ft.ProgressBar(value=0, color=ft.Colors.BLUE_600, height=8)
         
         self.progress_container = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Text("Progreso del OVA", size=12, color=ft.colors.GREY_600),
+                    ft.Text("Progreso del OVA", size=12, color=ft.Colors.GREY_600),
                     self.progress_text
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                 self.progress_bar
             ], spacing=5),
             padding=ft.padding.symmetric(horizontal=20, vertical=10),
-            bgcolor=ft.colors.WHITE
+            bgcolor=ft.Colors.WHITE
         )
 
     def create_navigation(self):
         nav_buttons = []
         nav_items = [
-            ("intro", "Introducción", ft.icons.PLAY_CIRCLE),
-            ("objectives", "Objetivos", ft.icons.TRACK_CHANGES),
-            ("theory", "Microlección", ft.icons.BOOK),
-            ("practice", "Práctica", ft.icons.COMPUTER),
-            ("evaluation", "Evaluación", ft.icons.ASSIGNMENT_TURNED_IN),
-            ("resources", "Recursos", ft.icons.DOWNLOAD)
+            ("intro", "Introducción", ft.Icons.PLAY_CIRCLE),
+            ("objectives", "Objetivos", ft.Icons.TRACK_CHANGES),
+            ("theory", "Microlección", ft.Icons.BOOK),
+            ("practice", "Práctica", ft.Icons.COMPUTER),
+            ("evaluation", "Evaluación", ft.Icons.ASSIGNMENT_TURNED_IN),
+            ("resources", "Recursos", ft.Icons.DOWNLOAD)
         ]
         
         for section_id, title, icon in nav_items:
@@ -149,8 +149,8 @@ class OVAInequidadesSalud:
                 icon=icon,
                 on_click=lambda e, s=section_id: self.show_section(s),
                 style=ft.ButtonStyle(
-                    bgcolor=ft.colors.BLUE_100 if section_id == "intro" else ft.colors.GREY_100,
-                    color=ft.colors.BLUE_700 if section_id == "intro" else ft.colors.GREY_700
+                    bgcolor=ft.Colors.BLUE_100 if section_id == "intro" else ft.Colors.GREY_100,
+                    color=ft.Colors.BLUE_700 if section_id == "intro" else ft.Colors.GREY_700
                 )
             )
             nav_buttons.append(btn)
@@ -159,14 +159,14 @@ class OVAInequidadesSalud:
         self.navigation = ft.Container(
             content=ft.Row(nav_buttons, scroll=ft.ScrollMode.AUTO),
             padding=10,
-            bgcolor=ft.colors.WHITE
+            bgcolor=ft.Colors.WHITE
         )
 
     def create_sections(self):
         self.content_container = ft.Container(
             content=ft.Column([]),
             padding=20,
-            bgcolor=ft.colors.GREY_50,
+            bgcolor=ft.Colors.GREY_50,
             expand=True
         )
 
@@ -203,19 +203,19 @@ class OVAInequidadesSalud:
 
     def update_navigation_style(self, active_section):
         for i, (section_id, _, _) in enumerate([
-            ("intro", "Introducción", ft.icons.PLAY_CIRCLE),
-            ("objectives", "Objetivos", ft.icons.TRACK_CHANGES),
-            ("theory", "Microlección", ft.icons.BOOK),
-            ("practice", "Práctica", ft.icons.COMPUTER),
-            ("evaluation", "Evaluación", ft.icons.ASSIGNMENT_TURNED_IN),
-            ("resources", "Recursos", ft.icons.DOWNLOAD)
+            ("intro", "Introducción", ft.Icons.PLAY_CIRCLE),
+            ("objectives", "Objetivos", ft.Icons.TRACK_CHANGES),
+            ("theory", "Microlección", ft.Icons.BOOK),
+            ("practice", "Práctica", ft.Icons.COMPUTER),
+            ("evaluation", "Evaluación", ft.Icons.ASSIGNMENT_TURNED_IN),
+            ("resources", "Recursos", ft.Icons.DOWNLOAD)
         ]):
             if section_id == active_section:
-                self.nav_buttons[i].style.bgcolor = ft.colors.BLUE_100
-                self.nav_buttons[i].style.color = ft.colors.BLUE_700
+                self.nav_buttons[i].style.bgcolor = ft.Colors.BLUE_100
+                self.nav_buttons[i].style.color = ft.Colors.BLUE_700
             else:
-                self.nav_buttons[i].style.bgcolor = ft.colors.GREY_100
-                self.nav_buttons[i].style.color = ft.colors.GREY_700
+                self.nav_buttons[i].style.bgcolor = ft.Colors.GREY_100
+                self.nav_buttons[i].style.color = ft.Colors.GREY_700
 
     def show_intro_section(self):
         # Selector de área de interés
@@ -236,16 +236,16 @@ class OVAInequidadesSalud:
                 ft.Text("💡 Recomendación IA:", weight=ft.FontWeight.BOLD, size=12),
                 ft.Text("Para maximizar tu aprendizaje, te sugiero comenzar identificando un problema de inequidad en salud de tu región.", size=12)
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=15,
             border_radius=8,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
         
         content = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.INFO, size=30, color=ft.colors.BLUE_600),
+                    ft.Icon(ft.Icons.INFO, size=30, color=ft.Colors.BLUE_600),
                     ft.Text("Introducción", size=28, weight=ft.FontWeight.BOLD)
                 ]),
                 ft.Row([
@@ -258,7 +258,7 @@ class OVAInequidadesSalud:
                         ft.Container(
                             content=ft.Column([
                                 ft.Row([
-                                    ft.Icon(ft.icons.LIGHTBULB, color=ft.colors.AMBER_600),
+                                    ft.Icon(ft.Icons.LIGHTBULB, color=ft.Colors.AMBER_600),
                                     ft.Text("Modelo C(H)ANGE en acción", weight=ft.FontWeight.BOLD)
                                 ]),
                                 ft.Text(
@@ -266,15 +266,15 @@ class OVAInequidadesSalud:
                                     size=12
                                 )
                             ]),
-                            bgcolor=ft.colors.AMBER_50,
+                            bgcolor=ft.Colors.AMBER_50,
                             padding=15,
                             border_radius=8,
-                            border=ft.border.all(2, ft.colors.AMBER_400)
+                            border=ft.border.all(2, ft.Colors.AMBER_400)
                         )
                     ], expand=True),
                     ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.SMART_TOY, color=ft.colors.PURPLE_600),
+                            ft.Icon(ft.Icons.SMART_TOY, color=ft.Colors.PURPLE_600),
                             ft.Text("Asistente IA Integrado", weight=ft.FontWeight.BOLD)
                         ]),
                         self.ai_recommendation,
@@ -284,15 +284,15 @@ class OVAInequidadesSalud:
                 ft.Container(height=20),
                 ft.ElevatedButton(
                     "Continuar a Objetivos",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda e: self.show_section("objectives"),
-                    style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)
                 )
             ], spacing=15, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=12,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
         
         self.content_container.content.controls.append(content)
@@ -312,11 +312,11 @@ class OVAInequidadesSalud:
 
     def show_objectives_section(self):
         change_components = [
-            ("C - Combinatoria", "Identificar patrones de inequidad en diferentes combinaciones de variables demográficas", ft.colors.RED_400),
-            ("Á - Álgebra", "Establecer relaciones matemáticas entre determinantes sociales y resultados de salud", ft.colors.BLUE_400),
-            ("N - Números", "Calcular e interpretar indicadores de inequidad (razones, diferencias, índices)", ft.colors.GREEN_400),
-            ("G - Geometría", "Utilizar representaciones espaciales y mapas para mostrar distribuciones geográficas", ft.colors.PURPLE_400),
-            ("E - Estadística", "Aplicar métodos descriptivos para cuantificar y comunicar inequidades", ft.colors.ORANGE_400)
+            ("C - Combinatoria", "Identificar patrones de inequidad en diferentes combinaciones de variables demográficas", ft.Colors.RED_400),
+            ("Á - Álgebra", "Establecer relaciones matemáticas entre determinantes sociales y resultados de salud", ft.Colors.BLUE_400),
+            ("N - Números", "Calcular e interpretar indicadores de inequidad (razones, diferencias, índices)", ft.Colors.GREEN_400),
+            ("G - Geometría", "Utilizar representaciones espaciales y mapas para mostrar distribuciones geográficas", ft.Colors.PURPLE_400),
+            ("E - Estadística", "Aplicar métodos descriptivos para cuantificar y comunicar inequidades", ft.Colors.ORANGE_400)
         ]
         
         change_cards = []
@@ -326,7 +326,7 @@ class OVAInequidadesSalud:
                     ft.Text(title, weight=ft.FontWeight.BOLD, color=color),
                     ft.Text(description, size=12)
                 ]),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=15,
                 border_radius=8,
                 border=ft.border.all(2, color)
@@ -336,7 +336,7 @@ class OVAInequidadesSalud:
         content = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.TRACK_CHANGES, size=30, color=ft.colors.GREEN_600),
+                    ft.Icon(ft.Icons.TRACK_CHANGES, size=30, color=ft.Colors.GREEN_600),
                     ft.Text("Objetivos de Aprendizaje", size=28, weight=ft.FontWeight.BOLD)
                 ]),
                 ft.Row([
@@ -347,19 +347,19 @@ class OVAInequidadesSalud:
                                 "Describir brechas en salud por sexo, edad, territorio y determinantes sociales de la salud (SDOH) mediante visualizaciones efectivas y análisis estadístico descriptivo.",
                                 size=14, weight=ft.FontWeight.W_500
                             ),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=20,
                             border_radius=8
                         ),
                         ft.Text("Al finalizar podrás:", size=16, weight=ft.FontWeight.BOLD),
                         ft.Column([
-                            ft.Row([ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500), 
+                            ft.Row([ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500), 
                                    ft.Text("Identificar y clasificar diferentes tipos de inequidades en salud", size=12)]),
-                            ft.Row([ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500), 
+                            ft.Row([ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500), 
                                    ft.Text("Calcular razones de tasas y diferencias absolutas entre grupos", size=12)]),
-                            ft.Row([ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500), 
+                            ft.Row([ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500), 
                                    ft.Text("Crear mapas y heatmaps para visualizar inequidades territoriales", size=12)]),
-                            ft.Row([ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500), 
+                            ft.Row([ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500), 
                                    ft.Text("Interpretar visualizaciones desde una perspectiva de salud pública", size=12)])
                         ])
                     ], expand=True),
@@ -371,15 +371,15 @@ class OVAInequidadesSalud:
                 ft.Container(height=20),
                 ft.ElevatedButton(
                     "Iniciar Microlección",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda e: self.show_section("theory"),
-                    style=ft.ButtonStyle(bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_600, color=ft.Colors.WHITE)
                 )
             ], spacing=15, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=12,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
         
         self.content_container.content.controls.append(content)
@@ -403,15 +403,15 @@ class OVAInequidadesSalud:
         content = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.BOOK, size=30, color=ft.colors.PURPLE_600),
+                    ft.Icon(ft.Icons.BOOK, size=30, color=ft.Colors.PURPLE_600),
                     ft.Text("Microlección Interactiva", size=28, weight=ft.FontWeight.BOLD)
                 ]),
                 
                 ft.Text("1. Conceptos Fundamentales", size=20, weight=ft.FontWeight.BOLD),
                 ft.Row([
-                    self.create_concept_card("Equidad vs Igualdad", "Diferencias conceptuales clave", ft.icons.BALANCE, ft.colors.BLUE_600),
-                    self.create_concept_card("Determinantes Sociales", "Factores que influyen en la salud", ft.icons.NETWORK_NODE, ft.colors.GREEN_600),
-                    self.create_concept_card("Indicadores de Inequidad", "Métricas para medir brechas", ft.icons.BAR_CHART, ft.colors.PURPLE_600)
+                    self.create_concept_card("Equidad vs Igualdad", "Diferencias conceptuales clave", ft.Icons.BALANCE, ft.Colors.BLUE_600),
+                    self.create_concept_card("Determinantes Sociales", "Factores que influyen en la salud", ft.Icons.NETWORK_NODE, ft.Colors.GREEN_600),
+                    self.create_concept_card("Indicadores de Inequidad", "Métricas para medir brechas", ft.Icons.BAR_CHART, ft.Colors.PURPLE_600)
                 ], spacing=10),
                 
                 ft.Text("2. Tipos de Visualización para Inequidades", size=20, weight=ft.FontWeight.BOLD),
@@ -422,10 +422,10 @@ class OVAInequidadesSalud:
                             trend_chart,
                             ft.Text("Evolución temporal de inequidades por grupos", size=12)
                         ]),
-                        bgcolor=ft.colors.WHITE,
+                        bgcolor=ft.Colors.WHITE,
                         padding=15,
                         border_radius=8,
-                        border=ft.border.all(1, ft.colors.GREY_300),
+                        border=ft.border.all(1, ft.Colors.GREY_300),
                         expand=True
                     ),
                     ft.Container(
@@ -435,15 +435,15 @@ class OVAInequidadesSalud:
                                 content=ft.Text("Simulación de Mapa de Inequidades", 
                                                text_align=ft.TextAlign.CENTER),
                                 height=200,
-                                bgcolor=ft.colors.GRADIENT,
+                                bgcolor=ft.Colors.GRADIENT,
                                 border_radius=8
                             ),
                             ft.Text("Distribución geográfica de indicadores de salud", size=12)
                         ]),
-                        bgcolor=ft.colors.WHITE,
+                        bgcolor=ft.Colors.WHITE,
                         padding=15,
                         border_radius=8,
-                        border=ft.border.all(1, ft.colors.GREY_300),
+                        border=ft.border.all(1, ft.Colors.GREY_300),
                         expand=True
                     )
                 ], spacing=10),
@@ -465,7 +465,7 @@ class OVAInequidadesSalud:
                         ], spacing=20),
                         self.inequality_results
                     ]),
-                    bgcolor=ft.colors.GREY_50,
+                    bgcolor=ft.Colors.GREY_50,
                     padding=20,
                     border_radius=8
                 ),
@@ -473,15 +473,15 @@ class OVAInequidadesSalud:
                 ft.Container(height=20),
                 ft.ElevatedButton(
                     "Ir a Práctica Guiada",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda e: self.show_section("practice"),
-                    style=ft.ButtonStyle(bgcolor=ft.colors.PURPLE_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_600, color=ft.Colors.WHITE)
                 )
             ], spacing=15, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=12,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
         
         self.content_container.content.controls.append(content)
@@ -493,7 +493,7 @@ class OVAInequidadesSalud:
                 ft.Text(title, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
                 ft.Text(description, size=12, text_align=ft.TextAlign.CENTER)
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=8,
             border=ft.border.all(1, color),
@@ -548,7 +548,7 @@ class OVAInequidadesSalud:
                                 ft.Text("Razón de Tasas", size=12),
                                 ft.Text(f"{rate_ratio:.2f}", size=18, weight=ft.FontWeight.BOLD)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=15,
                             border_radius=8,
                             expand=True
@@ -558,7 +558,7 @@ class OVAInequidadesSalud:
                                 ft.Text("Diferencia de Tasas", size=12),
                                 ft.Text(f"{rate_difference:.1f}", size=18, weight=ft.FontWeight.BOLD)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.GREEN_50,
+                            bgcolor=ft.Colors.GREEN_50,
                             padding=15,
                             border_radius=8,
                             expand=True
@@ -568,7 +568,7 @@ class OVAInequidadesSalud:
                                 ft.Text("Fracción Atribuible", size=12),
                                 ft.Text(f"{attributable_fraction:.1f}%", size=18, weight=ft.FontWeight.BOLD)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.PURPLE_50,
+                            bgcolor=ft.Colors.PURPLE_50,
                             padding=15,
                             border_radius=8,
                             expand=True
@@ -577,7 +577,7 @@ class OVAInequidadesSalud:
                     ft.Container(
                         content=ft.Text(f"Interpretación: El grupo desfavorecido tiene {rate_ratio:.1f} veces más riesgo que el grupo privilegiado.", 
                                        size=12),
-                        bgcolor=ft.colors.YELLOW_50,
+                        bgcolor=ft.Colors.YELLOW_50,
                         padding=10,
                         border_radius=8
                     )
@@ -597,15 +597,15 @@ class OVAInequidadesSalud:
         content = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.COMPUTER, size=30, color=ft.colors.ORANGE_600),
+                    ft.Icon(ft.Icons.COMPUTER, size=30, color=ft.Colors.ORANGE_600),
                     ft.Text("Práctica Guiada con Dataset", size=28, weight=ft.FontWeight.BOLD)
                 ]),
                 
                 ft.Text("Selecciona un Escenario de Práctica", size=18, weight=ft.FontWeight.BOLD),
                 ft.Row([
-                    self.create_scenario_button("maternal", "Mortalidad Materna", "Por departamentos en Colombia", ft.icons.CHILD_CARE, ft.colors.PINK_600),
-                    self.create_scenario_button("diabetes", "Diabetes Tipo 2", "Por nivel socioeconómico", ft.icons.FAVORITE, ft.colors.RED_600),
-                    self.create_scenario_button("vaccination", "Cobertura Vacunal", "Por área urbana/rural", ft.icons.VACCINES, ft.colors.GREEN_600)
+                    self.create_scenario_button("maternal", "Mortalidad Materna", "Por departamentos en Colombia", ft.Icons.CHILD_CARE, ft.Colors.PINK_600),
+                    self.create_scenario_button("diabetes", "Diabetes Tipo 2", "Por nivel socioeconómico", ft.Icons.FAVORITE, ft.Colors.RED_600),
+                    self.create_scenario_button("vaccination", "Cobertura Vacunal", "Por área urbana/rural", ft.Icons.VACCINES, ft.Colors.GREEN_600)
                 ], spacing=10),
                 
                 ft.Column([
@@ -620,15 +620,15 @@ class OVAInequidadesSalud:
                 ft.Container(height=20),
                 ft.ElevatedButton(
                     "Ir a Evaluación",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda e: self.show_section("evaluation"),
-                    style=ft.ButtonStyle(bgcolor=ft.colors.ORANGE_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.ORANGE_600, color=ft.Colors.WHITE)
                 )
             ], spacing=15, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=12,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
         
         self.content_container.content.controls.append(content)
@@ -640,10 +640,10 @@ class OVAInequidadesSalud:
                 ft.Text(title, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
                 ft.Text(description, size=12, text_align=ft.TextAlign.CENTER)
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=8,
-            border=ft.border.all(2, ft.colors.GREY_300),
+            border=ft.border.all(2, ft.Colors.GREY_300),
             expand=True,
             on_click=lambda e, s=scenario_id: self.load_scenario(s)
         )
@@ -669,11 +669,11 @@ class OVAInequidadesSalud:
             ft.Row([
                 ft.Text("Vista de Datos", weight=ft.FontWeight.BOLD),
                 ft.Row([
-                    ft.ElevatedButton("Análisis IA", icon=ft.icons.SMART_TOY, on_click=self.analyze_data),
-                    ft.ElevatedButton("Visualizar", icon=ft.icons.BAR_CHART, on_click=self.create_visualization)
+                    ft.ElevatedButton("Análisis IA", icon=ft.Icons.SMART_TOY, on_click=self.analyze_data),
+                    ft.ElevatedButton("Visualizar", icon=ft.Icons.BAR_CHART, on_click=self.create_visualization)
                 ])
             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-            ft.Container(content=data_table, bgcolor=ft.colors.GREY_50, padding=10, border_radius=8)
+            ft.Container(content=data_table, bgcolor=ft.Colors.GREY_50, padding=10, border_radius=8)
         ])
         self.data_table_container.visible = True
         
@@ -706,7 +706,7 @@ class OVAInequidadesSalud:
         for insight in insight_list:
             insight_controls.append(
                 ft.Row([
-                    ft.Icon(ft.icons.LIGHTBULB, color=ft.colors.YELLOW_600),
+                    ft.Icon(ft.Icons.LIGHTBULB, color=ft.Colors.YELLOW_600),
                     ft.Text(insight, size=12, expand=True)
                 ])
             )
@@ -714,12 +714,12 @@ class OVAInequidadesSalud:
         self.ai_analysis_container.content = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.SMART_TOY, color=ft.colors.BLUE_600),
+                    ft.Icon(ft.Icons.SMART_TOY, color=ft.Colors.BLUE_600),
                     ft.Text("Análisis Automático IA", weight=ft.FontWeight.BOLD)
                 ]),
                 ft.Column(insight_controls)
             ]),
-            bgcolor=ft.colors.BLUE_50,
+            bgcolor=ft.Colors.BLUE_50,
             padding=15,
             border_radius=8
         )
@@ -744,10 +744,10 @@ class OVAInequidadesSalud:
                     ft.Text("Gráfico Principal", weight=ft.FontWeight.BOLD),
                     main_chart
                 ]),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=15,
                 border_radius=8,
-                border=ft.border.all(1, ft.colors.GREY_300),
+                border=ft.border.all(1, ft.Colors.GREY_300),
                 expand=True
             ),
             ft.Container(
@@ -755,10 +755,10 @@ class OVAInequidadesSalud:
                     ft.Text("Análisis de Inequidad", weight=ft.FontWeight.BOLD),
                     inequality_chart
                 ]),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=15,
                 border_radius=8,
-                border=ft.border.all(1, ft.colors.GREY_300),
+                border=ft.border.all(1, ft.Colors.GREY_300),
                 expand=True
             )
         ], spacing=10)
@@ -820,10 +820,10 @@ class OVAInequidadesSalud:
                     ], expand=True),
                     ft.ElevatedButton("Completar", on_click=lambda e, step=i: self.complete_step(step))
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=15,
                 border_radius=8,
-                border=ft.border.all(2, ft.colors.GREY_300)
+                border=ft.border.all(2, ft.Colors.GREY_300)
             )
             step_controls.append(step_control)
         
@@ -887,10 +887,10 @@ class OVAInequidadesSalud:
                         on_change=lambda e, qi=i: self.update_quiz_answer(qi, e.control.value)
                     )
                 ]),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=20,
                 border_radius=8,
-                border=ft.border.all(1, ft.colors.GREY_300)
+                border=ft.border.all(1, ft.Colors.GREY_300)
             )
             self.quiz_controls.append(question_control)
         
@@ -899,14 +899,14 @@ class OVAInequidadesSalud:
         content = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.ASSIGNMENT_TURNED_IN, size=30, color=ft.colors.RED_600),
+                    ft.Icon(ft.Icons.ASSIGNMENT_TURNED_IN, size=30, color=ft.Colors.RED_600),
                     ft.Text("Evaluación Automatizada", size=28, weight=ft.FontWeight.BOLD)
                 ]),
                 
                 ft.Container(
                     content=ft.Text("Responde las siguientes preguntas basadas en lo aprendido. Recibirás retroalimentación inmediata.", 
                                    size=14),
-                    bgcolor=ft.colors.BLUE_50,
+                    bgcolor=ft.Colors.BLUE_50,
                     padding=15,
                     border_radius=8
                 ),
@@ -915,9 +915,9 @@ class OVAInequidadesSalud:
                 
                 ft.ElevatedButton(
                     "Enviar Respuestas",
-                    icon=ft.icons.CHECK,
+                    icon=ft.Icons.CHECK,
                     on_click=self.submit_quiz,
-                    style=ft.ButtonStyle(bgcolor=ft.colors.RED_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.RED_600, color=ft.Colors.WHITE)
                 ),
                 
                 self.quiz_results_container,
@@ -925,15 +925,15 @@ class OVAInequidadesSalud:
                 ft.Container(height=20),
                 ft.ElevatedButton(
                     "Ver Recursos",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda e: self.show_section("resources"),
-                    style=ft.ButtonStyle(bgcolor=ft.colors.GREY_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREY_600, color=ft.Colors.WHITE)
                 )
             ], spacing=15, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=12,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
         
         self.content_container.content.controls.append(content)
@@ -961,15 +961,15 @@ class OVAInequidadesSalud:
             result_controls.append(
                 ft.Container(
                     content=ft.Row([
-                        ft.Icon(ft.icons.CHECK_CIRCLE if is_correct else ft.icons.CANCEL, 
-                               color=ft.colors.GREEN_600 if is_correct else ft.colors.RED_600),
+                        ft.Icon(ft.Icons.CHECK_CIRCLE if is_correct else ft.Icons.CANCEL, 
+                               color=ft.Colors.GREEN_600 if is_correct else ft.Colors.RED_600),
                         ft.Text(f"Pregunta {i+1}: {'Correcta' if is_correct else 'Incorrecta'}", 
                                weight=ft.FontWeight.BOLD)
                     ]),
-                    bgcolor=ft.colors.GREEN_50 if is_correct else ft.colors.RED_50,
+                    bgcolor=ft.Colors.GREEN_50 if is_correct else ft.Colors.RED_50,
                     padding=10,
                     border_radius=8,
-                    border=ft.border.all(1, ft.colors.GREEN_200 if is_correct else ft.colors.RED_200)
+                    border=ft.border.all(1, ft.Colors.GREEN_200 if is_correct else ft.Colors.RED_200)
                 )
             )
         
@@ -980,17 +980,17 @@ class OVAInequidadesSalud:
                     ft.Column([
                         ft.Text(f"{score}/{len(correct_answers)} ({percentage:.0f}%)", 
                                size=24, weight=ft.FontWeight.BOLD, 
-                               color=ft.colors.GREEN_600 if percentage >= 70 else ft.colors.RED_600),
+                               color=ft.Colors.GREEN_600 if percentage >= 70 else ft.Colors.RED_600),
                         ft.Text("¡Excelente trabajo!" if percentage >= 70 else "Necesitas repasar algunos conceptos")
                     ], expand=True),
                     ft.Text("🎉" if percentage >= 70 else "📚", size=40)
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                 ft.Column(result_controls, spacing=5)
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=8,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
         self.quiz_results_container.visible = True
         self.page.update()
@@ -1018,10 +1018,10 @@ class OVAInequidadesSalud:
         
         # Recursos descargables
         resources = [
-            ("Guía de Indicadores de Inequidad", ft.icons.PICTURE_AS_PDF, ft.colors.RED_600),
-            ("Plantilla de Análisis de Inequidades", ft.icons.TABLE_CHART, ft.colors.GREEN_600),
-            ("Scripts R para Visualización", ft.icons.CODE, ft.colors.PURPLE_600),
-            ("Datasets de Práctica", ft.icons.DATABASE, ft.colors.BLUE_600)
+            ("Guía de Indicadores de Inequidad", ft.Icons.PICTURE_AS_PDF, ft.Colors.RED_600),
+            ("Plantilla de Análisis de Inequidades", ft.Icons.TABLE_CHART, ft.Colors.GREEN_600),
+            ("Scripts R para Visualización", ft.Icons.CODE, ft.Colors.PURPLE_600),
+            ("Datasets de Práctica", ft.Icons.DATABASE, ft.Colors.BLUE_600)
         ]
         
         resource_controls = []
@@ -1032,9 +1032,9 @@ class OVAInequidadesSalud:
                         ft.Icon(icon, color=color),
                         ft.Text(title)
                     ], expand=True),
-                    ft.IconButton(ft.icons.DOWNLOAD, on_click=lambda e, t=title: self.download_resource(t))
+                    ft.IconButton(ft.Icons.DOWNLOAD, on_click=lambda e, t=title: self.download_resource(t))
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=10,
                 border_radius=8
             )
@@ -1043,7 +1043,7 @@ class OVAInequidadesSalud:
         content = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.DOWNLOAD, size=30, color=ft.colors.INDIGO_600),
+                    ft.Icon(ft.Icons.DOWNLOAD, size=30, color=ft.Colors.INDIGO_600),
                     ft.Text("Recursos y Transferencia", size=28, weight=ft.FontWeight.BOLD)
                 ]),
                 
@@ -1059,7 +1059,7 @@ class OVAInequidadesSalud:
                                 ft.Column(checklist_controls),
                                 self.checklist_progress
                             ]),
-                            bgcolor=ft.colors.GREEN_50,
+                            bgcolor=ft.Colors.GREEN_50,
                             padding=15,
                             border_radius=8
                         )
@@ -1075,35 +1075,35 @@ class OVAInequidadesSalud:
                         ft.TextField(label="2. Grupos comparados:", multiline=True, min_lines=2),
                         ft.TextField(label="3. Indicadores calculados:", multiline=True, min_lines=2),
                         ft.TextField(label="4. Recomendaciones:", multiline=True, min_lines=3),
-                        ft.ElevatedButton("Generar Informe", icon=ft.icons.DESCRIPTION, on_click=self.generate_report)
+                        ft.ElevatedButton("Generar Informe", icon=ft.Icons.DESCRIPTION, on_click=self.generate_report)
                     ]),
-                    bgcolor=ft.colors.BLUE_50,
+                    bgcolor=ft.Colors.BLUE_50,
                     padding=20,
                     border_radius=8
                 ),
                 
                 ft.Container(
                     content=ft.Column([
-                        ft.Icon(ft.icons.EMOJI_EVENTS, size=40, color=ft.colors.WHITE),
-                        ft.Text("¡Felicitaciones!", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                        ft.Icon(ft.Icons.EMOJI_EVENTS, size=40, color=ft.Colors.WHITE),
+                        ft.Text("¡Felicitaciones!", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                         ft.Text("Has completado exitosamente el OVA de Visualización de Inequidades en Salud", 
-                               color=ft.colors.WHITE, text_align=ft.TextAlign.CENTER),
+                               color=ft.Colors.WHITE, text_align=ft.TextAlign.CENTER),
                         ft.ElevatedButton(
                             "Descargar Certificado",
-                            icon=ft.icons.DOWNLOAD,
+                            icon=ft.Icons.DOWNLOAD,
                             on_click=self.generate_certificate,
-                            style=ft.ButtonStyle(bgcolor=ft.colors.WHITE, color=ft.colors.ORANGE_600)
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.WHITE, color=ft.Colors.ORANGE_600)
                         )
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.ORANGE_600,
+                    bgcolor=ft.Colors.ORANGE_600,
                     padding=30,
                     border_radius=12
                 )
             ], spacing=15, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=12,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
         
         self.content_container.content.controls.append(content)
@@ -1114,7 +1114,7 @@ class OVAInequidadesSalud:
         self.checklist_progress.value = f"Progreso: {completed}/5 completado"
         if completed == 5:
             self.checklist_progress.value = "¡Completado! 5/5"
-            self.checklist_progress.color = ft.colors.GREEN_600
+            self.checklist_progress.color = ft.Colors.GREEN_600
         self.page.update()
 
     def download_resource(self, resource_title):

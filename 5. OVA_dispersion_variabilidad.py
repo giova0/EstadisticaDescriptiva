@@ -120,11 +120,11 @@ class OVAApp:
         self.quiz_manager = QuizManager()
         
         # Colores del tema
-        self.primary_color = ft.colors.BLUE_600
-        self.secondary_color = ft.colors.PURPLE_500
-        self.success_color = ft.colors.GREEN_500
-        self.warning_color = ft.colors.ORANGE_500
-        self.error_color = ft.colors.RED_500
+        self.primary_color = ft.Colors.BLUE_600
+        self.secondary_color = ft.Colors.PURPLE_500
+        self.success_color = ft.Colors.GREEN_500
+        self.warning_color = ft.Colors.ORANGE_500
+        self.error_color = ft.Colors.RED_500
         
         self.setup_ui()
     
@@ -136,37 +136,37 @@ class OVAApp:
                     "📊 Dispersión y Variabilidad Clínica",
                     size=32,
                     weight=ft.FontWeight.BOLD,
-                    color=ft.colors.WHITE
+                    color=ft.Colors.WHITE
                 ),
                 ft.Text(
                     "Objeto Virtual de Aprendizaje - Estadística Descriptiva para Ciencias de la Salud",
                     size=16,
-                    color=ft.colors.WHITE70
+                    color=ft.Colors.WHITE70
                 ),
                 ft.Row([
                     ft.Container(
                         content=ft.Text("🎯 Modelo C(H)ANGE", size=12),
-                        bgcolor=ft.colors.WHITE24,
+                        bgcolor=ft.Colors.WHITE24,
                         padding=ft.padding.symmetric(horizontal=12, vertical=6),
                         border_radius=20
                     ),
                     ft.Container(
                         content=ft.Text("🤖 IA Integrada", size=12),
-                        bgcolor=ft.colors.WHITE24,
+                        bgcolor=ft.Colors.WHITE24,
                         padding=ft.padding.symmetric(horizontal=12, vertical=6),
                         border_radius=20
                     ),
                     ft.Container(
                         content=ft.Text("🏥 Casos Clínicos", size=12),
-                        bgcolor=ft.colors.WHITE24,
+                        bgcolor=ft.Colors.WHITE24,
                         padding=ft.padding.symmetric(horizontal=12, vertical=6),
                         border_radius=20
                     )
                 ], alignment=ft.MainAxisAlignment.CENTER)
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
             gradient=ft.LinearGradient([
-                ft.colors.BLUE_600,
-                ft.colors.PURPLE_600
+                ft.Colors.BLUE_600,
+                ft.Colors.PURPLE_600
             ]),
             padding=30,
             alignment=ft.alignment.center
@@ -201,12 +201,12 @@ class OVAApp:
                     style=self.get_nav_button_style("evaluacion")
                 )
             ], alignment=ft.MainAxisAlignment.CENTER),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             shadow=ft.BoxShadow(
                 spread_radius=1,
                 blur_radius=5,
-                color=ft.colors.BLACK12
+                color=ft.Colors.BLACK12
             )
         )
         
@@ -230,11 +230,11 @@ class OVAApp:
         if self.current_section == section:
             return ft.ButtonStyle(
                 bgcolor=self.primary_color,
-                color=ft.colors.WHITE
+                color=ft.Colors.WHITE
             )
         else:
             return ft.ButtonStyle(
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 color=self.primary_color
             )
     
@@ -269,7 +269,7 @@ class OVAApp:
                             "🎯 Objetivos de Aprendizaje",
                             size=24,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.GREY_800
+                            color=ft.Colors.GREY_800
                         ),
                         ft.Row([
                             ft.Column([
@@ -307,7 +307,7 @@ class OVAApp:
                                     ft.Text("• Monitoreo de pacientes"),
                                     ft.Text("• Investigación biomédica")
                                 ]),
-                                bgcolor=ft.colors.BLUE_50,
+                                bgcolor=ft.Colors.BLUE_50,
                                 padding=20,
                                 border_radius=10,
                                 expand=True
@@ -324,7 +324,7 @@ class OVAApp:
                             "🚀 Metodología C(H)ANGE",
                             size=20,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.WHITE
+                            color=ft.Colors.WHITE
                         ),
                         ft.Row([
                             self.create_change_card("🔢", "Combinatoria", "Análisis de variaciones"),
@@ -338,7 +338,7 @@ class OVAApp:
                 ),
                 gradient=ft.LinearGradient([
                     self.secondary_color,
-                    ft.colors.PINK_500
+                    ft.Colors.PINK_500
                 ])
             )
         ], scroll=ft.ScrollMode.AUTO)
@@ -347,10 +347,10 @@ class OVAApp:
         return ft.Container(
             content=ft.Column([
                 ft.Text(icon, size=24),
-                ft.Text(title, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
-                ft.Text(subtitle, size=12, color=ft.colors.WHITE70)
+                ft.Text(title, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
+                ft.Text(subtitle, size=12, color=ft.Colors.WHITE70)
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.WHITE24,
+            bgcolor=ft.Colors.WHITE24,
             padding=15,
             border_radius=10,
             width=150
@@ -386,7 +386,7 @@ class OVAApp:
         
         self.clinical_interpretation = ft.Text(
             "Ajuste los parámetros para ver cómo cambia la distribución.",
-            color=ft.colors.GREY_700
+            color=ft.Colors.GREY_700
         )
         
         return ft.Column([
@@ -397,7 +397,7 @@ class OVAApp:
                             "📚 Conceptos Fundamentales",
                             size=24,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.GREY_800
+                            color=ft.Colors.GREY_800
                         ),
                         ft.Row([
                             ft.Column([
@@ -406,28 +406,28 @@ class OVAApp:
                                     "Diferencia entre el valor máximo y mínimo de un conjunto de datos.",
                                     "Rango = Valor máximo - Valor mínimo",
                                     "Ejemplo clínico: Rango de presión arterial sistólica en un grupo de pacientes.",
-                                    ft.colors.BLUE_500
+                                    ft.Colors.BLUE_500
                                 ),
                                 self.create_concept_card(
                                     "📊 Varianza",
                                     "Promedio de las desviaciones cuadráticas respecto a la media.",
                                     "σ² = Σ(xi - μ)² / N",
                                     "Aplicación: Variabilidad en niveles de glucosa en sangre.",
-                                    ft.colors.GREEN_500
+                                    ft.Colors.GREEN_500
                                 ),
                                 self.create_concept_card(
                                     "📈 Desviación Estándar",
                                     "Raíz cuadrada de la varianza, expresada en las mismas unidades que los datos.",
                                     "σ = √(σ²)",
                                     "Interpretación: Aproximadamente 68% de los datos están dentro de ±1σ de la media.",
-                                    ft.colors.PURPLE_500
+                                    ft.Colors.PURPLE_500
                                 ),
                                 self.create_concept_card(
                                     "🎲 Coeficiente de Variación",
                                     "Medida relativa de dispersión, útil para comparar variabilidades.",
                                     "CV = (σ / μ) × 100%",
                                     "Ventaja: Permite comparar variabilidades entre diferentes escalas de medición.",
-                                    ft.colors.ORANGE_500
+                                    ft.Colors.ORANGE_500
                                 )
                             ], expand=True),
                             ft.Container(
@@ -436,7 +436,7 @@ class OVAApp:
                                         "🧮 Calculadora Interactiva",
                                         size=18,
                                         weight=ft.FontWeight.BOLD,
-                                        color=ft.colors.GREY_800
+                                        color=ft.Colors.GREY_800
                                     ),
                                     self.data_input,
                                     ft.ElevatedButton(
@@ -444,12 +444,12 @@ class OVAApp:
                                         on_click=self.calculate_statistics,
                                         style=ft.ButtonStyle(
                                             bgcolor=self.primary_color,
-                                            color=ft.colors.WHITE
+                                            color=ft.Colors.WHITE
                                         )
                                     ),
                                     self.stats_results
                                 ]),
-                                bgcolor=ft.colors.GREY_50,
+                                bgcolor=ft.Colors.GREY_50,
                                 padding=20,
                                 border_radius=10,
                                 width=400
@@ -466,13 +466,13 @@ class OVAApp:
                             "📊 Visualización Interactiva",
                             size=20,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.GREY_800
+                            color=ft.Colors.GREY_800
                         ),
                         ft.Row([
                             ft.Container(
                                 content=ft.Text("Aquí iría el gráfico de distribución", 
                                                text_align=ft.TextAlign.CENTER),
-                                bgcolor=ft.colors.GREY_100,
+                                bgcolor=ft.Colors.GREY_100,
                                 padding=20,
                                 border_radius=10,
                                 width=400,
@@ -493,7 +493,7 @@ class OVAApp:
                                                color=self.primary_color),
                                         self.clinical_interpretation
                                     ]),
-                                    bgcolor=ft.colors.BLUE_50,
+                                    bgcolor=ft.Colors.BLUE_50,
                                     padding=15,
                                     border_radius=10
                                 )
@@ -509,14 +509,14 @@ class OVAApp:
         return ft.Container(
             content=ft.Column([
                 ft.Text(title, size=16, weight=ft.FontWeight.BOLD, color=color),
-                ft.Text(description, color=ft.colors.GREY_700),
+                ft.Text(description, color=ft.Colors.GREY_700),
                 ft.Container(
                     content=ft.Text(formula, color=color, weight=ft.FontWeight.BOLD),
-                    bgcolor=ft.colors.with_opacity(0.1, color),
+                    bgcolor=ft.Colors.with_opacity(0.1, color),
                     padding=10,
                     border_radius=5
                 ),
-                ft.Text(example, size=12, color=ft.colors.GREY_600, italic=True)
+                ft.Text(example, size=12, color=ft.Colors.GREY_600, italic=True)
             ]),
             border=ft.border.only(left=ft.BorderSide(4, color)),
             padding=ft.padding.only(left=20, top=10, bottom=10, right=10),
@@ -540,14 +540,14 @@ class OVAApp:
                 ft.Row([
                     ft.Container(
                         content=ft.Text(f"Media: {stats['mean']:.2f}"),
-                        bgcolor=ft.colors.BLUE_50,
+                        bgcolor=ft.Colors.BLUE_50,
                         padding=10,
                         border_radius=5,
                         expand=True
                     ),
                     ft.Container(
                         content=ft.Text(f"Rango: {stats['range']:.2f}"),
-                        bgcolor=ft.colors.GREEN_50,
+                        bgcolor=ft.Colors.GREEN_50,
                         padding=10,
                         border_radius=5,
                         expand=True
@@ -556,14 +556,14 @@ class OVAApp:
                 ft.Row([
                     ft.Container(
                         content=ft.Text(f"Varianza: {stats['variance']:.2f}"),
-                        bgcolor=ft.colors.PURPLE_50,
+                        bgcolor=ft.Colors.PURPLE_50,
                         padding=10,
                         border_radius=5,
                         expand=True
                     ),
                     ft.Container(
                         content=ft.Text(f"Desv. Estándar: {stats['std_dev']:.2f}"),
-                        bgcolor=ft.colors.ORANGE_50,
+                        bgcolor=ft.Colors.ORANGE_50,
                         padding=10,
                         border_radius=5,
                         expand=True
@@ -571,13 +571,13 @@ class OVAApp:
                 ]),
                 ft.Container(
                     content=ft.Text(f"Coef. Variación: {stats['cv']:.2f}%"),
-                    bgcolor=ft.colors.RED_50,
+                    bgcolor=ft.Colors.RED_50,
                     padding=10,
                     border_radius=5
                 ),
                 ft.Container(
                     content=ft.Text(f"Interpretación: {interpretation}"),
-                    bgcolor=ft.colors.YELLOW_50,
+                    bgcolor=ft.Colors.YELLOW_50,
                     padding=10,
                     border_radius=5
                 )
@@ -612,7 +612,7 @@ class OVAApp:
                             "🔬 Simulador Clínico Avanzado",
                             size=24,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.GREY_800
+                            color=ft.Colors.GREY_800
                         ),
                         ft.Row([
                             ft.ElevatedButton(
@@ -623,8 +623,8 @@ class OVAApp:
                                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                                 on_click=lambda _: self.load_scenario("presion"),
                                 style=ft.ButtonStyle(
-                                    bgcolor=ft.colors.RED_100,
-                                    color=ft.colors.RED_800,
+                                    bgcolor=ft.Colors.RED_100,
+                                    color=ft.Colors.RED_800,
                                     padding=20
                                 ),
                                 width=200,
@@ -638,8 +638,8 @@ class OVAApp:
                                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                                 on_click=lambda _: self.load_scenario("glucosa"),
                                 style=ft.ButtonStyle(
-                                    bgcolor=ft.colors.BLUE_100,
-                                    color=ft.colors.BLUE_800,
+                                    bgcolor=ft.Colors.BLUE_100,
+                                    color=ft.Colors.BLUE_800,
                                     padding=20
                                 ),
                                 width=200,
@@ -653,8 +653,8 @@ class OVAApp:
                                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                                 on_click=lambda _: self.load_scenario("frecuencia"),
                                 style=ft.ButtonStyle(
-                                    bgcolor=ft.colors.GREEN_100,
-                                    color=ft.colors.GREEN_800,
+                                    bgcolor=ft.Colors.GREEN_100,
+                                    color=ft.Colors.GREEN_800,
                                     padding=20
                                 ),
                                 width=200,
@@ -675,7 +675,7 @@ class OVAApp:
                                     text_align=ft.TextAlign.CENTER
                                 )
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.GREY_50,
+                            bgcolor=ft.Colors.GREY_50,
                             padding=40,
                             border_radius=10,
                             alignment=ft.alignment.center,
@@ -695,7 +695,7 @@ class OVAApp:
                 "data": [142, 138, 145, 140, 148, 135, 143, 139, 146, 141],
                 "unit": "mmHg",
                 "normal_range": "120-140",
-                "color": ft.colors.RED_500
+                "color": ft.Colors.RED_500
             },
             "glucosa": {
                 "title": "🩸 Simulador de Glucemia",
@@ -703,7 +703,7 @@ class OVAApp:
                 "data": [95, 110, 88, 125, 102, 118, 92, 135, 98, 115],
                 "unit": "mg/dL",
                 "normal_range": "70-100",
-                "color": ft.colors.BLUE_500
+                "color": ft.Colors.BLUE_500
             },
             "frecuencia": {
                 "title": "💓 Simulador de Frecuencia Cardíaca",
@@ -711,7 +711,7 @@ class OVAApp:
                 "data": [72, 68, 75, 70, 78, 65, 73, 69, 76, 71],
                 "unit": "lpm",
                 "normal_range": "60-80",
-                "color": ft.colors.GREEN_500
+                "color": ft.Colors.GREEN_500
             }
         }
         
@@ -732,31 +732,31 @@ class OVAApp:
                     ft.Text("📊 Datos de Simulación", weight=ft.FontWeight.BOLD),
                     ft.Container(
                         content=ft.Text(f"Mediciones: {', '.join(map(str, scenario['data']))} {scenario['unit']}"),
-                        bgcolor=ft.colors.GREY_50,
+                        bgcolor=ft.Colors.GREY_50,
                         padding=15,
                         border_radius=5
                     ),
                     ft.Container(
                         content=ft.Text(f"Media: {stats['mean']:.1f} {scenario['unit']}"),
-                        bgcolor=ft.colors.BLUE_50,
+                        bgcolor=ft.Colors.BLUE_50,
                         padding=10,
                         border_radius=5
                     ),
                     ft.Container(
                         content=ft.Text(f"Desviación Estándar: {stats['std_dev']:.1f} {scenario['unit']}"),
-                        bgcolor=ft.colors.GREEN_50,
+                        bgcolor=ft.Colors.GREEN_50,
                         padding=10,
                         border_radius=5
                     ),
                     ft.Container(
                         content=ft.Text(f"Coeficiente de Variación: {stats['cv']:.1f}%"),
-                        bgcolor=ft.colors.PURPLE_50,
+                        bgcolor=ft.Colors.PURPLE_50,
                         padding=10,
                         border_radius=5
                     ),
                     ft.Container(
                         content=ft.Text(f"Rango Normal: {scenario['normal_range']} {scenario['unit']}"),
-                        bgcolor=ft.colors.YELLOW_50,
+                        bgcolor=ft.Colors.YELLOW_50,
                         padding=10,
                         border_radius=5
                     )
@@ -768,7 +768,7 @@ class OVAApp:
                             ft.Text("Análisis de Variabilidad:", weight=ft.FontWeight.BOLD),
                             ft.Text(interpretation, size=12)
                         ]),
-                        bgcolor=ft.colors.with_opacity(0.1, scenario["color"]),
+                        bgcolor=ft.Colors.with_opacity(0.1, scenario["color"]),
                         border=ft.border.only(left=ft.BorderSide(4, scenario["color"])),
                         padding=15,
                         border_radius=5
@@ -778,7 +778,7 @@ class OVAApp:
                             ft.Text("Recomendaciones:", weight=ft.FontWeight.BOLD),
                             *[ft.Text(f"• {rec}", size=12) for rec in recommendations]
                         ]),
-                        bgcolor=ft.colors.GREY_50,
+                        bgcolor=ft.Colors.GREY_50,
                         padding=15,
                         border_radius=5
                     ),
@@ -787,7 +787,7 @@ class OVAApp:
                         on_click=lambda _: self.generate_new_data(scenario_type),
                         style=ft.ButtonStyle(
                             bgcolor=scenario["color"],
-                            color=ft.colors.WHITE
+                            color=ft.Colors.WHITE
                         )
                     )
                 ], expand=True)
@@ -804,7 +804,7 @@ class OVAApp:
                         # Replace the placeholder content
                         column.controls[2] = ft.Container(
                             content=simulator_content,
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=20,
                             border_radius=10
                         )
@@ -853,7 +853,7 @@ class OVAApp:
                             "🏥 Casos Clínicos Reales",
                             size=24,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.GREY_800
+                            color=ft.Colors.GREY_800
                         ),
                         self.create_caso_clinico(
                             "Caso 1: Control de Hipertensión",
@@ -862,8 +862,8 @@ class OVAApp:
                             [142, 138, 145, 140, 148, 135, 143, 139, 146, 141, 144, 137, 149, 136, 147],
                             "La baja variabilidad (CV = 3.2%) sugiere un control estable de la presión arterial, pero los valores se mantienen elevados.",
                             "Considerar ajuste de medicación antihipertensiva para reducir la media sin aumentar la variabilidad.",
-                            ft.colors.RED_100,
-                            ft.colors.RED_800
+                            ft.Colors.RED_100,
+                            ft.Colors.RED_800
                         ),
                         self.create_caso_clinico(
                             "Caso 2: Monitoreo Glucémico",
@@ -872,8 +872,8 @@ class OVAApp:
                             [95, 110, 88, 125, 102, 118, 92, 135, 98, 115, 105, 128, 85, 122, 108],
                             "Alta variabilidad glucémica (CV > 14%) indica control subóptimo del diabetes.",
                             "Revisar adherencia al tratamiento y considerar ajustes en la terapia para reducir variabilidad.",
-                            ft.colors.BLUE_100,
-                            ft.colors.BLUE_800
+                            ft.Colors.BLUE_100,
+                            ft.Colors.BLUE_800
                         )
                     ]),
                     padding=30
@@ -902,25 +902,25 @@ class OVAApp:
                         ft.Text(contexto),
                         ft.Container(
                             content=ft.Text(f"Datos: {', '.join(map(str, datos))}"),
-                            bgcolor=ft.colors.GREY_50,
+                            bgcolor=ft.Colors.GREY_50,
                             padding=15,
                             border_radius=5
                         ),
                         ft.Container(
                             content=ft.Text(f"Media: {stats['mean']:.1f}"),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=10,
                             border_radius=5
                         ),
                         ft.Container(
                             content=ft.Text(f"Desviación Estándar: {stats['std_dev']:.1f}"),
-                            bgcolor=ft.colors.GREEN_50,
+                            bgcolor=ft.Colors.GREEN_50,
                             padding=10,
                             border_radius=5
                         ),
                         ft.Container(
                             content=ft.Text(f"Coeficiente de Variación: {stats['cv']:.1f}%"),
-                            bgcolor=ft.colors.PURPLE_50,
+                            bgcolor=ft.Colors.PURPLE_50,
                             padding=10,
                             border_radius=5
                         )
@@ -932,8 +932,8 @@ class OVAApp:
                                 ft.Text("Interpretación:", weight=ft.FontWeight.BOLD),
                                 ft.Text(interpretacion, size=12)
                             ]),
-                            bgcolor=ft.colors.YELLOW_50,
-                            border=ft.border.only(left=ft.BorderSide(4, ft.colors.YELLOW_400)),
+                            bgcolor=ft.Colors.YELLOW_50,
+                            border=ft.border.only(left=ft.BorderSide(4, ft.Colors.YELLOW_400)),
                             padding=15,
                             border_radius=5
                         ),
@@ -942,8 +942,8 @@ class OVAApp:
                                 ft.Text("Decisión Clínica:", weight=ft.FontWeight.BOLD),
                                 ft.Text(decision, size=12)
                             ]),
-                            bgcolor=ft.colors.RED_50,
-                            border=ft.border.only(left=ft.BorderSide(4, ft.colors.RED_400)),
+                            bgcolor=ft.Colors.RED_50,
+                            border=ft.border.only(left=ft.BorderSide(4, ft.Colors.RED_400)),
                             padding=15,
                             border_radius=5
                         ),
@@ -951,13 +951,13 @@ class OVAApp:
                             "Ver Análisis Detallado",
                             style=ft.ButtonStyle(
                                 bgcolor=self.primary_color,
-                                color=ft.colors.WHITE
+                                color=ft.Colors.WHITE
                             )
                         )
                     ], expand=True)
                 ])
             ]),
-            border=ft.border.all(1, ft.colors.GREY_300),
+            border=ft.border.all(1, ft.Colors.GREY_300),
             border_radius=10,
             padding=20,
             margin=ft.margin.only(bottom=20)
@@ -974,7 +974,7 @@ class OVAApp:
                             "📝 Evaluación Interactiva",
                             size=24,
                             weight=ft.FontWeight.BOLD,
-                            color=ft.colors.GREY_800
+                            color=ft.Colors.GREY_800
                         ),
                         self.create_quiz_interface()
                     ]),
@@ -986,7 +986,7 @@ class OVAApp:
     def create_quiz_interface(self):
         self.quiz_progress = ft.ProgressBar(
             value=0.2,
-            bgcolor=ft.colors.GREY_200,
+            bgcolor=ft.Colors.GREY_200,
             color=self.primary_color
         )
         
@@ -1010,8 +1010,8 @@ class OVAApp:
             on_click=self.previous_question,
             disabled=True,
             style=ft.ButtonStyle(
-                bgcolor=ft.colors.GREY_500,
-                color=ft.colors.WHITE
+                bgcolor=ft.Colors.GREY_500,
+                color=ft.Colors.WHITE
             )
         )
         
@@ -1020,7 +1020,7 @@ class OVAApp:
             on_click=self.next_question,
             style=ft.ButtonStyle(
                 bgcolor=self.primary_color,
-                color=ft.colors.WHITE
+                color=ft.Colors.WHITE
             )
         )
         
@@ -1031,7 +1031,7 @@ class OVAApp:
                 ft.Container(
                     content=ft.Text(f"Puntuación: {self.quiz_manager.score}/{len(self.quiz_manager.questions)}",
                                    color=self.primary_color, weight=ft.FontWeight.BOLD),
-                    bgcolor=ft.colors.BLUE_100,
+                    bgcolor=ft.Colors.BLUE_100,
                     padding=ft.padding.symmetric(horizontal=15, vertical=8),
                     border_radius=20
                 )
@@ -1042,7 +1042,7 @@ class OVAApp:
                     self.quiz_question_text,
                     self.quiz_options
                 ]),
-                bgcolor=ft.colors.BLUE_50,
+                bgcolor=ft.Colors.BLUE_50,
                 padding=20,
                 border_radius=10,
                 margin=ft.margin.symmetric(vertical=20)
@@ -1125,8 +1125,8 @@ class OVAApp:
     def show_quiz_feedback(self, question, selected_answer, is_correct):
         icon = "✅" if is_correct else "❌"
         title = "¡Correcto!" if is_correct else "Incorrecto"
-        bg_color = ft.colors.GREEN_50 if is_correct else ft.colors.RED_50
-        border_color = ft.colors.GREEN_400 if is_correct else ft.colors.RED_400
+        bg_color = ft.Colors.GREEN_50 if is_correct else ft.Colors.RED_50
+        border_color = ft.Colors.GREEN_400 if is_correct else ft.Colors.RED_400
         
         feedback_content = ft.Column([
             ft.Row([
@@ -1166,10 +1166,10 @@ class OVAApp:
             ft.Container(
                 content=ft.Column([
                     ft.Text(f"{self.quiz_manager.score}/{len(self.quiz_manager.questions)}", 
-                           size=32, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
-                    ft.Text(message, size=16, color=ft.colors.WHITE)
+                           size=32, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
+                    ft.Text(message, size=16, color=ft.Colors.WHITE)
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                gradient=ft.LinearGradient([ft.colors.GREEN_400, ft.colors.BLUE_500]),
+                gradient=ft.LinearGradient([ft.Colors.GREEN_400, ft.Colors.BLUE_500]),
                 padding=30,
                 border_radius=10,
                 alignment=ft.alignment.center
@@ -1181,9 +1181,9 @@ class OVAApp:
                         content=ft.Row([
                             ft.Text(f"Pregunta {i+1}", weight=ft.FontWeight.BOLD),
                             ft.Text("✅ Correcta" if answer["correct"] else "❌ Incorrecta",
-                                   color=ft.colors.GREEN_600 if answer["correct"] else ft.colors.RED_600)
+                                   color=ft.Colors.GREEN_600 if answer["correct"] else ft.Colors.RED_600)
                         ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-                        bgcolor=ft.colors.GREEN_50 if answer["correct"] else ft.colors.RED_50,
+                        bgcolor=ft.Colors.GREEN_50 if answer["correct"] else ft.Colors.RED_50,
                         padding=10,
                         border_radius=5,
                         margin=ft.margin.only(bottom=5)
@@ -1191,12 +1191,12 @@ class OVAApp:
                     ft.Container(
                         content=ft.Text(f"Porcentaje de aciertos: {percentage:.1f}%", 
                                        color=self.primary_color, weight=ft.FontWeight.BOLD),
-                        bgcolor=ft.colors.BLUE_50,
+                        bgcolor=ft.Colors.BLUE_50,
                         padding=15,
                         border_radius=5
                     )
                 ]),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=20,
                 border_radius=10
             ),
@@ -1205,7 +1205,7 @@ class OVAApp:
                 on_click=self.restart_quiz,
                 style=ft.ButtonStyle(
                     bgcolor=self.primary_color,
-                    color=ft.colors.WHITE
+                    color=ft.Colors.WHITE
                 )
             )
         ], horizontal_alignment=ft.CrossAxisAlignment.CENTER)

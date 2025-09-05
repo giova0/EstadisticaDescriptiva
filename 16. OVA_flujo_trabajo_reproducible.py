@@ -44,7 +44,7 @@ class OVAApp:
         self.ai_message_text = ft.Text(
             self.ai_messages["default"],
             size=14,
-            color=ft.colors.GREY_700
+            color=ft.Colors.GREY_700
         )
         
         # Crear componentes principales
@@ -69,54 +69,54 @@ class OVAApp:
             content=ft.Row([
                 ft.Column([
                     ft.Text("OVA 16: Flujo de Trabajo Reproducible", 
-                           size=28, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800),
+                           size=28, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800),
                     ft.Text("Estadística para Ciencias de la Salud - Modelo C(H)ANGE", 
-                           size=16, color=ft.colors.GREY_600)
+                           size=16, color=ft.Colors.GREY_600)
                 ], expand=True),
                 ft.Row([
                     ft.Container(
-                        content=ft.Text("Duración: 2-4 horas", weight=ft.FontWeight.W_500, color=ft.colors.BLUE_800),
-                        bgcolor=ft.colors.BLUE_100,
+                        content=ft.Text("Duración: 2-4 horas", weight=ft.FontWeight.W_500, color=ft.Colors.BLUE_800),
+                        bgcolor=ft.Colors.BLUE_100,
                         padding=ft.padding.all(10),
                         border_radius=8
                     ),
                     ft.Container(
-                        content=ft.Text("Nivel: Intermedio", weight=ft.FontWeight.W_500, color=ft.colors.GREEN_800),
-                        bgcolor=ft.colors.GREEN_100,
+                        content=ft.Text("Nivel: Intermedio", weight=ft.FontWeight.W_500, color=ft.Colors.GREEN_800),
+                        bgcolor=ft.Colors.GREEN_100,
                         padding=ft.padding.all(10),
                         border_radius=8
                     )
                 ], spacing=10)
             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=ft.padding.all(20),
-            border=ft.border.only(bottom=ft.border.BorderSide(4, ft.colors.BLUE_500))
+            border=ft.border.only(bottom=ft.border.BorderSide(4, ft.Colors.BLUE_500))
         )
 
     def create_progress_bar(self):
-        self.progress_text = ft.Text("0% Completado", size=12, color=ft.colors.GREY_600)
-        self.progress_bar = ft.ProgressBar(value=0, color=ft.colors.BLUE_500, bgcolor=ft.colors.GREY_200)
+        self.progress_text = ft.Text("0% Completado", size=12, color=ft.Colors.GREY_600)
+        self.progress_bar = ft.ProgressBar(value=0, color=ft.Colors.BLUE_500, bgcolor=ft.Colors.GREY_200)
         
         self.progress_container = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Text("Progreso del Aprendizaje", size=12, color=ft.colors.GREY_600),
+                    ft.Text("Progreso del Aprendizaje", size=12, color=ft.Colors.GREY_600),
                     self.progress_text
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                 self.progress_bar
             ], spacing=5),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=ft.padding.all(15)
         )
 
     def create_navigation(self):
         nav_buttons = [
-            ("intro", "Introducción", ft.icons.PLAY_CIRCLE),
-            ("theory", "Microlección", ft.icons.BOOK),
-            ("simulator", "Simulador", ft.icons.SETTINGS),
-            ("practice", "Práctica Guiada", ft.icons.HANDYMAN),
-            ("evaluation", "Evaluación", ft.icons.ASSIGNMENT_TURNED_IN),
-            ("resources", "Recursos", ft.icons.DOWNLOAD)
+            ("intro", "Introducción", ft.Icons.PLAY_CIRCLE),
+            ("theory", "Microlección", ft.Icons.BOOK),
+            ("simulator", "Simulador", ft.Icons.SETTINGS),
+            ("practice", "Práctica Guiada", ft.Icons.HANDYMAN),
+            ("evaluation", "Evaluación", ft.Icons.ASSIGNMENT_TURNED_IN),
+            ("resources", "Recursos", ft.Icons.DOWNLOAD)
         ]
         
         self.nav_buttons = {}
@@ -128,8 +128,8 @@ class OVAApp:
                 icon=icon,
                 on_click=lambda e, s=section_id: self.show_section(s),
                 style=ft.ButtonStyle(
-                    color=ft.colors.GREY_600 if section_id != "intro" else ft.colors.BLUE_600,
-                    bgcolor=ft.colors.TRANSPARENT
+                    color=ft.Colors.GREY_600 if section_id != "intro" else ft.Colors.BLUE_600,
+                    bgcolor=ft.Colors.TRANSPARENT
                 )
             )
             self.nav_buttons[section_id] = btn
@@ -137,16 +137,16 @@ class OVAApp:
         
         self.navigation = ft.Container(
             content=ft.Row(nav_row, scroll=ft.ScrollMode.AUTO),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=ft.padding.symmetric(horizontal=20, vertical=10),
-            border=ft.border.only(bottom=ft.border.BorderSide(1, ft.colors.GREY_300))
+            border=ft.border.only(bottom=ft.border.BorderSide(1, ft.Colors.GREY_300))
         )
 
     def create_sections(self):
         self.content_container = ft.Container(
             content=ft.Column([], scroll=ft.ScrollMode.AUTO),
             padding=ft.padding.all(20),
-            bgcolor=ft.colors.BLUE_GREY_50,
+            bgcolor=ft.Colors.BLUE_GREY_50,
             expand=True
         )
 
@@ -185,11 +185,11 @@ class OVAApp:
     def update_navigation(self):
         for section_id, btn in self.nav_buttons.items():
             if section_id == self.current_section:
-                btn.style.color = ft.colors.BLUE_600
+                btn.style.color = ft.Colors.BLUE_600
             else:
-                btn.style.color = ft.colors.GREY_600
+                btn.style.color = ft.Colors.GREY_600
 
-    def create_card(self, content, bgcolor=ft.colors.WHITE, padding=20):
+    def create_card(self, content, bgcolor=ft.Colors.WHITE, padding=20):
         return ft.Container(
             content=content,
             bgcolor=bgcolor,
@@ -199,7 +199,7 @@ class OVAApp:
             shadow=ft.BoxShadow(
                 spread_radius=1,
                 blur_radius=10,
-                color=ft.colors.with_opacity(0.1, ft.colors.BLACK)
+                color=ft.Colors.with_opacity(0.1, ft.Colors.BLACK)
             )
         )
 
@@ -207,22 +207,22 @@ class OVAApp:
         # Título principal
         title_section = ft.Column([
             ft.Container(
-                content=ft.Icon(ft.icons.BIOTECH, size=60, color=ft.colors.BLUE_600),
+                content=ft.Icon(ft.Icons.BIOTECH, size=60, color=ft.Colors.BLUE_600),
                 alignment=ft.alignment.center,
                 margin=ft.margin.only(bottom=20)
             ),
             ft.Text("Bienvenido al Flujo de Trabajo Reproducible", 
                    size=24, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
             ft.Text("Aprende a documentar, versionar y reproducir análisis estadísticos en ciencias de la salud utilizando el modelo pedagógico C(H)ANGE e inteligencia artificial.",
-                   size=16, color=ft.colors.GREY_600, text_align=ft.TextAlign.CENTER)
+                   size=16, color=ft.Colors.GREY_600, text_align=ft.TextAlign.CENTER)
         ], horizontal_alignment=ft.CrossAxisAlignment.CENTER)
 
         # Objetivos y modelo CHANGE
         objectives_card = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.TARGET_OUTLINED, color=ft.colors.BLUE_600),
-                    ft.Text("Objetivos de Aprendizaje", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800)
+                    ft.Icon(ft.Icons.TARGET_OUTLINED, color=ft.Colors.BLUE_600),
+                    ft.Text("Objetivos de Aprendizaje", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800)
                 ]),
                 ft.Column([
                     self.create_objective_item("Documentar análisis estadísticos de forma reproducible"),
@@ -231,7 +231,7 @@ class OVAApp:
                     self.create_objective_item("Aplicar el modelo C(H)ANGE en flujos de trabajo")
                 ])
             ]),
-            bgcolor=ft.colors.BLUE_50,
+            bgcolor=ft.Colors.BLUE_50,
             padding=ft.padding.all(20),
             border_radius=8,
             expand=True
@@ -240,18 +240,18 @@ class OVAApp:
         change_card = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.PSYCHOLOGY, color=ft.colors.GREEN_600),
-                    ft.Text("Modelo C(H)ANGE Integrado", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800)
+                    ft.Icon(ft.Icons.PSYCHOLOGY, color=ft.Colors.GREEN_600),
+                    ft.Text("Modelo C(H)ANGE Integrado", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800)
                 ]),
                 ft.Column([
-                    self.create_change_item("C", "Combinatoria: Organización de archivos y carpetas", ft.colors.RED_100),
-                    self.create_change_item("A", "Álgebra: Variables y funciones en scripts", ft.colors.YELLOW_100),
-                    self.create_change_item("N", "Números: Semillas aleatorias y versiones", ft.colors.BLUE_100),
-                    self.create_change_item("G", "Geometría: Diagramas de flujo de trabajo", ft.colors.PURPLE_100),
-                    self.create_change_item("E", "Estadística: Análisis reproducible", ft.colors.GREEN_100)
+                    self.create_change_item("C", "Combinatoria: Organización de archivos y carpetas", ft.Colors.RED_100),
+                    self.create_change_item("A", "Álgebra: Variables y funciones en scripts", ft.Colors.YELLOW_100),
+                    self.create_change_item("N", "Números: Semillas aleatorias y versiones", ft.Colors.BLUE_100),
+                    self.create_change_item("G", "Geometría: Diagramas de flujo de trabajo", ft.Colors.PURPLE_100),
+                    self.create_change_item("E", "Estadística: Análisis reproducible", ft.Colors.GREEN_100)
                 ])
             ]),
-            bgcolor=ft.colors.GREEN_50,
+            bgcolor=ft.Colors.GREEN_50,
             padding=ft.padding.all(20),
             border_radius=8,
             expand=True
@@ -261,35 +261,35 @@ class OVAApp:
         case_card = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.MEDICAL_SERVICES, color=ft.colors.ORANGE_600),
-                    ft.Text("Caso Clínico: Estudio de Hipertensión", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800)
+                    ft.Icon(ft.Icons.MEDICAL_SERVICES, color=ft.Colors.ORANGE_600),
+                    ft.Text("Caso Clínico: Estudio de Hipertensión", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800)
                 ]),
                 ft.Text("Un equipo de investigación está analizando datos de 1,000 pacientes con hipertensión. Después de 6 meses, necesitan reproducir exactamente los mismos resultados para una publicación científica, pero el análisis original no está documentado adecuadamente.",
-                       size=14, color=ft.colors.GREY_700),
+                       size=14, color=ft.Colors.GREY_700),
                 ft.Container(
                     content=ft.Text("\"¿Cómo podemos asegurar que nuestros análisis estadísticos sean completamente reproducibles y transparentes para la comunidad científica?\"",
-                                   size=12, color=ft.colors.GREY_600, italic=True),
-                    bgcolor=ft.colors.WHITE,
+                                   size=12, color=ft.Colors.GREY_600, italic=True),
+                    bgcolor=ft.Colors.WHITE,
                     padding=ft.padding.all(15),
                     border_radius=8,
                     margin=ft.margin.only(top=10)
                 )
             ]),
-            bgcolor=ft.colors.ORANGE_50,
+            bgcolor=ft.Colors.ORANGE_50,
             padding=ft.padding.all(20),
             border_radius=8,
-            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.ORANGE_500))
+            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.ORANGE_500))
         )
 
         # Botón continuar
         continue_btn = ft.Container(
             content=ft.ElevatedButton(
                 text="Comenzar Microlección",
-                icon=ft.icons.ARROW_FORWARD,
+                icon=ft.Icons.ARROW_FORWARD,
                 on_click=lambda e: self.show_section("theory"),
                 style=ft.ButtonStyle(
-                    bgcolor=ft.colors.BLUE_500,
-                    color=ft.colors.WHITE,
+                    bgcolor=ft.Colors.BLUE_500,
+                    color=ft.Colors.WHITE,
                     padding=ft.padding.symmetric(horizontal=30, vertical=15)
                 )
             ),
@@ -307,8 +307,8 @@ class OVAApp:
 
     def create_objective_item(self, text):
         return ft.Row([
-            ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500, size=20),
-            ft.Text(text, size=14, color=ft.colors.GREY_700, expand=True)
+            ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500, size=20),
+            ft.Text(text, size=14, color=ft.Colors.GREY_700, expand=True)
         ], spacing=10)
 
     def create_change_item(self, letter, description, bgcolor):
@@ -322,56 +322,56 @@ class OVAApp:
                 height=30,
                 alignment=ft.alignment.center
             ),
-            ft.Text(description, size=14, color=ft.colors.GREY_700, expand=True)
+            ft.Text(description, size=14, color=ft.Colors.GREY_700, expand=True)
         ], spacing=10)
 
     def show_theory_section(self):
         # Título
         title = ft.Text("Microlección: Fundamentos de Reproducibilidad", 
-                       size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                       size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
 
         # Asistente IA
         ai_assistant = ft.Container(
             content=ft.Row([
                 ft.Container(
-                    content=ft.Icon(ft.icons.SMART_TOY, color=ft.colors.PURPLE_600, size=30),
-                    bgcolor=ft.colors.PURPLE_100,
+                    content=ft.Icon(ft.Icons.SMART_TOY, color=ft.Colors.PURPLE_600, size=30),
+                    bgcolor=ft.Colors.PURPLE_100,
                     padding=ft.padding.all(15),
                     border_radius=50
                 ),
                 ft.Column([
-                    ft.Text("Asistente IA - BioStat Helper", weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                    ft.Text("Asistente IA - BioStat Helper", weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
                     self.ai_message_text
                 ], expand=True)
             ], spacing=15),
-            bgcolor=ft.colors.PURPLE_50,
+            bgcolor=ft.Colors.PURPLE_50,
             padding=ft.padding.all(20),
             border_radius=8,
-            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.PURPLE_500))
+            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.PURPLE_500))
         )
 
         # Conceptos fundamentales
         concepts_column = ft.Column([
-            ft.Text("Conceptos Fundamentales", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800),
+            ft.Text("Conceptos Fundamentales", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800),
             self.create_concept_card("Reproducibilidad", "Capacidad de obtener los mismos resultados usando los mismos datos y métodos.", 
-                                   ft.colors.BLUE_50, ft.colors.BLUE_500, "reproducibility"),
+                                   ft.Colors.BLUE_50, ft.Colors.BLUE_500, "reproducibility"),
             self.create_concept_card("Documentación", "Registro detallado de todos los pasos, decisiones y métodos utilizados.", 
-                                   ft.colors.GREEN_50, ft.colors.GREEN_500, "documentation"),
+                                   ft.Colors.GREEN_50, ft.Colors.GREEN_500, "documentation"),
             self.create_concept_card("Control de Versiones", "Sistema para rastrear cambios en archivos y código a lo largo del tiempo.", 
-                                   ft.colors.YELLOW_50, ft.colors.YELLOW_600, "versioning"),
+                                   ft.Colors.YELLOW_50, ft.Colors.YELLOW_600, "versioning"),
             self.create_concept_card("Flujo de Trabajo", "Secuencia organizada de pasos para completar un análisis estadístico.", 
-                                   ft.colors.PURPLE_50, ft.colors.PURPLE_500, "workflow")
+                                   ft.Colors.PURPLE_50, ft.Colors.PURPLE_500, "workflow")
         ], spacing=15)
 
         # Panel de detalles
         self.concept_detail = ft.Container(
             content=ft.Column([
-                ft.Icon(ft.icons.MOUSE, size=60, color=ft.colors.GREY_400),
+                ft.Icon(ft.Icons.MOUSE, size=60, color=ft.Colors.GREY_400),
                 ft.Text("Haz clic en un concepto para ver más detalles", 
-                       color=ft.colors.GREY_500, text_align=ft.TextAlign.CENTER)
+                       color=ft.Colors.GREY_500, text_align=ft.TextAlign.CENTER)
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, 
                alignment=ft.MainAxisAlignment.CENTER),
-            bgcolor=ft.colors.GREY_50,
+            bgcolor=ft.Colors.GREY_50,
             padding=ft.padding.all(30),
             border_radius=8,
             height=400,
@@ -385,11 +385,11 @@ class OVAApp:
         continue_btn = ft.Container(
             content=ft.ElevatedButton(
                 text="Ir al Simulador",
-                icon=ft.icons.SETTINGS,
+                icon=ft.Icons.SETTINGS,
                 on_click=lambda e: self.show_section("simulator"),
                 style=ft.ButtonStyle(
-                    bgcolor=ft.colors.GREEN_500,
-                    color=ft.colors.WHITE,
+                    bgcolor=ft.Colors.GREEN_500,
+                    color=ft.Colors.WHITE,
                     padding=ft.padding.symmetric(horizontal=30, vertical=15)
                 )
             ),
@@ -409,7 +409,7 @@ class OVAApp:
         return ft.Container(
             content=ft.Column([
                 ft.Text(title, weight=ft.FontWeight.BOLD, size=16),
-                ft.Text(description, size=12, color=ft.colors.GREY_700)
+                ft.Text(description, size=12, color=ft.Colors.GREY_700)
             ]),
             bgcolor=bgcolor,
             padding=ft.padding.all(15),
@@ -480,13 +480,13 @@ class OVAApp:
         }
 
         detail = details[concept_id]
-        content_widgets = [ft.Text(detail["title"], size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)]
+        content_widgets = [ft.Text(detail["title"], size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)]
         
         for line in detail["content"]:
             if line.endswith(":"):
-                content_widgets.append(ft.Text(line, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800, size=14))
+                content_widgets.append(ft.Text(line, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800, size=14))
             else:
-                content_widgets.append(ft.Text(line, size=12, color=ft.colors.GREY_700))
+                content_widgets.append(ft.Text(line, size=12, color=ft.Colors.GREY_700))
 
         self.concept_detail.content = ft.Column(content_widgets, spacing=8, scroll=ft.ScrollMode.AUTO)
         self.ai_message_text.value = self.ai_messages[concept_id]
@@ -494,19 +494,19 @@ class OVAApp:
 
     def create_workflow_diagram(self):
         steps = [
-            ("Organización", "Estructura de carpetas", ft.colors.BLUE_100, ft.icons.FOLDER_OPEN),
-            ("Codificación", "Scripts documentados", ft.colors.GREEN_100, ft.icons.CODE),
-            ("Versionado", "Control de cambios", ft.colors.YELLOW_100, ft.icons.SAVE),
-            ("Compartir", "Reproducibilidad", ft.colors.PURPLE_100, ft.icons.SHARE)
+            ("Organización", "Estructura de carpetas", ft.Colors.BLUE_100, ft.Icons.FOLDER_OPEN),
+            ("Codificación", "Scripts documentados", ft.Colors.GREEN_100, ft.Icons.CODE),
+            ("Versionado", "Control de cambios", ft.Colors.YELLOW_100, ft.Icons.SAVE),
+            ("Compartir", "Reproducibilidad", ft.Colors.PURPLE_100, ft.Icons.SHARE)
         ]
 
         step_widgets = []
         for i, (title, subtitle, color, icon) in enumerate(steps):
             step_widget = ft.Container(
                 content=ft.Column([
-                    ft.Icon(icon, size=30, color=ft.colors.GREY_700),
+                    ft.Icon(icon, size=30, color=ft.Colors.GREY_700),
                     ft.Text(f"{i+1}. {title}", weight=ft.FontWeight.BOLD, size=14, text_align=ft.TextAlign.CENTER),
-                    ft.Text(subtitle, size=12, color=ft.colors.GREY_600, text_align=ft.TextAlign.CENTER)
+                    ft.Text(subtitle, size=12, color=ft.Colors.GREY_600, text_align=ft.TextAlign.CENTER)
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                 bgcolor=color,
                 padding=ft.padding.all(15),
@@ -518,13 +518,13 @@ class OVAApp:
             step_widgets.append(step_widget)
             
             if i < len(steps) - 1:
-                step_widgets.append(ft.Icon(ft.icons.ARROW_FORWARD, color=ft.colors.GREY_400))
+                step_widgets.append(ft.Icon(ft.Icons.ARROW_FORWARD, color=ft.Colors.GREY_400))
 
         return ft.Column([
-            ft.Text("Flujo de Trabajo Reproducible", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800),
+            ft.Text("Flujo de Trabajo Reproducible", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800),
             ft.Container(
                 content=ft.Row(step_widgets, alignment=ft.MainAxisAlignment.CENTER, spacing=10),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=ft.padding.all(20),
                 border_radius=8
             )
@@ -542,7 +542,7 @@ class OVAApp:
 
     def show_simulator_section(self):
         title = ft.Text("Simulador de Flujo de Trabajo", 
-                       size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                       size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
 
         # Panel de control
         self.project_type = ft.Dropdown(
@@ -561,7 +561,7 @@ class OVAApp:
             self.get_folder_structure("hypertension"),
             font_family="Courier New",
             size=12,
-            color=ft.colors.GREY_700
+            color=ft.Colors.GREY_700
         )
 
         self.random_seed = ft.TextField(
@@ -582,11 +582,11 @@ class OVAApp:
 
         generate_btn = ft.ElevatedButton(
             text="Generar Flujo de Trabajo",
-            icon=ft.icons.AUTO_FIX_HIGH,
+            icon=ft.Icons.AUTO_FIX_HIGH,
             on_click=self.generate_workflow,
             style=ft.ButtonStyle(
-                bgcolor=ft.colors.BLUE_500,
-                color=ft.colors.WHITE
+                bgcolor=ft.Colors.BLUE_500,
+                color=ft.Colors.WHITE
             )
         )
 
@@ -596,7 +596,7 @@ class OVAApp:
             ft.Text("Estructura de Carpetas Sugerida", weight=ft.FontWeight.BOLD, size=14),
             ft.Container(
                 content=self.folder_structure,
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=ft.padding.all(15),
                 border_radius=8
             ),
@@ -609,28 +609,28 @@ class OVAApp:
             "Selecciona las opciones y haz clic en 'Generar Flujo de Trabajo'",
             font_family="Courier New",
             size=12,
-            color=ft.colors.GREY_400
+            color=ft.Colors.GREY_400
         )
 
         self.ai_validation = ft.Container(
             content=ft.Row([
-                ft.Icon(ft.icons.SMART_TOY, color=ft.colors.BLUE_600),
+                ft.Icon(ft.Icons.SMART_TOY, color=ft.Colors.BLUE_600),
                 ft.Column([
-                    ft.Text("Validación IA", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
-                    ft.Text("", size=12, color=ft.colors.GREY_700)
+                    ft.Text("Validación IA", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
+                    ft.Text("", size=12, color=ft.Colors.GREY_700)
                 ], expand=True)
             ]),
-            bgcolor=ft.colors.BLUE_50,
+            bgcolor=ft.Colors.BLUE_50,
             padding=ft.padding.all(15),
             border_radius=8,
-            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.BLUE_500)),
+            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.BLUE_500)),
             visible=False
         )
 
         # Métricas de calidad
-        self.doc_progress = ft.ProgressBar(value=0, color=ft.colors.GREEN_500)
-        self.repro_progress = ft.ProgressBar(value=0, color=ft.colors.BLUE_500)
-        self.practices_progress = ft.ProgressBar(value=0, color=ft.colors.PURPLE_500)
+        self.doc_progress = ft.ProgressBar(value=0, color=ft.Colors.GREEN_500)
+        self.repro_progress = ft.ProgressBar(value=0, color=ft.Colors.BLUE_500)
+        self.practices_progress = ft.ProgressBar(value=0, color=ft.Colors.PURPLE_500)
 
         metrics = ft.Column([
             ft.Text("Métricas de Calidad del Código", weight=ft.FontWeight.BOLD, size=14),
@@ -643,7 +643,7 @@ class OVAApp:
             ft.Text("Código Generado", size=18, weight=ft.FontWeight.BOLD),
             ft.Container(
                 content=ft.Column([self.generated_code], scroll=ft.ScrollMode.AUTO),
-                bgcolor=ft.colors.GREY_900,
+                bgcolor=ft.Colors.GREY_900,
                 padding=ft.padding.all(15),
                 border_radius=8,
                 height=300
@@ -656,11 +656,11 @@ class OVAApp:
         continue_btn = ft.Container(
             content=ft.ElevatedButton(
                 text="Continuar con Práctica Guiada",
-                icon=ft.icons.HANDYMAN,
+                icon=ft.Icons.HANDYMAN,
                 on_click=lambda e: self.show_section("practice"),
                 style=ft.ButtonStyle(
-                    bgcolor=ft.colors.PURPLE_500,
-                    color=ft.colors.WHITE,
+                    bgcolor=ft.Colors.PURPLE_500,
+                    color=ft.Colors.WHITE,
                     padding=ft.padding.symmetric(horizontal=30, vertical=15)
                 )
             ),
@@ -759,7 +759,7 @@ class OVAApp:
             code = self.generate_python_code(project_type, seed)
 
         self.generated_code.value = code
-        self.generated_code.color = ft.colors.GREEN_400
+        self.generated_code.color = ft.Colors.GREEN_400
 
         # Mostrar validación IA
         self.ai_validation.visible = True
@@ -900,7 +900,7 @@ print("Flujo de trabajo generado exitosamente!")'''
 
     def show_practice_section(self):
         title = ft.Text("Práctica Guiada: Análisis de Hipertensión", 
-                       size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                       size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
 
         # Dataset
         dataset_table = self.create_dataset_table()
@@ -915,11 +915,11 @@ print("Flujo de trabajo generado exitosamente!")'''
         continue_btn = ft.Container(
             content=ft.ElevatedButton(
                 text="Ir a Evaluación",
-                icon=ft.icons.ASSIGNMENT_TURNED_IN,
+                icon=ft.Icons.ASSIGNMENT_TURNED_IN,
                 on_click=lambda e: self.show_section("evaluation"),
                 style=ft.ButtonStyle(
-                    bgcolor=ft.colors.RED_500,
-                    color=ft.colors.WHITE,
+                    bgcolor=ft.Colors.RED_500,
+                    color=ft.Colors.WHITE,
                     padding=ft.padding.symmetric(horizontal=30, vertical=15)
                 )
             ),
@@ -968,7 +968,7 @@ print("Flujo de trabajo generado exitosamente!")'''
                     columns=[ft.DataColumn(ft.Text(h)) for h in headers],
                     rows=table_rows[1:]  # Excluir header row
                 ),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=ft.padding.all(15),
                 border_radius=8
             )
@@ -976,10 +976,10 @@ print("Flujo de trabajo generado exitosamente!")'''
 
     def create_practice_steps(self):
         steps = [
-            ("Configuración del Entorno", self.get_step1_code(), ft.colors.BLUE_500),
-            ("Carga y Limpieza de Datos", self.get_step2_code(), ft.colors.GREEN_500),
-            ("Análisis Descriptivo", self.get_step3_code(), ft.colors.YELLOW_600),
-            ("Visualización y Documentación", self.get_step4_code(), ft.colors.PURPLE_500)
+            ("Configuración del Entorno", self.get_step1_code(), ft.Colors.BLUE_500),
+            ("Carga y Limpieza de Datos", self.get_step2_code(), ft.Colors.GREEN_500),
+            ("Análisis Descriptivo", self.get_step3_code(), ft.Colors.YELLOW_600),
+            ("Visualización y Documentación", self.get_step4_code(), ft.Colors.PURPLE_500)
         ]
 
         step_widgets = []
@@ -988,7 +988,7 @@ print("Flujo de trabajo generado exitosamente!")'''
                 content=ft.Column([
                     ft.Row([
                         ft.Container(
-                            content=ft.Text(f"Paso {i+1}", size=12, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                            content=ft.Text(f"Paso {i+1}", size=12, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                             bgcolor=color,
                             padding=ft.padding.all(8),
                             border_radius=20
@@ -996,17 +996,17 @@ print("Flujo de trabajo generado exitosamente!")'''
                         ft.Text(title, size=16, weight=ft.FontWeight.BOLD, expand=True)
                     ]),
                     ft.Container(
-                        content=ft.Text(code, font_family="Courier New", size=10, color=ft.colors.GREEN_400),
-                        bgcolor=ft.colors.GREY_900,
+                        content=ft.Text(code, font_family="Courier New", size=10, color=ft.Colors.GREEN_400),
+                        bgcolor=ft.Colors.GREY_900,
                         padding=ft.padding.all(15),
                         border_radius=8,
                         height=200
                     ),
                     ft.ElevatedButton(
                         text=f"Ejecutar Paso {i+1}",
-                        icon=ft.icons.PLAY_ARROW,
+                        icon=ft.Icons.PLAY_ARROW,
                         on_click=lambda e, step=i+1: self.execute_practice_step(step),
-                        style=ft.ButtonStyle(bgcolor=color, color=ft.colors.WHITE)
+                        style=ft.ButtonStyle(bgcolor=color, color=ft.Colors.WHITE)
                     )
                 ], spacing=10),
                 border=ft.border.only(left=ft.border.BorderSide(4, color)),
@@ -1166,7 +1166,7 @@ reporte <- paste(
 
     def show_evaluation_section(self):
         title = ft.Text("Evaluación Automatizada", 
-                       size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                       size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
 
         # Quiz
         quiz_section = self.create_quiz_section()
@@ -1181,11 +1181,11 @@ reporte <- paste(
         continue_btn = ft.Container(
             content=ft.ElevatedButton(
                 text="Acceder a Recursos",
-                icon=ft.icons.DOWNLOAD,
+                icon=ft.Icons.DOWNLOAD,
                 on_click=lambda e: self.show_section("resources"),
                 style=ft.ButtonStyle(
-                    bgcolor=ft.colors.ORANGE_500,
-                    color=ft.colors.WHITE,
+                    bgcolor=ft.Colors.ORANGE_500,
+                    color=ft.Colors.WHITE,
                     padding=ft.padding.symmetric(horizontal=30, vertical=15)
                 )
             ),
@@ -1247,19 +1247,19 @@ reporte <- paste(
                     ft.Text(f"Pregunta {i+1}: {q['question']}", weight=ft.FontWeight.BOLD, size=14),
                     options_group
                 ]),
-                bgcolor=ft.colors.BLUE_50 if i == 0 else ft.colors.GREEN_50 if i == 1 else ft.colors.YELLOW_50,
+                bgcolor=ft.Colors.BLUE_50 if i == 0 else ft.Colors.GREEN_50 if i == 1 else ft.Colors.YELLOW_50,
                 padding=ft.padding.all(20),
                 border_radius=8,
                 border=ft.border.only(left=ft.border.BorderSide(4, 
-                    ft.colors.BLUE_500 if i == 0 else ft.colors.GREEN_500 if i == 1 else ft.colors.YELLOW_500))
+                    ft.Colors.BLUE_500 if i == 0 else ft.Colors.GREEN_500 if i == 1 else ft.Colors.YELLOW_500))
             )
             question_widgets.append(question_widget)
 
         submit_btn = ft.ElevatedButton(
             text="Enviar Respuestas",
-            icon=ft.icons.CHECK,
+            icon=ft.Icons.CHECK,
             on_click=self.submit_quiz,
-            style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_500, color=ft.colors.WHITE)
+            style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_500, color=ft.Colors.WHITE)
         )
 
         self.quiz_results = ft.Container(visible=False)
@@ -1281,8 +1281,8 @@ reporte <- paste(
         
         percentage = int((score / len(correct_answers)) * 100)
         
-        color = ft.colors.GREEN_50 if score == 3 else ft.colors.YELLOW_50 if score >= 2 else ft.colors.RED_50
-        border_color = ft.colors.GREEN_500 if score == 3 else ft.colors.YELLOW_500 if score >= 2 else ft.colors.RED_500
+        color = ft.Colors.GREEN_50 if score == 3 else ft.Colors.YELLOW_50 if score >= 2 else ft.Colors.RED_50
+        border_color = ft.Colors.GREEN_500 if score == 3 else ft.Colors.YELLOW_500 if score >= 2 else ft.Colors.RED_500
         
         feedback = "¡Excelente! Dominas los conceptos de reproducibilidad." if score == 3 else \
                   "Buen trabajo. Revisa los conceptos que fallaste." if score >= 2 else \
@@ -1292,7 +1292,7 @@ reporte <- paste(
             content=ft.Column([
                 ft.Text(f"Resultado: {percentage}% ({score}/3 correctas)", 
                        weight=ft.FontWeight.BOLD, size=16),
-                ft.Text(feedback, size=14, color=ft.colors.GREY_700)
+                ft.Text(feedback, size=14, color=ft.Colors.GREY_700)
             ]),
             bgcolor=color,
             padding=ft.padding.all(20),
@@ -1313,9 +1313,9 @@ reporte <- paste(
 
         validate_btn = ft.ElevatedButton(
             text="Validar con IA",
-            icon=ft.icons.SMART_TOY,
+            icon=ft.Icons.SMART_TOY,
             on_click=self.validate_user_code,
-            style=ft.ButtonStyle(bgcolor=ft.colors.PURPLE_500, color=ft.colors.WHITE)
+            style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_500, color=ft.Colors.WHITE)
         )
 
         self.code_validation_result = ft.Container(visible=False)
@@ -1323,7 +1323,7 @@ reporte <- paste(
         return ft.Column([
             ft.Text("Ejercicio Práctico: Crear Script Reproducible", size=18, weight=ft.FontWeight.BOLD),
             ft.Text("Escribe un script en R o Python que incluya los elementos esenciales para la reproducibilidad:",
-                   size=14, color=ft.colors.GREY_700),
+                   size=14, color=ft.Colors.GREY_700),
             self.user_code,
             validate_btn,
             self.code_validation_result
@@ -1365,8 +1365,8 @@ reporte <- paste(
         else:
             feedback.append("❌ No se define estructura de directorios")
 
-        color = ft.colors.GREEN_50 if score >= 80 else ft.colors.YELLOW_50 if score >= 60 else ft.colors.RED_50
-        border_color = ft.colors.GREEN_500 if score >= 80 else ft.colors.YELLOW_500 if score >= 60 else ft.colors.RED_500
+        color = ft.Colors.GREEN_50 if score >= 80 else ft.Colors.YELLOW_50 if score >= 60 else ft.Colors.RED_50
+        border_color = ft.Colors.GREEN_500 if score >= 80 else ft.Colors.YELLOW_500 if score >= 60 else ft.Colors.RED_500
 
         final_feedback = "Excelente código reproducible!" if score >= 80 else \
                         "Buen código, pero puede mejorar." if score >= 60 else \
@@ -1375,11 +1375,11 @@ reporte <- paste(
         self.code_validation_result.content = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.SMART_TOY, color=border_color.replace("_50", "_600")),
+                    ft.Icon(ft.Icons.SMART_TOY, color=border_color.replace("_50", "_600")),
                     ft.Text(f"Validación IA - Puntuación: {score}/100", weight=ft.FontWeight.BOLD)
                 ]),
                 ft.Column([ft.Text(f, size=12) for f in feedback]),
-                ft.Text(final_feedback, size=14, color=ft.colors.GREY_700, weight=ft.FontWeight.BOLD)
+                ft.Text(final_feedback, size=14, color=ft.Colors.GREY_700, weight=ft.FontWeight.BOLD)
             ]),
             bgcolor=color,
             padding=ft.padding.all(15),
@@ -1417,7 +1417,7 @@ reporte <- paste(
         col2 = ft.Column(checkbox_widgets[4:], spacing=10)
 
         self.checklist_score_text = ft.Text("0/8 completado", size=20, weight=ft.FontWeight.BOLD)
-        self.checklist_progress_bar = ft.ProgressBar(value=0, color=ft.colors.GREEN_500)
+        self.checklist_progress_bar = ft.ProgressBar(value=0, color=ft.Colors.GREEN_500)
 
         return ft.Column([
             ft.Text("Checklist de Verificación", size=18, weight=ft.FontWeight.BOLD),
@@ -1432,7 +1432,7 @@ reporte <- paste(
                         margin=ft.margin.only(top=20)
                     )
                 ]),
-                bgcolor=ft.colors.GREEN_50,
+                bgcolor=ft.Colors.GREEN_50,
                 padding=ft.padding.all(20),
                 border_radius=8
             )
@@ -1448,7 +1448,7 @@ reporte <- paste(
 
     def show_resources_section(self):
         title = ft.Text("Recursos Descargables", 
-                       size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                       size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
 
         # Plantillas y guías
         templates_section = self.create_templates_section()
@@ -1472,10 +1472,10 @@ reporte <- paste(
 
     def create_templates_section(self):
         templates = [
-            ("Plantilla de Script R", "Estructura básica para análisis reproducible", ft.colors.BLUE_500, "r-template"),
-            ("Plantilla de Script Python", "Estructura básica para análisis con pandas", ft.colors.GREEN_500, "python-template"),
-            ("Checklist de Reproducibilidad", "Lista de verificación completa", ft.colors.YELLOW_600, "checklist"),
-            ("Guía de Estructura de Carpetas", "Organización recomendada para proyectos", ft.colors.PURPLE_500, "folder-guide")
+            ("Plantilla de Script R", "Estructura básica para análisis reproducible", ft.Colors.BLUE_500, "r-template"),
+            ("Plantilla de Script Python", "Estructura básica para análisis con pandas", ft.Colors.GREEN_500, "python-template"),
+            ("Checklist de Reproducibilidad", "Lista de verificación completa", ft.Colors.YELLOW_600, "checklist"),
+            ("Guía de Estructura de Carpetas", "Organización recomendada para proyectos", ft.Colors.PURPLE_500, "folder-guide")
         ]
 
         template_widgets = []
@@ -1484,12 +1484,12 @@ reporte <- paste(
                 content=ft.Row([
                     ft.Column([
                         ft.Text(title, weight=ft.FontWeight.BOLD, size=14),
-                        ft.Text(description, size=12, color=ft.colors.GREY_600)
+                        ft.Text(description, size=12, color=ft.Colors.GREY_600)
                     ], expand=True),
                     ft.IconButton(
-                        icon=ft.icons.DOWNLOAD,
+                        icon=ft.Icons.DOWNLOAD,
                         bgcolor=color,
-                        icon_color=ft.colors.WHITE,
+                        icon_color=ft.Colors.WHITE,
                         on_click=lambda e, rid=resource_id: self.download_resource(rid)
                     )
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
@@ -1508,10 +1508,10 @@ reporte <- paste(
 
     def create_datasets_section(self):
         datasets = [
-            ("Dataset Hipertensión", "1000 pacientes con variables clínicas", ft.colors.RED_500, "hypertension-data"),
-            ("Dataset Diabetes", "Datos de seguimiento de pacientes diabéticos", ft.colors.INDIGO_500, "diabetes-data"),
-            ("Dataset COVID-19", "Datos epidemiológicos simulados", ft.colors.PINK_500, "covid-data"),
-            ("Diccionario de Datos", "Descripción de todas las variables", ft.colors.TEAL_500, "data-dictionary")
+            ("Dataset Hipertensión", "1000 pacientes con variables clínicas", ft.Colors.RED_500, "hypertension-data"),
+            ("Dataset Diabetes", "Datos de seguimiento de pacientes diabéticos", ft.Colors.INDIGO_500, "diabetes-data"),
+            ("Dataset COVID-19", "Datos epidemiológicos simulados", ft.Colors.PINK_500, "covid-data"),
+            ("Diccionario de Datos", "Descripción de todas las variables", ft.Colors.TEAL_500, "data-dictionary")
         ]
 
         dataset_widgets = []
@@ -1520,12 +1520,12 @@ reporte <- paste(
                 content=ft.Row([
                     ft.Column([
                         ft.Text(title, weight=ft.FontWeight.BOLD, size=14),
-                        ft.Text(description, size=12, color=ft.colors.GREY_600)
+                        ft.Text(description, size=12, color=ft.Colors.GREY_600)
                     ], expand=True),
                     ft.IconButton(
-                        icon=ft.icons.DOWNLOAD,
+                        icon=ft.Icons.DOWNLOAD,
                         bgcolor=color,
-                        icon_color=ft.colors.WHITE,
+                        icon_color=ft.Colors.WHITE,
                         on_click=lambda e, rid=resource_id: self.download_resource(rid)
                     )
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
@@ -1651,14 +1651,14 @@ print("Análisis completado exitosamente!")'''
                 # Mostrar confirmación
                 self.page.snack_bar = ft.SnackBar(
                     content=ft.Text(f"Archivo {resource['filename']} descargado exitosamente"),
-                    bgcolor=ft.colors.GREEN_500
+                    bgcolor=ft.Colors.GREEN_500
                 )
                 self.page.snack_bar.open = True
                 self.page.update()
             except Exception as e:
                 self.page.snack_bar = ft.SnackBar(
                     content=ft.Text(f"Error al descargar: {str(e)}"),
-                    bgcolor=ft.colors.RED_500
+                    bgcolor=ft.Colors.RED_500
                 )
                 self.page.snack_bar.open = True
                 self.page.update()
@@ -1667,9 +1667,9 @@ print("Análisis completado exitosamente!")'''
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.ROCKET_LAUNCH, color=ft.colors.ORANGE_600),
+                    ft.Icon(ft.Icons.ROCKET_LAUNCH, color=ft.Colors.ORANGE_600),
                     ft.Text("Proyecto Final: Miniinforme Reproducible", 
-                           size=18, weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800)
+                           size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800)
                 ]),
                 ft.Row([
                     ft.Column([
@@ -1691,11 +1691,11 @@ print("Análisis completado exitosamente!")'''
                 ft.Container(
                     content=ft.ElevatedButton(
                         text="Iniciar Proyecto Final",
-                        icon=ft.icons.ROCKET_LAUNCH,
+                        icon=ft.Icons.ROCKET_LAUNCH,
                         on_click=self.start_transfer_activity,
                         style=ft.ButtonStyle(
-                            bgcolor=ft.colors.ORANGE_500,
-                            color=ft.colors.WHITE,
+                            bgcolor=ft.Colors.ORANGE_500,
+                            color=ft.Colors.WHITE,
                             padding=ft.padding.symmetric(horizontal=30, vertical=15)
                         )
                     ),
@@ -1703,10 +1703,10 @@ print("Análisis completado exitosamente!")'''
                     margin=ft.margin.only(top=20)
                 )
             ]),
-            bgcolor=ft.colors.ORANGE_50,
+            bgcolor=ft.Colors.ORANGE_50,
             padding=ft.padding.all(20),
             border_radius=8,
-            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.ORANGE_500))
+            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.ORANGE_500))
         )
 
     def start_transfer_activity(self, e):
@@ -1722,25 +1722,25 @@ print("Análisis completado exitosamente!")'''
         return ft.Container(
             content=ft.Container(
                 content=ft.Column([
-                    ft.Icon(ft.icons.WORKSPACE_PREMIUM, size=60, color=ft.colors.GREEN_600),
+                    ft.Icon(ft.Icons.WORKSPACE_PREMIUM, size=60, color=ft.Colors.GREEN_600),
                     ft.Text("¡Felicitaciones!", size=20, weight=ft.FontWeight.BOLD),
                     ft.Text("Has completado la OVA 16: Flujo de Trabajo Reproducible", 
                            text_align=ft.TextAlign.CENTER),
                     ft.ElevatedButton(
                         text="Generar Certificado",
-                        icon=ft.icons.WORKSPACE_PREMIUM,
+                        icon=ft.Icons.WORKSPACE_PREMIUM,
                         on_click=self.generate_certificate,
                         style=ft.ButtonStyle(
-                            bgcolor=ft.colors.GREEN_500,
-                            color=ft.colors.WHITE,
+                            bgcolor=ft.Colors.GREEN_500,
+                            color=ft.Colors.WHITE,
                             padding=ft.padding.symmetric(horizontal=30, vertical=15)
                         )
                     )
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=15),
-                bgcolor=ft.colors.GREEN_50,
+                bgcolor=ft.Colors.GREEN_50,
                 padding=ft.padding.all(40),
                 border_radius=12,
-                border=ft.border.all(2, ft.colors.GREEN_300)
+                border=ft.border.all(2, ft.Colors.GREEN_300)
             ),
             alignment=ft.alignment.center,
             margin=ft.margin.only(top=30)
@@ -1771,14 +1771,14 @@ Universidad Antonio Nariño
             
             self.page.snack_bar = ft.SnackBar(
                 content=ft.Text("Certificado generado: certificado_ova16.txt"),
-                bgcolor=ft.colors.GREEN_500
+                bgcolor=ft.Colors.GREEN_500
             )
             self.page.snack_bar.open = True
             self.page.update()
         except Exception as e:
             self.page.snack_bar = ft.SnackBar(
                 content=ft.Text(f"Error al generar certificado: {str(e)}"),
-                bgcolor=ft.colors.RED_500
+                bgcolor=ft.Colors.RED_500
             )
             self.page.snack_bar.open = True
             self.page.update()

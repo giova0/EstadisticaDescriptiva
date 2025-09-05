@@ -33,7 +33,7 @@ Covid-19,40
                         from_y=0,
                         to_y=row["Frecuencia"],
                         width=20,
-                        color=ft.colors.BLUE,
+                        color=ft.Colors.BLUE,
                         tooltip=f"{row['Categoria']}: {row['Frecuencia']}",
                         border_radius=0,
                     )
@@ -54,9 +54,9 @@ Covid-19,40
             title_size=14,
         ),
         horizontal_grid_lines=ft.ChartGridLines(
-            interval=20, color=ft.colors.GREY_300, width=1
+            interval=20, color=ft.Colors.GREY_300, width=1
         ),
-        tooltip_bgcolor=ft.colors.with_opacity(0.8, ft.colors.WHITE),
+        tooltip_bgcolor=ft.Colors.with_opacity(0.8, ft.Colors.WHITE),
         max_y=140,
         interactive=True,
         expand=True,
@@ -68,10 +68,10 @@ Covid-19,40
     def check_answer(e):
         if e.control.value == "Gráfico de Barras":
             feedback_text.value = "¡Correcto! El gráfico de barras es ideal para comparar frecuencias entre categorías."
-            feedback_text.color = ft.colors.GREEN
+            feedback_text.color = ft.Colors.GREEN
         else:
             feedback_text.value = "Respuesta incorrecta. El gráfico de barras es el más adecuado para comparar categorías discretas."
-            feedback_text.color = ft.colors.RED
+            feedback_text.color = ft.Colors.RED
         feedback_text.visible = True
         page.update()
 
@@ -101,7 +101,7 @@ Covid-19,40
                 content=chart,
                 height=350,
                 padding=20,
-                border=ft.border.all(1, ft.colors.GREY_400),
+                border=ft.border.all(1, ft.Colors.GREY_400),
                 border_radius=ft.border_radius.all(5),
             ),
             ft.Divider(),

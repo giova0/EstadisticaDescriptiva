@@ -51,43 +51,43 @@ class OVAIndicadoresSalud:
                     "OVA 11: Indicadores de Frecuencia en Salud",
                     size=28,
                     weight=ft.FontWeight.BOLD,
-                    color=ft.colors.WHITE,
+                    color=ft.Colors.WHITE,
                     text_align=ft.TextAlign.CENTER
                 ),
                 ft.Text(
                     "Modelo Pedagógico C(H)ANGE - Universidad Antonio Nariño",
                     size=16,
-                    color=ft.colors.WHITE,
+                    color=ft.Colors.WHITE,
                     text_align=ft.TextAlign.CENTER
                 ),
                 ft.Row([
-                    ft.Text("Combinatoria", color=ft.colors.WHITE, size=12),
-                    ft.Text("Álgebra", color=ft.colors.WHITE, size=12),
-                    ft.Text("Números", color=ft.colors.WHITE, size=12),
-                    ft.Text("Geometría", color=ft.colors.WHITE, size=12),
-                    ft.Text("Estadística", color=ft.colors.WHITE, size=12),
+                    ft.Text("Combinatoria", color=ft.Colors.WHITE, size=12),
+                    ft.Text("Álgebra", color=ft.Colors.WHITE, size=12),
+                    ft.Text("Números", color=ft.Colors.WHITE, size=12),
+                    ft.Text("Geometría", color=ft.Colors.WHITE, size=12),
+                    ft.Text("Estadística", color=ft.Colors.WHITE, size=12),
                 ], alignment=ft.MainAxisAlignment.CENTER, spacing=20)
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            gradient=ft.LinearGradient([ft.colors.BLUE_700, ft.colors.PURPLE_700]),
+            gradient=ft.LinearGradient([ft.Colors.BLUE_700, ft.Colors.PURPLE_700]),
             padding=20,
             margin=ft.margin.only(bottom=10)
         )
         
         # Progress Bar
-        self.progress_bar = ft.ProgressBar(value=0, color=ft.colors.BLUE_600, height=4)
-        self.progress_text = ft.Text("0%", size=12, color=ft.colors.GREY_600)
+        self.progress_bar = ft.ProgressBar(value=0, color=ft.Colors.BLUE_600, height=4)
+        self.progress_text = ft.Text("0%", size=12, color=ft.Colors.GREY_600)
         
         progress_container = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Text("Progreso del Aprendizaje", size=12, color=ft.colors.GREY_600),
+                    ft.Text("Progreso del Aprendizaje", size=12, color=ft.Colors.GREY_600),
                     self.progress_text
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                 self.progress_bar
             ]),
             padding=10,
-            bgcolor=ft.colors.WHITE,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            bgcolor=ft.Colors.WHITE,
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
         
         # Navigation
@@ -107,8 +107,8 @@ class OVAIndicadoresSalud:
                 text=title,
                 on_click=lambda e, s=section_id: self.show_section(s),
                 style=ft.ButtonStyle(
-                    bgcolor=ft.colors.BLUE_100 if section_id == "intro" else ft.colors.GREY_100,
-                    color=ft.colors.BLUE_800 if section_id == "intro" else ft.colors.BLACK
+                    bgcolor=ft.Colors.BLUE_100 if section_id == "intro" else ft.Colors.GREY_100,
+                    color=ft.Colors.BLUE_800 if section_id == "intro" else ft.Colors.BLACK
                 )
             )
             self.nav_buttons.append(btn)
@@ -117,8 +117,8 @@ class OVAIndicadoresSalud:
         navigation = ft.Container(
             content=nav_row,
             padding=10,
-            bgcolor=ft.colors.WHITE,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            bgcolor=ft.Colors.WHITE,
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
         
         # Content Container
@@ -173,11 +173,11 @@ class OVAIndicadoresSalud:
         sections = ["intro", "theory", "simulator", "practice", "evaluation", "resources"]
         for i, btn in enumerate(self.nav_buttons):
             if sections[i] == self.current_section:
-                btn.style.bgcolor = ft.colors.BLUE_100
-                btn.style.color = ft.colors.BLUE_800
+                btn.style.bgcolor = ft.Colors.BLUE_100
+                btn.style.color = ft.Colors.BLUE_800
             else:
-                btn.style.bgcolor = ft.colors.GREY_100
-                btn.style.color = ft.colors.BLACK
+                btn.style.bgcolor = ft.Colors.GREY_100
+                btn.style.color = ft.Colors.BLACK
             btn.update()
 
     def create_intro_section(self):
@@ -202,7 +202,7 @@ class OVAIndicadoresSalud:
                                         ft.Text("• Geometría: Visualizaciones gráficas", size=12),
                                         ft.Text("• Estadística: Interpretación epidemiológica", size=12),
                                     ]),
-                                    bgcolor=ft.colors.BLUE_50,
+                                    bgcolor=ft.Colors.BLUE_50,
                                     padding=15,
                                     border_radius=10,
                                     expand=True
@@ -213,15 +213,15 @@ class OVAIndicadoresSalud:
                                     ft.Text("💡 ¿Por qué son importantes estos indicadores?", size=16, weight=ft.FontWeight.BOLD),
                                     ft.Text("Los indicadores de frecuencia son fundamentales para la toma de decisiones en salud pública, permitiendo evaluar la magnitud de problemas de salud, planificar recursos y evaluar intervenciones.", size=14)
                                 ]),
-                                bgcolor=ft.colors.YELLOW_50,
+                                bgcolor=ft.Colors.YELLOW_50,
                                 padding=15,
                                 border_radius=10,
-                                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400))
+                                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400))
                             ),
                             ft.ElevatedButton(
                                 "Comenzar Aprendizaje Interactivo →",
                                 on_click=lambda e: self.show_section("theory"),
-                                style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)
+                                style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)
                             )
                         ], spacing=20),
                         padding=20
@@ -233,8 +233,8 @@ class OVAIndicadoresSalud:
     def create_objective_item(self, number, text):
         return ft.Row([
             ft.Container(
-                content=ft.Text(number, color=ft.colors.WHITE, size=12, weight=ft.FontWeight.BOLD),
-                bgcolor=ft.colors.GREEN_500,
+                content=ft.Text(number, color=ft.Colors.WHITE, size=12, weight=ft.FontWeight.BOLD),
+                bgcolor=ft.Colors.GREEN_500,
                 width=24,
                 height=24,
                 border_radius=12,
@@ -291,7 +291,7 @@ class OVAIndicadoresSalud:
         self.ai_feedback = ft.Text(
             "¡Excelente! Has calculado correctamente los tres indicadores principales.",
             size=14,
-            color=ft.colors.WHITE
+            color=ft.Colors.WHITE
         )
         
         return ft.Column([
@@ -303,7 +303,7 @@ class OVAIndicadoresSalud:
                             ft.Row([
                                 ft.Container(
                                     content=ft.Text("📊", size=24),
-                                    bgcolor=ft.colors.RED_100,
+                                    bgcolor=ft.Colors.RED_100,
                                     width=48,
                                     height=48,
                                     border_radius=8,
@@ -318,13 +318,13 @@ class OVAIndicadoresSalud:
                                     ft.Container(
                                         content=ft.Text("P = (Casos existentes / Población total) × 100", 
                                                        size=12, text_align=ft.TextAlign.CENTER),
-                                        bgcolor=ft.colors.WHITE,
+                                        bgcolor=ft.Colors.WHITE,
                                         padding=10,
                                         border_radius=5,
-                                        border=ft.border.all(1, ft.colors.GREY_400)
+                                        border=ft.border.all(1, ft.Colors.GREY_400)
                                     )
                                 ]),
-                                bgcolor=ft.colors.RED_50,
+                                bgcolor=ft.Colors.RED_50,
                                 padding=10,
                                 border_radius=8
                             ),
@@ -332,7 +332,7 @@ class OVAIndicadoresSalud:
                             self.prev_pop_field,
                             ft.Container(
                                 content=ft.Text(f"Prevalencia: {self.prevalence_result.value}", weight=ft.FontWeight.BOLD),
-                                bgcolor=ft.colors.GREY_50,
+                                bgcolor=ft.Colors.GREY_50,
                                 padding=10,
                                 border_radius=5
                             )
@@ -349,7 +349,7 @@ class OVAIndicadoresSalud:
                             ft.Row([
                                 ft.Container(
                                     content=ft.Text("📈", size=24),
-                                    bgcolor=ft.colors.BLUE_100,
+                                    bgcolor=ft.Colors.BLUE_100,
                                     width=48,
                                     height=48,
                                     border_radius=8,
@@ -364,13 +364,13 @@ class OVAIndicadoresSalud:
                                     ft.Container(
                                         content=ft.Text("I = (Casos nuevos / Población en riesgo) × 100", 
                                                        size=12, text_align=ft.TextAlign.CENTER),
-                                        bgcolor=ft.colors.WHITE,
+                                        bgcolor=ft.Colors.WHITE,
                                         padding=10,
                                         border_radius=5,
-                                        border=ft.border.all(1, ft.colors.GREY_400)
+                                        border=ft.border.all(1, ft.Colors.GREY_400)
                                     )
                                 ]),
-                                bgcolor=ft.colors.BLUE_50,
+                                bgcolor=ft.Colors.BLUE_50,
                                 padding=10,
                                 border_radius=8
                             ),
@@ -378,7 +378,7 @@ class OVAIndicadoresSalud:
                             self.inc_pop_field,
                             ft.Container(
                                 content=ft.Text(f"Incidencia: {self.incidence_result.value}", weight=ft.FontWeight.BOLD),
-                                bgcolor=ft.colors.GREY_50,
+                                bgcolor=ft.Colors.GREY_50,
                                 padding=10,
                                 border_radius=5
                             )
@@ -395,7 +395,7 @@ class OVAIndicadoresSalud:
                             ft.Row([
                                 ft.Container(
                                     content=ft.Text("⚠️", size=24),
-                                    bgcolor=ft.colors.PURPLE_100,
+                                    bgcolor=ft.Colors.PURPLE_100,
                                     width=48,
                                     height=48,
                                     border_radius=8,
@@ -410,13 +410,13 @@ class OVAIndicadoresSalud:
                                     ft.Container(
                                         content=ft.Text("L = (Muertes por enfermedad / Total de casos) × 100", 
                                                        size=12, text_align=ft.TextAlign.CENTER),
-                                        bgcolor=ft.colors.WHITE,
+                                        bgcolor=ft.Colors.WHITE,
                                         padding=10,
                                         border_radius=5,
-                                        border=ft.border.all(1, ft.colors.GREY_400)
+                                        border=ft.border.all(1, ft.Colors.GREY_400)
                                     )
                                 ]),
-                                bgcolor=ft.colors.PURPLE_50,
+                                bgcolor=ft.Colors.PURPLE_50,
                                 padding=10,
                                 border_radius=8
                             ),
@@ -424,7 +424,7 @@ class OVAIndicadoresSalud:
                             self.let_cases_field,
                             ft.Container(
                                 content=ft.Text(f"Letalidad: {self.lethality_result.value}", weight=ft.FontWeight.BOLD),
-                                bgcolor=ft.colors.GREY_50,
+                                bgcolor=ft.Colors.GREY_50,
                                 padding=10,
                                 border_radius=5
                             )
@@ -443,7 +443,7 @@ class OVAIndicadoresSalud:
                         ft.Row([
                             ft.Container(
                                 content=ft.Text("Gráfico de barras aquí", text_align=ft.TextAlign.CENTER),
-                                bgcolor=ft.colors.GREY_100,
+                                bgcolor=ft.Colors.GREY_100,
                                 width=400,
                                 height=300,
                                 border_radius=8,
@@ -452,22 +452,22 @@ class OVAIndicadoresSalud:
                             ft.Column([
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Interpretación Clínica", weight=ft.FontWeight.BOLD, color=ft.colors.RED_800),
+                                        ft.Text("Interpretación Clínica", weight=ft.FontWeight.BOLD, color=ft.Colors.RED_800),
                                         ft.Text("La prevalencia del 1.5% indica que 15 de cada 1000 personas tienen la enfermedad actualmente.", 
-                                               size=12, color=ft.colors.RED_700)
+                                               size=12, color=ft.Colors.RED_700)
                                     ]),
-                                    bgcolor=ft.colors.RED_50,
+                                    bgcolor=ft.Colors.RED_50,
                                     padding=10,
                                     border_radius=8,
                                     expand=True
                                 ),
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Implicaciones de Salud Pública", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                        ft.Text("Implicaciones de Salud Pública", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                                         ft.Text("Una incidencia del 0.76% sugiere 7-8 casos nuevos por cada 1000 personas en riesgo.", 
-                                               size=12, color=ft.colors.BLUE_700)
+                                               size=12, color=ft.Colors.BLUE_700)
                                     ]),
-                                    bgcolor=ft.colors.BLUE_50,
+                                    bgcolor=ft.Colors.BLUE_50,
                                     padding=10,
                                     border_radius=8,
                                     expand=True
@@ -482,10 +482,10 @@ class OVAIndicadoresSalud:
             # Retroalimentación IA
             ft.Container(
                 content=ft.Column([
-                    ft.Text("🤖 Retroalimentación Inteligente", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                    ft.Text("🤖 Retroalimentación Inteligente", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                     self.ai_feedback
                 ]),
-                gradient=ft.LinearGradient([ft.colors.BLUE_400, ft.colors.CYAN_400]),
+                gradient=ft.LinearGradient([ft.Colors.BLUE_400, ft.Colors.CYAN_400]),
                 padding=20,
                 border_radius=10
             )
@@ -571,9 +571,9 @@ class OVAIndicadoresSalud:
         )
         
         # Resultados del simulador
-        self.sim_prev_result = ft.Text("2.0%", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.RED_600)
-        self.sim_inc_result = ft.Text("1.0%", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600)
-        self.sim_let_result = ft.Text("10%", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_600)
+        self.sim_prev_result = ft.Text("2.0%", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.RED_600)
+        self.sim_inc_result = ft.Text("1.0%", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_600)
+        self.sim_let_result = ft.Text("10%", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_600)
         
         # Cálculos combinatorios
         self.combinations_result = ft.Text("C(10000,100) ≈ 10^139", size=12)
@@ -598,18 +598,18 @@ class OVAIndicadoresSalud:
                                     ft.ElevatedButton(
                                         "🚀 Ejecutar Simulación",
                                         on_click=self.run_simulation,
-                                        style=ft.ButtonStyle(bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                                        style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_600, color=ft.Colors.WHITE)
                                     )
                                 ], spacing=10),
                                 
                                 # Sección de Combinatoria
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("🔢 Cálculos Combinatorios", weight=ft.FontWeight.BOLD, color=ft.colors.YELLOW_800),
+                                        ft.Text("🔢 Cálculos Combinatorios", weight=ft.FontWeight.BOLD, color=ft.Colors.YELLOW_800),
                                         ft.Text("Formas de seleccionar 100 individuos de 10,000:", size=12),
                                         self.combinations_result
                                     ]),
-                                    bgcolor=ft.colors.YELLOW_50,
+                                    bgcolor=ft.Colors.YELLOW_50,
                                     padding=10,
                                     border_radius=8
                                 )
@@ -619,7 +619,7 @@ class OVAIndicadoresSalud:
                                 ft.Text("Resultados de la Simulación", size=16, weight=ft.FontWeight.BOLD),
                                 ft.Container(
                                     content=ft.Text("Gráfico circular aquí", text_align=ft.TextAlign.CENTER),
-                                    bgcolor=ft.colors.GREY_100,
+                                    bgcolor=ft.Colors.GREY_100,
                                     width=400,
                                     height=300,
                                     border_radius=8,
@@ -629,9 +629,9 @@ class OVAIndicadoresSalud:
                                     ft.Container(
                                         content=ft.Column([
                                             self.sim_prev_result,
-                                            ft.Text("Prevalencia", size=12, color=ft.colors.GREY_600)
+                                            ft.Text("Prevalencia", size=12, color=ft.Colors.GREY_600)
                                         ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                                        bgcolor=ft.colors.RED_50,
+                                        bgcolor=ft.Colors.RED_50,
                                         padding=10,
                                         border_radius=8,
                                         expand=True
@@ -639,9 +639,9 @@ class OVAIndicadoresSalud:
                                     ft.Container(
                                         content=ft.Column([
                                             self.sim_inc_result,
-                                            ft.Text("Incidencia", size=12, color=ft.colors.GREY_600)
+                                            ft.Text("Incidencia", size=12, color=ft.Colors.GREY_600)
                                         ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                                        bgcolor=ft.colors.BLUE_50,
+                                        bgcolor=ft.Colors.BLUE_50,
                                         padding=10,
                                         border_radius=8,
                                         expand=True
@@ -649,9 +649,9 @@ class OVAIndicadoresSalud:
                                     ft.Container(
                                         content=ft.Column([
                                             self.sim_let_result,
-                                            ft.Text("Letalidad", size=12, color=ft.colors.GREY_600)
+                                            ft.Text("Letalidad", size=12, color=ft.Colors.GREY_600)
                                         ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                                        bgcolor=ft.colors.PURPLE_50,
+                                        bgcolor=ft.Colors.PURPLE_50,
                                         padding=10,
                                         border_radius=8,
                                         expand=True
@@ -824,7 +824,7 @@ class OVAIndicadoresSalud:
                                     ft.Text("• Población susceptible: 1,026,286"),
                                 ])
                             ]),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=15,
                             border_radius=10
                         ),
@@ -837,17 +837,17 @@ class OVAIndicadoresSalud:
                                 # Paso 1: Prevalencia
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Paso 1: Calcular Prevalencia", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700),
+                                        ft.Text("Paso 1: Calcular Prevalencia", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700),
                                         self.practice_prev_cases_field,
                                         self.practice_prev_pop_field,
                                         ft.Container(
                                             content=ft.Text(f"Prevalencia: {self.practice_prev_result.value}"),
-                                            bgcolor=ft.colors.GREEN_50,
+                                            bgcolor=ft.Colors.GREEN_50,
                                             padding=10,
                                             border_radius=5
                                         )
                                     ], spacing=10),
-                                    border=ft.border.all(1, ft.colors.GREY_300),
+                                    border=ft.border.all(1, ft.Colors.GREY_300),
                                     padding=15,
                                     border_radius=8
                                 ),
@@ -855,17 +855,17 @@ class OVAIndicadoresSalud:
                                 # Paso 2: Incidencia
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Paso 2: Calcular Incidencia", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_700),
+                                        ft.Text("Paso 2: Calcular Incidencia", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_700),
                                         self.practice_inc_cases_field,
                                         self.practice_inc_pop_field,
                                         ft.Container(
                                             content=ft.Text(f"Incidencia: {self.practice_inc_result.value}"),
-                                            bgcolor=ft.colors.BLUE_50,
+                                            bgcolor=ft.Colors.BLUE_50,
                                             padding=10,
                                             border_radius=5
                                         )
                                     ], spacing=10),
-                                    border=ft.border.all(1, ft.colors.GREY_300),
+                                    border=ft.border.all(1, ft.Colors.GREY_300),
                                     padding=15,
                                     border_radius=8
                                 ),
@@ -873,17 +873,17 @@ class OVAIndicadoresSalud:
                                 # Paso 3: Letalidad
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Paso 3: Calcular Letalidad", weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_700),
+                                        ft.Text("Paso 3: Calcular Letalidad", weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_700),
                                         self.practice_let_deaths_field,
                                         self.practice_let_cases_field,
                                         ft.Container(
                                             content=ft.Text(f"Letalidad: {self.practice_let_result.value}"),
-                                            bgcolor=ft.colors.PURPLE_50,
+                                            bgcolor=ft.Colors.PURPLE_50,
                                             padding=10,
                                             border_radius=5
                                         )
                                     ], spacing=10),
-                                    border=ft.border.all(1, ft.colors.GREY_300),
+                                    border=ft.border.all(1, ft.Colors.GREY_300),
                                     padding=15,
                                     border_radius=8
                                 )
@@ -894,7 +894,7 @@ class OVAIndicadoresSalud:
                                 ft.Text("📊 Visualización de Resultados", size=16, weight=ft.FontWeight.BOLD),
                                 ft.Container(
                                     content=ft.Text("Gráfico radar aquí", text_align=ft.TextAlign.CENTER),
-                                    bgcolor=ft.colors.GREY_100,
+                                    bgcolor=ft.Colors.GREY_100,
                                     width=400,
                                     height=300,
                                     border_radius=8,
@@ -906,10 +906,10 @@ class OVAIndicadoresSalud:
                                         ft.Text("💡 Interpretación Epidemiológica", weight=ft.FontWeight.BOLD),
                                         self.epidemiological_interpretation
                                     ]),
-                                    bgcolor=ft.colors.YELLOW_50,
+                                    bgcolor=ft.Colors.YELLOW_50,
                                     padding=10,
                                     border_radius=8,
-                                    border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400))
+                                    border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400))
                                 ),
                                 
                                 ft.Container(
@@ -917,10 +917,10 @@ class OVAIndicadoresSalud:
                                         ft.Text("⚠️ Implicaciones para Salud Pública", weight=ft.FontWeight.BOLD),
                                         self.public_health_actions
                                     ]),
-                                    bgcolor=ft.colors.RED_50,
+                                    bgcolor=ft.Colors.RED_50,
                                     padding=10,
                                     border_radius=8,
-                                    border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.RED_400))
+                                    border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.RED_400))
                                 )
                             ], expand=True, spacing=15)
                         ], spacing=20)
@@ -978,7 +978,7 @@ class OVAIndicadoresSalud:
                                         ft.Text("Cartagena (estandarizada):", weight=ft.FontWeight.BOLD),
                                         ft.Text("(4.2×0.25) + (3.8×0.65) + (2.1×0.10) = 3.73/1000", size=12)
                                     ]),
-                                    bgcolor=ft.colors.BLUE_50,
+                                    bgcolor=ft.Colors.BLUE_50,
                                     padding=10,
                                     border_radius=8
                                 ),
@@ -987,7 +987,7 @@ class OVAIndicadoresSalud:
                                         ft.Text("Bogotá (estandarizada):", weight=ft.FontWeight.BOLD),
                                         ft.Text("(2.1×0.25) + (1.9×0.65) + (1.2×0.10) = 1.88/1000", size=12)
                                     ]),
-                                    bgcolor=ft.colors.GREEN_50,
+                                    bgcolor=ft.Colors.GREEN_50,
                                     padding=10,
                                     border_radius=8
                                 ),
@@ -996,7 +996,7 @@ class OVAIndicadoresSalud:
                                         ft.Text("Razón de tasas: 3.73/1.88 = 1.98", weight=ft.FontWeight.BOLD),
                                         ft.Text("Cartagena tiene el doble de riesgo que Bogotá", size=12)
                                     ]),
-                                    bgcolor=ft.colors.YELLOW_50,
+                                    bgcolor=ft.Colors.YELLOW_50,
                                     padding=10,
                                     border_radius=8
                                 )
@@ -1099,10 +1099,10 @@ class OVAIndicadoresSalud:
                         
                         ft.Container(
                             content=ft.Column([
-                                ft.Text("Instrucciones", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
-                                ft.Text("Responde las siguientes preguntas basadas en el caso de estudio. Recibirás retroalimentación inmediata.", color=ft.colors.BLUE_700)
+                                ft.Text("Instrucciones", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
+                                ft.Text("Responde las siguientes preguntas basadas en el caso de estudio. Recibirás retroalimentación inmediata.", color=ft.Colors.BLUE_700)
                             ]),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=15,
                             border_radius=10
                         ),
@@ -1115,7 +1115,7 @@ class OVAIndicadoresSalud:
                                 self.q1_group,
                                 self.feedback_q1
                             ], spacing=10),
-                            border=ft.border.all(1, ft.colors.GREY_300),
+                            border=ft.border.all(1, ft.Colors.GREY_300),
                             padding=15,
                             border_radius=8
                         ),
@@ -1128,7 +1128,7 @@ class OVAIndicadoresSalud:
                                 self.q2_group,
                                 self.feedback_q2
                             ], spacing=10),
-                            border=ft.border.all(1, ft.colors.GREY_300),
+                            border=ft.border.all(1, ft.Colors.GREY_300),
                             padding=15,
                             border_radius=8
                         ),
@@ -1141,7 +1141,7 @@ class OVAIndicadoresSalud:
                                 self.q3_group,
                                 self.feedback_q3
                             ], spacing=10),
-                            border=ft.border.all(1, ft.colors.GREY_300),
+                            border=ft.border.all(1, ft.Colors.GREY_300),
                             padding=15,
                             border_radius=8
                         ),
@@ -1154,7 +1154,7 @@ class OVAIndicadoresSalud:
                                 self.q4_group,
                                 self.feedback_q4
                             ], spacing=10),
-                            border=ft.border.all(1, ft.colors.GREY_300),
+                            border=ft.border.all(1, ft.Colors.GREY_300),
                             padding=15,
                             border_radius=8
                         ),
@@ -1162,7 +1162,7 @@ class OVAIndicadoresSalud:
                         ft.ElevatedButton(
                             "📊 Enviar Evaluación",
                             on_click=self.submit_evaluation,
-                            style=ft.ButtonStyle(bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_600, color=ft.Colors.WHITE)
                         ),
                         
                         self.final_score_container
@@ -1199,15 +1199,15 @@ class OVAIndicadoresSalud:
                 if is_correct:
                     score += 1
                     feedback.content = ft.Container(
-                        content=ft.Text(f"✓ Correcto! {explanations[question_key]['correct']}", color=ft.colors.GREEN_800),
-                        bgcolor=ft.colors.GREEN_100,
+                        content=ft.Text(f"✓ Correcto! {explanations[question_key]['correct']}", color=ft.Colors.GREEN_800),
+                        bgcolor=ft.Colors.GREEN_100,
                         padding=10,
                         border_radius=8
                     )
                 else:
                     feedback.content = ft.Container(
-                        content=ft.Text(f"✗ Incorrecto. {explanations[question_key]['incorrect']}", color=ft.colors.RED_800),
-                        bgcolor=ft.colors.RED_100,
+                        content=ft.Text(f"✗ Incorrecto. {explanations[question_key]['incorrect']}", color=ft.Colors.RED_800),
+                        bgcolor=ft.Colors.RED_100,
                         padding=10,
                         border_radius=8
                     )
@@ -1218,23 +1218,23 @@ class OVAIndicadoresSalud:
         percentage = (score / len(questions)) * 100
         
         if percentage >= 80:
-            score_color = ft.colors.GREEN_100
-            score_text_color = ft.colors.GREEN_800
+            score_color = ft.Colors.GREEN_100
+            score_text_color = ft.Colors.GREEN_800
             feedback_text = "🎉 ¡Excelente! Has demostrado un dominio sólido de los indicadores de frecuencia."
         elif percentage >= 60:
-            score_color = ft.colors.YELLOW_100
-            score_text_color = ft.colors.YELLOW_800
+            score_color = ft.Colors.YELLOW_100
+            score_text_color = ft.Colors.YELLOW_800
             feedback_text = "👍 Buen trabajo. Revisa los conceptos donde tuviste dificultades."
         else:
-            score_color = ft.colors.RED_100
-            score_text_color = ft.colors.RED_800
+            score_color = ft.Colors.RED_100
+            score_text_color = ft.Colors.RED_800
             feedback_text = "📚 Te recomendamos revisar la teoría y practicar más con el simulador."
         
         self.final_score_container.content = ft.Container(
             content=ft.Column([
                 ft.Text("🎯 Resultados de la Evaluación", size=18, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
-                ft.Text(f"{score}/{len(questions)}", size=32, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600, text_align=ft.TextAlign.CENTER),
-                ft.Text(f"{percentage:.0f}%", size=16, color=ft.colors.GREY_600, text_align=ft.TextAlign.CENTER),
+                ft.Text(f"{score}/{len(questions)}", size=32, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_600, text_align=ft.TextAlign.CENTER),
+                ft.Text(f"{percentage:.0f}%", size=16, color=ft.Colors.GREY_600, text_align=ft.TextAlign.CENTER),
                 ft.Container(
                     content=ft.Text(feedback_text, color=score_text_color, text_align=ft.TextAlign.CENTER),
                     bgcolor=score_color,
@@ -1242,7 +1242,7 @@ class OVAIndicadoresSalud:
                     border_radius=8
                 )
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.GREY_50,
+            bgcolor=ft.Colors.GREY_50,
             padding=20,
             border_radius=10
         )
@@ -1293,32 +1293,32 @@ class OVAIndicadoresSalud:
                             self.create_reference_item(
                                 "OMS - Indicadores de Salud",
                                 "Definiciones oficiales y estándares internacionales",
-                                ft.colors.BLUE_500
+                                ft.Colors.BLUE_500
                             ),
                             self.create_reference_item(
                                 "INS Colombia",
                                 "Protocolos de vigilancia epidemiológica",
-                                ft.colors.GREEN_500
+                                ft.Colors.GREEN_500
                             ),
                             self.create_reference_item(
                                 "CDC - Epidemiología",
                                 "Recursos educativos y casos de estudio",
-                                ft.colors.PURPLE_500
+                                ft.Colors.PURPLE_500
                             ),
                             self.create_reference_item(
                                 "Coursera - Bioestadística",
                                 "Cursos complementarios en línea",
-                                ft.colors.RED_500
+                                ft.Colors.RED_500
                             ),
                             
                             ft.Container(
                                 content=ft.Column([
-                                    ft.Text("📖 Bibliografía Recomendada", weight=ft.FontWeight.BOLD, color=ft.colors.YELLOW_800),
+                                    ft.Text("📖 Bibliografía Recomendada", weight=ft.FontWeight.BOLD, color=ft.Colors.YELLOW_800),
                                     ft.Text("• Gordis, L. (2013). Epidemiología. 5ª edición.", size=12),
                                     ft.Text("• Rothman, K.J. (2012). Epidemiology: An Introduction.", size=12),
                                     ft.Text("• Szklo, M. & Nieto, F.J. (2019). Epidemiología Intermedia.", size=12),
                                 ]),
-                                bgcolor=ft.colors.YELLOW_50,
+                                bgcolor=ft.Colors.YELLOW_50,
                                 padding=15,
                                 border_radius=10
                             )
@@ -1364,10 +1364,10 @@ class OVAIndicadoresSalud:
                                 ft.ElevatedButton(
                                     "🚀 Iniciar Proyecto",
                                     on_click=self.start_transfer_activity,
-                                    style=ft.ButtonStyle(bgcolor=ft.colors.PURPLE_600, color=ft.colors.WHITE)
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_600, color=ft.Colors.WHITE)
                                 )
                             ], spacing=15),
-                            gradient=ft.LinearGradient([ft.colors.PURPLE_50, ft.colors.PINK_50]),
+                            gradient=ft.LinearGradient([ft.Colors.PURPLE_50, ft.Colors.PINK_50]),
                             padding=20,
                             border_radius=10
                         )
@@ -1382,15 +1382,15 @@ class OVAIndicadoresSalud:
             content=ft.Row([
                 ft.Column([
                     ft.Text(title, weight=ft.FontWeight.BOLD),
-                    ft.Text(description, size=12, color=ft.colors.GREY_600)
+                    ft.Text(description, size=12, color=ft.Colors.GREY_600)
                 ], expand=True),
                 ft.ElevatedButton(
                     "📥 Descargar",
                     on_click=lambda e, rt=resource_type: self.download_resource(rt),
-                    style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)
                 )
             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-            border=ft.border.all(1, ft.colors.GREY_300),
+            border=ft.border.all(1, ft.Colors.GREY_300),
             padding=15,
             border_radius=8
         )
@@ -1402,7 +1402,7 @@ class OVAIndicadoresSalud:
                 ft.Text(description, size=12),
                 ft.Text("→ Visitar sitio web", size=12, color=color)
             ]),
-            bgcolor=ft.colors.with_opacity(0.1, color),
+            bgcolor=ft.Colors.with_opacity(0.1, color),
             padding=15,
             border_radius=8,
             border=ft.border.only(left=ft.border.BorderSide(4, color))

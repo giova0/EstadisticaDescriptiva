@@ -96,36 +96,36 @@ class OVAEpidemicCurves:
             content=ft.Row([
                 ft.Column([
                     ft.Text("OVA 12: Curvas Epidémicas y Series de Tiempo", 
-                           size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800),
+                           size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800),
                     ft.Text("Modelo Pedagógico C(H)ANGE con Inteligencia Artificial", 
-                           size=16, color=ft.colors.GREY_600)
+                           size=16, color=ft.Colors.GREY_600)
                 ], expand=True),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("Duración: 3 horas", size=12, color=ft.colors.BLUE_800),
-                        ft.Text("Modalidad: Interactiva", size=12, color=ft.colors.BLUE_800)
+                        ft.Text("Duración: 3 horas", size=12, color=ft.Colors.BLUE_800),
+                        ft.Text("Modalidad: Interactiva", size=12, color=ft.Colors.BLUE_800)
                     ]),
-                    bgcolor=ft.colors.BLUE_100,
+                    bgcolor=ft.Colors.BLUE_100,
                     padding=10,
                     border_radius=8
                 )
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
-            border=ft.border.only(bottom=ft.border.BorderSide(4, ft.colors.BLUE_500))
+            border=ft.border.only(bottom=ft.border.BorderSide(4, ft.Colors.BLUE_500))
         )
         
         # Barra de progreso
-        self.progress_bar = ft.ProgressBar(value=0, color=ft.colors.BLUE_500, height=4)
-        self.progress_text = ft.Text("0%", size=12, color=ft.colors.GREY_600)
+        self.progress_bar = ft.ProgressBar(value=0, color=ft.Colors.BLUE_500, height=4)
+        self.progress_text = ft.Text("0%", size=12, color=ft.Colors.GREY_600)
         
         progress_container = ft.Container(
             content=ft.Row([
-                ft.Text("Progreso:", size=12, color=ft.colors.GREY_600),
+                ft.Text("Progreso:", size=12, color=ft.Colors.GREY_600),
                 ft.Container(self.progress_bar, expand=True, margin=ft.margin.symmetric(horizontal=10)),
                 self.progress_text
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=10
         )
         
@@ -134,13 +134,13 @@ class OVAEpidemicCurves:
             selected_index=0,
             on_change=self.on_tab_change,
             tabs=[
-                ft.Tab(text="Introducción", icon=ft.icons.PLAY_CIRCLE),
-                ft.Tab(text="Fundamentos C(H)ANGE", icon=ft.icons.BOOK),
-                ft.Tab(text="Simulador IA", icon=ft.icons.SHOW_CHART),
-                ft.Tab(text="Práctica Guiada", icon=ft.icons.SCIENCE),
-                ft.Tab(text="Laboratorio IA", icon=ft.icons.SMART_TOY),
-                ft.Tab(text="Evaluación", icon=ft.icons.ASSIGNMENT_TURNED_IN),
-                ft.Tab(text="Recursos", icon=ft.icons.DOWNLOAD)
+                ft.Tab(text="Introducción", icon=ft.Icons.PLAY_CIRCLE),
+                ft.Tab(text="Fundamentos C(H)ANGE", icon=ft.Icons.BOOK),
+                ft.Tab(text="Simulador IA", icon=ft.Icons.SHOW_CHART),
+                ft.Tab(text="Práctica Guiada", icon=ft.Icons.SCIENCE),
+                ft.Tab(text="Laboratorio IA", icon=ft.Icons.SMART_TOY),
+                ft.Tab(text="Evaluación", icon=ft.Icons.ASSIGNMENT_TURNED_IN),
+                ft.Tab(text="Recursos", icon=ft.Icons.DOWNLOAD)
             ]
         )
         
@@ -197,19 +197,19 @@ class OVAEpidemicCurves:
             ft.Container(
                 content=ft.Column([
                     ft.Row([
-                        ft.Icon(ft.icons.TIMELINE, size=60, color=ft.colors.BLUE_600)
+                        ft.Icon(ft.Icons.TIMELINE, size=60, color=ft.Colors.BLUE_600)
                     ], alignment=ft.MainAxisAlignment.CENTER),
                     ft.Text("Bienvenido al Análisis de Curvas Epidémicas", 
                            size=28, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
                     ft.Text("Aprende a construir, interpretar y analizar curvas epidémicas utilizando el modelo pedagógico C(H)ANGE e inteligencia artificial para la toma de decisiones en salud pública.",
-                           size=16, text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_600),
+                           size=16, text_align=ft.TextAlign.CENTER, color=ft.Colors.GREY_600),
                     
                     ft.Row([
                         # Objetivos
                         ft.Container(
                             content=ft.Column([
                                 ft.Row([
-                                    ft.Icon(ft.icons.TARGET_OUTLINED, color=ft.colors.BLUE_600),
+                                    ft.Icon(ft.Icons.TARGET_OUTLINED, color=ft.Colors.BLUE_600),
                                     ft.Text("Objetivos de Aprendizaje", size=18, weight=ft.FontWeight.BOLD)
                                 ]),
                                 ft.Column([
@@ -219,7 +219,7 @@ class OVAEpidemicCurves:
                                     self.create_objective_item("Integrar conceptos del modelo C(H)ANGE")
                                 ])
                             ]),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=20,
                             border_radius=10,
                             expand=True
@@ -229,17 +229,17 @@ class OVAEpidemicCurves:
                         ft.Container(
                             content=ft.Column([
                                 ft.Row([
-                                    ft.Icon(ft.icons.SETTINGS, color=ft.colors.GREEN_600),
+                                    ft.Icon(ft.Icons.SETTINGS, color=ft.Colors.GREEN_600),
                                     ft.Text("Competencias a Desarrollar", size=18, weight=ft.FontWeight.BOLD)
                                 ]),
                                 ft.Column([
-                                    self.create_competency_item("Pensamiento estadístico aplicado", ft.colors.PURPLE_500),
-                                    self.create_competency_item("Visualización efectiva de datos", ft.colors.BLUE_500),
-                                    self.create_competency_item("Interpretación clínica de patrones", ft.colors.YELLOW_600),
-                                    self.create_competency_item("Comunicación de hallazgos", ft.colors.RED_500)
+                                    self.create_competency_item("Pensamiento estadístico aplicado", ft.Colors.PURPLE_500),
+                                    self.create_competency_item("Visualización efectiva de datos", ft.Colors.BLUE_500),
+                                    self.create_competency_item("Interpretación clínica de patrones", ft.Colors.YELLOW_600),
+                                    self.create_competency_item("Comunicación de hallazgos", ft.Colors.RED_500)
                                 ])
                             ]),
-                            bgcolor=ft.colors.GREEN_50,
+                            bgcolor=ft.Colors.GREEN_50,
                             padding=20,
                             border_radius=10,
                             expand=True
@@ -248,48 +248,48 @@ class OVAEpidemicCurves:
                     
                     ft.Container(
                         content=ft.Row([
-                            ft.Icon(ft.icons.INFO, color=ft.colors.YELLOW_600),
+                            ft.Icon(ft.Icons.INFO, color=ft.Colors.YELLOW_600),
                             ft.Column([
-                                ft.Text("Contexto Epidemiológico", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.YELLOW_800),
+                                ft.Text("Contexto Epidemiológico", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.YELLOW_800),
                                 ft.Text("Las curvas epidémicas son herramientas fundamentales para entender la dinámica de transmisión de enfermedades, identificar brotes, evaluar intervenciones y predecir tendencias futuras.",
-                                       color=ft.colors.YELLOW_700)
+                                       color=ft.Colors.YELLOW_700)
                             ], expand=True)
                         ]),
-                        bgcolor=ft.colors.YELLOW_50,
+                        bgcolor=ft.Colors.YELLOW_50,
                         padding=15,
                         border_radius=8,
-                        border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400))
+                        border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400))
                     ),
                     
                     ft.ElevatedButton(
                         "Comenzar Módulo",
-                        icon=ft.icons.ARROW_FORWARD,
+                        icon=ft.Icons.ARROW_FORWARD,
                         on_click=lambda _: self.next_tab(),
                         style=ft.ButtonStyle(
-                            bgcolor=ft.colors.BLUE_600,
-                            color=ft.colors.WHITE,
+                            bgcolor=ft.Colors.BLUE_600,
+                            color=ft.Colors.WHITE,
                             padding=ft.padding.symmetric(horizontal=30, vertical=15)
                         )
                     )
                 ], spacing=20, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=30,
                 border_radius=15,
-                shadow=ft.BoxShadow(blur_radius=10, color=ft.colors.GREY_300)
+                shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.GREY_300)
             )
         ], scroll=ft.ScrollMode.AUTO)
     
     def create_objective_item(self, text):
         """Crear item de objetivo"""
         return ft.Row([
-            ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500, size=16),
+            ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500, size=16),
             ft.Text(text, size=14, expand=True)
         ])
     
     def create_competency_item(self, text, color):
         """Crear item de competencia"""
         return ft.Row([
-            ft.Icon(ft.icons.PSYCHOLOGY, color=color, size=16),
+            ft.Icon(ft.Icons.PSYCHOLOGY, color=color, size=16),
             ft.Text(text, size=14, expand=True)
         ])
     
@@ -302,19 +302,19 @@ class OVAEpidemicCurves:
             ft.Row([
                 self.create_change_component("C", "Combinatoria", "Análisis de combinaciones de factores", 
                                            ["Rutas de transmisión", "Grupos poblacionales", "Factores de riesgo"], 
-                                           ft.colors.RED_500),
+                                           ft.Colors.RED_500),
                 self.create_change_component("H", "Álgebra", "Modelos matemáticos epidémicos", 
                                            ["Ecuaciones diferenciales", "Modelos SIR/SEIR", "Funciones exponenciales"], 
-                                           ft.colors.BLUE_500),
+                                           ft.Colors.BLUE_500),
                 self.create_change_component("A", "Números", "Cálculos estadísticos clave", 
                                            ["Tasas de incidencia", "Número reproductivo", "Intervalos seriales"], 
-                                           ft.colors.GREEN_500),
+                                           ft.Colors.GREEN_500),
                 self.create_change_component("N", "Geometría", "Visualización de patrones", 
                                            ["Curvas de crecimiento", "Distribución espacial", "Patrones geométricos"], 
-                                           ft.colors.PURPLE_500),
+                                           ft.Colors.PURPLE_500),
                 self.create_change_component("G", "Estadística", "Análisis de series temporales", 
                                            ["Tendencias temporales", "Estacionalidad", "Predicción estadística"], 
-                                           ft.colors.ORANGE_500)
+                                           ft.Colors.ORANGE_500)
             ], wrap=True, spacing=10),
             
             # Conceptos fundamentales
@@ -323,27 +323,27 @@ class OVAEpidemicCurves:
                     ft.Text("Conceptos Fundamentales", size=20, weight=ft.FontWeight.BOLD),
                     ft.Row([
                         ft.Column([
-                            self.create_concept_card("Curva Epidémica", "Representación gráfica del número de casos en función del tiempo", ft.icons.SHOW_CHART, ft.colors.BLUE_600),
-                            self.create_concept_card("Período de Incubación", "Tiempo entre exposición y aparición de síntomas", ft.icons.SCHEDULE, ft.colors.GREEN_600),
-                            self.create_concept_card("Caso Índice", "Primer caso identificado en un brote", ft.icons.PERSON, ft.colors.PURPLE_600)
+                            self.create_concept_card("Curva Epidémica", "Representación gráfica del número de casos en función del tiempo", ft.Icons.SHOW_CHART, ft.Colors.BLUE_600),
+                            self.create_concept_card("Período de Incubación", "Tiempo entre exposición y aparición de síntomas", ft.Icons.SCHEDULE, ft.Colors.GREEN_600),
+                            self.create_concept_card("Caso Índice", "Primer caso identificado en un brote", ft.Icons.PERSON, ft.Colors.PURPLE_600)
                         ], expand=True),
                         ft.Column([
-                            self.create_concept_card("Número Reproductivo (R₀)", "Casos secundarios generados por un caso primario", ft.icons.TRENDING_UP, ft.colors.RED_600),
-                            self.create_concept_card("Estacionalidad", "Patrón recurrente relacionado con factores temporales", ft.icons.CALENDAR_TODAY, ft.colors.ORANGE_600),
-                            self.create_concept_card("Vigilancia Epidemiológica", "Sistema de recolección y análisis de datos", ft.icons.VISIBILITY, ft.colors.INDIGO_600)
+                            self.create_concept_card("Número Reproductivo (R₀)", "Casos secundarios generados por un caso primario", ft.Icons.TRENDING_UP, ft.Colors.RED_600),
+                            self.create_concept_card("Estacionalidad", "Patrón recurrente relacionado con factores temporales", ft.Icons.CALENDAR_TODAY, ft.Colors.ORANGE_600),
+                            self.create_concept_card("Vigilancia Epidemiológica", "Sistema de recolección y análisis de datos", ft.Icons.VISIBILITY, ft.Colors.INDIGO_600)
                         ], expand=True)
                     ], spacing=20)
                 ]),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=20,
                 border_radius=10
             ),
             
             ft.ElevatedButton(
                 "Ir al Simulador",
-                icon=ft.icons.ARROW_FORWARD,
+                icon=ft.Icons.ARROW_FORWARD,
                 on_click=lambda _: self.next_tab(),
-                style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)
+                style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)
             )
         ], scroll=ft.ScrollMode.AUTO, spacing=20)
     
@@ -353,7 +353,7 @@ class OVAEpidemicCurves:
             content=ft.Column([
                 ft.Row([
                     ft.Container(
-                        content=ft.Text(letter, size=24, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                        content=ft.Text(letter, size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                         bgcolor=color,
                         width=50,
                         height=50,
@@ -362,10 +362,10 @@ class OVAEpidemicCurves:
                     ),
                     ft.Text(name, size=16, weight=ft.FontWeight.BOLD, expand=True)
                 ]),
-                ft.Text(description, size=12, color=ft.colors.GREY_700),
-                ft.Column([ft.Text(f"• {item}", size=10, color=ft.colors.GREY_600) for item in items])
+                ft.Text(description, size=12, color=ft.Colors.GREY_700),
+                ft.Column([ft.Text(f"• {item}", size=10, color=ft.Colors.GREY_600) for item in items])
             ], spacing=5),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=15,
             border_radius=8,
             border=ft.border.all(1, color),
@@ -380,12 +380,12 @@ class OVAEpidemicCurves:
                     ft.Icon(icon, color=color, size=20),
                     ft.Text(title, size=14, weight=ft.FontWeight.BOLD, expand=True)
                 ]),
-                ft.Text(description, size=12, color=ft.colors.GREY_600)
+                ft.Text(description, size=12, color=ft.Colors.GREY_600)
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=15,
             border_radius=8,
-            shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_200)
+            shadow=ft.BoxShadow(blur_radius=5, color=ft.Colors.GREY_200)
         )
     
     def create_simulator_tab(self):
@@ -425,10 +425,10 @@ class OVAEpidemicCurves:
         )
         
         # Métricas
-        self.peak_day = ft.Text("7", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600)
-        self.peak_cases = ft.Text("20", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.RED_600)
-        self.total_cases = ft.Text("141", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600)
-        self.r0_value = ft.Text("2.3", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_600)
+        self.peak_day = ft.Text("7", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_600)
+        self.peak_cases = ft.Text("20", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.RED_600)
+        self.total_cases = ft.Text("141", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_600)
+        self.r0_value = ft.Text("2.3", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_600)
         
         return ft.Column([
             ft.Text("Simulador Inteligente de Curvas Epidémicas", size=24, weight=ft.FontWeight.BOLD),
@@ -445,18 +445,18 @@ class OVAEpidemicCurves:
                         self.transmission_slider,
                         ft.ElevatedButton(
                             "Predicción IA",
-                            icon=ft.icons.AUTO_AWESOME,
+                            icon=ft.Icons.AUTO_AWESOME,
                             on_click=self.generate_ai_prediction,
-                            style=ft.ButtonStyle(bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_600, color=ft.Colors.WHITE)
                         ),
                         ft.ElevatedButton(
                             "Reiniciar",
-                            icon=ft.icons.REFRESH,
+                            icon=ft.Icons.REFRESH,
                             on_click=self.reset_simulation,
-                            style=ft.ButtonStyle(bgcolor=ft.colors.GREY_600, color=ft.colors.WHITE)
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.GREY_600, color=ft.Colors.WHITE)
                         )
                     ], spacing=15),
-                    bgcolor=ft.colors.GREY_50,
+                    bgcolor=ft.Colors.GREY_50,
                     padding=20,
                     border_radius=10,
                     width=300
@@ -468,31 +468,31 @@ class OVAEpidemicCurves:
                         content=ft.Column([
                             ft.Row([
                                 ft.Text("Curva Epidémica Simulada", size=16, weight=ft.FontWeight.BOLD),
-                                ft.IconButton(ft.icons.DOWNLOAD, tooltip="Exportar")
+                                ft.IconButton(ft.Icons.DOWNLOAD, tooltip="Exportar")
                             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                             self.chart_image
                         ]),
-                        bgcolor=ft.colors.WHITE,
+                        bgcolor=ft.Colors.WHITE,
                         padding=15,
                         border_radius=8,
-                        border=ft.border.all(1, ft.colors.GREY_300)
+                        border=ft.border.all(1, ft.Colors.GREY_300)
                     ),
                     
                     # Métricas
                     ft.Row([
-                        self.create_metric_card("Día Pico", self.peak_day, ft.colors.BLUE_50),
-                        self.create_metric_card("Casos Pico", self.peak_cases, ft.colors.RED_50),
-                        self.create_metric_card("Total Casos", self.total_cases, ft.colors.GREEN_50),
-                        self.create_metric_card("R₀ Estimado", self.r0_value, ft.colors.PURPLE_50)
+                        self.create_metric_card("Día Pico", self.peak_day, ft.Colors.BLUE_50),
+                        self.create_metric_card("Casos Pico", self.peak_cases, ft.Colors.RED_50),
+                        self.create_metric_card("Total Casos", self.total_cases, ft.Colors.GREEN_50),
+                        self.create_metric_card("R₀ Estimado", self.r0_value, ft.Colors.PURPLE_50)
                     ], spacing=10)
                 ], expand=True)
             ], spacing=20),
             
             ft.ElevatedButton(
                 "Práctica Guiada",
-                icon=ft.icons.ARROW_FORWARD,
+                icon=ft.Icons.ARROW_FORWARD,
                 on_click=lambda _: self.next_tab(),
-                style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)
+                style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)
             )
         ], scroll=ft.ScrollMode.AUTO, spacing=20)
     
@@ -599,13 +599,13 @@ class OVAEpidemicCurves:
         case_buttons = ft.Row([
             ft.ElevatedButton("Caso 1: COVID-19 Colombia", 
                             on_click=lambda _: self.load_case(1),
-                            style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)),
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)),
             ft.ElevatedButton("Caso 2: Dengue Bogotá", 
                             on_click=lambda _: self.load_case(2),
-                            style=ft.ButtonStyle(bgcolor=ft.colors.GREY_600, color=ft.colors.WHITE)),
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.GREY_600, color=ft.Colors.WHITE)),
             ft.ElevatedButton("Caso 3: Influenza Estacional", 
                             on_click=lambda _: self.load_case(3),
-                            style=ft.ButtonStyle(bgcolor=ft.colors.GREY_600, color=ft.colors.WHITE))
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.GREY_600, color=ft.Colors.WHITE))
         ])
         
         # Gráfico del caso
@@ -655,14 +655,14 @@ class OVAEpidemicCurves:
                         ], expand=True),
                         ft.Container(
                             content=self.case_chart,
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=10,
                             border_radius=8,
-                            border=ft.border.all(1, ft.colors.GREY_300)
+                            border=ft.border.all(1, ft.Colors.GREY_300)
                         )
                     ])
                 ]),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=20,
                 border_radius=10
             ),
@@ -675,12 +675,12 @@ class OVAEpidemicCurves:
                     # Ejercicio 1
                     ft.Container(
                         content=ft.Column([
-                            ft.Text("Ejercicio 1: Identificación de Patrones", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
-                            ft.Text("¿Qué tipo de patrón de transmisión observas?", color=ft.colors.BLUE_700),
+                            ft.Text("Ejercicio 1: Identificación de Patrones", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
+                            ft.Text("¿Qué tipo de patrón de transmisión observas?", color=ft.Colors.BLUE_700),
                             self.pattern_radio,
                             ft.ElevatedButton("Verificar Respuesta", on_click=self.check_pattern_answer)
                         ]),
-                        bgcolor=ft.colors.BLUE_50,
+                        bgcolor=ft.Colors.BLUE_50,
                         padding=15,
                         border_radius=8
                     ),
@@ -688,14 +688,14 @@ class OVAEpidemicCurves:
                     # Ejercicio 2
                     ft.Container(
                         content=ft.Column([
-                            ft.Text("Ejercicio 2: Cálculo de Métricas", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
-                            ft.Text("Calcula el R₀ aproximado para el período inicial:", color=ft.colors.GREEN_700),
+                            ft.Text("Ejercicio 2: Cálculo de Métricas", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
+                            ft.Text("Calcula el R₀ aproximado para el período inicial:", color=ft.Colors.GREEN_700),
                             ft.Row([
                                 self.r0_input,
                                 ft.ElevatedButton("Verificar", on_click=self.check_r0_answer)
                             ]),
                         ]),
-                        bgcolor=ft.colors.GREEN_50,
+                        bgcolor=ft.Colors.GREEN_50,
                         padding=15,
                         border_radius=8
                     ),
@@ -703,27 +703,27 @@ class OVAEpidemicCurves:
                     # Ejercicio 3
                     ft.Container(
                         content=ft.Column([
-                            ft.Text("Ejercicio 3: Interpretación Clínica", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
-                            ft.Text("¿Qué medidas de salud pública recomendarías?", color=ft.colors.PURPLE_700),
+                            ft.Text("Ejercicio 3: Interpretación Clínica", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
+                            ft.Text("¿Qué medidas de salud pública recomendarías?", color=ft.Colors.PURPLE_700),
                             self.interpretation_text,
                             ft.ElevatedButton("Evaluar Respuesta", on_click=self.check_interpretation_answer)
                         ]),
-                        bgcolor=ft.colors.PURPLE_50,
+                        bgcolor=ft.Colors.PURPLE_50,
                         padding=15,
                         border_radius=8
                     )
                 ], spacing=15),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=20,
                 border_radius=10,
-                border=ft.border.all(1, ft.colors.GREY_300)
+                border=ft.border.all(1, ft.Colors.GREY_300)
             ),
             
             ft.ElevatedButton(
                 "Laboratorio IA",
-                icon=ft.icons.ARROW_FORWARD,
+                icon=ft.Icons.ARROW_FORWARD,
                 on_click=lambda _: self.next_tab(),
-                style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)
+                style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)
             )
         ], scroll=ft.ScrollMode.AUTO, spacing=20)
     
@@ -769,8 +769,8 @@ class OVAEpidemicCurves:
     
     def show_feedback(self, message, is_correct):
         """Mostrar retroalimentación"""
-        color = ft.colors.GREEN_600 if is_correct else ft.colors.RED_600
-        icon = ft.icons.CHECK_CIRCLE if is_correct else ft.icons.ERROR
+        color = ft.Colors.GREEN_600 if is_correct else ft.Colors.RED_600
+        icon = ft.Icons.CHECK_CIRCLE if is_correct else ft.Icons.ERROR
         
         def close_snack(e):
             self.page.snack_bar.open = False
@@ -807,7 +807,7 @@ class OVAEpidemicCurves:
                                 ft.dropdown.Option("custom", "Datos Personalizados")
                             ]
                         ),
-                        ft.ElevatedButton("Procesar Datos", icon=ft.icons.SETTINGS),
+                        ft.ElevatedButton("Procesar Datos", icon=ft.Icons.SETTINGS),
                         
                         ft.Divider(),
                         ft.Text("Configuración de IA", size=16, weight=ft.FontWeight.BOLD),
@@ -824,7 +824,7 @@ class OVAEpidemicCurves:
                         ft.Slider(min=7, max=90, value=30, label="Días a predecir: {value}"),
                         ft.Slider(min=80, max=99, value=95, label="Confianza: {value}%")
                     ], spacing=10),
-                    bgcolor=ft.colors.GREY_50,
+                    bgcolor=ft.Colors.GREY_50,
                     padding=20,
                     border_radius=10,
                     width=300
@@ -837,10 +837,10 @@ class OVAEpidemicCurves:
                             ft.Row([
                                 ft.Text("Análisis Predictivo", size=16, weight=ft.FontWeight.BOLD),
                                 ft.Row([
-                                    ft.ElevatedButton("Ejecutar", icon=ft.icons.PLAY_ARROW, 
+                                    ft.ElevatedButton("Ejecutar", icon=ft.Icons.PLAY_ARROW, 
                                                     on_click=self.run_prediction,
-                                                    style=ft.ButtonStyle(bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)),
-                                    ft.ElevatedButton("Exportar", icon=ft.icons.DOWNLOAD)
+                                                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_600, color=ft.Colors.WHITE)),
+                                    ft.ElevatedButton("Exportar", icon=ft.Icons.DOWNLOAD)
                                 ])
                             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                             ft.Image(
@@ -850,30 +850,30 @@ class OVAEpidemicCurves:
                                 fit=ft.ImageFit.CONTAIN
                             )
                         ]),
-                        bgcolor=ft.colors.WHITE,
+                        bgcolor=ft.Colors.WHITE,
                         padding=15,
                         border_radius=8,
-                        border=ft.border.all(1, ft.colors.GREY_300)
+                        border=ft.border.all(1, ft.Colors.GREY_300)
                     ),
                     
                     # Métricas de rendimiento
                     ft.Row([
                         ft.Container(
                             content=ft.Column([
-                                ft.Text("12.3", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600),
+                                ft.Text("12.3", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_600),
                                 ft.Text("Error Absoluto Medio", size=10, text_align=ft.TextAlign.CENTER)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=10,
                             border_radius=8,
                             expand=True
                         ),
                         ft.Container(
                             content=ft.Column([
-                                ft.Text("0.87", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600),
+                                ft.Text("0.87", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_600),
                                 ft.Text("R² (Bondad de Ajuste)", size=10, text_align=ft.TextAlign.CENTER)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.GREEN_50,
+                            bgcolor=ft.Colors.GREEN_50,
                             padding=10,
                             border_radius=8,
                             expand=True
@@ -887,24 +887,24 @@ class OVAEpidemicCurves:
                 content=ft.Column([
                     ft.Text("Herramientas Avanzadas", size=18, weight=ft.FontWeight.BOLD),
                     ft.Row([
-                        ft.ElevatedButton("Detectar Brotes", icon=ft.icons.WARNING, 
-                                        style=ft.ButtonStyle(bgcolor=ft.colors.RED_600, color=ft.colors.WHITE)),
-                        ft.ElevatedButton("Análisis Estacional", icon=ft.icons.CALENDAR_TODAY,
-                                        style=ft.ButtonStyle(bgcolor=ft.colors.ORANGE_600, color=ft.colors.WHITE)),
-                        ft.ElevatedButton("Comparar Escenarios", icon=ft.icons.COMPARE,
-                                        style=ft.ButtonStyle(bgcolor=ft.colors.PURPLE_600, color=ft.colors.WHITE))
+                        ft.ElevatedButton("Detectar Brotes", icon=ft.Icons.WARNING, 
+                                        style=ft.ButtonStyle(bgcolor=ft.Colors.RED_600, color=ft.Colors.WHITE)),
+                        ft.ElevatedButton("Análisis Estacional", icon=ft.Icons.CALENDAR_TODAY,
+                                        style=ft.ButtonStyle(bgcolor=ft.Colors.ORANGE_600, color=ft.Colors.WHITE)),
+                        ft.ElevatedButton("Comparar Escenarios", icon=ft.Icons.COMPARE,
+                                        style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_600, color=ft.Colors.WHITE))
                     ], spacing=10)
                 ]),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=20,
                 border_radius=10
             ),
             
             ft.ElevatedButton(
                 "Evaluación Final",
-                icon=ft.icons.ARROW_FORWARD,
+                icon=ft.Icons.ARROW_FORWARD,
                 on_click=lambda _: self.next_tab(),
-                style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)
+                style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)
             )
         ], scroll=ft.ScrollMode.AUTO, spacing=20)
     
@@ -1004,16 +1004,16 @@ class OVAEpidemicCurves:
             
             ft.Container(
                 content=ft.Row([
-                    ft.Icon(ft.icons.INFO, color=ft.colors.BLUE_600),
+                    ft.Icon(ft.Icons.INFO, color=ft.Colors.BLUE_600),
                     ft.Column([
-                        ft.Text("Instrucciones", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
-                        ft.Text("Completa las siguientes preguntas para evaluar tu comprensión.", color=ft.colors.BLUE_700)
+                        ft.Text("Instrucciones", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
+                        ft.Text("Completa las siguientes preguntas para evaluar tu comprensión.", color=ft.Colors.BLUE_700)
                     ], expand=True)
                 ]),
-                bgcolor=ft.colors.BLUE_50,
+                bgcolor=ft.Colors.BLUE_50,
                 padding=15,
                 border_radius=8,
-                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.BLUE_500))
+                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.BLUE_500))
             ),
             
             # Pregunta 1
@@ -1030,7 +1030,7 @@ class OVAEpidemicCurves:
                     ),
                     self.q1_radio
                 ]),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=15,
                 border_radius=8
             ),
@@ -1043,7 +1043,7 @@ class OVAEpidemicCurves:
                     ft.Row([self.q2_initial, self.q2_second_gen]),
                     self.q2_justification
                 ]),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=15,
                 border_radius=8
             ),
@@ -1061,7 +1061,7 @@ class OVAEpidemicCurves:
                         ft.Row([ft.Text("Estadística:", width=100), self.change_e])
                     ])
                 ]),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=15,
                 border_radius=8
             ),
@@ -1075,7 +1075,7 @@ class OVAEpidemicCurves:
                     self.q4_curve,
                     self.q4_interpretation
                 ]),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=15,
                 border_radius=8
             ),
@@ -1084,23 +1084,23 @@ class OVAEpidemicCurves:
             ft.Row([
                 ft.ElevatedButton(
                     "Enviar Evaluación",
-                    icon=ft.icons.CHECK,
+                    icon=ft.Icons.CHECK,
                     on_click=self.submit_evaluation,
-                    style=ft.ButtonStyle(bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_600, color=ft.Colors.WHITE)
                 ),
                 ft.ElevatedButton(
                     "Reiniciar",
-                    icon=ft.icons.REFRESH,
+                    icon=ft.Icons.REFRESH,
                     on_click=self.reset_evaluation,
-                    style=ft.ButtonStyle(bgcolor=ft.colors.GREY_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREY_600, color=ft.Colors.WHITE)
                 )
             ], alignment=ft.MainAxisAlignment.CENTER, spacing=20),
             
             ft.ElevatedButton(
                 "Recursos y Material",
-                icon=ft.icons.ARROW_FORWARD,
+                icon=ft.Icons.ARROW_FORWARD,
                 on_click=lambda _: self.next_tab(),
-                style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)
+                style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)
             )
         ], scroll=ft.ScrollMode.AUTO, spacing=20)
     
@@ -1170,7 +1170,7 @@ class OVAEpidemicCurves:
             title=ft.Text("Resultados de la Evaluación"),
             content=ft.Column([
                 ft.Row([
-                    ft.Text(str(int(self.evaluation_score)), size=36, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600),
+                    ft.Text(str(int(self.evaluation_score)), size=36, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_600),
                     ft.Text("de 100 puntos", size=16)
                 ], alignment=ft.MainAxisAlignment.CENTER),
                 ft.Divider(),
@@ -1214,7 +1214,7 @@ class OVAEpidemicCurves:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.FILE_PRESENT, color=ft.colors.BLUE_600),
+                            ft.Icon(ft.Icons.FILE_PRESENT, color=ft.Colors.BLUE_600),
                             ft.Text("Plantillas y Herramientas", size=18, weight=ft.FontWeight.BOLD)
                         ]),
                         
@@ -1223,7 +1223,7 @@ class OVAEpidemicCurves:
                         self.create_resource_item("Checklist de Análisis", "Lista de verificación PDF"),
                         self.create_resource_item("Código R para Análisis", "Scripts comentados")
                     ], spacing=10),
-                    bgcolor=ft.colors.GREY_50,
+                    bgcolor=ft.Colors.GREY_50,
                     padding=20,
                     border_radius=10,
                     expand=True
@@ -1233,7 +1233,7 @@ class OVAEpidemicCurves:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.DATABASE, color=ft.colors.GREEN_600),
+                            ft.Icon(ft.Icons.DATABASE, color=ft.Colors.GREEN_600),
                             ft.Text("Datasets de Práctica", size=18, weight=ft.FontWeight.BOLD)
                         ]),
                         
@@ -1242,7 +1242,7 @@ class OVAEpidemicCurves:
                         self.create_resource_item("Influenza Estacional", "Patrones históricos 10 años"),
                         self.create_resource_item("Brotes Simulados", "Diferentes patrones epidémicos")
                     ], spacing=10),
-                    bgcolor=ft.colors.GREY_50,
+                    bgcolor=ft.Colors.GREY_50,
                     padding=20,
                     border_radius=10,
                     expand=True
@@ -1253,7 +1253,7 @@ class OVAEpidemicCurves:
             ft.Container(
                 content=ft.Column([
                     ft.Row([
-                        ft.Icon(ft.icons.BOOK, color=ft.colors.PURPLE_600),
+                        ft.Icon(ft.Icons.BOOK, color=ft.Colors.PURPLE_600),
                         ft.Text("Bibliografía y Referencias", size=18, weight=ft.FontWeight.BOLD)
                     ]),
                     ft.Row([
@@ -1271,7 +1271,7 @@ class OVAEpidemicCurves:
                         ], expand=True)
                     ])
                 ]),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=20,
                 border_radius=10
             ),
@@ -1280,30 +1280,30 @@ class OVAEpidemicCurves:
             ft.Container(
                 content=ft.Column([
                     ft.Row([
-                        ft.Icon(ft.icons.SCHOOL, color=ft.colors.YELLOW_600),
+                        ft.Icon(ft.Icons.SCHOOL, color=ft.Colors.YELLOW_600),
                         ft.Text("Certificación de Competencias", size=18, weight=ft.FontWeight.BOLD)
                     ], alignment=ft.MainAxisAlignment.CENTER),
                     ft.Text("Al completar exitosamente este módulo OVA, habrás desarrollado competencias clave en análisis de curvas epidémicas y series de tiempo.",
                            text_align=ft.TextAlign.CENTER),
                     
                     ft.Row([
-                        self.create_competency_card("Análisis Temporal", "Construcción e interpretación", ft.icons.SHOW_CHART, ft.colors.BLUE_600),
-                        self.create_competency_card("Herramientas IA", "Aplicación en epidemiología", ft.icons.SMART_TOY, ft.colors.GREEN_600),
-                        self.create_competency_card("Salud Pública", "Decisiones basadas en evidencia", ft.icons.HEALTH_AND_SAFETY, ft.colors.PURPLE_600)
+                        self.create_competency_card("Análisis Temporal", "Construcción e interpretación", ft.Icons.SHOW_CHART, ft.Colors.BLUE_600),
+                        self.create_competency_card("Herramientas IA", "Aplicación en epidemiología", ft.Icons.SMART_TOY, ft.Colors.GREEN_600),
+                        self.create_competency_card("Salud Pública", "Decisiones basadas en evidencia", ft.Icons.HEALTH_AND_SAFETY, ft.Colors.PURPLE_600)
                     ], alignment=ft.MainAxisAlignment.CENTER, spacing=20),
                     
                     ft.ElevatedButton(
                         "Completar Módulo OVA",
-                        icon=ft.icons.SCHOOL,
+                        icon=ft.Icons.SCHOOL,
                         on_click=self.complete_course,
                         style=ft.ButtonStyle(
-                            bgcolor=ft.colors.BLUE_600,
-                            color=ft.colors.WHITE,
+                            bgcolor=ft.Colors.BLUE_600,
+                            color=ft.Colors.WHITE,
                             padding=ft.padding.symmetric(horizontal=30, vertical=15)
                         )
                     )
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=15),
-                bgcolor=ft.colors.BLUE_50,
+                bgcolor=ft.Colors.BLUE_50,
                 padding=30,
                 border_radius=15
             )
@@ -1315,14 +1315,14 @@ class OVAEpidemicCurves:
             content=ft.Row([
                 ft.Column([
                     ft.Text(title, weight=ft.FontWeight.BOLD),
-                    ft.Text(description, size=12, color=ft.colors.GREY_600)
+                    ft.Text(description, size=12, color=ft.Colors.GREY_600)
                 ], expand=True),
-                ft.IconButton(ft.icons.DOWNLOAD, tooltip="Descargar", on_click=lambda _: self.download_resource(title))
+                ft.IconButton(ft.Icons.DOWNLOAD, tooltip="Descargar", on_click=lambda _: self.download_resource(title))
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=10,
             border_radius=8,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
     
     def create_competency_card(self, title, description, icon, color):
@@ -1331,9 +1331,9 @@ class OVAEpidemicCurves:
             content=ft.Column([
                 ft.Icon(icon, size=40, color=color),
                 ft.Text(title, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
-                ft.Text(description, size=12, text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_600)
+                ft.Text(description, size=12, text_align=ft.TextAlign.CENTER, color=ft.Colors.GREY_600)
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=10,
             width=200

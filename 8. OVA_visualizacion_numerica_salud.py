@@ -66,7 +66,7 @@ class OVAVisualizacionSalud:
     def create_header(self):
         self.header = ft.Container(
             content=ft.Row([
-                ft.Icon(ft.icons.ANALYTICS, color="white", size=30),
+                ft.Icon(ft.Icons.ANALYTICS, color="white", size=30),
                 ft.Column([
                     ft.Text("OVA 8: Visualización para Salud II", 
                            size=24, weight=ft.FontWeight.BOLD, color="white"),
@@ -85,12 +85,12 @@ class OVAVisualizacionSalud:
         
     def create_navigation(self):
         nav_buttons = [
-            ("Introducción", ft.icons.PLAY_CIRCLE, 0),
-            ("Teoría", ft.icons.BOOK, 1),
-            ("Práctica", ft.icons.HANDYMAN, 2),
-            ("Laboratorio", ft.icons.SCIENCE, 3),
-            ("Evaluación", ft.icons.QUIZ, 4),
-            ("Recursos", ft.icons.DOWNLOAD, 5)
+            ("Introducción", ft.Icons.PLAY_CIRCLE, 0),
+            ("Teoría", ft.Icons.BOOK, 1),
+            ("Práctica", ft.Icons.HANDYMAN, 2),
+            ("Laboratorio", ft.Icons.SCIENCE, 3),
+            ("Evaluación", ft.Icons.QUIZ, 4),
+            ("Recursos", ft.Icons.DOWNLOAD, 5)
         ]
         
         self.nav_buttons = []
@@ -100,7 +100,7 @@ class OVAVisualizacionSalud:
                 icon=icon,
                 on_click=lambda e, idx=index: self.show_section(idx),
                 style=ft.ButtonStyle(
-                    color=ft.colors.BLUE_700 if index == 0 else ft.colors.GREY_700
+                    color=ft.Colors.BLUE_700 if index == 0 else ft.Colors.GREY_700
                 )
             )
             self.nav_buttons.append(btn)
@@ -133,7 +133,7 @@ class OVAVisualizacionSalud:
         
         # Actualizar botones de navegación
         for i, btn in enumerate(self.nav_buttons):
-            btn.style.color = ft.colors.BLUE_700 if i == index else ft.colors.GREY_700
+            btn.style.color = ft.Colors.BLUE_700 if i == index else ft.Colors.GREY_700
             
         # Mostrar sección
         self.content_area.content = self.sections[index]
@@ -151,13 +151,13 @@ class OVAVisualizacionSalud:
         return ft.Column([
             ft.Container(
                 content=ft.Column([
-                    ft.Icon(ft.icons.ANALYTICS, size=60, color="white"),
+                    ft.Icon(ft.Icons.ANALYTICS, size=60, color="white"),
                     ft.Text("Visualización para Salud II", 
                            size=28, weight=ft.FontWeight.BOLD, color="white"),
                     ft.Text("Gráficos Numéricos en Ciencias de la Salud", 
                            size=18, color="white")
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                bgcolor=ft.colors.BLUE_GRADIENT,
+                bgcolor=ft.Colors.BLUE_GRADIENT,
                 padding=30,
                 border_radius=10,
                 margin=ft.margin.only(bottom=20)
@@ -168,13 +168,13 @@ class OVAVisualizacionSalud:
                 ft.Container(
                     content=ft.Column([
                         ft.Text("🎯 Objetivos de Aprendizaje", 
-                               size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                               size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                         ft.Text("✓ Seleccionar el gráfico numérico apropiado según el tipo de datos"),
                         ft.Text("✓ Construir e interpretar histogramas, boxplots, gráficos de violín"),
                         ft.Text("✓ Aplicar anotaciones clínicas relevantes"),
                         ft.Text("✓ Comparar distribuciones entre grupos poblacionales")
                     ], spacing=10),
-                    bgcolor=ft.colors.BLUE_50,
+                    bgcolor=ft.Colors.BLUE_50,
                     padding=20,
                     border_radius=10,
                     expand=True
@@ -184,14 +184,14 @@ class OVAVisualizacionSalud:
                 ft.Container(
                     content=ft.Column([
                         ft.Text("⏱️ Estructura del Módulo", 
-                               size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
-                        ft.Row([ft.Text("Introducción y objetivos"), ft.Text("10 min", bgcolor=ft.colors.GREEN_200)]),
-                        ft.Row([ft.Text("Microlección interactiva"), ft.Text("25 min", bgcolor=ft.colors.GREEN_200)]),
-                        ft.Row([ft.Text("Práctica guiada"), ft.Text("45 min", bgcolor=ft.colors.GREEN_200)]),
-                        ft.Row([ft.Text("Laboratorio virtual"), ft.Text("30 min", bgcolor=ft.colors.GREEN_200)]),
-                        ft.Row([ft.Text("Evaluación"), ft.Text("15 min", bgcolor=ft.colors.GREEN_200)])
+                               size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
+                        ft.Row([ft.Text("Introducción y objetivos"), ft.Text("10 min", bgcolor=ft.Colors.GREEN_200)]),
+                        ft.Row([ft.Text("Microlección interactiva"), ft.Text("25 min", bgcolor=ft.Colors.GREEN_200)]),
+                        ft.Row([ft.Text("Práctica guiada"), ft.Text("45 min", bgcolor=ft.Colors.GREEN_200)]),
+                        ft.Row([ft.Text("Laboratorio virtual"), ft.Text("30 min", bgcolor=ft.Colors.GREEN_200)]),
+                        ft.Row([ft.Text("Evaluación"), ft.Text("15 min", bgcolor=ft.Colors.GREEN_200)])
                     ], spacing=10),
-                    bgcolor=ft.colors.GREEN_50,
+                    bgcolor=ft.Colors.GREEN_50,
                     padding=20,
                     border_radius=10,
                     expand=True
@@ -201,13 +201,13 @@ class OVAVisualizacionSalud:
             ft.Container(
                 content=ft.Column([
                     ft.Text("💡 Modelo Pedagógico C(H)ANGE", 
-                           size=16, weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800),
+                           size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800),
                     ft.Text("Este módulo integra Combinatoria (selección de gráficos), "
                            "Álgebra (cálculos estadísticos), Números (interpretación cuantitativa), "
                            "Geometría (representación visual) y Estadística (análisis descriptivo) "
                            "para fortalecer el pensamiento estadístico en ciencias de la salud.")
                 ]),
-                bgcolor=ft.colors.ORANGE_50,
+                bgcolor=ft.Colors.ORANGE_50,
                 padding=20,
                 border_radius=10,
                 margin=ft.margin.only(top=20)
@@ -216,11 +216,11 @@ class OVAVisualizacionSalud:
             ft.Container(
                 content=ft.ElevatedButton(
                     "Comenzar Módulo",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda e: self.show_section(1),
                     style=ft.ButtonStyle(
-                        bgcolor=ft.colors.BLUE_600,
-                        color=ft.colors.WHITE,
+                        bgcolor=ft.Colors.BLUE_600,
+                        color=ft.Colors.WHITE,
                         padding=ft.padding.all(15)
                     )
                 ),
@@ -240,19 +240,19 @@ class OVAVisualizacionSalud:
                 # Histogramas
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("📊 Histogramas", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                        ft.Text("📊 Histogramas", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                         ft.Text("Representan la distribución de frecuencias de una variable numérica continua. "
                                "Esenciales para evaluar normalidad y detectar patrones en datos clínicos."),
                         ft.Container(
                             content=ft.Text("Uso clínico: Distribución de presión arterial, IMC, "
                                            "niveles de glucosa, tiempos de espera hospitalarios.",
                                            weight=ft.FontWeight.BOLD),
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=10,
-                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.BLUE_500))
+                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.BLUE_500))
                         )
                     ], spacing=10),
-                    bgcolor=ft.colors.BLUE_50,
+                    bgcolor=ft.Colors.BLUE_50,
                     padding=15,
                     border_radius=10,
                     expand=True
@@ -261,19 +261,19 @@ class OVAVisualizacionSalud:
                 # Boxplots
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("📦 Boxplots", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                        ft.Text("📦 Boxplots", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                         ft.Text("Muestran la mediana, cuartiles y valores atípicos. "
                                "Ideales para comparar distribuciones entre grupos."),
                         ft.Container(
                             content=ft.Text("Uso clínico: Comparación de biomarcadores entre grupos, "
                                            "análisis de variabilidad en mediciones clínicas.",
                                            weight=ft.FontWeight.BOLD),
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=10,
-                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.GREEN_500))
+                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.GREEN_500))
                         )
                     ], spacing=10),
-                    bgcolor=ft.colors.GREEN_50,
+                    bgcolor=ft.Colors.GREEN_50,
                     padding=15,
                     border_radius=10,
                     expand=True
@@ -284,19 +284,19 @@ class OVAVisualizacionSalud:
                 # Gráficos de Violín
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("🎵 Gráficos de Violín", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                        ft.Text("🎵 Gráficos de Violín", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
                         ft.Text("Combinan boxplot con estimación de densidad. "
                                "Muestran la forma completa de la distribución."),
                         ft.Container(
                             content=ft.Text("Uso clínico: Análisis de distribuciones complejas en farmacología, "
                                            "variabilidad en respuesta a tratamientos.",
                                            weight=ft.FontWeight.BOLD),
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=10,
-                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.PURPLE_500))
+                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.PURPLE_500))
                         )
                     ], spacing=10),
-                    bgcolor=ft.colors.PURPLE_50,
+                    bgcolor=ft.Colors.PURPLE_50,
                     padding=15,
                     border_radius=10,
                     expand=True
@@ -305,19 +305,19 @@ class OVAVisualizacionSalud:
                 # Scatterplots
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("⚫ Nubes de Puntos", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800),
+                        ft.Text("⚫ Nubes de Puntos", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800),
                         ft.Text("Visualizan la relación entre dos variables numéricas. "
                                "Fundamentales para explorar correlaciones."),
                         ft.Container(
                             content=ft.Text("Uso clínico: Relación peso-altura, correlación entre biomarcadores, "
                                            "análisis dosis-respuesta.",
                                            weight=ft.FontWeight.BOLD),
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=10,
-                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.ORANGE_500))
+                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.ORANGE_500))
                         )
                     ], spacing=10),
-                    bgcolor=ft.colors.ORANGE_50,
+                    bgcolor=ft.Colors.ORANGE_50,
                     padding=15,
                     border_radius=10,
                     expand=True
@@ -328,7 +328,7 @@ class OVAVisualizacionSalud:
             ft.Container(
                 content=ft.Column([
                     ft.Text("▶️ Ejemplo Interactivo: Presión Arterial Sistólica", 
-                           size=18, weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_800),
+                           size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_800),
                     ft.Text("Explora cómo diferentes gráficos revelan aspectos distintos de los mismos datos clínicos."),
                     
                     ft.Row([
@@ -354,13 +354,13 @@ class OVAVisualizacionSalud:
                             "valores entre 120-150 mmHg, indicando hipertensión leve a moderada.",
                             size=14
                         ),
-                        bgcolor=ft.colors.WHITE,
+                        bgcolor=ft.Colors.WHITE,
                         padding=15,
-                        border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.INDIGO_500)),
+                        border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.INDIGO_500)),
                         border_radius=5
                     )
                 ], spacing=15),
-                bgcolor=ft.colors.INDIGO_50,
+                bgcolor=ft.Colors.INDIGO_50,
                 padding=20,
                 border_radius=10,
                 margin=ft.margin.only(top=20)
@@ -369,9 +369,9 @@ class OVAVisualizacionSalud:
             ft.Container(
                 content=ft.ElevatedButton(
                     "Continuar a Práctica",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda e: self.show_section(2),
-                    style=ft.ButtonStyle(bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_600, color=ft.Colors.WHITE)
                 ),
                 alignment=ft.alignment.center,
                 margin=ft.margin.only(top=30)
@@ -427,7 +427,7 @@ class OVAVisualizacionSalud:
             ft.Container(
                 content=ft.Column([
                     ft.Text("🏥 Caso Clínico: Análisis de IMC en Pacientes Diabéticos", 
-                           size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                           size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                     ft.Text("Un hospital desea analizar la distribución del Índice de Masa Corporal (IMC) "
                            "en pacientes diabéticos tipo 2 para evaluar el estado nutricional y planificar "
                            "intervenciones. Se recolectaron datos de 200 pacientes."),
@@ -435,12 +435,12 @@ class OVAVisualizacionSalud:
                         content=ft.Text("Pregunta clínica: ¿Cómo se distribuye el IMC en nuestra población "
                                        "de pacientes diabéticos y existen diferencias entre hombres y mujeres?",
                                        weight=ft.FontWeight.BOLD),
-                        bgcolor=ft.colors.WHITE,
+                        bgcolor=ft.Colors.WHITE,
                         padding=15,
-                        border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.BLUE_500))
+                        border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.BLUE_500))
                     )
                 ], spacing=15),
-                bgcolor=ft.colors.BLUE_50,
+                bgcolor=ft.Colors.BLUE_50,
                 padding=20,
                 border_radius=10
             ),
@@ -451,7 +451,7 @@ class OVAVisualizacionSalud:
                     ft.Row([
                         ft.Container(
                             content=ft.Text("1", color="white", weight=ft.FontWeight.BOLD),
-                            bgcolor=ft.colors.BLUE_600,
+                            bgcolor=ft.Colors.BLUE_600,
                             width=30,
                             height=30,
                             border_radius=15,
@@ -467,30 +467,30 @@ class OVAVisualizacionSalud:
                         ft.Column([
                             ft.Container(
                                 content=ft.Column([
-                                    ft.Text("Observaciones Clínicas:", weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800),
+                                    ft.Text("Observaciones Clínicas:", weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800),
                                     ft.Text("• Distribución ligeramente sesgada hacia la derecha"),
                                     ft.Text("• Media ≈ 28.5 kg/m² (sobrepeso)"),
                                     ft.Text("• Mayoría de pacientes en rango 25-35 kg/m²"),
                                     ft.Text("• Algunos casos de obesidad severa (>35 kg/m²)")
                                 ], spacing=5),
-                                bgcolor=ft.colors.ORANGE_50,
+                                bgcolor=ft.Colors.ORANGE_50,
                                 padding=15,
                                 border_radius=5
                             ),
                             ft.Container(
                                 content=ft.Column([
-                                    ft.Text("Implicaciones Clínicas:", weight=ft.FontWeight.BOLD, color=ft.colors.RED_800),
+                                    ft.Text("Implicaciones Clínicas:", weight=ft.FontWeight.BOLD, color=ft.Colors.RED_800),
                                     ft.Text("El 70% de los pacientes presenta sobrepeso u obesidad, "
                                            "factor de riesgo adicional para complicaciones diabéticas.")
                                 ], spacing=5),
-                                bgcolor=ft.colors.RED_50,
+                                bgcolor=ft.Colors.RED_50,
                                 padding=15,
                                 border_radius=5
                             )
                         ], expand=True, spacing=10)
                     ], spacing=20)
                 ], spacing=15),
-                border=ft.border.all(1, ft.colors.GREY_300),
+                border=ft.border.all(1, ft.Colors.GREY_300),
                 padding=20,
                 border_radius=10
             ),
@@ -501,7 +501,7 @@ class OVAVisualizacionSalud:
                     ft.Row([
                         ft.Container(
                             content=ft.Text("2", color="white", weight=ft.FontWeight.BOLD),
-                            bgcolor=ft.colors.GREEN_600,
+                            bgcolor=ft.Colors.GREEN_600,
                             width=30,
                             height=30,
                             border_radius=15,
@@ -517,30 +517,30 @@ class OVAVisualizacionSalud:
                         ft.Column([
                             ft.Container(
                                 content=ft.Column([
-                                    ft.Text("Análisis Comparativo:", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                                    ft.Text("Análisis Comparativo:", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                                     ft.Text("• Mujeres: Mediana más alta (29.2 kg/m²)"),
                                     ft.Text("• Hombres: Mayor variabilidad (IQR más amplio)"),
                                     ft.Text("• Outliers presentes en ambos grupos"),
                                     ft.Text("• Diferencia estadísticamente significativa")
                                 ], spacing=5),
-                                bgcolor=ft.colors.GREEN_50,
+                                bgcolor=ft.Colors.GREEN_50,
                                 padding=15,
                                 border_radius=5
                             ),
                             ft.Container(
                                 content=ft.Column([
-                                    ft.Text("Interpretación Clínica:", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                    ft.Text("Interpretación Clínica:", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                                     ft.Text("Las mujeres diabéticas muestran mayor tendencia al sobrepeso, "
                                            "sugiriendo la necesidad de intervenciones nutricionales diferenciadas por sexo.")
                                 ], spacing=5),
-                                bgcolor=ft.colors.BLUE_50,
+                                bgcolor=ft.Colors.BLUE_50,
                                 padding=15,
                                 border_radius=5
                             )
                         ], expand=True, spacing=10)
                     ], spacing=20)
                 ], spacing=15),
-                border=ft.border.all(1, ft.colors.GREY_300),
+                border=ft.border.all(1, ft.Colors.GREY_300),
                 padding=20,
                 border_radius=10
             ),
@@ -548,7 +548,7 @@ class OVAVisualizacionSalud:
             # Ejercicio interactivo
             ft.Container(
                 content=ft.Column([
-                    ft.Text("✏️ Ejercicio Interactivo", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_800),
+                    ft.Text("✏️ Ejercicio Interactivo", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_800),
                     ft.Text("Selecciona el gráfico más apropiado para cada pregunta clínica:"),
                     
                     ft.Column([
@@ -580,12 +580,12 @@ class OVAVisualizacionSalud:
                     ft.ElevatedButton(
                         "Verificar Respuestas",
                         on_click=self.check_practice_answers,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.INDIGO_600, color=ft.colors.WHITE)
+                        style=ft.ButtonStyle(bgcolor=ft.Colors.INDIGO_600, color=ft.Colors.WHITE)
                     ),
                     
                     ft.Container(height=20)  # Espacio para feedback
                 ], spacing=15),
-                bgcolor=ft.colors.INDIGO_50,
+                bgcolor=ft.Colors.INDIGO_50,
                 padding=20,
                 border_radius=10
             ),
@@ -593,9 +593,9 @@ class OVAVisualizacionSalud:
             ft.Container(
                 content=ft.ElevatedButton(
                     "Ir al Laboratorio Virtual",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda e: self.show_section(3),
-                    style=ft.ButtonStyle(bgcolor=ft.colors.PURPLE_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_600, color=ft.Colors.WHITE)
                 ),
                 alignment=ft.alignment.center,
                 margin=ft.margin.only(top=30)
@@ -768,7 +768,7 @@ class OVAVisualizacionSalud:
             content=ft.Text("Selecciona parámetros para generar el gráfico"),
             width=600,
             height=400,
-            bgcolor=ft.colors.GREY_100,
+            bgcolor=ft.Colors.GREY_100,
             border_radius=10,
             alignment=ft.alignment.center
         )
@@ -777,46 +777,46 @@ class OVAVisualizacionSalud:
         self.lab_stats_container = ft.Row([
             ft.Container(
                 content=ft.Column([
-                    ft.Text("Media", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_700),
+                    ft.Text("Media", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_700),
                     ft.Text("--", size=20, weight=ft.FontWeight.BOLD)
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=15,
                 border_radius=5,
-                border=ft.border.all(1, ft.colors.GREY_300),
+                border=ft.border.all(1, ft.Colors.GREY_300),
                 expand=True
             ),
             ft.Container(
                 content=ft.Column([
-                    ft.Text("Mediana", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700),
+                    ft.Text("Mediana", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700),
                     ft.Text("--", size=20, weight=ft.FontWeight.BOLD)
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=15,
                 border_radius=5,
-                border=ft.border.all(1, ft.colors.GREY_300),
+                border=ft.border.all(1, ft.Colors.GREY_300),
                 expand=True
             ),
             ft.Container(
                 content=ft.Column([
-                    ft.Text("Desv. Estándar", weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_700),
+                    ft.Text("Desv. Estándar", weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_700),
                     ft.Text("--", size=20, weight=ft.FontWeight.BOLD)
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=15,
                 border_radius=5,
-                border=ft.border.all(1, ft.colors.GREY_300),
+                border=ft.border.all(1, ft.Colors.GREY_300),
                 expand=True
             ),
             ft.Container(
                 content=ft.Column([
-                    ft.Text("Rango", weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_700),
+                    ft.Text("Rango", weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_700),
                     ft.Text("--", size=20, weight=ft.FontWeight.BOLD)
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=15,
                 border_radius=5,
-                border=ft.border.all(1, ft.colors.GREY_300),
+                border=ft.border.all(1, ft.Colors.GREY_300),
                 expand=True
             )
         ], spacing=10)
@@ -824,10 +824,10 @@ class OVAVisualizacionSalud:
         # Contenedor para interpretación
         self.lab_interpretation = ft.Container(
             content=ft.Text("Selecciona una variable y tipo de gráfico para ver la interpretación clínica."),
-            bgcolor=ft.colors.GREEN_50,
+            bgcolor=ft.Colors.GREEN_50,
             padding=15,
             border_radius=5,
-            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.GREEN_500))
+            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.GREEN_500))
         )
         
         return ft.Column([
@@ -836,11 +836,11 @@ class OVAVisualizacionSalud:
             ft.Container(
                 content=ft.Column([
                     ft.Text("🔬 Simulador de Visualización de Datos Clínicos", 
-                           size=18, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                           size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
                     ft.Text("Experimenta con diferentes tipos de gráficos usando datos simulados de pacientes. "
                            "Modifica los parámetros y observa cómo cambian las visualizaciones e interpretaciones.")
                 ], spacing=10),
-                bgcolor=ft.colors.PURPLE_50,
+                bgcolor=ft.Colors.PURPLE_50,
                 padding=20,
                 border_radius=10
             ),
@@ -873,12 +873,12 @@ class OVAVisualizacionSalud:
                         
                         ft.ElevatedButton(
                             "Generar Nuevos Datos",
-                            icon=ft.icons.REFRESH,
+                            icon=ft.Icons.REFRESH,
                             on_click=self.generate_new_lab_data,
-                            style=ft.ButtonStyle(bgcolor=ft.colors.PURPLE_600, color=ft.colors.WHITE)
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_600, color=ft.Colors.WHITE)
                         )
                     ], spacing=15),
-                    bgcolor=ft.colors.GREY_50,
+                    bgcolor=ft.Colors.GREY_50,
                     padding=20,
                     border_radius=10,
                     width=300
@@ -898,10 +898,10 @@ class OVAVisualizacionSalud:
             # Estadísticas
             ft.Container(
                 content=ft.Column([
-                    ft.Text("🧮 Estadísticas Descriptivas", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                    ft.Text("🧮 Estadísticas Descriptivas", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                     self.lab_stats_container
                 ], spacing=15),
-                bgcolor=ft.colors.BLUE_50,
+                bgcolor=ft.Colors.BLUE_50,
                 padding=20,
                 border_radius=10
             ),
@@ -909,10 +909,10 @@ class OVAVisualizacionSalud:
             # Interpretación
             ft.Container(
                 content=ft.Column([
-                    ft.Text("🩺 Interpretación Clínica Automática", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                    ft.Text("🩺 Interpretación Clínica Automática", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                     self.lab_interpretation
                 ], spacing=15),
-                bgcolor=ft.colors.GREEN_50,
+                bgcolor=ft.Colors.GREEN_50,
                 padding=20,
                 border_radius=10
             ),
@@ -924,25 +924,25 @@ class OVAVisualizacionSalud:
                     ft.Row([
                         ft.ElevatedButton(
                             "Exportar PNG",
-                            icon=ft.icons.IMAGE,
+                            icon=ft.Icons.IMAGE,
                             on_click=self.export_chart,
-                            style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)
                         ),
                         ft.ElevatedButton(
                             "Exportar Datos CSV",
-                            icon=ft.icons.TABLE_CHART,
+                            icon=ft.Icons.TABLE_CHART,
                             on_click=self.export_data,
-                            style=ft.ButtonStyle(bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_600, color=ft.Colors.WHITE)
                         ),
                         ft.ElevatedButton(
                             "Generar Reporte",
-                            icon=ft.icons.DESCRIPTION,
+                            icon=ft.Icons.DESCRIPTION,
                             on_click=self.generate_report,
-                            style=ft.ButtonStyle(bgcolor=ft.colors.PURPLE_600, color=ft.colors.WHITE)
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.PURPLE_600, color=ft.Colors.WHITE)
                         )
                     ], spacing=10)
                 ], spacing=15),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=20,
                 border_radius=10
             ),
@@ -950,9 +950,9 @@ class OVAVisualizacionSalud:
             ft.Container(
                 content=ft.ElevatedButton(
                     "Continuar a Evaluación",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda e: self.show_section(4),
-                    style=ft.ButtonStyle(bgcolor=ft.colors.ORANGE_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.ORANGE_600, color=ft.Colors.WHITE)
                 ),
                 alignment=ft.alignment.center,
                 margin=ft.margin.only(top=30)
@@ -1218,15 +1218,15 @@ class OVAVisualizacionSalud:
             ft.Container(
                 content=ft.Column([
                     ft.Row([
-                        ft.Icon(ft.icons.INFO, color=ft.colors.ORANGE_600),
-                        ft.Text("Instrucciones", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800)
+                        ft.Icon(ft.Icons.INFO, color=ft.Colors.ORANGE_600),
+                        ft.Text("Instrucciones", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800)
                     ], spacing=10),
                     ft.Text("• Responde todas las preguntas basándote en los conceptos aprendidos"),
                     ft.Text("• Cada pregunta tiene una sola respuesta correcta"),
                     ft.Text("• Puedes revisar tus respuestas antes de enviar"),
                     ft.Text("• Se requiere 70% de aciertos para aprobar el módulo")
                 ], spacing=10),
-                bgcolor=ft.colors.ORANGE_50,
+                bgcolor=ft.Colors.ORANGE_50,
                 padding=20,
                 border_radius=10
             )
@@ -1250,7 +1250,7 @@ class OVAVisualizacionSalud:
                                size=14, weight=ft.FontWeight.BOLD),
                         radio_group
                     ], spacing=10),
-                    border=ft.border.all(1, ft.colors.GREY_300),
+                    border=ft.border.all(1, ft.Colors.GREY_300),
                     padding=20,
                     border_radius=10
                 )
@@ -1261,12 +1261,12 @@ class OVAVisualizacionSalud:
         
         quiz_content.extend([
             ft.Row([
-                ft.Text("0 de 5 preguntas respondidas", size=14, color=ft.colors.GREY_600),
+                ft.Text("0 de 5 preguntas respondidas", size=14, color=ft.Colors.GREY_600),
                 ft.ElevatedButton(
                     "Enviar Evaluación",
-                    icon=ft.icons.CHECK,
+                    icon=ft.Icons.CHECK,
                     on_click=self.submit_quiz,
-                    style=ft.ButtonStyle(bgcolor=ft.colors.ORANGE_600, color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(bgcolor=ft.Colors.ORANGE_600, color=ft.Colors.WHITE)
                 )
             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
             self.quiz_results_container
@@ -1302,8 +1302,8 @@ class OVAVisualizacionSalud:
         passed = percentage >= 70
         
         # Mostrar resultados
-        result_color = ft.colors.GREEN if passed else ft.colors.RED
-        result_icon = ft.icons.CHECK_CIRCLE if passed else ft.icons.CANCEL
+        result_color = ft.Colors.GREEN if passed else ft.Colors.RED
+        result_icon = ft.Icons.CHECK_CIRCLE if passed else ft.Icons.CANCEL
         result_title = "¡Felicitaciones!" if passed else "Necesitas repasar"
         
         self.quiz_results_container.content = ft.Container(
@@ -1316,7 +1316,7 @@ class OVAVisualizacionSalud:
                 ft.Text("Has aprobado el módulo." if passed else "Se requiere 70% para aprobar."),
                 ft.Text("Te recomendamos revisar los conceptos y volver a intentar." if not passed else "")
             ], spacing=10),
-            bgcolor=ft.colors.GREEN_50 if passed else ft.colors.RED_50,
+            bgcolor=ft.Colors.GREEN_50 if passed else ft.Colors.RED_50,
             padding=20,
             border_radius=10,
             border=ft.border.all(1, result_color)
@@ -1337,7 +1337,7 @@ class OVAVisualizacionSalud:
                 # Plantillas y Guías
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("📄 Plantillas y Guías", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                        ft.Text("📄 Plantillas y Guías", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                         
                         ft.Container(
                             content=ft.Column([
@@ -1345,15 +1345,15 @@ class OVAVisualizacionSalud:
                                 ft.Text("Diagrama de flujo para elegir el gráfico apropiado según el tipo de datos.", size=12),
                                 ft.ElevatedButton(
                                     "Descargar PDF",
-                                    icon=ft.icons.DOWNLOAD,
+                                    icon=ft.Icons.DOWNLOAD,
                                     on_click=lambda e: self.download_resource("chart-guide"),
-                                    style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)
                                 )
                             ], spacing=5),
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=15,
                             border_radius=5,
-                            border=ft.border.all(1, ft.colors.BLUE_200)
+                            border=ft.border.all(1, ft.Colors.BLUE_200)
                         ),
                         
                         ft.Container(
@@ -1362,15 +1362,15 @@ class OVAVisualizacionSalud:
                                 ft.Text("Formato estándar para reportar análisis descriptivos.", size=12),
                                 ft.ElevatedButton(
                                     "Descargar DOCX",
-                                    icon=ft.icons.DOWNLOAD,
+                                    icon=ft.Icons.DOWNLOAD,
                                     on_click=lambda e: self.download_resource("report-template"),
-                                    style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)
                                 )
                             ], spacing=5),
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=15,
                             border_radius=5,
-                            border=ft.border.all(1, ft.colors.BLUE_200)
+                            border=ft.border.all(1, ft.Colors.BLUE_200)
                         ),
                         
                         ft.Container(
@@ -1379,18 +1379,18 @@ class OVAVisualizacionSalud:
                                 ft.Text("Lista de verificación para crear gráficos de calidad.", size=12),
                                 ft.ElevatedButton(
                                     "Descargar PDF",
-                                    icon=ft.icons.DOWNLOAD,
+                                    icon=ft.Icons.DOWNLOAD,
                                     on_click=lambda e: self.download_resource("checklist"),
-                                    style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE)
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_600, color=ft.Colors.WHITE)
                                 )
                             ], spacing=5),
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=15,
                             border_radius=5,
-                            border=ft.border.all(1, ft.colors.BLUE_200)
+                            border=ft.border.all(1, ft.Colors.BLUE_200)
                         )
                     ], spacing=15),
-                    bgcolor=ft.colors.BLUE_50,
+                    bgcolor=ft.Colors.BLUE_50,
                     padding=20,
                     border_radius=10,
                     expand=True
@@ -1399,7 +1399,7 @@ class OVAVisualizacionSalud:
                 # Datos y Código
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("💻 Datos y Código", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                        ft.Text("💻 Datos y Código", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                         
                         ft.Container(
                             content=ft.Column([
@@ -1407,15 +1407,15 @@ class OVAVisualizacionSalud:
                                 ft.Text("Datos simulados de pacientes diabéticos (200 observaciones).", size=12),
                                 ft.ElevatedButton(
                                     "Descargar CSV",
-                                    icon=ft.icons.DOWNLOAD,
+                                    icon=ft.Icons.DOWNLOAD,
                                     on_click=lambda e: self.download_resource("dataset"),
-                                    style=ft.ButtonStyle(bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_600, color=ft.Colors.WHITE)
                                 )
                             ], spacing=5),
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=15,
                             border_radius=5,
-                            border=ft.border.all(1, ft.colors.GREEN_200)
+                            border=ft.border.all(1, ft.Colors.GREEN_200)
                         ),
                         
                         ft.Container(
@@ -1424,15 +1424,15 @@ class OVAVisualizacionSalud:
                                 ft.Text("Código reproducible usando ggplot2.", size=12),
                                 ft.ElevatedButton(
                                     "Descargar R",
-                                    icon=ft.icons.DOWNLOAD,
+                                    icon=ft.Icons.DOWNLOAD,
                                     on_click=lambda e: self.download_resource("r-scripts"),
-                                    style=ft.ButtonStyle(bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_600, color=ft.Colors.WHITE)
                                 )
                             ], spacing=5),
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=15,
                             border_radius=5,
-                            border=ft.border.all(1, ft.colors.GREEN_200)
+                            border=ft.border.all(1, ft.Colors.GREEN_200)
                         ),
                         
                         ft.Container(
@@ -1441,18 +1441,18 @@ class OVAVisualizacionSalud:
                                 ft.Text("Jupyter notebook con matplotlib y seaborn.", size=12),
                                 ft.ElevatedButton(
                                     "Descargar IPYNB",
-                                    icon=ft.icons.DOWNLOAD,
+                                    icon=ft.Icons.DOWNLOAD,
                                     on_click=lambda e: self.download_resource("python-notebook"),
-                                    style=ft.ButtonStyle(bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_600, color=ft.Colors.WHITE)
                                 )
                             ], spacing=5),
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=15,
                             border_radius=5,
-                            border=ft.border.all(1, ft.colors.GREEN_200)
+                            border=ft.border.all(1, ft.Colors.GREEN_200)
                         )
                     ], spacing=15),
-                    bgcolor=ft.colors.GREEN_50,
+                    bgcolor=ft.Colors.GREEN_50,
                     padding=20,
                     border_radius=10,
                     expand=True
@@ -1462,7 +1462,7 @@ class OVAVisualizacionSalud:
             # Rúbrica de Evaluación
             ft.Container(
                 content=ft.Column([
-                    ft.Text("📋 Rúbrica de Evaluación", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800),
+                    ft.Text("📋 Rúbrica de Evaluación", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800),
                     
                     ft.DataTable(
                         columns=[
@@ -1504,7 +1504,7 @@ class OVAVisualizacionSalud:
                         ]
                     )
                 ], spacing=15),
-                bgcolor=ft.colors.ORANGE_50,
+                bgcolor=ft.Colors.ORANGE_50,
                 padding=20,
                 border_radius=10
             ),
@@ -1512,7 +1512,7 @@ class OVAVisualizacionSalud:
             # Actividad de Transferencia
             ft.Container(
                 content=ft.Column([
-                    ft.Text("🎯 Actividad de Transferencia", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_800),
+                    ft.Text("🎯 Actividad de Transferencia", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_800),
                     
                     ft.Container(
                         content=ft.Column([
@@ -1524,7 +1524,7 @@ class OVAVisualizacionSalud:
                             
                             ft.Row([
                                 ft.Column([
-                                    ft.Text("Requisitos del Proyecto:", weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_700),
+                                    ft.Text("Requisitos del Proyecto:", weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_700),
                                     ft.Text("• Histograma con interpretación de normalidad"),
                                     ft.Text("• Boxplot comparativo entre grupos"),
                                     ft.Text("• Gráfico de violín o scatterplot"),
@@ -1533,7 +1533,7 @@ class OVAVisualizacionSalud:
                                     ft.Text("• Conclusiones y recomendaciones")
                                 ], expand=True),
                                 ft.Column([
-                                    ft.Text("Entregables:", weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_700),
+                                    ft.Text("Entregables:", weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_700),
                                     ft.Text("• Informe en PDF (máximo 4 páginas)"),
                                     ft.Text("• Gráficos en alta resolución"),
                                     ft.Text("• Dataset utilizado"),
@@ -1545,21 +1545,21 @@ class OVAVisualizacionSalud:
                             ft.Container(
                                 content=ft.ElevatedButton(
                                     "Descargar Plantilla del Proyecto",
-                                    icon=ft.icons.DOWNLOAD,
+                                    icon=ft.Icons.DOWNLOAD,
                                     on_click=lambda e: self.download_resource("project-template"),
-                                    style=ft.ButtonStyle(bgcolor=ft.colors.INDIGO_600, color=ft.colors.WHITE)
+                                    style=ft.ButtonStyle(bgcolor=ft.Colors.INDIGO_600, color=ft.Colors.WHITE)
                                 ),
                                 alignment=ft.alignment.center,
                                 margin=ft.margin.only(top=20)
                             )
                         ], spacing=15),
-                        bgcolor=ft.colors.WHITE,
+                        bgcolor=ft.Colors.WHITE,
                         padding=20,
                         border_radius=10,
-                        border=ft.border.all(1, ft.colors.INDIGO_200)
+                        border=ft.border.all(1, ft.Colors.INDIGO_200)
                     )
                 ], spacing=15),
-                bgcolor=ft.colors.INDIGO_50,
+                bgcolor=ft.Colors.INDIGO_50,
                 padding=20,
                 border_radius=10
             )

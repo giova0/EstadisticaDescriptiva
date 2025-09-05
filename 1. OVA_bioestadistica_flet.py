@@ -67,26 +67,26 @@ class OVABioestadistica:
         page.scroll = ft.ScrollMode.AUTO
         
         # Colores del tema
-        self.primary_color = ft.colors.BLUE_900
-        self.secondary_color = ft.colors.BLUE_100
-        self.success_color = ft.colors.GREEN_600
-        self.warning_color = ft.colors.ORANGE_600
-        self.error_color = ft.colors.RED_600
+        self.primary_color = ft.Colors.BLUE_900
+        self.secondary_color = ft.Colors.BLUE_100
+        self.success_color = ft.Colors.GREEN_600
+        self.warning_color = ft.Colors.ORANGE_600
+        self.error_color = ft.Colors.RED_600
         
         # Referencias a controles
         self.progress_bar = ft.ProgressBar(width=400, color=self.success_color, value=0)
-        self.progress_text = ft.Text("0%", color=ft.colors.WHITE)
+        self.progress_text = ft.Text("0%", color=ft.Colors.WHITE)
         self.content_area = ft.Column(scroll=ft.ScrollMode.AUTO, expand=True)
         
         # Header
         header = ft.Container(
             content=ft.Column([
                 ft.Text("OVA 1: Bioestadística Esencial para Salud", 
-                       size=28, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                       size=28, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                 ft.Text("Universidad Antonio Nariño - Estadística Descriptiva para Ciencias de la Salud",
-                       size=14, color=ft.colors.BLUE_200),
+                       size=14, color=ft.Colors.BLUE_200),
                 ft.Row([
-                    ft.Text("Progreso:", color=ft.colors.WHITE),
+                    ft.Text("Progreso:", color=ft.Colors.WHITE),
                     self.progress_text
                 ]),
                 self.progress_bar
@@ -103,14 +103,14 @@ class OVABioestadistica:
             btn = ft.ElevatedButton(
                 text=item,
                 on_click=lambda e, idx=i: self.show_section(idx),
-                bgcolor=self.secondary_color if i == 0 else ft.colors.WHITE,
-                color=self.primary_color if i == 0 else ft.colors.BLACK
+                bgcolor=self.secondary_color if i == 0 else ft.Colors.WHITE,
+                color=self.primary_color if i == 0 else ft.Colors.BLACK
             )
             self.nav_buttons.append(btn)
         
         navigation = ft.Container(
             content=ft.Row(self.nav_buttons, scroll=ft.ScrollMode.AUTO),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=10
         )
         
@@ -168,8 +168,8 @@ class OVABioestadistica:
                 btn.bgcolor = self.secondary_color
                 btn.color = self.primary_color
             else:
-                btn.bgcolor = ft.colors.WHITE
-                btn.color = ft.colors.BLACK
+                btn.bgcolor = ft.Colors.WHITE
+                btn.color = ft.Colors.BLACK
             btn.update()
 
     def show_introduction(self):
@@ -178,9 +178,9 @@ class OVABioestadistica:
                 "Variables a considerar: edad (cuantitativa), sexo (cualitativa nominal), "
                 "nivel de glucosa (cuantitativa), adherencia al tratamiento (cualitativa ordinal), "
                 "tiempo de diagnóstico (cuantitativa), etc.",
-                color=ft.colors.GREEN_800
+                color=ft.Colors.GREEN_800
             ),
-            bgcolor=ft.colors.GREEN_50,
+            bgcolor=ft.Colors.GREEN_50,
             padding=10,
             border_radius=5,
             visible=False
@@ -196,7 +196,7 @@ class OVABioestadistica:
                 content=ft.Column([
                     ft.Row([
                         ft.Container(
-                            content=ft.Text("1", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD),
+                            content=ft.Text("1", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD),
                             bgcolor=self.secondary_color,
                             width=30, height=30,
                             border_radius=15,
@@ -218,18 +218,18 @@ class OVABioestadistica:
                                     "Dato importante: El 80% de los errores en investigación médica se deben "
                                     "a una incorrecta identificación y manejo de variables.",
                                     weight=ft.FontWeight.BOLD,
-                                    color=ft.colors.ORANGE_800
+                                    color=ft.Colors.ORANGE_800
                                 ),
-                                bgcolor=ft.colors.ORANGE_50,
+                                bgcolor=ft.Colors.ORANGE_50,
                                 padding=10,
                                 border_radius=5,
-                                border=ft.border.left(4, ft.colors.ORANGE_400)
+                                border=ft.border.left(4, ft.Colors.ORANGE_400)
                             )
                         ], expand=True),
                         
                         ft.Container(
                             content=ft.Column([
-                                ft.Text("Caso Clínico Introductorio", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_800),
+                                ft.Text("Caso Clínico Introductorio", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_800),
                                 ft.Container(
                                     content=ft.Column([
                                         ft.Text("Escenario: Un hospital quiere evaluar la efectividad de un nuevo protocolo de atención para pacientes con diabetes tipo 2.", weight=ft.FontWeight.BOLD),
@@ -238,16 +238,16 @@ class OVABioestadistica:
                                             "Ver respuesta",
                                             on_click=reveal_answer,
                                             bgcolor=self.primary_color,
-                                            color=ft.colors.WHITE
+                                            color=ft.Colors.WHITE
                                         ),
                                         intro_answer
                                     ]),
-                                    bgcolor=ft.colors.WHITE,
+                                    bgcolor=ft.Colors.WHITE,
                                     padding=10,
                                     border_radius=5
                                 )
                             ]),
-                            bgcolor=ft.colors.INDIGO_50,
+                            bgcolor=ft.Colors.INDIGO_50,
                             padding=15,
                             border_radius=10,
                             expand=True
@@ -259,7 +259,7 @@ class OVABioestadistica:
                             "Continuar a Objetivos →",
                             on_click=lambda e: self.show_section(1),
                             bgcolor=self.primary_color,
-                            color=ft.colors.WHITE
+                            color=ft.Colors.WHITE
                         ),
                         alignment=ft.alignment.center,
                         margin=ft.margin.only(top=20)
@@ -277,8 +277,8 @@ class OVABioestadistica:
                 content=ft.Column([
                     ft.Row([
                         ft.Container(
-                            content=ft.Text("2", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD),
-                            bgcolor=ft.colors.GREEN_600,
+                            content=ft.Text("2", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD),
+                            bgcolor=ft.Colors.GREEN_600,
                             width=30, height=30,
                             border_radius=15,
                             alignment=ft.alignment.center
@@ -288,18 +288,18 @@ class OVABioestadistica:
                     
                     ft.Row([
                         ft.Column([
-                            ft.Text("Objetivo General", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                            ft.Text("Objetivo General", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                             ft.Container(
                                 content=ft.Text(
                                     "Reconocer tipos de variables, escalas de medición y su impacto en la selección "
                                     "de métodos estadísticos apropiados para el análisis de datos en ciencias de la salud.",
                                     weight=ft.FontWeight.W_500,
-                                    color=ft.colors.GREEN_800
+                                    color=ft.Colors.GREEN_800
                                 ),
-                                bgcolor=ft.colors.GREEN_50,
+                                bgcolor=ft.Colors.GREEN_50,
                                 padding=15,
                                 border_radius=5,
-                                border=ft.border.all(1, ft.colors.GREEN_200)
+                                border=ft.border.all(1, ft.Colors.GREEN_200)
                             )
                         ], expand=True),
                         
@@ -308,7 +308,7 @@ class OVABioestadistica:
                             ft.Column([
                                 ft.Row([
                                     ft.Container(
-                                        content=ft.Text("1", color=ft.colors.WHITE, size=12, weight=ft.FontWeight.BOLD),
+                                        content=ft.Text("1", color=ft.Colors.WHITE, size=12, weight=ft.FontWeight.BOLD),
                                         bgcolor=self.secondary_color,
                                         width=20, height=20,
                                         border_radius=10,
@@ -318,7 +318,7 @@ class OVABioestadistica:
                                 ]),
                                 ft.Row([
                                     ft.Container(
-                                        content=ft.Text("2", color=ft.colors.WHITE, size=12, weight=ft.FontWeight.BOLD),
+                                        content=ft.Text("2", color=ft.Colors.WHITE, size=12, weight=ft.FontWeight.BOLD),
                                         bgcolor=self.secondary_color,
                                         width=20, height=20,
                                         border_radius=10,
@@ -328,7 +328,7 @@ class OVABioestadistica:
                                 ]),
                                 ft.Row([
                                     ft.Container(
-                                        content=ft.Text("3", color=ft.colors.WHITE, size=12, weight=ft.FontWeight.BOLD),
+                                        content=ft.Text("3", color=ft.Colors.WHITE, size=12, weight=ft.FontWeight.BOLD),
                                         bgcolor=self.secondary_color,
                                         width=20, height=20,
                                         border_radius=10,
@@ -338,7 +338,7 @@ class OVABioestadistica:
                                 ]),
                                 ft.Row([
                                     ft.Container(
-                                        content=ft.Text("4", color=ft.colors.WHITE, size=12, weight=ft.FontWeight.BOLD),
+                                        content=ft.Text("4", color=ft.Colors.WHITE, size=12, weight=ft.FontWeight.BOLD),
                                         bgcolor=self.secondary_color,
                                         width=20, height=20,
                                         border_radius=10,
@@ -352,51 +352,51 @@ class OVABioestadistica:
                     
                     ft.Container(
                         content=ft.Column([
-                            ft.Text("Tiempo Estimado", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_800),
+                            ft.Text("Tiempo Estimado", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_800),
                             ft.Row([
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("10", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_600),
-                                        ft.Text("min Introducción", size=12, color=ft.colors.GREY_600)
+                                        ft.Text("10", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_600),
+                                        ft.Text("min Introducción", size=12, color=ft.Colors.GREY_600)
                                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                                    bgcolor=ft.colors.WHITE,
+                                    bgcolor=ft.Colors.WHITE,
                                     padding=10,
                                     border_radius=5,
                                     expand=True
                                 ),
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("30", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_600),
-                                        ft.Text("min Teoría", size=12, color=ft.colors.GREY_600)
+                                        ft.Text("30", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_600),
+                                        ft.Text("min Teoría", size=12, color=ft.Colors.GREY_600)
                                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                                    bgcolor=ft.colors.WHITE,
+                                    bgcolor=ft.Colors.WHITE,
                                     padding=10,
                                     border_radius=5,
                                     expand=True
                                 ),
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("60", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_600),
-                                        ft.Text("min Práctica", size=12, color=ft.colors.GREY_600)
+                                        ft.Text("60", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_600),
+                                        ft.Text("min Práctica", size=12, color=ft.Colors.GREY_600)
                                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                                    bgcolor=ft.colors.WHITE,
+                                    bgcolor=ft.Colors.WHITE,
                                     padding=10,
                                     border_radius=5,
                                     expand=True
                                 ),
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("20", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_600),
-                                        ft.Text("min Evaluación", size=12, color=ft.colors.GREY_600)
+                                        ft.Text("20", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_600),
+                                        ft.Text("min Evaluación", size=12, color=ft.Colors.GREY_600)
                                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                                    bgcolor=ft.colors.WHITE,
+                                    bgcolor=ft.Colors.WHITE,
                                     padding=10,
                                     border_radius=5,
                                     expand=True
                                 )
                             ])
                         ]),
-                        bgcolor=ft.colors.INDIGO_50,
+                        bgcolor=ft.Colors.INDIGO_50,
                         padding=15,
                         border_radius=10,
                         margin=ft.margin.only(top=20)
@@ -406,8 +406,8 @@ class OVABioestadistica:
                         content=ft.ElevatedButton(
                             "Comenzar Teoría →",
                             on_click=lambda e: self.show_section(2),
-                            bgcolor=ft.colors.GREEN_600,
-                            color=ft.colors.WHITE
+                            bgcolor=ft.Colors.GREEN_600,
+                            color=ft.Colors.WHITE
                         ),
                         alignment=ft.alignment.center,
                         margin=ft.margin.only(top=20)
@@ -441,20 +441,20 @@ class OVABioestadistica:
                 self.classification_score += 1
                 self.classification_feedback.content = ft.Container(
                     content=ft.Text(f"✓ ¡Correcto! {current_var['name']} es una variable {classification}.", 
-                                   color=ft.colors.GREEN_700),
-                    bgcolor=ft.colors.GREEN_100,
+                                   color=ft.Colors.GREEN_700),
+                    bgcolor=ft.Colors.GREEN_100,
                     padding=10,
                     border_radius=5,
-                    border=ft.border.all(1, ft.colors.GREEN_400)
+                    border=ft.border.all(1, ft.Colors.GREEN_400)
                 )
             else:
                 self.classification_feedback.content = ft.Container(
                     content=ft.Text(f"✗ Incorrecto. {current_var['name']} es una variable {current_var['correct']}.", 
-                                   color=ft.colors.RED_700),
-                    bgcolor=ft.colors.RED_100,
+                                   color=ft.Colors.RED_700),
+                    bgcolor=ft.Colors.RED_100,
                     padding=10,
                     border_radius=5,
-                    border=ft.border.all(1, ft.colors.RED_400)
+                    border=ft.border.all(1, ft.Colors.RED_400)
                 )
             
             self.classification_feedback.visible = True
@@ -485,41 +485,41 @@ class OVABioestadistica:
                     content=ft.Container(
                         content=ft.Row([
                             ft.Column([
-                                ft.Text("Clasificación de Variables", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                                ft.Text("Clasificación de Variables", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Variables Cualitativas", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                        ft.Text("Variables Cualitativas", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                                         ft.Text("Expresan cualidades o atributos"),
                                         ft.Text("• Nominales: Sin orden (sexo, grupo sanguíneo)", size=12),
                                         ft.Text("• Ordinales: Con orden (grado de dolor, estadio del cáncer)", size=12)
                                     ]),
-                                    bgcolor=ft.colors.BLUE_50,
+                                    bgcolor=ft.Colors.BLUE_50,
                                     padding=10,
                                     border_radius=5,
-                                    border=ft.border.all(1, ft.colors.BLUE_200)
+                                    border=ft.border.all(1, ft.Colors.BLUE_200)
                                 ),
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Variables Cuantitativas", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                                        ft.Text("Variables Cuantitativas", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                                         ft.Text("Expresan cantidades numéricas"),
                                         ft.Text("• Discretas: Valores enteros (número de hijos, episodios)", size=12),
                                         ft.Text("• Continuas: Cualquier valor (peso, presión arterial)", size=12)
                                     ]),
-                                    bgcolor=ft.colors.GREEN_50,
+                                    bgcolor=ft.Colors.GREEN_50,
                                     padding=10,
                                     border_radius=5,
-                                    border=ft.border.all(1, ft.colors.GREEN_200)
+                                    border=ft.border.all(1, ft.Colors.GREEN_200)
                                 )
                             ], expand=True),
                             
                             ft.Column([
-                                ft.Text("Simulador Interactivo", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                                ft.Text("Simulador Interactivo", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
                                 ft.Container(
                                     content=ft.Column([
                                         ft.Text("Clasifica la siguiente variable:"),
                                         ft.Container(
                                             content=self.current_variable_text,
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=10,
                                             border_radius=5,
                                             alignment=ft.alignment.center
@@ -528,14 +528,14 @@ class OVABioestadistica:
                                             ft.ElevatedButton(
                                                 "Cualitativa",
                                                 on_click=lambda e: classify_variable("cualitativa"),
-                                                bgcolor=ft.colors.BLUE_500,
-                                                color=ft.colors.WHITE
+                                                bgcolor=ft.Colors.BLUE_500,
+                                                color=ft.Colors.WHITE
                                             ),
                                             ft.ElevatedButton(
                                                 "Cuantitativa",
                                                 on_click=lambda e: classify_variable("cuantitativa"),
-                                                bgcolor=ft.colors.GREEN_500,
-                                                color=ft.colors.WHITE
+                                                bgcolor=ft.Colors.GREEN_500,
+                                                color=ft.Colors.WHITE
                                             )
                                         ]),
                                         self.classification_feedback,
@@ -544,7 +544,7 @@ class OVABioestadistica:
                                             self.classification_score_text
                                         ])
                                     ]),
-                                    bgcolor=ft.colors.GREY_50,
+                                    bgcolor=ft.Colors.GREY_50,
                                     padding=15,
                                     border_radius=5
                                 )
@@ -558,75 +558,75 @@ class OVABioestadistica:
                     text="Escalas",
                     content=ft.Container(
                         content=ft.Column([
-                            ft.Text("Escalas de Medición", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                            ft.Text("Escalas de Medición", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
                             ft.Row([
                                 ft.Column([
                                     ft.Container(
                                         content=ft.Column([
-                                            ft.Text("Escala Nominal", weight=ft.FontWeight.BOLD, color=ft.colors.RED_800),
+                                            ft.Text("Escala Nominal", weight=ft.FontWeight.BOLD, color=ft.Colors.RED_800),
                                             ft.Text("Solo clasificación, sin orden", size=12),
                                             ft.Container(
                                                 content=ft.Text("Ejemplo: Tipo de sangre (A, B, AB, O)", size=12),
-                                                bgcolor=ft.colors.WHITE,
+                                                bgcolor=ft.Colors.WHITE,
                                                 padding=5,
                                                 border_radius=3
                                             )
                                         ]),
-                                        bgcolor=ft.colors.RED_50,
+                                        bgcolor=ft.Colors.RED_50,
                                         padding=10,
                                         border_radius=5,
-                                        border=ft.border.all(1, ft.colors.RED_200)
+                                        border=ft.border.all(1, ft.Colors.RED_200)
                                     ),
                                     ft.Container(
                                         content=ft.Column([
-                                            ft.Text("Escala Ordinal", weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800),
+                                            ft.Text("Escala Ordinal", weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800),
                                             ft.Text("Clasificación con orden, sin distancias iguales", size=12),
                                             ft.Container(
                                                 content=ft.Text("Ejemplo: Dolor (leve, moderado, severo)", size=12),
-                                                bgcolor=ft.colors.WHITE,
+                                                bgcolor=ft.Colors.WHITE,
                                                 padding=5,
                                                 border_radius=3
                                             )
                                         ]),
-                                        bgcolor=ft.colors.ORANGE_50,
+                                        bgcolor=ft.Colors.ORANGE_50,
                                         padding=10,
                                         border_radius=5,
-                                        border=ft.border.all(1, ft.colors.ORANGE_200)
+                                        border=ft.border.all(1, ft.Colors.ORANGE_200)
                                     )
                                 ], expand=True),
                                 
                                 ft.Column([
                                     ft.Container(
                                         content=ft.Column([
-                                            ft.Text("Escala de Intervalo", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                            ft.Text("Escala de Intervalo", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                                             ft.Text("Orden y distancias iguales, sin cero absoluto", size=12),
                                             ft.Container(
                                                 content=ft.Text("Ejemplo: Temperatura en °C", size=12),
-                                                bgcolor=ft.colors.WHITE,
+                                                bgcolor=ft.Colors.WHITE,
                                                 padding=5,
                                                 border_radius=3
                                             )
                                         ]),
-                                        bgcolor=ft.colors.BLUE_50,
+                                        bgcolor=ft.Colors.BLUE_50,
                                         padding=10,
                                         border_radius=5,
-                                        border=ft.border.all(1, ft.colors.BLUE_200)
+                                        border=ft.border.all(1, ft.Colors.BLUE_200)
                                     ),
                                     ft.Container(
                                         content=ft.Column([
-                                            ft.Text("Escala de Razón", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                                            ft.Text("Escala de Razón", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                                             ft.Text("Orden, distancias iguales y cero absoluto", size=12),
                                             ft.Container(
                                                 content=ft.Text("Ejemplo: Peso, altura, presión arterial", size=12),
-                                                bgcolor=ft.colors.WHITE,
+                                                bgcolor=ft.Colors.WHITE,
                                                 padding=5,
                                                 border_radius=3
                                             )
                                         ]),
-                                        bgcolor=ft.colors.GREEN_50,
+                                        bgcolor=ft.Colors.GREEN_50,
                                         padding=10,
                                         border_radius=5,
-                                        border=ft.border.all(1, ft.colors.GREEN_200)
+                                        border=ft.border.all(1, ft.Colors.GREEN_200)
                                     )
                                 ], expand=True)
                             ])
@@ -639,85 +639,85 @@ class OVABioestadistica:
                     text="Ejemplos",
                     content=ft.Container(
                         content=ft.Column([
-                            ft.Text("Ejemplos en Ciencias de la Salud", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                            ft.Text("Ejemplos en Ciencias de la Salud", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
                             ft.Row([
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Cardiología", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                        ft.Text("Cardiología", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                                         ft.Container(
                                             content=ft.Text("Presión arterial: Cuantitativa continua (razón)", size=12),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=5,
                                             border_radius=3
                                         ),
                                         ft.Container(
                                             content=ft.Text("Clase funcional NYHA: Cualitativa ordinal", size=12),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=5,
                                             border_radius=3
                                         ),
                                         ft.Container(
                                             content=ft.Text("Tipo de arritmia: Cualitativa nominal", size=12),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=5,
                                             border_radius=3
                                         )
                                     ]),
-                                    bgcolor=ft.colors.BLUE_50,
+                                    bgcolor=ft.Colors.BLUE_50,
                                     padding=15,
                                     border_radius=10,
                                     expand=True
                                 ),
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Oncología", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                                        ft.Text("Oncología", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                                         ft.Container(
                                             content=ft.Text("Estadio TNM: Cualitativa ordinal", size=12),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=5,
                                             border_radius=3
                                         ),
                                         ft.Container(
                                             content=ft.Text("Tamaño del tumor: Cuantitativa continua", size=12),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=5,
                                             border_radius=3
                                         ),
                                         ft.Container(
                                             content=ft.Text("Tipo histológico: Cualitativa nominal", size=12),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=5,
                                             border_radius=3
                                         )
                                     ]),
-                                    bgcolor=ft.colors.GREEN_50,
+                                    bgcolor=ft.Colors.GREEN_50,
                                     padding=15,
                                     border_radius=10,
                                     expand=True
                                 ),
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Epidemiología", weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                                        ft.Text("Epidemiología", weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
                                         ft.Container(
                                             content=ft.Text("Incidencia: Cuantitativa continua", size=12),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=5,
                                             border_radius=3
                                         ),
                                         ft.Container(
                                             content=ft.Text("Nivel socioeconómico: Cualitativa ordinal", size=12),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=5,
                                             border_radius=3
                                         ),
                                         ft.Container(
                                             content=ft.Text("Región geográfica: Cualitativa nominal", size=12),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=5,
                                             border_radius=3
                                         )
                                     ]),
-                                    bgcolor=ft.colors.PURPLE_50,
+                                    bgcolor=ft.Colors.PURPLE_50,
                                     padding=15,
                                     border_radius=10,
                                     expand=True
@@ -732,35 +732,35 @@ class OVABioestadistica:
                     text="Errores Comunes",
                     content=ft.Container(
                         content=ft.Column([
-                            ft.Text("Errores Comunes y Cómo Evitarlos", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                            ft.Text("Errores Comunes y Cómo Evitarlos", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
                             ft.Container(
                                 content=ft.Column([
-                                    ft.Text("⚠️ Error 1: Confundir Ordinal con Cuantitativa", weight=ft.FontWeight.BOLD, color=ft.colors.RED_800),
+                                    ft.Text("⚠️ Error 1: Confundir Ordinal con Cuantitativa", weight=ft.FontWeight.BOLD, color=ft.Colors.RED_800),
                                     ft.Row([
                                         ft.Column([
-                                            ft.Text("Incorrecto:", weight=ft.FontWeight.BOLD, color=ft.colors.RED_700),
+                                            ft.Text("Incorrecto:", weight=ft.FontWeight.BOLD, color=ft.Colors.RED_700),
                                             ft.Container(
                                                 content=ft.Text("Tratar 'grado de dolor (1-10)' como cuantitativa y calcular la media.", size=12),
-                                                bgcolor=ft.colors.WHITE,
+                                                bgcolor=ft.Colors.WHITE,
                                                 padding=5,
                                                 border_radius=3
                                             )
                                         ], expand=True),
                                         ft.Column([
-                                            ft.Text("Correcto:", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700),
+                                            ft.Text("Correcto:", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700),
                                             ft.Container(
                                                 content=ft.Text("Es ordinal. Usar mediana y percentiles para resumir.", size=12),
-                                                bgcolor=ft.colors.WHITE,
+                                                bgcolor=ft.Colors.WHITE,
                                                 padding=5,
                                                 border_radius=3
                                             )
                                         ], expand=True)
                                     ])
                                 ]),
-                                bgcolor=ft.colors.RED_50,
+                                bgcolor=ft.Colors.RED_50,
                                 padding=15,
                                 border_radius=5,
-                                border=ft.border.all(1, ft.colors.RED_200)
+                                border=ft.border.all(1, ft.Colors.RED_200)
                             )
                         ]),
                         padding=20
@@ -774,8 +774,8 @@ class OVABioestadistica:
                 content=ft.Column([
                     ft.Row([
                         ft.Container(
-                            content=ft.Text("3", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD),
-                            bgcolor=ft.colors.PURPLE_600,
+                            content=ft.Text("3", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD),
+                            bgcolor=ft.Colors.PURPLE_600,
                             width=30, height=30,
                             border_radius=15,
                             alignment=ft.alignment.center
@@ -787,8 +787,8 @@ class OVABioestadistica:
                         content=ft.ElevatedButton(
                             "Ir a Práctica Guiada →",
                             on_click=lambda e: self.show_section(3),
-                            bgcolor=ft.colors.PURPLE_600,
-                            color=ft.colors.WHITE
+                            bgcolor=ft.Colors.PURPLE_600,
+                            color=ft.Colors.WHITE
                         ),
                         alignment=ft.alignment.center,
                         margin=ft.margin.only(top=20)
@@ -802,12 +802,12 @@ class OVABioestadistica:
 
     def show_practice(self):
         # Simulador de variables
-        self.sim_variable_name = ft.Text("", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_800)
-        self.sim_variable_desc = ft.Text("", size=12, color=ft.colors.INDIGO_600)
+        self.sim_variable_name = ft.Text("", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_800)
+        self.sim_variable_desc = ft.Text("", size=12, color=ft.Colors.INDIGO_600)
         self.sim_feedback = ft.Container(visible=False)
-        self.sim_correct_text = ft.Text("0", color=ft.colors.GREEN_600, weight=ft.FontWeight.BOLD)
-        self.sim_incorrect_text = ft.Text("0", color=ft.colors.RED_600, weight=ft.FontWeight.BOLD)
-        self.sim_percentage_text = ft.Text("0%", color=ft.colors.INDIGO_600, weight=ft.FontWeight.BOLD)
+        self.sim_correct_text = ft.Text("0", color=ft.Colors.GREEN_600, weight=ft.FontWeight.BOLD)
+        self.sim_incorrect_text = ft.Text("0", color=ft.Colors.RED_600, weight=ft.FontWeight.BOLD)
+        self.sim_percentage_text = ft.Text("0%", color=ft.Colors.INDIGO_600, weight=ft.FontWeight.BOLD)
         self.sim_history = ft.Column(scroll=ft.ScrollMode.AUTO, height=150)
         
         self.subtype_question = ft.Container(visible=False)
@@ -861,10 +861,10 @@ class OVABioestadistica:
                         content=ft.Column([
                             ft.Container(
                                 content=ft.Column([
-                                    ft.Text("Caso Clínico 1: Estudio de Diabetes Tipo 2", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                    ft.Text("Caso Clínico 1: Estudio de Diabetes Tipo 2", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                                     ft.Text("Un hospital universitario está realizando un estudio para evaluar el control glucémico en pacientes con diabetes tipo 2. Se recolectaron los siguientes datos de 200 pacientes:")
                                 ]),
-                                bgcolor=ft.colors.BLUE_50,
+                                bgcolor=ft.Colors.BLUE_50,
                                 padding=15,
                                 border_radius=10
                             ),
@@ -915,13 +915,13 @@ class OVABioestadistica:
                     content=ft.Container(
                         content=ft.Row([
                             ft.Column([
-                                ft.Text("Variable a Clasificar", weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_800),
+                                ft.Text("Variable a Clasificar", weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_800),
                                 ft.Container(
                                     content=ft.Column([
                                         self.sim_variable_name,
                                         self.sim_variable_desc
                                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                                    bgcolor=ft.colors.INDIGO_50,
+                                    bgcolor=ft.Colors.INDIGO_50,
                                     padding=15,
                                     border_radius=10
                                 ),
@@ -932,14 +932,14 @@ class OVABioestadistica:
                                         ft.ElevatedButton(
                                             "Cualitativa",
                                             on_click=lambda e: simulator_answer("type", "cualitativa"),
-                                            bgcolor=ft.colors.BLUE_500,
-                                            color=ft.colors.WHITE
+                                            bgcolor=ft.Colors.BLUE_500,
+                                            color=ft.Colors.WHITE
                                         ),
                                         ft.ElevatedButton(
                                             "Cuantitativa",
                                             on_click=lambda e: simulator_answer("type", "cuantitativa"),
-                                            bgcolor=ft.colors.GREEN_500,
-                                            color=ft.colors.WHITE
+                                            bgcolor=ft.Colors.GREEN_500,
+                                            color=ft.Colors.WHITE
                                         )
                                     ])
                                 ]),
@@ -951,20 +951,20 @@ class OVABioestadistica:
                                 ft.ElevatedButton(
                                     "Siguiente Variable",
                                     on_click=lambda e: next_simulator_variable(),
-                                    bgcolor=ft.colors.INDIGO_600,
-                                    color=ft.colors.WHITE
+                                    bgcolor=ft.Colors.INDIGO_600,
+                                    color=ft.Colors.WHITE
                                 )
                             ], expand=True),
                             
                             ft.Column([
-                                ft.Text("Puntuación y Progreso", weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_800),
+                                ft.Text("Puntuación y Progreso", weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_800),
                                 ft.Container(
                                     content=ft.Column([
                                         ft.Row([ft.Text("Correctas:"), self.sim_correct_text]),
                                         ft.Row([ft.Text("Incorrectas:"), self.sim_incorrect_text]),
                                         ft.Row([ft.Text("Porcentaje:"), self.sim_percentage_text])
                                     ]),
-                                    bgcolor=ft.colors.INDIGO_50,
+                                    bgcolor=ft.Colors.INDIGO_50,
                                     padding=10,
                                     border_radius=5
                                 ),
@@ -973,7 +973,7 @@ class OVABioestadistica:
                                         ft.Text("Historial de Variables:", weight=ft.FontWeight.W_500),
                                         self.sim_history
                                     ]),
-                                    bgcolor=ft.colors.GREY_50,
+                                    bgcolor=ft.Colors.GREY_50,
                                     padding=10,
                                     border_radius=5
                                 )
@@ -990,7 +990,7 @@ class OVABioestadistica:
                 content=ft.Column([
                     ft.Row([
                         ft.Container(
-                            content=ft.Text("4", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD),
+                            content=ft.Text("4", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD),
                             bgcolor=self.warning_color,
                             width=30, height=30,
                             border_radius=15,
@@ -1004,7 +1004,7 @@ class OVABioestadistica:
                             "Ir a Evaluación →",
                             on_click=lambda e: self.show_section(4),
                             bgcolor=self.warning_color,
-                            color=ft.colors.WHITE
+                            color=ft.Colors.WHITE
                         ),
                         alignment=ft.alignment.center,
                         margin=ft.margin.only(top=20)
@@ -1022,14 +1022,14 @@ class OVABioestadistica:
                 ft.ElevatedButton(
                     "Nominal",
                     on_click=lambda e: self.simulator_answer("subtype", "nominal"),
-                    bgcolor=ft.colors.BLUE_500,
-                    color=ft.colors.WHITE
+                    bgcolor=ft.Colors.BLUE_500,
+                    color=ft.Colors.WHITE
                 ),
                 ft.ElevatedButton(
                     "Ordinal",
                     on_click=lambda e: self.simulator_answer("subtype", "ordinal"),
-                    bgcolor=ft.colors.GREEN_500,
-                    color=ft.colors.WHITE
+                    bgcolor=ft.Colors.GREEN_500,
+                    color=ft.Colors.WHITE
                 )
             ]
         else:
@@ -1037,14 +1037,14 @@ class OVABioestadistica:
                 ft.ElevatedButton(
                     "Discreta",
                     on_click=lambda e: self.simulator_answer("subtype", "discreta"),
-                    bgcolor=ft.colors.BLUE_500,
-                    color=ft.colors.WHITE
+                    bgcolor=ft.Colors.BLUE_500,
+                    color=ft.Colors.WHITE
                 ),
                 ft.ElevatedButton(
                     "Continua",
                     on_click=lambda e: self.simulator_answer("subtype", "continua"),
-                    bgcolor=ft.colors.GREEN_500,
-                    color=ft.colors.WHITE
+                    bgcolor=ft.Colors.GREEN_500,
+                    color=ft.Colors.WHITE
                 )
             ]
         
@@ -1060,26 +1060,26 @@ class OVABioestadistica:
             ft.ElevatedButton(
                 "Nominal",
                 on_click=lambda e: self.simulator_answer("scale", "nominal"),
-                bgcolor=ft.colors.RED_500,
-                color=ft.colors.WHITE
+                bgcolor=ft.Colors.RED_500,
+                color=ft.Colors.WHITE
             ),
             ft.ElevatedButton(
                 "Ordinal",
                 on_click=lambda e: self.simulator_answer("scale", "ordinal"),
-                bgcolor=ft.colors.ORANGE_500,
-                color=ft.colors.WHITE
+                bgcolor=ft.Colors.ORANGE_500,
+                color=ft.Colors.WHITE
             ),
             ft.ElevatedButton(
                 "Intervalo",
                 on_click=lambda e: self.simulator_answer("scale", "intervalo"),
-                bgcolor=ft.colors.BLUE_500,
-                color=ft.colors.WHITE
+                bgcolor=ft.Colors.BLUE_500,
+                color=ft.Colors.WHITE
             ),
             ft.ElevatedButton(
                 "Razón",
                 on_click=lambda e: self.simulator_answer("scale", "razón"),
-                bgcolor=ft.colors.GREEN_500,
-                color=ft.colors.WHITE
+                bgcolor=ft.Colors.GREEN_500,
+                color=ft.Colors.WHITE
             )
         ]
         
@@ -1112,11 +1112,11 @@ class OVABioestadistica:
     def show_simulator_feedback(self, step, is_correct, variable):
         if is_correct:
             self.sim_feedback.content = ft.Container(
-                content=ft.Text("✓ ¡Correcto!", color=ft.colors.GREEN_700),
-                bgcolor=ft.colors.GREEN_100,
+                content=ft.Text("✓ ¡Correcto!", color=ft.Colors.GREEN_700),
+                bgcolor=ft.Colors.GREEN_100,
                 padding=10,
                 border_radius=5,
-                border=ft.border.all(1, ft.colors.GREEN_400)
+                border=ft.border.all(1, ft.Colors.GREEN_400)
             )
         else:
             correct_answer = ""
@@ -1128,11 +1128,11 @@ class OVABioestadistica:
                 correct_answer = variable["scale"]
             
             self.sim_feedback.content = ft.Container(
-                content=ft.Text(f"✗ Incorrecto. La respuesta correcta es: {correct_answer}", color=ft.colors.RED_700),
-                bgcolor=ft.colors.RED_100,
+                content=ft.Text(f"✗ Incorrecto. La respuesta correcta es: {correct_answer}", color=ft.Colors.RED_700),
+                bgcolor=ft.Colors.RED_100,
                 padding=10,
                 border_radius=5,
-                border=ft.border.all(1, ft.colors.RED_400)
+                border=ft.border.all(1, ft.Colors.RED_400)
             )
         
         self.sim_feedback.visible = True
@@ -1162,7 +1162,7 @@ class OVABioestadistica:
     def add_to_simulator_history(self, is_correct):
         variable = self.health_variables[self.current_sim_variable]
         icon = "✓" if is_correct else "✗"
-        color = ft.colors.GREEN_600 if is_correct else ft.colors.RED_600
+        color = ft.Colors.GREEN_600 if is_correct else ft.Colors.RED_600
         
         entry = ft.Text(f"{icon} {variable['name']}", size=10, color=color)
         self.sim_history.controls.append(entry)
@@ -1181,19 +1181,19 @@ class OVABioestadistica:
                     if is_correct:
                         score += 1
                         self.quiz_feedback_containers[i].content = ft.Container(
-                            content=ft.Text(f"✓ ¡Correcto! {question['explanation']}", color=ft.colors.GREEN_700),
-                            bgcolor=ft.colors.GREEN_100,
+                            content=ft.Text(f"✓ ¡Correcto! {question['explanation']}", color=ft.Colors.GREEN_700),
+                            bgcolor=ft.Colors.GREEN_100,
                             padding=10,
                             border_radius=5,
-                            border=ft.border.all(1, ft.colors.GREEN_400)
+                            border=ft.border.all(1, ft.Colors.GREEN_400)
                         )
                     else:
                         self.quiz_feedback_containers[i].content = ft.Container(
-                            content=ft.Text(f"✗ Incorrecto. {question['explanation']}", color=ft.colors.RED_700),
-                            bgcolor=ft.colors.RED_100,
+                            content=ft.Text(f"✗ Incorrecto. {question['explanation']}", color=ft.Colors.RED_700),
+                            bgcolor=ft.Colors.RED_100,
                             padding=10,
                             border_radius=5,
-                            border=ft.border.all(1, ft.colors.RED_400)
+                            border=ft.border.all(1, ft.Colors.RED_400)
                         )
                     
                     self.quiz_feedback_containers[i].visible = True
@@ -1221,7 +1221,7 @@ class OVABioestadistica:
                     radio_group,
                     feedback_container
                 ]),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=15,
                 border_radius=10,
                 margin=ft.margin.only(bottom=10)
@@ -1235,7 +1235,7 @@ class OVABioestadistica:
                 content=ft.Column([
                     ft.Row([
                         ft.Container(
-                            content=ft.Text("5", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD),
+                            content=ft.Text("5", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD),
                             bgcolor=self.error_color,
                             width=30, height=30,
                             border_radius=15,
@@ -1248,12 +1248,12 @@ class OVABioestadistica:
                         content=ft.Text(
                             "Instrucciones: Completa las siguientes preguntas para evaluar tu comprensión. "
                             "Tendrás retroalimentación inmediata y podrás ver tu puntuación final.",
-                            color=ft.colors.ORANGE_800
+                            color=ft.Colors.ORANGE_800
                         ),
-                        bgcolor=ft.colors.ORANGE_50,
+                        bgcolor=ft.Colors.ORANGE_50,
                         padding=10,
                         border_radius=5,
-                        border=ft.border.all(1, ft.colors.ORANGE_200)
+                        border=ft.border.all(1, ft.Colors.ORANGE_200)
                     ),
                     
                     ft.Column(quiz_questions_ui),
@@ -1263,13 +1263,13 @@ class OVABioestadistica:
                             "Verificar Respuestas",
                             on_click=lambda e: check_quiz_answers(),
                             bgcolor=self.error_color,
-                            color=ft.colors.WHITE
+                            color=ft.Colors.WHITE
                         ),
                         ft.ElevatedButton(
                             "Ver Recursos →",
                             on_click=lambda e: self.show_section(5),
-                            bgcolor=ft.colors.GREY_600,
-                            color=ft.colors.WHITE
+                            bgcolor=ft.Colors.GREY_600,
+                            color=ft.Colors.WHITE
                         )
                     ], alignment=ft.MainAxisAlignment.CENTER),
                     
@@ -1289,13 +1289,13 @@ class OVABioestadistica:
         
         if percentage >= 80:
             message = "¡Excelente! Has demostrado un dominio sólido de los conceptos."
-            color_scheme = (ft.colors.GREEN_100, ft.colors.GREEN_400, ft.colors.GREEN_700)
+            color_scheme = (ft.Colors.GREEN_100, ft.Colors.GREEN_400, ft.Colors.GREEN_700)
         elif percentage >= 60:
             message = "Buen trabajo. Revisa los conceptos donde tuviste dificultades."
-            color_scheme = (ft.colors.YELLOW_100, ft.colors.YELLOW_400, ft.colors.YELLOW_700)
+            color_scheme = (ft.Colors.YELLOW_100, ft.Colors.YELLOW_400, ft.Colors.YELLOW_700)
         else:
             message = "Necesitas repasar los conceptos. Te recomendamos revisar la teoría."
-            color_scheme = (ft.colors.RED_100, ft.colors.RED_400, ft.colors.RED_700)
+            color_scheme = (ft.Colors.RED_100, ft.Colors.RED_400, ft.Colors.RED_700)
         
         self.quiz_results_container.content = ft.Container(
             content=ft.Column([
@@ -1445,8 +1445,8 @@ Universidad Antonio Nariño
                 content=ft.Column([
                     ft.Row([
                         ft.Container(
-                            content=ft.Text("6", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD),
-                            bgcolor=ft.colors.GREY_600,
+                            content=ft.Text("6", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD),
+                            bgcolor=ft.Colors.GREY_600,
                             width=30, height=30,
                             border_radius=15,
                             alignment=ft.alignment.center
@@ -1462,20 +1462,20 @@ Universidad Antonio Nariño
                                 content=ft.Column([
                                     ft.Row([
                                         ft.Text("📊", size=20),
-                                        ft.Text("Plantilla de Clasificación de Variables", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800)
+                                        ft.Text("Plantilla de Clasificación de Variables", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800)
                                     ]),
-                                    ft.Text("Tabla estructurada para clasificar variables en estudios de salud", size=12, color=ft.colors.BLUE_700),
+                                    ft.Text("Tabla estructurada para clasificar variables en estudios de salud", size=12, color=ft.Colors.BLUE_700),
                                     ft.ElevatedButton(
                                         "Descargar CSV",
                                         on_click=lambda e: download_template("variables"),
-                                        bgcolor=ft.colors.BLUE_600,
-                                        color=ft.colors.WHITE
+                                        bgcolor=ft.Colors.BLUE_600,
+                                        color=ft.Colors.WHITE
                                     )
                                 ]),
-                                bgcolor=ft.colors.BLUE_50,
+                                bgcolor=ft.Colors.BLUE_50,
                                 padding=10,
                                 border_radius=5,
-                                border=ft.border.all(1, ft.colors.BLUE_200),
+                                border=ft.border.all(1, ft.Colors.BLUE_200),
                                 margin=ft.margin.only(bottom=10)
                             ),
                             
@@ -1483,20 +1483,20 @@ Universidad Antonio Nariño
                                 content=ft.Column([
                                     ft.Row([
                                         ft.Text("📋", size=20),
-                                        ft.Text("Checklist de Verificación", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800)
+                                        ft.Text("Checklist de Verificación", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800)
                                     ]),
-                                    ft.Text("Lista de verificación para clasificación correcta de variables", size=12, color=ft.colors.GREEN_700),
+                                    ft.Text("Lista de verificación para clasificación correcta de variables", size=12, color=ft.Colors.GREEN_700),
                                     ft.ElevatedButton(
                                         "Descargar TXT",
                                         on_click=lambda e: download_template("checklist"),
-                                        bgcolor=ft.colors.GREEN_600,
-                                        color=ft.colors.WHITE
+                                        bgcolor=ft.Colors.GREEN_600,
+                                        color=ft.Colors.WHITE
                                     )
                                 ]),
-                                bgcolor=ft.colors.GREEN_50,
+                                bgcolor=ft.Colors.GREEN_50,
                                 padding=10,
                                 border_radius=5,
-                                border=ft.border.all(1, ft.colors.GREEN_200),
+                                border=ft.border.all(1, ft.Colors.GREEN_200),
                                 margin=ft.margin.only(bottom=10)
                             ),
                             
@@ -1504,20 +1504,20 @@ Universidad Antonio Nariño
                                 content=ft.Column([
                                     ft.Row([
                                         ft.Text("🗂️", size=20),
-                                        ft.Text("Dataset de Práctica", weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800)
+                                        ft.Text("Dataset de Práctica", weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800)
                                     ]),
-                                    ft.Text("Datos simulados de pacientes para practicar clasificación", size=12, color=ft.colors.ORANGE_700),
+                                    ft.Text("Datos simulados de pacientes para practicar clasificación", size=12, color=ft.Colors.ORANGE_700),
                                     ft.ElevatedButton(
                                         "Descargar CSV",
                                         on_click=lambda e: download_template("dataset"),
-                                        bgcolor=ft.colors.ORANGE_600,
-                                        color=ft.colors.WHITE
+                                        bgcolor=ft.Colors.ORANGE_600,
+                                        color=ft.Colors.WHITE
                                     )
                                 ]),
-                                bgcolor=ft.colors.ORANGE_50,
+                                bgcolor=ft.Colors.ORANGE_50,
                                 padding=10,
                                 border_radius=5,
-                                border=ft.border.all(1, ft.colors.ORANGE_200)
+                                border=ft.border.all(1, ft.Colors.ORANGE_200)
                             )
                         ], expand=True),
                         
@@ -1531,7 +1531,7 @@ Universidad Antonio Nariño
                                     ft.Text("• Kirkwood, B. R. & Sterne, J. A. (2003). Essential Medical Statistics.", size=12),
                                     ft.Text("• Altman, D. G. (1991). Practical Statistics for Medical Research.", size=12)
                                 ]),
-                                bgcolor=ft.colors.GREY_50,
+                                bgcolor=ft.Colors.GREY_50,
                                 padding=10,
                                 border_radius=5,
                                 margin=ft.margin.only(bottom=10)
@@ -1545,15 +1545,15 @@ Universidad Antonio Nariño
                                     ft.Text("• Excel: Análisis básico y visualización", size=12),
                                     ft.Text("• Jamovi: Interfaz gráfica para R", size=12)
                                 ]),
-                                bgcolor=ft.colors.GREY_50,
+                                bgcolor=ft.Colors.GREY_50,
                                 padding=10,
                                 border_radius=5
                             ),
                             
                             ft.Container(
                                 content=ft.Column([
-                                    ft.Text("Actividad de Transferencia", weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_800),
-                                    ft.Text("Completa un miniinforme clasificando variables de un estudio real en tu área de interés.", size=12, color=ft.colors.INDIGO_700),
+                                    ft.Text("Actividad de Transferencia", weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_800),
+                                    ft.Text("Completa un miniinforme clasificando variables de un estudio real en tu área de interés.", size=12, color=ft.Colors.INDIGO_700),
                                     ft.Column([
                                         ft.Checkbox(label="Seleccionar un artículo científico reciente", value=False),
                                         ft.Checkbox(label="Identificar todas las variables del estudio", value=False),
@@ -1562,7 +1562,7 @@ Universidad Antonio Nariño
                                         ft.Checkbox(label="Redactar un párrafo de interpretación clínica", value=False)
                                     ])
                                 ]),
-                                bgcolor=ft.colors.INDIGO_50,
+                                bgcolor=ft.Colors.INDIGO_50,
                                 padding=15,
                                 border_radius=10,
                                 margin=ft.margin.only(top=15)
@@ -1572,31 +1572,31 @@ Universidad Antonio Nariño
                     
                     ft.Container(
                         content=ft.Column([
-                            ft.Text("¡Felicitaciones!", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                            ft.Text("¡Felicitaciones!", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                             ft.Text(
                                 "Has completado exitosamente la OVA 1: Bioestadística Esencial para Salud. "
                                 "Ahora tienes las bases para identificar y clasificar variables correctamente en estudios de ciencias de la salud.",
-                                color=ft.colors.GREEN_700
+                                color=ft.Colors.GREEN_700
                             ),
                             ft.Row([
                                 ft.ElevatedButton(
                                     "Generar Certificado",
                                     on_click=lambda e: generate_certificate(),
-                                    bgcolor=ft.colors.GREEN_600,
-                                    color=ft.colors.WHITE
+                                    bgcolor=ft.Colors.GREEN_600,
+                                    color=ft.Colors.WHITE
                                 ),
                                 ft.ElevatedButton(
                                     "Reiniciar OVA",
                                     on_click=lambda e: restart_ova(),
-                                    bgcolor=ft.colors.GREY_600,
-                                    color=ft.colors.WHITE
+                                    bgcolor=ft.Colors.GREY_600,
+                                    color=ft.Colors.WHITE
                                 )
                             ])
                         ]),
-                        bgcolor=ft.colors.GREEN_50,
+                        bgcolor=ft.Colors.GREEN_50,
                         padding=15,
                         border_radius=10,
-                        border=ft.border.all(1, ft.colors.GREEN_200),
+                        border=ft.border.all(1, ft.Colors.GREEN_200),
                         margin=ft.margin.only(top=20)
                     )
                 ]),

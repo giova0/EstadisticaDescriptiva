@@ -196,30 +196,30 @@ class OVA17App:
         # Variables de UI
         self.page = page
         self.progress_bar = ft.ProgressBar(width=400, color="amber", bgcolor="#eeeeee")
-        self.progress_text = ft.Text("0%", size=14, color=ft.colors.WHITE)
+        self.progress_text = ft.Text("0%", size=14, color=ft.Colors.WHITE)
         
         # Header
         header = ft.Container(
             content=ft.Column([
                 ft.Text("OVA 17: Resúmenes Ejecutivos y Escritura Científica", 
-                       size=28, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                       size=28, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                 ft.Text("Estadística Descriptiva para Ciencias de la Salud - Universidad Antonio Nariño", 
-                       size=16, color=ft.colors.WHITE70),
+                       size=16, color=ft.Colors.WHITE70),
                 ft.Row([
-                    ft.Text("Progreso del módulo:", size=14, color=ft.colors.WHITE),
+                    ft.Text("Progreso del módulo:", size=14, color=ft.Colors.WHITE),
                     self.progress_text
                 ]),
                 self.progress_bar
             ]),
             padding=20,
-            bgcolor=ft.colors.BLUE_700,
+            bgcolor=ft.Colors.BLUE_700,
             border_radius=0
         )
         
         # Navigation
         self.nav_buttons = {
             "intro": ft.ElevatedButton("📚 Introducción", on_click=lambda _: self.show_section("intro"), 
-                                     bgcolor=ft.colors.BLUE_100, color=ft.colors.BLUE_700),
+                                     bgcolor=ft.Colors.BLUE_100, color=ft.Colors.BLUE_700),
             "lesson": ft.ElevatedButton("📖 Microlección", on_click=lambda _: self.show_section("lesson")),
             "practice": ft.ElevatedButton("🤝 Práctica Guiada", on_click=lambda _: self.show_section("practice")),
             "evaluation": ft.ElevatedButton("📋 Evaluación", on_click=lambda _: self.show_section("evaluation")),
@@ -235,8 +235,8 @@ class OVA17App:
                 self.nav_buttons["resources"]
             ], scroll=ft.ScrollMode.AUTO),
             padding=10,
-            bgcolor=ft.colors.WHITE,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            bgcolor=ft.Colors.WHITE,
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
         
         # Content area
@@ -260,7 +260,7 @@ class OVA17App:
                 ])
             ]),
             padding=15,
-            bgcolor=ft.colors.PURPLE_50,
+            bgcolor=ft.Colors.PURPLE_50,
             border_radius=10,
             visible=False
         )
@@ -277,8 +277,8 @@ class OVA17App:
                     content=ft.Column([
                         ft.ElevatedButton("🤖 Asistente IA", 
                                         on_click=self.toggle_ai,
-                                        bgcolor=ft.colors.PURPLE_600,
-                                        color=ft.colors.WHITE),
+                                        bgcolor=ft.Colors.PURPLE_600,
+                                        color=ft.Colors.WHITE),
                         ai_panel
                     ]),
                     width=300,
@@ -294,8 +294,8 @@ class OVA17App:
         # Actualizar navegación
         for btn_id, btn in self.nav_buttons.items():
             if btn_id == section_id:
-                btn.bgcolor = ft.colors.BLUE_100
-                btn.color = ft.colors.BLUE_700
+                btn.bgcolor = ft.Colors.BLUE_100
+                btn.color = ft.Colors.BLUE_700
             else:
                 btn.bgcolor = None
                 btn.color = None
@@ -320,7 +320,7 @@ class OVA17App:
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.TRACK_CHANGES, color=ft.colors.BLUE_600, size=40),
+                    ft.Icon(ft.Icons.TRACK_CHANGES, color=ft.Colors.BLUE_600, size=40),
                     ft.Text("Objetivos de Aprendizaje", size=24, weight=ft.FontWeight.BOLD)
                 ]),
                 ft.Divider(),
@@ -328,15 +328,15 @@ class OVA17App:
                     ft.Container(
                         content=ft.Column([
                             ft.Text("Al finalizar esta OVA, serás capaz de:", 
-                                   size=18, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_700),
+                                   size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_700),
                             ft.Column([
-                                ft.Row([ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500), 
+                                ft.Row([ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500), 
                                        ft.Text("Estructurar resúmenes ejecutivos siguiendo el formato IMRyD adaptado")]),
-                                ft.Row([ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500), 
+                                ft.Row([ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500), 
                                        ft.Text("Crear tablas 'listas para publicación' con estándares científicos")]),
-                                ft.Row([ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500), 
+                                ft.Row([ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500), 
                                        ft.Text("Redactar notas y pies de página informativos y precisos")]),
-                                ft.Row([ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500), 
+                                ft.Row([ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500), 
                                        ft.Text("Comunicar resultados estadísticos a audiencias clínicas")])
                             ])
                         ]),
@@ -345,55 +345,55 @@ class OVA17App:
                     ft.Container(
                         content=ft.Column([
                             ft.Text("Modelo Pedagógico C(H)ANGE", 
-                                   size=18, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_700),
+                                   size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_700),
                             ft.Column([
-                                ft.Row([ft.Container(ft.Text("C", color=ft.colors.WHITE), 
-                                                   bgcolor=ft.colors.PURPLE_400, padding=5, border_radius=5),
+                                ft.Row([ft.Container(ft.Text("C", color=ft.Colors.WHITE), 
+                                                   bgcolor=ft.Colors.PURPLE_400, padding=5, border_radius=5),
                                        ft.Text("Combinatoria en diseños de estudio")]),
-                                ft.Row([ft.Container(ft.Text("H", color=ft.colors.WHITE), 
-                                                   bgcolor=ft.colors.BLUE_400, padding=5, border_radius=5),
+                                ft.Row([ft.Container(ft.Text("H", color=ft.Colors.WHITE), 
+                                                   bgcolor=ft.Colors.BLUE_400, padding=5, border_radius=5),
                                        ft.Text("Heurística en interpretación")]),
-                                ft.Row([ft.Container(ft.Text("A", color=ft.colors.WHITE), 
-                                                   bgcolor=ft.colors.GREEN_400, padding=5, border_radius=5),
+                                ft.Row([ft.Container(ft.Text("A", color=ft.Colors.WHITE), 
+                                                   bgcolor=ft.Colors.GREEN_400, padding=5, border_radius=5),
                                        ft.Text("Álgebra en cálculos estadísticos")]),
-                                ft.Row([ft.Container(ft.Text("N", color=ft.colors.WHITE), 
-                                                   bgcolor=ft.colors.YELLOW_600, padding=5, border_radius=5),
+                                ft.Row([ft.Container(ft.Text("N", color=ft.Colors.WHITE), 
+                                                   bgcolor=ft.Colors.YELLOW_600, padding=5, border_radius=5),
                                        ft.Text("Números y medidas de salud")]),
-                                ft.Row([ft.Container(ft.Text("G", color=ft.colors.WHITE), 
-                                                   bgcolor=ft.colors.RED_400, padding=5, border_radius=5),
+                                ft.Row([ft.Container(ft.Text("G", color=ft.Colors.WHITE), 
+                                                   bgcolor=ft.Colors.RED_400, padding=5, border_radius=5),
                                        ft.Text("Geometría en visualización")]),
-                                ft.Row([ft.Container(ft.Text("E", color=ft.colors.WHITE), 
-                                                   bgcolor=ft.colors.INDIGO_400, padding=5, border_radius=5),
+                                ft.Row([ft.Container(ft.Text("E", color=ft.Colors.WHITE), 
+                                                   bgcolor=ft.Colors.INDIGO_400, padding=5, border_radius=5),
                                        ft.Text("Estadística aplicada")])
                             ])
                         ]),
                         expand=True,
-                        bgcolor=ft.colors.PURPLE_50,
+                        bgcolor=ft.Colors.PURPLE_50,
                         padding=15,
                         border_radius=10
                     )
                 ]),
                 ft.Container(
                     content=ft.Row([
-                        ft.Icon(ft.icons.ACCESS_TIME, color=ft.colors.YELLOW_600),
+                        ft.Icon(ft.Icons.ACCESS_TIME, color=ft.Colors.YELLOW_600),
                         ft.Text("Duración estimada: 2-4 horas", weight=ft.FontWeight.BOLD),
                         ft.Text("Este módulo incluye actividades interactivas, casos prácticos y evaluación automatizada.")
                     ]),
-                    bgcolor=ft.colors.YELLOW_50,
+                    bgcolor=ft.Colors.YELLOW_50,
                     padding=15,
                     border_radius=10,
-                    border=ft.border.all(2, ft.colors.YELLOW_400)
+                    border=ft.border.all(2, ft.Colors.YELLOW_400)
                 ),
                 ft.ElevatedButton("Comenzar Microlección →", 
                                 on_click=lambda _: self.show_section("lesson"),
-                                bgcolor=ft.colors.BLUE_600,
-                                color=ft.colors.WHITE,
+                                bgcolor=ft.Colors.BLUE_600,
+                                color=ft.Colors.WHITE,
                                 size=ft.ControlSize.LARGE)
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=10,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
 
     def create_lesson_section(self):
@@ -405,7 +405,7 @@ class OVA17App:
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.BOOK, color=ft.colors.BLUE_600, size=40),
+                    ft.Icon(ft.Icons.BOOK, color=ft.Colors.BLUE_600, size=40),
                     ft.Text("Microlección: Escritura Científica en Salud", 
                            size=24, weight=ft.FontWeight.BOLD)
                 ]),
@@ -417,24 +417,24 @@ class OVA17App:
                             ft.Text("Conceptos Clave", size=18, weight=ft.FontWeight.BOLD),
                             ft.Container(
                                 content=ft.Text("Resumen Ejecutivo: Síntesis concisa de un estudio que permite toma de decisiones rápida."),
-                                bgcolor=ft.colors.BLUE_50,
+                                bgcolor=ft.Colors.BLUE_50,
                                 padding=10,
                                 border_radius=5,
-                                border=ft.border.all(2, ft.colors.BLUE_500)
+                                border=ft.border.all(2, ft.Colors.BLUE_500)
                             ),
                             ft.Container(
                                 content=ft.Text("Tabla Lista para Publicación: Formato estandarizado que cumple criterios editoriales."),
-                                bgcolor=ft.colors.GREEN_50,
+                                bgcolor=ft.Colors.GREEN_50,
                                 padding=10,
                                 border_radius=5,
-                                border=ft.border.all(2, ft.colors.GREEN_500)
+                                border=ft.border.all(2, ft.Colors.GREEN_500)
                             ),
                             ft.Container(
                                 content=ft.Text("Significancia Clínica: Relevancia práctica de los hallazgos para la atención médica."),
-                                bgcolor=ft.colors.PURPLE_50,
+                                bgcolor=ft.Colors.PURPLE_50,
                                 padding=10,
                                 border_radius=5,
-                                border=ft.border.all(2, ft.colors.PURPLE_500)
+                                border=ft.border.all(2, ft.Colors.PURPLE_500)
                             ),
                             ft.Text("Checklist Rápido", size=16, weight=ft.FontWeight.BOLD),
                             ft.Column([
@@ -445,7 +445,7 @@ class OVA17App:
                             ])
                         ]),
                         width=300,
-                        bgcolor=ft.colors.GREY_50,
+                        bgcolor=ft.Colors.GREY_50,
                         padding=15,
                         border_radius=10
                     )
@@ -455,28 +455,28 @@ class OVA17App:
                                     on_click=self.prev_slide,
                                     disabled=self.current_slide == 0),
                     ft.Text(f"{self.current_slide + 1} / {len(self.lesson_slides)}", 
-                           bgcolor=ft.colors.BLUE_100, 
-                           color=ft.colors.BLUE_700),
+                           bgcolor=ft.Colors.BLUE_100, 
+                           color=ft.Colors.BLUE_700),
                     ft.ElevatedButton("Siguiente →" if self.current_slide < len(self.lesson_slides) - 1 else "Ir a Práctica →", 
                                     on_click=self.next_slide)
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=10,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
 
     def create_slide_content(self):
         slide = self.lesson_slides[self.current_slide]
         return ft.Column([
-            ft.Text(slide["title"], size=20, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_700),
+            ft.Text(slide["title"], size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_700),
             ft.Container(
                 content=ft.Text(slide["content"], size=14),
-                bgcolor=ft.colors.BLUE_50,
+                bgcolor=ft.Colors.BLUE_50,
                 padding=15,
                 border_radius=10,
-                border=ft.border.all(1, ft.colors.BLUE_200)
+                border=ft.border.all(1, ft.Colors.BLUE_200)
             )
         ])
 
@@ -498,23 +498,23 @@ class OVA17App:
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.HANDSHAKE, color=ft.colors.GREEN_600, size=40),
+                    ft.Icon(ft.Icons.HANDSHAKE, color=ft.Colors.GREEN_600, size=40),
                     ft.Text("Práctica Guiada: Caso Clínico Real", 
                            size=24, weight=ft.FontWeight.BOLD)
                 ]),
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.LOCAL_HOSPITAL, color=ft.colors.GREEN_800),
+                            ft.Icon(ft.Icons.LOCAL_HOSPITAL, color=ft.Colors.GREEN_800),
                             ft.Text("Caso: Análisis de Mortalidad por COVID-19 en UCI", 
-                                   size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800)
+                                   size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800)
                         ]),
                         ft.Text("Trabajarás con datos simulados de 500 pacientes ingresados a UCI durante la pandemia. Tu objetivo es crear un resumen ejecutivo para el comité de calidad del hospital.")
                     ]),
-                    bgcolor=ft.colors.GREEN_50,
+                    bgcolor=ft.Colors.GREEN_50,
                     padding=15,
                     border_radius=10,
-                    border=ft.border.all(2, ft.colors.GREEN_400)
+                    border=ft.border.all(2, ft.Colors.GREEN_400)
                 ),
                 ft.Row([
                     ft.Container(
@@ -531,40 +531,40 @@ class OVA17App:
                                     ft.Text("• Importancia del problema"),
                                     ft.Text("• Objetivo específico del análisis")
                                 ]),
-                                bgcolor=ft.colors.BLUE_50,
+                                bgcolor=ft.Colors.BLUE_50,
                                 padding=10,
                                 border_radius=5,
-                                border=ft.border.all(2, ft.colors.BLUE_500)
+                                border=ft.border.all(2, ft.Colors.BLUE_500)
                             ),
                             ft.Container(
                                 content=ft.Column([
                                     ft.Text("Palabras clave sugeridas:", weight=ft.FontWeight.BOLD),
                                     ft.Row([
-                                        ft.Container(ft.Text("mortalidad"), bgcolor=ft.colors.GREEN_100, padding=5, border_radius=3),
-                                        ft.Container(ft.Text("UCI"), bgcolor=ft.colors.GREEN_100, padding=5, border_radius=3)
+                                        ft.Container(ft.Text("mortalidad"), bgcolor=ft.Colors.GREEN_100, padding=5, border_radius=3),
+                                        ft.Container(ft.Text("UCI"), bgcolor=ft.Colors.GREEN_100, padding=5, border_radius=3)
                                     ]),
                                     ft.Row([
-                                        ft.Container(ft.Text("factores de riesgo"), bgcolor=ft.colors.GREEN_100, padding=5, border_radius=3),
-                                        ft.Container(ft.Text("análisis descriptivo"), bgcolor=ft.colors.GREEN_100, padding=5, border_radius=3)
+                                        ft.Container(ft.Text("factores de riesgo"), bgcolor=ft.Colors.GREEN_100, padding=5, border_radius=3),
+                                        ft.Container(ft.Text("análisis descriptivo"), bgcolor=ft.Colors.GREEN_100, padding=5, border_radius=3)
                                     ])
                                 ]),
-                                bgcolor=ft.colors.GREEN_50,
+                                bgcolor=ft.Colors.GREEN_50,
                                 padding=10,
                                 border_radius=5,
-                                border=ft.border.all(2, ft.colors.GREEN_500)
+                                border=ft.border.all(2, ft.Colors.GREEN_500)
                             )
                         ]),
                         width=300,
-                        bgcolor=ft.colors.BLUE_50,
+                        bgcolor=ft.Colors.BLUE_50,
                         padding=15,
                         border_radius=10
                     )
                 ])
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=10,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
 
     def create_practice_step_content(self):
@@ -609,13 +609,13 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
         
         return ft.Column([
             ft.Row([
-                ft.Container(ft.Text(f"Paso {self.practice_step}", color=ft.colors.WHITE), 
-                           bgcolor=ft.colors.GREEN_600, padding=8, border_radius=20),
+                ft.Container(ft.Text(f"Paso {self.practice_step}", color=ft.Colors.WHITE), 
+                           bgcolor=ft.Colors.GREEN_600, padding=8, border_radius=20),
                 ft.Text(step["title"], size=18, weight=ft.FontWeight.BOLD)
             ]),
             ft.Container(
                 content=ft.Text(step["content"], size=14),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=15,
                 border_radius=10
             ),
@@ -628,8 +628,8 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
             ft.ElevatedButton(
                 f"Continuar al Paso {self.practice_step + 1}" if self.practice_step < 4 else "Ir a Evaluación",
                 on_click=self.next_practice_step,
-                bgcolor=ft.colors.GREEN_600,
-                color=ft.colors.WHITE
+                bgcolor=ft.Colors.GREEN_600,
+                color=ft.Colors.WHITE
             )
         ])
 
@@ -645,7 +645,7 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.QUIZ, color=ft.colors.PURPLE_600, size=40),
+                    ft.Icon(ft.Icons.QUIZ, color=ft.Colors.PURPLE_600, size=40),
                     ft.Text("Evaluación Automatizada", 
                            size=24, weight=ft.FontWeight.BOLD)
                 ]),
@@ -660,8 +660,8 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                             ft.Text("Progreso de Evaluación", size=16, weight=ft.FontWeight.BOLD),
                             ft.Column([
                                 ft.Row([ft.Text(f"Pregunta {i+1}"), 
-                                       ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500) 
-                                       if i < self.current_question else ft.Icon(ft.icons.CIRCLE, color=ft.colors.GREY_300)])
+                                       ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500) 
+                                       if i < self.current_question else ft.Icon(ft.Icons.CIRCLE, color=ft.Colors.GREY_300)])
                                 for i in range(len(self.quiz_questions))
                             ]),
                             ft.Container(
@@ -672,31 +672,31 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                                     ft.Text("• Interpretación clínica (25%)"),
                                     ft.Text("• Comunicación efectiva (25%)")
                                 ]),
-                                bgcolor=ft.colors.BLUE_50,
+                                bgcolor=ft.Colors.BLUE_50,
                                 padding=10,
                                 border_radius=5
                             ),
                             ft.Container(
                                 content=ft.Row([
-                                    ft.Icon(ft.icons.INFO, color=ft.colors.GREEN_800),
+                                    ft.Icon(ft.Icons.INFO, color=ft.Colors.GREEN_800),
                                     ft.Text("Puntuación mínima: 70%")
                                 ]),
-                                bgcolor=ft.colors.GREEN_50,
+                                bgcolor=ft.Colors.GREEN_50,
                                 padding=10,
                                 border_radius=5
                             )
                         ]),
                         width=300,
-                        bgcolor=ft.colors.GREY_50,
+                        bgcolor=ft.Colors.GREY_50,
                         padding=15,
                         border_radius=10
                     )
                 ])
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=10,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
 
     def create_quiz_content(self):
@@ -721,7 +721,7 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                         ft.Text(question["question"], size=16),
                         ft.Column(options)
                     ]),
-                    bgcolor=ft.colors.PURPLE_50,
+                    bgcolor=ft.Colors.PURPLE_50,
                     padding=15,
                     border_radius=10
                 ),
@@ -731,8 +731,8 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                                     disabled=self.current_question == 0),
                     ft.ElevatedButton("Siguiente →" if self.current_question < len(self.quiz_questions) - 1 else "Finalizar", 
                                     on_click=self.next_question,
-                                    bgcolor=ft.colors.PURPLE_600,
-                                    color=ft.colors.WHITE)
+                                    bgcolor=ft.Colors.PURPLE_600,
+                                    color=ft.Colors.WHITE)
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
             ])
         else:
@@ -761,25 +761,25 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
         return ft.Column([
             ft.Container(
                 content=ft.Column([
-                    ft.Icon(ft.icons.EMOJI_EVENTS, color=ft.colors.YELLOW_600, size=60),
+                    ft.Icon(ft.Icons.EMOJI_EVENTS, color=ft.Colors.YELLOW_600, size=60),
                     ft.Text("¡Evaluación Completada!", size=24, weight=ft.FontWeight.BOLD),
                     ft.Row([
                         ft.Container(
                             content=ft.Column([
-                                ft.Text(str(correct_answers), size=32, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600),
-                                ft.Text("Respuestas Correctas", size=14, color=ft.colors.GREEN_700)
+                                ft.Text(str(correct_answers), size=32, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_600),
+                                ft.Text("Respuestas Correctas", size=14, color=ft.Colors.GREEN_700)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.GREEN_50,
+                            bgcolor=ft.Colors.GREEN_50,
                             padding=15,
                             border_radius=10,
                             expand=True
                         ),
                         ft.Container(
                             content=ft.Column([
-                                ft.Text(f"{score}%", size=32, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600),
-                                ft.Text("Puntuación Final", size=14, color=ft.colors.BLUE_700)
+                                ft.Text(f"{score}%", size=32, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_600),
+                                ft.Text("Puntuación Final", size=14, color=ft.Colors.BLUE_700)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=15,
                             border_radius=10,
                             expand=True
@@ -787,10 +787,10 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                         ft.Container(
                             content=ft.Column([
                                 ft.Text("A" if score >= 90 else "B" if score >= 80 else "C" if score >= 70 else "D", 
-                                       size=32, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_600),
-                                ft.Text("Calificación", size=14, color=ft.colors.PURPLE_700)
+                                       size=32, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_600),
+                                ft.Text("Calificación", size=14, color=ft.Colors.PURPLE_700)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.PURPLE_50,
+                            bgcolor=ft.Colors.PURPLE_50,
                             padding=15,
                             border_radius=10,
                             expand=True
@@ -802,10 +802,10 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                             ft.Text("Excelente dominio de la estructura IMRyD. Se recomienda practicar más la redacción de limitaciones en la sección de discusión." 
                                    if score >= 80 else "Buen trabajo. Revisa los conceptos de interpretación clínica y estructura de tablas científicas.")
                         ]),
-                        bgcolor=ft.colors.YELLOW_50,
+                        bgcolor=ft.Colors.YELLOW_50,
                         padding=15,
                         border_radius=10,
-                        border=ft.border.all(2, ft.colors.YELLOW_400)
+                        border=ft.border.all(2, ft.Colors.YELLOW_400)
                     )
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                 padding=20
@@ -816,7 +816,7 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.DOWNLOAD, color=ft.colors.INDIGO_600, size=40),
+                    ft.Icon(ft.Icons.DOWNLOAD, color=ft.Colors.INDIGO_600, size=40),
                     ft.Text("Recursos Descargables y Actividad de Transferencia", 
                            size=24, weight=ft.FontWeight.BOLD)
                 ]),
@@ -824,7 +824,7 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                 ft.Row([
                     ft.Container(
                         content=ft.Column([
-                            ft.Text("Material Descargable", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_700),
+                            ft.Text("Material Descargable", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_700),
                             ft.Column([
                                 self.create_resource_item("📄", "Plantilla Resumen Ejecutivo", 
                                                          "Formato estándar IMRyD para ciencias de la salud", "template"),
@@ -844,7 +844,7 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                                     ft.Text("• Satisfactorio (2): Cumple criterios básicos pero requiere mejoras"),
                                     ft.Text("• Insuficiente (1): No cumple criterios mínimos")
                                 ]),
-                                bgcolor=ft.colors.GREY_50,
+                                bgcolor=ft.Colors.GREY_50,
                                 padding=15,
                                 border_radius=10
                             )
@@ -853,11 +853,11 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                     ),
                     ft.Container(
                         content=ft.Column([
-                            ft.Text("Actividad de Transferencia", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700),
+                            ft.Text("Actividad de Transferencia", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700),
                             ft.Container(
                                 content=ft.Column([
                                     ft.Row([
-                                        ft.Icon(ft.icons.ASSIGNMENT, color=ft.colors.GREEN_800),
+                                        ft.Icon(ft.Icons.ASSIGNMENT, color=ft.Colors.GREEN_800),
                                         ft.Text("Proyecto Final: Miniinforme Clínico", weight=ft.FontWeight.BOLD)
                                     ]),
                                     ft.Text("Elabora un resumen ejecutivo completo sobre un problema de salud pública de tu elección, utilizando datos reales o simulados."),
@@ -870,13 +870,13 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                                             ft.Text("• Referencias bibliográficas (formato Vancouver)"),
                                             ft.Text("• Entrega en formato PDF reproducible")
                                         ]),
-                                        bgcolor=ft.colors.WHITE,
+                                        bgcolor=ft.Colors.WHITE,
                                         padding=10,
                                         border_radius=5,
-                                        border=ft.border.all(2, ft.colors.GREEN_500)
+                                        border=ft.border.all(2, ft.Colors.GREEN_500)
                                     )
                                 ]),
-                                bgcolor=ft.colors.GREEN_50,
+                                bgcolor=ft.Colors.GREEN_50,
                                 padding=15,
                                 border_radius=10
                             ),
@@ -900,7 +900,7 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                             ft.Container(
                                 content=ft.Column([
                                     ft.Row([
-                                        ft.Icon(ft.icons.CALENDAR_TODAY, color=ft.colors.YELLOW_800),
+                                        ft.Icon(ft.Icons.CALENDAR_TODAY, color=ft.Colors.YELLOW_800),
                                         ft.Text("Cronograma Sugerido", weight=ft.FontWeight.BOLD)
                                     ]),
                                     ft.Text("Semana 1: Búsqueda bibliográfica y definición de objetivos"),
@@ -908,25 +908,25 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                                     ft.Text("Semana 3: Redacción del borrador inicial"),
                                     ft.Text("Semana 4: Revisión, correcciones y entrega final")
                                 ]),
-                                bgcolor=ft.colors.YELLOW_50,
+                                bgcolor=ft.Colors.YELLOW_50,
                                 padding=15,
                                 border_radius=10,
-                                border=ft.border.all(2, ft.colors.YELLOW_400)
+                                border=ft.border.all(2, ft.Colors.YELLOW_400)
                             ),
                             ft.ElevatedButton("🚀 Iniciar Proyecto de Transferencia", 
                                             on_click=self.start_transfer_project,
-                                            bgcolor=ft.colors.GREEN_600,
-                                            color=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.GREEN_600,
+                                            color=ft.Colors.WHITE,
                                             size=ft.ControlSize.LARGE)
                         ]),
                         width=400
                     )
                 ])
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=10,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
 
     def create_resource_item(self, icon, title, description, resource_type):
@@ -935,17 +935,17 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
                 ft.Text(icon, size=24),
                 ft.Column([
                     ft.Text(title, weight=ft.FontWeight.BOLD),
-                    ft.Text(description, size=12, color=ft.colors.GREY_600)
+                    ft.Text(description, size=12, color=ft.Colors.GREY_600)
                 ], expand=True),
                 ft.ElevatedButton("💾 Descargar", 
                                 on_click=lambda _: self.download_resource(resource_type),
-                                bgcolor=ft.colors.INDIGO_600,
-                                color=ft.colors.WHITE)
+                                bgcolor=ft.Colors.INDIGO_600,
+                                color=ft.Colors.WHITE)
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=15,
             border_radius=10,
-            border=ft.border.all(1, ft.colors.GREY_200)
+            border=ft.border.all(1, ft.Colors.GREY_200)
         )
 
     def download_resource(self, resource_type):
@@ -990,8 +990,8 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
             self.page.update()
 
     def add_ai_message(self, message, sender):
-        color = ft.colors.PURPLE_100 if sender == "ai" else ft.colors.BLUE_100
-        text_color = ft.colors.PURPLE_800 if sender == "ai" else ft.colors.BLUE_800
+        color = ft.Colors.PURPLE_100 if sender == "ai" else ft.Colors.BLUE_100
+        text_color = ft.Colors.PURPLE_800 if sender == "ai" else ft.Colors.BLUE_800
         
         self.ai_messages.controls.append(
             ft.Container(
@@ -1038,13 +1038,13 @@ Días estancia     | 500 | -    | 12.5 (8.9)"""
             self.page.update()
 
     def show_notification(self, message, type_msg):
-        color = ft.colors.GREEN_500 if type_msg == "success" else ft.colors.RED_500 if type_msg == "error" else ft.colors.BLUE_500
-        icon = ft.icons.CHECK_CIRCLE if type_msg == "success" else ft.icons.ERROR if type_msg == "error" else ft.icons.INFO
+        color = ft.Colors.GREEN_500 if type_msg == "success" else ft.Colors.RED_500 if type_msg == "error" else ft.Colors.BLUE_500
+        icon = ft.Icons.CHECK_CIRCLE if type_msg == "success" else ft.Icons.ERROR if type_msg == "error" else ft.Icons.INFO
         
         snack_bar = ft.SnackBar(
             content=ft.Row([
-                ft.Icon(icon, color=ft.colors.WHITE),
-                ft.Text(message, color=ft.colors.WHITE)
+                ft.Icon(icon, color=ft.Colors.WHITE),
+                ft.Text(message, color=ft.Colors.WHITE)
             ]),
             bgcolor=color
         )

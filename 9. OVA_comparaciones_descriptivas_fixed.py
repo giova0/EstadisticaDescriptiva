@@ -182,7 +182,7 @@ class OVAApp:
             # Advertencia importante
             ft.Container(
                 content=ft.Row([
-                    ft.Icon(ft.icons.WARNING, color="#D97706"),
+                    ft.Icon(ft.Icons.WARNING, color="#D97706"),
                     ft.Column([
                         ft.Text("Importante:", weight=ft.FontWeight.BOLD, color="#D97706"),
                         ft.Text(

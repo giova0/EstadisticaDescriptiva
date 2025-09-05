@@ -37,23 +37,23 @@ class OVAApp:
             content=ft.Row([
                 ft.Column([
                     ft.Text("OVA 9: Comparaciones Descriptivas entre Grupos", 
-                           size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800),
+                           size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800),
                     ft.Text("Estadística Descriptiva para Ciencias de la Salud", 
-                           size=16, color=ft.colors.GREY_600)
+                           size=16, color=ft.Colors.GREY_600)
                 ], expand=True),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("Modelo C(H)ANGE", size=12, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
-                        ft.Text("Duración: 2-4 horas", size=10, color=ft.colors.BLUE_600)
+                        ft.Text("Modelo C(H)ANGE", size=12, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
+                        ft.Text("Duración: 2-4 horas", size=10, color=ft.Colors.BLUE_600)
                     ]),
-                    bgcolor=ft.colors.BLUE_100,
+                    bgcolor=ft.Colors.BLUE_100,
                     padding=10,
                     border_radius=8
                 )
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
-            border=ft.border.only(bottom=ft.border.BorderSide(4, ft.colors.BLUE_500))
+            border=ft.border.only(bottom=ft.border.BorderSide(4, ft.Colors.BLUE_500))
         )
         
         # Navigation
@@ -71,11 +71,11 @@ class OVAApp:
                 ft.ElevatedButton(
                     text=label,
                     on_click=lambda e, section=section: self.show_section(section),
-                    bgcolor=ft.colors.BLUE_600 if section == self.current_section else ft.colors.BLUE_400,
-                    color=ft.colors.WHITE
+                    bgcolor=ft.Colors.BLUE_600 if section == self.current_section else ft.Colors.BLUE_400,
+                    color=ft.Colors.WHITE
                 ) for section, label in nav_buttons
             ], scroll=ft.ScrollMode.AUTO),
-            bgcolor=ft.colors.BLUE_600,
+            bgcolor=ft.Colors.BLUE_600,
             padding=10
         )
         
@@ -94,7 +94,7 @@ class OVAApp:
                 ft.Container(
                     content=self.main_container,
                     expand=True,
-                    bgcolor=ft.colors.BLUE_GREY_50
+                    bgcolor=ft.Colors.BLUE_GREY_50
                 )
             ], expand=True)
         )
@@ -107,7 +107,7 @@ class OVAApp:
         for i, (sect, _) in enumerate([("intro", "Introducción"), ("theory", "Teoría"), 
                                       ("practice", "Práctica"), ("simulation", "Simulación"), 
                                       ("evaluation", "Evaluación"), ("resources", "Recursos")]):
-            nav_container.content.controls[i].bgcolor = ft.colors.BLUE_600 if sect == section else ft.colors.BLUE_400
+            nav_container.content.controls[i].bgcolor = ft.Colors.BLUE_600 if sect == section else ft.Colors.BLUE_400
         
         # Update main content
         if section == "intro":
@@ -133,40 +133,40 @@ class OVAApp:
                         content=ft.Column([
                             ft.Row([
                                 ft.Container(
-                                    content=ft.Text("1", color=ft.colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
-                                    bgcolor=ft.colors.BLUE_500,
+                                    content=ft.Text("1", color=ft.Colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
+                                    bgcolor=ft.Colors.BLUE_500,
                                     width=32,
                                     height=32,
                                     border_radius=16,
                                     alignment=ft.alignment.center
                                 ),
-                                ft.Text("Introducción y Objetivos", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                                ft.Text("Introducción y Objetivos", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
                             ]),
                             ft.Divider(),
                             ft.Row([
                                 ft.Column([
-                                    ft.Text("¿Por qué comparar grupos en salud?", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_700),
+                                    ft.Text("¿Por qué comparar grupos en salud?", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_700),
                                     ft.Text(
                                         "En ciencias de la salud, constantemente necesitamos comparar diferentes grupos de pacientes, "
                                         "tratamientos, o poblaciones para entender patrones, identificar diferencias y tomar decisiones "
                                         "clínicas informadas.",
-                                        color=ft.colors.GREY_600
+                                        color=ft.Colors.GREY_600
                                     ),
                                     ft.Container(
                                         content=ft.Column([
-                                            ft.Text("Ejemplos clínicos:", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
-                                            ft.Text("• Comparar presión arterial entre hombres y mujeres", color=ft.colors.BLUE_700),
-                                            ft.Text("• Analizar tiempo de recuperación por grupos de edad", color=ft.colors.BLUE_700),
-                                            ft.Text("• Evaluar efectividad de diferentes tratamientos", color=ft.colors.BLUE_700),
-                                            ft.Text("• Estudiar prevalencia de enfermedades por región", color=ft.colors.BLUE_700)
+                                            ft.Text("Ejemplos clínicos:", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
+                                            ft.Text("• Comparar presión arterial entre hombres y mujeres", color=ft.Colors.BLUE_700),
+                                            ft.Text("• Analizar tiempo de recuperación por grupos de edad", color=ft.Colors.BLUE_700),
+                                            ft.Text("• Evaluar efectividad de diferentes tratamientos", color=ft.Colors.BLUE_700),
+                                            ft.Text("• Estudiar prevalencia de enfermedades por región", color=ft.Colors.BLUE_700)
                                         ]),
-                                        bgcolor=ft.colors.BLUE_50,
+                                        bgcolor=ft.Colors.BLUE_50,
                                         padding=15,
                                         border_radius=8
                                     )
                                 ], expand=True),
                                 ft.Column([
-                                    ft.Text("Objetivos de Aprendizaje", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_700),
+                                    ft.Text("Objetivos de Aprendizaje", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_700),
                                     ft.Column([
                                         self.create_objective_item("Contrastar perfiles de dos o más cohortes sin inferencia estadística"),
                                         self.create_objective_item("Calcular resúmenes descriptivos por grupo"),
@@ -177,20 +177,20 @@ class OVAApp:
                             ]),
                             ft.Container(
                                 content=ft.Row([
-                                    ft.Icon(ft.icons.WARNING, color=ft.colors.YELLOW_600),
+                                    ft.Icon(ft.Icons.WARNING, color=ft.Colors.YELLOW_600),
                                     ft.Column([
-                                        ft.Text("Importante:", weight=ft.FontWeight.BOLD, color=ft.colors.YELLOW_700),
+                                        ft.Text("Importante:", weight=ft.FontWeight.BOLD, color=ft.Colors.YELLOW_700),
                                         ft.Text(
                                             "En esta OVA nos enfocamos en análisis descriptivo. "
                                             "No realizaremos pruebas de significancia estadística ni inferencias causales.",
-                                            color=ft.colors.YELLOW_700
+                                            color=ft.Colors.YELLOW_700
                                         )
                                     ], expand=True)
                                 ]),
-                                bgcolor=ft.colors.YELLOW_50,
+                                bgcolor=ft.Colors.YELLOW_50,
                                 padding=15,
                                 border_radius=8,
-                                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400))
+                                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400))
                             )
                         ]),
                         padding=20
@@ -203,14 +203,14 @@ class OVAApp:
     def create_objective_item(self, text):
         return ft.Row([
             ft.Container(
-                content=ft.Text("✓", color=ft.colors.WHITE, size=12, weight=ft.FontWeight.BOLD),
-                bgcolor=ft.colors.GREEN_500,
+                content=ft.Text("✓", color=ft.Colors.WHITE, size=12, weight=ft.FontWeight.BOLD),
+                bgcolor=ft.Colors.GREEN_500,
                 width=24,
                 height=24,
                 border_radius=12,
                 alignment=ft.alignment.center
             ),
-            ft.Text(text, color=ft.colors.GREY_600, expand=True)
+            ft.Text(text, color=ft.Colors.GREY_600, expand=True)
         ])
     
     def create_theory_section(self):
@@ -221,14 +221,14 @@ class OVAApp:
                         content=ft.Column([
                             ft.Row([
                                 ft.Container(
-                                    content=ft.Text("2", color=ft.colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
-                                    bgcolor=ft.colors.BLUE_500,
+                                    content=ft.Text("2", color=ft.Colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
+                                    bgcolor=ft.Colors.BLUE_500,
                                     width=32,
                                     height=32,
                                     border_radius=16,
                                     alignment=ft.alignment.center
                                 ),
-                                ft.Text("Fundamentos Teóricos", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                                ft.Text("Fundamentos Teóricos", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
                             ]),
                             ft.Divider(),
                             ft.Row([
@@ -236,19 +236,19 @@ class OVAApp:
                                     "Resúmenes por Grupo",
                                     "Calculamos medidas de tendencia central y dispersión para cada grupo por separado.",
                                     "• Media, mediana, moda\n• Desviación estándar\n• Rango intercuartílico\n• Percentiles",
-                                    ft.colors.BLUE_50
+                                    ft.Colors.BLUE_50
                                 ),
                                 self.create_theory_card(
                                     "Diferencias Absolutas",
                                     "Calculamos la diferencia directa entre las medidas de los grupos.",
                                     "Diferencia = Grupo A - Grupo B\n\nEjemplo:\nMedia PA Hombres: 130 mmHg\nMedia PA Mujeres: 125 mmHg\nDiferencia: 5 mmHg",
-                                    ft.colors.GREEN_50
+                                    ft.Colors.GREEN_50
                                 ),
                                 self.create_theory_card(
                                     "Tamaño del Efecto",
                                     "Medida estandarizada que permite comparar diferencias independientemente de las unidades.",
                                     "d de Cohen:\nd = (Media₁ - Media₂) / DE_pooled\n\nInterpretación:\n• 0.2: Pequeño\n• 0.5: Mediano\n• 0.8: Grande",
-                                    ft.colors.PURPLE_50
+                                    ft.Colors.PURPLE_50
                                 )
                             ]),
                             ft.Divider(),
@@ -289,13 +289,13 @@ class OVAApp:
                                             ft.Text(
                                                 "Interpretación clínica: Los hombres muestran una presión arterial sistólica "
                                                 "promedio 4.7 mmHg mayor que las mujeres en esta muestra.",
-                                                color=ft.colors.BLUE_600
+                                                color=ft.Colors.BLUE_600
                                             )
                                         ]),
-                                        bgcolor=ft.colors.WHITE,
+                                        bgcolor=ft.Colors.WHITE,
                                         padding=15,
                                         border_radius=8,
-                                        border=ft.border.all(1, ft.colors.GREY_300)
+                                        border=ft.border.all(1, ft.Colors.GREY_300)
                                     )
                                 ], expand=True)
                             ])
@@ -314,7 +314,7 @@ class OVAApp:
                 ft.Text(description, size=12),
                 ft.Container(
                     content=ft.Text(details, size=10),
-                    bgcolor=ft.colors.WHITE,
+                    bgcolor=ft.Colors.WHITE,
                     padding=10,
                     border_radius=5
                 )
@@ -338,14 +338,14 @@ class OVAApp:
                         content=ft.Column([
                             ft.Row([
                                 ft.Container(
-                                    content=ft.Text("3", color=ft.colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
-                                    bgcolor=ft.colors.BLUE_500,
+                                    content=ft.Text("3", color=ft.Colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
+                                    bgcolor=ft.Colors.BLUE_500,
                                     width=32,
                                     height=32,
                                     border_radius=16,
                                     alignment=ft.alignment.center
                                 ),
-                                ft.Text("Práctica Guiada", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                                ft.Text("Práctica Guiada", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
                             ]),
                             ft.Divider(),
                             ft.Text("Ejercicio: Tiempo de Recuperación por Grupo de Edad", size=16, weight=ft.FontWeight.BOLD),
@@ -362,7 +362,7 @@ class OVAApp:
                                             ft.Text("12, 14, 11, 13, 15, 12, 16, 13, 14, 12, 15, 13, 14, 11, 13",
                                                    style=ft.TextStyle(font_family="monospace"))
                                         ]),
-                                        bgcolor=ft.colors.GREY_100,
+                                        bgcolor=ft.Colors.GREY_100,
                                         padding=15,
                                         border_radius=8
                                     ),
@@ -371,16 +371,16 @@ class OVAApp:
                                         ft.ElevatedButton(
                                             text="Calcular Estadísticos",
                                             on_click=self.calculate_stats,
-                                            bgcolor=ft.colors.BLUE_500,
-                                            color=ft.colors.WHITE
+                                            bgcolor=ft.Colors.BLUE_500,
+                                            color=ft.Colors.WHITE
                                         ),
                                         self.stats_results,
                                         ft.Text("Paso 2: Calcular diferencias", weight=ft.FontWeight.BOLD),
                                         ft.ElevatedButton(
                                             text="Calcular Diferencias",
                                             on_click=self.calculate_differences,
-                                            bgcolor=ft.colors.GREEN_500,
-                                            color=ft.colors.WHITE
+                                            bgcolor=ft.Colors.GREEN_500,
+                                            color=ft.Colors.WHITE
                                         ),
                                         self.diff_results
                                     ])
@@ -389,18 +389,18 @@ class OVAApp:
                                     ft.Text("Visualización", weight=ft.FontWeight.BOLD),
                                     ft.Container(
                                         content=ft.Text("Los gráficos se mostrarán después de calcular los estadísticos"),
-                                        bgcolor=ft.colors.WHITE,
+                                        bgcolor=ft.Colors.WHITE,
                                         padding=20,
                                         border_radius=8,
-                                        border=ft.border.all(1, ft.colors.GREY_300),
+                                        border=ft.border.all(1, ft.Colors.GREY_300),
                                         height=200
                                     ),
                                     ft.Container(
                                         content=ft.Column([
-                                            ft.Text("Interpretación Clínica", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                            ft.Text("Interpretación Clínica", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                                             self.clinical_interpretation
                                         ]),
-                                        bgcolor=ft.colors.BLUE_50,
+                                        bgcolor=ft.Colors.BLUE_50,
                                         padding=15,
                                         border_radius=8
                                     )
@@ -513,7 +513,7 @@ class OVAApp:
         )
         
         self.clinical_interpretation.value = interpretation
-        self.clinical_interpretation.color = ft.colors.BLUE_700
+        self.clinical_interpretation.color = ft.Colors.BLUE_700
         
         self.page.update()
     
@@ -551,14 +551,14 @@ class OVAApp:
                         content=ft.Column([
                             ft.Row([
                                 ft.Container(
-                                    content=ft.Text("4", color=ft.colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
-                                    bgcolor=ft.colors.BLUE_500,
+                                    content=ft.Text("4", color=ft.Colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
+                                    bgcolor=ft.Colors.BLUE_500,
                                     width=32,
                                     height=32,
                                     border_radius=16,
                                     alignment=ft.alignment.center
                                 ),
-                                ft.Text("Simulación Interactiva", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                                ft.Text("Simulación Interactiva", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
                             ]),
                             ft.Divider(),
                             ft.Text("Simulador de Comparaciones entre Grupos", size=16, weight=ft.FontWeight.BOLD),
@@ -581,11 +581,11 @@ class OVAApp:
                                             ft.ElevatedButton(
                                                 text="Ejecutar Simulación",
                                                 on_click=self.run_simulation,
-                                                bgcolor=ft.colors.PURPLE_500,
-                                                color=ft.colors.WHITE
+                                                bgcolor=ft.Colors.PURPLE_500,
+                                                color=ft.Colors.WHITE
                                             )
                                         ]),
-                                        bgcolor=ft.colors.GREY_100,
+                                        bgcolor=ft.Colors.GREY_100,
                                         padding=20,
                                         border_radius=8
                                     )
@@ -597,15 +597,15 @@ class OVAApp:
                                             ft.Container(
                                                 content=ft.Text("Ejecute la simulación para ver los gráficos"),
                                                 height=200,
-                                                bgcolor=ft.colors.WHITE,
+                                                bgcolor=ft.Colors.WHITE,
                                                 border_radius=8,
                                                 padding=20
                                             )
                                         ]),
-                                        bgcolor=ft.colors.WHITE,
+                                        bgcolor=ft.Colors.WHITE,
                                         padding=15,
                                         border_radius=8,
-                                        border=ft.border.all(1, ft.colors.GREY_300)
+                                        border=ft.border.all(1, ft.Colors.GREY_300)
                                     ),
                                     ft.Row([
                                         ft.Container(
@@ -613,10 +613,10 @@ class OVAApp:
                                                 ft.Text("Estadísticos Descriptivos", weight=ft.FontWeight.BOLD),
                                                 self.sim_stats
                                             ]),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=15,
                                             border_radius=8,
-                                            border=ft.border.all(1, ft.colors.GREY_300),
+                                            border=ft.border.all(1, ft.Colors.GREY_300),
                                             expand=True
                                         ),
                                         ft.Container(
@@ -624,10 +624,10 @@ class OVAApp:
                                                 ft.Text("Análisis de Diferencias", weight=ft.FontWeight.BOLD),
                                                 self.sim_differences
                                             ]),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=15,
                                             border_radius=8,
-                                            border=ft.border.all(1, ft.colors.GREY_300),
+                                            border=ft.border.all(1, ft.Colors.GREY_300),
                                             expand=True
                                         )
                                     ])
@@ -741,26 +741,26 @@ Tamaño del efecto: {effect_size}"""
                         content=ft.Column([
                             ft.Row([
                                 ft.Container(
-                                    content=ft.Text("5", color=ft.colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
-                                    bgcolor=ft.colors.BLUE_500,
+                                    content=ft.Text("5", color=ft.Colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
+                                    bgcolor=ft.Colors.BLUE_500,
                                     width=32,
                                     height=32,
                                     border_radius=16,
                                     alignment=ft.alignment.center
                                 ),
-                                ft.Text("Evaluación Automatizada", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                                ft.Text("Evaluación Automatizada", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
                             ]),
                             ft.Divider(),
                             ft.Container(
                                 content=ft.Text(
                                     "Instrucciones: Responda las siguientes preguntas basadas en el caso clínico presentado. "
                                     "Recibirá retroalimentación inmediata para cada respuesta.",
-                                    color=ft.colors.BLUE_700
+                                    color=ft.Colors.BLUE_700
                                 ),
-                                bgcolor=ft.colors.BLUE_50,
+                                bgcolor=ft.Colors.BLUE_50,
                                 padding=15,
                                 border_radius=8,
-                                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.BLUE_400))
+                                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.BLUE_400))
                             ),
                             ft.Container(
                                 content=ft.Column([
@@ -779,18 +779,18 @@ Tamaño del efecto: {effect_size}"""
                                                 ft.Text("DE: 25 mg/dL")
                                             ], expand=True)
                                         ]),
-                                        bgcolor=ft.colors.WHITE,
+                                        bgcolor=ft.Colors.WHITE,
                                         padding=15,
                                         border_radius=8,
-                                        border=ft.border.all(1, ft.colors.GREY_300)
+                                        border=ft.border.all(1, ft.Colors.GREY_300)
                                     ),
                                     ft.Text("1. ¿Cuál es la diferencia absoluta en los niveles promedio de glucosa?", weight=ft.FontWeight.BOLD),
                                     self.q1_group,
                                     ft.ElevatedButton(
                                         text="Verificar Respuesta",
                                         on_click=lambda e: self.check_answer('q1', 'b', '70 mg/dL es correcto. Se calcula: 165 - 95 = 70 mg/dL'),
-                                        bgcolor=ft.colors.BLUE_500,
-                                        color=ft.colors.WHITE
+                                        bgcolor=ft.Colors.BLUE_500,
+                                        color=ft.Colors.WHITE
                                     ),
                                     self.feedback_q1,
                                     ft.Text("2. ¿Cómo interpretaría clínicamente esta diferencia?", weight=ft.FontWeight.BOLD),
@@ -798,8 +798,8 @@ Tamaño del efecto: {effect_size}"""
                                     ft.ElevatedButton(
                                         text="Verificar Respuesta",
                                         on_click=lambda e: self.check_answer('q2', 'b', 'Correcto. Una diferencia de 70 mg/dL en glucosa es clínicamente muy significativa, ya que refleja la diferencia entre niveles normales y diabéticos.'),
-                                        bgcolor=ft.colors.BLUE_500,
-                                        color=ft.colors.WHITE
+                                        bgcolor=ft.Colors.BLUE_500,
+                                        color=ft.Colors.WHITE
                                     ),
                                     self.feedback_q2,
                                     ft.Text("3. Calcule aproximadamente la d de Cohen para este caso:", weight=ft.FontWeight.BOLD),
@@ -807,12 +807,12 @@ Tamaño del efecto: {effect_size}"""
                                     ft.ElevatedButton(
                                         text="Verificar Respuesta",
                                         on_click=lambda e: self.check_answer('q3', 'a', 'Correcto. d = 70/20 ≈ 3.5, donde 20 es aproximadamente la DE pooled. Este es un efecto muy grande.'),
-                                        bgcolor=ft.colors.BLUE_500,
-                                        color=ft.colors.WHITE
+                                        bgcolor=ft.Colors.BLUE_500,
+                                        color=ft.Colors.WHITE
                                     ),
                                     self.feedback_q3
                                 ]),
-                                bgcolor=ft.colors.GREY_100,
+                                bgcolor=ft.Colors.GREY_100,
                                 padding=20,
                                 border_radius=8
                             ),
@@ -826,10 +826,10 @@ Tamaño del efecto: {effect_size}"""
                                             ft.Text("Turno Día (n=50): Media = 45, DE = 12", weight=ft.FontWeight.BOLD),
                                             ft.Text("Turno Noche (n=45): Media = 62, DE = 18", weight=ft.FontWeight.BOLD)
                                         ]),
-                                        bgcolor=ft.colors.WHITE,
+                                        bgcolor=ft.Colors.WHITE,
                                         padding=15,
                                         border_radius=8,
-                                        border=ft.border.all(1, ft.colors.GREY_300)
+                                        border=ft.border.all(1, ft.Colors.GREY_300)
                                     ),
                                     ft.Row([
                                         ft.Column([
@@ -846,12 +846,12 @@ Tamaño del efecto: {effect_size}"""
                                     ft.ElevatedButton(
                                         text="Verificar Ejercicio",
                                         on_click=self.check_practical_exercise,
-                                        bgcolor=ft.colors.GREEN_500,
-                                        color=ft.colors.WHITE
+                                        bgcolor=ft.Colors.GREEN_500,
+                                        color=ft.Colors.WHITE
                                     ),
                                     self.practical_feedback
                                 ]),
-                                bgcolor=ft.colors.GREEN_50,
+                                bgcolor=ft.Colors.GREEN_50,
                                 padding=20,
                                 border_radius=8
                             ),
@@ -877,7 +877,7 @@ Tamaño del efecto: {effect_size}"""
         
         if not selected:
             feedback_control.value = "Por favor seleccione una respuesta."
-            feedback_control.color = ft.colors.YELLOW_700
+            feedback_control.color = ft.Colors.YELLOW_700
             feedback_control.visible = True
             self.page.update()
             return
@@ -887,10 +887,10 @@ Tamaño del efecto: {effect_size}"""
         if selected == correct_answer:
             self.score += 1
             feedback_control.value = f"✓ Correcto! {feedback}"
-            feedback_control.color = ft.colors.GREEN_700
+            feedback_control.color = ft.Colors.GREEN_700
         else:
             feedback_control.value = f"✗ Incorrecto. {feedback}"
-            feedback_control.color = ft.colors.RED_700
+            feedback_control.color = ft.Colors.RED_700
         
         feedback_control.visible = True
         self.update_final_score()
@@ -931,12 +931,12 @@ Tamaño del efecto: {effect_size}"""
                 feedback += "✗ La interpretación debe ser más detallada"
             
             self.practical_feedback.value = feedback
-            self.practical_feedback.color = ft.colors.BLUE_700
+            self.practical_feedback.color = ft.Colors.BLUE_700
             self.practical_feedback.visible = True
             
         except ValueError:
             self.practical_feedback.value = "Error: Por favor ingrese valores numéricos válidos."
-            self.practical_feedback.color = ft.colors.RED_700
+            self.practical_feedback.color = ft.Colors.RED_700
             self.practical_feedback.visible = True
         
         self.page.update()
@@ -954,14 +954,14 @@ Tamaño del efecto: {effect_size}"""
                         content=ft.Column([
                             ft.Row([
                                 ft.Container(
-                                    content=ft.Text("6", color=ft.colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
-                                    bgcolor=ft.colors.BLUE_500,
+                                    content=ft.Text("6", color=ft.Colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
+                                    bgcolor=ft.Colors.BLUE_500,
                                     width=32,
                                     height=32,
                                     border_radius=16,
                                     alignment=ft.alignment.center
                                 ),
-                                ft.Text("Recursos y Materiales", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                                ft.Text("Recursos y Materiales", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
                             ]),
                             ft.Divider(),
                             ft.Row([
@@ -1012,7 +1012,7 @@ Tamaño del efecto: {effect_size}"""
                                                 ])
                                             ]
                                         ),
-                                        bgcolor=ft.colors.GREY_100,
+                                        bgcolor=ft.Colors.GREY_100,
                                         padding=15,
                                         border_radius=8
                                     )
@@ -1021,11 +1021,11 @@ Tamaño del efecto: {effect_size}"""
                                     ft.Text("Actividad de Transferencia", size=16, weight=ft.FontWeight.BOLD),
                                     ft.Container(
                                         content=ft.Column([
-                                            ft.Text("Miniinforme: Comparación de Tratamientos", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                            ft.Text("Miniinforme: Comparación de Tratamientos", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_800),
                                             ft.Text(
                                                 "Elabore un informe de 1-2 páginas comparando la efectividad de dos tratamientos "
                                                 "para hipertensión usando los datos proporcionados.",
-                                                color=ft.colors.BLUE_700
+                                                color=ft.Colors.BLUE_700
                                             ),
                                             ft.Container(
                                                 content=ft.Column([
@@ -1037,13 +1037,13 @@ Tamaño del efecto: {effect_size}"""
                                                     ft.Text("• Interpretación clínica"),
                                                     ft.Text("• Limitaciones del análisis")
                                                 ]),
-                                                bgcolor=ft.colors.WHITE,
+                                                bgcolor=ft.Colors.WHITE,
                                                 padding=15,
                                                 border_radius=8,
-                                                border=ft.border.all(1, ft.colors.GREY_300)
+                                                border=ft.border.all(1, ft.Colors.GREY_300)
                                             )
                                         ]),
-                                        bgcolor=ft.colors.BLUE_50,
+                                        bgcolor=ft.Colors.BLUE_50,
                                         padding=20,
                                         border_radius=8
                                     ),
@@ -1055,14 +1055,14 @@ Tamaño del efecto: {effect_size}"""
                                     ]),
                                     ft.Container(
                                         content=ft.Column([
-                                            ft.Text("Próximos Pasos", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                                            ft.Text("Próximos Pasos", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                                             ft.Text(
                                                 "En la siguiente OVA exploraremos las tablas 2x2 y 2xk en epidemiología, "
                                                 "donde aprenderemos a analizar asociaciones entre variables categóricas.",
-                                                color=ft.colors.GREEN_700
+                                                color=ft.Colors.GREEN_700
                                             )
                                         ]),
-                                        bgcolor=ft.colors.GREEN_50,
+                                        bgcolor=ft.Colors.GREEN_50,
                                         padding=15,
                                         border_radius=8
                                     )
@@ -1081,29 +1081,29 @@ Tamaño del efecto: {effect_size}"""
             content=ft.Row([
                 ft.Column([
                     ft.Text(title, weight=ft.FontWeight.BOLD),
-                    ft.Text(description, size=12, color=ft.colors.GREY_600)
+                    ft.Text(description, size=12, color=ft.Colors.GREY_600)
                 ], expand=True),
                 ft.ElevatedButton(
                     text="Descargar",
                     on_click=lambda e, t=file_type: self.download_template(t),
-                    bgcolor=ft.colors.BLUE_500,
-                    color=ft.colors.WHITE
+                    bgcolor=ft.Colors.BLUE_500,
+                    color=ft.Colors.WHITE
                 )
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=15,
             border_radius=8,
-            border=ft.border.all(1, ft.colors.GREY_300),
+            border=ft.border.all(1, ft.Colors.GREY_300),
             margin=ft.margin.only(bottom=10)
         )
     
     def create_reference_item(self, author, title, publisher):
         return ft.Container(
             content=ft.Text(f"{author} {title} {publisher}"),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=10,
             border_radius=8,
-            border=ft.border.all(1, ft.colors.GREY_300),
+            border=ft.border.all(1, ft.Colors.GREY_300),
             margin=ft.margin.only(bottom=5)
         )
     

@@ -28,9 +28,9 @@ def main(page: ft.Page):
             for control in avatar_container.controls:
                 if isinstance(control, ft.Container):
                     if control.data == avatar_tipo:
-                        control.border = ft.border.all(3, ft.colors.AMBER)
+                        control.border = ft.border.all(3, ft.Colors.AMBER)
                     else:
-                        control.border = ft.border.all(1, ft.colors.GREY_600)
+                        control.border = ft.border.all(1, ft.Colors.GREY_600)
             page.update()
         return on_click
     
@@ -46,106 +46,36 @@ def main(page: ft.Page):
     def mostrar_pantalla_inicio():
         """Crear la pantalla de inicio con el libro"""
         
-        # Contenedor principal con fondo de piedra simulado
-        fondo_container = ft.Container(
-            width=page.window_width,
-            height=page.window_height,
-            gradient=ft.LinearGradient(
-                begin=ft.alignment.top_left,
-                end=ft.alignment.bottom_right,
-                colors=["#2d1810", "#1a0f08", "#3d2415"]
+        # Contenedor principal con imagen de fondo
+        fondo_container = ft.Stack([
+            # Imagen de fondo que cubre toda la pantalla
+            ft.Image(
+                src="https://i.postimg.cc/02sy0XKB/portada-Estadistica-6.png",
+                width=page.window_width,
+                height=page.window_height,
+                fit=ft.ImageFit.COVER,
             ),
-            content=ft.Stack([
-                # Elementos decorativos (antorchas simuladas)
-                ft.Container(
-                    left=50,
-                    top=100,
-                    width=20,
-                    height=60,
-                    bgcolor=ft.colors.ORANGE_800,
-                    border_radius=10,
-                ),
-                ft.Container(
-                    right=50,
-                    top=150,
-                    width=20,
-                    height=60,
-                    bgcolor=ft.colors.ORANGE_800,
-                    border_radius=10,
-                ),
+            # Contenido sobre la imagen
+            ft.Stack([
                 
-                # Contenedor principal centrado
+                # Botón de ingreso en la parte derecha abajo
                 ft.Container(
-                    alignment=ft.alignment.center,
-                    content=ft.Row([
-                        # Libro central
-                        ft.Container(
-                            width=300,
-                            height=400,
-                            bgcolor="#7FFFD4",
-                            border_radius=15,
-                            border=ft.border.all(3, "#654321"),
-                            content=ft.Column([
-                                ft.Container(height=40),
-                                ft.Text(
-                                    "CURSO DE ESTADÍSTICA",
-                                    size=24,
-                                    weight=ft.FontWeight.BOLD,
-                                    color="#4169E1",
-                                    text_align=ft.TextAlign.CENTER
-                                ),
-                                ft.Container(height=20),
-                                # Escudo con corona y cruz
-                                ft.Container(
-                                    width=120,
-                                    height=140,
-                                    bgcolor=ft.colors.BLUE_800,
-                                    border_radius=60,
-                                    border=ft.border.all(3, ft.colors.AMBER_700),
-                                    content=ft.Column([
-                                        ft.Container(height=20),
-                                        ft.Icon(
-                                            ft.icons.CASTLE,
-                                            size=40,
-                                            color=ft.colors.AMBER_700
-                                        ),
-                                        ft.Icon(
-                                            ft.icons.ADD,
-                                            size=30,
-                                            color=ft.colors.AMBER_700
-                                        ),
-                                    ], alignment=ft.MainAxisAlignment.CENTER)
-                                )
-                            ], alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+                    alignment=ft.alignment.bottom_right,
+                    margin=ft.margin.only(right=50, bottom=50),
+                    content=ft.ElevatedButton(
+                        "INGRESAR",
+                        width=200,
+                        height=60,
+                        style=ft.ButtonStyle(
+                            color=ft.Colors.WHITE,
+                            bgcolor=ft.Colors.BLUE_700,
+                            text_style=ft.TextStyle(size=18, weight=ft.FontWeight.BOLD)
                         ),
-                        
-                        ft.Container(width=100),
-                        
-                        # Texto de bienvenida y botón
-                        ft.Column([
-                            ft.Text(
-                                "Bienvenido al Curso",
-                                size=32,
-                                weight=ft.FontWeight.BOLD,
-                                color="#4169E1",
-                            ),
-                            ft.Container(height=50),
-                            ft.ElevatedButton(
-                                "INGRESAR",
-                                width=150,
-                                height=50,
-                                style=ft.ButtonStyle(
-                                    color=ft.colors.WHITE,
-                                    bgcolor=ft.colors.BLUE_700,
-                                    text_style=ft.TextStyle(size=16, weight=ft.FontWeight.BOLD)
-                                ),
-                                on_click=ir_a_seleccion_avatar
-                            )
-                        ], alignment=ft.MainAxisAlignment.CENTER)
-                    ], alignment=ft.MainAxisAlignment.CENTER)
+                        on_click=ir_a_seleccion_avatar
+                    )
                 )
             ])
-        )
+        ])
         
         page.add(fondo_container)
         page.update()
@@ -157,41 +87,41 @@ def main(page: ft.Page):
         
         # Datos de los avatares
         avatares = [
-            {"nombre": "Medicina", "icono": ft.icons.SHIELD, "color": ft.colors.RED_700},
-            {"nombre": "Enfermería", "icono": ft.icons.AUTO_FIX_HIGH, "color": ft.colors.PURPLE_700},
-            {"nombre": "Fisioterapia", "icono": ft.icons.NATURE_PEOPLE, "color": ft.colors.GREEN_700},
-            {"nombre": "Odontología", "icono": ft.icons.PSYCHOLOGY, "color": ft.colors.BLUE_GREY_700},
+            {"nombre": "Medicina", "icono": ft.Icons.SHIELD, "color": ft.Colors.RED_700},
+            {"nombre": "Enfermería", "icono": ft.Icons.AUTO_FIX_HIGH, "color": ft.Colors.PURPLE_700},
+            {"nombre": "Fisioterapia", "icono": ft.Icons.NATURE_PEOPLE, "color": ft.Colors.GREEN_700},
+            {"nombre": "Odontología", "icono": ft.Icons.PSYCHOLOGY, "color": ft.Colors.BLUE_GREY_700},
         ]
         
         # Crear contenedores de avatares
         avatar_controls = []
         for avatar in avatares:
             avatar_control = ft.Container(
-                width=100,
-                height=120,
+                width=80,
+                height=100,
                 bgcolor="#2d3748",
-                border_radius=10,
-                border=ft.border.all(1, ft.colors.GREY_600),
+                border_radius=8,
+                border=ft.border.all(1, ft.Colors.GREY_600),
                 data=avatar["nombre"],
                 content=ft.Column([
-                    ft.Container(height=10),
+                    ft.Container(height=8),
                     ft.Container(
-                        width=60,
-                        height=60,
+                        width=50,
+                        height=50,
                         bgcolor=avatar["color"],
-                        border_radius=30,
+                        border_radius=25,
                         content=ft.Icon(
                             avatar["icono"],
-                            size=30,
-                            color=ft.colors.WHITE
+                            size=25,
+                            color=ft.Colors.WHITE
                         ),
                         alignment=ft.alignment.center
                     ),
-                    ft.Container(height=5),
+                    ft.Container(height=3),
                     ft.Text(
                         avatar["nombre"],
-                        size=12,
-                        color=ft.colors.WHITE,
+                        size=10,
+                        color=ft.Colors.WHITE,
                         text_align=ft.TextAlign.CENTER
                     )
                 ], alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
@@ -202,7 +132,7 @@ def main(page: ft.Page):
         avatar_container = ft.Row(
             avatar_controls,
             alignment=ft.MainAxisAlignment.CENTER,
-            spacing=30
+            spacing=20
         )
         
         # Contenedor principal
@@ -211,43 +141,43 @@ def main(page: ft.Page):
             height=page.window_height,
             bgcolor="#0a0a0a",
             content=ft.Column([
-                ft.Container(height=80),
+                ft.Container(height=40),
                 
                 # Título principal
                 ft.Text(
                     "Curso de Estadística",
-                    size=36,
+                    size=28,
                     weight=ft.FontWeight.BOLD,
                     color="#4169E1",
                     text_align=ft.TextAlign.CENTER
                 ),
                 
-                ft.Container(height=20),
+                ft.Container(height=15),
                 
                 # Subtítulo
                 ft.Text(
                     "¡Selecciona tu avatar y comienza la aventura!",
-                    size=16,
-                    color=ft.colors.WHITE70,
+                    size=14,
+                    color=ft.Colors.WHITE70,
                     text_align=ft.TextAlign.CENTER
                 ),
                 
-                ft.Container(height=60),
+                ft.Container(height=30),
                 
                 # Título de selección
                 ft.Text(
                     "Elige tu avatar de Aventurero:",
-                    size=20,
-                    color=ft.colors.LIGHT_BLUE_300,
+                    size=18,
+                    color=ft.Colors.LIGHT_BLUE_300,
                     text_align=ft.TextAlign.CENTER
                 ),
                 
-                ft.Container(height=40),
+                ft.Container(height=25),
                 
                 # Contenedor de avatares
                 avatar_container,
                 
-                ft.Container(height=60),
+                ft.Container(height=30),
                 
                 # Botones
                 ft.Row([
@@ -256,8 +186,8 @@ def main(page: ft.Page):
                         width=120,
                         height=40,
                         style=ft.ButtonStyle(
-                            color=ft.colors.WHITE,
-                            bgcolor=ft.colors.GREY_700,
+                            color=ft.Colors.WHITE,
+                            bgcolor=ft.Colors.GREY_700,
                         ),
                         on_click=volver_inicio
                     ),
@@ -269,8 +199,8 @@ def main(page: ft.Page):
                         width=200,
                         height=50,
                         style=ft.ButtonStyle(
-                            color=ft.colors.WHITE,
-                            bgcolor=ft.colors.BLUE_700,
+                            color=ft.Colors.WHITE,
+                            bgcolor=ft.Colors.BLUE_700,
                             text_style=ft.TextStyle(size=16, weight=ft.FontWeight.BOLD)
                         ),
                         on_click=comenzar_aventura
@@ -283,8 +213,8 @@ def main(page: ft.Page):
                         width=100,
                         height=40,
                         style=ft.ButtonStyle(
-                            color=ft.colors.WHITE,
-                            bgcolor=ft.colors.GREY_600,
+                            color=ft.Colors.WHITE,
+                            bgcolor=ft.Colors.GREY_600,
                         ),
                         on_click=mostrar_ayuda
                     )

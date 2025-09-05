@@ -128,9 +128,9 @@ class OVAApp:
                     ft.Text("Universidad Antonio Nariño", size=12, weight=ft.FontWeight.BOLD, color="white")
                 ])
             ]),
-            bgcolor=ft.colors.BLUE_700,
+            bgcolor=ft.Colors.BLUE_700,
             padding=20,
-            border=ft.border.only(bottom=ft.BorderSide(4, ft.colors.BLUE_500))
+            border=ft.border.only(bottom=ft.BorderSide(4, ft.Colors.BLUE_500))
         )
         
         # Progress bar
@@ -149,7 +149,7 @@ class OVAApp:
         # Navigation
         nav_buttons = [
             ft.ElevatedButton("Introducción", on_click=lambda _: self.show_section("intro"), 
-                            bgcolor=ft.colors.BLUE_500, color="white"),
+                            bgcolor=ft.Colors.BLUE_500, color="white"),
             ft.ElevatedButton("Marco Teórico", on_click=lambda _: self.show_section("teoria")),
             ft.ElevatedButton("Casos de Estudio", on_click=lambda _: self.show_section("casos")),
             ft.ElevatedButton("Simulador", on_click=lambda _: self.show_section("simulador")),
@@ -217,7 +217,7 @@ class OVAApp:
             content=ft.Column([
                 ft.Container(
                     content=ft.Column([
-                        ft.Icon(ft.icons.ANALYTICS, size=60, color=ft.colors.BLUE_500),
+                        ft.Icon(ft.Icons.ANALYTICS, size=60, color=ft.Colors.BLUE_500),
                         ft.Text("Análisis de Correlación y Regresión Lineal", 
                                size=24, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
                         ft.Text("Aplicaciones en Investigación en Salud", 
@@ -232,7 +232,7 @@ class OVAApp:
                                     ft.Text("• Fundamentar decisiones basadas en evidencia"),
                                     ft.Text("• Interpretar estudios epidemiológicos")
                                 ]),
-                                bgcolor=ft.colors.BLUE_50,
+                                bgcolor=ft.Colors.BLUE_50,
                                 padding=15,
                                 border_radius=10,
                                 expand=True
@@ -246,7 +246,7 @@ class OVAApp:
                                     ft.Text("Geometría: Visualización gráfica"),
                                     ft.Text("Estadística: Análisis inferencial")
                                 ]),
-                                bgcolor=ft.colors.GREEN_50,
+                                bgcolor=ft.Colors.GREEN_50,
                                 padding=15,
                                 border_radius=10,
                                 expand=True
@@ -273,7 +273,7 @@ class OVAApp:
                                     ], expand=True)
                                 ])
                             ]),
-                            bgcolor=ft.colors.PURPLE_50,
+                            bgcolor=ft.Colors.PURPLE_50,
                             padding=15,
                             border_radius=10
                         ),
@@ -281,7 +281,7 @@ class OVAApp:
                         ft.ElevatedButton(
                             "Comenzar Aprendizaje →",
                             on_click=lambda _: self.show_section("teoria"),
-                            bgcolor=ft.colors.BLUE_500,
+                            bgcolor=ft.Colors.BLUE_500,
                             color="white",
                             style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10))
                         )
@@ -289,7 +289,7 @@ class OVAApp:
                     bgcolor="white",
                     padding=30,
                     border_radius=15,
-                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=10, color=ft.colors.GREY_300)
+                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=10, color=ft.Colors.GREY_300)
                 )
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER)
         )
@@ -305,7 +305,7 @@ class OVAApp:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.TRENDING_UP, color=ft.colors.BLUE_600),
+                            ft.Icon(ft.Icons.TRENDING_UP, color=ft.Colors.BLUE_600),
                             ft.Text("Correlación", size=20, weight=ft.FontWeight.BOLD)
                         ]),
                         ft.Text("La correlación mide la fuerza y dirección de la relación lineal entre dos variables cuantitativas."),
@@ -316,7 +316,7 @@ class OVAApp:
                                 ft.Text("r = Σ(xi - x̄)(yi - ȳ) / √[Σ(xi - x̄)² Σ(yi - ȳ)²]", 
                                        style=ft.TextStyle(font_family="monospace"))
                             ]),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=10,
                             border_radius=5
                         ),
@@ -332,7 +332,7 @@ class OVAApp:
                     bgcolor="white",
                     padding=15,
                     border_radius=10,
-                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.colors.GREY_300),
+                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.Colors.GREY_300),
                     expand=True
                 ),
                 
@@ -340,7 +340,7 @@ class OVAApp:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.SHOW_CHART, color=ft.colors.GREEN_600),
+                            ft.Icon(ft.Icons.SHOW_CHART, color=ft.Colors.GREEN_600),
                             ft.Text("Regresión Lineal Simple", size=20, weight=ft.FontWeight.BOLD)
                         ]),
                         ft.Text("Permite predecir el valor de una variable dependiente (Y) a partir de una variable independiente (X)."),
@@ -352,7 +352,7 @@ class OVAApp:
                                 ft.Text("a: Intercepto (valor de Y cuando X = 0)"),
                                 ft.Text("b: Pendiente (cambio en Y por unidad de X)")
                             ]),
-                            bgcolor=ft.colors.GREEN_50,
+                            bgcolor=ft.Colors.GREEN_50,
                             padding=10,
                             border_radius=5
                         ),
@@ -365,7 +365,7 @@ class OVAApp:
                                 ft.Text("a = ȳ - bx̄", 
                                        style=ft.TextStyle(font_family="monospace"))
                             ]),
-                            bgcolor=ft.colors.GREEN_50,
+                            bgcolor=ft.Colors.GREEN_50,
                             padding=10,
                             border_radius=5
                         )
@@ -373,7 +373,7 @@ class OVAApp:
                     bgcolor="white",
                     padding=15,
                     border_radius=10,
-                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.colors.GREY_300),
+                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.Colors.GREY_300),
                     expand=True
                 )
             ], spacing=20),
@@ -385,33 +385,33 @@ class OVAApp:
                     ft.Row([
                         ft.Container(
                             content=ft.Column([
-                                ft.Icon(ft.icons.WARNING, color=ft.colors.RED_600, size=40),
+                                ft.Icon(ft.Icons.WARNING, color=ft.Colors.RED_600, size=40),
                                 ft.Text("¡Cuidado!", weight=ft.FontWeight.BOLD),
                                 ft.Text("Correlación NO implica causalidad. Una relación estadística no establece causa-efecto.", text_align=ft.TextAlign.CENTER)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.RED_50,
+                            bgcolor=ft.Colors.RED_50,
                             padding=15,
                             border_radius=10,
                             expand=True
                         ),
                         ft.Container(
                             content=ft.Column([
-                                ft.Icon(ft.icons.LIGHTBULB, color=ft.colors.YELLOW_600, size=40),
+                                ft.Icon(ft.Icons.LIGHTBULB, color=ft.Colors.YELLOW_600, size=40),
                                 ft.Text("Significancia Clínica", weight=ft.FontWeight.BOLD),
                                 ft.Text("Evalúa si la diferencia estadística es relevante en la práctica clínica.", text_align=ft.TextAlign.CENTER)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.YELLOW_50,
+                            bgcolor=ft.Colors.YELLOW_50,
                             padding=15,
                             border_radius=10,
                             expand=True
                         ),
                         ft.Container(
                             content=ft.Column([
-                                ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.BLUE_600, size=40),
+                                ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.BLUE_600, size=40),
                                 ft.Text("Validación", weight=ft.FontWeight.BOLD),
                                 ft.Text("Verifica supuestos: linealidad, normalidad, homocedasticidad e independencia.", text_align=ft.TextAlign.CENTER)
                             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                            bgcolor=ft.colors.BLUE_50,
+                            bgcolor=ft.Colors.BLUE_50,
                             padding=15,
                             border_radius=10,
                             expand=True
@@ -421,13 +421,13 @@ class OVAApp:
                 bgcolor="white",
                 padding=20,
                 border_radius=15,
-                shadow=ft.BoxShadow(spread_radius=1, blur_radius=10, color=ft.colors.GREY_300)
+                shadow=ft.BoxShadow(spread_radius=1, blur_radius=10, color=ft.Colors.GREY_300)
             ),
             
             ft.ElevatedButton(
                 "Ver Casos de Estudio →",
                 on_click=lambda _: self.show_section("casos"),
-                bgcolor=ft.colors.GREEN_500,
+                bgcolor=ft.Colors.GREEN_500,
                 color="white"
             )
         ], spacing=20)
@@ -448,7 +448,7 @@ class OVAApp:
                     "0.61",
                     "PA = 85.2 + 2.1 × IMC",
                     "Por cada unidad de aumento en el IMC, la presión arterial sistólica aumenta aproximadamente 2.1 mmHg.",
-                    ft.colors.RED_500
+                    ft.Colors.RED_500
                 ),
                 
                 # Caso 2: Edad y Capacidad Pulmonar
@@ -460,7 +460,7 @@ class OVAApp:
                     "0.52",
                     "CVF = 5.8 - 0.03 × Edad",
                     "Por cada año de edad, la capacidad vital forzada disminuye aproximadamente 0.03 litros.",
-                    ft.colors.BLUE_500
+                    ft.Colors.BLUE_500
                 )
             ], spacing=20),
             
@@ -474,7 +474,7 @@ class OVAApp:
                     "0.72",
                     "Tiempo = 12.5 - 0.08 × Dosis",
                     "Por cada mg adicional de medicamento, el tiempo de recuperación disminuye 0.08 horas.",
-                    ft.colors.GREEN_500
+                    ft.Colors.GREEN_500
                 ),
                 
                 # Caso 4: Sueño y Rendimiento Cognitivo
@@ -486,14 +486,14 @@ class OVAApp:
                     "0.46",
                     "Puntuación = 45 + 6.2 × Horas_Sueño",
                     "Por cada hora adicional de sueño, la puntuación cognitiva aumenta 6.2 puntos.",
-                    ft.colors.PURPLE_500
+                    ft.Colors.PURPLE_500
                 )
             ], spacing=20),
             
             ft.ElevatedButton(
                 "Usar Simulador Interactivo →",
                 on_click=lambda _: self.show_section("simulador"),
-                bgcolor=ft.colors.PURPLE_500,
+                bgcolor=ft.Colors.PURPLE_500,
                 color="white"
             )
         ], spacing=20)
@@ -504,7 +504,7 @@ class OVAApp:
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.FAVORITE, color=color),
+                    ft.Icon(ft.Icons.FAVORITE, color=color),
                     ft.Text(title, size=16, weight=ft.FontWeight.BOLD)
                 ]),
                 ft.Text(description),
@@ -513,7 +513,7 @@ class OVAApp:
                 ft.Container(
                     content=ft.Text("📊 Gráfico de Dispersión", text_align=ft.TextAlign.CENTER),
                     height=150,
-                    bgcolor=ft.colors.GREY_100,
+                    bgcolor=ft.Colors.GREY_100,
                     border_radius=5
                 ),
                 
@@ -561,7 +561,7 @@ class OVAApp:
             bgcolor="white",
             padding=15,
             border_radius=10,
-            shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.colors.GREY_300),
+            shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.Colors.GREY_300),
             expand=True
         )
 
@@ -602,8 +602,8 @@ class OVAApp:
             multiline=True,
             max_lines=3
         )
-        self.sim_corr_result = ft.Text("-", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600)
-        self.sim_r2_result = ft.Text("-", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600)
+        self.sim_corr_result = ft.Text("-", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_600)
+        self.sim_r2_result = ft.Text("-", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_600)
         self.sim_equation = ft.Text("Y = a + bX", style=ft.TextStyle(font_family="monospace"))
         self.sim_interpretation = ft.Text("Ingresa datos y calcula la correlación para ver la interpretación.")
         self.sim_predict_input = ft.TextField(label="Valor X", width=100)
@@ -637,14 +637,14 @@ class OVAApp:
                         ft.Row([
                             ft.ElevatedButton(
                                 "Calcular Correlación",
-                                bgcolor=ft.colors.BLUE_500,
+                                bgcolor=ft.Colors.BLUE_500,
                                 color="white",
                                 on_click=self.calculate_correlation,
                                 expand=True
                             ),
                             ft.ElevatedButton(
                                 "Regresión Lineal",
-                                bgcolor=ft.colors.GREEN_500,
+                                bgcolor=ft.Colors.GREEN_500,
                                 color="white",
                                 on_click=self.calculate_regression,
                                 expand=True
@@ -658,14 +658,14 @@ class OVAApp:
                                     self.sim_predict_input,
                                     ft.ElevatedButton(
                                         "Predecir Y",
-                                        bgcolor=ft.colors.PURPLE_500,
+                                        bgcolor=ft.Colors.PURPLE_500,
                                         color="white",
                                         on_click=self.make_prediction
                                     )
                                 ], spacing=10),
                                 self.sim_predict_result
                             ]),
-                            bgcolor=ft.colors.GREY_50,
+                            bgcolor=ft.Colors.GREY_50,
                             padding=10,
                             border_radius=5
                         )
@@ -673,7 +673,7 @@ class OVAApp:
                     bgcolor="white",
                     padding=15,
                     border_radius=10,
-                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.colors.GREY_300),
+                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.Colors.GREY_300),
                     expand=True
                 ),
                 
@@ -686,7 +686,7 @@ class OVAApp:
                         ft.Container(
                             content=ft.Text("📊 Gráfico de Correlación y Regresión", text_align=ft.TextAlign.CENTER),
                             height=200,
-                            bgcolor=ft.colors.GREY_100,
+                            bgcolor=ft.Colors.GREY_100,
                             border_radius=5
                         ),
                         
@@ -696,7 +696,7 @@ class OVAApp:
                                     self.sim_corr_result,
                                     ft.Text("Correlación (r)", size=12)
                                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                                bgcolor=ft.colors.BLUE_50,
+                                bgcolor=ft.Colors.BLUE_50,
                                 padding=10,
                                 border_radius=5,
                                 expand=True
@@ -706,7 +706,7 @@ class OVAApp:
                                     self.sim_r2_result,
                                     ft.Text("R² (Determinación)", size=12)
                                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                                bgcolor=ft.colors.GREEN_50,
+                                bgcolor=ft.Colors.GREEN_50,
                                 padding=10,
                                 border_radius=5,
                                 expand=True
@@ -718,7 +718,7 @@ class OVAApp:
                                 ft.Text("Ecuación de Regresión:", weight=ft.FontWeight.BOLD),
                                 self.sim_equation
                             ]),
-                            bgcolor=ft.colors.PURPLE_50,
+                            bgcolor=ft.Colors.PURPLE_50,
                             padding=10,
                             border_radius=5
                         ),
@@ -728,7 +728,7 @@ class OVAApp:
                                 ft.Text("Interpretación:", weight=ft.FontWeight.BOLD),
                                 self.sim_interpretation
                             ]),
-                            bgcolor=ft.colors.YELLOW_50,
+                            bgcolor=ft.Colors.YELLOW_50,
                             padding=10,
                             border_radius=5
                         )
@@ -736,7 +736,7 @@ class OVAApp:
                     bgcolor="white",
                     padding=15,
                     border_radius=10,
-                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.colors.GREY_300),
+                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.Colors.GREY_300),
                     expand=True
                 )
             ], spacing=20),
@@ -744,7 +744,7 @@ class OVAApp:
             ft.ElevatedButton(
                 "Realizar Actividades Prácticas →",
                 on_click=lambda _: self.show_section("actividades"),
-                bgcolor=ft.colors.INDIGO_500,
+                bgcolor=ft.Colors.INDIGO_500,
                 color="white"
             )
         ], spacing=20)
@@ -898,7 +898,7 @@ class OVAApp:
                     ft.Row([
                         ft.Container(
                             content=ft.Text("1", size=20, weight=ft.FontWeight.BOLD, color="white"),
-                            bgcolor=ft.colors.BLUE_500,
+                            bgcolor=ft.Colors.BLUE_500,
                             width=40,
                             height=40,
                             border_radius=20,
@@ -914,7 +914,7 @@ class OVAApp:
                             ft.Text("Edad: 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 28, 33, 38, 43, 48, 53, 58, 63, 68, 72"),
                             ft.Text("Colesterol: 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 185, 195, 205, 215, 225, 235, 245, 255, 265, 275")
                         ]),
-                        bgcolor=ft.colors.BLUE_50,
+                        bgcolor=ft.Colors.BLUE_50,
                         padding=15,
                         border_radius=10
                     ),
@@ -925,7 +925,7 @@ class OVAApp:
                     
                     ft.ElevatedButton(
                         "Verificar Respuestas",
-                        bgcolor=ft.colors.BLUE_500,
+                        bgcolor=ft.Colors.BLUE_500,
                         color="white",
                         on_click=lambda _: self.check_activity_1()
                     )
@@ -933,7 +933,7 @@ class OVAApp:
                 bgcolor="white",
                 padding=20,
                 border_radius=15,
-                shadow=ft.BoxShadow(spread_radius=1, blur_radius=10, color=ft.colors.GREY_300)
+                shadow=ft.BoxShadow(spread_radius=1, blur_radius=10, color=ft.Colors.GREY_300)
             ),
             
             # Actividad 2
@@ -942,7 +942,7 @@ class OVAApp:
                     ft.Row([
                         ft.Container(
                             content=ft.Text("2", size=20, weight=ft.FontWeight.BOLD, color="white"),
-                            bgcolor=ft.colors.GREEN_500,
+                            bgcolor=ft.Colors.GREEN_500,
                             width=40,
                             height=40,
                             border_radius=20,
@@ -961,7 +961,7 @@ class OVAApp:
                             ft.Text("• Valor p: 0.003"),
                             ft.Text("• Tamaño de muestra: n = 80")
                         ]),
-                        bgcolor=ft.colors.GREEN_50,
+                        bgcolor=ft.Colors.GREEN_50,
                         padding=15,
                         border_radius=10
                     ),
@@ -981,7 +981,7 @@ class OVAApp:
                     
                     ft.ElevatedButton(
                         "Verificar Respuestas",
-                        bgcolor=ft.colors.GREEN_500,
+                        bgcolor=ft.Colors.GREEN_500,
                         color="white",
                         on_click=lambda _: self.check_activity_2()
                     )
@@ -989,13 +989,13 @@ class OVAApp:
                 bgcolor="white",
                 padding=20,
                 border_radius=15,
-                shadow=ft.BoxShadow(spread_radius=1, blur_radius=10, color=ft.colors.GREY_300)
+                shadow=ft.BoxShadow(spread_radius=1, blur_radius=10, color=ft.Colors.GREY_300)
             ),
             
             ft.ElevatedButton(
                 "Realizar Evaluación Final →",
                 on_click=lambda _: self.show_section("evaluacion"),
-                bgcolor=ft.colors.RED_500,
+                bgcolor=ft.Colors.RED_500,
                 color="white"
             )
         ], spacing=20)
@@ -1041,7 +1041,7 @@ class OVAApp:
             
             ft.Container(
                 content=ft.Column([
-                    ft.Icon(ft.icons.QUIZ, size=60, color=ft.colors.RED_500),
+                    ft.Icon(ft.Icons.QUIZ, size=60, color=ft.Colors.RED_500),
                     ft.Text("Quiz de Evaluación", size=20, weight=ft.FontWeight.BOLD),
                     ft.Text("10 preguntas sobre correlación y regresión lineal"),
                     ft.Text(f"Pregunta {self.current_quiz_question + 1} de {len(self.quiz_questions)}")
@@ -1055,7 +1055,7 @@ class OVAApp:
             ft.ElevatedButton(
                 "Ver Recursos Adicionales →",
                 on_click=lambda _: self.show_section("recursos"),
-                bgcolor=ft.colors.TEAL_500,
+                bgcolor=ft.Colors.TEAL_500,
                 color="white"
             )
         ], spacing=20)
@@ -1083,7 +1083,7 @@ class OVAApp:
                 bgcolor="white",
                 padding=20,
                 border_radius=10,
-                shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.colors.GREY_300)
+                shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.Colors.GREY_300)
             )
         )
         
@@ -1119,13 +1119,13 @@ class OVAApp:
         
         if percentage >= 80:
             performance = "Excelente"
-            color = ft.colors.GREEN_600
+            color = ft.Colors.GREEN_600
         elif percentage >= 60:
             performance = "Bueno"
-            color = ft.colors.YELLOW_600
+            color = ft.Colors.YELLOW_600
         else:
             performance = "Necesita mejorar"
-            color = ft.colors.RED_600
+            color = ft.Colors.RED_600
         
         results_content = ft.Column([
             ft.Container(
@@ -1139,7 +1139,7 @@ class OVAApp:
             
             ft.ElevatedButton(
                 "Generar Certificado",
-                bgcolor=ft.colors.ORANGE_500,
+                bgcolor=ft.Colors.ORANGE_500,
                 color="white",
                 on_click=self.generate_certificate
             )
@@ -1170,21 +1170,21 @@ class OVAApp:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.COMPUTER, color=ft.colors.BLUE_600),
+                            ft.Icon(ft.Icons.COMPUTER, color=ft.Colors.BLUE_600),
                             ft.Text("Herramientas de Software", size=16, weight=ft.FontWeight.BOLD)
                         ]),
                         
                         ft.Column([
-                            self.create_resource_item("R Statistical Software", "Software libre para análisis estadístico", "cor(x, y), lm(y ~ x)", ft.colors.BLUE_500),
-                            self.create_resource_item("Python (SciPy/Pandas)", "Librerías para análisis de datos", "scipy.stats.pearsonr()", ft.colors.GREEN_500),
-                            self.create_resource_item("SPSS", "Software estadístico comercial", "CORRELATIONS, REGRESSION", ft.colors.PURPLE_500),
-                            self.create_resource_item("Excel", "Funciones básicas de correlación", "=CORREL(), =LINEST()", ft.colors.ORANGE_500)
+                            self.create_resource_item("R Statistical Software", "Software libre para análisis estadístico", "cor(x, y), lm(y ~ x)", ft.Colors.BLUE_500),
+                            self.create_resource_item("Python (SciPy/Pandas)", "Librerías para análisis de datos", "scipy.stats.pearsonr()", ft.Colors.GREEN_500),
+                            self.create_resource_item("SPSS", "Software estadístico comercial", "CORRELATIONS, REGRESSION", ft.Colors.PURPLE_500),
+                            self.create_resource_item("Excel", "Funciones básicas de correlación", "=CORREL(), =LINEST()", ft.Colors.ORANGE_500)
                         ])
                     ], spacing=10),
                     bgcolor="white",
                     padding=15,
                     border_radius=10,
-                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.colors.GREY_300),
+                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.Colors.GREY_300),
                     expand=True
                 ),
                 
@@ -1192,20 +1192,20 @@ class OVAApp:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.BOOK, color=ft.colors.GREEN_600),
+                            ft.Icon(ft.Icons.BOOK, color=ft.Colors.GREEN_600),
                             ft.Text("Estudios de Referencia", size=16, weight=ft.FontWeight.BOLD)
                         ]),
                         
                         ft.Column([
-                            self.create_study_item("Framingham Heart Study", "Estudio longitudinal sobre factores de riesgo cardiovascular", "Epidemiología", ft.colors.GREEN_500),
-                            self.create_study_item("Nurses' Health Study", "Investigación sobre salud femenina y factores de riesgo", "Cohorte", ft.colors.BLUE_500),
-                            self.create_study_item("NHANES", "Encuesta Nacional de Salud y Nutrición (EE.UU.)", "Transversal", ft.colors.PURPLE_500)
+                            self.create_study_item("Framingham Heart Study", "Estudio longitudinal sobre factores de riesgo cardiovascular", "Epidemiología", ft.Colors.GREEN_500),
+                            self.create_study_item("Nurses' Health Study", "Investigación sobre salud femenina y factores de riesgo", "Cohorte", ft.Colors.BLUE_500),
+                            self.create_study_item("NHANES", "Encuesta Nacional de Salud y Nutrición (EE.UU.)", "Transversal", ft.Colors.PURPLE_500)
                         ])
                     ], spacing=10),
                     bgcolor="white",
                     padding=15,
                     border_radius=10,
-                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.colors.GREY_300),
+                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.Colors.GREY_300),
                     expand=True
                 ),
                 
@@ -1213,21 +1213,21 @@ class OVAApp:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.LIBRARY_BOOKS, color=ft.colors.PURPLE_600),
+                            ft.Icon(ft.Icons.LIBRARY_BOOKS, color=ft.Colors.PURPLE_600),
                             ft.Text("Bibliografía Recomendada", size=16, weight=ft.FontWeight.BOLD)
                         ]),
                         
                         ft.Column([
-                            self.create_bibliography_item("Bioestadística Médica", "Dawson, B. & Trapp, R. (2005)", "Manual Moderno", ft.colors.PURPLE_500),
-                            self.create_bibliography_item("Epidemiología Clínica", "Fletcher, R. & Fletcher, S. (2007)", "Lippincott Williams & Wilkins", ft.colors.INDIGO_500),
-                            self.create_bibliography_item("Statistics in Medicine", "Altman, D. (1991)", "Chapman & Hall", ft.colors.PINK_500),
-                            self.create_bibliography_item("Regression Analysis", "Montgomery, D. et al. (2012)", "Wiley", ft.colors.TEAL_500)
+                            self.create_bibliography_item("Bioestadística Médica", "Dawson, B. & Trapp, R. (2005)", "Manual Moderno", ft.Colors.PURPLE_500),
+                            self.create_bibliography_item("Epidemiología Clínica", "Fletcher, R. & Fletcher, S. (2007)", "Lippincott Williams & Wilkins", ft.Colors.INDIGO_500),
+                            self.create_bibliography_item("Statistics in Medicine", "Altman, D. (1991)", "Chapman & Hall", ft.Colors.PINK_500),
+                            self.create_bibliography_item("Regression Analysis", "Montgomery, D. et al. (2012)", "Wiley", ft.Colors.TEAL_500)
                         ])
                     ], spacing=10),
                     bgcolor="white",
                     padding=15,
                     border_radius=10,
-                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.colors.GREY_300),
+                    shadow=ft.BoxShadow(spread_radius=1, blur_radius=5, color=ft.Colors.GREY_300),
                     expand=True
                 )
             ], spacing=20),
@@ -1237,36 +1237,36 @@ class OVAApp:
                 content=ft.Column([
                     ft.Text("Enlaces Útiles", size=18, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
                     ft.Row([
-                        self.create_link_item("PubMed", "Base de datos de literatura médica", ft.icons.PUBLIC, ft.colors.RED_500),
-                        self.create_link_item("Cochrane Library", "Revisiones sistemáticas", ft.icons.ANALYTICS, ft.colors.BLUE_500),
-                        self.create_link_item("WHO", "Organización Mundial de la Salud", ft.icons.HEALTH_AND_SAFETY, ft.colors.GREEN_500),
-                        self.create_link_item("CDC", "Centros para el Control de Enfermedades", ft.icons.SCIENCE, ft.colors.PURPLE_500)
+                        self.create_link_item("PubMed", "Base de datos de literatura médica", ft.Icons.PUBLIC, ft.Colors.RED_500),
+                        self.create_link_item("Cochrane Library", "Revisiones sistemáticas", ft.Icons.ANALYTICS, ft.Colors.BLUE_500),
+                        self.create_link_item("WHO", "Organización Mundial de la Salud", ft.Icons.HEALTH_AND_SAFETY, ft.Colors.GREEN_500),
+                        self.create_link_item("CDC", "Centros para el Control de Enfermedades", ft.Icons.SCIENCE, ft.Colors.PURPLE_500)
                     ], alignment=ft.MainAxisAlignment.SPACE_AROUND)
                 ]),
                 bgcolor="white",
                 padding=20,
                 border_radius=15,
-                shadow=ft.BoxShadow(spread_radius=1, blur_radius=10, color=ft.colors.GREY_300)
+                shadow=ft.BoxShadow(spread_radius=1, blur_radius=10, color=ft.Colors.GREY_300)
             ),
             
             # Certificado de Finalización
             ft.Container(
                 content=ft.Column([
-                    ft.Icon(ft.icons.EMOJI_EVENTS, size=60, color=ft.colors.YELLOW_600),
+                    ft.Icon(ft.Icons.EMOJI_EVENTS, size=60, color=ft.Colors.YELLOW_600),
                     ft.Text("¡Felicitaciones!", size=24, weight=ft.FontWeight.BOLD, color="white"),
                     ft.Text("Has completado exitosamente la OVA 13: Análisis de Correlación y Regresión Lineal en Investigación en Salud", 
                            color="white", text_align=ft.TextAlign.CENTER),
                     ft.ElevatedButton(
                         "Generar Certificado",
                         bgcolor="white",
-                        color=ft.colors.ORANGE_600,
+                        color=ft.Colors.ORANGE_600,
                         on_click=self.generate_certificate
                     )
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=15),
-                bgcolor=ft.colors.ORANGE_500,
+                bgcolor=ft.Colors.ORANGE_500,
                 padding=30,
                 border_radius=15,
-                shadow=ft.BoxShadow(spread_radius=1, blur_radius=10, color=ft.colors.GREY_300)
+                shadow=ft.BoxShadow(spread_radius=1, blur_radius=10, color=ft.Colors.GREY_300)
             )
         ], spacing=20)
         
@@ -1279,7 +1279,7 @@ class OVAApp:
                 ft.Text(description, size=12),
                 ft.Container(
                     content=ft.Text(code, style=ft.TextStyle(font_family="monospace")),
-                    bgcolor=ft.colors.GREY_100,
+                    bgcolor=ft.Colors.GREY_100,
                     padding=5,
                     border_radius=3
                 )
@@ -1310,7 +1310,7 @@ class OVAApp:
             content=ft.Column([
                 ft.Text(title, weight=ft.FontWeight.BOLD),
                 ft.Text(author),
-                ft.Text(publisher, size=10, color=ft.colors.GREY_600)
+                ft.Text(publisher, size=10, color=ft.Colors.GREY_600)
             ]),
             border=ft.border.only(left=ft.BorderSide(4, color)),
             padding=ft.padding.only(left=10)

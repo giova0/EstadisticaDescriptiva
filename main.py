@@ -13,8 +13,8 @@ def mostrar_estadistica_descriptiva(page: ft.Page) -> None:
     page.bgcolor = "#f0f0f0"
 
     button_style = ft.ButtonStyle(
-        color=ft.colors.WHITE,
-        bgcolor=ft.colors.BLUE_700,
+        color=ft.Colors.WHITE,
+        bgcolor=ft.Colors.BLUE_700,
         text_style=ft.TextStyle(size=14, weight=ft.FontWeight.BOLD),
         shape=ft.RoundedRectangleBorder(radius=6),
         elevation=2,
@@ -29,7 +29,7 @@ def mostrar_estadistica_descriptiva(page: ft.Page) -> None:
                 "ESTADÍSTICA DESCRIPTIVA",
                 size=26,
                 weight=ft.FontWeight.BOLD,
-                color=ft.colors.BLUE,
+                color=ft.Colors.BLUE,
                 text_align=ft.TextAlign.CENTER,
             ),
             ft.Container(height=30),
@@ -96,7 +96,7 @@ def mostrar_menu_ovas(page: ft.Page) -> None:
     page.add(
         ft.Column(
             [
-                ft.Text("OVAS - Selecciona un módulo", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE),
+                ft.Text("OVAS - Selecciona un módulo", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE),
                 ft.Container(height=20),
                 ft.Column(botones, spacing=10, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                 ft.Container(height=30),
@@ -186,7 +186,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                 ova.main(page)
             return
         # Si no está mapeada
-        page.add(ft.Text("OVA no disponible", color=ft.colors.RED))
+        page.add(ft.Text("OVA no disponible", color=ft.Colors.RED))
         page.update()
     except Exception as err:
         # Registrar traza en consola y mostrar mensaje en UI
@@ -208,6 +208,7 @@ def route_change(page: ft.Page):
         page.clean()
         inicio.main(page)
         page.update()
+
 
 
 if __name__ == "__main__":

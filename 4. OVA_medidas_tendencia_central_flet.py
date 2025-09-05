@@ -148,13 +148,13 @@ class OVAApp:
         header = ft.Container(
             content=ft.Column([
                 ft.Text("📊 Medidas de Tendencia Central", 
-                       size=32, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                       size=32, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                 ft.Text("Aplicadas a Ciencias de la Salud", 
-                       size=20, color=ft.colors.WHITE),
+                       size=20, color=ft.Colors.WHITE),
                 ft.Text("Objeto Virtual de Aprendizaje - Modelo Pedagógico C(H)ANGE", 
-                       size=14, color=ft.colors.WHITE70),
+                       size=14, color=ft.Colors.WHITE70),
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.BLUE_700,
+            bgcolor=ft.Colors.BLUE_700,
             padding=20,
             margin=ft.margin.only(bottom=10)
         )
@@ -195,7 +195,7 @@ class OVAApp:
                                             size=14
                                         )
                                     ]),
-                                    bgcolor=ft.colors.BLUE_50,
+                                    bgcolor=ft.Colors.BLUE_50,
                                     padding=15,
                                     border_radius=10,
                                     expand=1
@@ -212,11 +212,11 @@ class OVAApp:
                                    size=24, weight=ft.FontWeight.BOLD),
                             ft.Divider(),
                             ft.Row([
-                                self.crear_componente_change("🔢", "Combinatoria", "Organización de datos", ft.colors.RED_100),
-                                self.crear_componente_change("📐", "Álgebra", "Fórmulas y cálculos", ft.colors.BLUE_100),
-                                self.crear_componente_change("🔢", "Números", "Interpretación numérica", ft.colors.GREEN_100),
-                                self.crear_componente_change("📊", "Geometría", "Visualización gráfica", ft.colors.YELLOW_100),
-                                self.crear_componente_change("📈", "Estadística", "Análisis de datos", ft.colors.PURPLE_100),
+                                self.crear_componente_change("🔢", "Combinatoria", "Organización de datos", ft.Colors.RED_100),
+                                self.crear_componente_change("📐", "Álgebra", "Fórmulas y cálculos", ft.Colors.BLUE_100),
+                                self.crear_componente_change("🔢", "Números", "Interpretación numérica", ft.Colors.GREEN_100),
+                                self.crear_componente_change("📊", "Geometría", "Visualización gráfica", ft.Colors.YELLOW_100),
+                                self.crear_componente_change("📈", "Estadística", "Análisis de datos", ft.Colors.PURPLE_100),
                             ], alignment=ft.MainAxisAlignment.SPACE_AROUND)
                         ]),
                         padding=20
@@ -230,8 +230,8 @@ class OVAApp:
         """Crea un objetivo de aprendizaje"""
         return ft.Row([
             ft.Container(
-                content=ft.Text(numero, color=ft.colors.WHITE, weight=ft.FontWeight.BOLD),
-                bgcolor=ft.colors.BLUE_500,
+                content=ft.Text(numero, color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD),
+                bgcolor=ft.Colors.BLUE_500,
                 width=30,
                 height=30,
                 border_radius=15,
@@ -264,7 +264,7 @@ class OVAApp:
                 ft.Card(
                     content=ft.Container(
                         content=ft.Column([
-                            ft.Text("➕ Media Aritmética", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_700),
+                            ft.Text("➕ Media Aritmética", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_700),
                             ft.Row([
                                 ft.Container(
                                     content=ft.Column([
@@ -275,28 +275,28 @@ class OVAApp:
                                                 ft.Text("x̄ = Σx / n", size=18, weight=ft.FontWeight.BOLD),
                                                 ft.Text("Donde x̄ es la media, Σx es la suma de todos los valores, y n es el número de observaciones", size=12)
                                             ]),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=10,
                                             border_radius=5,
-                                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.BLUE_500))
+                                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.BLUE_500))
                                         )
                                     ]),
                                     expand=1
                                 ),
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Ejemplo en Salud:", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_700),
+                                        ft.Text("Ejemplo en Salud:", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_700),
                                         ft.Text("Presión arterial sistólica de 5 pacientes:", size=14),
                                         ft.Row([
-                                            ft.Container(ft.Text("120"), bgcolor=ft.colors.BLUE_100, padding=5, border_radius=3),
-                                            ft.Container(ft.Text("130"), bgcolor=ft.colors.BLUE_100, padding=5, border_radius=3),
-                                            ft.Container(ft.Text("125"), bgcolor=ft.colors.BLUE_100, padding=5, border_radius=3),
-                                            ft.Container(ft.Text("135"), bgcolor=ft.colors.BLUE_100, padding=5, border_radius=3),
-                                            ft.Container(ft.Text("140"), bgcolor=ft.colors.BLUE_100, padding=5, border_radius=3),
+                                            ft.Container(ft.Text("120"), bgcolor=ft.Colors.BLUE_100, padding=5, border_radius=3),
+                                            ft.Container(ft.Text("130"), bgcolor=ft.Colors.BLUE_100, padding=5, border_radius=3),
+                                            ft.Container(ft.Text("125"), bgcolor=ft.Colors.BLUE_100, padding=5, border_radius=3),
+                                            ft.Container(ft.Text("135"), bgcolor=ft.Colors.BLUE_100, padding=5, border_radius=3),
+                                            ft.Container(ft.Text("140"), bgcolor=ft.Colors.BLUE_100, padding=5, border_radius=3),
                                         ]),
                                         ft.Text("Media = (120+130+125+135+140)/5 = 130 mmHg", weight=ft.FontWeight.BOLD)
                                     ]),
-                                    bgcolor=ft.colors.WHITE,
+                                    bgcolor=ft.Colors.WHITE,
                                     padding=10,
                                     border_radius=5,
                                     expand=1
@@ -305,14 +305,14 @@ class OVAApp:
                         ]),
                         padding=15
                     ),
-                    color=ft.colors.BLUE_50
+                    color=ft.Colors.BLUE_50
                 ),
                 
                 # Mediana
                 ft.Card(
                     content=ft.Container(
                         content=ft.Column([
-                            ft.Text("📍 Mediana", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700),
+                            ft.Text("📍 Mediana", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700),
                             ft.Row([
                                 ft.Container(
                                     content=ft.Column([
@@ -324,28 +324,28 @@ class OVAApp:
                                                 ft.Text("• Útil en distribuciones asimétricas"),
                                                 ft.Text("• Representa el percentil 50"),
                                             ]),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=10,
                                             border_radius=5,
-                                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.GREEN_500))
+                                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.GREEN_500))
                                         )
                                     ]),
                                     expand=1
                                 ),
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Ejemplo en Salud:", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700),
+                                        ft.Text("Ejemplo en Salud:", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700),
                                         ft.Text("Tiempo de espera en urgencias (minutos):", size=14),
                                         ft.Row([
-                                            ft.Container(ft.Text("15"), bgcolor=ft.colors.GREEN_100, padding=5, border_radius=3),
-                                            ft.Container(ft.Text("20"), bgcolor=ft.colors.GREEN_100, padding=5, border_radius=3),
-                                            ft.Container(ft.Text("25"), bgcolor=ft.colors.GREEN_200, padding=5, border_radius=3, border=ft.border.all(2, ft.colors.GREEN_700)),
-                                            ft.Container(ft.Text("30"), bgcolor=ft.colors.GREEN_100, padding=5, border_radius=3),
-                                            ft.Container(ft.Text("45"), bgcolor=ft.colors.GREEN_100, padding=5, border_radius=3),
+                                            ft.Container(ft.Text("15"), bgcolor=ft.Colors.GREEN_100, padding=5, border_radius=3),
+                                            ft.Container(ft.Text("20"), bgcolor=ft.Colors.GREEN_100, padding=5, border_radius=3),
+                                            ft.Container(ft.Text("25"), bgcolor=ft.Colors.GREEN_200, padding=5, border_radius=3, border=ft.border.all(2, ft.Colors.GREEN_700)),
+                                            ft.Container(ft.Text("30"), bgcolor=ft.Colors.GREEN_100, padding=5, border_radius=3),
+                                            ft.Container(ft.Text("45"), bgcolor=ft.Colors.GREEN_100, padding=5, border_radius=3),
                                         ]),
-                                        ft.Text("Mediana = 25 minutos", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700)
+                                        ft.Text("Mediana = 25 minutos", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700)
                                     ]),
-                                    bgcolor=ft.colors.WHITE,
+                                    bgcolor=ft.Colors.WHITE,
                                     padding=10,
                                     border_radius=5,
                                     expand=1
@@ -354,14 +354,14 @@ class OVAApp:
                         ]),
                         padding=15
                     ),
-                    color=ft.colors.GREEN_50
+                    color=ft.Colors.GREEN_50
                 ),
                 
                 # Moda
                 ft.Card(
                     content=ft.Container(
                         content=ft.Column([
-                            ft.Text("🎯 Moda", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_700),
+                            ft.Text("🎯 Moda", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_700),
                             ft.Row([
                                 ft.Container(
                                     content=ft.Column([
@@ -373,35 +373,35 @@ class OVAApp:
                                                 ft.Text("• Bimodal: Dos modas"),
                                                 ft.Text("• Multimodal: Más de dos modas"),
                                             ]),
-                                            bgcolor=ft.colors.WHITE,
+                                            bgcolor=ft.Colors.WHITE,
                                             padding=10,
                                             border_radius=5,
-                                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.PURPLE_500))
+                                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.PURPLE_500))
                                         )
                                     ]),
                                     expand=1
                                 ),
                                 ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Ejemplo en Salud:", weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_700),
+                                        ft.Text("Ejemplo en Salud:", weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_700),
                                         ft.Text("Grupo sanguíneo de pacientes:", size=14),
                                         ft.Column([
                                             ft.Row([
-                                                ft.Container(ft.Text("A"), bgcolor=ft.colors.PURPLE_100, padding=5, border_radius=3),
-                                                ft.Container(ft.Text("O"), bgcolor=ft.colors.PURPLE_200, padding=5, border_radius=3, border=ft.border.all(2, ft.colors.PURPLE_700)),
+                                                ft.Container(ft.Text("A"), bgcolor=ft.Colors.PURPLE_100, padding=5, border_radius=3),
+                                                ft.Container(ft.Text("O"), bgcolor=ft.Colors.PURPLE_200, padding=5, border_radius=3, border=ft.border.all(2, ft.Colors.PURPLE_700)),
                                             ]),
                                             ft.Row([
-                                                ft.Container(ft.Text("B"), bgcolor=ft.colors.PURPLE_100, padding=5, border_radius=3),
-                                                ft.Container(ft.Text("O"), bgcolor=ft.colors.PURPLE_200, padding=5, border_radius=3, border=ft.border.all(2, ft.colors.PURPLE_700)),
+                                                ft.Container(ft.Text("B"), bgcolor=ft.Colors.PURPLE_100, padding=5, border_radius=3),
+                                                ft.Container(ft.Text("O"), bgcolor=ft.Colors.PURPLE_200, padding=5, border_radius=3, border=ft.border.all(2, ft.Colors.PURPLE_700)),
                                             ]),
                                             ft.Row([
-                                                ft.Container(ft.Text("O"), bgcolor=ft.colors.PURPLE_200, padding=5, border_radius=3, border=ft.border.all(2, ft.colors.PURPLE_700)),
-                                                ft.Container(ft.Text("AB"), bgcolor=ft.colors.PURPLE_100, padding=5, border_radius=3),
+                                                ft.Container(ft.Text("O"), bgcolor=ft.Colors.PURPLE_200, padding=5, border_radius=3, border=ft.border.all(2, ft.Colors.PURPLE_700)),
+                                                ft.Container(ft.Text("AB"), bgcolor=ft.Colors.PURPLE_100, padding=5, border_radius=3),
                                             ])
                                         ]),
-                                        ft.Text("Moda = Grupo O (3 veces)", weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_700)
+                                        ft.Text("Moda = Grupo O (3 veces)", weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_700)
                                     ]),
-                                    bgcolor=ft.colors.WHITE,
+                                    bgcolor=ft.Colors.WHITE,
                                     padding=10,
                                     border_radius=5,
                                     expand=1
@@ -410,7 +410,7 @@ class OVAApp:
                         ]),
                         padding=15
                     ),
-                    color=ft.colors.PURPLE_50
+                    color=ft.Colors.PURPLE_50
                 )
             ], scroll=ft.ScrollMode.AUTO),
             padding=10
@@ -431,100 +431,100 @@ class OVAApp:
                 ft.Card(
                     content=ft.Container(
                         content=ft.Column([
-                            ft.Text("Caso 1: Análisis de Presión Arterial", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.RED_700),
+                            ft.Text("Caso 1: Análisis de Presión Arterial", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.RED_700),
                             ft.Text("Un cardiólogo registró la presión arterial sistólica de 10 pacientes hipertensos durante su consulta matutina:", size=14),
                             ft.Row([
-                                ft.Container(ft.Text("145"), bgcolor=ft.colors.RED_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("150"), bgcolor=ft.colors.RED_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("138"), bgcolor=ft.colors.RED_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("162"), bgcolor=ft.colors.RED_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("155"), bgcolor=ft.colors.RED_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("148"), bgcolor=ft.colors.RED_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("142"), bgcolor=ft.colors.RED_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("158"), bgcolor=ft.colors.RED_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("151"), bgcolor=ft.colors.RED_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("149"), bgcolor=ft.colors.RED_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("145"), bgcolor=ft.Colors.RED_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("150"), bgcolor=ft.Colors.RED_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("138"), bgcolor=ft.Colors.RED_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("162"), bgcolor=ft.Colors.RED_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("155"), bgcolor=ft.Colors.RED_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("148"), bgcolor=ft.Colors.RED_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("142"), bgcolor=ft.Colors.RED_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("158"), bgcolor=ft.Colors.RED_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("151"), bgcolor=ft.Colors.RED_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("149"), bgcolor=ft.Colors.RED_100, padding=8, border_radius=5),
                             ], wrap=True),
                             ft.ElevatedButton(
                                 "Calcular Medidas",
                                 on_click=lambda _: self.calcular_caso1(),
-                                bgcolor=ft.colors.RED_600,
-                                color=ft.colors.WHITE
+                                bgcolor=ft.Colors.RED_600,
+                                color=ft.Colors.WHITE
                             ),
                             self.caso1_resultados
                         ]),
                         padding=15
                     ),
-                    color=ft.colors.RED_50
+                    color=ft.Colors.RED_50
                 ),
                 
                 # Caso 2: IMC
                 ft.Card(
                     content=ft.Container(
                         content=ft.Column([
-                            ft.Text("Caso 2: Índice de Masa Corporal (IMC)", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700),
+                            ft.Text("Caso 2: Índice de Masa Corporal (IMC)", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700),
                             ft.Text("Una nutricionista evaluó el IMC de 12 pacientes en una consulta de control nutricional:", size=14),
                             ft.Row([
-                                ft.Container(ft.Text("22.5"), bgcolor=ft.colors.GREEN_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("28.3"), bgcolor=ft.colors.GREEN_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("31.2"), bgcolor=ft.colors.GREEN_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("24.8"), bgcolor=ft.colors.GREEN_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("26.7"), bgcolor=ft.colors.GREEN_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("29.1"), bgcolor=ft.colors.GREEN_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("23.4"), bgcolor=ft.colors.GREEN_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("27.9"), bgcolor=ft.colors.GREEN_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("25.6"), bgcolor=ft.colors.GREEN_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("30.5"), bgcolor=ft.colors.GREEN_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("24.2"), bgcolor=ft.colors.GREEN_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("26.8"), bgcolor=ft.colors.GREEN_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("22.5"), bgcolor=ft.Colors.GREEN_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("28.3"), bgcolor=ft.Colors.GREEN_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("31.2"), bgcolor=ft.Colors.GREEN_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("24.8"), bgcolor=ft.Colors.GREEN_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("26.7"), bgcolor=ft.Colors.GREEN_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("29.1"), bgcolor=ft.Colors.GREEN_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("23.4"), bgcolor=ft.Colors.GREEN_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("27.9"), bgcolor=ft.Colors.GREEN_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("25.6"), bgcolor=ft.Colors.GREEN_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("30.5"), bgcolor=ft.Colors.GREEN_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("24.2"), bgcolor=ft.Colors.GREEN_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("26.8"), bgcolor=ft.Colors.GREEN_100, padding=8, border_radius=5),
                             ], wrap=True),
                             ft.ElevatedButton(
                                 "Analizar IMC",
                                 on_click=lambda _: self.calcular_caso2(),
-                                bgcolor=ft.colors.GREEN_600,
-                                color=ft.colors.WHITE
+                                bgcolor=ft.Colors.GREEN_600,
+                                color=ft.Colors.WHITE
                             ),
                             self.caso2_resultados
                         ]),
                         padding=15
                     ),
-                    color=ft.colors.GREEN_50
+                    color=ft.Colors.GREEN_50
                 ),
                 
                 # Caso 3: Tiempo de Recuperación
                 ft.Card(
                     content=ft.Container(
                         content=ft.Column([
-                            ft.Text("Caso 3: Tiempo de Recuperación Post-Cirugía", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_700),
+                            ft.Text("Caso 3: Tiempo de Recuperación Post-Cirugía", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_700),
                             ft.Text("Un cirujano registró los días de recuperación de 15 pacientes después de una apendicectomía:", size=14),
                             ft.Row([
-                                ft.Container(ft.Text("3"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("5"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("4"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("7"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("4"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("6"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("5"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("4"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("8"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("5"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("6"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("4"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("5"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("7"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
-                                ft.Container(ft.Text("5"), bgcolor=ft.colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("3"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("5"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("4"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("7"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("4"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("6"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("5"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("4"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("8"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("5"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("6"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("4"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("5"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("7"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
+                                ft.Container(ft.Text("5"), bgcolor=ft.Colors.BLUE_100, padding=8, border_radius=5),
                             ], wrap=True),
                             ft.ElevatedButton(
                                 "Analizar Recuperación",
                                 on_click=lambda _: self.calcular_caso3(),
-                                bgcolor=ft.colors.BLUE_600,
-                                color=ft.colors.WHITE
+                                bgcolor=ft.Colors.BLUE_600,
+                                color=ft.Colors.WHITE
                             ),
                             self.caso3_resultados
                         ]),
                         padding=15
                     ),
-                    color=ft.colors.BLUE_50
+                    color=ft.Colors.BLUE_50
                 )
             ], scroll=ft.ScrollMode.AUTO),
             padding=10
@@ -546,30 +546,30 @@ class OVAApp:
             ft.Row([
                 ft.Container(
                     content=ft.Column([
-                        ft.Text(f"{media:.1f}", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_700),
+                        ft.Text(f"{media:.1f}", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_700),
                         ft.Text("Media (mmHg)", size=12)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.BLUE_100,
+                    bgcolor=ft.Colors.BLUE_100,
                     padding=15,
                     border_radius=10,
                     expand=1
                 ),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text(f"{mediana}", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700),
+                        ft.Text(f"{mediana}", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700),
                         ft.Text("Mediana (mmHg)", size=12)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.GREEN_100,
+                    bgcolor=ft.Colors.GREEN_100,
                     padding=15,
                     border_radius=10,
                     expand=1
                 ),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text(f"{moda}", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_700),
+                        ft.Text(f"{moda}", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_700),
                         ft.Text("Moda (mmHg)", size=12)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.PURPLE_100,
+                    bgcolor=ft.Colors.PURPLE_100,
                     padding=15,
                     border_radius=10,
                     expand=1
@@ -580,10 +580,10 @@ class OVAApp:
                     f"Interpretación: La media de {media:.1f} mmHg indica hipertensión arterial en este grupo de pacientes. La mediana ({mediana} mmHg) confirma que al menos la mitad de los pacientes tienen valores elevados.",
                     size=14
                 ),
-                bgcolor=ft.colors.YELLOW_50,
+                bgcolor=ft.Colors.YELLOW_50,
                 padding=10,
                 border_radius=5,
-                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_600))
+                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_600))
             ),
             ft.Image(src=imagen_base64, width=600, height=400)
         ]
@@ -622,30 +622,30 @@ class OVAApp:
             ft.Row([
                 ft.Container(
                     content=ft.Column([
-                        ft.Text(f"{media:.1f}", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_700),
+                        ft.Text(f"{media:.1f}", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_700),
                         ft.Text("Media IMC", size=12)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.BLUE_100,
+                    bgcolor=ft.Colors.BLUE_100,
                     padding=15,
                     border_radius=10,
                     expand=1
                 ),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text(f"{mediana:.1f}", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700),
+                        ft.Text(f"{mediana:.1f}", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700),
                         ft.Text("Mediana IMC", size=12)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.GREEN_100,
+                    bgcolor=ft.Colors.GREEN_100,
                     padding=15,
                     border_radius=10,
                     expand=1
                 ),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text(f"{moda}", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_700),
+                        ft.Text(f"{moda}", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_700),
                         ft.Text("Moda IMC", size=12)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.PURPLE_100,
+                    bgcolor=ft.Colors.PURPLE_100,
                     padding=15,
                     border_radius=10,
                     expand=1
@@ -659,7 +659,7 @@ class OVAApp:
                         ft.Text(f"{count} pacientes", weight=ft.FontWeight.BOLD)
                     ]) for cat, count in conteo_clasif.items()]
                 ]),
-                bgcolor=ft.colors.GREY_50,
+                bgcolor=ft.Colors.GREY_50,
                 padding=10,
                 border_radius=5
             ),
@@ -668,10 +668,10 @@ class OVAApp:
                     f"Interpretación: El IMC promedio de {media:.1f} indica sobrepeso en el grupo. Se recomienda intervención nutricional para {conteo_clasif.get('Sobrepeso', 0)} pacientes con sobrepeso y {conteo_clasif.get('Obesidad', 0)} con obesidad.",
                     size=14
                 ),
-                bgcolor=ft.colors.GREEN_50,
+                bgcolor=ft.Colors.GREEN_50,
                 padding=10,
                 border_radius=5,
-                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.GREEN_600))
+                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.GREEN_600))
             ),
             ft.Image(src=imagen_base64, width=600, height=400)
         ]
@@ -694,30 +694,30 @@ class OVAApp:
             ft.Row([
                 ft.Container(
                     content=ft.Column([
-                        ft.Text(f"{media:.1f}", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_700),
+                        ft.Text(f"{media:.1f}", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_700),
                         ft.Text("Media (días)", size=12)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.BLUE_100,
+                    bgcolor=ft.Colors.BLUE_100,
                     padding=15,
                     border_radius=10,
                     expand=1
                 ),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text(f"{mediana}", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700),
+                        ft.Text(f"{mediana}", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700),
                         ft.Text("Mediana (días)", size=12)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.GREEN_100,
+                    bgcolor=ft.Colors.GREEN_100,
                     padding=15,
                     border_radius=10,
                     expand=1
                 ),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text(f"{moda}", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_700),
+                        ft.Text(f"{moda}", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_700),
                         ft.Text("Moda (días)", size=12)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.PURPLE_100,
+                    bgcolor=ft.Colors.PURPLE_100,
                     padding=15,
                     border_radius=10,
                     expand=1
@@ -728,10 +728,10 @@ class OVAApp:
                     f"Interpretación: El tiempo promedio de recuperación es {media:.1f} días. La moda de {moda} días indica que estos son los tiempos más frecuentes de recuperación. Esto ayuda a planificar la capacidad hospitalaria y expectativas del paciente.",
                     size=14
                 ),
-                bgcolor=ft.colors.BLUE_50,
+                bgcolor=ft.Colors.BLUE_50,
                 padding=10,
                 border_radius=5,
-                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.BLUE_600))
+                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.BLUE_600))
             ),
             ft.Image(src=imagen_base64, width=600, height=400)
         ]
@@ -796,8 +796,8 @@ class OVAApp:
                                 ft.ElevatedButton(
                                     "🎲 Generar Datos Simulados",
                                     on_click=lambda _: self.generar_datos_simulador(),
-                                    bgcolor=ft.colors.BLUE_600,
-                                    color=ft.colors.WHITE,
+                                    bgcolor=ft.Colors.BLUE_600,
+                                    color=ft.Colors.WHITE,
                                     width=280
                                 ),
                                 self.datos_generados
@@ -836,7 +836,7 @@ class OVAApp:
         # Mostrar datos generados
         datos_texto = [ft.Container(
             ft.Text(f"{d}{config['unidad']}"),
-            bgcolor=ft.colors.BLUE_100,
+            bgcolor=ft.Colors.BLUE_100,
             padding=5,
             border_radius=3
         ) for d in datos[:20]]  # Mostrar solo los primeros 20
@@ -851,8 +851,8 @@ class OVAApp:
             ft.ElevatedButton(
                 "📊 Calcular Medidas",
                 on_click=lambda _: self.calcular_simulador(datos, config),
-                bgcolor=ft.colors.GREEN_600,
-                color=ft.colors.WHITE
+                bgcolor=ft.Colors.GREEN_600,
+                color=ft.Colors.WHITE
             )
         ]
         self.datos_generados.visible = True
@@ -878,30 +878,30 @@ class OVAApp:
             ft.Row([
                 ft.Container(
                     content=ft.Column([
-                        ft.Text(f"{media:.1f}", size=28, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_700),
+                        ft.Text(f"{media:.1f}", size=28, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_700),
                         ft.Text(f"Media {config['unidad']}", size=12)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.BLUE_100,
+                    bgcolor=ft.Colors.BLUE_100,
                     padding=20,
                     border_radius=10,
                     expand=1
                 ),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text(f"{mediana}", size=28, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700),
+                        ft.Text(f"{mediana}", size=28, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700),
                         ft.Text(f"Mediana {config['unidad']}", size=12)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.GREEN_100,
+                    bgcolor=ft.Colors.GREEN_100,
                     padding=20,
                     border_radius=10,
                     expand=1
                 ),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text(f"{moda}", size=28, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_700),
+                        ft.Text(f"{moda}", size=28, weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_700),
                         ft.Text(f"Moda {config['unidad']}", size=12)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.PURPLE_100,
+                    bgcolor=ft.Colors.PURPLE_100,
                     padding=20,
                     border_radius=10,
                     expand=1
@@ -909,13 +909,13 @@ class OVAApp:
             ]),
             ft.Container(
                 content=ft.Column([
-                    ft.Text("💡 Interpretación Clínica:", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_700),
+                    ft.Text("💡 Interpretación Clínica:", weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_700),
                     ft.Text(interpretacion, size=14)
                 ]),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=15,
                 border_radius=5,
-                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.BLUE_500))
+                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.BLUE_500))
             ),
             ft.Image(src=imagen_base64, width=650, height=450)
         ]
@@ -1006,13 +1006,13 @@ class OVAApp:
             pregunta_card = ft.Card(
                 content=ft.Container(
                     content=ft.Column([
-                        ft.Text(f"Pregunta {i+1} de {len(preguntas)}", size=16, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_700),
+                        ft.Text(f"Pregunta {i+1} de {len(preguntas)}", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE_700),
                         ft.Text(pregunta["pregunta"], size=14),
                         radio_group
                     ]),
                     padding=15
                 ),
-                color=ft.colors.BLUE_50
+                color=ft.Colors.BLUE_50
             )
             preguntas_controles.append(pregunta_card)
         
@@ -1026,8 +1026,8 @@ class OVAApp:
                     content=ft.ElevatedButton(
                         "📊 Evaluar Respuestas",
                         on_click=lambda _: self.evaluar_quiz(preguntas),
-                        bgcolor=ft.colors.GREEN_600,
-                        color=ft.colors.WHITE,
+                        bgcolor=ft.Colors.GREEN_600,
+                        color=ft.Colors.WHITE,
                         width=200
                     ),
                     alignment=ft.alignment.center
@@ -1050,9 +1050,9 @@ class OVAApp:
             if es_correcta:
                 puntuacion += 1
             
-            color = ft.colors.GREEN_50 if es_correcta else ft.colors.RED_50
-            border_color = ft.colors.GREEN_400 if es_correcta else ft.colors.RED_400
-            text_color = ft.colors.GREEN_800 if es_correcta else ft.colors.RED_800
+            color = ft.Colors.GREEN_50 if es_correcta else ft.Colors.RED_50
+            border_color = ft.Colors.GREEN_400 if es_correcta else ft.Colors.RED_400
+            text_color = ft.Colors.GREEN_800 if es_correcta else ft.Colors.RED_800
             
             retroalimentacion.append(
                 ft.Container(
@@ -1072,13 +1072,13 @@ class OVAApp:
         
         if porcentaje >= 80:
             mensaje = "¡Excelente! Dominas muy bien los conceptos de medidas de tendencia central."
-            color_resultado = ft.colors.GREEN_600
+            color_resultado = ft.Colors.GREEN_600
         elif porcentaje >= 60:
             mensaje = "Buen trabajo. Tienes una comprensión sólida, pero puedes mejorar algunos aspectos."
-            color_resultado = ft.colors.BLUE_600
+            color_resultado = ft.Colors.BLUE_600
         else:
             mensaje = "Necesitas repasar los conceptos. Te recomendamos revisar la teoría y los casos clínicos."
-            color_resultado = ft.colors.RED_600
+            color_resultado = ft.Colors.RED_600
         
         self.resultados_quiz.controls = [
             ft.Card(
@@ -1095,13 +1095,13 @@ class OVAApp:
                         ft.ElevatedButton(
                             "🔄 Intentar de Nuevo",
                             on_click=lambda _: self.reiniciar_quiz(),
-                            bgcolor=ft.colors.BLUE_600,
-                            color=ft.colors.WHITE
+                            bgcolor=ft.Colors.BLUE_600,
+                            color=ft.Colors.WHITE
                         )
                     ]),
                     padding=20
                 ),
-                color=ft.colors.BLUE_50
+                color=ft.Colors.BLUE_50
             )
         ]
         self.resultados_quiz.visible = True

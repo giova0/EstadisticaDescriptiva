@@ -78,40 +78,40 @@ class OVAApp:
             content=ft.Row([
                 ft.Column([
                     ft.Text("OVA 1: Mini-metodología de Reporte Gráfico", 
-                           size=28, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                           size=28, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                     ft.Text("Estadística Descriptiva para Ciencias de la Salud", 
-                           size=18, color=ft.colors.WHITE70)
+                           size=18, color=ft.Colors.WHITE70)
                 ], expand=True),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("Duración estimada", size=12, color=ft.colors.WHITE70),
-                        ft.Text("2-4 horas", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE)
+                        ft.Text("Duración estimada", size=12, color=ft.Colors.WHITE70),
+                        ft.Text("2-4 horas", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.with_opacity(0.2, ft.colors.WHITE),
+                    bgcolor=ft.Colors.with_opacity(0.2, ft.Colors.WHITE),
                     padding=15,
                     border_radius=10
                 )
             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-            gradient=ft.LinearGradient([ft.colors.BLUE_700, ft.colors.PURPLE_700]),
+            gradient=ft.LinearGradient([ft.Colors.BLUE_700, ft.Colors.PURPLE_700]),
             padding=20,
             height=120
         )
         
         # Progress Bar
-        self.progress_bar = ft.ProgressBar(value=0, width=400, height=8, color=ft.colors.BLUE_600)
-        self.progress_text = ft.Text("0%", size=14, color=ft.colors.GREY_600)
+        self.progress_bar = ft.ProgressBar(value=0, width=400, height=8, color=ft.Colors.BLUE_600)
+        self.progress_text = ft.Text("0%", size=14, color=ft.Colors.GREY_600)
         
         progress_container = ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Text("Progreso del OVA", size=14, color=ft.colors.GREY_600),
+                    ft.Text("Progreso del OVA", size=14, color=ft.Colors.GREY_600),
                     self.progress_text
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                 self.progress_bar
             ]),
             padding=20,
-            bgcolor=ft.colors.WHITE,
-            border=ft.border.only(bottom=ft.BorderSide(1, ft.colors.GREY_300))
+            bgcolor=ft.Colors.WHITE,
+            border=ft.border.only(bottom=ft.BorderSide(1, ft.Colors.GREY_300))
         )
         
         # Main content container
@@ -121,11 +121,11 @@ class OVAApp:
         footer = ft.Container(
             content=ft.Column([
                 ft.Text("Universidad Antonio Nariño - Proyecto de Investigación", 
-                       size=16, color=ft.colors.WHITE, text_align=ft.TextAlign.CENTER),
+                       size=16, color=ft.Colors.WHITE, text_align=ft.TextAlign.CENTER),
                 ft.Text('"Uso de la inteligencia artificial y el enfoque C(H)ANGE para fortalecer el pensamiento estadístico en estudiantes de Ciencias de la Salud"', 
-                       size=12, color=ft.colors.WHITE70, text_align=ft.TextAlign.CENTER)
+                       size=12, color=ft.Colors.WHITE70, text_align=ft.TextAlign.CENTER)
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.GREY_800,
+            bgcolor=ft.Colors.GREY_800,
             padding=20
         )
         
@@ -177,47 +177,47 @@ class OVAApp:
                 # Header de sección
                 ft.Row([
                     ft.Container(
-                        content=ft.Icon(ft.icons.TRENDING_UP, size=30, color=ft.colors.BLUE_600),
-                        bgcolor=ft.colors.BLUE_100,
+                        content=ft.Icon(ft.Icons.TRENDING_UP, size=30, color=ft.Colors.BLUE_600),
+                        bgcolor=ft.Colors.BLUE_100,
                         padding=15,
                         border_radius=50
                     ),
                     ft.Text("Introducción y Objetivos de Aprendizaje", 
-                           size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                           size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
                 ], alignment=ft.MainAxisAlignment.START),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Contenido principal
                 ft.Row([
                     # Columna izquierda
                     ft.Column([
-                        ft.Text("¿Por qué es importante?", size=20, weight=ft.FontWeight.W_600, color=ft.colors.GREY_700),
+                        ft.Text("¿Por qué es importante?", size=20, weight=ft.FontWeight.W_600, color=ft.Colors.GREY_700),
                         ft.Text(
                             "En las ciencias de la salud, los gráficos no son solo herramientas de presentación, sino instrumentos críticos para la toma de decisiones clínicas y de salud pública. Una visualización mal diseñada puede llevar a interpretaciones erróneas con consecuencias directas en la atención al paciente.",
-                            size=14, color=ft.colors.GREY_600
+                            size=14, color=ft.Colors.GREY_600
                         ),
                         
                         ft.Container(
                             content=ft.Column([
-                                ft.Text("Caso Real", weight=ft.FontWeight.BOLD, color=ft.colors.RED_800),
+                                ft.Text("Caso Real", weight=ft.FontWeight.BOLD, color=ft.Colors.RED_800),
                                 ft.Text(
                                     "En 2020, múltiples gráficos sobre COVID-19 fueron malinterpretados debido a escalas inadecuadas, llevando a decisiones de política pública incorrectas.",
-                                    size=12, color=ft.colors.RED_700
+                                    size=12, color=ft.Colors.RED_700
                                 )
                             ]),
-                            bgcolor=ft.colors.RED_50,
-                            border=ft.border.only(left=ft.BorderSide(4, ft.colors.RED_400)),
+                            bgcolor=ft.Colors.RED_50,
+                            border=ft.border.only(left=ft.BorderSide(4, ft.Colors.RED_400)),
                             padding=15,
                             margin=ft.margin.only(top=15)
                         )
                     ], expand=True),
                     
-                    ft.VerticalDivider(width=40, color=ft.colors.TRANSPARENT),
+                    ft.VerticalDivider(width=40, color=ft.Colors.TRANSPARENT),
                     
                     # Columna derecha
                     ft.Column([
-                        ft.Text("Objetivos de Aprendizaje", size=20, weight=ft.FontWeight.W_600, color=ft.colors.GREY_700),
+                        ft.Text("Objetivos de Aprendizaje", size=20, weight=ft.FontWeight.W_600, color=ft.Colors.GREY_700),
                         ft.Column([
                             self.create_objective_item("Estandarizar la 'gramática' de figuras en ciencias de la salud"),
                             self.create_objective_item("Crear títulos informativos y leyendas claras"),
@@ -227,67 +227,67 @@ class OVAApp:
                     ], expand=True)
                 ]),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Modelo C(H)ANGE
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.PSYCHOLOGY, color=ft.colors.WHITE, size=24),
-                            ft.Text("Enfoque Pedagógico C(H)ANGE", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE)
+                            ft.Icon(ft.Icons.PSYCHOLOGY, color=ft.Colors.WHITE, size=24),
+                            ft.Text("Enfoque Pedagógico C(H)ANGE", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE)
                         ]),
-                        ft.Divider(height=10, color=ft.colors.TRANSPARENT),
+                        ft.Divider(height=10, color=ft.Colors.TRANSPARENT),
                         ft.Row([
                             ft.Column([
-                                ft.Text("C - Combinatoria:", weight=ft.FontWeight.BOLD, color=ft.colors.WHITE, size=12),
-                                ft.Text("Selección óptima de tipos de gráficos según datos", color=ft.colors.WHITE, size=11),
-                                ft.Text("A - Álgebra:", weight=ft.FontWeight.BOLD, color=ft.colors.WHITE, size=12),
-                                ft.Text("Transformaciones de escalas y ejes", color=ft.colors.WHITE, size=11),
+                                ft.Text("C - Combinatoria:", weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE, size=12),
+                                ft.Text("Selección óptima de tipos de gráficos según datos", color=ft.Colors.WHITE, size=11),
+                                ft.Text("A - Álgebra:", weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE, size=12),
+                                ft.Text("Transformaciones de escalas y ejes", color=ft.Colors.WHITE, size=11),
                             ], expand=True),
                             ft.Column([
-                                ft.Text("N - Números:", weight=ft.FontWeight.BOLD, color=ft.colors.WHITE, size=12),
-                                ft.Text("Interpretación numérica precisa", color=ft.colors.WHITE, size=11),
-                                ft.Text("G - Geometría:", weight=ft.FontWeight.BOLD, color=ft.colors.WHITE, size=12),
-                                ft.Text("Diseño visual y proporciones", color=ft.colors.WHITE, size=11),
+                                ft.Text("N - Números:", weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE, size=12),
+                                ft.Text("Interpretación numérica precisa", color=ft.Colors.WHITE, size=11),
+                                ft.Text("G - Geometría:", weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE, size=12),
+                                ft.Text("Diseño visual y proporciones", color=ft.Colors.WHITE, size=11),
                             ], expand=True),
                             ft.Column([
-                                ft.Text("E - Estadística:", weight=ft.FontWeight.BOLD, color=ft.colors.WHITE, size=12),
-                                ft.Text("Representación de datos estadísticos", color=ft.colors.WHITE, size=11),
-                                ft.Text("Salud:", weight=ft.FontWeight.BOLD, color=ft.colors.WHITE, size=12),
-                                ft.Text("Contexto clínico y epidemiológico", color=ft.colors.WHITE, size=11),
+                                ft.Text("E - Estadística:", weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE, size=12),
+                                ft.Text("Representación de datos estadísticos", color=ft.Colors.WHITE, size=11),
+                                ft.Text("Salud:", weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE, size=12),
+                                ft.Text("Contexto clínico y epidemiológico", color=ft.Colors.WHITE, size=11),
                             ], expand=True)
                         ])
                     ]),
-                    gradient=ft.LinearGradient([ft.colors.GREEN_600, ft.colors.TEAL_600]),
+                    gradient=ft.LinearGradient([ft.Colors.GREEN_600, ft.Colors.TEAL_600]),
                     padding=20,
                     border_radius=10
                 ),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Botón continuar
                 ft.ElevatedButton(
                     content=ft.Row([
-                        ft.Text("Comenzar Microlección", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD),
-                        ft.Icon(ft.icons.ARROW_FORWARD, color=ft.colors.WHITE)
+                        ft.Text("Comenzar Microlección", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD),
+                        ft.Icon(ft.Icons.ARROW_FORWARD, color=ft.Colors.WHITE)
                     ], tight=True),
-                    bgcolor=ft.colors.BLUE_600,
+                    bgcolor=ft.Colors.BLUE_600,
                     on_click=self.next_section,
                     height=50,
                     width=250
                 )
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=10, color=ft.colors.with_opacity(0.1, ft.colors.BLACK))
+            shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.with_opacity(0.1, ft.Colors.BLACK))
         )
         
         self.main_content.controls.append(section)
 
     def create_objective_item(self, text):
         return ft.Row([
-            ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500, size=20),
+            ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500, size=20),
             ft.Text(text, size=14, expand=True)
         ], alignment=ft.MainAxisAlignment.START)
 
@@ -297,40 +297,40 @@ class OVAApp:
             content=ft.Column([
                 # Header
                 ft.Row([
-                    ft.Icon(ft.icons.SCIENCE, size=30, color=ft.colors.BLUE_600),
+                    ft.Icon(ft.Icons.SCIENCE, size=30, color=ft.Colors.BLUE_600),
                     ft.Text("Microlección: Gramática de Gráficos en Salud", 
-                           size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                           size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
                 ]),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Asistente IA
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.SMART_TOY, color=ft.colors.WHITE, size=30),
-                            ft.Text("Asistente IA: Dr. GraphIA", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE)
+                            ft.Icon(ft.Icons.SMART_TOY, color=ft.Colors.WHITE, size=30),
+                            ft.Text("Asistente IA: Dr. GraphIA", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE)
                         ]),
                         ft.Text(
                             "¡Hola! Soy tu asistente de inteligencia artificial especializado en visualización de datos de salud. Te ayudaré a analizar gráficos y sugerir mejoras en tiempo real.",
-                            color=ft.colors.WHITE, size=14
+                            color=ft.Colors.WHITE, size=14
                         ),
                         ft.Container(
                             content=ft.Text(
                                 "Consejo inicial: Recuerda que en salud, la claridad puede salvar vidas. Cada elemento visual debe tener un propósito clínico claro.",
-                                color=ft.colors.WHITE, size=12, weight=ft.FontWeight.BOLD
+                                color=ft.Colors.WHITE, size=12, weight=ft.FontWeight.BOLD
                             ),
-                            bgcolor=ft.colors.with_opacity(0.2, ft.colors.WHITE),
+                            bgcolor=ft.Colors.with_opacity(0.2, ft.Colors.WHITE),
                             padding=10,
                             border_radius=5
                         )
                     ]),
-                    gradient=ft.LinearGradient([ft.colors.INDIGO_600, ft.colors.PURPLE_600]),
+                    gradient=ft.LinearGradient([ft.Colors.INDIGO_600, ft.Colors.PURPLE_600]),
                     padding=20,
                     border_radius=10
                 ),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Contenido principal
                 ft.Row([
@@ -346,17 +346,17 @@ class OVAApp:
                         ])
                     ], expand=True),
                     
-                    ft.VerticalDivider(width=20, color=ft.colors.TRANSPARENT),
+                    ft.VerticalDivider(width=20, color=ft.Colors.TRANSPARENT),
                     
                     # Panel de detalles
                     ft.Container(
                         content=ft.Column([
-                            ft.Icon(ft.icons.TOUCH_APP, size=60, color=ft.colors.GREY_400),
+                            ft.Icon(ft.Icons.TOUCH_APP, size=60, color=ft.Colors.GREY_400),
                             ft.Text("Haz clic en cualquier pilar para ver detalles y ejemplos", 
-                                   text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_500)
+                                   text_align=ft.TextAlign.CENTER, color=ft.Colors.GREY_500)
                         ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, 
                            alignment=ft.MainAxisAlignment.CENTER),
-                        bgcolor=ft.colors.GREY_50,
+                        bgcolor=ft.Colors.GREY_50,
                         border_radius=10,
                         height=400,
                         expand=True,
@@ -364,23 +364,23 @@ class OVAApp:
                     )
                 ]),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 ft.ElevatedButton(
                     content=ft.Row([
-                        ft.Text("Continuar a Práctica Guiada", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD),
-                        ft.Icon(ft.icons.ARROW_FORWARD, color=ft.colors.WHITE)
+                        ft.Text("Continuar a Práctica Guiada", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD),
+                        ft.Icon(ft.Icons.ARROW_FORWARD, color=ft.Colors.WHITE)
                     ], tight=True),
-                    bgcolor=ft.colors.GREEN_600,
+                    bgcolor=ft.Colors.GREEN_600,
                     on_click=self.next_section,
                     height=50,
                     width=280
                 )
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=10, color=ft.colors.with_opacity(0.1, ft.colors.BLACK))
+            shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.with_opacity(0.1, ft.Colors.BLACK))
         )
         
         self.main_content.controls.append(section)
@@ -390,12 +390,12 @@ class OVAApp:
             content=ft.Column([
                 ft.Row([
                     ft.Text(f"{number}. {title}", weight=ft.FontWeight.W_600, size=16),
-                    ft.Icon(ft.icons.CHEVRON_RIGHT, color=ft.colors.GREY_600)
+                    ft.Icon(ft.Icons.CHEVRON_RIGHT, color=ft.Colors.GREY_600)
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-                ft.Text(description, size=12, color=ft.colors.GREY_600)
+                ft.Text(description, size=12, color=ft.Colors.GREY_600)
             ]),
-            bgcolor=ft.colors.WHITE,
-            border=ft.border.all(1, ft.colors.GREY_300),
+            bgcolor=ft.Colors.WHITE,
+            border=ft.border.all(1, ft.Colors.GREY_300),
             border_radius=8,
             padding=15,
             margin=ft.margin.only(bottom=10),
@@ -432,53 +432,53 @@ class OVAApp:
             content=ft.Column([
                 # Header
                 ft.Row([
-                    ft.Icon(ft.icons.HANDYMAN, size=30, color=ft.colors.GREEN_600),
+                    ft.Icon(ft.Icons.HANDYMAN, size=30, color=ft.Colors.GREEN_600),
                     ft.Text("Práctica Guiada: Mejorando Gráficos Reales", 
-                           size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                           size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
                 ]),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Selección de dataset
                 ft.Text("Selecciona un Dataset de Salud", size=20, weight=ft.FontWeight.W_600),
                 ft.Row([
-                    self.create_dataset_card('covid', 'COVID-19', 'Casos por edad y región', ft.icons.CORONAVIRUS, ft.colors.RED_500),
-                    self.create_dataset_card('diabetes', 'Diabetes', 'Prevalencia por departamento', ft.icons.FAVORITE, ft.colors.BLUE_500),
-                    self.create_dataset_card('vaccination', 'Vacunación', 'Cobertura infantil', ft.icons.VACCINES, ft.colors.GREEN_500)
+                    self.create_dataset_card('covid', 'COVID-19', 'Casos por edad y región', ft.Icons.CORONAVIRUS, ft.Colors.RED_500),
+                    self.create_dataset_card('diabetes', 'Diabetes', 'Prevalencia por departamento', ft.Icons.FAVORITE, ft.Colors.BLUE_500),
+                    self.create_dataset_card('vaccination', 'Vacunación', 'Cobertura infantil', ft.Icons.VACCINES, ft.Colors.GREEN_500)
                 ], alignment=ft.MainAxisAlignment.SPACE_AROUND),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Interfaz de gráficos (inicialmente oculta)
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("Área de trabajo de gráficos", size=16, color=ft.colors.GREY_600),
-                        ft.Text("Selecciona un dataset para comenzar", size=14, color=ft.colors.GREY_500)
+                        ft.Text("Área de trabajo de gráficos", size=16, color=ft.Colors.GREY_600),
+                        ft.Text("Selecciona un dataset para comenzar", size=14, color=ft.Colors.GREY_500)
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                     height=300,
-                    bgcolor=ft.colors.GREY_100,
+                    bgcolor=ft.Colors.GREY_100,
                     border_radius=10,
                     padding=20,
                     alignment=ft.alignment.center
                 ),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 ft.ElevatedButton(
                     content=ft.Row([
-                        ft.Text("Ir a Evaluación", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD),
-                        ft.Icon(ft.icons.ARROW_FORWARD, color=ft.colors.WHITE)
+                        ft.Text("Ir a Evaluación", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD),
+                        ft.Icon(ft.Icons.ARROW_FORWARD, color=ft.Colors.WHITE)
                     ], tight=True),
-                    bgcolor=ft.colors.PURPLE_600,
+                    bgcolor=ft.Colors.PURPLE_600,
                     on_click=self.next_section,
                     height=50,
                     width=200
                 )
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=10, color=ft.colors.with_opacity(0.1, ft.colors.BLACK))
+            shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.with_opacity(0.1, ft.Colors.BLACK))
         )
         
         self.main_content.controls.append(section)
@@ -488,12 +488,12 @@ class OVAApp:
             content=ft.Column([
                 ft.Icon(icon, size=40, color=color),
                 ft.Text(title, weight=ft.FontWeight.BOLD, size=16),
-                ft.Text(description, size=12, color=ft.colors.GREY_600, text_align=ft.TextAlign.CENTER)
+                ft.Text(description, size=12, color=ft.Colors.GREY_600, text_align=ft.TextAlign.CENTER)
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
             width=200,
             height=120,
-            bgcolor=ft.colors.WHITE,
-            border=ft.border.all(2, ft.colors.GREY_300),
+            bgcolor=ft.Colors.WHITE,
+            border=ft.border.all(2, ft.Colors.GREY_300),
             border_radius=10,
             padding=15,
             on_click=lambda e, ds=dataset_id: self.load_dataset(ds)
@@ -541,12 +541,12 @@ class OVAApp:
             content=ft.Column([
                 # Header
                 ft.Row([
-                    ft.Icon(ft.icons.QUIZ, size=30, color=ft.colors.PURPLE_600),
+                    ft.Icon(ft.Icons.QUIZ, size=30, color=ft.Colors.PURPLE_600),
                     ft.Text("Evaluación Automatizada", 
-                           size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                           size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
                 ]),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Quiz
                 ft.Text("Quiz de Conocimientos", size=20, weight=ft.FontWeight.W_600),
@@ -556,12 +556,12 @@ class OVAApp:
                 
                 ft.ElevatedButton(
                     "Enviar Quiz",
-                    bgcolor=ft.colors.BLUE_600,
-                    color=ft.colors.WHITE,
+                    bgcolor=ft.Colors.BLUE_600,
+                    color=ft.Colors.WHITE,
                     on_click=self.submit_quiz
                 ),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Ejercicio práctico
                 ft.Text("Ejercicio Práctico", size=20, weight=ft.FontWeight.W_600),
@@ -581,34 +581,34 @@ class OVAApp:
                         ),
                         ft.ElevatedButton(
                             "Evaluar con IA",
-                            bgcolor=ft.colors.GREEN_600,
-                            color=ft.colors.WHITE,
+                            bgcolor=ft.Colors.GREEN_600,
+                            color=ft.Colors.WHITE,
                             on_click=self.evaluate_exercise
                         )
                     ]),
-                    bgcolor=ft.colors.YELLOW_50,
-                    border=ft.border.all(1, ft.colors.YELLOW_200),
+                    bgcolor=ft.Colors.YELLOW_50,
+                    border=ft.border.all(1, ft.Colors.YELLOW_200),
                     border_radius=10,
                     padding=20
                 ),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 ft.ElevatedButton(
                     content=ft.Row([
-                        ft.Text("Ver Rúbrica y Materiales", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD),
-                        ft.Icon(ft.icons.ARROW_FORWARD, color=ft.colors.WHITE)
+                        ft.Text("Ver Rúbrica y Materiales", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD),
+                        ft.Icon(ft.Icons.ARROW_FORWARD, color=ft.Colors.WHITE)
                     ], tight=True),
-                    bgcolor=ft.colors.ORANGE_600,
+                    bgcolor=ft.Colors.ORANGE_600,
                     on_click=self.next_section,
                     height=50,
                     width=280
                 )
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=10, color=ft.colors.with_opacity(0.1, ft.colors.BLACK))
+            shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.with_opacity(0.1, ft.Colors.BLACK))
         )
         
         self.main_content.controls.append(section)
@@ -624,7 +624,7 @@ class OVAApp:
                     ])
                 )
             ]),
-            border=ft.border.all(1, ft.colors.GREY_300),
+            border=ft.border.all(1, ft.Colors.GREY_300),
             border_radius=8,
             padding=15,
             margin=ft.margin.only(bottom=10)
@@ -663,12 +663,12 @@ class OVAApp:
             content=ft.Column([
                 # Header
                 ft.Row([
-                    ft.Icon(ft.icons.DOWNLOAD, size=30, color=ft.colors.ORANGE_600),
+                    ft.Icon(ft.Icons.DOWNLOAD, size=30, color=ft.Colors.ORANGE_600),
                     ft.Text("Rúbrica de Evaluación y Materiales Descargables", 
-                           size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                           size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
                 ]),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Rúbrica
                 ft.Text("Rúbrica de Evidencias", size=20, weight=ft.FontWeight.W_600),
@@ -680,8 +680,8 @@ class OVAApp:
                             ft.Text("Bueno (3)", weight=ft.FontWeight.BOLD, expand=1),
                             ft.Text("Satisfactorio (2)", weight=ft.FontWeight.BOLD, expand=1),
                             ft.Text("Necesita Mejora (1)", weight=ft.FontWeight.BOLD, expand=1)
-                        ], bgcolor=ft.colors.GREY_100),
-                        ft.Divider(height=1, color=ft.colors.GREY_300),
+                        ], bgcolor=ft.Colors.GREY_100),
+                        ft.Divider(height=1, color=ft.Colors.GREY_300),
                         ft.Row([
                             ft.Text("Título Informativo", expand=1),
                             ft.Text("Incluye qué, quién, cuándo, dónde", expand=1, size=12),
@@ -689,7 +689,7 @@ class OVAApp:
                             ft.Text("Incluye 2 de 4 elementos", expand=1, size=12),
                             ft.Text("Título genérico o ausente", expand=1, size=12)
                         ]),
-                        ft.Divider(height=1, color=ft.colors.GREY_300),
+                        ft.Divider(height=1, color=ft.Colors.GREY_300),
                         ft.Row([
                             ft.Text("Escalas y Ejes", expand=1),
                             ft.Text("Escalas apropiadas, ejes etiquetados", expand=1, size=12),
@@ -698,39 +698,39 @@ class OVAApp:
                             ft.Text("Escalas confusas o incorrectas", expand=1, size=12)
                         ])
                     ]),
-                    border=ft.border.all(1, ft.colors.GREY_300),
+                    border=ft.border.all(1, ft.Colors.GREY_300),
                     border_radius=8,
                     padding=10
                 ),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Materiales descargables
                 ft.Text("Materiales Descargables", size=20, weight=ft.FontWeight.W_600),
                 ft.Row([
-                    self.create_download_card("Plantillas de Gráficos", "PDF", ft.icons.PICTURE_AS_PDF, ft.colors.RED_500),
-                    self.create_download_card("Paletas de Colores", "CSS", ft.icons.PALETTE, ft.colors.BLUE_500),
-                    self.create_download_card("Scripts R/Python", "ZIP", ft.icons.CODE, ft.colors.GREEN_500),
-                    self.create_download_card("Checklist de Calidad", "PDF", ft.icons.CHECKLIST, ft.colors.PURPLE_500)
+                    self.create_download_card("Plantillas de Gráficos", "PDF", ft.Icons.PICTURE_AS_PDF, ft.Colors.RED_500),
+                    self.create_download_card("Paletas de Colores", "CSS", ft.Icons.PALETTE, ft.Colors.BLUE_500),
+                    self.create_download_card("Scripts R/Python", "ZIP", ft.Icons.CODE, ft.Colors.GREEN_500),
+                    self.create_download_card("Checklist de Calidad", "PDF", ft.Icons.CHECKLIST, ft.Colors.PURPLE_500)
                 ], alignment=ft.MainAxisAlignment.SPACE_AROUND),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 ft.ElevatedButton(
                     content=ft.Row([
-                        ft.Text("Actividad de Transferencia", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD),
-                        ft.Icon(ft.icons.ARROW_FORWARD, color=ft.colors.WHITE)
+                        ft.Text("Actividad de Transferencia", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD),
+                        ft.Icon(ft.Icons.ARROW_FORWARD, color=ft.Colors.WHITE)
                     ], tight=True),
-                    bgcolor=ft.colors.INDIGO_600,
+                    bgcolor=ft.Colors.INDIGO_600,
                     on_click=self.next_section,
                     height=50,
                     width=280
                 )
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=10, color=ft.colors.with_opacity(0.1, ft.colors.BLACK))
+            shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.with_opacity(0.1, ft.Colors.BLACK))
         )
         
         self.main_content.controls.append(section)
@@ -743,13 +743,13 @@ class OVAApp:
                 ft.ElevatedButton(
                     f"Descargar {file_type}",
                     bgcolor=color,
-                    color=ft.colors.WHITE,
+                    color=ft.Colors.WHITE,
                     on_click=lambda e, t=title: self.download_material(t)
                 )
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
             width=200,
             height=150,
-            border=ft.border.all(1, ft.colors.GREY_300),
+            border=ft.border.all(1, ft.Colors.GREY_300),
             border_radius=10,
             padding=15
         )
@@ -770,12 +770,12 @@ class OVAApp:
             content=ft.Column([
                 # Header
                 ft.Row([
-                    ft.Icon(ft.icons.ASSIGNMENT, size=30, color=ft.colors.INDIGO_600),
+                    ft.Icon(ft.Icons.ASSIGNMENT, size=30, color=ft.Colors.INDIGO_600),
                     ft.Text("Actividad de Transferencia: Miniinforme Gráfico", 
-                           size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREY_800)
+                           size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREY_800)
                 ]),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Proyecto final
                 ft.Container(
@@ -805,12 +805,12 @@ class OVAApp:
                             ], expand=True)
                         ])
                     ]),
-                    bgcolor=ft.colors.INDIGO_50,
+                    bgcolor=ft.Colors.INDIGO_50,
                     border_radius=10,
                     padding=20
                 ),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 # Espacio de trabajo
                 ft.Container(
@@ -849,25 +849,25 @@ class OVAApp:
                         
                         ft.ElevatedButton(
                             "Enviar Propuesta para Revisión IA",
-                            bgcolor=ft.colors.GREEN_600,
-                            color=ft.colors.WHITE,
+                            bgcolor=ft.Colors.GREEN_600,
+                            color=ft.Colors.WHITE,
                             on_click=self.submit_project
                         )
                     ]),
-                    border=ft.border.all(1, ft.colors.GREY_300),
+                    border=ft.border.all(1, ft.Colors.GREY_300),
                     border_radius=10,
                     padding=20
                 ),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 ft.Container(
                     content=ft.ElevatedButton(
                         content=ft.Row([
-                            ft.Icon(ft.icons.EMOJI_EVENTS, color=ft.colors.WHITE),
-                            ft.Text("Completar OVA", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD, size=16)
+                            ft.Icon(ft.Icons.EMOJI_EVENTS, color=ft.Colors.WHITE),
+                            ft.Text("Completar OVA", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD, size=16)
                         ], tight=True),
-                        bgcolor=ft.colors.GREEN_500,
+                        bgcolor=ft.Colors.GREEN_500,
                         on_click=self.complete_ova,
                         height=60,
                         width=300
@@ -875,10 +875,10 @@ class OVAApp:
                     alignment=ft.alignment.center
                 )
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=10, color=ft.colors.with_opacity(0.1, ft.colors.BLACK))
+            shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.with_opacity(0.1, ft.Colors.BLACK))
         )
         
         self.main_content.controls.append(section)
@@ -904,71 +904,71 @@ class OVAApp:
         
         completion = ft.Container(
             content=ft.Column([
-                ft.Icon(ft.icons.EMOJI_EVENTS, size=80, color=ft.colors.YELLOW_600),
-                ft.Text("¡Felicitaciones!", size=32, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                ft.Icon(ft.Icons.EMOJI_EVENTS, size=80, color=ft.Colors.YELLOW_600),
+                ft.Text("¡Felicitaciones!", size=32, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
                 ft.Text("Has completado exitosamente el OVA de Mini-metodología de Reporte Gráfico", 
-                       size=18, color=ft.colors.WHITE, text_align=ft.TextAlign.CENTER),
+                       size=18, color=ft.Colors.WHITE, text_align=ft.TextAlign.CENTER),
                 
-                ft.Divider(height=20, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=20, color=ft.Colors.TRANSPARENT),
                 
                 ft.Row([
                     ft.Container(
                         content=ft.Column([
-                            ft.Text("Conceptos Dominados", weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
-                            ft.Text("5/5", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE)
+                            ft.Text("Conceptos Dominados", weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
+                            ft.Text("5/5", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE)
                         ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                        bgcolor=ft.colors.with_opacity(0.2, ft.colors.WHITE),
+                        bgcolor=ft.Colors.with_opacity(0.2, ft.Colors.WHITE),
                         border_radius=10,
                         padding=15,
                         expand=True
                     ),
                     ft.Container(
                         content=ft.Column([
-                            ft.Text("Tiempo Invertido", weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
-                            ft.Text(f"{minutes} min", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE)
+                            ft.Text("Tiempo Invertido", weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
+                            ft.Text(f"{minutes} min", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE)
                         ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                        bgcolor=ft.colors.with_opacity(0.2, ft.colors.WHITE),
+                        bgcolor=ft.Colors.with_opacity(0.2, ft.Colors.WHITE),
                         border_radius=10,
                         padding=15,
                         expand=True
                     ),
                     ft.Container(
                         content=ft.Column([
-                            ft.Text("Puntuación Final", weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
-                            ft.Text(f"{max(85, self.quiz_score)}/100", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE)
+                            ft.Text("Puntuación Final", weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
+                            ft.Text(f"{max(85, self.quiz_score)}/100", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE)
                         ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                        bgcolor=ft.colors.with_opacity(0.2, ft.colors.WHITE),
+                        bgcolor=ft.Colors.with_opacity(0.2, ft.Colors.WHITE),
                         border_radius=10,
                         padding=15,
                         expand=True
                     )
                 ], alignment=ft.MainAxisAlignment.SPACE_AROUND),
                 
-                ft.Divider(height=30, color=ft.colors.TRANSPARENT),
+                ft.Divider(height=30, color=ft.Colors.TRANSPARENT),
                 
                 ft.Row([
                     ft.ElevatedButton(
                         content=ft.Row([
-                            ft.Icon(ft.icons.DOWNLOAD, color=ft.colors.BLUE_600),
-                            ft.Text("Descargar Certificado", color=ft.colors.BLUE_600, weight=ft.FontWeight.BOLD)
+                            ft.Icon(ft.Icons.DOWNLOAD, color=ft.Colors.BLUE_600),
+                            ft.Text("Descargar Certificado", color=ft.Colors.BLUE_600, weight=ft.FontWeight.BOLD)
                         ], tight=True),
-                        bgcolor=ft.colors.WHITE,
+                        bgcolor=ft.Colors.WHITE,
                         on_click=self.download_certificate
                     ),
                     ft.ElevatedButton(
                         content=ft.Row([
-                            ft.Icon(ft.icons.SHARE, color=ft.colors.WHITE),
-                            ft.Text("Compartir Progreso", color=ft.colors.WHITE, weight=ft.FontWeight.BOLD)
+                            ft.Icon(ft.Icons.SHARE, color=ft.Colors.WHITE),
+                            ft.Text("Compartir Progreso", color=ft.Colors.WHITE, weight=ft.FontWeight.BOLD)
                         ], tight=True),
-                        bgcolor=ft.colors.BLUE_600,
+                        bgcolor=ft.Colors.BLUE_600,
                         on_click=self.share_progress
                     )
                 ], alignment=ft.MainAxisAlignment.CENTER)
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            gradient=ft.LinearGradient([ft.colors.GREEN_400, ft.colors.BLUE_500]),
+            gradient=ft.LinearGradient([ft.Colors.GREEN_400, ft.Colors.BLUE_500]),
             padding=40,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=15, color=ft.colors.with_opacity(0.3, ft.colors.BLACK))
+            shadow=ft.BoxShadow(blur_radius=15, color=ft.Colors.with_opacity(0.3, ft.Colors.BLACK))
         )
         
         self.main_content.controls.clear()

@@ -46,12 +46,12 @@ class OVAApp:
         
         # Navegación
         nav_buttons = ft.Row([
-            ft.ElevatedButton("Introducción", icon=ft.icons.PLAY_CIRCLE, on_click=lambda _: self.show_section(page, "intro")),
-            ft.ElevatedButton("Teoría", icon=ft.icons.BOOK, on_click=lambda _: self.show_section(page, "theory")),
-            ft.ElevatedButton("Simulador IA", icon=ft.icons.SMART_TOY, on_click=lambda _: self.show_section(page, "simulator")),
-            ft.ElevatedButton("Práctica", icon=ft.icons.HANDYMAN, on_click=lambda _: self.show_section(page, "practice")),
-            ft.ElevatedButton("Evaluación", icon=ft.icons.QUIZ, on_click=lambda _: self.show_section(page, "evaluation")),
-            ft.ElevatedButton("Recursos", icon=ft.icons.DOWNLOAD, on_click=lambda _: self.show_section(page, "resources")),
+            ft.ElevatedButton("Introducción", icon=ft.Icons.PLAY_CIRCLE, on_click=lambda _: self.show_section(page, "intro")),
+            ft.ElevatedButton("Teoría", icon=ft.Icons.BOOK, on_click=lambda _: self.show_section(page, "theory")),
+            ft.ElevatedButton("Simulador IA", icon=ft.Icons.SMART_TOY, on_click=lambda _: self.show_section(page, "simulator")),
+            ft.ElevatedButton("Práctica", icon=ft.Icons.HANDYMAN, on_click=lambda _: self.show_section(page, "practice")),
+            ft.ElevatedButton("Evaluación", icon=ft.Icons.QUIZ, on_click=lambda _: self.show_section(page, "evaluation")),
+            ft.ElevatedButton("Recursos", icon=ft.Icons.DOWNLOAD, on_click=lambda _: self.show_section(page, "resources")),
         ], scroll=ft.ScrollMode.AUTO)
         
         # Header
@@ -62,7 +62,7 @@ class OVAApp:
                 ft.Text("Estadística Descriptiva para Ciencias de la Salud", 
                        size=16, color="white"),
             ]),
-            bgcolor=ft.colors.BLUE_700,
+            bgcolor=ft.Colors.BLUE_700,
             padding=20,
             margin=ft.margin.only(bottom=10)
         )
@@ -141,12 +141,12 @@ class OVAApp:
                 content=ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.DATABASE, size=60, color=ft.colors.BLUE_600),
+                            ft.Icon(ft.Icons.DATABASE, size=60, color=ft.Colors.BLUE_600),
                             ft.Column([
                                 ft.Text("Bienvenido al OVA de Calidad y Limpieza de Datos", 
                                         size=24, weight=ft.FontWeight.BOLD),
                                 ft.Text("Aprende a aplicar un flujo básico de depuración de datos clínicos utilizando el modelo pedagógico C(H)ANGE e inteligencia artificial.", 
-                                        size=14, color=ft.colors.GREY_700)
+                                        size=14, color=ft.Colors.GREY_700)
                             ], expand=True)
                         ]),
                         
@@ -157,14 +157,14 @@ class OVAApp:
                                 content=ft.Container(
                                     content=ft.Column([
                                         ft.Row([
-                                            ft.Icon(ft.icons.TARGET, color=ft.colors.BLUE_600),
+                                            ft.Icon(ft.Icons.TARGET, color=ft.Colors.BLUE_600),
                                             ft.Text("Objetivo Principal", weight=ft.FontWeight.BOLD)
                                         ]),
                                         ft.Text("Aplicar un flujo básico de depuración de datos clínicos, identificando y corrigiendo valores perdidos, outliers y errores de codificación.", 
                                                 size=12)
                                     ]),
                                     padding=15,
-                                    bgcolor=ft.colors.BLUE_50
+                                    bgcolor=ft.Colors.BLUE_50
                                 ),
                                 expand=True
                             ),
@@ -172,7 +172,7 @@ class OVAApp:
                                 content=ft.Container(
                                     content=ft.Column([
                                         ft.Row([
-                                            ft.Icon(ft.icons.SCHOOL, color=ft.colors.GREEN_600),
+                                            ft.Icon(ft.Icons.SCHOOL, color=ft.Colors.GREEN_600),
                                             ft.Text("Competencias C(H)ANGE", weight=ft.FontWeight.BOLD)
                                         ]),
                                         ft.Text("C: Combinatoria - Patrones en datos faltantes", size=11),
@@ -182,7 +182,7 @@ class OVAApp:
                                         ft.Text("E: Estadística - Medidas de calidad", size=11),
                                     ]),
                                     padding=15,
-                                    bgcolor=ft.colors.GREEN_50
+                                    bgcolor=ft.Colors.GREEN_50
                                 ),
                                 expand=True
                             )
@@ -192,7 +192,7 @@ class OVAApp:
                             content=ft.Container(
                                 content=ft.Column([
                                     ft.Row([
-                                        ft.Icon(ft.icons.MEDICAL_SERVICES, color=ft.colors.RED_600),
+                                        ft.Icon(ft.Icons.MEDICAL_SERVICES, color=ft.Colors.RED_600),
                                         ft.Text("Caso Clínico: Estudio de Hipertensión Arterial", 
                                                 weight=ft.FontWeight.BOLD)
                                     ]),
@@ -206,7 +206,7 @@ class OVAApp:
                                             ]),
                                             padding=10,
                                             bgcolor="white",
-                                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.RED_400)),
+                                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.RED_400)),
                                             expand=True
                                         ),
                                         ft.Container(
@@ -216,7 +216,7 @@ class OVAApp:
                                             ]),
                                             padding=10,
                                             bgcolor="white",
-                                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400)),
+                                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400)),
                                             expand=True
                                         ),
                                         ft.Container(
@@ -226,22 +226,22 @@ class OVAApp:
                                             ]),
                                             padding=10,
                                             bgcolor="white",
-                                            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.BLUE_400)),
+                                            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.BLUE_400)),
                                             expand=True
                                         )
                                     ])
                                 ]),
                                 padding=15,
-                                bgcolor=ft.colors.RED_50
+                                bgcolor=ft.Colors.RED_50
                             )
                         ),
                         
                         ft.Container(
                             content=ft.ElevatedButton(
                                 "Comenzar con la Teoría",
-                                icon=ft.icons.ARROW_FORWARD,
+                                icon=ft.Icons.ARROW_FORWARD,
                                 on_click=lambda _: self.show_section(page, "theory"),
-                                bgcolor=ft.colors.BLUE_600,
+                                bgcolor=ft.Colors.BLUE_600,
                                 color="white"
                             ),
                             alignment=ft.alignment.center,
@@ -268,7 +268,7 @@ class OVAApp:
                                 content=ft.Container(
                                     content=ft.Column([
                                         ft.Row([
-                                            ft.Icon(ft.icons.HELP, color=ft.colors.RED_600),
+                                            ft.Icon(ft.Icons.HELP, color=ft.Colors.RED_600),
                                             ft.Text("Valores Perdidos", weight=ft.FontWeight.BOLD)
                                         ]),
                                         ft.Text("• MCAR (Missing Completely at Random)", size=12),
@@ -277,7 +277,7 @@ class OVAApp:
                                         ft.Text("• Impacto en análisis estadísticos", size=12),
                                     ]),
                                     padding=15,
-                                    bgcolor=ft.colors.RED_50
+                                    bgcolor=ft.Colors.RED_50
                                 ),
                                 expand=True
                             ),
@@ -285,7 +285,7 @@ class OVAApp:
                                 content=ft.Container(
                                     content=ft.Column([
                                         ft.Row([
-                                            ft.Icon(ft.icons.WARNING, color=ft.colors.YELLOW_600),
+                                            ft.Icon(ft.Icons.WARNING, color=ft.Colors.YELLOW_600),
                                             ft.Text("Valores Atípicos", weight=ft.FontWeight.BOLD)
                                         ]),
                                         ft.Text("• Outliers univariados", size=12),
@@ -294,7 +294,7 @@ class OVAApp:
                                         ft.Text("• Métodos de detección", size=12),
                                     ]),
                                     padding=15,
-                                    bgcolor=ft.colors.YELLOW_50
+                                    bgcolor=ft.Colors.YELLOW_50
                                 ),
                                 expand=True
                             ),
@@ -302,7 +302,7 @@ class OVAApp:
                                 content=ft.Container(
                                     content=ft.Column([
                                         ft.Row([
-                                            ft.Icon(ft.icons.CODE, color=ft.colors.BLUE_600),
+                                            ft.Icon(ft.Icons.CODE, color=ft.Colors.BLUE_600),
                                             ft.Text("Errores de Codificación", weight=ft.FontWeight.BOLD)
                                         ]),
                                         ft.Text("• Inconsistencias en categorías", size=12),
@@ -311,7 +311,7 @@ class OVAApp:
                                         ft.Text("• Caracteres especiales", size=12),
                                     ]),
                                     padding=15,
-                                    bgcolor=ft.colors.BLUE_50
+                                    bgcolor=ft.Colors.BLUE_50
                                 ),
                                 expand=True
                             )
@@ -333,7 +333,7 @@ class OVAApp:
                                     ft.Container(
                                         content=ft.Text("1", color="white", weight=ft.FontWeight.BOLD),
                                         width=40, height=40,
-                                        bgcolor=ft.colors.BLUE_600,
+                                        bgcolor=ft.Colors.BLUE_600,
                                         border_radius=20,
                                         alignment=ft.alignment.center
                                     ),
@@ -341,13 +341,13 @@ class OVAApp:
                                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                                 expand=True
                             ),
-                            ft.Icon(ft.icons.ARROW_FORWARD, color=ft.colors.GREY_400),
+                            ft.Icon(ft.Icons.ARROW_FORWARD, color=ft.Colors.GREY_400),
                             ft.Container(
                                 content=ft.Column([
                                     ft.Container(
                                         content=ft.Text("2", color="white", weight=ft.FontWeight.BOLD),
                                         width=40, height=40,
-                                        bgcolor=ft.colors.GREEN_600,
+                                        bgcolor=ft.Colors.GREEN_600,
                                         border_radius=20,
                                         alignment=ft.alignment.center
                                     ),
@@ -355,13 +355,13 @@ class OVAApp:
                                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                                 expand=True
                             ),
-                            ft.Icon(ft.icons.ARROW_FORWARD, color=ft.colors.GREY_400),
+                            ft.Icon(ft.Icons.ARROW_FORWARD, color=ft.Colors.GREY_400),
                             ft.Container(
                                 content=ft.Column([
                                     ft.Container(
                                         content=ft.Text("3", color="white", weight=ft.FontWeight.BOLD),
                                         width=40, height=40,
-                                        bgcolor=ft.colors.YELLOW_600,
+                                        bgcolor=ft.Colors.YELLOW_600,
                                         border_radius=20,
                                         alignment=ft.alignment.center
                                     ),
@@ -369,13 +369,13 @@ class OVAApp:
                                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                                 expand=True
                             ),
-                            ft.Icon(ft.icons.ARROW_FORWARD, color=ft.colors.GREY_400),
+                            ft.Icon(ft.Icons.ARROW_FORWARD, color=ft.Colors.GREY_400),
                             ft.Container(
                                 content=ft.Column([
                                     ft.Container(
                                         content=ft.Text("4", color="white", weight=ft.FontWeight.BOLD),
                                         width=40, height=40,
-                                        bgcolor=ft.colors.PURPLE_600,
+                                        bgcolor=ft.Colors.PURPLE_600,
                                         border_radius=20,
                                         alignment=ft.alignment.center
                                     ),
@@ -386,7 +386,7 @@ class OVAApp:
                         ], alignment=ft.MainAxisAlignment.CENTER)
                     ]),
                     padding=20,
-                    bgcolor=ft.colors.GREEN_50
+                    bgcolor=ft.Colors.GREEN_50
                 )
             ),
             
@@ -401,7 +401,7 @@ class OVAApp:
                                 content=ft.Container(
                                     content=ft.Column([
                                         ft.Row([
-                                            ft.Icon(ft.icons.SMART_TOY, color=ft.colors.PURPLE_600),
+                                            ft.Icon(ft.Icons.SMART_TOY, color=ft.Colors.PURPLE_600),
                                             ft.Text("Algoritmos de IA Aplicados", weight=ft.FontWeight.BOLD)
                                         ]),
                                         ft.Text("✓ Machine Learning: Detección automática de outliers usando Isolation Forest", size=11),
@@ -410,7 +410,7 @@ class OVAApp:
                                         ft.Text("✓ Clustering: Identificación de patrones anómalos", size=11),
                                     ]),
                                     padding=15,
-                                    bgcolor=ft.colors.PURPLE_50
+                                    bgcolor=ft.Colors.PURPLE_50
                                 ),
                                 expand=True
                             ),
@@ -418,7 +418,7 @@ class OVAApp:
                                 content=ft.Container(
                                     content=ft.Column([
                                         ft.Row([
-                                            ft.Icon(ft.icons.BUILD, color=ft.colors.ORANGE_600),
+                                            ft.Icon(ft.Icons.BUILD, color=ft.Colors.ORANGE_600),
                                             ft.Text("Herramientas Prácticas", weight=ft.FontWeight.BOLD)
                                         ]),
                                         ft.Text("⚙ OpenRefine: Limpieza interactiva de datos", size=11),
@@ -427,7 +427,7 @@ class OVAApp:
                                         ft.Text("⚙ Trifacta/Alteryx: Plataformas de preparación de datos", size=11),
                                     ]),
                                     padding=15,
-                                    bgcolor=ft.colors.ORANGE_50
+                                    bgcolor=ft.Colors.ORANGE_50
                                 ),
                                 expand=True
                             )
@@ -440,9 +440,9 @@ class OVAApp:
             ft.Container(
                 content=ft.ElevatedButton(
                     "Continuar al Simulador IA",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda _: self.show_section(page, "simulator"),
-                    bgcolor=ft.colors.GREEN_600,
+                    bgcolor=ft.Colors.GREEN_600,
                     color="white"
                 ),
                 alignment=ft.alignment.center,
@@ -452,22 +452,22 @@ class OVAApp:
 
     def create_simulator_section(self, page):
         # Estadísticas de calidad
-        self.missing_count = ft.Text("3", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.RED_600)
-        self.outlier_count = ft.Text("2", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.YELLOW_600)
-        self.quality_score = ft.Text("73%", size=24, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600)
+        self.missing_count = ft.Text("3", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.RED_600)
+        self.outlier_count = ft.Text("2", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.YELLOW_600)
+        self.quality_score = ft.Text("73%", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_600)
         
         # Resultados del IA
         self.ai_results = ft.Container(
             content=ft.Column([
-                ft.Text("Análisis IA Completado:", weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
-                ft.Row([ft.Icon(ft.icons.ERROR, color=ft.colors.RED_600), ft.Text("Detectados 3 valores faltantes en variables críticas", size=12)]),
-                ft.Row([ft.Icon(ft.icons.WARNING, color=ft.colors.YELLOW_600), ft.Text("Identificados 2 outliers potenciales en presión arterial", size=12)]),
-                ft.Row([ft.Icon(ft.icons.CODE, color=ft.colors.ORANGE_600), ft.Text("Encontradas 4 inconsistencias en codificación de variables", size=12)]),
-                ft.Row([ft.Icon(ft.icons.INFO, color=ft.colors.BLUE_600), ft.Text("Sugerencia: Estandarizar formato de fechas", size=12)]),
+                ft.Text("Análisis IA Completado:", weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
+                ft.Row([ft.Icon(ft.Icons.ERROR, color=ft.Colors.RED_600), ft.Text("Detectados 3 valores faltantes en variables críticas", size=12)]),
+                ft.Row([ft.Icon(ft.Icons.WARNING, color=ft.Colors.YELLOW_600), ft.Text("Identificados 2 outliers potenciales en presión arterial", size=12)]),
+                ft.Row([ft.Icon(ft.Icons.CODE, color=ft.Colors.ORANGE_600), ft.Text("Encontradas 4 inconsistencias en codificación de variables", size=12)]),
+                ft.Row([ft.Icon(ft.Icons.INFO, color=ft.Colors.BLUE_600), ft.Text("Sugerencia: Estandarizar formato de fechas", size=12)]),
             ]),
             padding=15,
             bgcolor="white",
-            border=ft.border.all(2, ft.colors.PURPLE_200),
+            border=ft.border.all(2, ft.Colors.PURPLE_200),
             border_radius=10,
             visible=False
         )
@@ -482,30 +482,30 @@ class OVAApp:
                 content=ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.PSYCHOLOGY, color=ft.colors.PURPLE_600),
+                            ft.Icon(ft.Icons.PSYCHOLOGY, color=ft.Colors.PURPLE_600),
                             ft.Text("Asistente IA para Limpieza de Datos", size=18, weight=ft.FontWeight.BOLD)
                         ]),
                         
                         ft.Row([
                             ft.ElevatedButton(
                                 "Análisis Automático",
-                                icon=ft.icons.SEARCH,
+                                icon=ft.Icons.SEARCH,
                                 on_click=lambda _: self.run_ai_analysis(page),
-                                bgcolor=ft.colors.PURPLE_600,
+                                bgcolor=ft.Colors.PURPLE_600,
                                 color="white"
                             ),
                             ft.ElevatedButton(
                                 "Sugerir Limpieza",
-                                icon=ft.icons.LIGHTBULB,
+                                icon=ft.Icons.LIGHTBULB,
                                 on_click=lambda _: self.suggest_cleaning(page),
-                                bgcolor=ft.colors.BLUE_600,
+                                bgcolor=ft.Colors.BLUE_600,
                                 color="white"
                             ),
                             ft.ElevatedButton(
                                 "Validar Resultados",
-                                icon=ft.icons.CHECK_CIRCLE,
+                                icon=ft.Icons.CHECK_CIRCLE,
                                 on_click=lambda _: self.validate_data(page),
-                                bgcolor=ft.colors.GREEN_600,
+                                bgcolor=ft.Colors.GREEN_600,
                                 color="white"
                             )
                         ]),
@@ -513,7 +513,7 @@ class OVAApp:
                         self.ai_results
                     ]),
                     padding=20,
-                    bgcolor=ft.colors.PURPLE_50
+                    bgcolor=ft.Colors.PURPLE_50
                 )
             ),
             
@@ -521,45 +521,45 @@ class OVAApp:
                 content=ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.TABLE_CHART, color=ft.colors.BLUE_600),
+                            ft.Icon(ft.Icons.TABLE_CHART, color=ft.Colors.BLUE_600),
                             ft.Text("Base de Datos: Pacientes con Hipertensión", size=18, weight=ft.FontWeight.BOLD)
                         ]),
                         
                         ft.Row([
                             ft.ElevatedButton(
                                 "Resaltar Faltantes",
-                                icon=ft.icons.HELP,
+                                icon=ft.Icons.HELP,
                                 on_click=lambda _: self.highlight_missing(page),
-                                bgcolor=ft.colors.RED_100,
-                                color=ft.colors.RED_800
+                                bgcolor=ft.Colors.RED_100,
+                                color=ft.Colors.RED_800
                             ),
                             ft.ElevatedButton(
                                 "Detectar Outliers",
-                                icon=ft.icons.WARNING,
+                                icon=ft.Icons.WARNING,
                                 on_click=lambda _: self.highlight_outliers(page),
-                                bgcolor=ft.colors.YELLOW_100,
-                                color=ft.colors.YELLOW_800
+                                bgcolor=ft.Colors.YELLOW_100,
+                                color=ft.Colors.YELLOW_800
                             ),
                             ft.ElevatedButton(
                                 "Inconsistencias",
-                                icon=ft.icons.CODE,
+                                icon=ft.Icons.CODE,
                                 on_click=lambda _: self.highlight_inconsistent(page),
-                                bgcolor=ft.colors.ORANGE_100,
-                                color=ft.colors.ORANGE_800
+                                bgcolor=ft.Colors.ORANGE_100,
+                                color=ft.Colors.ORANGE_800
                             ),
                             ft.ElevatedButton(
                                 "Limpiar Datos",
-                                icon=ft.icons.CLEANING_SERVICES,
+                                icon=ft.Icons.CLEANING_SERVICES,
                                 on_click=lambda _: self.clean_data(page),
-                                bgcolor=ft.colors.GREEN_100,
-                                color=ft.colors.GREEN_800
+                                bgcolor=ft.Colors.GREEN_100,
+                                color=ft.Colors.GREEN_800
                             )
                         ], wrap=True),
                         
                         ft.Container(
                             content=self.data_table,
                             padding=10,
-                            bgcolor=ft.colors.GREY_50,
+                            bgcolor=ft.Colors.GREY_50,
                             border_radius=10
                         )
                     ]),
@@ -571,36 +571,36 @@ class OVAApp:
                 ft.Card(
                     content=ft.Container(
                         content=ft.Column([
-                            ft.Text("Valores Faltantes", weight=ft.FontWeight.BOLD, color=ft.colors.RED_800),
+                            ft.Text("Valores Faltantes", weight=ft.FontWeight.BOLD, color=ft.Colors.RED_800),
                             self.missing_count,
-                            ft.Text("registros afectados", size=12, color=ft.colors.RED_600)
+                            ft.Text("registros afectados", size=12, color=ft.Colors.RED_600)
                         ]),
                         padding=20,
-                        bgcolor=ft.colors.RED_50
+                        bgcolor=ft.Colors.RED_50
                     ),
                     expand=True
                 ),
                 ft.Card(
                     content=ft.Container(
                         content=ft.Column([
-                            ft.Text("Outliers Detectados", weight=ft.FontWeight.BOLD, color=ft.colors.YELLOW_800),
+                            ft.Text("Outliers Detectados", weight=ft.FontWeight.BOLD, color=ft.Colors.YELLOW_800),
                             self.outlier_count,
-                            ft.Text("valores atípicos", size=12, color=ft.colors.YELLOW_600)
+                            ft.Text("valores atípicos", size=12, color=ft.Colors.YELLOW_600)
                         ]),
                         padding=20,
-                        bgcolor=ft.colors.YELLOW_50
+                        bgcolor=ft.Colors.YELLOW_50
                     ),
                     expand=True
                 ),
                 ft.Card(
                     content=ft.Container(
                         content=ft.Column([
-                            ft.Text("Calidad General", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                            ft.Text("Calidad General", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                             self.quality_score,
-                            ft.Text("datos limpios", size=12, color=ft.colors.GREEN_600)
+                            ft.Text("datos limpios", size=12, color=ft.Colors.GREEN_600)
                         ]),
                         padding=20,
-                        bgcolor=ft.colors.GREEN_50
+                        bgcolor=ft.Colors.GREEN_50
                     ),
                     expand=True
                 )
@@ -609,9 +609,9 @@ class OVAApp:
             ft.Container(
                 content=ft.ElevatedButton(
                     "Continuar a la Práctica Guiada",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda _: self.show_section(page, "practice"),
-                    bgcolor=ft.colors.BLUE_600,
+                    bgcolor=ft.Colors.BLUE_600,
                     color="white"
                 ),
                 alignment=ft.alignment.center,
@@ -651,10 +651,10 @@ class OVAApp:
                 ft.DataColumn(ft.Text("Fecha", weight=ft.FontWeight.BOLD)),
             ],
             rows=rows,
-            border=ft.border.all(1, ft.colors.GREY_400),
+            border=ft.border.all(1, ft.Colors.GREY_400),
             border_radius=10,
-            vertical_lines=ft.border.BorderSide(1, ft.colors.GREY_300),
-            horizontal_lines=ft.border.BorderSide(1, ft.colors.GREY_300),
+            vertical_lines=ft.border.BorderSide(1, ft.Colors.GREY_300),
+            horizontal_lines=ft.border.BorderSide(1, ft.Colors.GREY_300),
         )
 
     def run_ai_analysis(self, page):
@@ -743,7 +743,7 @@ class OVAApp:
                 content=ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.SEARCH, color=ft.colors.BLUE_600),
+                            ft.Icon(ft.Icons.SEARCH, color=ft.Colors.BLUE_600),
                             ft.Text("Ejercicio 1: Identificación de Problemas de Calidad", 
                                     size=18, weight=ft.FontWeight.BOLD)
                         ]),
@@ -764,7 +764,7 @@ class OVAApp:
                                 ft.DataRow(cells=[ft.DataCell(ft.Text("002")), ft.DataCell(ft.Text("")), ft.DataCell(ft.Text("Femenino")), ft.DataCell(ft.Text("320")), ft.DataCell(ft.Text("-10"))]),
                                 ft.DataRow(cells=[ft.DataCell(ft.Text("003")), ft.DataCell(ft.Text("999")), ft.DataCell(ft.Text("F")), ft.DataCell(ft.Text("N/A")), ft.DataCell(ft.Text("68.5"))]),
                             ],
-                            border=ft.border.all(1, ft.colors.GREY_400),
+                            border=ft.border.all(1, ft.Colors.GREY_400),
                         ),
                         
                         ft.Column([
@@ -782,16 +782,16 @@ class OVAApp:
                         
                         ft.ElevatedButton(
                             "Verificar Respuestas",
-                            icon=ft.icons.CHECK,
+                            icon=ft.Icons.CHECK,
                             on_click=lambda _: self.check_exercise1(page),
-                            bgcolor=ft.colors.BLUE_600,
+                            bgcolor=ft.Colors.BLUE_600,
                             color="white"
                         ),
                         
                         self.exercise1_feedback
                     ]),
                     padding=20,
-                    bgcolor=ft.colors.BLUE_50
+                    bgcolor=ft.Colors.BLUE_50
                 )
             ),
             
@@ -800,7 +800,7 @@ class OVAApp:
                 content=ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.CLEANING_SERVICES, color=ft.colors.GREEN_600),
+                            ft.Icon(ft.Icons.CLEANING_SERVICES, color=ft.Colors.GREEN_600),
                             ft.Text("Ejercicio 2: Aplicación de Técnicas de Limpieza", 
                                     size=18, weight=ft.FontWeight.BOLD)
                         ]),
@@ -821,7 +821,7 @@ class OVAApp:
                             ]),
                             padding=15,
                             bgcolor="white",
-                            border=ft.border.all(2, ft.colors.GREEN_200),
+                            border=ft.border.all(2, ft.Colors.GREEN_200),
                             border_radius=10
                         ),
                         
@@ -839,22 +839,22 @@ class OVAApp:
                             ]),
                             padding=15,
                             bgcolor="white",
-                            border=ft.border.all(2, ft.colors.GREEN_200),
+                            border=ft.border.all(2, ft.Colors.GREEN_200),
                             border_radius=10
                         ),
                         
                         ft.ElevatedButton(
                             "Verificar Soluciones",
-                            icon=ft.icons.CHECK,
+                            icon=ft.Icons.CHECK,
                             on_click=lambda _: self.check_exercise2(page),
-                            bgcolor=ft.colors.GREEN_600,
+                            bgcolor=ft.Colors.GREEN_600,
                             color="white"
                         ),
                         
                         self.exercise2_feedback
                     ]),
                     padding=20,
-                    bgcolor=ft.colors.GREEN_50
+                    bgcolor=ft.Colors.GREEN_50
                 )
             ),
             
@@ -863,7 +863,7 @@ class OVAApp:
                 content=ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.BOOK, color=ft.colors.PURPLE_600),
+                            ft.Icon(ft.Icons.BOOK, color=ft.Colors.PURPLE_600),
                             ft.Text("Ejercicio 3: Creación de Diccionario de Datos", 
                                     size=18, weight=ft.FontWeight.BOLD)
                         ]),
@@ -893,31 +893,31 @@ class OVAApp:
                             ]),
                             padding=15,
                             bgcolor="white",
-                            border=ft.border.all(2, ft.colors.PURPLE_200),
+                            border=ft.border.all(2, ft.Colors.PURPLE_200),
                             border_radius=10
                         ),
                         
                         ft.ElevatedButton(
                             "Validar Diccionario",
-                            icon=ft.icons.CHECK,
+                            icon=ft.Icons.CHECK,
                             on_click=lambda _: self.check_exercise3(page),
-                            bgcolor=ft.colors.PURPLE_600,
+                            bgcolor=ft.Colors.PURPLE_600,
                             color="white"
                         ),
                         
                         self.exercise3_feedback
                     ]),
                     padding=20,
-                    bgcolor=ft.colors.PURPLE_50
+                    bgcolor=ft.Colors.PURPLE_50
                 )
             ),
             
             ft.Container(
                 content=ft.ElevatedButton(
                     "Continuar a la Evaluación",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda _: self.show_section(page, "evaluation"),
-                    bgcolor=ft.colors.ORANGE_600,
+                    bgcolor=ft.Colors.ORANGE_600,
                     color="white"
                 ),
                 alignment=ft.alignment.center,
@@ -937,25 +937,25 @@ class OVAApp:
         if correct_count == 5:
             self.exercise1_feedback.content = ft.Container(
                 content=ft.Column([
-                    ft.Text("¡Excelente!", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                    ft.Text("¡Excelente!", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                     ft.Text("Has identificado correctamente todos los problemas de calidad en los datos.", 
-                            color=ft.colors.GREEN_700)
+                            color=ft.Colors.GREEN_700)
                 ]),
                 padding=15,
-                bgcolor=ft.colors.GREEN_50,
-                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.GREEN_400)),
+                bgcolor=ft.Colors.GREEN_50,
+                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.GREEN_400)),
                 border_radius=10
             )
         else:
             self.exercise1_feedback.content = ft.Container(
                 content=ft.Column([
-                    ft.Text("Revisa tu respuesta", weight=ft.FontWeight.BOLD, color=ft.colors.YELLOW_800),
+                    ft.Text("Revisa tu respuesta", weight=ft.FontWeight.BOLD, color=ft.Colors.YELLOW_800),
                     ft.Text(f"Has identificado {correct_count} de 5 problemas. Revisa los datos nuevamente.", 
-                            color=ft.colors.YELLOW_700)
+                            color=ft.Colors.YELLOW_700)
                 ]),
                 padding=15,
-                bgcolor=ft.colors.YELLOW_50,
-                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400)),
+                bgcolor=ft.Colors.YELLOW_50,
+                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400)),
                 border_radius=10
             )
         
@@ -975,25 +975,25 @@ class OVAApp:
         if score == 2:
             self.exercise2_feedback.content = ft.Container(
                 content=ft.Column([
-                    ft.Text("¡Perfecto!", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                    ft.Text("¡Perfecto!", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                     ft.Text("Has seleccionado las mejores estrategias de limpieza para cada problema.", 
-                            color=ft.colors.GREEN_700)
+                            color=ft.Colors.GREEN_700)
                 ]),
                 padding=15,
-                bgcolor=ft.colors.GREEN_50,
-                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.GREEN_400)),
+                bgcolor=ft.Colors.GREEN_50,
+                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.GREEN_400)),
                 border_radius=10
             )
         else:
             self.exercise2_feedback.content = ft.Container(
                 content=ft.Column([
-                    ft.Text("Buena aproximación", weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800),
+                    ft.Text("Buena aproximación", weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800),
                     ft.Text("Considera siempre verificar con fuentes primarias antes de eliminar o imputar datos.", 
-                            color=ft.colors.ORANGE_700)
+                            color=ft.Colors.ORANGE_700)
                 ]),
                 padding=15,
-                bgcolor=ft.colors.ORANGE_50,
-                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.ORANGE_400)),
+                bgcolor=ft.Colors.ORANGE_50,
+                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.ORANGE_400)),
                 border_radius=10
             )
         
@@ -1009,25 +1009,25 @@ class OVAApp:
         if var_name and var_type == "categorical" and var_values and var_description:
             self.exercise3_feedback.content = ft.Container(
                 content=ft.Column([
-                    ft.Text("¡Diccionario completo!", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                    ft.Text("¡Diccionario completo!", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                     ft.Text("Has creado un diccionario de datos completo y bien estructurado.", 
-                            color=ft.colors.GREEN_700)
+                            color=ft.Colors.GREEN_700)
                 ]),
                 padding=15,
-                bgcolor=ft.colors.GREEN_50,
-                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.GREEN_400)),
+                bgcolor=ft.Colors.GREEN_50,
+                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.GREEN_400)),
                 border_radius=10
             )
         else:
             self.exercise3_feedback.content = ft.Container(
                 content=ft.Column([
-                    ft.Text("Información incompleta", weight=ft.FontWeight.BOLD, color=ft.colors.RED_800),
+                    ft.Text("Información incompleta", weight=ft.FontWeight.BOLD, color=ft.Colors.RED_800),
                     ft.Text("Completa todos los campos para crear un diccionario de datos válido.", 
-                            color=ft.colors.RED_700)
+                            color=ft.Colors.RED_700)
                 ]),
                 padding=15,
-                bgcolor=ft.colors.RED_50,
-                border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.RED_400)),
+                bgcolor=ft.Colors.RED_50,
+                border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.RED_400)),
                 border_radius=10
             )
         
@@ -1044,7 +1044,7 @@ class OVAApp:
                 content=ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.QUIZ, color=ft.colors.ORANGE_600),
+                            ft.Icon(ft.Icons.QUIZ, color=ft.Colors.ORANGE_600),
                             ft.Text("Quiz: Calidad y Limpieza de Datos (3 preguntas)", 
                                     size=18, weight=ft.FontWeight.BOLD)
                         ]),
@@ -1065,7 +1065,7 @@ class OVAApp:
                             ]),
                             padding=15,
                             bgcolor="white",
-                            border=ft.border.all(2, ft.colors.ORANGE_200),
+                            border=ft.border.all(2, ft.Colors.ORANGE_200),
                             border_radius=10,
                             margin=ft.margin.only(bottom=10)
                         ),
@@ -1086,7 +1086,7 @@ class OVAApp:
                             ]),
                             padding=15,
                             bgcolor="white",
-                            border=ft.border.all(2, ft.colors.ORANGE_200),
+                            border=ft.border.all(2, ft.Colors.ORANGE_200),
                             border_radius=10,
                             margin=ft.margin.only(bottom=10)
                         ),
@@ -1107,23 +1107,23 @@ class OVAApp:
                             ]),
                             padding=15,
                             bgcolor="white",
-                            border=ft.border.all(2, ft.colors.ORANGE_200),
+                            border=ft.border.all(2, ft.Colors.ORANGE_200),
                             border_radius=10,
                             margin=ft.margin.only(bottom=10)
                         ),
                         
                         ft.ElevatedButton(
                             "Enviar Quiz",
-                            icon=ft.icons.SEND,
+                            icon=ft.Icons.SEND,
                             on_click=lambda _: self.submit_quiz(page),
-                            bgcolor=ft.colors.ORANGE_600,
+                            bgcolor=ft.Colors.ORANGE_600,
                             color="white"
                         ),
                         
                         self.quiz_results
                     ]),
                     padding=20,
-                    bgcolor=ft.colors.ORANGE_50
+                    bgcolor=ft.Colors.ORANGE_50
                 )
             ),
             
@@ -1132,7 +1132,7 @@ class OVAApp:
                 content=ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.LAPTOP, color=ft.colors.BLUE_600),
+                            ft.Icon(ft.Icons.LAPTOP, color=ft.Colors.BLUE_600),
                             ft.Text("Ejercicio Práctico Final: Limpieza Completa de Dataset", 
                                     size=18, weight=ft.FontWeight.BOLD)
                         ]),
@@ -1144,7 +1144,7 @@ class OVAApp:
                             content=ft.Column([
                                 ft.Text("Dataset: Pacientes con Diabetes Tipo 2", weight=ft.FontWeight.BOLD),
                                 ft.Text("Problemas identificados: 23 valores faltantes, 8 outliers, 15 inconsistencias de codificación", 
-                                        size=12, color=ft.colors.GREY_600),
+                                        size=12, color=ft.Colors.GREY_600),
                                 
                                 ft.Row([
                                     ft.Column([
@@ -1167,38 +1167,38 @@ class OVAApp:
                             ]),
                             padding=15,
                             bgcolor="white",
-                            border=ft.border.all(2, ft.colors.BLUE_200),
+                            border=ft.border.all(2, ft.Colors.BLUE_200),
                             border_radius=10
                         ),
                         
                         ft.Row([
                             ft.ElevatedButton(
                                 "Descargar Dataset",
-                                icon=ft.icons.DOWNLOAD,
+                                icon=ft.Icons.DOWNLOAD,
                                 on_click=lambda _: self.download_dataset(page),
-                                bgcolor=ft.colors.BLUE_600,
+                                bgcolor=ft.Colors.BLUE_600,
                                 color="white"
                             ),
                             ft.ElevatedButton(
                                 "Subir Solución",
-                                icon=ft.icons.UPLOAD,
+                                icon=ft.Icons.UPLOAD,
                                 on_click=lambda _: self.submit_final_exercise(page),
-                                bgcolor=ft.colors.GREEN_600,
+                                bgcolor=ft.Colors.GREEN_600,
                                 color="white"
                             )
                         ])
                     ]),
                     padding=20,
-                    bgcolor=ft.colors.BLUE_50
+                    bgcolor=ft.Colors.BLUE_50
                 )
             ),
             
             ft.Container(
                 content=ft.ElevatedButton(
                     "Ver Recursos Descargables",
-                    icon=ft.icons.ARROW_FORWARD,
+                    icon=ft.Icons.ARROW_FORWARD,
                     on_click=lambda _: self.show_section(page, "resources"),
-                    bgcolor=ft.colors.PURPLE_600,
+                    bgcolor=ft.Colors.PURPLE_600,
                     color="white"
                 ),
                 alignment=ft.alignment.center,
@@ -1221,13 +1221,13 @@ class OVAApp:
         
         self.quiz_results.content = ft.Container(
             content=ft.Column([
-                ft.Text("Resultados del Quiz", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
-                ft.Text(f"Puntuación: {score}/3 ({percentage}%)", color=ft.colors.GREEN_700),
+                ft.Text("Resultados del Quiz", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
+                ft.Text(f"Puntuación: {score}/3 ({percentage}%)", color=ft.Colors.GREEN_700),
                 ft.Column([ft.Text(feedback, size=12) for feedback in feedback_text])
             ]),
             padding=15,
-            bgcolor=ft.colors.GREEN_50,
-            border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.GREEN_400)),
+            bgcolor=ft.Colors.GREEN_50,
+            border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.GREEN_400)),
             border_radius=10
         )
         
@@ -1259,7 +1259,7 @@ class OVAApp:
                     content=ft.Container(
                         content=ft.Column([
                             ft.Row([
-                                ft.Icon(ft.icons.DESCRIPTION, color=ft.colors.BLUE_600),
+                                ft.Icon(ft.Icons.DESCRIPTION, color=ft.Colors.BLUE_600),
                                 ft.Text("Plantillas y Formularios", weight=ft.FontWeight.BOLD)
                             ]),
                             
@@ -1267,15 +1267,15 @@ class OVAApp:
                                 content=ft.Row([
                                     ft.Column([
                                         ft.Text("Plantilla de Diccionario de Datos", weight=ft.FontWeight.BOLD, size=12),
-                                        ft.Text("Excel/CSV - Estructura estándar", size=10, color=ft.colors.GREY_600)
+                                        ft.Text("Excel/CSV - Estructura estándar", size=10, color=ft.Colors.GREY_600)
                                     ], expand=True),
-                                    ft.ElevatedButton("Descargar", icon=ft.icons.DOWNLOAD, 
-                                                    bgcolor=ft.colors.BLUE_600, color="white",
+                                    ft.ElevatedButton("Descargar", icon=ft.Icons.DOWNLOAD, 
+                                                    bgcolor=ft.Colors.BLUE_600, color="white",
                                                     on_click=lambda _: page.show_snack_bar(ft.SnackBar(content=ft.Text("Descargando plantilla..."), action="OK")))
                                 ]),
                                 padding=10,
                                 bgcolor="white",
-                                border=ft.border.all(1, ft.colors.GREY_300),
+                                border=ft.border.all(1, ft.Colors.GREY_300),
                                 border_radius=5,
                                 margin=ft.margin.only(bottom=5)
                             ),
@@ -1284,15 +1284,15 @@ class OVAApp:
                                 content=ft.Row([
                                     ft.Column([
                                         ft.Text("Checklist de Calidad de Datos", weight=ft.FontWeight.BOLD, size=12),
-                                        ft.Text("PDF - Lista de verificación", size=10, color=ft.colors.GREY_600)
+                                        ft.Text("PDF - Lista de verificación", size=10, color=ft.Colors.GREY_600)
                                     ], expand=True),
-                                    ft.ElevatedButton("Descargar", icon=ft.icons.DOWNLOAD, 
-                                                    bgcolor=ft.colors.BLUE_600, color="white",
+                                    ft.ElevatedButton("Descargar", icon=ft.Icons.DOWNLOAD, 
+                                                    bgcolor=ft.Colors.BLUE_600, color="white",
                                                     on_click=lambda _: page.show_snack_bar(ft.SnackBar(content=ft.Text("Descargando checklist..."), action="OK")))
                                 ]),
                                 padding=10,
                                 bgcolor="white",
-                                border=ft.border.all(1, ft.colors.GREY_300),
+                                border=ft.border.all(1, ft.Colors.GREY_300),
                                 border_radius=5,
                                 margin=ft.margin.only(bottom=5)
                             ),
@@ -1301,20 +1301,20 @@ class OVAApp:
                                 content=ft.Row([
                                     ft.Column([
                                         ft.Text("Formulario de Reporte de Limpieza", weight=ft.FontWeight.BOLD, size=12),
-                                        ft.Text("Word - Documentación estándar", size=10, color=ft.colors.GREY_600)
+                                        ft.Text("Word - Documentación estándar", size=10, color=ft.Colors.GREY_600)
                                     ], expand=True),
-                                    ft.ElevatedButton("Descargar", icon=ft.icons.DOWNLOAD, 
-                                                    bgcolor=ft.colors.BLUE_600, color="white",
+                                    ft.ElevatedButton("Descargar", icon=ft.Icons.DOWNLOAD, 
+                                                    bgcolor=ft.Colors.BLUE_600, color="white",
                                                     on_click=lambda _: page.show_snack_bar(ft.SnackBar(content=ft.Text("Descargando formulario..."), action="OK")))
                                 ]),
                                 padding=10,
                                 bgcolor="white",
-                                border=ft.border.all(1, ft.colors.GREY_300),
+                                border=ft.border.all(1, ft.Colors.GREY_300),
                                 border_radius=5
                             )
                         ]),
                         padding=20,
-                        bgcolor=ft.colors.BLUE_50
+                        bgcolor=ft.Colors.BLUE_50
                     ),
                     expand=True
                 ),
@@ -1323,7 +1323,7 @@ class OVAApp:
                     content=ft.Container(
                         content=ft.Column([
                             ft.Row([
-                                ft.Icon(ft.icons.CODE, color=ft.colors.GREEN_600),
+                                ft.Icon(ft.Icons.CODE, color=ft.Colors.GREEN_600),
                                 ft.Text("Scripts y Códigos", weight=ft.FontWeight.BOLD)
                             ]),
                             
@@ -1331,15 +1331,15 @@ class OVAApp:
                                 content=ft.Row([
                                     ft.Column([
                                         ft.Text("Script Python - Detección de Outliers", weight=ft.FontWeight.BOLD, size=12),
-                                        ft.Text("Python - Usando pandas y scipy", size=10, color=ft.colors.GREY_600)
+                                        ft.Text("Python - Usando pandas y scipy", size=10, color=ft.Colors.GREY_600)
                                     ], expand=True),
-                                    ft.ElevatedButton("Descargar", icon=ft.icons.DOWNLOAD, 
-                                                    bgcolor=ft.colors.GREEN_600, color="white",
+                                    ft.ElevatedButton("Descargar", icon=ft.Icons.DOWNLOAD, 
+                                                    bgcolor=ft.Colors.GREEN_600, color="white",
                                                     on_click=lambda _: page.show_snack_bar(ft.SnackBar(content=ft.Text("Descargando script Python..."), action="OK")))
                                 ]),
                                 padding=10,
                                 bgcolor="white",
-                                border=ft.border.all(1, ft.colors.GREY_300),
+                                border=ft.border.all(1, ft.Colors.GREY_300),
                                 border_radius=5,
                                 margin=ft.margin.only(bottom=5)
                             ),
@@ -1348,15 +1348,15 @@ class OVAApp:
                                 content=ft.Row([
                                     ft.Column([
                                         ft.Text("Script R - Análisis de Datos Faltantes", weight=ft.FontWeight.BOLD, size=12),
-                                        ft.Text("R - Usando VIM y mice", size=10, color=ft.colors.GREY_600)
+                                        ft.Text("R - Usando VIM y mice", size=10, color=ft.Colors.GREY_600)
                                     ], expand=True),
-                                    ft.ElevatedButton("Descargar", icon=ft.icons.DOWNLOAD, 
-                                                    bgcolor=ft.colors.GREEN_600, color="white",
+                                    ft.ElevatedButton("Descargar", icon=ft.Icons.DOWNLOAD, 
+                                                    bgcolor=ft.Colors.GREEN_600, color="white",
                                                     on_click=lambda _: page.show_snack_bar(ft.SnackBar(content=ft.Text("Descargando script R..."), action="OK")))
                                 ]),
                                 padding=10,
                                 bgcolor="white",
-                                border=ft.border.all(1, ft.colors.GREY_300),
+                                border=ft.border.all(1, ft.Colors.GREY_300),
                                 border_radius=5,
                                 margin=ft.margin.only(bottom=5)
                             ),
@@ -1365,20 +1365,20 @@ class OVAApp:
                                 content=ft.Row([
                                     ft.Column([
                                         ft.Text("Notebook Jupyter - Flujo Completo", weight=ft.FontWeight.BOLD, size=12),
-                                        ft.Text("Jupyter - Ejemplo paso a paso", size=10, color=ft.colors.GREY_600)
+                                        ft.Text("Jupyter - Ejemplo paso a paso", size=10, color=ft.Colors.GREY_600)
                                     ], expand=True),
-                                    ft.ElevatedButton("Descargar", icon=ft.icons.DOWNLOAD, 
-                                                    bgcolor=ft.colors.GREEN_600, color="white",
+                                    ft.ElevatedButton("Descargar", icon=ft.Icons.DOWNLOAD, 
+                                                    bgcolor=ft.Colors.GREEN_600, color="white",
                                                     on_click=lambda _: page.show_snack_bar(ft.SnackBar(content=ft.Text("Descargando notebook..."), action="OK")))
                                 ]),
                                 padding=10,
                                 bgcolor="white",
-                                border=ft.border.all(1, ft.colors.GREY_300),
+                                border=ft.border.all(1, ft.Colors.GREY_300),
                                 border_radius=5
                             )
                         ]),
                         padding=20,
-                        bgcolor=ft.colors.GREEN_50
+                        bgcolor=ft.Colors.GREEN_50
                     ),
                     expand=True
                 )
@@ -1388,7 +1388,7 @@ class OVAApp:
                 content=ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.STORAGE, color=ft.colors.ORANGE_600),
+                            ft.Icon(ft.Icons.STORAGE, color=ft.Colors.ORANGE_600),
                             ft.Text("Datasets de Práctica", weight=ft.FontWeight.BOLD)
                         ]),
                         
@@ -1396,42 +1396,42 @@ class OVAApp:
                             ft.Card(
                                 content=ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Dataset Básico", weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800),
+                                        ft.Text("Dataset Básico", weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800),
                                         ft.Text("100 registros con problemas simples de calidad", size=12),
-                                        ft.ElevatedButton("Descargar CSV", icon=ft.icons.DOWNLOAD, 
-                                                        bgcolor=ft.colors.ORANGE_600, color="white",
+                                        ft.ElevatedButton("Descargar CSV", icon=ft.Icons.DOWNLOAD, 
+                                                        bgcolor=ft.Colors.ORANGE_600, color="white",
                                                         on_click=lambda _: page.show_snack_bar(ft.SnackBar(content=ft.Text("Descargando dataset básico..."), action="OK")))
                                     ]),
                                     padding=15,
-                                    bgcolor=ft.colors.ORANGE_50
+                                    bgcolor=ft.Colors.ORANGE_50
                                 ),
                                 expand=True
                             ),
                             ft.Card(
                                 content=ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Dataset Intermedio", weight=ft.FontWeight.BOLD, color=ft.colors.RED_800),
+                                        ft.Text("Dataset Intermedio", weight=ft.FontWeight.BOLD, color=ft.Colors.RED_800),
                                         ft.Text("500 registros con múltiples tipos de problemas", size=12),
-                                        ft.ElevatedButton("Descargar CSV", icon=ft.icons.DOWNLOAD, 
-                                                        bgcolor=ft.colors.RED_600, color="white",
+                                        ft.ElevatedButton("Descargar CSV", icon=ft.Icons.DOWNLOAD, 
+                                                        bgcolor=ft.Colors.RED_600, color="white",
                                                         on_click=lambda _: page.show_snack_bar(ft.SnackBar(content=ft.Text("Descargando dataset intermedio..."), action="OK")))
                                     ]),
                                     padding=15,
-                                    bgcolor=ft.colors.RED_50
+                                    bgcolor=ft.Colors.RED_50
                                 ),
                                 expand=True
                             ),
                             ft.Card(
                                 content=ft.Container(
                                     content=ft.Column([
-                                        ft.Text("Dataset Avanzado", weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                                        ft.Text("Dataset Avanzado", weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
                                         ft.Text("1000+ registros con problemas complejos", size=12),
-                                        ft.ElevatedButton("Descargar CSV", icon=ft.icons.DOWNLOAD, 
-                                                        bgcolor=ft.colors.PURPLE_600, color="white",
+                                        ft.ElevatedButton("Descargar CSV", icon=ft.Icons.DOWNLOAD, 
+                                                        bgcolor=ft.Colors.PURPLE_600, color="white",
                                                         on_click=lambda _: page.show_snack_bar(ft.SnackBar(content=ft.Text("Descargando dataset avanzado..."), action="OK")))
                                     ]),
                                     padding=15,
-                                    bgcolor=ft.colors.PURPLE_50
+                                    bgcolor=ft.Colors.PURPLE_50
                                 ),
                                 expand=True
                             )
@@ -1446,7 +1446,7 @@ class OVAApp:
                 content=ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.EMOJI_EVENTS, color=ft.colors.YELLOW_600, size=40),
+                            ft.Icon(ft.Icons.EMOJI_EVENTS, color=ft.Colors.YELLOW_600, size=40),
                             ft.Column([
                                 ft.Text("Certificado de Finalización", size=20, weight=ft.FontWeight.BOLD),
                                 ft.Text("¡Felicitaciones! Has completado exitosamente el OVA de Calidad y Limpieza de Datos Clínicos.", 
@@ -1457,9 +1457,9 @@ class OVAApp:
                         ft.Container(
                             content=ft.ElevatedButton(
                                 "Generar Certificado",
-                                icon=ft.icons.CARD_MEMBERSHIP,
+                                icon=ft.Icons.CARD_MEMBERSHIP,
                                 on_click=lambda _: self.generate_certificate(page),
-                                bgcolor=ft.colors.YELLOW_600,
+                                bgcolor=ft.Colors.YELLOW_600,
                                 color="white"
                             ),
                             alignment=ft.alignment.center,
@@ -1467,7 +1467,7 @@ class OVAApp:
                         )
                     ]),
                     padding=20,
-                    bgcolor=ft.colors.YELLOW_50
+                    bgcolor=ft.Colors.YELLOW_50
                 )
             )
         ], scroll=ft.ScrollMode.AUTO)

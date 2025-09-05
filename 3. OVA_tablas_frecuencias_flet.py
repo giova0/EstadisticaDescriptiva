@@ -22,25 +22,25 @@ class OVAApp:
         
         # Colores del tema
         self.colors = {
-            'primary': ft.colors.BLUE_900,
-            'secondary': ft.colors.BLUE_600,
-            'success': ft.colors.GREEN_600,
-            'warning': ft.colors.ORANGE_600,
-            'danger': ft.colors.RED_600,
-            'info': ft.colors.CYAN_600,
-            'light': ft.colors.GREY_100,
-            'dark': ft.colors.GREY_800
+            'primary': ft.Colors.BLUE_900,
+            'secondary': ft.Colors.BLUE_600,
+            'success': ft.Colors.GREEN_600,
+            'warning': ft.Colors.ORANGE_600,
+            'danger': ft.Colors.RED_600,
+            'info': ft.Colors.CYAN_600,
+            'light': ft.Colors.GREY_100,
+            'dark': ft.Colors.GREY_800
         }
         
         # Barra de progreso
         self.progress_bar = ft.ProgressBar(
             width=200,
-            color=ft.colors.GREEN_400,
-            bgcolor=ft.colors.BLUE_700,
+            color=ft.Colors.GREEN_400,
+            bgcolor=ft.Colors.BLUE_700,
             value=0
         )
         
-        self.progress_text = ft.Text("0% completado", size=12, color=ft.colors.WHITE)
+        self.progress_text = ft.Text("0% completado", size=12, color=ft.Colors.WHITE)
         
         # Header
         header = ft.Container(
@@ -50,21 +50,21 @@ class OVAApp:
                         "OVA: Tablas de Frecuencias y Resúmenes Categóricos",
                         size=24,
                         weight=ft.FontWeight.BOLD,
-                        color=ft.colors.WHITE
+                        color=ft.Colors.WHITE
                     ),
                     ft.Text(
                         "Estadística Descriptiva para Ciencias de la Salud - Modelo C(H)ANGE",
                         size=14,
-                        color=ft.colors.BLUE_200
+                        color=ft.Colors.BLUE_200
                     )
                 ], expand=True),
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("Progreso del OVA", size=12, color=ft.colors.WHITE),
+                        ft.Text("Progreso del OVA", size=12, color=ft.Colors.WHITE),
                         self.progress_bar,
                         self.progress_text
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.BLUE_800,
+                    bgcolor=ft.Colors.BLUE_800,
                     padding=10,
                     border_radius=8
                 )
@@ -77,12 +77,12 @@ class OVAApp:
         # Navegación
         self.nav_buttons = []
         nav_items = [
-            ("intro", "Introducción", ft.icons.PLAY_CIRCLE),
-            ("theory", "Teoría", ft.icons.BOOK),
-            ("practice", "Práctica", ft.icons.CALCULATE),
-            ("ai_assistant", "Asistente IA", ft.icons.SMART_TOY),
-            ("evaluation", "Evaluación", ft.icons.QUIZ),
-            ("resources", "Recursos", ft.icons.DOWNLOAD)
+            ("intro", "Introducción", ft.Icons.PLAY_CIRCLE),
+            ("theory", "Teoría", ft.Icons.BOOK),
+            ("practice", "Práctica", ft.Icons.CALCULATE),
+            ("ai_assistant", "Asistente IA", ft.Icons.SMART_TOY),
+            ("evaluation", "Evaluación", ft.Icons.QUIZ),
+            ("resources", "Recursos", ft.Icons.DOWNLOAD)
         ]
         
         for module_id, title, icon in nav_items:
@@ -91,8 +91,8 @@ class OVAApp:
                 icon=icon,
                 on_click=lambda e, mid=module_id: self.show_module(page, mid),
                 style=ft.ButtonStyle(
-                    bgcolor=self.colors['secondary'] if module_id == "intro" else ft.colors.GREY_200,
-                    color=ft.colors.WHITE if module_id == "intro" else ft.colors.GREY_700
+                    bgcolor=self.colors['secondary'] if module_id == "intro" else ft.Colors.GREY_200,
+                    color=ft.Colors.WHITE if module_id == "intro" else ft.Colors.GREY_700
                 )
             )
             self.nav_buttons.append((module_id, btn))
@@ -103,11 +103,11 @@ class OVAApp:
                 alignment=ft.MainAxisAlignment.CENTER,
                 wrap=True
             ),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=10,
             margin=ft.margin.only(bottom=10),
             border_radius=8,
-            shadow=ft.BoxShadow(blur_radius=2, color=ft.colors.GREY_300)
+            shadow=ft.BoxShadow(blur_radius=2, color=ft.Colors.GREY_300)
         )
         
         # Contenedor principal para módulos
@@ -135,12 +135,12 @@ class OVAApp:
             if mid == module_id:
                 btn.style = ft.ButtonStyle(
                     bgcolor=self.colors['secondary'],
-                    color=ft.colors.WHITE
+                    color=ft.Colors.WHITE
                 )
             else:
                 btn.style = ft.ButtonStyle(
-                    bgcolor=ft.colors.GREY_200,
-                    color=ft.colors.GREY_700
+                    bgcolor=ft.Colors.GREY_200,
+                    color=ft.Colors.GREY_700
                 )
         
         # Mostrar módulo correspondiente
@@ -175,8 +175,8 @@ class OVAApp:
                 ft.Container(
                     content=ft.Column([
                         ft.Container(
-                            content=ft.Icon(ft.icons.BAR_CHART, size=60, color=self.colors['secondary']),
-                            bgcolor=ft.colors.BLUE_50,
+                            content=ft.Icon(ft.Icons.BAR_CHART, size=60, color=self.colors['secondary']),
+                            bgcolor=ft.Colors.BLUE_50,
                             width=80,
                             height=80,
                             border_radius=40,
@@ -193,7 +193,7 @@ class OVAApp:
                             "Aprende a construir y analizar tablas de frecuencias para variables categóricas en el contexto de las ciencias de la salud, utilizando el modelo pedagógico C(H)ANGE e inteligencia artificial.",
                             size=16,
                             text_align=ft.TextAlign.CENTER,
-                            color=ft.colors.GREY_600
+                            color=ft.Colors.GREY_600
                         )
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                     margin=ft.margin.only(bottom=30)
@@ -204,7 +204,7 @@ class OVAApp:
                     ft.Container(
                         content=ft.Column([
                             ft.Row([
-                                ft.Icon(ft.icons.TARGET_OUTLINED, color=self.colors['secondary']),
+                                ft.Icon(ft.Icons.TARGET_OUTLINED, color=self.colors['secondary']),
                                 ft.Text("Objetivos de Aprendizaje", size=18, weight=ft.FontWeight.BOLD)
                             ]),
                             ft.Column([
@@ -214,7 +214,7 @@ class OVAApp:
                                 self.create_objective_item("Interpretar resultados en contextos clínicos y epidemiológicos")
                             ])
                         ]),
-                        bgcolor=ft.colors.BLUE_50,
+                        bgcolor=ft.Colors.BLUE_50,
                         padding=20,
                         border_radius=10,
                         expand=True
@@ -224,7 +224,7 @@ class OVAApp:
                     ft.Container(
                         content=ft.Column([
                             ft.Row([
-                                ft.Icon(ft.icons.EXTENSION, color=ft.colors.PURPLE_600),
+                                ft.Icon(ft.Icons.EXTENSION, color=ft.Colors.PURPLE_600),
                                 ft.Text("Modelo C(H)ANGE", size=18, weight=ft.FontWeight.BOLD)
                             ]),
                             ft.Column([
@@ -236,7 +236,7 @@ class OVAApp:
                                 ft.Text("Estadística: Análisis descriptivo categórico", size=12)
                             ])
                         ]),
-                        bgcolor=ft.colors.PURPLE_50,
+                        bgcolor=ft.Colors.PURPLE_50,
                         padding=20,
                         border_radius=10,
                         expand=True
@@ -247,7 +247,7 @@ class OVAApp:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.LIGHTBULB, color=ft.colors.ORANGE_600),
+                            ft.Icon(ft.Icons.LIGHTBULB, color=ft.Colors.ORANGE_600),
                             ft.Text("Caso Clínico Motivador", size=18, weight=ft.FontWeight.BOLD)
                         ]),
                         ft.Text(
@@ -255,10 +255,10 @@ class OVAApp:
                             size=14
                         )
                     ]),
-                    bgcolor=ft.colors.YELLOW_50,
+                    bgcolor=ft.Colors.YELLOW_50,
                     padding=20,
                     border_radius=10,
-                    border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400)),
+                    border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400)),
                     margin=ft.margin.only(top=20, bottom=20)
                 ),
                 
@@ -266,26 +266,26 @@ class OVAApp:
                 ft.Container(
                     content=ft.ElevatedButton(
                         text="Comenzar con la Teoría",
-                        icon=ft.icons.ARROW_FORWARD,
+                        icon=ft.Icons.ARROW_FORWARD,
                         on_click=lambda e: self.show_module(page, "theory"),
                         style=ft.ButtonStyle(
                             bgcolor=self.colors['secondary'],
-                            color=ft.colors.WHITE,
+                            color=ft.Colors.WHITE,
                             padding=ft.padding.symmetric(horizontal=30, vertical=15)
                         )
                     ),
                     alignment=ft.alignment.center
                 )
             ], scroll=ft.ScrollMode.AUTO),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300)
+            shadow=ft.BoxShadow(blur_radius=5, color=ft.Colors.GREY_300)
         )
     
     def create_objective_item(self, text):
         return ft.Row([
-            ft.Icon(ft.icons.CHECK_CIRCLE, color=ft.colors.GREEN_500, size=16),
+            ft.Icon(ft.Icons.CHECK_CIRCLE, color=ft.Colors.GREEN_500, size=16),
             ft.Text(text, size=12, expand=True)
         ], spacing=5)
     
@@ -293,7 +293,7 @@ class OVAApp:
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.BOOK, color=self.colors['secondary'], size=30),
+                    ft.Icon(ft.Icons.BOOK, color=self.colors['secondary'], size=30),
                     ft.Text("Fundamentos Teóricos", size=28, weight=ft.FontWeight.BOLD)
                 ]),
                 
@@ -324,7 +324,7 @@ class OVAApp:
                             )
                         ])
                     ]),
-                    bgcolor=ft.colors.BLUE_50,
+                    bgcolor=ft.Colors.BLUE_50,
                     padding=20,
                     border_radius=10,
                     margin=ft.margin.only(bottom=20)
@@ -390,9 +390,9 @@ class OVAApp:
                                 content=ft.Column([
                                     ft.Text("Frecuencia Absoluta", weight=ft.FontWeight.BOLD, color=self.colors['secondary']),
                                     ft.Text("Número de casos en cada categoría", size=12),
-                                    ft.Text("Ejemplo: 425 casos de trauma", size=10, color=ft.colors.GREY_600)
+                                    ft.Text("Ejemplo: 425 casos de trauma", size=10, color=ft.Colors.GREY_600)
                                 ]),
-                                bgcolor=ft.colors.BLUE_100,
+                                bgcolor=ft.Colors.BLUE_100,
                                 padding=15,
                                 border_radius=8,
                                 expand=True
@@ -401,27 +401,27 @@ class OVAApp:
                                 content=ft.Column([
                                     ft.Text("Proporción", weight=ft.FontWeight.BOLD, color=self.colors['success']),
                                     ft.Text("Frecuencia relativa expresada como porcentaje", size=12),
-                                    ft.Text("Fórmula: (n/N) × 100", size=10, color=ft.colors.GREY_600)
+                                    ft.Text("Fórmula: (n/N) × 100", size=10, color=ft.Colors.GREY_600)
                                 ]),
-                                bgcolor=ft.colors.GREEN_100,
+                                bgcolor=ft.Colors.GREEN_100,
                                 padding=15,
                                 border_radius=8,
                                 expand=True
                             ),
                             ft.Container(
                                 content=ft.Column([
-                                    ft.Text("Intervalo de Confianza", weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                                    ft.Text("Intervalo de Confianza", weight=ft.FontWeight.BOLD, color=ft.Colors.PURPLE_800),
                                     ft.Text("Rango de valores plausibles para la proporción", size=12),
-                                    ft.Text("IC 95% = p ± 1.96√(p(1-p)/n)", size=10, color=ft.colors.GREY_600)
+                                    ft.Text("IC 95% = p ± 1.96√(p(1-p)/n)", size=10, color=ft.Colors.GREY_600)
                                 ]),
-                                bgcolor=ft.colors.PURPLE_100,
+                                bgcolor=ft.Colors.PURPLE_100,
                                 padding=15,
                                 border_radius=8,
                                 expand=True
                             )
                         ], spacing=10)
                     ]),
-                    bgcolor=ft.colors.GREEN_50,
+                    bgcolor=ft.Colors.GREEN_50,
                     padding=20,
                     border_radius=10,
                     margin=ft.margin.only(bottom=20)
@@ -434,7 +434,7 @@ class OVAApp:
                         ft.Row([
                             ft.Container(
                                 content=ft.Column([
-                                    ft.Text("✓ Recomendaciones", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_700),
+                                    ft.Text("✓ Recomendaciones", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_700),
                                     ft.Text("• Ordenar categorías lógicamente", size=12),
                                     ft.Text("• Incluir totales y verificar suma 100%", size=12),
                                     ft.Text("• Reportar intervalos de confianza", size=12),
@@ -446,7 +446,7 @@ class OVAApp:
                             ),
                             ft.Container(
                                 content=ft.Column([
-                                    ft.Text("✗ Errores Comunes", weight=ft.FontWeight.BOLD, color=ft.colors.RED_700),
+                                    ft.Text("✗ Errores Comunes", weight=ft.FontWeight.BOLD, color=ft.Colors.RED_700),
                                     ft.Text("• Categorías superpuestas o ambiguas", size=12),
                                     ft.Text("• Omitir información sobre datos faltantes", size=12),
                                     ft.Text("• Usar demasiadas categorías pequeñas", size=12),
@@ -458,7 +458,7 @@ class OVAApp:
                             )
                         ])
                     ]),
-                    bgcolor=ft.colors.ORANGE_50,
+                    bgcolor=ft.Colors.ORANGE_50,
                     padding=20,
                     border_radius=10,
                     margin=ft.margin.only(bottom=20)
@@ -467,21 +467,21 @@ class OVAApp:
                 ft.Container(
                     content=ft.ElevatedButton(
                         text="Continuar con la Práctica",
-                        icon=ft.icons.ARROW_FORWARD,
+                        icon=ft.Icons.ARROW_FORWARD,
                         on_click=lambda e: self.show_module(page, "practice"),
                         style=ft.ButtonStyle(
                             bgcolor=self.colors['success'],
-                            color=ft.colors.WHITE,
+                            color=ft.Colors.WHITE,
                             padding=ft.padding.symmetric(horizontal=30, vertical=15)
                         )
                     ),
                     alignment=ft.alignment.center
                 )
             ], scroll=ft.ScrollMode.AUTO),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300)
+            shadow=ft.BoxShadow(blur_radius=5, color=ft.Colors.GREY_300)
         )
     
     def create_practice_module(self, page):
@@ -502,11 +502,11 @@ class OVAApp:
         )
         
         self.result_container = ft.Container(
-            content=ft.Text("Los resultados aparecerán aquí...", color=ft.colors.GREY_500),
-            bgcolor=ft.colors.WHITE,
+            content=ft.Text("Los resultados aparecerán aquí...", color=ft.Colors.GREY_500),
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=8,
-            border=ft.border.all(1, ft.colors.GREY_300),
+            border=ft.border.all(1, ft.Colors.GREY_300),
             width=400,
             height=300
         )
@@ -535,7 +535,7 @@ class OVAApp:
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.CALCULATE, color=self.colors['success'], size=30),
+                    ft.Icon(ft.Icons.CALCULATE, color=self.colors['success'], size=30),
                     ft.Text("Práctica Interactiva", size=28, weight=ft.FontWeight.BOLD)
                 ]),
                 
@@ -550,11 +550,11 @@ class OVAApp:
                                 self.data_input_field,
                                 ft.ElevatedButton(
                                     text="Calcular Tabla",
-                                    icon=ft.icons.CALCULATE,
+                                    icon=ft.Icons.CALCULATE,
                                     on_click=lambda e: self.calculate_frequency_table(page),
                                     style=ft.ButtonStyle(
                                         bgcolor=self.colors['secondary'],
-                                        color=ft.colors.WHITE
+                                        color=ft.Colors.WHITE
                                     )
                                 )
                             ]),
@@ -564,7 +564,7 @@ class OVAApp:
                             ])
                         ])
                     ]),
-                    bgcolor=ft.colors.BLUE_50,
+                    bgcolor=ft.Colors.BLUE_50,
                     padding=20,
                     border_radius=10,
                     margin=ft.margin.only(bottom=20)
@@ -590,7 +590,7 @@ class OVAApp:
                                             ft.Text("• Retinopatía: 75 pacientes", size=12),
                                             ft.Text("• Sin comorbilidades: 55 pacientes", size=12)
                                         ]),
-                                        bgcolor=ft.colors.GREY_100,
+                                        bgcolor=ft.Colors.GREY_100,
                                         padding=15,
                                         border_radius=8,
                                         expand=True
@@ -603,7 +603,7 @@ class OVAApp:
                                             ft.Text("3. Interpretar los resultados", size=12),
                                             ft.Text("4. Identificar la comorbilidad más frecuente", size=12)
                                         ]),
-                                        bgcolor=ft.colors.BLUE_50,
+                                        bgcolor=ft.Colors.BLUE_50,
                                         padding=15,
                                         border_radius=8,
                                         expand=True
@@ -617,23 +617,23 @@ class OVAApp:
                                 
                                 ft.ElevatedButton(
                                     text="Verificar Respuestas",
-                                    icon=ft.icons.CHECK,
+                                    icon=ft.Icons.CHECK,
                                     on_click=lambda e: self.check_exercise_answers(page),
                                     style=ft.ButtonStyle(
                                         bgcolor=self.colors['success'],
-                                        color=ft.colors.WHITE
+                                        color=ft.Colors.WHITE
                                     )
                                 ),
                                 
                                 self.exercise_feedback
                             ]),
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             padding=20,
                             border_radius=8,
-                            border=ft.border.all(1, ft.colors.GREY_300)
+                            border=ft.border.all(1, ft.Colors.GREY_300)
                         )
                     ]),
-                    bgcolor=ft.colors.GREEN_50,
+                    bgcolor=ft.Colors.GREEN_50,
                     padding=20,
                     border_radius=10,
                     margin=ft.margin.only(bottom=20)
@@ -642,21 +642,21 @@ class OVAApp:
                 ft.Container(
                     content=ft.ElevatedButton(
                         text="Explorar Asistente IA",
-                        icon=ft.icons.ARROW_FORWARD,
+                        icon=ft.Icons.ARROW_FORWARD,
                         on_click=lambda e: self.show_module(page, "ai_assistant"),
                         style=ft.ButtonStyle(
-                            bgcolor=ft.colors.PURPLE_600,
-                            color=ft.colors.WHITE,
+                            bgcolor=ft.Colors.PURPLE_600,
+                            color=ft.Colors.WHITE,
                             padding=ft.padding.symmetric(horizontal=30, vertical=15)
                         )
                     ),
                     alignment=ft.alignment.center
                 )
             ], scroll=ft.ScrollMode.AUTO),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300)
+            shadow=ft.BoxShadow(blur_radius=5, color=ft.Colors.GREY_300)
         )
     
     def calculate_frequency_table(self, page):
@@ -664,7 +664,7 @@ class OVAApp:
         data_input = self.data_input_field.value
         
         if not variable_name or not data_input:
-            self.result_container.content = ft.Text("Por favor, completa todos los campos.", color=ft.colors.RED_500)
+            self.result_container.content = ft.Text("Por favor, completa todos los campos.", color=ft.Colors.RED_500)
             page.update()
             return
         
@@ -731,7 +731,7 @@ class OVAApp:
             self.result_container.content = result_table
             
         except Exception as e:
-            self.result_container.content = ft.Text(f"Error: {str(e)}", color=ft.colors.RED_500)
+            self.result_container.content = ft.Text(f"Error: {str(e)}", color=ft.Colors.RED_500)
         
         page.update()
     
@@ -747,17 +747,17 @@ class OVAApp:
             # Verificar proporción de hipertensión
             correct_prop = (285 / 500) * 100  # 57.0%
             if abs(hypertension_prop - correct_prop) < 0.5:
-                feedback_items.append(ft.Text("✓ Correcto: La proporción de hipertensión es 57.0%", color=ft.colors.GREEN_600))
+                feedback_items.append(ft.Text("✓ Correcto: La proporción de hipertensión es 57.0%", color=ft.Colors.GREEN_600))
                 correct += 1
             else:
-                feedback_items.append(ft.Text(f"✗ Incorrecto: La proporción correcta es {correct_prop}% (285/500 × 100)", color=ft.colors.RED_600))
+                feedback_items.append(ft.Text(f"✗ Incorrecto: La proporción correcta es {correct_prop}% (285/500 × 100)", color=ft.Colors.RED_600))
             
             # Verificar comorbilidad más frecuente
             if most_frequent == "hipertension":
-                feedback_items.append(ft.Text("✓ Correcto: La hipertensión es la comorbilidad más frecuente (285 casos)", color=ft.colors.GREEN_600))
+                feedback_items.append(ft.Text("✓ Correcto: La hipertensión es la comorbilidad más frecuente (285 casos)", color=ft.Colors.GREEN_600))
                 correct += 1
             else:
-                feedback_items.append(ft.Text("✗ Incorrecto: La hipertensión es la comorbilidad más frecuente con 285 casos", color=ft.colors.RED_600))
+                feedback_items.append(ft.Text("✗ Incorrecto: La hipertensión es la comorbilidad más frecuente con 285 casos", color=ft.Colors.RED_600))
             
             # Interpretación clínica
             feedback_items.append(
@@ -769,7 +769,7 @@ class OVAApp:
                             size=12
                         )
                     ]),
-                    bgcolor=ft.colors.BLUE_50,
+                    bgcolor=ft.Colors.BLUE_50,
                     padding=15,
                     border_radius=8,
                     margin=ft.margin.only(top=10)
@@ -780,15 +780,15 @@ class OVAApp:
             
             self.exercise_feedback.content = ft.Container(
                 content=ft.Column(feedback_items),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=20,
                 border_radius=8,
-                border=ft.border.all(1, ft.colors.GREY_300)
+                border=ft.border.all(1, ft.Colors.GREY_300)
             )
             self.exercise_feedback.visible = True
             
         except ValueError:
-            self.exercise_feedback.content = ft.Text("Por favor, ingresa valores válidos.", color=ft.colors.RED_500)
+            self.exercise_feedback.content = ft.Text("Por favor, ingresa valores válidos.", color=ft.Colors.RED_500)
             self.exercise_feedback.visible = True
         
         page.update()
@@ -799,8 +799,8 @@ class OVAApp:
             ft.Container(
                 content=ft.Row([
                     ft.Container(
-                        content=ft.Icon(ft.icons.SMART_TOY, color=ft.colors.WHITE),
-                        bgcolor=ft.colors.PURPLE_600,
+                        content=ft.Icon(ft.Icons.SMART_TOY, color=ft.Colors.WHITE),
+                        bgcolor=ft.Colors.PURPLE_600,
                         width=32,
                         height=32,
                         border_radius=16,
@@ -814,7 +814,7 @@ class OVAApp:
                             ft.Text("• Recomendaciones de visualización", size=10),
                             ft.Text("• Análisis de significancia clínica", size=10)
                         ]),
-                        bgcolor=ft.colors.PURPLE_100,
+                        bgcolor=ft.Colors.PURPLE_100,
                         padding=10,
                         border_radius=8,
                         expand=True
@@ -844,11 +844,11 @@ class OVAApp:
         )
         
         self.analysis_result = ft.Container(
-            content=ft.Text("Selecciona un dataset y ejecuta el análisis...", color=ft.colors.GREY_500),
-            bgcolor=ft.colors.WHITE,
+            content=ft.Text("Selecciona un dataset y ejecuta el análisis...", color=ft.Colors.GREY_500),
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=8,
-            border=ft.border.all(1, ft.colors.GREY_300),
+            border=ft.border.all(1, ft.Colors.GREY_300),
             width=400,
             height=200
         )
@@ -856,7 +856,7 @@ class OVAApp:
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.SMART_TOY, color=ft.colors.PURPLE_600, size=30),
+                    ft.Icon(ft.Icons.SMART_TOY, color=ft.Colors.PURPLE_600, size=30),
                     ft.Text("Asistente de IA para Análisis Categórico", size=28, weight=ft.FontWeight.BOLD)
                 ]),
                 
@@ -864,19 +864,19 @@ class OVAApp:
                 ft.Container(
                     content=ft.Row([
                         ft.Container(
-                            content=ft.Icon(ft.icons.PSYCHOLOGY, size=40, color=ft.colors.WHITE),
+                            content=ft.Icon(ft.Icons.PSYCHOLOGY, size=40, color=ft.Colors.WHITE),
                             width=60,
                             height=60,
-                            bgcolor=ft.colors.WHITE24,
+                            bgcolor=ft.Colors.WHITE24,
                             border_radius=30,
                             alignment=ft.alignment.center
                         ),
                         ft.Column([
-                            ft.Text("CHANGE-AI Assistant", size=20, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
-                            ft.Text("Especialista en análisis estadístico para ciencias de la salud", color=ft.colors.WHITE70)
+                            ft.Text("CHANGE-AI Assistant", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
+                            ft.Text("Especialista en análisis estadístico para ciencias de la salud", color=ft.Colors.WHITE70)
                         ], expand=True)
                     ]),
-                    bgcolor=ft.colors.PURPLE_600,
+                    bgcolor=ft.Colors.PURPLE_600,
                     padding=20,
                     border_radius=10,
                     margin=ft.margin.only(bottom=20)
@@ -888,19 +888,19 @@ class OVAApp:
                         ft.Text("Chat con el Asistente", size=18, weight=ft.FontWeight.BOLD),
                         ft.Container(
                             content=self.chat_container,
-                            bgcolor=ft.colors.WHITE,
+                            bgcolor=ft.Colors.WHITE,
                             border_radius=8,
-                            border=ft.border.all(1, ft.colors.GREY_300),
+                            border=ft.border.all(1, ft.Colors.GREY_300),
                             padding=10
                         ),
                         ft.Row([
                             self.chat_input,
                             ft.ElevatedButton(
-                                icon=ft.icons.SEND,
+                                icon=ft.Icons.SEND,
                                 on_click=lambda e: self.send_message(page),
                                 style=ft.ButtonStyle(
-                                    bgcolor=ft.colors.PURPLE_600,
-                                    color=ft.colors.WHITE
+                                    bgcolor=ft.Colors.PURPLE_600,
+                                    color=ft.Colors.WHITE
                                 )
                             )
                         ]),
@@ -909,21 +909,21 @@ class OVAApp:
                             ft.ElevatedButton(
                                 text="Intervalos de confianza",
                                 on_click=lambda e: self.ask_predefined_question(page, "¿Cómo interpreto un intervalo de confianza del 95%?"),
-                                style=ft.ButtonStyle(bgcolor=ft.colors.BLUE_100, color=ft.colors.BLUE_800)
+                                style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_100, color=ft.Colors.BLUE_800)
                             ),
                             ft.ElevatedButton(
                                 text="Tipos de gráficos",
                                 on_click=lambda e: self.ask_predefined_question(page, "¿Cuándo usar gráfico de barras vs circular?"),
-                                style=ft.ButtonStyle(bgcolor=ft.colors.GREEN_100, color=ft.colors.GREEN_800)
+                                style=ft.ButtonStyle(bgcolor=ft.Colors.GREEN_100, color=ft.Colors.GREEN_800)
                             ),
                             ft.ElevatedButton(
                                 text="Categorías pequeñas",
                                 on_click=lambda e: self.ask_predefined_question(page, "¿Cómo manejar categorías con frecuencias muy bajas?"),
-                                style=ft.ButtonStyle(bgcolor=ft.colors.ORANGE_100, color=ft.colors.ORANGE_800)
+                                style=ft.ButtonStyle(bgcolor=ft.Colors.ORANGE_100, color=ft.Colors.ORANGE_800)
                             )
                         ], wrap=True)
                     ]),
-                    bgcolor=ft.colors.GREY_50,
+                    bgcolor=ft.Colors.GREY_50,
                     padding=20,
                     border_radius=10,
                     margin=ft.margin.only(bottom=20)
@@ -932,18 +932,18 @@ class OVAApp:
                 # Automatic Analysis
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("Análisis Automático de Datos", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.INDIGO_800),
+                        ft.Text("Análisis Automático de Datos", size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_800),
                         ft.Row([
                             ft.Column([
                                 ft.Text("Cargar Datos para Análisis", weight=ft.FontWeight.BOLD),
                                 self.dataset_selector,
                                 ft.ElevatedButton(
                                     text="Ejecutar Análisis IA",
-                                    icon=ft.icons.AUTO_AWESOME,
+                                    icon=ft.Icons.AUTO_AWESOME,
                                     on_click=lambda e: self.run_automatic_analysis(page),
                                     style=ft.ButtonStyle(
-                                        bgcolor=ft.colors.INDIGO_600,
-                                        color=ft.colors.WHITE
+                                        bgcolor=ft.Colors.INDIGO_600,
+                                        color=ft.Colors.WHITE
                                     )
                                 )
                             ]),
@@ -953,7 +953,7 @@ class OVAApp:
                             ])
                         ])
                     ]),
-                    bgcolor=ft.colors.INDIGO_50,
+                    bgcolor=ft.Colors.INDIGO_50,
                     padding=20,
                     border_radius=10,
                     margin=ft.margin.only(bottom=20)
@@ -962,21 +962,21 @@ class OVAApp:
                 ft.Container(
                     content=ft.ElevatedButton(
                         text="Ir a Evaluación",
-                        icon=ft.icons.ARROW_FORWARD,
+                        icon=ft.Icons.ARROW_FORWARD,
                         on_click=lambda e: self.show_module(page, "evaluation"),
                         style=ft.ButtonStyle(
                             bgcolor=self.colors['danger'],
-                            color=ft.colors.WHITE,
+                            color=ft.Colors.WHITE,
                             padding=ft.padding.symmetric(horizontal=30, vertical=15)
                         )
                     ),
                     alignment=ft.alignment.center
                 )
             ], scroll=ft.ScrollMode.AUTO),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300)
+            shadow=ft.BoxShadow(blur_radius=5, color=ft.Colors.GREY_300)
         )
     
     def send_message(self, page):
@@ -989,8 +989,8 @@ class OVAApp:
             ft.Container(
                 content=ft.Row([
                     ft.Container(
-                        content=ft.Icon(ft.icons.PERSON, color=ft.colors.WHITE),
-                        bgcolor=ft.colors.BLUE_600,
+                        content=ft.Icon(ft.Icons.PERSON, color=ft.Colors.WHITE),
+                        bgcolor=ft.Colors.BLUE_600,
                         width=32,
                         height=32,
                         border_radius=16,
@@ -998,7 +998,7 @@ class OVAApp:
                     ),
                     ft.Container(
                         content=ft.Text(message, size=12),
-                        bgcolor=ft.colors.BLUE_100,
+                        bgcolor=ft.Colors.BLUE_100,
                         padding=10,
                         border_radius=8,
                         expand=True
@@ -1018,8 +1018,8 @@ class OVAApp:
             ft.Container(
                 content=ft.Row([
                     ft.Container(
-                        content=ft.Icon(ft.icons.SMART_TOY, color=ft.colors.WHITE),
-                        bgcolor=ft.colors.PURPLE_600,
+                        content=ft.Icon(ft.Icons.SMART_TOY, color=ft.Colors.WHITE),
+                        bgcolor=ft.Colors.PURPLE_600,
                         width=32,
                         height=32,
                         border_radius=16,
@@ -1027,7 +1027,7 @@ class OVAApp:
                     ),
                     ft.Container(
                         content=ft.Text(response, size=12),
-                        bgcolor=ft.colors.PURPLE_100,
+                        bgcolor=ft.Colors.PURPLE_100,
                         padding=10,
                         border_radius=8,
                         expand=True
@@ -1065,7 +1065,7 @@ class OVAApp:
     def run_automatic_analysis(self, page):
         dataset = self.dataset_selector.value
         if not dataset:
-            self.analysis_result.content = ft.Text("Por favor, selecciona un dataset.", color=ft.colors.RED_500)
+            self.analysis_result.content = ft.Text("Por favor, selecciona un dataset.", color=ft.Colors.RED_500)
             page.update()
             return
         
@@ -1081,7 +1081,7 @@ class OVAApp:
         
         analyses = {
             'emergency': ft.Column([
-                ft.Text("Análisis Completado: Consultas de Urgencias", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                ft.Text("Análisis Completado: Consultas de Urgencias", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                 ft.Container(
                     content=ft.Column([
                         ft.Text("Hallazgos Principales:", weight=ft.FontWeight.BOLD),
@@ -1089,7 +1089,7 @@ class OVAApp:
                         ft.Text("• Cardiovascular es la segunda causa (25%, IC 95%: 22.7% - 27.5%)", size=12),
                         ft.Text("• Distribución sugiere necesidad de recursos especializados en trauma", size=12)
                     ]),
-                    bgcolor=ft.colors.GREEN_50,
+                    bgcolor=ft.Colors.GREEN_50,
                     padding=10,
                     border_radius=5
                 ),
@@ -1100,13 +1100,13 @@ class OVAApp:
                         ft.Text("• Implementar protocolos de triaje cardiovascular", size=12),
                         ft.Text("• Monitorear tendencias estacionales", size=12)
                     ]),
-                    bgcolor=ft.colors.BLUE_50,
+                    bgcolor=ft.Colors.BLUE_50,
                     padding=10,
                     border_radius=5
                 )
             ]),
             'comorbidities': ft.Column([
-                ft.Text("Análisis Completado: Comorbilidades Diabéticas", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                ft.Text("Análisis Completado: Comorbilidades Diabéticas", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                 ft.Container(
                     content=ft.Column([
                         ft.Text("Hallazgos Principales:", weight=ft.FontWeight.BOLD),
@@ -1114,7 +1114,7 @@ class OVAApp:
                         ft.Text("• Dislipidemia: 38% (IC 95%: 33.8% - 42.2%)", size=12),
                         ft.Text("• Solo 11% sin comorbilidades", size=12)
                     ]),
-                    bgcolor=ft.colors.GREEN_50,
+                    bgcolor=ft.Colors.GREEN_50,
                     padding=10,
                     border_radius=5
                 ),
@@ -1125,14 +1125,14 @@ class OVAApp:
                         ft.Text("• Manejo integral diabetes-hipertensión", size=12),
                         ft.Text("• Programas de prevención cardiovascular", size=12)
                     ]),
-                    bgcolor=ft.colors.BLUE_50,
+                    bgcolor=ft.Colors.BLUE_50,
                     padding=10,
                     border_radius=5
                 )
             ])
         }
         
-        self.analysis_result.content = analyses.get(dataset, ft.Text("Análisis no disponible para este dataset.", color=ft.colors.GREY_500))
+        self.analysis_result.content = analyses.get(dataset, ft.Text("Análisis no disponible para este dataset.", color=ft.Colors.GREY_500))
         page.update()
     
     def create_evaluation_module(self, page):
@@ -1187,7 +1187,7 @@ class OVAApp:
                         ft.Text(f"{i+1}. {q['question']}", size=16, weight=ft.FontWeight.BOLD),
                         radio_group
                     ]),
-                    bgcolor=ft.colors.GREY_50,
+                    bgcolor=ft.Colors.GREY_50,
                     padding=20,
                     border_radius=8,
                     margin=ft.margin.only(bottom=10)
@@ -1199,19 +1199,19 @@ class OVAApp:
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.QUIZ, color=self.colors['danger'], size=30),
+                    ft.Icon(ft.Icons.QUIZ, color=self.colors['danger'], size=30),
                     ft.Text("Evaluación del Aprendizaje", size=28, weight=ft.FontWeight.BOLD)
                 ]),
                 
                 ft.Container(
                     content=ft.Row([
-                        ft.Icon(ft.icons.INFO, color=ft.colors.YELLOW_600),
-                        ft.Text("Instrucciones: Responde todas las preguntas. Al finalizar, recibirás retroalimentación inmediata y recomendaciones personalizadas.", weight=ft.FontWeight.BOLD, color=ft.colors.YELLOW_800, expand=True)
+                        ft.Icon(ft.Icons.INFO, color=ft.Colors.YELLOW_600),
+                        ft.Text("Instrucciones: Responde todas las preguntas. Al finalizar, recibirás retroalimentación inmediata y recomendaciones personalizadas.", weight=ft.FontWeight.BOLD, color=ft.Colors.YELLOW_800, expand=True)
                     ]),
-                    bgcolor=ft.colors.YELLOW_50,
+                    bgcolor=ft.Colors.YELLOW_50,
                     padding=15,
                     border_radius=8,
-                    border=ft.border.only(left=ft.border.BorderSide(4, ft.colors.YELLOW_400)),
+                    border=ft.border.only(left=ft.border.BorderSide(4, ft.Colors.YELLOW_400)),
                     margin=ft.margin.only(bottom=20)
                 ),
                 
@@ -1220,11 +1220,11 @@ class OVAApp:
                 ft.Container(
                     content=ft.ElevatedButton(
                         text="Enviar Evaluación",
-                        icon=ft.icons.CHECK_CIRCLE,
+                        icon=ft.Icons.CHECK_CIRCLE,
                         on_click=lambda e: self.submit_quiz(page),
                         style=ft.ButtonStyle(
                             bgcolor=self.colors['danger'],
-                            color=ft.colors.WHITE,
+                            color=ft.Colors.WHITE,
                             padding=ft.padding.symmetric(horizontal=30, vertical=15)
                         )
                     ),
@@ -1234,10 +1234,10 @@ class OVAApp:
                 
                 self.quiz_results
             ], scroll=ft.ScrollMode.AUTO),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300)
+            shadow=ft.BoxShadow(blur_radius=5, color=ft.Colors.GREY_300)
         )
     
     def submit_quiz(self, page):
@@ -1256,15 +1256,15 @@ class OVAApp:
             ft.Container(
                 content=ft.Column([
                     ft.Container(
-                        content=ft.Text(str(score), size=36, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600 if percentage >= 70 else ft.colors.RED_600),
+                        content=ft.Text(str(score), size=36, weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_600 if percentage >= 70 else ft.Colors.RED_600),
                         width=80,
                         height=80,
-                        bgcolor=ft.colors.GREEN_100 if percentage >= 70 else ft.colors.RED_100,
+                        bgcolor=ft.Colors.GREEN_100 if percentage >= 70 else ft.Colors.RED_100,
                         border_radius=40,
                         alignment=ft.alignment.center
                     ),
                     ft.Text(f"Puntuación: {score}/{total} ({percentage:.0f}%)", size=18, weight=ft.FontWeight.BOLD),
-                    ft.Text("¡Excelente trabajo!" if percentage >= 70 else "Necesitas repasar algunos conceptos", color=ft.colors.GREY_600)
+                    ft.Text("¡Excelente trabajo!" if percentage >= 70 else "Necesitas repasar algunos conceptos", color=ft.Colors.GREY_600)
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                 margin=ft.margin.only(bottom=20)
             )
@@ -1282,10 +1282,10 @@ class OVAApp:
                     content=ft.Column([
                         ft.Text(f"Pregunta {i+1}: {'✓ Correcto' if is_correct else '✗ Incorrecto'}", 
                                weight=ft.FontWeight.BOLD, 
-                               color=ft.colors.GREEN_800 if is_correct else ft.colors.RED_800),
+                               color=ft.Colors.GREEN_800 if is_correct else ft.Colors.RED_800),
                         ft.Text(q['explanation'], size=12)
                     ]),
-                    bgcolor=ft.colors.GREEN_50 if is_correct else ft.colors.RED_50,
+                    bgcolor=ft.Colors.GREEN_50 if is_correct else ft.Colors.RED_50,
                     padding=15,
                     border_radius=8,
                     margin=ft.margin.only(bottom=10)
@@ -1297,10 +1297,10 @@ class OVAApp:
             result_items.append(
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("¡Felicitaciones!", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                        ft.Text("¡Felicitaciones!", weight=ft.FontWeight.BOLD, color=ft.Colors.GREEN_800),
                         ft.Text("Has demostrado un buen dominio de los conceptos de tablas de frecuencias. Estás listo para aplicar estos conocimientos en contextos clínicos reales.", size=12)
                     ]),
-                    bgcolor=ft.colors.GREEN_50,
+                    bgcolor=ft.Colors.GREEN_50,
                     padding=15,
                     border_radius=8,
                     margin=ft.margin.only(top=20)
@@ -1310,13 +1310,13 @@ class OVAApp:
             result_items.append(
                 ft.Container(
                     content=ft.Column([
-                        ft.Text("Recomendaciones de Estudio", weight=ft.FontWeight.BOLD, color=ft.colors.ORANGE_800),
+                        ft.Text("Recomendaciones de Estudio", weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_800),
                         ft.Text("• Repasa el módulo de teoría, especialmente el cálculo de proporciones", size=12),
                         ft.Text("• Practica más con la calculadora interactiva", size=12),
                         ft.Text("• Consulta con el asistente de IA sobre conceptos específicos", size=12),
                         ft.Text("• Revisa los recursos descargables para reforzar el aprendizaje", size=12)
                     ]),
-                    bgcolor=ft.colors.ORANGE_50,
+                    bgcolor=ft.Colors.ORANGE_50,
                     padding=15,
                     border_radius=8,
                     margin=ft.margin.only(top=20)
@@ -1325,22 +1325,22 @@ class OVAApp:
         
         self.quiz_results.content = ft.Container(
             content=ft.Column(result_items),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=8,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
         self.quiz_results.visible = True
         page.update()
     
     def create_resources_module(self, page):
         resources = [
-            ("Plantillas de Tablas", ft.icons.TABLE_CHART, ft.colors.BLUE_600, "Tabla de frecuencias estándar\nFormato para publicación\nPlantilla con intervalos de confianza\nTabla de contingencia 2x2"),
-            ("Guías Metodológicas", ft.icons.BOOK_OUTLINED, ft.colors.GREEN_600, "Guía paso a paso\nChecklist de verificación\nInterpretación clínica\nErrores comunes a evitar"),
-            ("Datasets de Práctica", ft.icons.DATABASE, ft.colors.PURPLE_600, "Datos de urgencias hospitalarias\nComorbilidades en diabetes\nSatisfacción del paciente\nAdherencia a tratamientos"),
-            ("Scripts en R", ft.icons.CODE, ft.colors.ORANGE_600, "Análisis de frecuencias\nCálculo de intervalos de confianza\nVisualizaciones automáticas\nReportes reproducibles"),
-            ("Infografías", ft.icons.PIE_CHART, ft.colors.TEAL_600, "Tipos de variables categóricas\nProceso de análisis\nInterpretación de resultados\nBuenas prácticas visuales"),
-            ("Certificado", ft.icons.WORKSPACE_PREMIUM, ft.colors.YELLOW_600, "Certificado de finalización\nCompetencias adquiridas\nHoras de estudio\nCódigo de verificación")
+            ("Plantillas de Tablas", ft.Icons.TABLE_CHART, ft.Colors.BLUE_600, "Tabla de frecuencias estándar\nFormato para publicación\nPlantilla con intervalos de confianza\nTabla de contingencia 2x2"),
+            ("Guías Metodológicas", ft.Icons.BOOK_OUTLINED, ft.Colors.GREEN_600, "Guía paso a paso\nChecklist de verificación\nInterpretación clínica\nErrores comunes a evitar"),
+            ("Datasets de Práctica", ft.Icons.DATABASE, ft.Colors.PURPLE_600, "Datos de urgencias hospitalarias\nComorbilidades en diabetes\nSatisfacción del paciente\nAdherencia a tratamientos"),
+            ("Scripts en R", ft.Icons.CODE, ft.Colors.ORANGE_600, "Análisis de frecuencias\nCálculo de intervalos de confianza\nVisualizaciones automáticas\nReportes reproducibles"),
+            ("Infografías", ft.Icons.PIE_CHART, ft.Colors.TEAL_600, "Tipos de variables categóricas\nProceso de análisis\nInterpretación de resultados\nBuenas prácticas visuales"),
+            ("Certificado", ft.Icons.WORKSPACE_PREMIUM, ft.Colors.YELLOW_600, "Certificado de finalización\nCompetencias adquiridas\nHoras de estudio\nCódigo de verificación")
         ]
         
         resource_cards = []
@@ -1354,21 +1354,21 @@ class OVAApp:
                             margin=ft.margin.only(bottom=10)
                         ),
                         ft.Text(title, size=16, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
-                        ft.Text(description, size=12, text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_600),
+                        ft.Text(description, size=12, text_align=ft.TextAlign.CENTER, color=ft.Colors.GREY_600),
                         ft.ElevatedButton(
                             text="Descargar" if title != "Certificado" else "Generar",
-                            icon=ft.icons.DOWNLOAD if title != "Certificado" else ft.icons.WORKSPACE_PREMIUM,
+                            icon=ft.Icons.DOWNLOAD if title != "Certificado" else ft.Icons.WORKSPACE_PREMIUM,
                             on_click=lambda e, t=title: self.download_resource(page, t),
                             style=ft.ButtonStyle(
                                 bgcolor=color,
-                                color=ft.colors.WHITE
+                                color=ft.Colors.WHITE
                             )
                         )
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.WHITE,
+                    bgcolor=ft.Colors.WHITE,
                     padding=20,
                     border_radius=10,
-                    shadow=ft.BoxShadow(blur_radius=2, color=ft.colors.GREY_300),
+                    shadow=ft.BoxShadow(blur_radius=2, color=ft.Colors.GREY_300),
                     width=200,
                     height=250
                 )
@@ -1377,7 +1377,7 @@ class OVAApp:
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Icon(ft.icons.DOWNLOAD, color=self.colors['success'], size=30),
+                    ft.Icon(ft.Icons.DOWNLOAD, color=self.colors['success'], size=30),
                     ft.Text("Recursos Descargables", size=28, weight=ft.FontWeight.BOLD)
                 ]),
                 
@@ -1395,7 +1395,7 @@ class OVAApp:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.BOOK, color=ft.colors.GREY_800),
+                            ft.Icon(ft.Icons.BOOK, color=ft.Colors.GREY_800),
                             ft.Text("Referencias Bibliográficas", size=20, weight=ft.FontWeight.BOLD)
                         ]),
                         ft.Row([
@@ -1420,7 +1420,7 @@ class OVAApp:
                             )
                         ])
                     ]),
-                    bgcolor=ft.colors.GREY_50,
+                    bgcolor=ft.Colors.GREY_50,
                     padding=20,
                     border_radius=10,
                     margin=ft.margin.only(bottom=20)
@@ -1430,7 +1430,7 @@ class OVAApp:
                 ft.Container(
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.icons.LINK, color=self.colors['secondary']),
+                            ft.Icon(ft.Icons.LINK, color=self.colors['secondary']),
                             ft.Text("Enlaces Útiles", size=20, weight=ft.FontWeight.BOLD)
                         ]),
                         ft.Row([
@@ -1466,15 +1466,15 @@ class OVAApp:
                             )
                         ])
                     ]),
-                    bgcolor=ft.colors.BLUE_50,
+                    bgcolor=ft.Colors.BLUE_50,
                     padding=20,
                     border_radius=10
                 )
             ], scroll=ft.ScrollMode.AUTO),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=30,
             border_radius=10,
-            shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300)
+            shadow=ft.BoxShadow(blur_radius=5, color=ft.Colors.GREY_300)
         )
     
     def download_resource(self, page, resource_type):
