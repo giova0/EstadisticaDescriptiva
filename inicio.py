@@ -46,36 +46,37 @@ def main(page: ft.Page):
     def mostrar_pantalla_inicio():
         """Crear la pantalla de inicio con el libro"""
         
-        # Contenedor principal con imagen de fondo
-        fondo_container = ft.Stack([
-            # Imagen de fondo que cubre toda la pantalla
-            ft.Image(
-                src="https://i.postimg.cc/02sy0XKB/portada-Estadistica-6.png",
-                width=page.window_width,
-                height=page.window_height,
-                fit=ft.ImageFit.COVER,
-            ),
-            # Contenido sobre la imagen
-            ft.Stack([
-                
-                # Botón de ingreso en la parte derecha abajo
-                ft.Container(
-                    alignment=ft.alignment.bottom_right,
-                    margin=ft.margin.only(right=50, bottom=50),
-                    content=ft.ElevatedButton(
-                        "INGRESAR",
-                        width=200,
-                        height=60,
-                        style=ft.ButtonStyle(
-                            color=ft.Colors.WHITE,
-                            bgcolor=ft.Colors.BLUE_700,
-                            text_style=ft.TextStyle(size=18, weight=ft.FontWeight.BOLD)
-                        ),
-                        on_click=ir_a_seleccion_avatar
-                    )
+        # Contenedor principal con imagen y botón
+        fondo_container = ft.Column([
+            # Imagen de fondo reducida
+            ft.Container(
+                alignment=ft.alignment.center,
+                content=ft.Image(
+                    src="https://i.postimg.cc/02sy0XKB/portada-Estadistica-6.png",
+                    width=page.window_width * 0.9,
+                    height=page.window_height * 0.75,
+                    fit=ft.ImageFit.CONTAIN,
                 )
-            ])
-        ])
+            ),
+            # Espacio entre imagen y botón
+            ft.Container(height=20),
+            # Botón de ingreso en la parte inferior derecha
+            ft.Container(
+                alignment=ft.alignment.center_right,
+                margin=ft.margin.only(right=50),
+                content=ft.ElevatedButton(
+                    "INGRESAR",
+                    width=200,
+                    height=60,
+                    style=ft.ButtonStyle(
+                        color=ft.Colors.WHITE,
+                        bgcolor=ft.Colors.BLUE_700,
+                        text_style=ft.TextStyle(size=18, weight=ft.FontWeight.BOLD)
+                    ),
+                    on_click=ir_a_seleccion_avatar
+                )
+            )
+        ], alignment=ft.MainAxisAlignment.CENTER)
         
         page.add(fondo_container)
         page.update()
