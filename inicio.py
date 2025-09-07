@@ -48,19 +48,25 @@ def main(page: ft.Page):
         
         # Contenedor principal con imagen de fondo completa y botón superpuesto
         fondo_container = ft.Stack([
-            # Imagen de fondo que ocupa toda la pantalla
-            ft.Image(
-                src="https://i.postimg.cc/rw0Q9BF2/portada1-6.png",
+            # Contenedor para posicionar la imagen más arriba
+            ft.Container(
                 width=page.window_width,
                 height=page.window_height,
-                fit=ft.ImageFit.COVER,
+                alignment=ft.alignment.top_center,
+                padding=ft.padding.only(top=20),
+                content=ft.Image(
+                    src="https://i.postimg.cc/SK0YDVyB/portada-10.jpg",
+                    width=page.window_width * 0.9,
+                    height=page.window_height * 0.8,
+                    fit=ft.ImageFit.CONTAIN,
+                )
             ),
-            # Botón superpuesto en la esquina inferior derecha
+            # Botón superpuesto en la parte derecha, más arriba
             ft.Container(
                 width=page.window_width,
                 height=page.window_height,
                 alignment=ft.alignment.bottom_right,
-                padding=ft.padding.only(right=50, bottom=50),
+                padding=ft.padding.only(right=50, bottom=120),
                 content=ft.ElevatedButton(
                     "INGRESAR",
                     width=200,
