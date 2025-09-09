@@ -1,0 +1,1395 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 17 - Fundamentos de Pruebas de Hipótesis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .gradient-bg { background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%); }
+        .medical-gradient { background: linear-gradient(135deg, #059669 0%, #0891b2 100%); }
+        .error-type1 { background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%); }
+        .error-type2 { background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold">OVA 17 - Fundamentos de Pruebas de Hipótesis</h1>
+                    <p class="text-blue-100 mt-2">Bioestadística para Ciencias de la Salud - UAN</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm">Duración: 4 horas académicas</p>
+                    <p class="text-sm">Modalidad: 50% Virtual - 50% Presencial</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-8 overflow-x-auto py-4">
+                <button onclick="showSection('intro')" class="nav-btn px-4 py-2 rounded-lg bg-blue-600 text-white whitespace-nowrap">Introducción</button>
+                <button onclick="showSection('teoria')" class="nav-btn px-4 py-2 rounded-lg bg-gray-200 text-gray-700 whitespace-nowrap">Teoría</button>
+                <button onclick="showSection('errores')" class="nav-btn px-4 py-2 rounded-lg bg-gray-200 text-gray-700 whitespace-nowrap">Tipos de Error</button>
+                <button onclick="showSection('valor-p')" class="nav-btn px-4 py-2 rounded-lg bg-gray-200 text-gray-700 whitespace-nowrap">Valor p</button>
+                <button onclick="showSection('simuladores')" class="nav-btn px-4 py-2 rounded-lg bg-gray-200 text-gray-700 whitespace-nowrap">Simuladores</button>
+                <button onclick="showSection('ejercicios')" class="nav-btn px-4 py-2 rounded-lg bg-gray-200 text-gray-700 whitespace-nowrap">Ejercicios</button>
+                <button onclick="showSection('evaluacion')" class="nav-btn px-4 py-2 rounded-lg bg-gray-200 text-gray-700 whitespace-nowrap">Evaluación</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Introducción -->
+        <section id="intro" class="section-content">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8 fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">🎯 Objetivos de Aprendizaje</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 text-xl">✓</span>
+                            <p>Comprender el planteamiento de hipótesis en investigación médica</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 text-xl">✓</span>
+                            <p>Identificar y diferenciar errores Tipo I y Tipo II</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 text-xl">✓</span>
+                            <p>Interpretar el valor p y su significancia clínica</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 text-xl">✓</span>
+                            <p>Distinguir entre significancia estadística y clínica</p>
+                        </div>
+                    </div>
+                    <div class="medical-gradient rounded-lg p-6 text-white">
+                        <h3 class="font-bold mb-3">🏥 ¿Por qué es crucial?</h3>
+                        <p class="text-sm">Las pruebas de hipótesis son fundamentales para la toma de decisiones en medicina basada en evidencia. Nos permiten evaluar la efectividad de tratamientos, validar diagnósticos y establecer protocolos clínicos con rigor científico.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">📋 Contenido del Módulo</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <h3 class="font-semibold text-lg mb-2">Fundamentos</h3>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Hipótesis nula y alternativa</li>
+                            <li>• Planteamiento en investigación</li>
+                            <li>• Proceso de decisión</li>
+                        </ul>
+                    </div>
+                    <div class="border-l-4 border-red-500 pl-4">
+                        <h3 class="font-semibold text-lg mb-2">Tipos de Error</h3>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Error Tipo I (α)</li>
+                            <li>• Error Tipo II (β)</li>
+                            <li>• Poder estadístico</li>
+                        </ul>
+                    </div>
+                    <div class="border-l-4 border-green-500 pl-4">
+                        <h3 class="font-semibold text-lg mb-2">Valor p</h3>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Definición e interpretación</li>
+                            <li>• Niveles de significancia</li>
+                            <li>• Limitaciones del valor p</li>
+                        </ul>
+                    </div>
+                    <div class="border-l-4 border-purple-500 pl-4">
+                        <h3 class="font-semibold text-lg mb-2">Aplicaciones</h3>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Ensayos clínicos</li>
+                            <li>• Estudios diagnósticos</li>
+                            <li>• Investigación epidemiológica</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">🔬 Contexto en Investigación Médica</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-blue-800 mb-3">Ensayos Clínicos</h3>
+                        <p class="text-sm">¿Es el nuevo tratamiento más efectivo que el estándar actual?</p>
+                        <div class="mt-3 text-xs text-blue-600">
+                            <p>H₀: No hay diferencia</p>
+                            <p>H₁: Hay diferencia significativa</p>
+                        </div>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-green-800 mb-3">Estudios Diagnósticos</h3>
+                        <p class="text-sm">¿Tiene el paciente la enfermedad según la prueba diagnóstica?</p>
+                        <div class="mt-3 text-xs text-green-600">
+                            <p>H₀: Paciente sano</p>
+                            <p>H₁: Paciente enfermo</p>
+                        </div>
+                    </div>
+                    <div class="bg-purple-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-purple-800 mb-3">Epidemiología</h3>
+                        <p class="text-sm">¿Existe asociación entre el factor de riesgo y la enfermedad?</p>
+                        <div class="mt-3 text-xs text-purple-600">
+                            <p>H₀: No hay asociación</p>
+                            <p>H₁: Existe asociación</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teoría -->
+        <section id="teoria" class="section-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8 fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">📚 Fundamentos de las Pruebas de Hipótesis</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600">¿Qué es una Hipótesis Estadística?</h3>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                        <p class="mb-4">Una <strong>hipótesis estadística</strong> es una afirmación sobre uno o más parámetros de una población que puede ser sometida a verificación mediante datos muestrales.</p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-2">Hipótesis Nula (H₀)</h4>
+                                <p class="text-sm">Afirmación de "no efecto" o "no diferencia". Es la hipótesis que se somete a prueba.</p>
+                                <p class="text-xs mt-2 text-gray-600">Ejemplo: "El nuevo medicamento no es más efectivo que el placebo"</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-2">Hipótesis Alternativa (H₁)</h4>
+                                <p class="text-sm">Afirmación que se acepta si se rechaza H₀. Representa lo que el investigador quiere demostrar.</p>
+                                <p class="text-xs mt-2 text-gray-600">Ejemplo: "El nuevo medicamento es más efectivo que el placebo"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-green-600">Proceso de Prueba de Hipótesis</h3>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold mb-3">Pasos del Proceso:</h4>
+                                <ol class="list-decimal list-inside space-y-2 text-sm">
+                                    <li>Plantear H₀ y H₁</li>
+                                    <li>Elegir nivel de significancia (α)</li>
+                                    <li>Seleccionar estadístico de prueba</li>
+                                    <li>Calcular el valor del estadístico</li>
+                                    <li>Determinar el valor p</li>
+                                    <li>Tomar decisión</li>
+                                    <li>Interpretar en contexto clínico</li>
+                                </ol>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-3">Regla de Decisión:</h4>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <p class="text-sm mb-2"><strong>Si p ≤ α:</strong> Rechazar H₀</p>
+                                    <p class="text-sm mb-2"><strong>Si p > α:</strong> No rechazar H₀</p>
+                                    <p class="text-xs text-gray-600 mt-3">Comúnmente α = 0.05 en medicina</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-purple-600">Tipos de Pruebas de Hipótesis</h3>
+                    <div class="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-r-lg">
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="font-semibold text-purple-800 mb-2">Prueba Bilateral</h4>
+                                <p class="text-sm mb-2">H₁: μ ≠ μ₀</p>
+                                <p class="text-xs text-gray-600">Detecta diferencias en cualquier dirección</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="font-semibold text-purple-800 mb-2">Prueba Unilateral Derecha</h4>
+                                <p class="text-sm mb-2">H₁: μ > μ₀</p>
+                                <p class="text-xs text-gray-600">Detecta si es mayor que el valor de referencia</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="font-semibold text-purple-800 mb-2">Prueba Unilateral Izquierda</h4>
+                                <p class="text-sm mb-2">H₁: μ < μ₀</p>
+                                <p class="text-xs text-gray-600">Detecta si es menor que el valor de referencia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">🏥 Ejemplo Clínico Completo</h2>
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                    <h3 class="font-semibold mb-4">Estudio: Efectividad de un Nuevo Antihipertensivo</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-3">Planteamiento del Problema:</h4>
+                            <p class="text-sm mb-3">Un laboratorio desarrolló un nuevo medicamento antihipertensivo. Se quiere determinar si es más efectivo que el tratamiento estándar en reducir la presión arterial sistólica.</p>
+                            
+                            <h4 class="font-semibold mb-2">Hipótesis:</h4>
+                            <div class="bg-white p-3 rounded text-sm">
+                                <p><strong>H₀:</strong> μ_nuevo = μ_estándar (no hay diferencia)</p>
+                                <p><strong>H₁:</strong> μ_nuevo < μ_estándar (el nuevo es mejor)</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold mb-3">Datos del Estudio:</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Nivel de significancia: α = 0.05</li>
+                                <li>• Tamaño de muestra: n = 100 pacientes</li>
+                                <li>• Reducción promedio: 15 mmHg</li>
+                                <li>• Desviación estándar: 8 mmHg</li>
+                                <li>• Valor de referencia: 12 mmHg</li>
+                            </ul>
+                            
+                            <div class="mt-4 bg-white p-3 rounded text-sm">
+                                <p><strong>Estadístico de prueba:</strong></p>
+                                <p>t = (15 - 12) / (8/√100) = 3.75</p>
+                                <p><strong>Valor p:</strong> p < 0.001</p>
+                                <p class="text-green-600 font-semibold">Conclusión: Rechazar H₀</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tipos de Error -->
+        <section id="errores" class="section-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8 fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">⚠️ Errores en Pruebas de Hipótesis</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <!-- Error Tipo I -->
+                    <div class="error-type1 rounded-lg p-6 text-white">
+                        <h3 class="text-xl font-bold mb-4">🚨 Error Tipo I (α)</h3>
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg mb-4">
+                            <p class="font-semibold mb-2">Definición:</p>
+                            <p class="text-sm">Rechazar H₀ cuando en realidad es verdadera</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg mb-4">
+                            <p class="font-semibold mb-2">En Medicina:</p>
+                            <p class="text-sm">Concluir que un tratamiento es efectivo cuando en realidad no lo es</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
+                            <p class="font-semibold mb-2">Consecuencias:</p>
+                            <ul class="text-sm space-y-1">
+                                <li>• Falsos positivos</li>
+                                <li>• Tratamientos inefectivos</li>
+                                <li>• Gastos innecesarios</li>
+                                <li>• Riesgos para pacientes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Error Tipo II -->
+                    <div class="error-type2 rounded-lg p-6 text-white">
+                        <h3 class="text-xl font-bold mb-4">🔍 Error Tipo II (β)</h3>
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg mb-4">
+                            <p class="font-semibold mb-2">Definición:</p>
+                            <p class="text-sm">No rechazar H₀ cuando en realidad es falsa</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg mb-4">
+                            <p class="font-semibold mb-2">En Medicina:</p>
+                            <p class="text-sm">Concluir que un tratamiento no es efectivo cuando sí lo es</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
+                            <p class="font-semibold mb-2">Consecuencias:</p>
+                            <ul class="text-sm space-y-1">
+                                <li>• Falsos negativos</li>
+                                <li>• Pérdida de tratamientos efectivos</li>
+                                <li>• Retraso en avances médicos</li>
+                                <li>• Oportunidades perdidas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de Decisiones -->
+                <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-center">Matriz de Decisiones</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full border-collapse border border-gray-300">
+                            <thead class="bg-gray-200">
+                                <tr>
+                                    <th class="border border-gray-300 px-4 py-3"></th>
+                                    <th class="border border-gray-300 px-4 py-3 text-center" colspan="2">Realidad</th>
+                                </tr>
+                                <tr>
+                                    <th class="border border-gray-300 px-4 py-3">Decisión</th>
+                                    <th class="border border-gray-300 px-4 py-3 bg-green-100">H₀ es Verdadera</th>
+                                    <th class="border border-gray-300 px-4 py-3 bg-blue-100">H₀ es Falsa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-3 font-semibold bg-green-100">No Rechazar H₀</td>
+                                    <td class="border border-gray-300 px-4 py-3 text-center bg-green-200">
+                                        <span class="text-green-800 font-semibold">✓ Decisión Correcta</span><br>
+                                        <span class="text-sm">Probabilidad: 1 - α</span>
+                                    </td>
+                                    <td class="border border-gray-300 px-4 py-3 text-center bg-red-200">
+                                        <span class="text-red-800 font-semibold">✗ Error Tipo II</span><br>
+                                        <span class="text-sm">Probabilidad: β</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-3 font-semibold bg-blue-100">Rechazar H₀</td>
+                                    <td class="border border-gray-300 px-4 py-3 text-center bg-red-200">
+                                        <span class="text-red-800 font-semibold">✗ Error Tipo I</span><br>
+                                        <span class="text-sm">Probabilidad: α</span>
+                                    </td>
+                                    <td class="border border-gray-300 px-4 py-3 text-center bg-green-200">
+                                        <span class="text-green-800 font-semibold">✓ Decisión Correcta</span><br>
+                                        <span class="text-sm">Probabilidad: 1 - β (Poder)</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Poder Estadístico -->
+                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-indigo-800">💪 Poder Estadístico (1 - β)</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="mb-4">El <strong>poder estadístico</strong> es la probabilidad de rechazar correctamente una hipótesis nula falsa.</p>
+                            <h4 class="font-semibold mb-2">Factores que afectan el poder:</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Tamaño del efecto</li>
+                                <li>• Tamaño de la muestra</li>
+                                <li>• Nivel de significancia (α)</li>
+                                <li>• Variabilidad de los datos</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg">
+                            <h4 class="font-semibold mb-3">Interpretación del Poder:</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span>Poder < 0.50:</span>
+                                    <span class="text-red-600">Inadecuado</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Poder 0.50-0.79:</span>
+                                    <span class="text-yellow-600">Moderado</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Poder ≥ 0.80:</span>
+                                    <span class="text-green-600">Adecuado</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Valor p -->
+        <section id="valor-p" class="section-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8 fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">📊 El Valor p y su Interpretación</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600">¿Qué es el Valor p?</h3>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                        <p class="mb-4 text-lg">El <strong>valor p</strong> es la probabilidad de obtener un resultado tan extremo o más extremo que el observado, asumiendo que la hipótesis nula es verdadera.</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-3">Interpretación Correcta:</h4>
+                                <ul class="text-sm space-y-2">
+                                    <li>• Medida de evidencia contra H₀</li>
+                                    <li>• NO es la probabilidad de que H₀ sea verdadera</li>
+                                    <li>• Menor valor p = mayor evidencia contra H₀</li>
+                                    <li>• Depende del tamaño de muestra</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-3">Interpretación Errónea:</h4>
+                                <ul class="text-sm space-y-2 text-red-600">
+                                    <li>• ✗ Probabilidad de que H₀ sea verdadera</li>
+                                    <li>• ✗ Probabilidad de error</li>
+                                    <li>• ✗ Tamaño del efecto</li>
+                                    <li>• ✗ Importancia clínica</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-green-600">Niveles de Significancia Comunes</h3>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-white p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-green-600 mb-2">α = 0.05</div>
+                                <p class="text-sm font-semibold">Estándar en Medicina</p>
+                                <p class="text-xs text-gray-600 mt-2">5% de probabilidad de Error Tipo I</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-blue-600 mb-2">α = 0.01</div>
+                                <p class="text-sm font-semibold">Más Conservador</p>
+                                <p class="text-xs text-gray-600 mt-2">1% de probabilidad de Error Tipo I</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-purple-600 mb-2">α = 0.10</div>
+                                <p class="text-sm font-semibold">Exploratorio</p>
+                                <p class="text-xs text-gray-600 mt-2">10% de probabilidad de Error Tipo I</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-purple-600">Significancia Estadística vs. Clínica</h3>
+                    <div class="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-r-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="font-semibold text-purple-800 mb-3">Significancia Estadística</h4>
+                                <ul class="text-sm space-y-2">
+                                    <li>• p < α (usualmente 0.05)</li>
+                                    <li>• Evidencia contra H₀</li>
+                                    <li>• Depende del tamaño de muestra</li>
+                                    <li>• No indica importancia práctica</li>
+                                </ul>
+                                <div class="mt-3 p-2 bg-purple-100 rounded text-xs">
+                                    <strong>Ejemplo:</strong> Diferencia de 0.1 mmHg en presión arterial con p = 0.001
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="font-semibold text-purple-800 mb-3">Significancia Clínica</h4>
+                                <ul class="text-sm space-y-2">
+                                    <li>• Relevancia práctica para el paciente</li>
+                                    <li>• Diferencia mínima clínicamente importante</li>
+                                    <li>• Considera beneficios vs. riesgos</li>
+                                    <li>• Independiente del valor p</li>
+                                </ul>
+                                <div class="mt-3 p-2 bg-purple-100 rounded text-xs">
+                                    <strong>Ejemplo:</strong> Reducción de 10 mmHg en presión arterial (clínicamente relevante)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculadora de Valor p -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4">🧮 Calculadora Interactiva de Valor p</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-3">Prueba t para una muestra:</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Media muestral:</label>
+                                    <input type="number" id="media-muestra" step="0.1" value="15" class="w-full px-3 py-2 border rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Media poblacional (H₀):</label>
+                                    <input type="number" id="media-poblacion" step="0.1" value="12" class="w-full px-3 py-2 border rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Desviación estándar:</label>
+                                    <input type="number" id="desviacion" step="0.1" value="8" class="w-full px-3 py-2 border rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Tamaño de muestra:</label>
+                                    <input type="number" id="tamano-muestra" value="100" class="w-full px-3 py-2 border rounded-lg">
+                                </div>
+                                <button onclick="calcularValorP()" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Calcular Valor p</button>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-3">Resultados:</h4>
+                            <div id="resultados-valor-p" class="bg-white p-4 rounded-lg border">
+                                <p class="text-gray-500 text-center">Los resultados aparecerán aquí</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simuladores -->
+        <section id="simuladores" class="section-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8 fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">🎲 Simuladores de Pruebas Estadísticas</h2>
+                
+                <!-- Simulador de Errores Tipo I y II -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-red-600">Simulador: Errores Tipo I y II</h3>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold mb-3">Parámetros de Simulación:</h4>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Número de simulaciones:</label>
+                                        <input type="number" id="num-simulaciones" value="1000" min="100" max="10000" class="w-full px-3 py-2 border rounded-lg">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Nivel de significancia (α):</label>
+                                        <select id="alpha-nivel" class="w-full px-3 py-2 border rounded-lg">
+                                            <option value="0.01">0.01</option>
+                                            <option value="0.05" selected>0.05</option>
+                                            <option value="0.10">0.10</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Diferencia real de medias:</label>
+                                        <input type="number" id="diferencia-real" step="0.1" value="0" class="w-full px-3 py-2 border rounded-lg">
+                                        <p class="text-xs text-gray-600 mt-1">0 = H₀ verdadera, >0 = H₀ falsa</p>
+                                    </div>
+                                    <button onclick="simularErrores()" class="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Ejecutar Simulación</button>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-3">Resultados de la Simulación:</h4>
+                                <div id="resultados-simulacion-errores" class="bg-white p-4 rounded-lg border min-h-[200px]">
+                                    <p class="text-gray-500 text-center">Los resultados aparecerán aquí</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulador de Poder Estadístico -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600">Simulador: Poder Estadístico</h3>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div>
+                                <h4 class="font-semibold mb-3">Parámetros:</h4>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Tamaño de efecto:</label>
+                                        <input type="range" id="efecto-slider" min="0" max="2" step="0.1" value="0.5" class="w-full">
+                                        <span id="efecto-value" class="text-sm text-gray-600">0.5</span>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Tamaño de muestra:</label>
+                                        <input type="range" id="muestra-slider" min="10" max="200" step="10" value="50" class="w-full">
+                                        <span id="muestra-value" class="text-sm text-gray-600">50</span>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">Nivel α:</label>
+                                        <input type="range" id="alpha-slider" min="0.01" max="0.10" step="0.01" value="0.05" class="w-full">
+                                        <span id="alpha-value" class="text-sm text-gray-600">0.05</span>
+                                    </div>
+                                    <button onclick="calcularPoder()" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Calcular Poder</button>
+                                </div>
+                            </div>
+                            <div class="col-span-2">
+                                <h4 class="font-semibold mb-3">Análisis de Poder:</h4>
+                                <div id="resultados-poder" class="bg-white p-4 rounded-lg border min-h-[200px]">
+                                    <p class="text-gray-500 text-center">Los resultados aparecerán aquí</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visualizador de Distribuciones -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-purple-600">Visualizador: Distribuciones y Regiones Críticas</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-3">Configuración:</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Tipo de prueba:</label>
+                                    <select id="tipo-prueba" class="w-full px-3 py-2 border rounded-lg" onchange="actualizarVisualizacion()">
+                                        <option value="bilateral">Bilateral (≠)</option>
+                                        <option value="derecha">Unilateral derecha (>)</option>
+                                        <option value="izquierda">Unilateral izquierda (<)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Nivel de significancia:</label>
+                                    <select id="alpha-visual" class="w-full px-3 py-2 border rounded-lg" onchange="actualizarVisualizacion()">
+                                        <option value="0.01">0.01</option>
+                                        <option value="0.05" selected>0.05</option>
+                                        <option value="0.10">0.10</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Estadístico observado:</label>
+                                    <input type="number" id="estadistico-obs" step="0.1" value="1.96" class="w-full px-3 py-2 border rounded-lg" onchange="actualizarVisualizacion()">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-3">Visualización:</h4>
+                            <canvas id="distribucionCanvas" width="400" height="250" class="border rounded-lg bg-white"></canvas>
+                            <div id="info-visualizacion" class="mt-3 text-sm text-gray-600">
+                                <p>Región crítica y valor p se mostrarán aquí</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ejercicios -->
+        <section id="ejercicios" class="section-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8 fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">📝 Ejercicios Prácticos</h2>
+                
+                <!-- Ejercicio 1 -->
+                <div class="border border-gray-200 rounded-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600">Ejercicio 1: Planteamiento de Hipótesis</h3>
+                    <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                        <p class="mb-3">Un investigador quiere determinar si un nuevo analgésico reduce el tiempo de recuperación después de una cirugía. El tiempo promedio actual es de 48 horas.</p>
+                        <p class="font-semibold">Plantee las hipótesis nula y alternativa apropiadas:</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Hipótesis Nula (H₀):</label>
+                            <textarea id="ejercicio1-h0" rows="2" class="w-full px-3 py-2 border rounded-lg" placeholder="Escriba la hipótesis nula..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Hipótesis Alternativa (H₁):</label>
+                            <textarea id="ejercicio1-h1" rows="2" class="w-full px-3 py-2 border rounded-lg" placeholder="Escriba la hipótesis alternativa..."></textarea>
+                        </div>
+                    </div>
+                    <button onclick="verificarEjercicio1()" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Verificar Respuesta</button>
+                    <div id="resultado-ejercicio1" class="mt-4 hidden"></div>
+                </div>
+
+                <!-- Ejercicio 2 -->
+                <div class="border border-gray-200 rounded-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold mb-4 text-green-600">Ejercicio 2: Interpretación de Errores</h3>
+                    <div class="bg-green-50 p-4 rounded-lg mb-4">
+                        <p class="mb-3">En un estudio sobre la efectividad de una vacuna:</p>
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li>H₀: La vacuna no es efectiva (eficacia ≤ 50%)</li>
+                            <li>H₁: La vacuna es efectiva (eficacia > 50%)</li>
+                        </ul>
+                        <p class="mt-3 font-semibold">Describa qué significaría cada tipo de error en este contexto:</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Error Tipo I (α):</label>
+                            <textarea id="ejercicio2-tipo1" rows="3" class="w-full px-3 py-2 border rounded-lg" placeholder="Describa las consecuencias del Error Tipo I..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Error Tipo II (β):</label>
+                            <textarea id="ejercicio2-tipo2" rows="3" class="w-full px-3 py-2 border rounded-lg" placeholder="Describa las consecuencias del Error Tipo II..."></textarea>
+                        </div>
+                    </div>
+                    <button onclick="verificarEjercicio2()" class="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Verificar Respuesta</button>
+                    <div id="resultado-ejercicio2" class="mt-4 hidden"></div>
+                </div>
+
+                <!-- Ejercicio 3 -->
+                <div class="border border-gray-200 rounded-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold mb-4 text-purple-600">Ejercicio 3: Cálculo e Interpretación</h3>
+                    <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                        <p class="mb-3">Un estudio comparó la presión arterial antes y después de un tratamiento en 25 pacientes:</p>
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li>Reducción promedio: 8 mmHg</li>
+                            <li>Desviación estándar: 12 mmHg</li>
+                            <li>Se quiere probar si hay reducción significativa (α = 0.05)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Estadístico t:</label>
+                            <input type="number" step="0.01" id="ejercicio3-t" class="w-full px-3 py-2 border rounded-lg" placeholder="Calcule t">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Grados de libertad:</label>
+                            <input type="number" id="ejercicio3-gl" class="w-full px-3 py-2 border rounded-lg" placeholder="gl">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Decisión:</label>
+                            <select id="ejercicio3-decision" class="w-full px-3 py-2 border rounded-lg">
+                                <option value="">Seleccione...</option>
+                                <option value="rechazar">Rechazar H₀</option>
+                                <option value="no-rechazar">No rechazar H₀</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="verificarEjercicio3()" class="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">Verificar Respuesta</button>
+                    <div id="resultado-ejercicio3" class="mt-4 hidden"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluación -->
+        <section id="evaluacion" class="section-content hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8 fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">📊 Evaluación Final</h2>
+                
+                <div class="mb-6">
+                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg">
+                        <p class="font-semibold">Instrucciones:</p>
+                        <p class="text-sm mt-1">Complete todas las preguntas sobre fundamentos de pruebas de hipótesis. La evaluación se califica automáticamente.</p>
+                    </div>
+                </div>
+
+                <form id="evaluacion-form" class="space-y-6">
+                    <!-- Pregunta 1 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold mb-3">1. ¿Cuál es la interpretación correcta de un valor p = 0.03?</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q1" value="a" class="form-radio">
+                                <span>Hay 3% de probabilidad de que H₀ sea verdadera</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q1" value="b" class="form-radio">
+                                <span>Hay 3% de probabilidad de obtener este resultado o más extremo si H₀ es verdadera</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q1" value="c" class="form-radio">
+                                <span>Hay 97% de probabilidad de que el tratamiento sea efectivo</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q1" value="d" class="form-radio">
+                                <span>El tamaño del efecto es del 3%</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold mb-3">2. Un Error Tipo I en un ensayo clínico significa:</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q2" value="a" class="form-radio">
+                                <span>Concluir que el tratamiento no funciona cuando sí funciona</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q2" value="b" class="form-radio">
+                                <span>Concluir que el tratamiento funciona cuando no funciona</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q2" value="c" class="form-radio">
+                                <span>No tener suficientes pacientes en el estudio</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q2" value="d" class="form-radio">
+                                <span>Usar el estadístico de prueba incorrecto</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 3 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold mb-3">3. Si α = 0.05 y el poder = 0.80, ¿cuál es la probabilidad de Error Tipo II?</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q3" value="a" class="form-radio">
+                                <span>0.05</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q3" value="b" class="form-radio">
+                                <span>0.20</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q3" value="c" class="form-radio">
+                                <span>0.80</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q3" value="d" class="form-radio">
+                                <span>0.95</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 4 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold mb-3">4. ¿Cuál es la diferencia principal entre significancia estadística y clínica?</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q4" value="a" class="form-radio">
+                                <span>No hay diferencia, son lo mismo</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q4" value="b" class="form-radio">
+                                <span>La estadística se basa en p < 0.05, la clínica en la relevancia práctica</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q4" value="c" class="form-radio">
+                                <span>La clínica es más importante que la estadística</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q4" value="d" class="form-radio">
+                                <span>La estadística solo se usa en investigación básica</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 5 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold mb-3">5. Para aumentar el poder estadístico de un estudio, se puede:</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q5" value="a" class="form-radio">
+                                <span>Disminuir el tamaño de muestra</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q5" value="b" class="form-radio">
+                                <span>Aumentar el nivel de significancia (α)</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q5" value="c" class="form-radio">
+                                <span>Disminuir el nivel de significancia (α)</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q5" value="d" class="form-radio">
+                                <span>Aumentar la variabilidad de los datos</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="button" onclick="evaluarRespuestas()" class="px-8 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 text-lg font-semibold">Finalizar Evaluación</button>
+                    </div>
+                </form>
+
+                <div id="resultados-evaluacion" class="mt-8 hidden">
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold mb-4">Resultados de la Evaluación</h3>
+                        <div id="puntuacion-final" class="text-2xl font-bold mb-4"></div>
+                        <div id="retroalimentacion" class="space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="font-bold mb-4">Recursos Adicionales</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>• Tablas de distribución t</li>
+                        <li>• Calculadoras de poder estadístico</li>
+                        <li>• Guías de interpretación de valor p</li>
+                        <li>• Software estadístico (R, SPSS)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4">Próximos Temas</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>• OVA 18: Pruebas Específicas para Ciencias de la Salud</li>
+                        <li>• Pruebas t para muestras independientes</li>
+                        <li>• Pruebas para proporciones</li>
+                        <li>• Corrección de Bonferroni</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4">Contacto</h3>
+                    <p class="text-sm">Universidad Antonio Nariño</p>
+                    <p class="text-sm">Bioestadística para Ciencias de la Salud</p>
+                    <p class="text-sm">Campus Virtual UAN</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Variables globales
+        let distribucionChart = null;
+
+        // Navegación entre secciones
+        function showSection(sectionId) {
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+            event.target.classList.add('bg-blue-600', 'text-white');
+        }
+
+        // Calculadora de Valor p
+        function calcularValorP() {
+            const mediaMuestra = parseFloat(document.getElementById('media-muestra').value);
+            const mediaPoblacion = parseFloat(document.getElementById('media-poblacion').value);
+            const desviacion = parseFloat(document.getElementById('desviacion').value);
+            const tamanoMuestra = parseInt(document.getElementById('tamano-muestra').value);
+            
+            // Calcular estadístico t
+            const errorEstandar = desviacion / Math.sqrt(tamanoMuestra);
+            const tCalculado = (mediaMuestra - mediaPoblacion) / errorEstandar;
+            const gradosLibertad = tamanoMuestra - 1;
+            
+            // Aproximación del valor p (bilateral)
+            let valorP;
+            if (Math.abs(tCalculado) > 3) {
+                valorP = "< 0.001";
+            } else if (Math.abs(tCalculado) > 2.576) {
+                valorP = "< 0.01";
+            } else if (Math.abs(tCalculado) > 1.96) {
+                valorP = "< 0.05";
+            } else {
+                valorP = "> 0.05";
+            }
+            
+            const resultadosDiv = document.getElementById('resultados-valor-p');
+            resultadosDiv.innerHTML = `
+                <div class="space-y-3">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600">Estadístico t</p>
+                            <p class="text-2xl font-bold text-blue-600">${tCalculado.toFixed(3)}</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600">Grados de libertad</p>
+                            <p class="text-2xl font-bold text-green-600">${gradosLibertad}</p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-sm text-gray-600">Valor p (bilateral)</p>
+                        <p class="text-3xl font-bold text-purple-600">${valorP}</p>
+                    </div>
+                    <div class="mt-4 p-3 rounded-lg ${Math.abs(tCalculado) > 1.96 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}">
+                        <p class="font-semibold">
+                            ${Math.abs(tCalculado) > 1.96 ? 'Rechazar H₀ (α = 0.05)' : 'No rechazar H₀ (α = 0.05)'}
+                        </p>
+                        <p class="text-sm mt-1">
+                            ${Math.abs(tCalculado) > 1.96 ? 'Hay evidencia estadísticamente significativa' : 'No hay evidencia estadísticamente significativa'}
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Simulador de Errores
+        function simularErrores() {
+            const numSimulaciones = parseInt(document.getElementById('num-simulaciones').value);
+            const alpha = parseFloat(document.getElementById('alpha-nivel').value);
+            const diferenciaReal = parseFloat(document.getElementById('diferencia-real').value);
+            
+            let erroresTipo1 = 0;
+            let erroresTipo2 = 0;
+            let decisiones = [];
+            
+            for (let i = 0; i < numSimulaciones; i++) {
+                // Simular datos
+                const muestra = [];
+                for (let j = 0; j < 30; j++) {
+                    muestra.push(Math.random() * 2 - 1 + diferenciaReal); // Normal aproximada
+                }
+                
+                const media = muestra.reduce((a, b) => a + b) / muestra.length;
+                const varianza = muestra.reduce((sum, x) => sum + Math.pow(x - media, 2), 0) / (muestra.length - 1);
+                const errorEstandar = Math.sqrt(varianza / muestra.length);
+                const t = media / errorEstandar;
+                
+                const valorP = Math.abs(t) > 2.045 ? 0.04 : 0.06; // Aproximación simple
+                const rechazarH0 = valorP < alpha;
+                
+                decisiones.push(rechazarH0);
+                
+                if (diferenciaReal === 0 && rechazarH0) {
+                    erroresTipo1++;
+                } else if (diferenciaReal !== 0 && !rechazarH0) {
+                    erroresTipo2++;
+                }
+            }
+            
+            const tasaError1 = (erroresTipo1 / numSimulaciones * 100).toFixed(2);
+            const tasaError2 = (erroresTipo2 / numSimulaciones * 100).toFixed(2);
+            const poder = diferenciaReal !== 0 ? ((numSimulaciones - erroresTipo2) / numSimulaciones * 100).toFixed(2) : 'N/A';
+            
+            document.getElementById('resultados-simulacion-errores').innerHTML = `
+                <div class="space-y-4">
+                    <h5 class="font-semibold">Resultados de ${numSimulaciones} simulaciones:</h5>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center p-3 bg-red-100 rounded-lg">
+                            <p class="text-sm text-red-600">Error Tipo I</p>
+                            <p class="text-2xl font-bold text-red-800">${tasaError1}%</p>
+                            <p class="text-xs text-red-600">Esperado: ${(alpha * 100).toFixed(1)}%</p>
+                        </div>
+                        <div class="text-center p-3 bg-blue-100 rounded-lg">
+                            <p class="text-sm text-blue-600">Error Tipo II</p>
+                            <p class="text-2xl font-bold text-blue-800">${tasaError2}%</p>
+                        </div>
+                    </div>
+                    ${diferenciaReal !== 0 ? `
+                        <div class="text-center p-3 bg-green-100 rounded-lg">
+                            <p class="text-sm text-green-600">Poder Estadístico</p>
+                            <p class="text-2xl font-bold text-green-800">${poder}%</p>
+                        </div>
+                    ` : ''}
+                    <div class="text-sm text-gray-600">
+                        <p><strong>Interpretación:</strong></p>
+                        <p>${diferenciaReal === 0 ? 
+                            `Con H₀ verdadera, se esperan aproximadamente ${(alpha * 100).toFixed(1)}% de errores Tipo I.` :
+                            `Con H₀ falsa (diferencia real = ${diferenciaReal}), el poder observado es ${poder}%.`
+                        }</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Calculador de Poder
+        function calcularPoder() {
+            const efecto = parseFloat(document.getElementById('efecto-slider').value);
+            const muestra = parseInt(document.getElementById('muestra-slider').value);
+            const alpha = parseFloat(document.getElementById('alpha-slider').value);
+            
+            // Aproximación simple del poder
+            const valorCritico = alpha === 0.05 ? 1.96 : (alpha === 0.01 ? 2.576 : 1.645);
+            const errorEstandar = 1 / Math.sqrt(muestra); // Asumiendo σ = 1
+            const delta = efecto / errorEstandar;
+            
+            // Aproximación del poder usando distribución normal
+            let poder;
+            if (delta > 3) poder = 0.99;
+            else if (delta > 2.5) poder = 0.95;
+            else if (delta > 2) poder = 0.85;
+            else if (delta > 1.5) poder = 0.70;
+            else if (delta > 1) poder = 0.50;
+            else if (delta > 0.5) poder = 0.30;
+            else poder = 0.15;
+            
+            let interpretacion, color;
+            if (poder >= 0.80) {
+                interpretacion = "Adecuado";
+                color = "green";
+            } else if (poder >= 0.50) {
+                interpretacion = "Moderado";
+                color = "yellow";
+            } else {
+                interpretacion = "Inadecuado";
+                color = "red";
+            }
+            
+            document.getElementById('resultados-poder').innerHTML = `
+                <div class="space-y-4">
+                    <div class="text-center">
+                        <p class="text-sm text-gray-600">Poder Estadístico</p>
+                        <p class="text-4xl font-bold text-${color}-600">${(poder * 100).toFixed(1)}%</p>
+                        <p class="text-lg font-semibold text-${color}-600">${interpretacion}</p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="p-2 bg-gray-100 rounded">
+                            <p class="text-xs text-gray-600">Tamaño de Efecto</p>
+                            <p class="font-semibold">${efecto}</p>
+                        </div>
+                        <div class="p-2 bg-gray-100 rounded">
+                            <p class="text-xs text-gray-600">Tamaño de Muestra</p>
+                            <p class="font-semibold">${muestra}</p>
+                        </div>
+                        <div class="p-2 bg-gray-100 rounded">
+                            <p class="text-xs text-gray-600">Nivel α</p>
+                            <p class="font-semibold">${alpha}</p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        <p><strong>Recomendaciones:</strong></p>
+                        ${poder < 0.80 ? 
+                            '<p class="text-red-600">• Considere aumentar el tamaño de muestra<br>• Evalúe aumentar el nivel α si es apropiado<br>• Busque formas de reducir la variabilidad</p>' :
+                            '<p class="text-green-600">• El estudio tiene poder adecuado para detectar el efecto especificado</p>'
+                        }
+                    </div>
+                </div>
+            `;
+        }
+
+        // Actualizar valores de sliders
+        document.addEventListener('DOMContentLoaded', function() {
+            const sliders = [
+                {id: 'efecto-slider', valueId: 'efecto-value'},
+                {id: 'muestra-slider', valueId: 'muestra-value'},
+                {id: 'alpha-slider', valueId: 'alpha-value'}
+            ];
+            
+            sliders.forEach(slider => {
+                const element = document.getElementById(slider.id);
+                const valueElement = document.getElementById(slider.valueId);
+                
+                element.addEventListener('input', function() {
+                    valueElement.textContent = this.value;
+                });
+            });
+        });
+
+        // Visualización de distribuciones
+        function actualizarVisualizacion() {
+            const canvas = document.getElementById('distribucionCanvas');
+            const ctx = canvas.getContext('2d');
+            const tipoPrueba = document.getElementById('tipo-prueba').value;
+            const alpha = parseFloat(document.getElementById('alpha-visual').value);
+            const estadisticoObs = parseFloat(document.getElementById('estadistico-obs').value);
+            
+            // Limpiar canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Dibujar distribución normal estándar
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height * 0.7;
+            const scale = 50;
+            
+            ctx.strokeStyle = '#3B82F6';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            
+            for (let x = -4; x <= 4; x += 0.1) {
+                const y = Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI);
+                const canvasX = centerX + x * scale;
+                const canvasY = centerY - y * 100;
+                
+                if (x === -4) ctx.moveTo(canvasX, canvasY);
+                else ctx.lineTo(canvasX, canvasY);
+            }
+            ctx.stroke();
+            
+            // Dibujar regiones críticas
+            ctx.fillStyle = 'rgba(239, 68, 68, 0.3)';
+            
+            let valorCritico;
+            if (alpha === 0.05) valorCritico = 1.96;
+            else if (alpha === 0.01) valorCritico = 2.576;
+            else valorCritico = 1.645;
+            
+            if (tipoPrueba === 'bilateral') {
+                // Región crítica izquierda
+                for (let x = -4; x <= -valorCritico; x += 0.1) {
+                    const y = Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI);
+                    const canvasX = centerX + x * scale;
+                    const canvasY = centerY - y * 100;
+                    ctx.fillRect(canvasX, canvasY, 2, centerY - canvasY);
+                }
+                // Región crítica derecha
+                for (let x = valorCritico; x <= 4; x += 0.1) {
+                    const y = Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI);
+                    const canvasX = centerX + x * scale;
+                    const canvasY = centerY - y * 100;
+                    ctx.fillRect(canvasX, canvasY, 2, centerY - canvasY);
+                }
+            } else if (tipoPrueba === 'derecha') {
+                for (let x = valorCritico; x <= 4; x += 0.1) {
+                    const y = Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI);
+                    const canvasX = centerX + x * scale;
+                    const canvasY = centerY - y * 100;
+                    ctx.fillRect(canvasX, canvasY, 2, centerY - canvasY);
+                }
+            } else {
+                for (let x = -4; x <= -valorCritico; x += 0.1) {
+                    const y = Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI);
+                    const canvasX = centerX + x * scale;
+                    const canvasY = centerY - y * 100;
+                    ctx.fillRect(canvasX, canvasY, 2, centerY - canvasY);
+                }
+            }
+            
+            // Dibujar estadístico observado
+            ctx.strokeStyle = '#DC2626';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            const obsX = centerX + estadisticoObs * scale;
+            ctx.moveTo(obsX, centerY - 80);
+            ctx.lineTo(obsX, centerY);
+            ctx.stroke();
+            
+            // Actualizar información
+            let decision, valorP;
+            if (tipoPrueba === 'bilateral') {
+                decision = Math.abs(estadisticoObs) > valorCritico ? 'Rechazar H₀' : 'No rechazar H₀';
+                valorP = Math.abs(estadisticoObs) > valorCritico ? `< ${alpha}` : `> ${alpha}`;
+            } else if (tipoPrueba === 'derecha') {
+                decision = estadisticoObs > valorCritico ? 'Rechazar H₀' : 'No rechazar H₀';
+                valorP = estadisticoObs > valorCritico ? `< ${alpha}` : `> ${alpha}`;
+            } else {
+                decision = estadisticoObs < -valorCritico ? 'Rechazar H₀' : 'No rechazar H₀';
+                valorP = estadisticoObs < -valorCritico ? `< ${alpha}` : `> ${alpha}`;
+            }
+            
+            document.getElementById('info-visualizacion').innerHTML = `
+                <p><strong>Valor crítico:</strong> ±${valorCritico}</p>
+                <p><strong>Estadístico observado:</strong> ${estadisticoObs}</p>
+                <p><strong>Valor p:</strong> ${valorP}</p>
+                <p><strong>Decisión:</strong> <span class="${decision.includes('Rechazar') ? 'text-red-600' : 'text-green-600'} font-semibold">${decision}</span></p>
+            `;
+        }
+
+        // Ejercicios
+        function verificarEjercicio1() {
+            const h0 = document.getElementById('ejercicio1-h0').value.toLowerCase();
+            const h1 = document.getElementById('ejercicio1-h1').value.toLowerCase();
+            
+            const resultadoDiv = document.getElementById('resultado-ejercicio1');
+            
+            let feedback = '<div class="space-y-2">';
+            
+            if (h0.includes('48') && (h0.includes('=') || h0.includes('igual'))) {
+                feedback += '<p class="text-green-600">✓ H₀ correcta: El tiempo de recuperación es igual a 48 horas</p>';
+            } else {
+                feedback += '<p class="text-red-600">✗ H₀ incorrecta. Debe indicar que no hay diferencia (μ = 48 horas)</p>';
+            }
+            
+            if (h1.includes('48') && (h1.includes('<') || h1.includes('menor') || h1.includes('reduce'))) {
+                feedback += '<p class="text-green-600">✓ H₁ correcta: El tiempo de recuperación es menor a 48 horas</p>';
+            } else {
+                feedback += '<p class="text-red-600">✗ H₁ incorrecta. Debe indicar que el nuevo analgésico reduce el tiempo (μ < 48 horas)</p>';
+            }
+            
+            feedback += '</div>';
+            resultadoDiv.innerHTML = feedback;
+            resultadoDiv.classList.remove('hidden');
+        }
+
+        function verificarEjercicio2() {
+            const tipo1 = document.getElementById('ejercicio2-tipo1').value.toLowerCase();
+            const tipo2 = document.getElementById('ejercicio2-tipo2').value.toLowerCase();
+            
+            const resultadoDiv = document.getElementById('resultado-ejercicio2');
+            
+            let feedback = '<div class="space-y-3">';
+            
+            if (tipo1.includes('efectiva') && tipo1.includes('no') && (tipo1.includes('aprobar') || tipo1.includes('concluir'))) {
+                feedback += '<p class="text-green-600">✓ Error Tipo I bien explicado</p>';
+            } else {
+                feedback += '<p class="text-red-600">✗ Error Tipo I: Concluir que la vacuna es efectiva cuando no lo es (falso positivo)</p>';
+            }
+            
+            if (tipo2.includes('efectiva') && (tipo2.includes('rechazar') || tipo2.includes('no aprobar'))) {
+                feedback += '<p class="text-green-600">✓ Error Tipo II bien explicado</p>';
+            } else {
+                feedback += '<p class="text-red-600">✗ Error Tipo II: No aprobar una vacuna que sí es efectiva (falso negativo)</p>';
+            }
+            
+            feedback += '<div class="bg-blue-50 p-3 rounded-lg text-sm">';
+            feedback += '<p><strong>Consecuencias:</strong></p>';
+            feedback += '<p>• Error Tipo I: Aprobar vacuna inefectiva → riesgo para la población</p>';
+            feedback += '<p>• Error Tipo II: Rechazar vacuna efectiva → pérdida de beneficio para la salud pública</p>';
+            feedback += '</div></div>';
+            
+            resultadoDiv.innerHTML = feedback;
+            resultadoDiv.classList.remove('hidden');
+        }
+
+        function verificarEjercicio3() {
+            const tIngresado = parseFloat(document.getElementById('ejercicio3-t').value);
+            const glIngresado = parseInt(document.getElementById('ejercicio3-gl').value);
+            const decision = document.getElementById('ejercicio3-decision').value;
+            
+            // Cálculos correctos
+            const tCorrecto = 8 / (12 / Math.sqrt(25)); // t = 8 / (12/5) = 8/2.4 = 3.33
+            const glCorrecto = 24; // n - 1 = 25 - 1 = 24
+            const tCalculado = 3.33;
+            
+            const resultadoDiv = document.getElementById('resultado-ejercicio3');
+            
+            let feedback = '<div class="space-y-2">';
+            
+            if (Math.abs(tIngresado - tCalculado) < 0.1) {
+                feedback += '<p class="text-green-600">✓ Estadístico t correcto: 3.33</p>';
+            } else {
+                feedback += '<p class="text-red-600">✗ Estadístico t incorrecto. t = 8 / (12/√25) = 8 / 2.4 = 3.33</p>';
+            }
+            
+            if (glIngresado === glCorrecto) {
+                feedback += '<p class="text-green-600">✓ Grados de libertad correctos: 24</p>';
+            } else {
+                feedback += '<p class="text-red-600">✗ Grados de libertad incorrectos. gl = n - 1 = 25 - 1 = 24</p>';
+            }
+            
+            if (decision === 'rechazar') {
+                feedback += '<p class="text-green-600">✓ Decisión correcta: Rechazar H₀</p>';
+                feedback += '<p class="text-sm text-blue-600">Con t = 3.33 y gl = 24, p < 0.01, por lo que se rechaza H₀ al nivel 0.05</p>';
+            } else {
+                feedback += '<p class="text-red-600">✗ Decisión incorrecta. Con t = 3.33 > 2.064 (valor crítico), se debe rechazar H₀</p>';
+            }
+            
+            feedback += '</div>';
+            resultadoDiv.innerHTML = feedback;
+            resultadoDiv.classList.remove('hidden');
+        }
+
+        // Evaluación final
+        function evaluarRespuestas() {
+            const respuestasCorrectas = {
+                q1: 'b', // Interpretación correcta del valor p
+                q2: 'b', // Error Tipo I
+                q3: 'b', // Probabilidad de Error Tipo II = 0.20
+                q4: 'b', // Diferencia entre significancia estadística y clínica
+                q5: 'b'  // Aumentar poder estadístico
+            };
+            
+            let puntuacion = 0;
+            const totalPreguntas = Object.keys(respuestasCorrectas).length;
+            const retroalimentacion = [];
+            
+            for (const [pregunta, respuestaCorrecta] of Object.entries(respuestasCorrectas)) {
+                const respuestaSeleccionada = document.querySelector(`input[name="${pregunta}"]:checked`);
+                
+                if (respuestaSeleccionada && respuestaSeleccionada.value === respuestaCorrecta) {
+                    puntuacion++;
+                    retroalimentacion.push(`<p class="text-green-600">✓ Pregunta ${pregunta.slice(1)}: Correcta</p>`);
+                } else {
+                    retroalimentacion.push(`<p class="text-red-600">✗ Pregunta ${pregunta.slice(1)}: Incorrecta</p>`);
+                }
+            }
+            
+            const porcentaje = (puntuacion / totalPreguntas) * 100;
+            let calificacion, color;
+            
+            if (porcentaje >= 90) {
+                calificacion = "Excelente";
+                color = "text-green-600";
+            } else if (porcentaje >= 70) {
+                calificacion = "Bueno";
+                color = "text-blue-600";
+            } else if (porcentaje >= 60) {
+                calificacion = "Aceptable";
+                color = "text-yellow-600";
+            } else {
+                calificacion = "Necesita mejorar";
+                color = "text-red-600";
+            }
+            
+            document.getElementById('puntuacion-final').innerHTML = `
+                <span class="${color}">${calificacion}</span><br>
+                <span class="text-gray-600">Puntuación: ${puntuacion}/${totalPreguntas} (${porcentaje.toFixed(1)}%)</span>
+            `;
+            
+            document.getElementById('retroalimentacion').innerHTML = retroalimentacion.join('');
+            document.getElementById('resultados-evaluacion').classList.remove('hidden');
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            actualizarVisualizacion();
+        });
+    </script>
+</body>
+</html>

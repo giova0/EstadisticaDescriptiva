@@ -1,0 +1,1430 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 8 - Teoría de Conjuntos y Probabilidad Básica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .medical-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+        .venn-circle {
+            transition: all 0.3s ease;
+        }
+        .venn-circle:hover {
+            opacity: 0.8;
+        }
+        .interactive-element {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .interactive-element:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="medical-gradient text-white py-6 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold">OVA 8 - Teoría de Conjuntos y Probabilidad Básica</h1>
+                    <p class="text-blue-100 mt-2">Bioestadística para Ciencias de la Salud - Universidad Antonio Nariño</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm">Duración: 4 horas académicas</p>
+                    <p class="text-sm">Modalidad: 70% Virtual - 30% Presencial</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center justify-between text-sm text-gray-600 mb-2">
+                <span>Progreso del módulo</span>
+                <span id="progress-text">0%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="progress-bar bg-blue-600 h-2 rounded-full" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-1 overflow-x-auto py-2">
+                <button onclick="showSection('intro')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap bg-blue-600 text-white">Introducción</button>
+                <button onclick="showSection('conjuntos')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Teoría de Conjuntos</button>
+                <button onclick="showSection('espacios')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Espacios Muestrales</button>
+                <button onclick="showSection('probabilidad')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Probabilidad</button>
+                <button onclick="showSection('propiedades')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Propiedades</button>
+                <button onclick="showSection('simulador')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Simulador</button>
+                <button onclick="showSection('casos')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Casos Clínicos</button>
+                <button onclick="showSection('evaluacion')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Evaluación</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <!-- Introducción -->
+        <section id="intro" class="section">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">🎯 Objetivos de Aprendizaje</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-blue-600 mb-3">Al finalizar esta OVA, podrás:</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Aplicar conceptos de teoría de conjuntos en contextos médicos
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Identificar espacios muestrales en estudios de salud
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Calcular probabilidades usando enfoques clásico y frecuentista
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2">✓</span>
+                                Utilizar propiedades fundamentales de la probabilidad
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-3">💡 ¿Por qué es importante?</h3>
+                        <p class="text-gray-700">
+                            La probabilidad es fundamental en medicina para evaluar riesgos, interpretar pruebas diagnósticas, 
+                            analizar efectividad de tratamientos y tomar decisiones clínicas basadas en evidencia.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">📚 Contenido del Módulo</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200">
+                        <div class="text-blue-600 text-3xl mb-3">🔢</div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Teoría de Conjuntos</h3>
+                        <p class="text-sm text-gray-600">Operaciones básicas aplicadas a poblaciones y muestras médicas</p>
+                    </div>
+                    <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border border-green-200">
+                        <div class="text-green-600 text-3xl mb-3">🎲</div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Probabilidad</h3>
+                        <p class="text-sm text-gray-600">Enfoques clásico y frecuentista en contextos clínicos</p>
+                    </div>
+                    <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border border-purple-200">
+                        <div class="text-purple-600 text-3xl mb-3">⚕️</div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Aplicaciones</h3>
+                        <p class="text-sm text-gray-600">Casos reales en epidemiología y medicina clínica</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teoría de Conjuntos -->
+        <section id="conjuntos" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">🔢 Teoría de Conjuntos en Medicina</h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Conceptos Fundamentales</h3>
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800">Conjunto (Set)</h4>
+                                <p class="text-gray-700 text-sm mt-1">Colección bien definida de elementos. En medicina: grupo de pacientes, síntomas, tratamientos.</p>
+                                <p class="text-blue-600 text-sm mt-2"><strong>Ejemplo:</strong> A = {pacientes con diabetes}</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800">Elemento</h4>
+                                <p class="text-gray-700 text-sm mt-1">Cada objeto individual dentro de un conjunto.</p>
+                                <p class="text-green-600 text-sm mt-2"><strong>Ejemplo:</strong> Juan ∈ A (Juan pertenece al conjunto de pacientes con diabetes)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Diagrama de Venn Interactivo</h3>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <svg width="300" height="200" viewBox="0 0 300 200" class="mx-auto">
+                                <circle cx="100" cy="100" r="60" fill="rgba(59, 130, 246, 0.3)" stroke="#3b82f6" stroke-width="2" class="venn-circle" onclick="highlightSet('A')"/>
+                                <circle cx="200" cy="100" r="60" fill="rgba(16, 185, 129, 0.3)" stroke="#10b981" stroke-width="2" class="venn-circle" onclick="highlightSet('B')"/>
+                                <text x="70" y="70" class="text-sm font-semibold fill-blue-600">A</text>
+                                <text x="220" y="70" class="text-sm font-semibold fill-green-600">B</text>
+                                <text x="145" y="105" class="text-xs font-semibold">A ∩ B</text>
+                            </svg>
+                            <div class="mt-4 text-center">
+                                <p class="text-sm text-gray-600">A = Pacientes con hipertensión</p>
+                                <p class="text-sm text-gray-600">B = Pacientes con diabetes</p>
+                                <p class="text-sm text-gray-600">A ∩ B = Pacientes con ambas condiciones</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-blue-600 mb-6">Operaciones con Conjuntos</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h4 class="font-semibold text-gray-800">Unión (A ∪ B)</h4>
+                            <p class="text-gray-700 text-sm">Elementos que pertenecen a A o B (o ambos)</p>
+                            <p class="text-blue-600 text-sm mt-1"><strong>Ejemplo médico:</strong> Pacientes con hipertensión O diabetes</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-semibold text-gray-800">Intersección (A ∩ B)</h4>
+                            <p class="text-gray-700 text-sm">Elementos que pertenecen a A y B simultáneamente</p>
+                            <p class="text-green-600 text-sm mt-1"><strong>Ejemplo médico:</strong> Pacientes con hipertensión Y diabetes</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h4 class="font-semibold text-gray-800">Complemento (A')</h4>
+                            <p class="text-gray-700 text-sm">Elementos que NO pertenecen a A</p>
+                            <p class="text-red-600 text-sm mt-1"><strong>Ejemplo médico:</strong> Pacientes SIN hipertensión</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h4 class="font-semibold text-gray-800">Diferencia (A - B)</h4>
+                            <p class="text-gray-700 text-sm">Elementos de A que no están en B</p>
+                            <p class="text-purple-600 text-sm mt-1"><strong>Ejemplo médico:</strong> Pacientes con hipertensión pero SIN diabetes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Espacios Muestrales -->
+        <section id="espacios" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">🎲 Espacios Muestrales en Estudios Médicos</h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Definiciones Clave</h3>
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800">Experimento Aleatorio</h4>
+                                <p class="text-gray-700 text-sm mt-1">Proceso cuyo resultado no se puede predecir con certeza.</p>
+                                <p class="text-blue-600 text-sm mt-2"><strong>Ejemplo:</strong> Administrar un medicamento y observar si hay mejoría</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800">Espacio Muestral (Ω)</h4>
+                                <p class="text-gray-700 text-sm mt-1">Conjunto de todos los resultados posibles de un experimento.</p>
+                                <p class="text-green-600 text-sm mt-2"><strong>Ejemplo:</strong> Ω = {Mejoría, Sin cambio, Empeoramiento}</p>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800">Evento</h4>
+                                <p class="text-gray-700 text-sm mt-1">Subconjunto del espacio muestral.</p>
+                                <p class="text-purple-600 text-sm mt-2"><strong>Ejemplo:</strong> A = {Mejoría} (evento favorable)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Ejemplo Interactivo: Prueba Diagnóstica</h3>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <p class="text-gray-700 mb-4">Una prueba de COVID-19 puede tener los siguientes resultados:</p>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-4 h-4 bg-green-500 rounded"></div>
+                                    <span class="text-sm">Positivo Verdadero (VP)</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-4 h-4 bg-blue-500 rounded"></div>
+                                    <span class="text-sm">Negativo Verdadero (VN)</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-4 h-4 bg-red-500 rounded"></div>
+                                    <span class="text-sm">Falso Positivo (FP)</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-4 h-4 bg-orange-500 rounded"></div>
+                                    <span class="text-sm">Falso Negativo (FN)</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600">Ω = {VP, VN, FP, FN}</p>
+                            <button onclick="generateSample()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Generar Muestra
+                            </button>
+                            <div id="sample-result" class="mt-4 p-3 bg-white rounded border hidden">
+                                <p class="text-sm font-semibold">Resultado de la muestra:</p>
+                                <p id="sample-text" class="text-sm text-gray-700"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-blue-600 mb-6">Tipos de Espacios Muestrales en Medicina</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-3">Finito</h4>
+                        <p class="text-gray-700 text-sm mb-3">Número limitado de resultados posibles</p>
+                        <div class="bg-white p-3 rounded text-sm">
+                            <strong>Ejemplo:</strong> Grupo sanguíneo<br>
+                            Ω = {A, B, AB, O}
+                        </div>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-3">Infinito Numerable</h4>
+                        <p class="text-gray-700 text-sm mb-3">Infinitos resultados que se pueden contar</p>
+                        <div class="bg-white p-3 rounded text-sm">
+                            <strong>Ejemplo:</strong> Número de consultas por día<br>
+                            Ω = {0, 1, 2, 3, ...}
+                        </div>
+                    </div>
+                    <div class="bg-purple-50 p-6 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-3">Infinito No Numerable</h4>
+                        <p class="text-gray-700 text-sm mb-3">Infinitos resultados en un continuo</p>
+                        <div class="bg-white p-3 rounded text-sm">
+                            <strong>Ejemplo:</strong> Presión arterial<br>
+                            Ω = [0, ∞) mmHg
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Probabilidad -->
+        <section id="probabilidad" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">📊 Enfoques de Probabilidad</h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Probabilidad Clásica (Laplace)</h3>
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="text-center mb-4">
+                                <div class="text-2xl font-bold text-blue-600">P(A) = |A| / |Ω|</div>
+                                <p class="text-sm text-gray-600 mt-2">Casos favorables / Casos totales</p>
+                            </div>
+                            <div class="bg-white p-4 rounded">
+                                <h4 class="font-semibold text-gray-800 mb-2">Ejemplo: Selección de Pacientes</h4>
+                                <p class="text-sm text-gray-700 mb-2">
+                                    En un hospital hay 100 pacientes: 60 mujeres y 40 hombres.
+                                </p>
+                                <p class="text-sm text-gray-700">
+                                    P(seleccionar mujer) = 60/100 = 0.6 = 60%
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-semibold text-gray-800 mb-3">Calculadora de Probabilidad Clásica</h4>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="grid grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Casos favorables</label>
+                                        <input type="number" id="favorable" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="60">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Casos totales</label>
+                                        <input type="number" id="total" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="100">
+                                    </div>
+                                </div>
+                                <button onclick="calculateClassical()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Calcular
+                                </button>
+                                <div id="classical-result" class="mt-4 p-3 bg-white rounded border hidden">
+                                    <p class="text-sm font-semibold">Resultado:</p>
+                                    <p id="classical-text" class="text-lg font-bold text-blue-600"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-green-600 mb-4">Probabilidad Frecuentista</h3>
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <div class="text-center mb-4">
+                                <div class="text-2xl font-bold text-green-600">P(A) = lim(n→∞) f(A)/n</div>
+                                <p class="text-sm text-gray-600 mt-2">Frecuencia relativa cuando n tiende a infinito</p>
+                            </div>
+                            <div class="bg-white p-4 rounded">
+                                <h4 class="font-semibold text-gray-800 mb-2">Ejemplo: Efectividad de Tratamiento</h4>
+                                <p class="text-sm text-gray-700 mb-2">
+                                    De 1000 pacientes tratados, 850 mostraron mejoría.
+                                </p>
+                                <p class="text-sm text-gray-700">
+                                    P(mejoría) ≈ 850/1000 = 0.85 = 85%
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-semibold text-gray-800 mb-3">Simulador de Frecuencia</h4>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Probabilidad real del evento</label>
+                                    <input type="range" id="true-prob" min="0" max="1" step="0.01" value="0.7" class="w-full">
+                                    <span id="prob-value" class="text-sm text-gray-600">70%</span>
+                                </div>
+                                <button onclick="runFrequencySimulation()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    Ejecutar Simulación
+                                </button>
+                                <div id="frequency-chart" class="mt-4 hidden">
+                                    <canvas id="freq-canvas" width="300" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Propiedades -->
+        <section id="propiedades" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">⚖️ Propiedades Fundamentales de la Probabilidad</h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Axiomas de Kolmogorov</h3>
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                                <h4 class="font-semibold text-gray-800">Axioma 1: No Negatividad</h4>
+                                <p class="text-lg font-mono text-blue-600 my-2">P(A) ≥ 0</p>
+                                <p class="text-gray-700 text-sm">La probabilidad de cualquier evento es no negativa.</p>
+                                <p class="text-blue-600 text-sm mt-1"><strong>Ejemplo:</strong> P(curación) ≥ 0</p>
+                            </div>
+                            
+                            <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                                <h4 class="font-semibold text-gray-800">Axioma 2: Normalización</h4>
+                                <p class="text-lg font-mono text-green-600 my-2">P(Ω) = 1</p>
+                                <p class="text-gray-700 text-sm">La probabilidad del espacio muestral completo es 1.</p>
+                                <p class="text-green-600 text-sm mt-1"><strong>Ejemplo:</strong> P(algún resultado) = 1</p>
+                            </div>
+                            
+                            <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                                <h4 class="font-semibold text-gray-800">Axioma 3: Aditividad</h4>
+                                <p class="text-lg font-mono text-purple-600 my-2">P(A ∪ B) = P(A) + P(B)</p>
+                                <p class="text-gray-700 text-sm">Para eventos mutuamente excluyentes.</p>
+                                <p class="text-purple-600 text-sm mt-1"><strong>Ejemplo:</strong> P(tipo A o tipo B) = P(tipo A) + P(tipo B)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Propiedades Derivadas</h3>
+                        <div class="space-y-4">
+                            <div class="bg-red-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800">Probabilidad del Complemento</h4>
+                                <p class="text-lg font-mono text-red-600 my-2">P(A') = 1 - P(A)</p>
+                                <div class="bg-white p-3 rounded text-sm">
+                                    <strong>Ejemplo médico:</strong><br>
+                                    Si P(curación) = 0.8<br>
+                                    Entonces P(no curación) = 1 - 0.8 = 0.2
+                                </div>
+                            </div>
+                            
+                            <div class="bg-orange-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800">Regla de la Adición General</h4>
+                                <p class="text-lg font-mono text-orange-600 my-2">P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</p>
+                                <div class="bg-white p-3 rounded text-sm">
+                                    <strong>Ejemplo médico:</strong><br>
+                                    P(hipertensión o diabetes) = P(hipertensión) + P(diabetes) - P(ambas)
+                                </div>
+                            </div>
+                            
+                            <div class="bg-teal-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800">Probabilidad del Evento Imposible</h4>
+                                <p class="text-lg font-mono text-teal-600 my-2">P(∅) = 0</p>
+                                <div class="bg-white p-3 rounded text-sm">
+                                    <strong>Ejemplo médico:</strong><br>
+                                    P(tener tipo A y tipo B simultáneamente) = 0
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-blue-600 mb-6">🧮 Calculadora de Propiedades</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-4">Regla de la Adición</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">P(A)</label>
+                                <input type="number" id="prob-a" min="0" max="1" step="0.01" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="0.3">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">P(B)</label>
+                                <input type="number" id="prob-b" min="0" max="1" step="0.01" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="0.4">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">P(A ∩ B)</label>
+                                <input type="number" id="prob-ab" min="0" max="1" step="0.01" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="0.1">
+                            </div>
+                            <button onclick="calculateUnion()" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Calcular P(A ∪ B)
+                            </button>
+                            <div id="union-result" class="mt-4 p-3 bg-white rounded border hidden">
+                                <p class="text-sm font-semibold">P(A ∪ B) =</p>
+                                <p id="union-text" class="text-lg font-bold text-blue-600"></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-4">Probabilidad del Complemento</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">P(A)</label>
+                                <input type="number" id="prob-comp" min="0" max="1" step="0.01" class="w-full px-3 py-2 border border-gray-300 rounded-md" value="0.7">
+                            </div>
+                            <button onclick="calculateComplement()" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                Calcular P(A')
+                            </button>
+                            <div id="complement-result" class="mt-4 p-3 bg-white rounded border hidden">
+                                <p class="text-sm font-semibold">P(A') =</p>
+                                <p id="complement-text" class="text-lg font-bold text-green-600"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simulador -->
+        <section id="simulador" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">🎮 Simulador de Probabilidades Médicas</h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Simulación: Efectividad de Tratamiento</h3>
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Probabilidad de éxito del tratamiento</label>
+                                    <input type="range" id="treatment-success" min="0" max="1" step="0.01" value="0.75" class="w-full">
+                                    <span id="success-value" class="text-sm text-gray-600">75%</span>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Número de pacientes</label>
+                                    <input type="number" id="num-patients" min="10" max="1000" value="100" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                                </div>
+                                <button onclick="runTreatmentSimulation()" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Ejecutar Simulación
+                                </button>
+                            </div>
+                            
+                            <div id="treatment-results" class="mt-6 hidden">
+                                <div class="bg-white p-4 rounded">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Resultados de la Simulación</h4>
+                                    <div class="grid grid-cols-2 gap-4 text-sm">
+                                        <div>
+                                            <span class="text-gray-600">Éxitos observados:</span>
+                                            <span id="observed-success" class="font-bold text-green-600"></span>
+                                        </div>
+                                        <div>
+                                            <span class="text-gray-600">Fracasos observados:</span>
+                                            <span id="observed-failure" class="font-bold text-red-600"></span>
+                                        </div>
+                                        <div>
+                                            <span class="text-gray-600">Tasa de éxito:</span>
+                                            <span id="success-rate" class="font-bold text-blue-600"></span>
+                                        </div>
+                                        <div>
+                                            <span class="text-gray-600">Diferencia esperada:</span>
+                                            <span id="difference" class="font-bold text-purple-600"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-green-600 mb-4">Visualización de Resultados</h3>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <canvas id="simulation-chart" width="400" height="300" class="hidden"></canvas>
+                            <div id="chart-placeholder" class="flex items-center justify-center h-64 text-gray-500">
+                                <div class="text-center">
+                                    <div class="text-4xl mb-2">📊</div>
+                                    <p>Ejecuta una simulación para ver los resultados</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-semibold text-gray-800 mb-3">Interpretación Clínica</h4>
+                            <div id="clinical-interpretation" class="bg-yellow-50 p-4 rounded-lg text-sm text-gray-700 hidden">
+                                <p id="interpretation-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-blue-600 mb-6">🎯 Simulación de Pruebas Diagnósticas</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-4">Parámetros de la Prueba</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Sensibilidad</label>
+                                <input type="range" id="sensitivity" min="0" max="1" step="0.01" value="0.9" class="w-full">
+                                <span id="sens-value" class="text-sm text-gray-600">90%</span>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Especificidad</label>
+                                <input type="range" id="specificity" min="0" max="1" step="0.01" value="0.85" class="w-full">
+                                <span id="spec-value" class="text-sm text-gray-600">85%</span>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Prevalencia</label>
+                                <input type="range" id="prevalence" min="0" max="1" step="0.01" value="0.1" class="w-full">
+                                <span id="prev-value" class="text-sm text-gray-600">10%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-4">Configuración</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Tamaño de muestra</label>
+                                <input type="number" id="sample-size" min="100" max="10000" value="1000" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                            </div>
+                            <button onclick="runDiagnosticSimulation()" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                Simular Prueba Diagnóstica
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-4">Resultados</h4>
+                        <div id="diagnostic-results" class="space-y-2 text-sm hidden">
+                            <div class="flex justify-between">
+                                <span>Verdaderos Positivos:</span>
+                                <span id="tp-count" class="font-bold text-green-600"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Verdaderos Negativos:</span>
+                                <span id="tn-count" class="font-bold text-blue-600"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Falsos Positivos:</span>
+                                <span id="fp-count" class="font-bold text-red-600"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Falsos Negativos:</span>
+                                <span id="fn-count" class="font-bold text-orange-600"></span>
+                            </div>
+                            <hr class="my-2">
+                            <div class="flex justify-between font-semibold">
+                                <span>VPP:</span>
+                                <span id="ppv" class="text-purple-600"></span>
+                            </div>
+                            <div class="flex justify-between font-semibold">
+                                <span>VPN:</span>
+                                <span id="npv" class="text-indigo-600"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Casos Clínicos -->
+        <section id="casos" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">⚕️ Casos Clínicos Epidemiológicos</h2>
+                
+                <div class="space-y-8">
+                    <!-- Caso 1 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-blue-100 p-3 rounded-full">
+                                <span class="text-2xl">🏥</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-3">Caso 1: Brote de Infección Nosocomial</h3>
+                                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                                    <p class="text-gray-700 mb-3">
+                                        En un hospital se detecta un brote de infección nosocomial. De 200 pacientes hospitalizados:
+                                    </p>
+                                    <ul class="text-gray-700 space-y-1 mb-3">
+                                        <li>• 30 pacientes desarrollaron la infección</li>
+                                        <li>• 120 pacientes estuvieron en la UCI</li>
+                                        <li>• 25 de los infectados estuvieron en la UCI</li>
+                                    </ul>
+                                    <p class="text-gray-700 font-semibold">
+                                        ¿Cuál es la probabilidad de que un paciente seleccionado al azar esté infectado O haya estado en la UCI?
+                                    </p>
+                                </div>
+                                
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800 mb-3">Análisis del Problema</h4>
+                                        <div class="space-y-2 text-sm">
+                                            <p><strong>Definir eventos:</strong></p>
+                                            <p>A = Paciente infectado</p>
+                                            <p>B = Paciente estuvo en UCI</p>
+                                            <p><strong>Datos:</strong></p>
+                                            <p>|A| = 30, |B| = 120, |A ∩ B| = 25</p>
+                                            <p>Total = 200 pacientes</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800 mb-3">Solución</h4>
+                                        <div class="bg-white p-4 rounded border">
+                                            <p class="text-sm mb-2">Usar la regla de la adición:</p>
+                                            <p class="text-sm font-mono">P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</p>
+                                            <p class="text-sm mt-2">P(A ∪ B) = 30/200 + 120/200 - 25/200</p>
+                                            <p class="text-sm">P(A ∪ B) = 0.15 + 0.6 - 0.125 = 0.625</p>
+                                            <p class="text-lg font-bold text-blue-600 mt-2">Respuesta: 62.5%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button onclick="toggleSolution(1)" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Ver Interpretación Clínica
+                                </button>
+                                <div id="solution-1" class="mt-4 bg-yellow-50 p-4 rounded-lg hidden">
+                                    <h5 class="font-semibold text-gray-800 mb-2">Interpretación Clínica:</h5>
+                                    <p class="text-gray-700 text-sm">
+                                        El 62.5% de los pacientes están en riesgo elevado (infectados o expuestos en UCI). 
+                                        Esto sugiere que la UCI podría ser un factor de riesgo importante para la infección nosocomial. 
+                                        Se recomienda implementar medidas de control de infecciones más estrictas en la UCI.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Caso 2 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-green-100 p-3 rounded-full">
+                                <span class="text-2xl">🧬</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-3">Caso 2: Estudio Genético de Enfermedad Rara</h3>
+                                <div class="bg-green-50 p-4 rounded-lg mb-4">
+                                    <p class="text-gray-700 mb-3">
+                                        Un estudio genético analiza la presencia de una mutación asociada a una enfermedad rara:
+                                    </p>
+                                    <ul class="text-gray-700 space-y-1 mb-3">
+                                        <li>• Prevalencia de la enfermedad: 1 en 10,000 personas</li>
+                                        <li>• Prevalencia de la mutación: 1 en 1,000 personas</li>
+                                        <li>• 80% de los enfermos tienen la mutación</li>
+                                    </ul>
+                                    <p class="text-gray-700 font-semibold">
+                                        Si una persona tiene la mutación, ¿cuál es la probabilidad de que desarrolle la enfermedad?
+                                    </p>
+                                </div>
+                                
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800 mb-3">Datos del Problema</h4>
+                                        <div class="space-y-2 text-sm">
+                                            <p><strong>Eventos:</strong></p>
+                                            <p>E = Tener la enfermedad</p>
+                                            <p>M = Tener la mutación</p>
+                                            <p><strong>Probabilidades:</strong></p>
+                                            <p>P(E) = 1/10,000 = 0.0001</p>
+                                            <p>P(M) = 1/1,000 = 0.001</p>
+                                            <p>P(M|E) = 0.8</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800 mb-3">Cálculo Interactivo</h4>
+                                        <div class="bg-white p-4 rounded border">
+                                            <p class="text-sm mb-2">Necesitamos P(E|M). Primero calculamos P(E ∩ M):</p>
+                                            <p class="text-sm font-mono">P(E ∩ M) = P(M|E) × P(E)</p>
+                                            <p class="text-sm">P(E ∩ M) = 0.8 × 0.0001 = 0.00008</p>
+                                            <p class="text-sm mt-2">Luego aplicamos:</p>
+                                            <p class="text-sm font-mono">P(E|M) = P(E ∩ M) / P(M)</p>
+                                            <p class="text-sm">P(E|M) = 0.00008 / 0.001 = 0.08</p>
+                                            <p class="text-lg font-bold text-green-600 mt-2">Respuesta: 8%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button onclick="toggleSolution(2)" class="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                    Ver Interpretación Clínica
+                                </button>
+                                <div id="solution-2" class="mt-4 bg-yellow-50 p-4 rounded-lg hidden">
+                                    <h5 class="font-semibold text-gray-800 mb-2">Interpretación Clínica:</h5>
+                                    <p class="text-gray-700 text-sm">
+                                        Aunque la mutación está fuertemente asociada con la enfermedad (80% de los enfermos la tienen), 
+                                        la probabilidad de desarrollar la enfermedad dado que se tiene la mutación es solo del 8%. 
+                                        Esto se debe a la baja prevalencia de la enfermedad. Es importante comunicar este riesgo 
+                                        adecuadamente en el consejo genético para evitar ansiedad innecesaria.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Caso 3 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-purple-100 p-3 rounded-full">
+                                <span class="text-2xl">💊</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-3">Caso 3: Efectos Adversos de Medicamentos</h3>
+                                <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                                    <p class="text-gray-700 mb-3">
+                                        Un nuevo medicamento se está evaluando en un ensayo clínico:
+                                    </p>
+                                    <ul class="text-gray-700 space-y-1 mb-3">
+                                        <li>• 1000 pacientes reciben el medicamento</li>
+                                        <li>• 50 pacientes experimentan efectos adversos leves</li>
+                                        <li>• 5 pacientes experimentan efectos adversos graves</li>
+                                        <li>• Los efectos adversos son mutuamente excluyentes</li>
+                                    </ul>
+                                    <p class="text-gray-700 font-semibold">
+                                        ¿Cuál es la probabilidad de que un paciente NO experimente ningún efecto adverso?
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-white p-6 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800 mb-4">Resuelve el Problema</h4>
+                                    <div class="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <div class="space-y-3">
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700 mb-1">P(Efectos leves)</label>
+                                                    <input type="number" id="mild-effects" step="0.001" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Calcula y escribe aquí">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700 mb-1">P(Efectos graves)</label>
+                                                    <input type="number" id="severe-effects" step="0.001" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Calcula y escribe aquí">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700 mb-1">P(Cualquier efecto adverso)</label>
+                                                    <input type="number" id="any-effects" step="0.001" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Suma de ambos">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <div class="space-y-3">
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700 mb-1">P(Sin efectos adversos)</label>
+                                                    <input type="number" id="no-effects" step="0.001" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Usa el complemento">
+                                                </div>
+                                                <button onclick="checkCase3Answer()" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                                    Verificar Respuesta
+                                                </button>
+                                                <div id="case3-feedback" class="mt-4 p-3 rounded border hidden">
+                                                    <p id="case3-result" class="font-semibold"></p>
+                                                    <p id="case3-explanation" class="text-sm mt-2"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluación -->
+        <section id="evaluacion" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">📝 Autoevaluación</h2>
+                
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Pregunta <span id="current-question">1</span> de <span id="total-questions">5</span></h3>
+                        <div class="text-sm text-gray-600">
+                            Puntuación: <span id="score">0</span>/<span id="max-score">5</span>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mb-6">
+                        <div id="quiz-progress" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 20%"></div>
+                    </div>
+                </div>
+
+                <div id="quiz-container">
+                    <!-- Las preguntas se cargarán dinámicamente -->
+                </div>
+
+                <div class="flex justify-between mt-6">
+                    <button id="prev-btn" onclick="previousQuestion()" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50" disabled>
+                        Anterior
+                    </button>
+                    <button id="next-btn" onclick="nextQuestion()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Siguiente
+                    </button>
+                </div>
+
+                <div id="quiz-results" class="mt-8 p-6 bg-gray-50 rounded-lg hidden">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Resultados de la Evaluación</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="text-center">
+                                <div id="final-score" class="text-4xl font-bold text-blue-600 mb-2">0/5</div>
+                                <div id="percentage" class="text-lg text-gray-600 mb-4">0%</div>
+                                <div id="grade" class="text-xl font-semibold px-4 py-2 rounded-lg"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-3">Retroalimentación</h4>
+                            <div id="feedback" class="text-gray-700 text-sm"></div>
+                            <button onclick="restartQuiz()" class="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                Reiniciar Evaluación
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-blue-600 mb-6">📚 Recursos Adicionales</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-3">Material de Estudio</h4>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li class="flex items-center">
+                                <span class="text-blue-500 mr-2">📖</span>
+                                <a href="#" class="hover:text-blue-600">Fundamentos de Probabilidad en Medicina</a>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">🎥</span>
+                                <a href="#" class="hover:text-blue-600">Videos: Aplicaciones Clínicas de Probabilidad</a>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-purple-500 mr-2">📊</span>
+                                <a href="#" class="hover:text-blue-600">Ejercicios Interactivos Adicionales</a>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-red-500 mr-2">📋</span>
+                                <a href="#" class="hover:text-blue-600">Casos Clínicos Complementarios</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-3">Próximos Temas</h4>
+                        <div class="space-y-3">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-blue-800">OVA 9: Probabilidad Condicional y Bayes</h5>
+                                <p class="text-sm text-gray-600">Aplicaciones en diagnósticos médicos</p>
+                            </div>
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <h5 class="font-semibold text-green-800">OVA 11: Distribuciones Discretas</h5>
+                                <p class="text-sm text-gray-600">Variables aleatorias en medicina</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="medical-gradient text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">Universidad Antonio Nariño - Facultad de Ciencias de la Salud</p>
+            <p class="text-blue-100 text-sm">Bioestadística para Ciencias de la Salud - OVA 8: Teoría de Conjuntos y Probabilidad Básica</p>
+        </div>
+    </footer>
+
+    <script>
+        // Variables globales
+        let currentSection = 'intro';
+        let currentQuestionIndex = 0;
+        let quizScore = 0;
+        let userAnswers = [];
+
+        // Preguntas del quiz
+        const quizQuestions = [
+            {
+                question: "En un hospital, 200 pacientes están hospitalizados. 80 tienen diabetes, 60 tienen hipertensión, y 30 tienen ambas condiciones. ¿Cuál es la probabilidad de que un paciente seleccionado al azar tenga diabetes O hipertensión?",
+                options: [
+                    "0.55 (55%)",
+                    "0.70 (70%)",
+                    "0.85 (85%)",
+                    "0.40 (40%)"
+                ],
+                correct: 0,
+                explanation: "P(D ∪ H) = P(D) + P(H) - P(D ∩ H) = 80/200 + 60/200 - 30/200 = 110/200 = 0.55"
+            },
+            {
+                question: "Si la probabilidad de que un tratamiento sea efectivo es 0.8, ¿cuál es la probabilidad de que NO sea efectivo?",
+                options: [
+                    "0.8",
+                    "0.2",
+                    "1.0",
+                    "0.6"
+                ],
+                correct: 1,
+                explanation: "P(no efectivo) = 1 - P(efectivo) = 1 - 0.8 = 0.2"
+            },
+            {
+                question: "En un estudio, el espacio muestral para el resultado de una cirugía es Ω = {Éxito, Complicación menor, Complicación mayor}. ¿Qué tipo de espacio muestral es este?",
+                options: [
+                    "Infinito numerable",
+                    "Infinito no numerable",
+                    "Finito",
+                    "Continuo"
+                ],
+                correct: 2,
+                explanation: "Es un espacio muestral finito porque tiene un número limitado y contable de resultados posibles (3 resultados)."
+            },
+            {
+                question: "Si A y B son eventos mutuamente excluyentes con P(A) = 0.3 y P(B) = 0.4, ¿cuál es P(A ∪ B)?",
+                options: [
+                    "0.12",
+                    "0.70",
+                    "0.10",
+                    "1.00"
+                ],
+                correct: 1,
+                explanation: "Para eventos mutuamente excluyentes, P(A ∩ B) = 0, entonces P(A ∪ B) = P(A) + P(B) = 0.3 + 0.4 = 0.7"
+            },
+            {
+                question: "En un experimento donde se lanza una moneda tres veces, ¿cuántos elementos tiene el espacio muestral?",
+                options: [
+                    "3",
+                    "6",
+                    "8",
+                    "9"
+                ],
+                correct: 2,
+                explanation: "Cada lanzamiento tiene 2 resultados posibles (cara o cruz). Para 3 lanzamientos: 2³ = 8 elementos en el espacio muestral."
+            }
+        ];
+
+        // Funciones de navegación
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Actualizar navegación
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('text-gray-600', 'hover:bg-gray-100');
+            });
+            
+            event.target.classList.add('bg-blue-600', 'text-white');
+            event.target.classList.remove('text-gray-600', 'hover:bg-gray-100');
+            
+            currentSection = sectionId;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const sections = ['intro', 'conjuntos', 'espacios', 'probabilidad', 'propiedades', 'simulador', 'casos', 'evaluacion'];
+            const currentIndex = sections.indexOf(currentSection);
+            const progress = ((currentIndex + 1) / sections.length) * 100;
+            
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = Math.round(progress) + '%';
+        }
+
+        // Funciones de cálculo
+        function calculateClassical() {
+            const favorable = parseFloat(document.getElementById('favorable').value);
+            const total = parseFloat(document.getElementById('total').value);
+            
+            if (total === 0) {
+                alert('El número total no puede ser cero');
+                return;
+            }
+            
+            const probability = favorable / total;
+            const percentage = (probability * 100).toFixed(2);
+            
+            document.getElementById('classical-result').classList.remove('hidden');
+            document.getElementById('classical-text').textContent = `${probability.toFixed(4)} (${percentage}%)`;
+        }
+
+        function calculateUnion() {
+            const probA = parseFloat(document.getElementById('prob-a').value);
+            const probB = parseFloat(document.getElementById('prob-b').value);
+            const probAB = parseFloat(document.getElementById('prob-ab').value);
+            
+            const union = probA + probB - probAB;
+            
+            document.getElementById('union-result').classList.remove('hidden');
+            document.getElementById('union-text').textContent = union.toFixed(4);
+        }
+
+        function calculateComplement() {
+            const prob = parseFloat(document.getElementById('prob-comp').value);
+            const complement = 1 - prob;
+            
+            document.getElementById('complement-result').classList.remove('hidden');
+            document.getElementById('complement-text').textContent = complement.toFixed(4);
+        }
+
+        // Funciones de simulación
+        function generateSample() {
+            const outcomes = ['Positivo Verdadero', 'Negativo Verdadero', 'Falso Positivo', 'Falso Negativo'];
+            const randomOutcome = outcomes[Math.floor(Math.random() * outcomes.length)];
+            
+            document.getElementById('sample-result').classList.remove('hidden');
+            document.getElementById('sample-text').textContent = randomOutcome;
+        }
+
+        function runFrequencySimulation() {
+            const trueProb = parseFloat(document.getElementById('true-prob').value);
+            const trials = [10, 50, 100, 500, 1000, 5000];
+            const frequencies = [];
+            
+            trials.forEach(n => {
+                let successes = 0;
+                for (let i = 0; i < n; i++) {
+                    if (Math.random() < trueProb) successes++;
+                }
+                frequencies.push(successes / n);
+            });
+            
+            // Mostrar gráfico
+            document.getElementById('frequency-chart').classList.remove('hidden');
+            const ctx = document.getElementById('freq-canvas').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: trials,
+                    datasets: [{
+                        label: 'Frecuencia Observada',
+                        data: frequencies,
+                        borderColor: 'rgb(34, 197, 94)',
+                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                        tension: 0.1
+                    }, {
+                        label: 'Probabilidad Real',
+                        data: trials.map(() => trueProb),
+                        borderColor: 'rgb(239, 68, 68)',
+                        borderDash: [5, 5],
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Número de Ensayos'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Frecuencia Relativa'
+                            },
+                            min: 0,
+                            max: 1
+                        }
+                    }
+                }
+            });
+        }
+
+        function runTreatmentSimulation() {
+            const successProb = parseFloat(document.getElementById('treatment-success').value);
+            const numPatients = parseInt(document.getElementById('num-patients').value);
+            
+            let successes = 0;
+            for (let i = 0; i < numPatients; i++) {
+                if (Math.random() < successProb) successes++;
+            }
+            
+            const failures = numPatients - successes;
+            const observedRate = successes / numPatients;
+            const difference = Math.abs(observedRate - successProb);
+            
+            document.getElementById('treatment-results').classList.remove('hidden');
+            document.getElementById('observed-success').textContent = successes;
+            document.getElementById('observed-failure').textContent = failures;
+            document.getElementById('success-rate').textContent = (observedRate * 100).toFixed(1) + '%';
+            document.getElementById('difference').textContent = (difference * 100).toFixed(1) + '%';
+            
+            // Mostrar gráfico
+            document.getElementById('chart-placeholder').classList.add('hidden');
+            document.getElementById('simulation-chart').classList.remove('hidden');
+            
+            const ctx = document.getElementById('simulation-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Éxitos', 'Fracasos'],
+                    datasets: [{
+                        data: [successes, failures],
+                        backgroundColor: ['#10b981', '#ef4444']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+            
+            // Interpretación clínica
+            document.getElementById('clinical-interpretation').classList.remove('hidden');
+            let interpretation = '';
+            if (difference < 0.05) {
+                interpretation = 'Los resultados observados están muy cerca de lo esperado, lo que sugiere que la estimación de efectividad es confiable.';
+            } else if (difference < 0.1) {
+                interpretation = 'Hay una diferencia moderada entre lo observado y lo esperado. Esto podría deberse a variabilidad natural o factores no controlados.';
+            } else {
+                interpretation = 'La diferencia significativa sugiere que pueden existir factores adicionales que afectan la efectividad del tratamiento.';
+            }
+            document.getElementById('interpretation-text').textContent = interpretation;
+        }
+
+        function runDiagnosticSimulation() {
+            const sensitivity = parseFloat(document.getElementById('sensitivity').value);
+            const specificity = parseFloat(document.getElementById('specificity').value);
+            const prevalence = parseFloat(document.getElementById('prevalence').value);
+            const sampleSize = parseInt(document.getElementById('sample-size').value);
+            
+            const diseased = Math.round(sampleSize * prevalence);
+            const healthy = sampleSize - diseased;
+            
+            const tp = Math.round(diseased * sensitivity);
+            const fn = diseased - tp;
+            const tn = Math.round(healthy * specificity);
+            const fp = healthy - tn;
+            
+            const ppv = tp / (tp + fp);
+            const npv = tn / (tn + fn);
+            
+            document.getElementById('diagnostic-results').classList.remove('hidden');
+            document.getElementById('tp-count').textContent = tp;
+            document.getElementById('tn-count').textContent = tn;
+            document.getElementById('fp-count').textContent = fp;
+            document.getElementById('fn-count').textContent = fn;
+            document.getElementById('ppv').textContent = (ppv * 100).toFixed(1) + '%';
+            document.getElementById('npv').textContent = (npv * 100).toFixed(1) + '%';
+        }
+
+        // Funciones de casos clínicos
+        function toggleSolution(caseNumber) {
+            const solution = document.getElementById(`solution-${caseNumber}`);
+            solution.classList.toggle('hidden');
+        }
+
+        function checkCase3Answer() {
+            const mildEffects = parseFloat(document.getElementById('mild-effects').value);
+            const severeEffects = parseFloat(document.getElementById('severe-effects').value);
+            const anyEffects = parseFloat(document.getElementById('any-effects').value);
+            const noEffects = parseFloat(document.getElementById('no-effects').value);
+            
+            const correctMild = 50/1000;
+            const correctSevere = 5/1000;
+            const correctAny = correctMild + correctSevere;
+            const correctNo = 1 - correctAny;
+            
+            const feedback = document.getElementById('case3-feedback');
+            const result = document.getElementById('case3-result');
+            const explanation = document.getElementById('case3-explanation');
+            
+            feedback.classList.remove('hidden', 'bg-red-50', 'bg-green-50', 'border-red-200', 'border-green-200');
+            
+            if (Math.abs(noEffects - correctNo) < 0.001) {
+                feedback.classList.add('bg-green-50', 'border-green-200');
+                result.textContent = '¡Correcto!';
+                result.className = 'font-semibold text-green-600';
+                explanation.textContent = `La respuesta correcta es ${correctNo.toFixed(3)} (94.5%). P(sin efectos) = 1 - P(cualquier efecto) = 1 - (50/1000 + 5/1000) = 1 - 0.055 = 0.945`;
+            } else {
+                feedback.classList.add('bg-red-50', 'border-red-200');
+                result.textContent = 'Incorrecto';
+                result.className = 'font-semibold text-red-600';
+                explanation.textContent = `La respuesta correcta es ${correctNo.toFixed(3)} (94.5%). Recuerda: P(efectos leves) = 50/1000 = 0.05, P(efectos graves) = 5/1000 = 0.005, P(cualquier efecto) = 0.055, P(sin efectos) = 1 - 0.055 = 0.945`;
+            }
+        }
+
+        // Funciones del quiz
+        function loadQuestion() {
+            const question = quizQuestions[currentQuestionIndex];
+            const container = document.getElementById('quiz-container');
+            
+            container.innerHTML = `
+                <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                    <h4 class="font-semibold text-gray-800 mb-4">${question.question}</h4>
+                    <div class="space-y-3">
+                        ${question.options.map((option, index) => `
+                            <label class="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-white transition-colors">
+                                <input type="radio" name="answer" value="${index}" class="text-blue-600">
+                                <span class="text-gray-700">${option}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // Restaurar respuesta previa si existe
+            if (userAnswers[currentQuestionIndex] !== undefined) {
+                const radio = container.querySelector(`input[value="${userAnswers[currentQuestionIndex]}"]`);
+                if (radio) radio.checked = true;
+            }
+            
+            updateQuizNavigation();
+        }
+
+        function updateQuizNavigation() {
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = quizQuestions.length;
+            
+            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress').style.width = progress + '%';
+            
+            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
+            
+            const nextBtn = document.getElementById('next-btn');
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                nextBtn.textContent = 'Finalizar';
+            } else {
+                nextBtn.textContent = 'Siguiente';
+            }
+        }
+
+        function nextQuestion() {
+            // Guardar respuesta actual
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+            if (selectedAnswer) {
+                userAnswers[currentQuestionIndex] = parseInt(selectedAnswer.value);
+            }
+            
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function finishQuiz() {
+            // Calcular puntuación
+            quizScore = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === quizQuestions[index].correct) {
+                    quizScore++;
+                }
+            });
+            
+            const percentage = (quizScore / quizQuestions.length) * 100;
+            
+            // Mostrar resultados
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.querySelector('.flex.justify-between').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            
+            document.getElementById('final-score').textContent = `${quizScore}/${quizQuestions.length}`;
+            document.getElementById('percentage').textContent = `${percentage.toFixed(1)}%`;
+            document.getElementById('score').textContent = quizScore;
+            
+            // Determinar calificación y retroalimentación
+            let grade, gradeClass, feedback;
+            if (percentage >= 90) {
+                grade = 'Excelente';
+                gradeClass = 'bg-green-100 text-green-800';
+                feedback = 'Demuestras un dominio excepcional de los conceptos de probabilidad y teoría de conjuntos. Estás listo para avanzar a temas más complejos.';
+            } else if (percentage >= 80) {
+                grade = 'Muy Bueno';
+                gradeClass = 'bg-blue-100 text-blue-800';
+                feedback = 'Tienes una comprensión sólida de los conceptos fundamentales. Revisa los temas donde tuviste dificultades para fortalecer tu conocimiento.';
+            } else if (percentage >= 70) {
+                grade = 'Bueno';
+                gradeClass = 'bg-yellow-100 text-yellow-800';
+                feedback = 'Comprendes los conceptos básicos, pero necesitas reforzar algunos temas. Te recomendamos revisar el material y practicar más ejercicios.';
+            } else {
+                grade = 'Necesita Mejora';
+                gradeClass = 'bg-red-100 text-red-800';
+                feedback = 'Es importante que revises todo el material nuevamente y practiques más ejercicios antes de continuar. No dudes en consultar con tu instructor.';
+            }
+            
+            document.getElementById('grade').textContent = grade;
+            document.getElementById('grade').className = `text-xl font-semibold px-4 py-2 rounded-lg ${gradeClass}`;
+            document.getElementById('feedback').textContent = feedback;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            quizScore = 0;
+            userAnswers = [];
+            
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.querySelector('.flex.justify-between').classList.remove('hidden');
+            document.getElementById('quiz-results').classList.add('hidden');
+            
+            loadQuestion();
+        }
+
+        // Event listeners para sliders
+        document.getElementById('true-prob').addEventListener('input', function() {
+            document.getElementById('prob-value').textContent = (this.value * 100).toFixed(0) + '%';
+        });
+
+        document.getElementById('treatment-success').addEventListener('input', function() {
+            document.getElementById('success-value').textContent = (this.value * 100).toFixed(0) + '%';
+        });
+
+        document.getElementById('sensitivity').addEventListener('input', function() {
+            document.getElementById('sens-value').textContent = (this.value * 100).toFixed(0) + '%';
+        });
+
+        document.getElementById('specificity').addEventListener('input', function() {
+            document.getElementById('spec-value').textContent = (this.value * 100).toFixed(0) + '%';
+        });
+
+        document.getElementById('prevalence').addEventListener('input', function() {
+            document.getElementById('prev-value').textContent = (this.value * 100).toFixed(0) + '%';
+        });
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            loadQuestion();
+        });
+    </script>
+</body>
+</html>

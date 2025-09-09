@@ -1,0 +1,1113 @@
+
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 2: Población, Muestra y Variables - Bioestadística UAN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .pulse-slow { animation: pulse 3s infinite; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .medical-pattern { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f0f9ff' fill-opacity='0.1'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm0 0c0 11.046 8.954 20 20 20s20-8.954 20-20-8.954-20-20-20-20 8.954-20 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    </style>
+</head>
+<body class="bg-base-100">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold">OVA 2: Población, Muestra y Variables</h1>
+                    <p class="text-blue-100 mt-2">Bioestadística para Ciencias de la Salud - UAN</p>
+                </div>
+                <div class="text-right">
+                    <div class="badge badge-secondary badge-lg">Semana 2</div>
+                    <p class="text-sm mt-1">Duración: 3 horas académicas</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-1 overflow-x-auto py-2">
+                <button class="nav-btn btn btn-sm btn-primary" data-section="intro">Introducción</button>
+                <button class="nav-btn btn btn-sm btn-ghost" data-section="conceptos">Conceptos</button>
+                <button class="nav-btn btn btn-sm btn-ghost" data-section="parametros">Parámetros</button>
+                <button class="nav-btn btn btn-sm btn-ghost" data-section="muestreo">Muestreo</button>
+                <button class="nav-btn btn btn-sm btn-ghost" data-section="simulador">Simulador</button>
+                <button class="nav-btn btn btn-sm btn-ghost" data-section="ejercicios">Ejercicios</button>
+                <button class="nav-btn btn btn-sm btn-ghost" data-section="evaluacion">Evaluación</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Introducción -->
+        <section id="intro" class="section-content fade-in">
+            <div class="hero medical-pattern rounded-lg mb-8">
+                <div class="hero-content text-center bg-white bg-opacity-90 rounded-lg p-8">
+                    <div class="max-w-md">
+                        <i class="fas fa-users text-6xl text-primary mb-4"></i>
+                        <h2 class="text-4xl font-bold text-primary">¡Bienvenido!</h2>
+                        <p class="py-6">En esta OVA aprenderás los conceptos fundamentales sobre población, muestra y variables en el contexto de las ciencias de la salud.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-primary">
+                            <i class="fas fa-target"></i>
+                            Objetivos de Aprendizaje
+                        </h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Distinguir entre población y muestra en estudios de salud</li>
+                            <li>Comprender la diferencia entre parámetros y estimadores</li>
+                            <li>Identificar técnicas de muestreo en investigación clínica</li>
+                            <li>Aplicar conceptos en casos prácticos de salud</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-secondary">
+                            <i class="fas fa-clock"></i>
+                            Estructura del Contenido
+                        </h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>Teoría</span>
+                                <span class="badge badge-primary">60%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Práctica</span>
+                                <span class="badge badge-secondary">40%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Modalidad</span>
+                                <span class="badge badge-accent">60% Virtual</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conceptos Fundamentales -->
+        <section id="conceptos" class="section-content hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Población vs. Muestra</h2>
+                <p class="text-lg text-gray-600">Fundamentos esenciales para la investigación en salud</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <div class="card bg-gradient-to-br from-blue-50 to-blue-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-blue-700">
+                            <i class="fas fa-globe"></i>
+                            Población
+                        </h3>
+                        <p class="mb-4">Conjunto completo de individuos, objetos o medidas que comparten características comunes de interés para el estudio.</p>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb"></i>
+                            <div>
+                                <h4 class="font-bold">Ejemplo en Salud:</h4>
+                                <p>Todos los pacientes diabéticos tipo 2 en Colombia mayores de 40 años.</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h4 class="font-semibold mb-2">Características:</h4>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Tamaño generalmente grande o infinito</li>
+                                <li>Difícil o imposible de estudiar completamente</li>
+                                <li>Parámetros desconocidos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-gradient-to-br from-green-50 to-green-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-green-700">
+                            <i class="fas fa-users"></i>
+                            Muestra
+                        </h3>
+                        <p class="mb-4">Subconjunto representativo de la población que se selecciona para realizar el estudio estadístico.</p>
+                        
+                        <div class="alert alert-success">
+                            <i class="fas fa-lightbulb"></i>
+                            <div>
+                                <h4 class="font-bold">Ejemplo en Salud:</h4>
+                                <p>500 pacientes diabéticos tipo 2 seleccionados de hospitales de Bogotá.</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h4 class="font-semibold mb-2">Características:</h4>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Tamaño manejable y conocido</li>
+                                <li>Factible de estudiar completamente</li>
+                                <li>Estadísticos calculables</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h3 class="card-title text-purple-700">
+                        <i class="fas fa-balance-scale"></i>
+                        Relación Población-Muestra
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-4 mt-4">
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <i class="fas fa-arrow-right text-2xl text-purple-600 mb-2"></i>
+                            <h4 class="font-bold">Inferencia</h4>
+                            <p class="text-sm">De la muestra hacia la población</p>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <i class="fas fa-chart-line text-2xl text-purple-600 mb-2"></i>
+                            <h4 class="font-bold">Representatividad</h4>
+                            <p class="text-sm">La muestra debe reflejar la población</p>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <i class="fas fa-exclamation-triangle text-2xl text-purple-600 mb-2"></i>
+                            <h4 class="font-bold">Sesgo</h4>
+                            <p class="text-sm">Evitar muestras no representativas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parámetros y Estimadores -->
+        <section id="parametros" class="section-content hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Parámetros y Estimadores</h2>
+                <p class="text-lg text-gray-600">Medidas descriptivas de poblaciones y muestras</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <div class="card bg-gradient-to-br from-orange-50 to-orange-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-orange-700">
+                            <i class="fas fa-calculator"></i>
+                            Parámetros
+                        </h3>
+                        <p class="mb-4">Medidas numéricas que describen características de una <strong>población</strong>. Generalmente desconocidos.</p>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="table table-zebra w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Medida</th>
+                                        <th>Símbolo</th>
+                                        <th>Ejemplo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Media poblacional</td>
+                                        <td class="font-mono">μ (mu)</td>
+                                        <td>Edad promedio de todos los diabéticos</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Desviación estándar</td>
+                                        <td class="font-mono">σ (sigma)</td>
+                                        <td>Variabilidad de glucosa en población</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Proporción poblacional</td>
+                                        <td class="font-mono">π (pi)</td>
+                                        <td>% de hipertensos en población</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-gradient-to-br from-teal-50 to-teal-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-teal-700">
+                            <i class="fas fa-chart-bar"></i>
+                            Estimadores
+                        </h3>
+                        <p class="mb-4">Medidas numéricas calculadas a partir de una <strong>muestra</strong>. Son conocidos y calculables.</p>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="table table-zebra w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Medida</th>
+                                        <th>Símbolo</th>
+                                        <th>Ejemplo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Media muestral</td>
+                                        <td class="font-mono">x̄ (x barra)</td>
+                                        <td>Edad promedio en muestra de 500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Desviación estándar</td>
+                                        <td class="font-mono">s</td>
+                                        <td>Variabilidad de glucosa en muestra</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Proporción muestral</td>
+                                        <td class="font-mono">p̂ (p sombrero)</td>
+                                        <td>% de hipertensos en muestra</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <h4 class="font-bold">Concepto Clave:</h4>
+                    <p>Los estimadores se utilizan para hacer inferencias sobre los parámetros poblacionales desconocidos. La calidad de esta inferencia depende de la representatividad de la muestra.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Técnicas de Muestreo -->
+        <section id="muestreo" class="section-content hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Técnicas de Muestreo</h2>
+                <p class="text-lg text-gray-600">Métodos para seleccionar muestras representativas en investigación clínica</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6 mb-8">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-blue-700">
+                            <i class="fas fa-random"></i>
+                            Muestreo Probabilístico
+                        </h3>
+                        <p class="mb-4">Cada elemento de la población tiene una probabilidad conocida y no nula de ser seleccionado.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="collapse collapse-arrow bg-blue-50">
+                                <input type="checkbox" />
+                                <div class="collapse-title font-medium">
+                                    <i class="fas fa-dice"></i> Aleatorio Simple
+                                </div>
+                                <div class="collapse-content">
+                                    <p><strong>Descripción:</strong> Cada individuo tiene la misma probabilidad de ser seleccionado.</p>
+                                    <p><strong>Ejemplo:</strong> Seleccionar 200 pacientes de una base de datos de 10,000 usando números aleatorios.</p>
+                                    <p><strong>Ventajas:</strong> Simple, sin sesgo de selección.</p>
+                                    <p><strong>Desventajas:</strong> Requiere marco muestral completo.</p>
+                                </div>
+                            </div>
+
+                            <div class="collapse collapse-arrow bg-blue-50">
+                                <input type="checkbox" />
+                                <div class="collapse-title font-medium">
+                                    <i class="fas fa-layer-group"></i> Estratificado
+                                </div>
+                                <div class="collapse-content">
+                                    <p><strong>Descripción:</strong> La población se divide en estratos homogéneos y se muestrea de cada estrato.</p>
+                                    <p><strong>Ejemplo:</strong> Dividir pacientes por edad (18-30, 31-50, 51+) y seleccionar proporcionalmente de cada grupo.</p>
+                                    <p><strong>Ventajas:</strong> Garantiza representación de subgrupos.</p>
+                                    <p><strong>Desventajas:</strong> Requiere conocimiento previo de la población.</p>
+                                </div>
+                            </div>
+
+                            <div class="collapse collapse-arrow bg-blue-50">
+                                <input type="checkbox" />
+                                <div class="collapse-title font-medium">
+                                    <i class="fas fa-sitemap"></i> Por Conglomerados
+                                </div>
+                                <div class="collapse-content">
+                                    <p><strong>Descripción:</strong> Se seleccionan grupos completos (conglomerados) y se estudian todos sus elementos.</p>
+                                    <p><strong>Ejemplo:</strong> Seleccionar hospitales completos y estudiar todos los pacientes de esos hospitales.</p>
+                                    <p><strong>Ventajas:</strong> Económico, práctico para poblaciones dispersas.</p>
+                                    <p><strong>Desventajas:</strong> Mayor error muestral.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-red-700">
+                            <i class="fas fa-hand-pointer"></i>
+                            Muestreo No Probabilístico
+                        </h3>
+                        <p class="mb-4">La selección no se basa en probabilidades conocidas. Útil en estudios exploratorios.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="collapse collapse-arrow bg-red-50">
+                                <input type="checkbox" />
+                                <div class="collapse-title font-medium">
+                                    <i class="fas fa-hand-paper"></i> Por Conveniencia
+                                </div>
+                                <div class="collapse-content">
+                                    <p><strong>Descripción:</strong> Se seleccionan individuos fácilmente accesibles.</p>
+                                    <p><strong>Ejemplo:</strong> Pacientes que acuden a consulta en una semana específica.</p>
+                                    <p><strong>Ventajas:</strong> Rápido, económico.</p>
+                                    <p><strong>Desventajas:</strong> Alto riesgo de sesgo.</p>
+                                </div>
+                            </div>
+
+                            <div class="collapse collapse-arrow bg-red-50">
+                                <input type="checkbox" />
+                                <div class="collapse-title font-medium">
+                                    <i class="fas fa-bullseye"></i> Intencional
+                                </div>
+                                <div class="collapse-content">
+                                    <p><strong>Descripción:</strong> Se seleccionan individuos con características específicas según criterio del investigador.</p>
+                                    <p><strong>Ejemplo:</strong> Seleccionar pacientes con comorbilidades específicas para un estudio.</p>
+                                    <p><strong>Ventajas:</strong> Útil para estudios cualitativos.</p>
+                                    <p><strong>Desventajas:</strong> No generalizable.</p>
+                                </div>
+                            </div>
+
+                            <div class="collapse collapse-arrow bg-red-50">
+                                <input type="checkbox" />
+                                <div class="collapse-title font-medium">
+                                    <i class="fas fa-snowflake"></i> Bola de Nieve
+                                </div>
+                                <div class="collapse-content">
+                                    <p><strong>Descripción:</strong> Los participantes reclutan a otros participantes.</p>
+                                    <p><strong>Ejemplo:</strong> Estudios sobre enfermedades raras donde los pacientes refieren a otros.</p>
+                                    <p><strong>Ventajas:</strong> Útil para poblaciones difíciles de acceder.</p>
+                                    <p><strong>Desventajas:</strong> Sesgo de red social.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                    <h4 class="font-bold">Recomendación para Investigación Clínica:</h4>
+                    <p>Siempre que sea posible, utilice métodos de muestreo probabilístico para garantizar la validez externa de sus resultados y la posibilidad de generalización a la población objetivo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simulador -->
+        <section id="simulador" class="section-content hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Simulador de Muestreo</h2>
+                <p class="text-lg text-gray-600">Experimenta con diferentes técnicas de muestreo</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-1">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title">Configuración</h3>
+                            
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Tamaño de Población</span>
+                                </label>
+                                <input type="range" id="poblacionSize" min="100" max="10000" value="1000" class="range range-primary" />
+                                <div class="w-full flex justify-between text-xs px-2">
+                                    <span>100</span>
+                                    <span>5,000</span>
+                                    <span>10,000</span>
+                                </div>
+                                <span id="poblacionValue" class="text-center font-bold">1,000</span>
+                            </div>
+
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Tamaño de Muestra</span>
+                                </label>
+                                <input type="range" id="muestraSize" min="10" max="500" value="100" class="range range-secondary" />
+                                <div class="w-full flex justify-between text-xs px-2">
+                                    <span>10</span>
+                                    <span>250</span>
+                                    <span>500</span>
+                                </div>
+                                <span id="muestraValue" class="text-center font-bold">100</span>
+                            </div>
+
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Tipo de Muestreo</span>
+                                </label>
+                                <select id="tipoMuestreo" class="select select-bordered">
+                                    <option value="aleatorio">Aleatorio Simple</option>
+                                    <option value="sistematico">Sistemático</option>
+                                    <option value="estratificado">Estratificado</option>
+                                </select>
+                            </div>
+
+                            <button id="simularBtn" class="btn btn-primary btn-block mt-4">
+                                <i class="fas fa-play"></i>
+                                Simular Muestreo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title">Resultados de la Simulación</h3>
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div class="stat bg-primary text-primary-content rounded-lg">
+                                    <div class="stat-title text-primary-content">Media Poblacional</div>
+                                    <div class="stat-value" id="mediaPoblacion">--</div>
+                                    <div class="stat-desc text-primary-content">μ (parámetro)</div>
+                                </div>
+                                <div class="stat bg-secondary text-secondary-content rounded-lg">
+                                    <div class="stat-title text-secondary-content">Media Muestral</div>
+                                    <div class="stat-value" id="mediaMuestra">--</div>
+                                    <div class="stat-desc text-secondary-content">x̄ (estimador)</div>
+                                </div>
+                            </div>
+                            <canvas id="simulacionChart" width="400" height="200"></canvas>
+                            <div id="interpretacion" class="mt-4 p-4 bg-base-200 rounded-lg hidden">
+                                <h4 class="font-bold mb-2">Interpretación:</h4>
+                                <p id="textoInterpretacion"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ejercicios -->
+        <section id="ejercicios" class="section-content hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Ejercicios Prácticos</h2>
+                <p class="text-lg text-gray-600">Aplica los conceptos aprendidos</p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Ejercicio 1 -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-blue-700">
+                            <i class="fas fa-question-circle"></i>
+                            Ejercicio 1: Identificación de Población y Muestra
+                        </h3>
+                        <p class="mb-4">Lee el siguiente caso y identifica la población y la muestra:</p>
+                        
+                        <div class="alert alert-info mb-4">
+                            <i class="fas fa-file-medical"></i>
+                            <div>
+                                <p><strong>Caso:</strong> Un investigador quiere estudiar la efectividad de un nuevo tratamiento para la hipertensión en adultos mayores de 65 años en Colombia. Para ello, selecciona 300 pacientes hipertensos mayores de 65 años de 5 hospitales de Bogotá y les aplica el tratamiento durante 6 meses.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text font-bold">Población:</span>
+                                </label>
+                                <textarea id="ejercicio1_poblacion" class="textarea textarea-bordered" placeholder="Describe la población..."></textarea>
+                            </div>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text font-bold">Muestra:</span>
+                                </label>
+                                <textarea id="ejercicio1_muestra" class="textarea textarea-bordered" placeholder="Describe la muestra..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <button onclick="verificarEjercicio1()" class="btn btn-primary mt-4">Verificar Respuesta</button>
+                        <div id="feedback1" class="mt-4 hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 2 -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-green-700">
+                            <i class="fas fa-calculator"></i>
+                            Ejercicio 2: Parámetros vs Estimadores
+                        </h3>
+                        <p class="mb-4">Clasifica las siguientes medidas como parámetro o estimador:</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-3 bg-base-200 rounded-lg">
+                                <span>La edad promedio de 150 pacientes diabéticos estudiados</span>
+                                <div class="form-control">
+                                    <select class="select select-bordered select-sm" data-respuesta="estimador">
+                                        <option value="">Seleccionar...</option>
+                                        <option value="parametro">Parámetro</option>
+                                        <option value="estimador">Estimador</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-base-200 rounded-lg">
+                                <span>El porcentaje real de fumadores en toda la población colombiana</span>
+                                <div class="form-control">
+                                    <select class="select select-bordered select-sm" data-respuesta="parametro">
+                                        <option value="">Seleccionar...</option>
+                                        <option value="parametro">Parámetro</option>
+                                        <option value="estimador">Estimador</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 bg-base-200 rounded-lg">
+                                <span>La desviación estándar del peso en una muestra de 200 recién nacidos</span>
+                                <div class="form-control">
+                                    <select class="select select-bordered select-sm" data-respuesta="estimador">
+                                        <option value="">Seleccionar...</option>
+                                        <option value="parametro">Parámetro</option>
+                                        <option value="estimador">Estimador</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="verificarEjercicio2()" class="btn btn-primary mt-4">Verificar Respuestas</button>
+                        <div id="feedback2" class="mt-4 hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 3 -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-purple-700">
+                            <i class="fas fa-users"></i>
+                            Ejercicio 3: Técnicas de Muestreo
+                        </h3>
+                        <p class="mb-4">Para cada situación, selecciona la técnica de muestreo más apropiada:</p>
+                        
+                        <div class="space-y-4">
+                            <div class="p-4 bg-base-200 rounded-lg">
+                                <p class="mb-2"><strong>Situación 1:</strong> Estudiar la prevalencia de anemia en niños de 0-5 años, asegurando representación de cada grupo de edad.</p>
+                                <select class="select select-bordered w-full" data-respuesta="estratificado">
+                                    <option value="">Seleccionar técnica...</option>
+                                    <option value="aleatorio">Aleatorio Simple</option>
+                                    <option value="estratificado">Estratificado</option>
+                                    <option value="conglomerados">Por Conglomerados</option>
+                                    <option value="conveniencia">Por Conveniencia</option>
+                                </select>
+                            </div>
+                            
+                            <div class="p-4 bg-base-200 rounded-lg">
+                                <p class="mb-2"><strong>Situación 2:</strong> Evaluar la satisfacción de pacientes en hospitales públicos de diferentes ciudades del país.</p>
+                                <select class="select select-bordered w-full" data-respuesta="conglomerados">
+                                    <option value="">Seleccionar técnica...</option>
+                                    <option value="aleatorio">Aleatorio Simple</option>
+                                    <option value="estratificado">Estratificado</option>
+                                    <option value="conglomerados">Por Conglomerados</option>
+                                    <option value="conveniencia">Por Conveniencia</option>
+                                </select>
+                            </div>
+                            
+                            <div class="p-4 bg-base-200 rounded-lg">
+                                <p class="mb-2"><strong>Situación 3:</strong> Estudio piloto sobre una nueva terapia, necesitas resultados rápidos con recursos limitados.</p>
+                                <select class="select select-bordered w-full" data-respuesta="conveniencia">
+                                    <option value="">Seleccionar técnica...</option>
+                                    <option value="aleatorio">Aleatorio Simple</option>
+                                    <option value="estratificado">Estratificado</option>
+                                    <option value="conglomerados">Por Conglomerados</option>
+                                    <option value="conveniencia">Por Conveniencia</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button onclick="verificarEjercicio3()" class="btn btn-primary mt-4">Verificar Respuestas</button>
+                        <div id="feedback3" class="mt-4 hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluación -->
+        <section id="evaluacion" class="section-content hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Evaluación Final</h2>
+                <p class="text-lg text-gray-600">Demuestra tu comprensión de los conceptos</p>
+            </div>
+
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="card-title">Quiz de Conocimientos</h3>
+                        <div class="badge badge-primary badge-lg">
+                            <span id="preguntaActual">1</span> / <span id="totalPreguntas">5</span>
+                        </div>
+                    </div>
+
+                    <div id="quizContainer">
+                        <!-- Las preguntas se cargarán dinámicamente -->
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button id="anteriorBtn" class="btn btn-outline" disabled>
+                            <i class="fas fa-arrow-left"></i>
+                            Anterior
+                        </button>
+                        <button id="siguienteBtn" class="btn btn-primary">
+                            Siguiente
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <div id="resultadosQuiz" class="mt-6 hidden">
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4 class="font-bold">¡Evaluación Completada!</h4>
+                                <p>Tu puntuación: <span id="puntuacionFinal" class="font-bold"></span></p>
+                                <p id="mensajeFinal"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h4 class="font-bold mb-2">Retroalimentación:</h4>
+                            <div id="retroalimentacion"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-base-200 text-center py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <p class="text-base-content/70">
+                <i class="fas fa-university"></i>
+                Universidad Antonio Nariño - Bioestadística para Ciencias de la Salud
+            </p>
+            <p class="text-sm mt-2">OVA 2: Población, Muestra y Variables | Modalidad Blended Learning</p>
+        </div>
+    </footer>
+
+    <script>
+        // Variables globales
+        let currentSection = 'intro';
+        let simulacionChart = null;
+        let preguntaActualIndex = 0;
+        let respuestasQuiz = [];
+        
+        // Preguntas del quiz
+        const preguntasQuiz = [
+            {
+                pregunta: "¿Cuál es la principal diferencia entre población y muestra?",
+                opciones: [
+                    "La población es más grande que la muestra",
+                    "La población incluye todos los elementos de interés, la muestra es un subconjunto representativo",
+                    "La muestra es más precisa que la población",
+                    "No hay diferencia significativa"
+                ],
+                correcta: 1,
+                explicacion: "La población incluye todos los elementos que cumplen con los criterios de interés, mientras que la muestra es un subconjunto representativo que se selecciona para el estudio."
+            },
+            {
+                pregunta: "¿Qué símbolo se utiliza para representar la media poblacional?",
+                opciones: ["x̄ (x barra)", "μ (mu)", "s", "σ (sigma)"],
+                correcta: 1,
+                explicacion: "μ (mu) representa la media poblacional, que es un parámetro. x̄ representa la media muestral, que es un estimador."
+            },
+            {
+                pregunta: "¿Cuál es la ventaja principal del muestreo estratificado?",
+                opciones: [
+                    "Es más económico",
+                    "Garantiza la representación de todos los subgrupos importantes",
+                    "Es más rápido de implementar",
+                    "No requiere marco muestral"
+                ],
+                correcta: 1,
+                explicacion: "El muestreo estratificado divide la población en estratos homogéneos y muestrea de cada uno, garantizando que todos los subgrupos importantes estén representados."
+            },
+            {
+                pregunta: "En un estudio sobre diabetes en Colombia, ¿qué sería un estimador?",
+                opciones: [
+                    "El porcentaje real de diabéticos en todo el país",
+                    "La edad promedio de todos los diabéticos colombianos",
+                    "La glucosa promedio en una muestra de 500 pacientes diabéticos",
+                    "La varianza poblacional de la glucosa"
+                ],
+                correcta: 2,
+                explicacion: "Un estimador es una medida calculada a partir de una muestra. La glucosa promedio en una muestra de 500 pacientes es un estimador que se usa para inferir sobre el parámetro poblacional."
+            },
+            {
+                pregunta: "¿Cuándo sería apropiado usar muestreo por conveniencia?",
+                opciones: [
+                    "En estudios que requieren alta precisión estadística",
+                    "Cuando se necesita generalizar a toda la población",
+                    "En estudios piloto o exploratorios con recursos limitados",
+                    "Nunca es apropiado en investigación médica"
+                ],
+                correcta: 2,
+                explicacion: "El muestreo por conveniencia es útil en estudios piloto o exploratorios donde se necesitan resultados rápidos con recursos limitados, aunque tiene limitaciones para la generalización."
+            }
+        ];
+
+        // Navegación entre secciones
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const section = btn.dataset.section;
+                showSection(section);
+                updateNavigation(btn);
+            });
+        });
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+            document.getElementById(sectionId).classList.add('fade-in');
+            currentSection = sectionId;
+        }
+
+        function updateNavigation(activeBtn) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-ghost');
+            });
+            activeBtn.classList.remove('btn-ghost');
+            activeBtn.classList.add('btn-primary');
+        }
+
+        // Simulador de muestreo
+        document.getElementById('poblacionSize').addEventListener('input', function() {
+            document.getElementById('poblacionValue').textContent = parseInt(this.value).toLocaleString();
+        });
+
+        document.getElementById('muestraSize').addEventListener('input', function() {
+            document.getElementById('muestraValue').textContent = parseInt(this.value).toLocaleString();
+        });
+
+        document.getElementById('simularBtn').addEventListener('click', function() {
+            const poblacionSize = parseInt(document.getElementById('poblacionSize').value);
+            const muestraSize = parseInt(document.getElementById('muestraSize').value);
+            const tipoMuestreo = document.getElementById('tipoMuestreo').value;
+
+            // Generar datos simulados (distribución normal para edad de pacientes)
+            const poblacion = [];
+            for (let i = 0; i < poblacionSize; i++) {
+                poblacion.push(Math.round(Math.random() * 40 + 45)); // Edad entre 45-85 años
+            }
+
+            let muestra = [];
+            if (tipoMuestreo === 'aleatorio') {
+                // Muestreo aleatorio simple
+                const indices = [];
+                while (indices.length < muestraSize) {
+                    const index = Math.floor(Math.random() * poblacionSize);
+                    if (!indices.includes(index)) {
+                        indices.push(index);
+                        muestra.push(poblacion[index]);
+                    }
+                }
+            } else if (tipoMuestreo === 'sistematico') {
+                // Muestreo sistemático
+                const k = Math.floor(poblacionSize / muestraSize);
+                const inicio = Math.floor(Math.random() * k);
+                for (let i = inicio; i < poblacionSize && muestra.length < muestraSize; i += k) {
+                    muestra.push(poblacion[i]);
+                }
+            } else if (tipoMuestreo === 'estratificado') {
+                // Muestreo estratificado por grupos de edad
+                const jovenes = poblacion.filter(edad => edad < 55);
+                const adultos = poblacion.filter(edad => edad >= 55 && edad < 70);
+                const mayores = poblacion.filter(edad => edad >= 70);
+                
+                const propJovenes = jovenes.length / poblacionSize;
+                const propAdultos = adultos.length / poblacionSize;
+                const propMayores = mayores.length / poblacionSize;
+                
+                const muestraJovenes = Math.round(muestraSize * propJovenes);
+                const muestraAdultos = Math.round(muestraSize * propAdultos);
+                const muestraMayores = muestraSize - muestraJovenes - muestraAdultos;
+                
+                muestra = [
+                    ...jovenes.sort(() => 0.5 - Math.random()).slice(0, muestraJovenes),
+                    ...adultos.sort(() => 0.5 - Math.random()).slice(0, muestraAdultos),
+                    ...mayores.sort(() => 0.5 - Math.random()).slice(0, muestraMayores)
+                ];
+            }
+
+            // Calcular estadísticas
+            const mediaPoblacion = poblacion.reduce((a, b) => a + b, 0) / poblacion.length;
+            const mediaMuestra = muestra.reduce((a, b) => a + b, 0) / muestra.length;
+
+            // Mostrar resultados
+            document.getElementById('mediaPoblacion').textContent = mediaPoblacion.toFixed(1);
+            document.getElementById('mediaMuestra').textContent = mediaMuestra.toFixed(1);
+
+            // Crear gráfico
+            const ctx = document.getElementById('simulacionChart').getContext('2d');
+            
+            if (simulacionChart) {
+                simulacionChart.destroy();
+            }
+
+            simulacionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Población', 'Muestra'],
+                    datasets: [{
+                        label: 'Edad Promedio',
+                        data: [mediaPoblacion, mediaMuestra],
+                        backgroundColor: ['rgba(59, 130, 246, 0.8)', 'rgba(16, 185, 129, 0.8)'],
+                        borderColor: ['rgb(59, 130, 246)', 'rgb(16, 185, 129)'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: Math.min(mediaPoblacion, mediaMuestra) - 5,
+                            max: Math.max(mediaPoblacion, mediaMuestra) + 5
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Mostrar interpretación
+            const diferencia = Math.abs(mediaPoblacion - mediaMuestra);
+            let interpretacion = "";
+            
+            if (diferencia < 1) {
+                interpretacion = "¡Excelente! La media muestral es muy similar a la media poblacional, indicando una muestra muy representativa.";
+            } else if (diferencia < 2) {
+                interpretacion = "Buena representatividad. La diferencia entre la media poblacional y muestral es pequeña.";
+            } else {
+                interpretacion = "La muestra muestra cierta variabilidad respecto a la población. Esto es normal en muestras pequeñas.";
+            }
+
+            document.getElementById('textoInterpretacion').textContent = interpretacion;
+            document.getElementById('interpretacion').classList.remove('hidden');
+        });
+
+        // Ejercicios
+        function verificarEjercicio1() {
+            const poblacion = document.getElementById('ejercicio1_poblacion').value.toLowerCase();
+            const muestra = document.getElementById('ejercicio1_muestra').value.toLowerCase();
+            
+            let feedback = "<div class='alert alert-info'><h4 class='font-bold'>Retroalimentación:</h4>";
+            
+            if (poblacion.includes('adultos mayores') && poblacion.includes('65') && poblacion.includes('colombia')) {
+                feedback += "<p>✅ <strong>Población correcta:</strong> Todos los adultos mayores de 65 años con hipertensión en Colombia.</p>";
+            } else {
+                feedback += "<p>❌ <strong>Población:</strong> Recuerda que la población incluye TODOS los elementos de interés. En este caso: todos los adultos mayores de 65 años con hipertensión en Colombia.</p>";
+            }
+            
+            if (muestra.includes('300') && muestra.includes('pacientes') && muestra.includes('bogotá')) {
+                feedback += "<p>✅ <strong>Muestra correcta:</strong> Los 300 pacientes hipertensos mayores de 65 años seleccionados de 5 hospitales de Bogotá.</p>";
+            } else {
+                feedback += "<p>❌ <strong>Muestra:</strong> La muestra son los 300 pacientes específicos seleccionados de los 5 hospitales de Bogotá.</p>";
+            }
+            
+            feedback += "</div>";
+            
+            document.getElementById('feedback1').innerHTML = feedback;
+            document.getElementById('feedback1').classList.remove('hidden');
+        }
+
+        function verificarEjercicio2() {
+            const selects = document.querySelectorAll('#ejercicios select[data-respuesta]');
+            let correctas = 0;
+            let feedback = "<div class='alert alert-info'><h4 class='font-bold'>Resultados:</h4>";
+            
+            selects.forEach((select, index) => {
+                const respuestaCorrecta = select.dataset.respuesta;
+                const respuestaUsuario = select.value;
+                
+                if (respuestaUsuario === respuestaCorrecta) {
+                    correctas++;
+                    feedback += `<p>✅ Pregunta ${index + 1}: Correcto</p>`;
+                } else {
+                    feedback += `<p>❌ Pregunta ${index + 1}: Incorrecto. La respuesta correcta es "${respuestaCorrecta}"</p>`;
+                }
+            });
+            
+            feedback += `<p class='font-bold mt-2'>Puntuación: ${correctas}/${selects.length}</p></div>`;
+            
+            document.getElementById('feedback2').innerHTML = feedback;
+            document.getElementById('feedback2').classList.remove('hidden');
+        }
+
+        function verificarEjercicio3() {
+            const selects = document.querySelectorAll('#ejercicios select[data-respuesta]');
+            let correctas = 0;
+            let feedback = "<div class='alert alert-info'><h4 class='font-bold'>Resultados:</h4>";
+            
+            const explicaciones = [
+                "Estratificado es correcto porque necesitas representación de cada grupo de edad.",
+                "Por conglomerados es correcto porque estudias hospitales completos en diferentes ciudades.",
+                "Por conveniencia es apropiado para estudios piloto con recursos limitados."
+            ];
+            
+            selects.forEach((select, index) => {
+                const respuestaCorrecta = select.dataset.respuesta;
+                const respuestaUsuario = select.value;
+                
+                if (respuestaUsuario === respuestaCorrecta) {
+                    correctas++;
+                    feedback += `<p>✅ Situación ${index + 1}: Correcto - ${explicaciones[index]}</p>`;
+                } else {
+                    feedback += `<p>❌ Situación ${index + 1}: Incorrecto. ${explicaciones[index]}</p>`;
+                }
+            });
+            
+            feedback += `<p class='font-bold mt-2'>Puntuación: ${correctas}/${selects.length}</p></div>`;
+            
+            document.getElementById('feedback3').innerHTML = feedback;
+            document.getElementById('feedback3').classList.remove('hidden');
+        }
+
+        // Quiz final
+        function cargarPregunta(index) {
+            const pregunta = preguntasQuiz[index];
+            const container = document.getElementById('quizContainer');
+            
+            let html = `
+                <div class="mb-6">
+                    <h4 class="text-lg font-bold mb-4">${pregunta.pregunta}</h4>
+                    <div class="space-y-2">
+            `;
+            
+            pregunta.opciones.forEach((opcion, i) => {
+                html += `
+                    <label class="flex items-center p-3 bg-base-200 rounded-lg cursor-pointer hover:bg-base-300">
+                        <input type="radio" name="pregunta${index}" value="${i}" class="radio radio-primary mr-3">
+                        <span>${opcion}</span>
+                    </label>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+            
+            // Actualizar contador
+            document.getElementById('preguntaActual').textContent = index + 1;
+            document.getElementById('totalPreguntas').textContent = preguntasQuiz.length;
+            
+            // Actualizar botones
+            document.getElementById('anteriorBtn').disabled = index === 0;
+            document.getElementById('siguienteBtn').textContent = index === preguntasQuiz.length - 1 ? 'Finalizar' : 'Siguiente';
+            
+            // Restaurar respuesta previa si existe
+            if (respuestasQuiz[index] !== undefined) {
+                const radio = document.querySelector(`input[name="pregunta${index}"][value="${respuestasQuiz[index]}"]`);
+                if (radio) radio.checked = true;
+            }
+        }
+
+        function guardarRespuesta() {
+            const radio = document.querySelector(`input[name="pregunta${preguntaActualIndex}"]:checked`);
+            if (radio) {
+                respuestasQuiz[preguntaActualIndex] = parseInt(radio.value);
+            }
+        }
+
+        function calcularResultados() {
+            let correctas = 0;
+            let retroalimentacion = "";
+            
+            preguntasQuiz.forEach((pregunta, index) => {
+                const respuestaUsuario = respuestasQuiz[index];
+                const esCorrecta = respuestaUsuario === pregunta.correcta;
+                
+                if (esCorrecta) correctas++;
+                
+                retroalimentacion += `
+                    <div class="mb-4 p-4 rounded-lg ${esCorrecta ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'} border">
+                        <p class="font-bold">${index + 1}. ${pregunta.pregunta}</p>
+                        <p class="${esCorrecta ? 'text-green-700' : 'text-red-700'}">
+                            ${esCorrecta ? '✅ Correcto' : '❌ Incorrecto'}
+                        </p>
+                        <p class="text-sm mt-2">${pregunta.explicacion}</p>
+                    </div>
+                `;
+            });
+            
+            const porcentaje = Math.round((correctas / preguntasQuiz.length) * 100);
+            let mensaje = "";
+            
+            if (porcentaje >= 80) {
+                mensaje = "¡Excelente! Has demostrado un dominio sólido de los conceptos.";
+            } else if (porcentaje >= 60) {
+                mensaje = "Buen trabajo. Revisa los temas donde tuviste dificultades.";
+            } else {
+                mensaje = "Necesitas repasar los conceptos. Te recomendamos revisar el material nuevamente.";
+            }
+            
+            document.getElementById('puntuacionFinal').textContent = `${correctas}/${preguntasQuiz.length} (${porcentaje}%)`;
+            document.getElementById('mensajeFinal').textContent = mensaje;
+            document.getElementById('retroalimentacion').innerHTML = retroalimentacion;
+            
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.querySelector('.flex.justify-between').classList.add('hidden');
+            document.getElementById('resultadosQuiz').classList.remove('hidden');
+        }
+
+        // Event listeners para el quiz
+        document.getElementById('siguienteBtn').addEventListener('click', function() {
+            guardarRespuesta();
+            
+            if (preguntaActualIndex < preguntasQuiz.length - 1) {
+                preguntaActualIndex++;
+                cargarPregunta(preguntaActualIndex);
+            } else {
+                calcularResultados();
+            }
+        });
+
+        document.getElementById('anteriorBtn').addEventListener('click', function() {
+            guardarRespuesta();
+            
+            if (preguntaActualIndex > 0) {
+                preguntaActualIndex--;
+                cargarPregunta(preguntaActualIndex);
+            }
+        });
+
+        // Inicializar quiz cuando se carga la sección de evaluación
+        document.querySelector('[data-section="evaluacion"]').addEventListener('click', function() {
+            if (document.getElementById('quizContainer').innerHTML === '') {
+                cargarPregunta(0);
+            }
+        });
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('intro');
+        });
+    </script>
+</body>
+</html>
