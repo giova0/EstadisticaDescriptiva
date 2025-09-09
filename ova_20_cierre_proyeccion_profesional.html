@@ -1,0 +1,820 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 20 - Cierre y Proyección Profesional | Bioestadística UAN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uan-blue': '#1e3a8a',
+                        'uan-light-blue': '#3b82f6',
+                        'uan-dark-blue': '#1e40af',
+                        'uan-accent': '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-uan-blue text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-white p-2 rounded-full">
+                        <i class="fas fa-graduation-cap text-uan-blue text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">OVA 20 - Cierre y Proyección Profesional</h1>
+                        <p class="text-blue-200">Bioestadística para Ciencias de la Salud | Universidad Antonio Nariño</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm">Semana 16 - Fase IV</p>
+                    <p class="text-xs text-blue-200">Duración: 2 horas académicas</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-uan-dark-blue text-white sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <ul class="flex space-x-6 py-3 overflow-x-auto">
+                <li><a href="#introduccion" class="hover:text-uan-accent transition-colors nav-link">Introducción</a></li>
+                <li><a href="#bioestadistica-avanzada" class="hover:text-uan-accent transition-colors nav-link">Bioestadística Avanzada</a></li>
+                <li><a href="#educacion-continua" class="hover:text-uan-accent transition-colors nav-link">Educación Continua</a></li>
+                <li><a href="#investigacion" class="hover:text-uan-accent transition-colors nav-link">Investigación</a></li>
+                <li><a href="#reflexion" class="hover:text-uan-accent transition-colors nav-link">Reflexión</a></li>
+                <li><a href="#evaluacion" class="hover:text-uan-accent transition-colors nav-link">Evaluación</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Introducción -->
+        <section id="introduccion" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-uan-blue mb-4">¡Felicitaciones por completar tu viaje en Bioestadística!</h2>
+                    <div class="w-24 h-1 bg-uan-accent mx-auto mb-6"></div>
+                    <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+                        Has recorrido un camino extraordinario desde los conceptos básicos de estadística descriptiva hasta las complejas técnicas de inferencia estadística. Ahora es momento de proyectar tu futuro profesional en el fascinante mundo de la bioestadística.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+                        <i class="fas fa-chart-line text-4xl text-uan-blue mb-4"></i>
+                        <h3 class="font-bold text-uan-blue mb-2">19 OVAs Completadas</h3>
+                        <p class="text-sm text-gray-600">Desde estadística descriptiva hasta inferencia estadística</p>
+                    </div>
+                    <div class="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-lg">
+                        <i class="fas fa-database text-4xl text-green-600 mb-4"></i>
+                        <h3 class="font-bold text-green-600 mb-2">Múltiples Datasets</h3>
+                        <p class="text-sm text-gray-600">Análisis de datos reales anonimizados del sector salud</p>
+                    </div>
+                    <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg">
+                        <i class="fas fa-microscope text-4xl text-purple-600 mb-4"></i>
+                        <h3 class="font-bold text-purple-600 mb-2">Aplicación Clínica</h3>
+                        <p class="text-sm text-gray-600">Conexión directa con la práctica en ciencias de la salud</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-uan-blue to-uan-light-blue text-white p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-3">Objetivos de esta OVA</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-3"></i>Explorar oportunidades de especialización en bioestadística</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-3"></i>Identificar herramientas para el aprendizaje continuo</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-3"></i>Desarrollar un plan personal de investigación</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-3"></i>Reflexionar sobre el impacto profesional adquirido</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bioestadística Avanzada -->
+        <section id="bioestadistica-avanzada" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-uan-blue mb-6 flex items-center">
+                    <i class="fas fa-rocket mr-3"></i>Bioestadística Avanzada y Especialización
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-uan-dark-blue mb-4">Áreas de Especialización</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-uan-accent pl-4 py-2 bg-orange-50">
+                                <h4 class="font-semibold text-gray-800">Epidemiología Clínica</h4>
+                                <p class="text-sm text-gray-600">Diseño y análisis de estudios observacionales y experimentales</p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4 py-2 bg-green-50">
+                                <h4 class="font-semibold text-gray-800">Bioinformática</h4>
+                                <p class="text-sm text-gray-600">Análisis de datos genómicos y proteómicos</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4 py-2 bg-purple-50">
+                                <h4 class="font-semibold text-gray-800">Farmacovigilancia</h4>
+                                <p class="text-sm text-gray-600">Análisis de seguridad y eficacia de medicamentos</p>
+                            </div>
+                            <div class="border-l-4 border-blue-500 pl-4 py-2 bg-blue-50">
+                                <h4 class="font-semibold text-gray-800">Salud Pública</h4>
+                                <p class="text-sm text-gray-600">Análisis poblacional y políticas de salud</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold text-uan-dark-blue mb-4">Técnicas Avanzadas</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <canvas id="techniquesChart" width="400" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-indigo-50 to-blue-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-uan-blue mb-4">Actividad Interactiva: Explora tu Interés</h3>
+                    <p class="mb-4 text-gray-700">Selecciona las áreas que más te interesan para recibir recomendaciones personalizadas:</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" class="interest-checkbox" value="epidemiologia" class="text-uan-blue">
+                                <span>Epidemiología y Salud Pública</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" class="interest-checkbox" value="clinica" class="text-uan-blue">
+                                <span>Investigación Clínica</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" class="interest-checkbox" value="bioinformatica" class="text-uan-blue">
+                                <span>Bioinformática</span>
+                            </label>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" class="interest-checkbox" value="farmaco" class="text-uan-blue">
+                                <span>Farmacovigilancia</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" class="interest-checkbox" value="machine-learning" class="text-uan-blue">
+                                <span>Machine Learning en Salud</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" class="interest-checkbox" value="regulatorio" class="text-uan-blue">
+                                <span>Asuntos Regulatorios</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button onclick="generateRecommendations()" class="mt-4 bg-uan-blue text-white px-6 py-2 rounded-lg hover:bg-uan-dark-blue transition-colors">
+                        Generar Recomendaciones
+                    </button>
+                    <div id="recommendations" class="mt-4 hidden"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Educación Continua -->
+        <section id="educacion-continua" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-uan-blue mb-6 flex items-center">
+                    <i class="fas fa-book-open mr-3"></i>Herramientas para Educación Continua
+                </h2>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                        <i class="fas fa-laptop-code text-3xl text-uan-blue mb-4"></i>
+                        <h3 class="font-bold text-uan-blue mb-3">Plataformas Online</h3>
+                        <ul class="text-sm space-y-2">
+                            <li>• Coursera - Especialización en Bioestadística</li>
+                            <li>• edX - Cursos de Harvard y MIT</li>
+                            <li>• DataCamp - R y Python para Ciencias</li>
+                            <li>• Udacity - Nanodegree en Data Science</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                        <i class="fas fa-users text-3xl text-green-600 mb-4"></i>
+                        <h3 class="font-bold text-green-600 mb-3">Comunidades</h3>
+                        <ul class="text-sm space-y-2">
+                            <li>• R-Ladies Global</li>
+                            <li>• Bioconductor Community</li>
+                            <li>• Stack Overflow</li>
+                            <li>• Reddit r/statistics</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                        <i class="fas fa-certificate text-3xl text-purple-600 mb-4"></i>
+                        <h3 class="font-bold text-purple-600 mb-3">Certificaciones</h3>
+                        <ul class="text-sm space-y-2">
+                            <li>• SAS Certified Statistician</li>
+                            <li>• R Programming Certification</li>
+                            <li>• Google Data Analytics</li>
+                            <li>• Microsoft Azure Data Scientist</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-uan-blue text-white p-6 rounded-lg mb-6">
+                    <h3 class="text-xl font-bold mb-4">Software y Herramientas Recomendadas</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-2">Software Estadístico</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• R Studio (Gratuito)</li>
+                                <li>• Python + Jupyter Notebooks</li>
+                                <li>• SPSS (Licencia académica)</li>
+                                <li>• SAS (Versión universitaria)</li>
+                                <li>• Stata (Licencia estudiantil)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Herramientas Especializadas</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li>• RevMan (Revisiones sistemáticas)</li>
+                                <li>• OpenEpi (Epidemiología)</li>
+                                <li>• G*Power (Cálculo de poder)</li>
+                                <li>• JASP (Análisis bayesiano)</li>
+                                <li>• Tableau (Visualización)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                    <div class="flex">
+                        <i class="fas fa-lightbulb text-yellow-400 mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold text-yellow-800">Consejo Profesional</h4>
+                            <p class="text-yellow-700 text-sm">Mantente actualizado suscribiéndote a revistas como <em>Statistics in Medicine</em>, <em>Biostatistics</em>, y <em>American Journal of Epidemiology</em>. La bioestadística evoluciona constantemente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investigación Independiente -->
+        <section id="investigacion" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-uan-blue mb-6 flex items-center">
+                    <i class="fas fa-microscope mr-3"></i>Recursos para Investigación Independiente
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-uan-dark-blue mb-4">Bases de Datos y Repositorios</h3>
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 p-4 rounded-lg hover:shadow-md transition-shadow">
+                                <h4 class="font-semibold text-gray-800 mb-2">PubMed/MEDLINE</h4>
+                                <p class="text-sm text-gray-600 mb-2">Base de datos biomédica más completa del mundo</p>
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Gratuito</span>
+                            </div>
+                            <div class="border border-gray-200 p-4 rounded-lg hover:shadow-md transition-shadow">
+                                <h4 class="font-semibold text-gray-800 mb-2">Cochrane Library</h4>
+                                <p class="text-sm text-gray-600 mb-2">Revisiones sistemáticas de alta calidad</p>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Acceso institucional</span>
+                            </div>
+                            <div class="border border-gray-200 p-4 rounded-lg hover:shadow-md transition-shadow">
+                                <h4 class="font-semibold text-gray-800 mb-2">NHANES</h4>
+                                <p class="text-sm text-gray-600 mb-2">Datos de salud poblacional de EE.UU.</p>
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Gratuito</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold text-uan-dark-blue mb-4">Metodología de Investigación</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <ol class="space-y-3 text-sm">
+                                <li class="flex items-start">
+                                    <span class="bg-uan-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">1</span>
+                                    <div>
+                                        <strong>Pregunta de Investigación</strong>
+                                        <p class="text-gray-600">Utiliza el formato PICO (Población, Intervención, Comparación, Outcome)</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-uan-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">2</span>
+                                    <div>
+                                        <strong>Revisión Bibliográfica</strong>
+                                        <p class="text-gray-600">Búsqueda sistemática en bases de datos especializadas</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-uan-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">3</span>
+                                    <div>
+                                        <strong>Diseño del Estudio</strong>
+                                        <p class="text-gray-600">Selección del diseño más apropiado para tu pregunta</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-uan-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">4</span>
+                                    <div>
+                                        <strong>Análisis Estadístico</strong>
+                                        <p class="text-gray-600">Aplicación de técnicas apropiadas y validación de supuestos</p>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-uan-blue mb-4">Planificador de Proyecto de Investigación</h3>
+                    <form id="research-planner" class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Área de Interés</label>
+                                <select class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-uan-blue focus:border-transparent">
+                                    <option>Selecciona un área</option>
+                                    <option>Epidemiología</option>
+                                    <option>Ensayos Clínicos</option>
+                                    <option>Salud Pública</option>
+                                    <option>Bioinformática</option>
+                                    <option>Farmacovigilancia</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Estudio</label>
+                                <select class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-uan-blue focus:border-transparent">
+                                    <option>Selecciona el tipo</option>
+                                    <option>Observacional</option>
+                                    <option>Experimental</option>
+                                    <option>Revisión Sistemática</option>
+                                    <option>Meta-análisis</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pregunta de Investigación (Formato PICO)</label>
+                            <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-uan-blue focus:border-transparent" rows="3" placeholder="Describe tu pregunta de investigación usando el formato PICO..."></textarea>
+                        </div>
+                        <button type="button" onclick="generateResearchPlan()" class="bg-uan-blue text-white px-6 py-2 rounded-lg hover:bg-uan-dark-blue transition-colors">
+                            Generar Plan de Investigación
+                        </button>
+                    </form>
+                    <div id="research-plan" class="mt-4 hidden"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reflexión Personal -->
+        <section id="reflexion" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-uan-blue mb-6 flex items-center">
+                    <i class="fas fa-heart mr-3"></i>Reflexión Personal y Profesional
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-uan-blue mb-4">Tu Viaje de Aprendizaje</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <span class="text-sm">Estadística Descriptiva (Semanas 1-5)</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <span class="text-sm">Probabilidad (Semanas 6-12)</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-sm"></i>
+                                </div>
+                                <span class="text-sm">Inferencia Estadística (Semanas 13-15)</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-uan-accent rounded-full flex items-center justify-center">
+                                    <i class="fas fa-star text-white text-sm"></i>
+                                </div>
+                                <span class="text-sm font-semibold">Síntesis y Proyección (Semana 16)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-purple-700 mb-4">Competencias Desarrolladas</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm">Análisis de Datos</span>
+                                <div class="w-24 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm">Interpretación Clínica</span>
+                                <div class="w-24 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm">Software Estadístico</span>
+                                <div class="w-24 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm">Comunicación Científica</span>
+                                <div class="w-24 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-purple-600 h-2 rounded-full" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-uan-blue to-uan-light-blue text-white p-6 rounded-lg mb-6">
+                    <h3 class="text-xl font-bold mb-4">Actividad de Reflexión</h3>
+                    <p class="mb-4">Completa las siguientes reflexiones sobre tu experiencia de aprendizaje:</p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">¿Cuál fue el concepto más desafiante que aprendiste?</label>
+                            <textarea class="w-full p-3 text-gray-800 border border-gray-300 rounded-lg" rows="2" placeholder="Reflexiona sobre los conceptos que más te costaron..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">¿Cómo aplicarás la bioestadística en tu práctica profesional?</label>
+                            <textarea class="w-full p-3 text-gray-800 border border-gray-300 rounded-lg" rows="2" placeholder="Describe cómo usarás estos conocimientos..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">¿Qué área te gustaría profundizar en el futuro?</label>
+                            <textarea class="w-full p-3 text-gray-800 border border-gray-300 rounded-lg" rows="2" placeholder="Menciona tus intereses futuros..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-green-50 border-l-4 border-green-400 p-4">
+                    <div class="flex">
+                        <i class="fas fa-quote-left text-green-400 mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold text-green-800">Mensaje Inspiracional</h4>
+                            <p class="text-green-700 text-sm italic">"La bioestadística no es solo números y fórmulas; es la herramienta que nos permite tomar decisiones informadas que pueden salvar vidas y mejorar la salud de las poblaciones. Tu formación te convierte en un guardián de la evidencia científica."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluación Final -->
+        <section id="evaluacion" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-uan-blue mb-6 flex items-center">
+                    <i class="fas fa-clipboard-check mr-3"></i>Evaluación Final y Certificación
+                </h2>
+
+                <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-lg mb-6">
+                    <h3 class="text-xl font-semibold text-orange-800 mb-4">Autoevaluación de Competencias</h3>
+                    <p class="text-orange-700 mb-4">Evalúa tu nivel de confianza en cada competencia (1 = Principiante, 5 = Experto):</p>
+                    
+                    <div class="space-y-4">
+                        <div class="competency-item">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Análisis descriptivo de datos clínicos</label>
+                            <div class="flex space-x-2">
+                                <input type="radio" name="descriptive" value="1" class="text-uan-blue"> <span class="text-xs">1</span>
+                                <input type="radio" name="descriptive" value="2" class="text-uan-blue"> <span class="text-xs">2</span>
+                                <input type="radio" name="descriptive" value="3" class="text-uan-blue"> <span class="text-xs">3</span>
+                                <input type="radio" name="descriptive" value="4" class="text-uan-blue"> <span class="text-xs">4</span>
+                                <input type="radio" name="descriptive" value="5" class="text-uan-blue"> <span class="text-xs">5</span>
+                            </div>
+                        </div>
+
+                        <div class="competency-item">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Aplicación de conceptos de probabilidad</label>
+                            <div class="flex space-x-2">
+                                <input type="radio" name="probability" value="1" class="text-uan-blue"> <span class="text-xs">1</span>
+                                <input type="radio" name="probability" value="2" class="text-uan-blue"> <span class="text-xs">2</span>
+                                <input type="radio" name="probability" value="3" class="text-uan-blue"> <span class="text-xs">3</span>
+                                <input type="radio" name="probability" value="4" class="text-uan-blue"> <span class="text-xs">4</span>
+                                <input type="radio" name="probability" value="5" class="text-uan-blue"> <span class="text-xs">5</span>
+                            </div>
+                        </div>
+
+                        <div class="competency-item">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Inferencia estadística y pruebas de hipótesis</label>
+                            <div class="flex space-x-2">
+                                <input type="radio" name="inference" value="1" class="text-uan-blue"> <span class="text-xs">1</span>
+                                <input type="radio" name="inference" value="2" class="text-uan-blue"> <span class="text-xs">2</span>
+                                <input type="radio" name="inference" value="3" class="text-uan-blue"> <span class="text-xs">3</span>
+                                <input type="radio" name="inference" value="4" class="text-uan-blue"> <span class="text-xs">4</span>
+                                <input type="radio" name="inference" value="5" class="text-uan-blue"> <span class="text-xs">5</span>
+                            </div>
+                        </div>
+
+                        <div class="competency-item">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Interpretación clínica de resultados estadísticos</label>
+                            <div class="flex space-x-2">
+                                <input type="radio" name="interpretation" value="1" class="text-uan-blue"> <span class="text-xs">1</span>
+                                <input type="radio" name="interpretation" value="2" class="text-uan-blue"> <span class="text-xs">2</span>
+                                <input type="radio" name="interpretation" value="3" class="text-uan-blue"> <span class="text-xs">3</span>
+                                <input type="radio" name="interpretation" value="4" class="text-uan-blue"> <span class="text-xs">4</span>
+                                <input type="radio" name="interpretation" value="5" class="text-uan-blue"> <span class="text-xs">5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="calculateCompetencyScore()" class="mt-4 bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                        Calcular Puntuación
+                    </button>
+                    <div id="competency-result" class="mt-4 hidden"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-uan-blue text-white p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4">Certificado de Finalización</h3>
+                        <p class="mb-4 text-sm">Al completar esta OVA, has demostrado competencia en:</p>
+                        <ul class="text-sm space-y-1 mb-4">
+                            <li>✓ Estadística descriptiva aplicada</li>
+                            <li>✓ Teoría de probabilidades</li>
+                            <li>✓ Inferencia estadística</li>
+                            <li>✓ Interpretación clínica</li>
+                            <li>✓ Uso de software estadístico</li>
+                        </ul>
+                        <button onclick="generateCertificate()" class="bg-white text-uan-blue px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                            Generar Certificado
+                        </button>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-200">
+                        <h3 class="text-xl font-bold text-green-800 mb-4">Próximos Pasos</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-arrow-right text-green-600"></i>
+                                <span>Aplicar conocimientos en proyectos reales</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-arrow-right text-green-600"></i>
+                                <span>Continuar con cursos especializados</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-arrow-right text-green-600"></i>
+                                <span>Unirse a comunidades profesionales</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-arrow-right text-green-600"></i>
+                                <span>Desarrollar proyectos de investigación</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cierre -->
+        <section class="text-center py-12">
+            <div class="bg-gradient-to-r from-uan-blue to-uan-light-blue text-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold mb-4">¡Felicitaciones!</h2>
+                <p class="text-xl mb-6">Has completado exitosamente el ecosistema de aprendizaje blended en Bioestadística para Ciencias de la Salud</p>
+                <div class="flex justify-center items-center space-x-4 mb-6">
+                    <i class="fas fa-trophy text-4xl text-yellow-300"></i>
+                    <div class="text-left">
+                        <p class="font-bold text-lg">Universidad Antonio Nariño</p>
+                        <p class="text-blue-200">Bioestadística para Ciencias de la Salud</p>
+                        <p class="text-sm text-blue-200">16 semanas • 20 OVAs • Modalidad Blended</p>
+                    </div>
+                </div>
+                <p class="text-lg italic">"El conocimiento que has adquirido es una herramienta poderosa para mejorar la salud y el bienestar de las personas. Úsalo sabiamente."</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-uan-dark-blue text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4">
+                <h3 class="text-lg font-bold">Universidad Antonio Nariño</h3>
+                <p class="text-blue-200">Facultad de Ciencias de la Salud</p>
+            </div>
+            <div class="text-sm text-blue-200">
+                <p>© 2024 UAN - Todos los derechos reservados</p>
+                <p>Ecosistema Blended Learning - Bioestadística para Ciencias de la Salud</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Chart for advanced techniques
+        const ctx = document.getElementById('techniquesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Machine Learning', 'Análisis Bayesiano', 'Meta-análisis', 'Análisis Longitudinal', 'Bioinformática', 'Modelado Causal'],
+                datasets: [{
+                    label: 'Nivel de Demanda',
+                    data: [85, 70, 75, 80, 90, 65],
+                    backgroundColor: 'rgba(30, 58, 138, 0.2)',
+                    borderColor: 'rgba(30, 58, 138, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        // Generate recommendations based on interests
+        function generateRecommendations() {
+            const checkboxes = document.querySelectorAll('.interest-checkbox:checked');
+            const interests = Array.from(checkboxes).map(cb => cb.value);
+            const recommendationsDiv = document.getElementById('recommendations');
+            
+            if (interests.length === 0) {
+                alert('Por favor selecciona al menos un área de interés.');
+                return;
+            }
+
+            const recommendations = {
+                epidemiologia: {
+                    title: 'Epidemiología y Salud Pública',
+                    courses: ['Epidemiología Avanzada', 'Análisis de Supervivencia', 'Modelado de Enfermedades'],
+                    tools: ['R/EpiR', 'OpenEpi', 'STATA'],
+                    career: 'Epidemiólogo, Investigador en Salud Pública'
+                },
+                clinica: {
+                    title: 'Investigación Clínica',
+                    courses: ['Diseño de Ensayos Clínicos', 'Análisis de Datos Clínicos', 'Regulación Farmacéutica'],
+                    tools: ['SAS', 'R Clinical', 'SPSS'],
+                    career: 'Bioestadístico Clínico, CRA'
+                },
+                bioinformatica: {
+                    title: 'Bioinformática',
+                    courses: ['Genómica Estadística', 'Análisis de Secuencias', 'Machine Learning en Biología'],
+                    tools: ['R/Bioconductor', 'Python/BioPython', 'Galaxy'],
+                    career: 'Bioinformático, Analista de Datos Genómicos'
+                }
+            };
+
+            let html = '<div class="bg-white p-4 rounded-lg border border-gray-200"><h4 class="font-bold text-uan-blue mb-3">Recomendaciones Personalizadas</h4>';
+            
+            interests.forEach(interest => {
+                if (recommendations[interest]) {
+                    const rec = recommendations[interest];
+                    html += `
+                        <div class="mb-4 p-3 bg-blue-50 rounded">
+                            <h5 class="font-semibold text-uan-dark-blue">${rec.title}</h5>
+                            <p class="text-sm text-gray-600 mb-2"><strong>Cursos recomendados:</strong> ${rec.courses.join(', ')}</p>
+                            <p class="text-sm text-gray-600 mb-2"><strong>Herramientas:</strong> ${rec.tools.join(', ')}</p>
+                            <p class="text-sm text-gray-600"><strong>Oportunidades:</strong> ${rec.career}</p>
+                        </div>
+                    `;
+                }
+            });
+            
+            html += '</div>';
+            recommendationsDiv.innerHTML = html;
+            recommendationsDiv.classList.remove('hidden');
+        }
+
+        // Generate research plan
+        function generateResearchPlan() {
+            const planDiv = document.getElementById('research-plan');
+            const html = `
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-bold text-uan-blue mb-3">Plan de Investigación Sugerido</h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start space-x-2">
+                            <span class="bg-uan-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">1</span>
+                            <div>
+                                <strong>Semanas 1-2:</strong> Revisión bibliográfica exhaustiva
+                                <p class="text-gray-600">Búsqueda en PubMed, Cochrane, y bases especializadas</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="bg-uan-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">2</span>
+                            <div>
+                                <strong>Semanas 3-4:</strong> Refinamiento de metodología
+                                <p class="text-gray-600">Definición de variables, criterios de inclusión/exclusión</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="bg-uan-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">3</span>
+                            <div>
+                                <strong>Semanas 5-8:</strong> Recolección y limpieza de datos
+                                <p class="text-gray-600">Implementación del protocolo de investigación</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="bg-uan-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">4</span>
+                            <div>
+                                <strong>Semanas 9-12:</strong> Análisis estadístico
+                                <p class="text-gray-600">Aplicación de técnicas apropiadas y validación</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            planDiv.innerHTML = html;
+            planDiv.classList.remove('hidden');
+        }
+
+        // Calculate competency score
+        function calculateCompetencyScore() {
+            const competencies = ['descriptive', 'probability', 'inference', 'interpretation'];
+            let total = 0;
+            let count = 0;
+
+            competencies.forEach(comp => {
+                const selected = document.querySelector(`input[name="${comp}"]:checked`);
+                if (selected) {
+                    total += parseInt(selected.value);
+                    count++;
+                }
+            });
+
+            if (count === 0) {
+                alert('Por favor completa todas las evaluaciones.');
+                return;
+            }
+
+            const average = (total / count).toFixed(1);
+            const resultDiv = document.getElementById('competency-result');
+            
+            let level, color, message;
+            if (average >= 4.5) {
+                level = 'Experto';
+                color = 'green';
+                message = '¡Excelente! Tienes un dominio avanzado de la bioestadística.';
+            } else if (average >= 3.5) {
+                level = 'Competente';
+                color = 'blue';
+                message = 'Buen nivel de competencia. Continúa practicando para alcanzar la excelencia.';
+            } else {
+                level = 'En desarrollo';
+                color = 'orange';
+                message = 'Tienes una base sólida. Considera reforzar algunas áreas específicas.';
+            }
+
+            resultDiv.innerHTML = `
+                <div class="bg-${color}-50 border border-${color}-200 p-4 rounded-lg">
+                    <h5 class="font-bold text-${color}-800">Nivel de Competencia: ${level}</h5>
+                    <p class="text-${color}-700 text-sm">Puntuación promedio: ${average}/5.0</p>
+                    <p class="text-${color}-600 text-sm mt-2">${message}</p>
+                </div>
+            `;
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Generate certificate
+        function generateCertificate() {
+            const studentName = prompt('Ingresa tu nombre completo para el certificado:');
+            if (studentName) {
+                alert(`¡Certificado generado para ${studentName}!\n\nEste certificado confirma la finalización exitosa del curso de Bioestadística para Ciencias de la Salud de la Universidad Antonio Nariño.\n\nFecha: ${new Date().toLocaleDateString()}`);
+            }
+        }
+
+        // Progress tracking
+        let progress = 0;
+        const sections = document.querySelectorAll('section');
+        
+        window.addEventListener('scroll', () => {
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize animations
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        // Show first section immediately
+        if (sections.length > 0) {
+            sections[0].style.opacity = '1';
+            sections[0].style.transform = 'translateY(0)';
+        }
+    </script>
+</body>
+</html>
