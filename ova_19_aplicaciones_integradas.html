@@ -1,0 +1,816 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 19 - Aplicaciones Integradas | Bioestadística UAN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uan-blue': '#1e3a8a',
+                        'uan-light-blue': '#3b82f6',
+                        'uan-dark-blue': '#1e40af',
+                        'uan-accent': '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-uan-blue text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-white p-2 rounded-full">
+                        <i class="fas fa-chart-bar text-uan-blue text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">OVA 19 - Aplicaciones Integradas</h1>
+                        <p class="text-blue-200">Bioestadística para Ciencias de la Salud | Universidad Antonio Nariño</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm">Semana 16 - Fase IV</p>
+                    <p class="text-xs text-blue-200">Duración: 3 horas académicas</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-uan-dark-blue text-white sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <ul class="flex space-x-6 py-3 overflow-x-auto">
+                <li><a href="#introduccion" class="hover:text-uan-accent transition-colors nav-link">Introducción</a></li>
+                <li><a href="#analisis-clinico" class="hover:text-uan-accent transition-colors nav-link">Análisis Clínico</a></li>
+                <li><a href="#comunicacion" class="hover:text-uan-accent transition-colors nav-link">Comunicación</a></li>
+                <li><a href="#etica" class="hover:text-uan-accent transition-colors nav-link">Ética</a></li>
+                <li><a href="#casos-practicos" class="hover:text-uan-accent transition-colors nav-link">Casos Prácticos</a></li>
+                <li><a href="#evaluacion" class="hover:text-uan-accent transition-colors nav-link">Evaluación</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Introducción -->
+        <section id="introduccion" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-uan-blue mb-4">Aplicaciones Integradas en Bioestadística</h2>
+                    <div class="w-24 h-1 bg-uan-accent mx-auto mb-6"></div>
+                    <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+                        En esta OVA integrativa aplicarás todos los conocimientos adquiridos durante el curso para realizar análisis completos de datos clínicos, comunicar resultados de manera efectiva y mantener los más altos estándares éticos en la presentación de información científica.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+                        <i class="fas fa-microscope text-4xl text-uan-blue mb-4"></i>
+                        <h3 class="font-bold text-uan-blue mb-2">Análisis Completo</h3>
+                        <p class="text-sm text-gray-600">Desde la exploración inicial hasta las conclusiones finales</p>
+                    </div>
+                    <div class="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-lg">
+                        <i class="fas fa-comments text-4xl text-green-600 mb-4"></i>
+                        <h3 class="font-bold text-green-600 mb-2">Comunicación Efectiva</h3>
+                        <p class="text-sm text-gray-600">Presentación clara y precisa de resultados estadísticos</p>
+                    </div>
+                    <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg">
+                        <i class="fas fa-balance-scale text-4xl text-purple-600 mb-4"></i>
+                        <h3 class="font-bold text-purple-600 mb-2">Ética Profesional</h3>
+                        <p class="text-sm text-gray-600">Integridad en la interpretación y presentación de datos</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-uan-blue to-uan-light-blue text-white p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-3">Objetivos de Aprendizaje</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-3"></i>Realizar análisis estadísticos completos de datos clínicos reales</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-3"></i>Comunicar resultados de manera clara y profesional</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-3"></i>Aplicar principios éticos en la presentación de datos</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle mr-3"></i>Integrar conocimientos de estadística descriptiva, probabilidad e inferencia</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Análisis Clínico Completo -->
+        <section id="analisis-clinico" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-uan-blue mb-6 flex items-center">
+                    <i class="fas fa-chart-line mr-3"></i>Análisis Completo de Datos Clínicos
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-uan-dark-blue mb-4">Flujo de Análisis Estadístico</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-uan-accent pl-4 py-2 bg-orange-50">
+                                <h4 class="font-semibold text-gray-800">1. Exploración de Datos</h4>
+                                <p class="text-sm text-gray-600">Análisis descriptivo, detección de outliers, valores faltantes</p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4 py-2 bg-green-50">
+                                <h4 class="font-semibold text-gray-800">2. Verificación de Supuestos</h4>
+                                <p class="text-sm text-gray-600">Normalidad, homocedasticidad, independencia</p>
+                            </div>
+                            <div class="border-l-4 border-blue-500 pl-4 py-2 bg-blue-50">
+                                <h4 class="font-semibold text-gray-800">3. Análisis Inferencial</h4>
+                                <p class="text-sm text-gray-600">Pruebas de hipótesis, intervalos de confianza</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4 py-2 bg-purple-50">
+                                <h4 class="font-semibold text-gray-800">4. Interpretación Clínica</h4>
+                                <p class="text-sm text-gray-600">Significancia clínica vs. estadística</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold text-uan-dark-blue mb-4">Dataset: Estudio de Hipertensión</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                            <div class="text-sm text-gray-600 mb-3">
+                                <strong>Descripción:</strong> Datos de 500 pacientes con hipertensión arterial
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs">
+                                <div><strong>Variables:</strong></div>
+                                <div></div>
+                                <div>• Edad (años)</div>
+                                <div>• Sexo (M/F)</div>
+                                <div>• Presión sistólica</div>
+                                <div>• Presión diastólica</div>
+                                <div>• IMC</div>
+                                <div>• Tratamiento (A/B/C)</div>
+                                <div>• Respuesta (Sí/No)</div>
+                                <div>• Tiempo seguimiento</div>
+                            </div>
+                        </div>
+                        <canvas id="datasetChart" width="400" height="250"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-indigo-50 to-blue-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-uan-blue mb-4">Simulador de Análisis Estadístico</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Selecciona el tipo de análisis:</label>
+                            <select id="analysisType" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-uan-blue">
+                                <option value="">Selecciona...</option>
+                                <option value="descriptive">Estadística Descriptiva</option>
+                                <option value="ttest">Prueba t para medias</option>
+                                <option value="anova">ANOVA</option>
+                                <option value="chi2">Chi-cuadrado</option>
+                                <option value="correlation">Correlación</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Variable de interés:</label>
+                            <select id="variable" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-uan-blue">
+                                <option value="">Selecciona...</option>
+                                <option value="presion_sistolica">Presión Sistólica</option>
+                                <option value="presion_diastolica">Presión Diastólica</option>
+                                <option value="imc">IMC</option>
+                                <option value="respuesta">Respuesta al Tratamiento</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="runAnalysis()" class="mt-4 bg-uan-blue text-white px-6 py-2 rounded-lg hover:bg-uan-dark-blue transition-colors">
+                        Ejecutar Análisis
+                    </button>
+                    <div id="analysisResults" class="mt-4 hidden"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comunicación de Resultados -->
+        <section id="comunicacion" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-uan-blue mb-6 flex items-center">
+                    <i class="fas fa-presentation mr-3"></i>Comunicación de Resultados Estadísticos
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-uan-dark-blue mb-4">Elementos Clave</h3>
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-uan-blue mb-2">Claridad y Precisión</h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• Uso de lenguaje técnico apropiado</li>
+                                    <li>• Evitar jerga innecesaria</li>
+                                    <li>• Definir términos estadísticos</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-green-700 mb-2">Visualización Efectiva</h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• Gráficos apropiados para el tipo de datos</li>
+                                    <li>• Escalas y etiquetas claras</li>
+                                    <li>• Colores y símbolos consistentes</li>
+                                </ul>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-purple-700 mb-2">Contexto Clínico</h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• Relevancia para la práctica médica</li>
+                                    <li>• Limitaciones del estudio</li>
+                                    <li>• Implicaciones para el paciente</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold text-uan-dark-blue mb-4">Estructura del Reporte</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <ol class="space-y-3 text-sm">
+                                <li class="flex items-start">
+                                    <span class="bg-uan-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">1</span>
+                                    <div>
+                                        <strong>Resumen Ejecutivo</strong>
+                                        <p class="text-gray-600">Hallazgos principales en 2-3 oraciones</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-uan-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">2</span>
+                                    <div>
+                                        <strong>Metodología</strong>
+                                        <p class="text-gray-600">Descripción clara de métodos utilizados</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-uan-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">3</span>
+                                    <div>
+                                        <strong>Resultados</strong>
+                                        <p class="text-gray-600">Datos objetivos con medidas de precisión</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-uan-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">4</span>
+                                    <div>
+                                        <strong>Interpretación</strong>
+                                        <p class="text-gray-600">Significado clínico y limitaciones</p>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-uan-blue text-white p-6 rounded-lg mb-6">
+                    <h3 class="text-xl font-bold mb-4">Ejemplo de Comunicación Efectiva</h3>
+                    <div class="bg-white text-gray-800 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">❌ Comunicación Inadecuada:</h4>
+                        <p class="text-sm mb-3 italic">"El p-valor fue 0.03, por lo que rechazamos H0."</p>
+                        
+                        <h4 class="font-semibold mb-2">✅ Comunicación Efectiva:</h4>
+                        <p class="text-sm italic">"Los pacientes que recibieron el tratamiento A mostraron una reducción promedio de 15 mmHg en la presión sistólica (IC 95%: 8-22 mmHg, p=0.03) comparado con el grupo control, lo que representa una mejora clínicamente significativa en el control de la hipertensión."</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-orange-800 mb-4">Generador de Reportes</h3>
+                    <div class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de estudio:</label>
+                                <select class="w-full p-2 border border-gray-300 rounded-lg">
+                                    <option>Ensayo clínico controlado</option>
+                                    <option>Estudio observacional</option>
+                                    <option>Estudio transversal</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Audiencia objetivo:</label>
+                                <select class="w-full p-2 border border-gray-300 rounded-lg">
+                                    <option>Médicos especialistas</option>
+                                    <option>Investigadores</option>
+                                    <option>Administradores de salud</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Hallazgo principal:</label>
+                            <textarea class="w-full p-3 border border-gray-300 rounded-lg" rows="2" placeholder="Describe el hallazgo más importante de tu análisis..."></textarea>
+                        </div>
+                        <button onclick="generateReport()" class="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                            Generar Reporte
+                        </button>
+                    </div>
+                    <div id="generatedReport" class="mt-4 hidden"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ética en Presentación de Datos -->
+        <section id="etica" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-uan-blue mb-6 flex items-center">
+                    <i class="fas fa-shield-alt mr-3"></i>Ética en la Presentación de Datos
+                </h2>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg">
+                        <i class="fas fa-exclamation-triangle text-3xl text-red-600 mb-4"></i>
+                        <h3 class="font-bold text-red-700 mb-3">Prácticas Inadecuadas</h3>
+                        <ul class="text-sm space-y-2">
+                            <li>• Cherry picking de datos</li>
+                            <li>• Manipulación de escalas</li>
+                            <li>• Omisión de limitaciones</li>
+                            <li>• Sobreinterpretación</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg">
+                        <i class="fas fa-check-circle text-3xl text-green-600 mb-4"></i>
+                        <h3 class="font-bold text-green-700 mb-3">Buenas Prácticas</h3>
+                        <ul class="text-sm space-y-2">
+                            <li>• Transparencia metodológica</li>
+                            <li>• Reporte completo de resultados</li>
+                            <li>• Reconocimiento de limitaciones</li>
+                            <li>• Interpretación balanceada</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                        <i class="fas fa-gavel text-3xl text-blue-600 mb-4"></i>
+                        <h3 class="font-bold text-blue-700 mb-3">Responsabilidades</h3>
+                        <ul class="text-sm space-y-2">
+                            <li>• Protección de datos</li>
+                            <li>• Consentimiento informado</li>
+                            <li>• Confidencialidad</li>
+                            <li>• Integridad científica</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-lg mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Casos Éticos Interactivos</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-white p-4 rounded-lg border border-gray-200">
+                            <h4 class="font-semibold text-gray-800 mb-2">Caso 1: Presentación de Resultados Negativos</h4>
+                            <p class="text-sm text-gray-600 mb-3">Un estudio no encuentra diferencias significativas entre dos tratamientos (p=0.08). ¿Cómo deberías presentar este resultado?</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="case1" value="a" class="text-uan-blue">
+                                    <span class="text-sm">"No hay diferencias entre los tratamientos"</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="case1" value="b" class="text-uan-blue">
+                                    <span class="text-sm">"Los tratamientos son equivalentes"</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="case1" value="c" class="text-uan-blue">
+                                    <span class="text-sm">"No se encontró evidencia estadística de diferencia (p=0.08)"</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-lg border border-gray-200">
+                            <h4 class="font-semibold text-gray-800 mb-2">Caso 2: Conflicto de Intereses</h4>
+                            <p class="text-sm text-gray-600 mb-3">Tu estudio es financiado por una empresa farmacéutica y los resultados favorecen su producto. ¿Qué debes hacer?</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="case2" value="a" class="text-uan-blue">
+                                    <span class="text-sm">Omitir la fuente de financiamiento</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="case2" value="b" class="text-uan-blue">
+                                    <span class="text-sm">Declarar transparentemente el conflicto de intereses</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="case2" value="c" class="text-uan-blue">
+                                    <span class="text-sm">Modificar los resultados para parecer más neutral</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="checkEthicalCases()" class="mt-4 bg-gray-700 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors">
+                        Verificar Respuestas
+                    </button>
+                    <div id="ethicalResults" class="mt-4 hidden"></div>
+                </div>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                    <div class="flex">
+                        <i class="fas fa-lightbulb text-yellow-400 mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold text-yellow-800">Principio Fundamental</h4>
+                            <p class="text-yellow-700 text-sm">La integridad en la presentación de datos no es solo una obligación profesional, sino un compromiso con la salud pública y el avance de la ciencia médica.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Casos Prácticos -->
+        <section id="casos-practicos" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-uan-blue mb-6 flex items-center">
+                    <i class="fas fa-stethoscope mr-3"></i>Casos Prácticos Integrados
+                </h2>
+
+                <div class="space-y-8">
+                    <!-- Caso 1 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-uan-dark-blue mb-4">Caso 1: Eficacia de Nuevo Antihipertensivo</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold mb-2">Contexto Clínico</h4>
+                                <p class="text-sm text-gray-700 mb-4">
+                                    Un nuevo medicamento antihipertensivo se compara con el tratamiento estándar en un ensayo clínico aleatorizado con 200 pacientes (100 por grupo). El outcome primario es la reducción de la presión arterial sistólica a las 12 semanas.
+                                </p>
+                                <div class="bg-gray-50 p-3 rounded text-xs">
+                                    <strong>Datos simulados:</strong><br>
+                                    Grupo nuevo: Media = 142 mmHg, DE = 18<br>
+                                    Grupo estándar: Media = 155 mmHg, DE = 22<br>
+                                    Diferencia: -13 mmHg (IC 95%: -18 a -8)<br>
+                                    p-valor = 0.001
+                                </div>
+                            </div>
+                            <div>
+                                <canvas id="case1Chart" width="300" height="200"></canvas>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="font-semibold mb-2">Tu Análisis:</h4>
+                            <textarea class="w-full p-3 border border-gray-300 rounded-lg" rows="3" placeholder="Interpreta estos resultados considerando significancia estadística y clínica..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Caso 2 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-uan-dark-blue mb-4">Caso 2: Factores de Riesgo Cardiovascular</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold mb-2">Contexto Epidemiológico</h4>
+                                <p class="text-sm text-gray-700 mb-4">
+                                    Estudio observacional de 1000 pacientes para identificar factores de riesgo de enfermedad cardiovascular. Se evaluaron edad, sexo, tabaquismo, diabetes, e hipertensión.
+                                </p>
+                                <div class="bg-gray-50 p-3 rounded text-xs">
+                                    <strong>Resultados de regresión logística:</strong><br>
+                                    Edad: OR = 1.05 (IC 95%: 1.02-1.08)<br>
+                                    Tabaquismo: OR = 2.3 (IC 95%: 1.5-3.5)<br>
+                                    Diabetes: OR = 1.8 (IC 95%: 1.2-2.7)<br>
+                                    Todos p < 0.05
+                                </div>
+                            </div>
+                            <div>
+                                <canvas id="case2Chart" width="300" height="200"></canvas>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="font-semibold mb-2">Tu Interpretación:</h4>
+                            <textarea class="w-full p-3 border border-gray-300 rounded-lg" rows="3" placeholder="Explica el significado clínico de estos odds ratios..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Caso 3 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-uan-dark-blue mb-4">Caso 3: Prueba Diagnóstica</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold mb-2">Evaluación Diagnóstica</h4>
+                                <p class="text-sm text-gray-700 mb-4">
+                                    Nueva prueba para diagnóstico de COVID-19 se evalúa contra el gold standard (PCR) en 500 pacientes.
+                                </p>
+                                <div class="bg-gray-50 p-3 rounded text-xs">
+                                    <strong>Tabla 2x2:</strong><br>
+                                    Verdaderos positivos: 180<br>
+                                    Falsos positivos: 25<br>
+                                    Verdaderos negativos: 270<br>
+                                    Falsos negativos: 25<br>
+                                    <br>
+                                    Sensibilidad: 87.8%<br>
+                                    Especificidad: 91.5%
+                                </div>
+                            </div>
+                            <div>
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold text-blue-800 mb-2">Calcula:</h5>
+                                    <div class="space-y-2 text-sm">
+                                        <div>VPP (prevalencia 40%): <input type="number" class="w-20 p-1 border rounded" placeholder="%" step="0.1"></div>
+                                        <div>VPN (prevalencia 40%): <input type="number" class="w-20 p-1 border rounded" placeholder="%" step="0.1"></div>
+                                        <button onclick="checkDiagnostic()" class="bg-blue-600 text-white px-3 py-1 rounded text-xs">Verificar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluación Final -->
+        <section id="evaluacion" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-uan-blue mb-6 flex items-center">
+                    <i class="fas fa-clipboard-check mr-3"></i>Evaluación Integrativa
+                </h2>
+
+                <div class="bg-gradient-to-r from-uan-blue to-uan-light-blue text-white p-6 rounded-lg mb-6">
+                    <h3 class="text-xl font-bold mb-4">Proyecto Final: Análisis Completo</h3>
+                    <p class="mb-4">Selecciona un dataset y realiza un análisis estadístico completo siguiendo las mejores prácticas aprendidas.</p>
+                    
+                    <div class="bg-white text-gray-800 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-3">Criterios de Evaluación:</h4>
+                        <div class="grid md:grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <h5 class="font-semibold">Análisis Técnico (40%)</h5>
+                                <ul class="space-y-1 text-xs">
+                                    <li>• Exploración adecuada de datos</li>
+                                    <li>• Verificación de supuestos</li>
+                                    <li>• Selección correcta de pruebas</li>
+                                    <li>• Interpretación precisa</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold">Comunicación (35%)</h5>
+                                <ul class="space-y-1 text-xs">
+                                    <li>• Claridad en la presentación</li>
+                                    <li>• Visualizaciones efectivas</li>
+                                    <li>• Contexto clínico apropiado</li>
+                                    <li>• Conclusiones balanceadas</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold">Ética (25%)</h5>
+                                <ul class="space-y-1 text-xs">
+                                    <li>• Transparencia metodológica</li>
+                                    <li>• Reconocimiento de limitaciones</li>
+                                    <li>• Integridad en interpretación</li>
+                                    <li>• Consideraciones éticas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                        <h3 class="text-xl font-bold text-green-800 mb-4">Competencias Logradas</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check-circle text-green-600"></i>
+                                <span>Análisis estadístico integral</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check-circle text-green-600"></i>
+                                <span>Comunicación científica efectiva</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check-circle text-green-600"></i>
+                                <span>Aplicación de principios éticos</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check-circle text-green-600"></i>
+                                <span>Interpretación clínica contextualizada</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                        <h3 class="text-xl font-bold text-blue-800 mb-4">Preparación para OVA 20</h3>
+                        <p class="text-sm text-blue-700 mb-4">
+                            Has desarrollado las competencias necesarias para la síntesis final y proyección profesional en bioestadística.
+                        </p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-arrow-right text-blue-600"></i>
+                                <span>Integración de conocimientos</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-arrow-right text-blue-600"></i>
+                                <span>Aplicación práctica</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-arrow-right text-blue-600"></i>
+                                <span>Comunicación profesional</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-uan-dark-blue text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4">
+                <h3 class="text-lg font-bold">Universidad Antonio Nariño</h3>
+                <p class="text-blue-200">Facultad de Ciencias de la Salud</p>
+            </div>
+            <div class="text-sm text-blue-200">
+                <p>© 2024 UAN - Todos los derechos reservados</p>
+                <p>Ecosistema Blended Learning - Bioestadística para Ciencias de la Salud</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Dataset visualization
+        const ctx1 = document.getElementById('datasetChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Presión Sistólica vs Edad',
+                    data: [
+                        {x: 45, y: 140}, {x: 52, y: 155}, {x: 38, y: 125},
+                        {x: 61, y: 170}, {x: 29, y: 118}, {x: 55, y: 162},
+                        {x: 48, y: 145}, {x: 67, y: 175}, {x: 33, y: 122}
+                    ],
+                    backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                    borderColor: 'rgba(59, 130, 246, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { title: { display: true, text: 'Edad (años)' } },
+                    y: { title: { display: true, text: 'Presión Sistólica (mmHg)' } }
+                }
+            }
+        });
+
+        // Case 1 Chart
+        const ctx2 = document.getElementById('case1Chart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Nuevo Tratamiento', 'Tratamiento Estándar'],
+                datasets: [{
+                    label: 'Presión Sistólica (mmHg)',
+                    data: [142, 155],
+                    backgroundColor: ['rgba(34, 197, 94, 0.7)', 'rgba(239, 68, 68, 0.7)'],
+                    borderColor: ['rgba(34, 197, 94, 1)', 'rgba(239, 68, 68, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: false, min: 130 }
+                }
+            }
+        });
+
+        // Case 2 Chart
+        const ctx3 = document.getElementById('case2Chart').getContext('2d');
+        new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: ['Edad', 'Tabaquismo', 'Diabetes'],
+                datasets: [{
+                    label: 'Odds Ratio',
+                    data: [1.05, 2.3, 1.8],
+                    backgroundColor: 'rgba(147, 51, 234, 0.7)',
+                    borderColor: 'rgba(147, 51, 234, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Analysis simulator
+        function runAnalysis() {
+            const analysisType = document.getElementById('analysisType').value;
+            const variable = document.getElementById('variable').value;
+            const resultsDiv = document.getElementById('analysisResults');
+            
+            if (!analysisType || !variable) {
+                alert('Por favor selecciona el tipo de análisis y la variable.');
+                return;
+            }
+
+            const results = {
+                descriptive: {
+                    presion_sistolica: 'Media: 145.2 mmHg, DE: 18.5, Mediana: 143, Rango: 98-195',
+                    imc: 'Media: 28.4 kg/m², DE: 4.2, Mediana: 27.8, Rango: 18.5-42.1'
+                },
+                ttest: {
+                    presion_sistolica: 't = -2.45, gl = 498, p = 0.015, Diferencia de medias: -8.3 mmHg (IC 95%: -15.1 a -1.5)',
+                    imc: 't = 1.82, gl = 498, p = 0.069, Diferencia de medias: 1.2 kg/m² (IC 95%: -0.1 a 2.5)'
+                }
+            };
+
+            const result = results[analysisType]?.[variable] || 'Análisis no disponible para esta combinación.';
+            
+            resultsDiv.innerHTML = `
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-bold text-uan-blue mb-2">Resultados del Análisis</h4>
+                    <p class="text-sm text-gray-700">${result}</p>
+                </div>
+            `;
+            resultsDiv.classList.remove('hidden');
+        }
+
+        // Report generator
+        function generateReport() {
+            const reportDiv = document.getElementById('generatedReport');
+            const html = `
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                    <h4 class="font-bold text-orange-800 mb-3">Reporte Generado</h4>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Resumen Ejecutivo:</strong> El nuevo tratamiento antihipertensivo demostró una reducción estadísticamente significativa de la presión arterial sistólica comparado con el tratamiento estándar.</p>
+                        <p><strong>Metodología:</strong> Ensayo clínico aleatorizado, doble ciego, con 200 pacientes (100 por grupo), seguimiento de 12 semanas.</p>
+                        <p><strong>Resultados:</strong> Reducción promedio de 13 mmHg (IC 95%: 8-22 mmHg, p=0.001) en el grupo de intervención.</p>
+                        <p><strong>Interpretación:</strong> Esta diferencia es tanto estadística como clínicamente significativa, sugiriendo beneficio terapéutico real para los pacientes.</p>
+                    </div>
+                </div>
+            `;
+            reportDiv.innerHTML = html;
+            reportDiv.classList.remove('hidden');
+        }
+
+        // Ethical cases checker
+        function checkEthicalCases() {
+            const case1 = document.querySelector('input[name="case1"]:checked')?.value;
+            const case2 = document.querySelector('input[name="case2"]:checked')?.value;
+            const resultsDiv = document.getElementById('ethicalResults');
+            
+            let feedback = '<div class="bg-white p-4 rounded-lg border border-gray-200"><h4 class="font-bold text-gray-800 mb-3">Retroalimentación</h4>';
+            
+            if (case1 === 'c') {
+                feedback += '<p class="text-sm text-green-700 mb-2">✅ Caso 1: Correcto. Es importante reportar el p-valor exacto y evitar conclusiones definitivas cuando no hay significancia estadística.</p>';
+            } else {
+                feedback += '<p class="text-sm text-red-700 mb-2">❌ Caso 1: La respuesta correcta es reportar que no se encontró evidencia estadística de diferencia (p=0.08).</p>';
+            }
+            
+            if (case2 === 'b') {
+                feedback += '<p class="text-sm text-green-700">✅ Caso 2: Correcto. La transparencia sobre conflictos de intereses es fundamental para la integridad científica.</p>';
+            } else {
+                feedback += '<p class="text-sm text-red-700">❌ Caso 2: La respuesta correcta es declarar transparentemente el conflicto de intereses.</p>';
+            }
+            
+            feedback += '</div>';
+            resultsDiv.innerHTML = feedback;
+            resultsDiv.classList.remove('hidden');
+        }
+
+        // Diagnostic test calculator
+        function checkDiagnostic() {
+            // VPP = (Sensibilidad × Prevalencia) / (Sensibilidad × Prevalencia + (1-Especificidad) × (1-Prevalencia))
+            // VPN = (Especificidad × (1-Prevalencia)) / ((1-Sensibilidad) × Prevalencia + Especificidad × (1-Prevalencia))
+            
+            const sens = 0.878;
+            const spec = 0.915;
+            const prev = 0.40;
+            
+            const vpv = (sens * prev) / (sens * prev + (1-spec) * (1-prev));
+            const vpn = (spec * (1-prev)) / ((1-sens) * prev + spec * (1-prev));
+            
+            alert(`Valores correctos:\nVPP: ${(vpv * 100).toFixed(1)}%\nVPN: ${(vpn * 100).toFixed(1)}%`);
+        }
+
+        // Initialize animations
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        // Show sections on scroll
+        window.addEventListener('scroll', () => {
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Show first section immediately
+        if (sections.length > 0) {
+            sections[0].style.opacity = '1';
+            sections[0].style.transform = 'translateY(0)';
+        }
+    </script>
+</body>
+</html>

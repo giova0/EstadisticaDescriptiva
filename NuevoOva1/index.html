@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVA 1: Estadística Descriptiva - Hospital Universitario Antonio Nariño Bogotá</title>
+    <link rel="stylesheet" href="css/pixel-style.css">
+    <link rel="stylesheet" href="css/hospital-theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header del Hospital -->
+    <header class="hospital-header">
+        <div class="hospital-logo">
+            <div class="pixel-cross"></div>
+            <h1 class="pixel-text">Hospital Universitario Antonio Nariño</h1>
+            <p class="pixel-subtitle">Bogotá - Bioestadística UAN</p>
+        </div>
+        <div class="patient-info-display">
+            <div class="pixel-monitor">
+                <span id="patient-count">Pacientes: 0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación Principal -->
+    <nav class="main-navigation">
+        <div class="nav-container">
+            <button class="pixel-btn nav-btn active" data-section="intro">Introducción</button>
+            <button class="pixel-btn nav-btn" data-section="conceptos">Conceptos</button>
+            <button class="pixel-btn nav-btn" data-section="medidas">Medidas</button>
+            <button class="pixel-btn nav-btn" data-section="graficos">Gráficos</button>
+            <button class="pixel-btn nav-btn" data-section="ejercicios">Ejercicios</button>
+            <button class="pixel-btn nav-btn" data-section="evaluacion">Evaluación</button>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal -->
+    <main class="main-container">
+        
+        <!-- Sección: Introducción -->
+        <section id="intro" class="ova-section active">
+            <div class="hospital-room">
+                <div class="room-header">
+                    <h2 class="pixel-title">🏥 Bienvenido al Hospital Universitario Antonio Nariño</h2>
+                    <div class="pixel-separator"></div>
+                </div>
+                
+                <div class="content-area">
+                    <div class="doctor-avatar">
+                        <div class="pixel-doctor"></div>
+                        <div class="speech-bubble">
+                            <h3>Dr. Estadístico</h3>
+                            <p>¡Hola! Soy tu guía en esta aventura por la Bioestadística. En este hospital de Bogotá aprenderemos sobre Estadística Descriptiva analizando datos reales de pacientes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-objectives">
+                        <h3 class="pixel-subtitle">🎯 Objetivos de Aprendizaje</h3>
+                        <div class="objectives-grid">
+                            <div class="objective-card">
+                                <div class="objective-icon">📊</div>
+                                <p>Comprender conceptos básicos de estadística descriptiva</p>
+                            </div>
+                            <div class="objective-card">
+                                <div class="objective-icon">📈</div>
+                                <p>Calcular medidas de tendencia central y dispersión</p>
+                            </div>
+                            <div class="objective-card">
+                                <div class="objective-icon">📋</div>
+                                <p>Interpretar datos de pacientes del hospital</p>
+                            </div>
+                            <div class="objective-card">
+                                <div class="objective-icon">🔍</div>
+                                <p>Crear visualizaciones de datos médicos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Conceptos Básicos -->
+        <section id="conceptos" class="ova-section">
+            <div class="hospital-room">
+                <div class="room-header">
+                    <h2 class="pixel-title">📚 Conceptos Fundamentales</h2>
+                    <div class="pixel-separator"></div>
+                </div>
+                
+                <div class="content-area">
+                    <div class="concepts-container">
+                        <div class="concept-card" data-concept="poblacion">
+                            <div class="concept-header">
+                                <div class="pixel-icon">👥</div>
+                                <h3>Población vs Muestra</h3>
+                            </div>
+                            <div class="concept-content">
+                                <p><strong>Población:</strong> Todos los pacientes atendidos en el Hospital Universitario Antonio Nariño (≈15,000 pacientes/año)</p>
+                                <p><strong>Muestra:</strong> Un grupo de 300 pacientes seleccionados para análisis</p>
+                                <div class="interactive-demo" id="poblacion-demo">
+                                    <div class="hospital-capacity">
+                                        <div class="total-patients">Total: <span id="total-patients">15000</span></div>
+                                        <div class="sample-patients">Muestra: <span id="sample-patients">300</span></div>
+                                        <div class="visual-representation"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="concept-card" data-concept="variables">
+                            <div class="concept-header">
+                                <div class="pixel-icon">🔢</div>
+                                <h3>Tipos de Variables</h3>
+                            </div>
+                            <div class="concept-content">
+                                <div class="variables-grid">
+                                    <div class="variable-type">
+                                        <h4>Variables Cuantitativas</h4>
+                                        <ul>
+                                            <li>Edad del paciente</li>
+                                            <li>Peso (kg)</li>
+                                            <li>Presión arterial (mmHg)</li>
+                                            <li>Tiempo de hospitalización (días)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="variable-type">
+                                        <h4>Variables Cualitativas</h4>
+                                        <ul>
+                                            <li>Género (M/F)</li>
+                                            <li>Tipo de sangre (A, B, AB, O)</li>
+                                            <li>Diagnóstico principal</li>
+                                            <li>EPS de afiliación</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Medidas Descriptivas -->
+        <section id="medidas" class="ova-section">
+            <div class="hospital-room">
+                <div class="room-header">
+                    <h2 class="pixel-title">📏 Medidas Descriptivas</h2>
+                    <div class="pixel-separator"></div>
+                </div>
+                
+                <div class="content-area">
+                    <div class="measures-container">
+                        <!-- Medidas de Tendencia Central -->
+                        <div class="measure-section">
+                            <h3 class="section-title">🎯 Medidas de Tendencia Central</h3>
+                            <div class="calculator-container">
+                                <div class="data-input">
+                                    <h4>Edades de Pacientes (años)</h4>
+                                    <div class="patient-data">
+                                        <div class="data-display" id="patient-ages">
+                                            25, 34, 45, 52, 38, 41, 29, 67, 33, 48
+                                        </div>
+                                        <button class="pixel-btn" id="generate-data">Generar Nuevos Datos</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="results-display">
+                                    <div class="measure-result">
+                                        <div class="measure-label">Media (x̄)</div>
+                                        <div class="measure-value" id="media-result">41.2</div>
+                                    </div>
+                                    <div class="measure-result">
+                                        <div class="measure-label">Mediana (Me)</div>
+                                        <div class="measure-value" id="mediana-result">39.5</div>
+                                    </div>
+                                    <div class="measure-result">
+                                        <div class="measure-label">Moda (Mo)</div>
+                                        <div class="measure-value" id="moda-result">N/A</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Medidas de Dispersión -->
+                        <div class="measure-section">
+                            <h3 class="section-title">📊 Medidas de Dispersión</h3>
+                            <div class="dispersion-container">
+                                <div class="dispersion-result">
+                                    <div class="measure-label">Rango</div>
+                                    <div class="measure-value" id="rango-result">42</div>
+                                </div>
+                                <div class="dispersion-result">
+                                    <div class="measure-label">Desviación Estándar (s)</div>
+                                    <div class="measure-value" id="desviacion-result">13.8</div>
+                                </div>
+                                <div class="dispersion-result">
+                                    <div class="measure-label">Varianza (s²)</div>
+                                    <div class="measure-value" id="varianza-result">190.4</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Gráficos -->
+        <section id="graficos" class="ova-section">
+            <div class="hospital-room">
+                <div class="room-header">
+                    <h2 class="pixel-title">📈 Visualización de Datos</h2>
+                    <div class="pixel-separator"></div>
+                </div>
+                
+                <div class="content-area">
+                    <div class="charts-container">
+                        <div class="chart-section">
+                            <h3>Distribución de Edades por Género</h3>
+                            <canvas id="age-chart" style="height: 300px;"></canvas>
+                        </div>
+                        
+                        <div class="chart-section">
+                            <h3>Servicios Médicos más Utilizados</h3>
+                            <canvas id="services-chart" style="height: 300px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Ejercicios -->
+        <section id="ejercicios" class="ova-section">
+            <div class="hospital-room">
+                <div class="room-header">
+                    <h2 class="pixel-title">🎮 Ejercicios Interactivos</h2>
+                    <div class="pixel-separator"></div>
+                </div>
+                
+                <div class="content-area">
+                    <div class="exercise-container">
+                        <div class="exercise-card" id="exercise-1">
+                            <h3>Ejercicio 1: Calculadora de Media</h3>
+                            <p>Los siguientes son los pesos (en kg) de 8 pacientes internados en el Hospital Universitario Antonio Nariño:</p>
+                            <div class="exercise-data">65, 72, 58, 81, 69, 75, 63, 77</div>
+                            <div class="exercise-input">
+                                <label>Calcula la media aritmética:</label>
+                                <input type="number" id="answer-1" placeholder="Ingresa tu respuesta" step="0.1">
+                                <button class="pixel-btn check-btn" onclick="checkAnswer(1, 70)">Verificar</button>
+                            </div>
+                            <div class="feedback" id="feedback-1"></div>
+                        </div>
+
+                        <div class="exercise-card" id="exercise-2">
+                            <h3>Ejercicio 2: Identificar Variables</h3>
+                            <p>Clasifica las siguientes variables del Hospital Universitario Antonio Nariño:</p>
+                            <div class="classification-exercise">
+                                <div class="variable-items">
+                                    <div class="variable-item" draggable="true" data-type="cuantitativa">Número de días de hospitalización</div>
+                                    <div class="variable-item" draggable="true" data-type="cualitativa">Tipo de cirugía realizada</div>
+                                    <div class="variable-item" draggable="true" data-type="cuantitativa">Temperatura corporal (°C)</div>
+                                    <div class="variable-item" draggable="true" data-type="cualitativa">Estado civil del paciente</div>
+                                </div>
+                                <div class="classification-zones">
+                                    <div class="drop-zone" data-category="cuantitativa">
+                                        <h4>Variables Cuantitativas</h4>
+                                    </div>
+                                    <div class="drop-zone" data-category="cualitativa">
+                                        <h4>Variables Cualitativas</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Evaluación -->
+        <section id="evaluacion" class="ova-section">
+            <div class="hospital-room">
+                <div class="room-header">
+                    <h2 class="pixel-title">✅ Evaluación Final</h2>
+                    <div class="pixel-separator"></div>
+                </div>
+                
+                <div class="content-area">
+                    <div class="evaluation-container">
+                        <div class="quiz-header">
+                            <h3>Quiz: Estadística Descriptiva en el Hospital Universitario Antonio Nariño</h3>
+                            <div class="quiz-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="quiz-progress"></div>
+                                </div>
+                                <span id="question-counter">Pregunta 1 de 5</span>
+                            </div>
+                        </div>
+
+                        <div class="quiz-container" id="quiz-container">
+                            <!-- Las preguntas se cargarán dinámicamente -->
+                        </div>
+
+                        <div class="quiz-controls">
+                            <button class="pixel-btn" id="prev-question" style="display: none;">Anterior</button>
+                            <button class="pixel-btn" id="next-question">Siguiente</button>
+                            <button class="pixel-btn primary" id="submit-quiz" style="display: none;">Enviar Evaluación</button>
+                        </div>
+
+                        <div class="quiz-results" id="quiz-results" style="display: none;">
+                            <h3>¡Evaluación Completada!</h3>
+                            <div class="score-display">
+                                <div class="score-circle">
+                                    <span id="final-score">0</span>%
+                                </div>
+                                <p id="score-message">¡Excelente trabajo!</p>
+                            </div>
+                            <button class="pixel-btn" id="restart-quiz">Reiniciar Quiz</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="hospital-footer">
+        <div class="footer-content">
+            <div class="hospital-info">
+                <p>🏥 Hospital Universitario Antonio Nariño - Bogotá, Colombia</p>
+                <p>📚 OVA 1: Estadística Descriptiva - Universidad Antonio Nariño</p>
+            </div>
+            <div class="progress-indicator">
+                <span>Progreso OVA: <span id="overall-progress">0%</span></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/pixel-engine.js"></script>
+    <script src="js/statistics-calculator.js"></script>
+    <script src="js/interactive-exercises.js"></script>
+    <script src="js/quiz-system.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

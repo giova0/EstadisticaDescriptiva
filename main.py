@@ -8,7 +8,7 @@ import traceback
 
 def mostrar_estadistica_descriptiva(page: ft.Page) -> None:
     page.clean()
-    page.title = "Estadística Descriptiva"
+    page.title = "Bioestadística para Ciencias de la Salud UAN"
     page.theme_mode = ft.ThemeMode.LIGHT
     page.bgcolor = "#f0f0f0"
 
@@ -26,7 +26,7 @@ def mostrar_estadistica_descriptiva(page: ft.Page) -> None:
     contenido = ft.Column(
         [
             ft.Text(
-                "ESTADÍSTICA DESCRIPTIVA",
+                "Bioestadística para Ciencias de la Salud UAN",
                 size=26,
                 weight=ft.FontWeight.BOLD,
                 color=ft.Colors.BLUE,
@@ -35,11 +35,10 @@ def mostrar_estadistica_descriptiva(page: ft.Page) -> None:
             ft.Container(height=30),
             ft.Column(
                 [
-                    ft.ElevatedButton("OVAS", style=button_style, on_click=lambda e: page.go("/ovas")),
-                    ft.ElevatedButton("Análisis de Datos", style=button_style),
-                    ft.ElevatedButton("Gráficos", style=button_style),
-                    ft.ElevatedButton("Reportes", style=button_style),
-                    ft.ElevatedButton("Configuración", style=button_style),
+                    ft.ElevatedButton("Fase I - Estadística Descriptiva - 7 OVAs", style=button_style, on_click=lambda e: page.go("/ovas")),
+                    ft.ElevatedButton("Fase II - Probabilidad - 8 OVA", style=button_style, on_click=lambda e: page.go("/fase2")),
+                    ft.ElevatedButton("Fase III - Inferencia Estadística - 4 OVAs", style=button_style, on_click=lambda e: page.go("/fase3")),
+                    ft.ElevatedButton("Fase IV - Síntesis e Integración - 1 OVA", style=button_style, on_click=lambda e: page.go("/fase4")),
                 ],
                 spacing=12,
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -54,7 +53,7 @@ def mostrar_estadistica_descriptiva(page: ft.Page) -> None:
     page.add(
         ft.Container(
             width=page.window_width,
-            height=page.window_height,
+            height=page.window_height + 80,  # Extendido 1 cm (aproximadamente 40 píxeles) arriba y abajo
             bgcolor="#f8f9fa",
             content=contenido,
             alignment=ft.alignment.center,
@@ -71,13 +70,13 @@ def app_main(page: ft.Page):
 
 def mostrar_menu_ovas(page: ft.Page) -> None:
     page.clean()
-    page.title = "OVAS - Estadística Descriptiva"
+    page.title = "Fase I - Estadística Descriptiva - Bioestadística para Ciencias de la Salud UAN"
     page.bgcolor = "#f8f9fa"
 
     def volver(e):
         page.go("/estadistica")
 
-    # Lista completa de OVAs disponibles
+    # Lista de OVAs para FASE I - Bioestadística para Ciencias de la Salud UAN
     ovas = [
         ("1", "OVA 1. Bienvenida y Fundamentos"),
         ("2", "OVA 2. Población, Muestra y Variables"),
@@ -86,19 +85,6 @@ def mostrar_menu_ovas(page: ft.Page) -> None:
         ("5", "OVA 5. Visualización Avanzada de Datos"),
         ("6", "OVA 6. Estadísticas Descriptivas Básicas"),
         ("7", "OVA 7. Integración y Evaluación Parcial I"),
-        ("8", "OVA 8. Teoría de Conjuntos y Probabilidad Básica"),
-        ("9", "OVA 9. Probabilidad Condicional y Bayes"),
-        ("10", "OVA 10. Integración y Evaluación Parcial II"),
-        ("11", "OVA 11. Distribuciones Discretas en Medicina"),
-        ("12", "OVA 12. Distribución Binomial y Poisson"),
-        ("13", "OVA 13. Distribución Normal en Biomedicina"),
-        ("14", "OVA 14. Integración y Evaluación Parcial III"),
-        ("15", "OVA 15. Inferencia Estadística Básica"),
-        ("16", "OVA 16. Intervalos para Diferencias"),
-        ("17", "OVA 17. Fundamentos de Pruebas de Hipótesis"),
-        ("18", "OVA 18. Pruebas Específicas para Ciencias de la Salud"),
-        ("19", "OVA 19. Aplicaciones Integradas"),
-        ("20", "OVA 20. Cierre y Proyección Profesional"),
     ]
 
     botones = [
@@ -109,7 +95,7 @@ def mostrar_menu_ovas(page: ft.Page) -> None:
     page.add(
         ft.Column(
             [
-                ft.Text("OVAS - Selecciona un módulo", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE),
+                ft.Text("Fase I - Estadística Descriptiva - Selecciona un módulo", size=24, weight=ft.FontWeight.BOLD, color=ft.Colors.BLUE),
                 ft.Container(height=20),
                 ft.Column(botones, spacing=10, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                 ft.Container(height=30),
@@ -173,7 +159,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -230,8 +216,120 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
+                                style=ft.ButtonStyle(
+                                    color=ft.Colors.WHITE,
+                                    bgcolor=ft.Colors.GREY_700,
+                                )
+                            )
+                        ], alignment=ft.MainAxisAlignment.START),
+                        ft.Container(height=50),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Icon(
+                                    ft.Icons.ERROR,
+                                    size=80,
+                                    color=ft.Colors.RED
+                                ),
+                                ft.Text(
+                                    "Error: Archivo no encontrado",
+                                    size=24,
+                                    weight=ft.FontWeight.BOLD,
+                                    color=ft.Colors.RED,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=20),
+                                ft.Text(
+                                    f"No se pudo encontrar el archivo: {html_path}",
+                                    size=14,
+                                    color=ft.Colors.GREY_600,
+                                    text_align=ft.TextAlign.CENTER
+                                )
+                            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                            alignment=ft.alignment.center
+                        )
+                    ])
+                )
+            
+            page.update()
+            return
+        if clave == "19":
+            # Cargar página HTML para OVA 19 en el navegador del sistema
+            import webbrowser
+            import os
+            
+            html_path = str(base_dir / "ova_19_aplicaciones_integradas.html")
+            
+            # Verificar que el archivo existe
+            if os.path.exists(html_path):
+                # Abrir el archivo HTML en el navegador predeterminado
+                webbrowser.open(f"file:///{html_path}")
+                
+                # Mostrar mensaje de confirmación en la aplicación
+                page.add(
+                    ft.Column([
+                        ft.Row([
+                            ft.ElevatedButton(
+                                "◀ Volver a FASE III",
+                                on_click=lambda e: page.go("/fase3"),
+                                style=ft.ButtonStyle(
+                                    color=ft.Colors.WHITE,
+                                    bgcolor=ft.Colors.GREY_700,
+                                )
+                            )
+                        ], alignment=ft.MainAxisAlignment.START),
+                        ft.Container(height=50),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Icon(
+                                    ft.Icons.OPEN_IN_BROWSER,
+                                    size=80,
+                                    color=ft.Colors.TEAL
+                                ),
+                                ft.Text(
+                                    "OVA 19: Aplicaciones Integradas",
+                                    size=24,
+                                    weight=ft.FontWeight.BOLD,
+                                    color=ft.Colors.TEAL,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=20),
+                                ft.Text(
+                                    "La OVA se ha abierto en tu navegador predeterminado.",
+                                    size=16,
+                                    color=ft.Colors.GREY_700,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=10),
+                                ft.Text(
+                                    "Si no se abrió automáticamente, verifica que el archivo HTML existe en la carpeta del proyecto.",
+                                    size=14,
+                                    color=ft.Colors.GREY_600,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=30),
+                                ft.ElevatedButton(
+                                    "🔄 Abrir nuevamente",
+                                    on_click=lambda e: webbrowser.open(f"file:///{html_path}"),
+                                    style=ft.ButtonStyle(
+                                        color=ft.Colors.WHITE,
+                                        bgcolor=ft.Colors.TEAL_700,
+                                    )
+                                )
+                            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                            alignment=ft.alignment.center
+                        )
+                    ])
+                )
+            else:
+                # Mostrar mensaje de error si el archivo no existe
+                page.add(
+                    ft.Column([
+                        ft.Row([
+                            ft.ElevatedButton(
+                                "◀ Volver a FASE III",
+                                on_click=lambda e: page.go("/fase3"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
                                     bgcolor=ft.Colors.GREY_700,
@@ -285,7 +383,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -342,7 +440,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -397,7 +495,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -454,7 +552,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -509,7 +607,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -566,7 +664,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -621,7 +719,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -678,7 +776,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -733,7 +831,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -790,7 +888,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -845,7 +943,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -902,7 +1000,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -957,7 +1055,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1014,7 +1112,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1069,7 +1167,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1126,7 +1224,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1181,7 +1279,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1238,7 +1336,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1293,7 +1391,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1350,7 +1448,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1405,7 +1503,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1462,7 +1560,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1517,7 +1615,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1574,7 +1672,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1629,7 +1727,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1686,7 +1784,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1741,7 +1839,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1798,7 +1896,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1853,7 +1951,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1910,7 +2008,231 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
+                                on_click=lambda e: page.go("/ovas"),
+                                style=ft.ButtonStyle(
+                                    color=ft.Colors.WHITE,
+                                    bgcolor=ft.Colors.GREY_700,
+                                )
+                            )
+                        ], alignment=ft.MainAxisAlignment.START),
+                        ft.Container(height=50),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Icon(
+                                    ft.Icons.ERROR,
+                                    size=80,
+                                    color=ft.Colors.RED
+                                ),
+                                ft.Text(
+                                    "Error: Archivo no encontrado",
+                                    size=24,
+                                    weight=ft.FontWeight.BOLD,
+                                    color=ft.Colors.RED,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=20),
+                                ft.Text(
+                                    f"No se pudo encontrar el archivo: {html_path}",
+                                    size=14,
+                                    color=ft.Colors.GREY_600,
+                                    text_align=ft.TextAlign.CENTER
+                                )
+                            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                            alignment=ft.alignment.center
+                        )
+                    ])
+                )
+            
+            page.update()
+            return
+        if clave == "17":
+            # Cargar página HTML para OVA 17 en el navegador del sistema
+            import webbrowser
+            import os
+            
+            html_path = str(base_dir / "ova_17_pruebas_hipotesis.html")
+            
+            # Verificar que el archivo existe
+            if os.path.exists(html_path):
+                # Abrir el archivo HTML en el navegador predeterminado
+                webbrowser.open(f"file:///{html_path}")
+                
+                # Mostrar mensaje de confirmación en la aplicación
+                page.add(
+                    ft.Column([
+                        ft.Row([
+                            ft.ElevatedButton(
+                                "◀ Volver a FASE I",
+                                on_click=lambda e: page.go("/ovas"),
+                                style=ft.ButtonStyle(
+                                    color=ft.Colors.WHITE,
+                                    bgcolor=ft.Colors.GREY_700,
+                                )
+                            )
+                        ], alignment=ft.MainAxisAlignment.START),
+                        ft.Container(height=50),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Icon(
+                                    ft.Icons.OPEN_IN_BROWSER,
+                                    size=80,
+                                    color=ft.Colors.PURPLE
+                                ),
+                                ft.Text(
+                                    "OVA 17: Fundamentos de Pruebas de Hipótesis",
+                                    size=24,
+                                    weight=ft.FontWeight.BOLD,
+                                    color=ft.Colors.PURPLE,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=20),
+                                ft.Text(
+                                    "La OVA se ha abierto en tu navegador predeterminado.",
+                                    size=16,
+                                    color=ft.Colors.GREY_700,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=10),
+                                ft.Text(
+                                    "Si no se abrió automáticamente, verifica que el archivo HTML existe en la carpeta del proyecto.",
+                                    size=14,
+                                    color=ft.Colors.GREY_600,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=30),
+                                ft.ElevatedButton(
+                                    "🔄 Abrir nuevamente",
+                                    on_click=lambda e: webbrowser.open(f"file:///{html_path}"),
+                                    style=ft.ButtonStyle(
+                                        color=ft.Colors.WHITE,
+                                        bgcolor=ft.Colors.PURPLE_700,
+                                    )
+                                )
+                            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                            alignment=ft.alignment.center
+                        )
+                    ])
+                )
+            else:
+                # Mostrar error si el archivo no existe
+                page.add(
+                    ft.Column([
+                        ft.Row([
+                            ft.ElevatedButton(
+                                "◀ Volver a FASE I",
+                                on_click=lambda e: page.go("/ovas"),
+                                style=ft.ButtonStyle(
+                                    color=ft.Colors.WHITE,
+                                    bgcolor=ft.Colors.GREY_700,
+                                )
+                            )
+                        ], alignment=ft.MainAxisAlignment.START),
+                        ft.Container(height=50),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Icon(
+                                    ft.Icons.ERROR,
+                                    size=80,
+                                    color=ft.Colors.RED
+                                ),
+                                ft.Text(
+                                    "Error: Archivo no encontrado",
+                                    size=24,
+                                    weight=ft.FontWeight.BOLD,
+                                    color=ft.Colors.RED,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=20),
+                                ft.Text(
+                                    f"No se pudo encontrar el archivo: {html_path}",
+                                    size=14,
+                                    color=ft.Colors.GREY_600,
+                                    text_align=ft.TextAlign.CENTER
+                                )
+                            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                            alignment=ft.alignment.center
+                        )
+                    ])
+                )
+            
+            page.update()
+            return
+        if clave == "20":
+            # Cargar página HTML para OVA 20 en el navegador del sistema
+            import webbrowser
+            import os
+            
+            html_path = str(base_dir / "ova_20_cierre_proyeccion_profesional.html")
+            
+            # Verificar que el archivo existe
+            if os.path.exists(html_path):
+                # Abrir el archivo HTML en el navegador predeterminado
+                webbrowser.open(f"file:///{html_path}")
+                
+                # Mostrar mensaje de confirmación en la aplicación
+                page.add(
+                    ft.Column([
+                        ft.Row([
+                            ft.ElevatedButton(
+                                "◀ Volver a FASE I",
+                                on_click=lambda e: page.go("/ovas"),
+                                style=ft.ButtonStyle(
+                                    color=ft.Colors.WHITE,
+                                    bgcolor=ft.Colors.GREY_700,
+                                )
+                            )
+                        ], alignment=ft.MainAxisAlignment.START),
+                        ft.Container(height=50),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Icon(
+                                    ft.Icons.OPEN_IN_BROWSER,
+                                    size=80,
+                                    color=ft.Colors.TEAL
+                                ),
+                                ft.Text(
+                                    "OVA 20: Cierre y Proyección Profesional",
+                                    size=24,
+                                    weight=ft.FontWeight.BOLD,
+                                    color=ft.Colors.TEAL,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=20),
+                                ft.Text(
+                                    "La OVA se ha abierto en tu navegador predeterminado.",
+                                    size=16,
+                                    color=ft.Colors.GREY_700,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=10),
+                                ft.Text(
+                                    "Si no se abrió automáticamente, verifica que el archivo HTML existe en la carpeta del proyecto.",
+                                    size=14,
+                                    color=ft.Colors.GREY_600,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=30),
+                                ft.ElevatedButton(
+                                    "🔄 Abrir nuevamente",
+                                    on_click=lambda e: webbrowser.open(f"file:///{html_path}"),
+                                    style=ft.ButtonStyle(
+                                        color=ft.Colors.WHITE,
+                                        bgcolor=ft.Colors.TEAL_700,
+                                    )
+                                )
+                            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                            alignment=ft.alignment.center
+                        )
+                    ])
+                )
+            else:
+                # Mostrar error si el archivo no existe
+                page.add(
+                    ft.Column([
+                        ft.Row([
+                            ft.ElevatedButton(
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -1965,7 +2287,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -2022,7 +2344,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                     ft.Column([
                         ft.Row([
                             ft.ElevatedButton(
-                                "◀ Volver a OVAS",
+                                "◀ Volver a FASE I",
                                 on_click=lambda e: page.go("/ovas"),
                                 style=ft.ButtonStyle(
                                     color=ft.Colors.WHITE,
@@ -2070,11 +2392,238 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
         page.update()
 
 
+def mostrar_fase4(page: ft.Page) -> None:
+    page.clean()
+    page.title = "Fase IV - Síntesis e Integración - Selecciona un módulo"
+    page.theme_mode = ft.ThemeMode.LIGHT
+    page.bgcolor = "#f0f0f0"
+
+    button_style = ft.ButtonStyle(
+        color=ft.Colors.WHITE,
+        bgcolor=ft.Colors.BLUE_700,
+        text_style=ft.TextStyle(size=14, weight=ft.FontWeight.BOLD),
+        shape=ft.RoundedRectangleBorder(radius=6),
+        elevation=2,
+    )
+
+    def volver_estadistica(e):
+        page.go("/estadistica")
+
+    contenido = ft.Column(
+        [
+            ft.Text(
+                "Fase IV - Síntesis e Integración - Selecciona un módulo",
+                size=26,
+                weight=ft.FontWeight.BOLD,
+                color=ft.Colors.BLUE,
+                text_align=ft.TextAlign.CENTER,
+            ),
+            ft.Container(height=30),
+            ft.Column(
+                [
+                    ft.ElevatedButton(
+                        "OVA 20. Cierre y Proyección Profesional", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/20")
+                    ),
+                ],
+                spacing=12,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            ft.Container(height=40),
+            ft.ElevatedButton("◀ Volver", on_click=volver_estadistica, style=button_style),
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+    )
+
+    page.add(
+        ft.Container(
+            width=page.window_width,
+            height=page.window_height,
+            bgcolor="#f8f9fa",
+            content=contenido,
+            alignment=ft.alignment.center,
+        )
+    )
+    page.update()
+
+
+def mostrar_fase3(page: ft.Page) -> None:
+    page.clean()
+    page.title = "Fase III - Inferencia Estadística - Selecciona un módulo"
+    page.theme_mode = ft.ThemeMode.LIGHT
+    page.bgcolor = "#f0f0f0"
+
+    button_style = ft.ButtonStyle(
+        color=ft.Colors.WHITE,
+        bgcolor=ft.Colors.BLUE_700,
+        text_style=ft.TextStyle(size=14, weight=ft.FontWeight.BOLD),
+        shape=ft.RoundedRectangleBorder(radius=6),
+        elevation=2,
+    )
+
+    def volver_estadistica(e):
+        page.go("/estadistica")
+
+    contenido = ft.Column(
+        [
+            ft.Text(
+                "Fase III - Inferencia Estadística - Selecciona un módulo",
+                size=26,
+                weight=ft.FontWeight.BOLD,
+                color=ft.Colors.BLUE,
+                text_align=ft.TextAlign.CENTER,
+            ),
+            ft.Container(height=30),
+            ft.Column(
+                [
+                    ft.ElevatedButton(
+                        "OVA 16. Intervalos para Diferencias", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/16")
+                    ),
+                    ft.ElevatedButton(
+                        "OVA 17. Fundamentos de Pruebas de Hipótesis", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/17")
+                    ),
+                    ft.ElevatedButton(
+                        "OVA 18. Pruebas Específicas para Ciencias de la Salud", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/18")
+                    ),
+                    ft.ElevatedButton(
+                        "OVA 19. Aplicaciones Integradas", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/19")
+                    ),
+                ],
+                spacing=12,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            ft.Container(height=40),
+            ft.ElevatedButton("◀ Volver", on_click=volver_estadistica, style=button_style),
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+    )
+
+    page.add(
+        ft.Container(
+            width=page.window_width,
+            height=page.window_height,
+            bgcolor="#f8f9fa",
+            content=contenido,
+            alignment=ft.alignment.center,
+        )
+    )
+    page.update()
+
+
+def mostrar_fase2(page: ft.Page) -> None:
+    page.clean()
+    page.title = "Fase II - Probabilidad - Selecciona un módulo"
+    page.theme_mode = ft.ThemeMode.LIGHT
+    page.bgcolor = "#f0f0f0"
+
+    button_style = ft.ButtonStyle(
+        color=ft.Colors.WHITE,
+        bgcolor=ft.Colors.BLUE_700,
+        text_style=ft.TextStyle(size=14, weight=ft.FontWeight.BOLD),
+        shape=ft.RoundedRectangleBorder(radius=6),
+        elevation=2,
+    )
+
+    def volver_estadistica(e):
+        page.go("/estadistica")
+
+    contenido = ft.Column(
+        [
+            ft.Text(
+                "Fase II - Probabilidad - Selecciona un módulo",
+                size=26,
+                weight=ft.FontWeight.BOLD,
+                color=ft.Colors.BLUE,
+                text_align=ft.TextAlign.CENTER,
+            ),
+            ft.Container(height=30),
+            ft.Column(
+                [
+                    ft.ElevatedButton(
+                        "OVA 8. Teoría de Conjuntos y Probabilidad Básica", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/8")
+                    ),
+                    ft.ElevatedButton(
+                        "OVA 9. Probabilidad Condicional y Bayes", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/9")
+                    ),
+                    ft.ElevatedButton(
+                        "OVA 10. Integración y Evaluación Parcial II", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/10")
+                    ),
+                    ft.ElevatedButton(
+                        "OVA 11. Distribuciones Discretas en Medicina", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/11")
+                    ),
+                    ft.ElevatedButton(
+                        "OVA 12. Distribución Binomial y Poisson", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/12")
+                    ),
+                    ft.ElevatedButton(
+                        "OVA 13. Distribución Normal en Biomedicina", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/13")
+                    ),
+                    ft.ElevatedButton(
+                        "OVA 14. Integración y Evaluación Parcial III", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/14")
+                    ),
+                    ft.ElevatedButton(
+                        "OVA 15. Inferencia Estadística Básica", 
+                        style=button_style, 
+                        on_click=lambda e: page.go("/ova/15")
+                    ),
+                ],
+                spacing=12,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            ft.Container(height=40),
+            ft.ElevatedButton("◀ Volver", on_click=volver_estadistica, style=button_style),
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+    )
+
+    page.add(
+        ft.Container(
+            width=page.window_width,
+            height=page.window_height,
+            bgcolor="#f8f9fa",
+            content=contenido,
+            alignment=ft.alignment.center,
+        )
+    )
+    page.update()
+
+
 def route_change(page: ft.Page):
     if page.route == "/estadistica":
         mostrar_estadistica_descriptiva(page)
     elif page.route == "/ovas":
         mostrar_menu_ovas(page)
+    elif page.route == "/fase2":
+        mostrar_fase2(page)
+    elif page.route == "/fase3":
+        mostrar_fase3(page)
+    elif page.route == "/fase4":
+        mostrar_fase4(page)
     elif page.route.startswith("/ova/"):
         clave = page.route.split("/ova/")[-1]
         abrir_ova(page, clave)
@@ -2087,4 +2636,4 @@ def route_change(page: ft.Page):
 
 
 if __name__ == "__main__":
-    ft.app(target=app_main, view=ft.AppView.WEB_BROWSER, port=8080)
+    ft.app(target=app_main, view=ft.AppView.WEB_BROWSER, port=8082)

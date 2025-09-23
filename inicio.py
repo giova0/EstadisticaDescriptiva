@@ -66,7 +66,7 @@ def main(page: ft.Page):
                 width=page.window_width,
                 height=page.window_height,
                 alignment=ft.alignment.bottom_right,
-                padding=ft.padding.only(right=50, bottom=120),
+                padding=ft.padding.only(right=50, bottom=80),
                 content=ft.ElevatedButton(
                     "INGRESAR",
                     width=200,

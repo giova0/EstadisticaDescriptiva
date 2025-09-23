@@ -1,0 +1,260 @@
+/* Fuentes y Base Pixel Art */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    background: #1a1a2e;
+    color: #eee;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* Texto Pixelado */
+.pixel-text {
+    font-family: 'Press Start 2P', monospace;
+    text-shadow: 2px 2px 0px #000;
+    letter-spacing: 2px;
+}
+
+.pixel-title {
+    font-size: 18px;
+    color: #00ff41;
+    text-shadow: 2px 2px 0px #000;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.pixel-subtitle {
+    font-size: 10px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+/* Botones Pixelados */
+.pixel-btn {
+    background: linear-gradient(45deg, #0066cc, #004499);
+    border: 3px solid #fff;
+    color: #fff;
+    padding: 12px 20px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 4px 4px 0px #000;
+}
+
+.pixel-btn:hover {
+    background: linear-gradient(45deg, #0088ff, #0066cc);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000;
+}
+
+.pixel-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000;
+}
+
+.pixel-btn.primary {
+    background: linear-gradient(45deg, #00ff41, #00cc33);
+    border-color: #00ff41;
+}
+
+.pixel-btn.active {
+    background: linear-gradient(45deg, #ff4444, #cc3333);
+    border-color: #ff4444;
+}
+
+/* Separadores Pixelados */
+.pixel-separator {
+    width: 100%;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        #00ff41 0px,
+        #00ff41 8px,
+        #000 8px,
+        #000 16px
+    );
+    margin: 20px 0;
+}
+
+/* Efectos de Sombra y Bordes */
+.pixel-border {
+    border: 4px solid #fff;
+    border-style: dotted;
+    box-shadow: 
+        inset 0 0 0 4px #000,
+        4px 4px 0 #000;
+}
+
+.pixel-panel {
+    background: linear-gradient(135deg, #16213e, #0f1419);
+    border: 3px solid #00ff41;
+    padding: 20px;
+    position: relative;
+}
+
+.pixel-panel::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    background: #000;
+    z-index: -1;
+    border: 3px solid #00ff41;
+}
+
+/* Animaciones Pixeladas */
+@keyframes pixel-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+@keyframes pixel-glow {
+    0%, 100% { 
+        text-shadow: 2px 2px 0px #000, 0 0 10px #00ff41; 
+    }
+    50% { 
+        text-shadow: 2px 2px 0px #000, 0 0 20px #00ff41, 0 0 30px #00ff41; 
+    }
+}
+
+.pixel-blink {
+    animation: pixel-blink 1s infinite;
+}
+
+.pixel-glow {
+    animation: pixel-glow 2s ease-in-out infinite;
+}
+
+/* Grids Pixelados */
+.pixel-grid {
+    display: grid;
+    gap: 10px;
+    background-image: 
+        linear-gradient(#00ff41 1px, transparent 1px),
+        linear-gradient(90deg, #00ff41 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* Iconos Pixelados */
+.pixel-icon {
+    font-size: 24px;
+    text-shadow: 2px 2px 0px #000;
+    display: inline-block;
+    image-rendering: pixelated;
+}
+
+/* Efectos de Hover */
+.pixel-hover:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+    transition: all 0.2s ease;
+}
+
+/* Cajas de Contenido */
+.pixel-container {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 2px solid #00ff41;
+    padding: 15px;
+    margin: 10px 0;
+    position: relative;
+}
+
+.pixel-container::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 8px;
+    height: 8px;
+    background: #00ff41;
+    box-shadow: 0 0 10px #00ff41;
+}
+
+/* Inputs Pixelados */
+.pixel-input {
+    background: #000;
+    border: 2px solid #00ff41;
+    color: #00ff41;
+    padding: 10px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    width: 100%;
+}
+
+.pixel-input:focus {
+    outline: none;
+    box-shadow: 0 0 10px #00ff41;
+    background: #001a00;
+}
+
+/* Barras de Progreso */
+.pixel-progress {
+    width: 100%;
+    height: 20px;
+    background: #000;
+    border: 2px solid #00ff41;
+    position: relative;
+    overflow: hidden;
+}
+
+.pixel-progress-fill {
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        #00ff41 0px,
+        #00ff41 4px,
+        #00cc33 4px,
+        #00cc33 8px
+    );
+    transition: width 0.5s ease;
+}
+
+/* Efectos de Scanline */
+.scanlines::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1) 0px,
+        rgba(0, 0, 0, 0.1) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pixel-btn {
+        padding: 8px 12px;
+        font-size: 8px;
+    }
+    
+    .pixel-title {
+        font-size: 14px;
+    }
+    
+    .pixel-subtitle {
+        font-size: 8px;
+    }
+}
