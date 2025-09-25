@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Juego de rol: Médico en la UCI</title>
+<style>
+:root {
+  --bg: #AFEEEE; /* PaleTurquoise, a light aquamarine color */
+  --panel: #ffffff;
+  --green: #28a745; /* A calmer green */
+  --red: #dc3545; /* A standard red */
+  --cyan: #17a2b8; /* A calm cyan */
+  --orange: #fd7e14; /* A standard orange */
+  --text: #212529; /* Dark text for light background */
+  --light-text: #6c757d; /* Lighter text for secondary info */
+}
+body {
+  margin:0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A more modern, readable font */
+  background: var(--bg);
+  color: var(--text);
+}
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 20px;
+}
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+header h1 {
+  font-size: 28px; /* Larger for better hierarchy */
+  color: #005f5f; /* Darker aquamarine for titles */
+  text-shadow: none; /* Remove shadow for a cleaner look */
+}
+header p {
+  font-size: 16px; /* Larger for readability */
+  color: var(--light-text);
+}
+.monitor {
+  background: var(--panel);
+  border: 1px solid #dee2e6; /* Lighter border */
+  border-radius: 10px;
+  padding: 20px; /* More padding */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Softer shadow */
+  margin-bottom: 20px;
+}
+.monitor h2 {
+  color: var(--orange);
+  font-size: 20px; /* Larger */
+  margin: 0 0 15px 0;
+}
+.scenario {
+  background: #f8f9fa; /* Very light grey for contrast */
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 16px; /* Larger for readability */
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.option {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.option:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+.option.correct {
+  border-color: var(--green);
+  background: #d4edda; /* Light green for correct */
+  color: #155724; /* Dark green text */
+}
+.option.incorrect {
+  border-color: var(--red);
+  background: #f8d7da; /* Light red for incorrect */
+  color: #721c24; /* Dark red text */
+}
+.feedback {
+  margin-top: 15px;
+  font-size: 16px;
+  color: var(--light-text);
+}
+.controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+button {
+  background: var(--cyan);
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+button:hover {
+    background-color: #138496;
+}
+button:disabled {
+  background: #6c757d;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.vitals {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+.vitals div {
+  text-shadow: none;
+}
+.vitals .corrects { color: var(--green); }
+.vitals .wrongs { color: var(--red); }
+.vitals .reputation { color: var(--orange); }
+.final {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>👩‍⚕️ Juego de rol: Médico Residente en la UCI 👨‍⚕️</h1>
+    <p>Responde los informes clínicos para ganar reputación médica</p>
+  </header>
+
+  <div class="vitals">
+    <div class="corrects">✔ Correctas: <span id="corrects">0</span></div>
+    <div class="wrongs">✘ Incorrectas: <span id="wrongs">0</span></div>
+    <div class="reputation">🏥 Reputación: <span id="reputation">100</span></div>
+  </div>
+
+  <div class="monitor">
+    <h2 id="questionTitle">Informe clínico 1</h2>
+    <div class="scenario" id="scenarioText"></div>
+    <div class="options" id="optionsBox"></div>
+    <div class="feedback" id="feedback">Selecciona una opción para continuar...</div>
+    <div class="controls">
+      <button id="nextBtn" disabled>Siguiente caso</button>
+      <button id="restartBtn">Reiniciar</button>
+    </div>
+  </div>
+
+  <div class="final" id="finalBox"></div>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    scenario: "Paciente de 70 años en UCI con neumonía. El equipo desea estudiar la frecuencia de infecciones en todos los pacientes mayores de 65 años ingresados en la UCI este año. ¿Qué representa la <strong>población</strong>?",
+    options: [
+      { text:"Todos los pacientes del país", correct:false, explanation:"Muy amplio: no son solo la UCI." },
+      { text:"Todos los mayores de 65 en la UCI este año", correct:true, explanation:"Correcto: esa es la población objetivo." },
+      { text:"Las 50 historias clínicas revisadas", correct:false, explanation:"Eso sería una muestra." },
+      { text:"La presión arterial registrada", correct:false, explanation:"Eso es una variable." }
+    ]
+  },
+  {
+    scenario: "Se seleccionan 60 historias clínicas al azar de pacientes de marzo para estimar la media de días de ventilación mecánica. ¿Cuál es la <strong>muestra</strong>?",
+    options: [
+      { text:"Los 60 pacientes seleccionados de marzo", correct:true, explanation:"Correcto: la muestra es el subconjunto." },
+      { text:"Todos los pacientes de la UCI", correct:false, explanation:"Eso sería la población." },
+      { text:"La variable ventilación mecánica", correct:false, explanation:"Eso es una variable." },
+      { text:"Las enfermeras de marzo", correct:false, explanation:"No corresponde a la muestra." }
+    ]
+  },
+  {
+    scenario: "En un estudio se registran: edad, sexo, presión arterial y presencia de infección. ¿Qué son estos elementos?",
+    options: [
+      { text:"Variables cuantitativas y cualitativas", correct:true, explanation:"Correcto: son variables medidas en los pacientes." },
+      { text:"La población", correct:false, explanation:"No: la población es el conjunto de pacientes." },
+      { text:"Una muestra", correct:false, explanation:"No: no son un subconjunto." },
+      { text:"Un protocolo", correct:false, explanation:"El protocolo no es lo que se mide." }
+    ]
+  }
+];
+
+let current = 0;
+let corrects = 0;
+let wrongs = 0;
+let reputation = 100;
+
+const qTitle = document.getElementById('questionTitle');
+const scenarioText = document.getElementById('scenarioText');
+const optionsBox = document.getElementById('optionsBox');
+const feedback = document.getElementById('feedback');
+const nextBtn = document.getElementById('nextBtn');
+const restartBtn = document.getElementById('restartBtn');
+const correctsEl = document.getElementById('corrects');
+const wrongsEl = document.getElementById('wrongs');
+const repEl = document.getElementById('reputation');
+const finalBox = document.getElementById('finalBox');
+
+function renderQuestion(i){
+  const q = QUESTIONS[i];
+  qTitle.textContent = "Informe clínico " + (i+1);
+  scenarioText.innerHTML = q.scenario;
+  optionsBox.innerHTML = "";
+  feedback.textContent = "Selecciona una opción para continuar...";
+  nextBtn.disabled = true;
+
+  q.options.forEach((opt, idx)=>{
+    const div = document.createElement("div");
+    div.className = "option";
+    div.textContent = opt.text;
+    div.onclick = ()=> selectOption(opt, div);
+    optionsBox.appendChild(div);
+  });
+}
+
+function selectOption(opt, element){
+  const all = optionsBox.querySelectorAll(".option");
+  all.forEach(o => o.onclick = null); // bloquear
+  if(opt.correct){
+    element.classList.add("correct");
+    feedback.textContent = opt.explanation;
+    corrects++;
+    reputation += 5;
+  } else {
+    element.classList.add("incorrect");
+    feedback.textContent = opt.explanation;
+    wrongs++;
+    reputation -= 10;
+  }
+  correctsEl.textContent = corrects;
+  wrongsEl.textContent = wrongs;
+  repEl.textContent = reputation;
+  nextBtn.disabled = false;
+
+  // mostrar correctas
+  all.forEach((o,i)=>{
+    if(q.options[i].correct){ o.classList.add("correct"); }
+  });
+}
+
+nextBtn.onclick = ()=>{
+  current++;
+  if(current < QUESTIONS.length){
+    renderQuestion(current);
+  } else {
+    showFinal();
+  }
+};
+
+restartBtn.onclick = ()=>{
+  current = 0; corrects=0; wrongs=0; reputation=100;
+  correctsEl.textContent=0; wrongsEl.textContent=0; repEl.textContent=100;
+  finalBox.textContent="";
+  renderQuestion(0);
+};
+
+function showFinal(){
+  let total = QUESTIONS.length;
+  let perc = Math.round((corrects/total)*100);
+  if(perc >= 60){
+    finalBox.innerHTML = `<div style="color:var(--green)">¡Excelente doctor/a! Tu equipo confía en ti. Puntaje ${perc}% (${corrects}/${total}).</div>`;
+  } else {
+    finalBox.innerHTML = `<div style="color:var(--red)">Necesitas más práctica, doctor/a. ¡Tú puedes! Puntaje ${perc}% (${corrects}/${total}).</div>`;
+  }
+}
+
+renderQuestion(0);
+</script>
+</body>
+</html>

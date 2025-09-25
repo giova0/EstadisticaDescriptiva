@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Juego educativo: Población, Muestra y Variables (UCI)</title>
+<style>
+  :root{
+    --bg:#0f1724;
+    --card:#0b1220;
+    --accent:#0ea5a1; /* teal */
+    --accent2:#f97316; /* orange */
+    --muted:#94a3b8;
+    --line:#1f2937;
+    --success:#16a34a;
+    --danger:#ef4444;
+  }
+  *{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, "Helvetica Neue", Arial;}
+  body{
+    margin:0;
+    background:linear-gradient(180deg,#071228 0%, #0b1b2a 100%);
+    color:#e6eef6;
+    padding:28px;
+  }
+
+  .container{
+    max-width:960px;
+    margin:0 auto;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:12px;
+    padding:20px;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+    border:1px solid rgba(255,255,255,0.03);
+  }
+
+  header{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:14px;
+  }
+  header .logo{
+    width:64px;height:64px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#0284c7);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;
+  }
+  header h1{margin:0;font-size:20px}
+  header p{margin:0;color:var(--muted);font-size:13px}
+
+  /* Instruction box with lines */
+  .instructions{
+    border:1px dashed var(--line);
+    padding:14px;
+    border-radius:10px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));
+    margin-bottom:18px;
+    position:relative;
+  }
+  .instructions:before{
+    content:"";
+    position:absolute;left:0;top:0;height:100%;width:6px;background:linear-gradient(180deg,var(--accent),var(--accent2));
+    border-radius:8px 0 0 8px;
+  }
+  .instructions h2{margin:0 0 8px 0;font-size:16px}
+  .instructions ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px}
+  .instructions li{margin:6px 0}
+
+  /* Game area */
+  .game{
+    display:grid;
+    grid-template-columns: 1fr 320px;
+    gap:18px;
+  }
+  @media (max-width:900px){ .game{grid-template-columns:1fr;} }
+
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    border-radius:10px;padding:16px;border:1px solid rgba(255,255,255,0.03);
+  }
+
+  .question-area{min-height:220px; display:flex; flex-direction:column; justify-content:space-between;}
+  .q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .q-title{font-size:15px;margin:0}
+  .progress{font-size:13px;color:var(--muted)}
+  .scenario{background:linear-gradient(90deg, rgba(14,165,161,0.06), rgba(249,115,22,0.03));padding:10px;border-radius:8px;border-left:4px solid rgba(255,255,255,0.03);color:#dff7f6;margin-bottom:10px;font-size:14px}
+  .options{display:flex;flex-direction:column;gap:8px}
+  .option{
+    padding:10px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));
+    border:1px solid rgba(255,255,255,0.03);
+    cursor:pointer;transition:all .15s;display:flex;gap:10px;align-items:center;
+  }
+  .option:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(2,6,23,0.6)}
+  .option[data-selected="true"]{outline:3px solid rgba(14,165,161,0.12)}
+  .option.correct{border-color:rgba(22,163,74,0.8);background:linear-gradient(90deg, rgba(16,185,129,0.06), rgba(16,185,129,0.02));}
+  .option.incorrect{border-color:rgba(239,68,68,0.85);background:linear-gradient(90deg, rgba(239,68,68,0.04), rgba(239,68,68,0.01));opacity:0.95}
+
+  .controls{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  button{background:var(--accent);color:#052025;border:0;padding:10px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+  button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+  button.warn{background:var(--accent2);color:#fff}
+  button:disabled{opacity:0.5;cursor:not-allowed}
+
+  /* Side panel */
+  .side{
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .counters{display:flex;gap:10px;justify-content:space-between}
+  .counter{
+    flex:1;padding:12px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));
+    border:1px solid rgba(255,255,255,0.03);
+    display:flex;flex-direction:column;align-items:flex-start;gap:6px;
+  }
+  .counter .num{font-size:22px;font-weight:700}
+  .explanation{font-size:13px;color:var(--muted);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+  .final{padding:12px;border-radius:8px;text-align:center;font-size:16px}
+
+  .legend{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:13px}
+  .dot{width:10px;height:10px;border-radius:50%}
+  .dot.good{background:var(--success)}
+  .dot.bad{background:var(--danger)}
+  footer{margin-top:14px;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+  <div class="container" role="application" aria-label="Juego Población Muestra Variables - UCI">
+    <header>
+      <div class="logo" aria-hidden="true">UCI</div>
+      <div>
+        <h1>Juego: Población, Muestra y Variables — Unidad de Cuidados Intensivos</h1>
+        <p>Escenarios clínicos para entender conceptos estadísticos en contexto hospitalario.</p>
+      </div>
+    </header>
+
+    <div class="instructions" aria-live="polite">
+      <h2>Instrucciones</h2>
+      <ul>
+        <li>Lee cada escenario (situación en la UCI) y selecciona la opción que responda correctamente sobre <strong>población</strong>, <strong>muestra</strong> o <strong>variable</strong>.</li>
+        <li>Después de elegir una opción, recibirás retroalimentación y la pregunta quedará bloqueada.</li>
+        <li>Observa los contadores de respuestas correctas e incorrectas. Al terminar, recibirás un mensaje con tu puntaje.</li>
+        <li>Para usar en Google Sites: pega este HTML en un bloque de código o usa un iframe (instrucciones al final).</li>
+      </ul>
+    </div>
+
+    <div class="game">
+      <div class="card question-card">
+        <div class="question-area">
+          <div>
+            <div class="q-header">
+              <div>
+                <p class="q-title" id="qTitle">Pregunta</p>
+                <div class="progress" id="progressTxt">Pregunta 1 / 10</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:12px;color:var(--muted)">Tiempo sugerido por pregunta</div>
+                <div style="font-weight:700;font-size:16px">60 seg *</div>
+              </div>
+            </div>
+
+            <div class="scenario" id="scenarioText" tabindex="0">
+              <!-- escenario -->
+            </div>
+
+            <div class="options" id="optionsBox" role="list">
+              <!-- opciones -->
+            </div>
+          </div>
+
+          <div>
+            <div class="controls">
+              <button id="nextBtn" class="secondary" disabled>Siguiente</button>
+              <button id="reviewBtn" class="secondary">Revisar respuestas</button>
+              <button id="restartBtn" class="warn">Reiniciar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side">
+        <div class="card counters" aria-hidden="false">
+          <div class="counter" title="Respuestas correctas">
+            <div style="color:var(--muted);font-size:13px">Correctas</div>
+            <div class="num" id="correctCount">0</div>
+          </div>
+          <div class="counter" title="Respuestas incorrectas">
+            <div style="color:var(--muted);font-size:13px">Incorrectas</div>
+            <div class="num" id="incorrectCount">0</div>
+          </div>
+        </div>
+
+        <div class="card explanation" id="explanationBox" aria-live="polite">
+          <strong>Explicación</strong>
+          <p id="explanationText" style="margin-top:8px;color:var(--muted);font-size:14px">Selecciona una opción para ver la explicación relacionada con población, muestra o variable.</p>
+        </div>
+
+        <div class="card final" id="finalBox" style="background:linear-gradient(180deg, rgba(255,255,255,0.005), rgba(255,255,255,0.0));">
+          <div id="finalMessage">Avanza por las preguntas para ver tu resultado final.</div>
+        </div>
+
+        <div class="card" style="padding:10px">
+          <div class="legend">
+            <div class="dot good" aria-hidden="true"></div><div style="color:var(--muted)">Correcto</div>
+            <div style="width:8px"></div>
+            <div class="dot bad" aria-hidden="true"></div><div style="color:var(--muted)">Incorrecto</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      *El temporizador es solo referencia pedagógica; el juego no bloquea por tiempo.
+    </footer>
+  </div>
+
+<script>
+/* ====== Datos de las preguntas ======
+   Cada ítem tiene:
+    - scenario: texto principal contextual (UCI)
+    - options: array de {text, type: "poblacion"|"muestra"|"variable", correct: true/false, explanation}
+*/
+const QUESTIONS = [
+  {
+    scenario: "En la UCI del Hospital Universitario se desea estudiar la frecuencia de infección nosocomial en pacientes mayores de 65 años durante 2024. ¿Cuál sería la <strong>población</strong> del estudio?",
+    options: [
+      {text: "Todos los pacientes hospitalizados en el país en 2024", type:"poblacion", correct:false, explanation:"Demasiado amplio: incluye pacientes fuera de la UCI y fuera del hospital universitario."},
+      {text: "Todos los pacientes mayores de 65 años atendidos en la UCI del Hospital Universitario durante 2024", type:"poblacion", correct:true, explanation:"Correcto: describe el conjunto completo al que se refiere el estudio (UCI, mayores de 65, 2024)."},
+      {text: "Las 50 historias clínicas seleccionadas al azar de 2024", type:"muestra", correct:false, explanation:"Esto sería una muestra, no la población completa."},
+      {text: "La variable 'tiempo de estancia en UCI' de 20 pacientes", type:"variable", correct:false, explanation:"Esto describe una variable en particular, no la población."}
+    ]
+  },
+  {
+    scenario: "Se extraen aleatoriamente 60 historias clínicas de pacientes ingresados en la UCI durante marzo para estimar la media de días de ventilación mecánica. ¿Qué describe mejor la <strong>muestra</strong>?",
+    options: [
+      {text: "Los 60 pacientes seleccionados aleatoriamente de marzo", type:"muestra", correct:true, explanation:"Correcto: la muestra es el subconjunto seleccionado para el estudio."},
+      {text: "Todos los pacientes con ventilador en 2023", type:"poblacion", correct:false, explanation:"Eso sería una población de otro periodo."},
+      {text: "La variable 'duración de ventilación' medida", type:"variable", correct:false, explanation:"Es una variable cuantitativa, no la muestra."},
+      {text: "60 enfermeras que trabajaron en marzo", type:"muestra", correct:false, explanation:"No corresponde al objeto de estudio (pacientes), por tanto no es la muestra correcta."}
+    ]
+  },
+  {
+    scenario: "En un protocolo se registra: edad, sexo, presión arterial, y presencia/ausencia de infección. ¿Cuál(es) son <strong>variables</strong>?",
+    options: [
+      {text: "Edad y presión arterial (cuantitativas); sexo y presencia de infección (categóricas)", type:"variable", correct:true, explanation:"Correcto: edad y presión son variables cuantitativas; sexo y presencia/ausencia son variables categóricas."},
+      {text: "Solo la edad es variable", type:"variable", correct:false, explanation:"Incorrecto: hay varias variables medidas."},
+      {text: "El protocolo es la variable", type:"poblacion", correct:false, explanation:"El protocolo no es una variable; es el instrumento o plan del estudio."},
+      {text: "La UCI es la variable", type:"poblacion", correct:false, explanation:"La UCI es un lugar/contexto, no una variable medida."}
+    ]
+  },
+  {
+    scenario: "Investigación: 'Proporción de pacientes con bacteriemia en la UCI en un mes' — ¿qué tipo de variable es la 'presencia de bacteriemia'?",
+    options: [
+      {text: "Variable categórica dicotómica (sí/no)", type:"variable", correct:true, explanation:"Correcto: es categórica con dos categorías (presencia o ausencia)."},
+      {text: "Variable de intervalo", type:"variable", correct:false, explanation:"Incorrecto: no mide una magnitud con orden numérico continuo."},
+      {text: "Población", type:"poblacion", correct:false, explanation:"No: es una variable, no la población."},
+      {text: "Muestra", type:"muestra", correct:false, explanation:"No: es una variable; la muestra sería un subconjunto de pacientes."}
+    ]
+  },
+  {
+    scenario: "Se toma una muestra de 30 pacientes para estimar la media de glucemia al ingreso en UCI. Si quisieras que la muestra sea representativa, ¿qué deberías considerar?",
+    options: [
+      {text: "Seleccionar pacientes al azar y asegurar tamaño suficiente", type:"muestra", correct:true, explanation:"Correcto: muestreo aleatorio y tamaño adecuado ayudan a la representatividad."},
+      {text: "Seleccionar solo los pacientes con estancia larga", type:"muestra", correct:false, explanation:"Sería sesgante y no representativo."},
+      {text: "Usar solo variables categóricas", type:"variable", correct:false, explanation:"No tiene relación directa con representatividad de la muestra."},
+      {text: "Cambiar la población objetivo", type:"poblacion", correct:false, explanation:"Modificar la población no garantiza representatividad de la muestra actual."}
+    ]
+  },
+  {
+    scenario: "En un estudio se reporta: 'Media de días en UCI = 12, desviación estándar = 4' — ¿a qué tipo de variable pertenecen 'días en UCI'?",
+    options: [
+      {text: "Variable cuantitativa continua (o discreta según medición) relacionada con tiempo", type:"variable", correct:true, explanation:"Correcto: es una variable cuantitativa que mide tiempo (días)."},
+      {text: "Variable categórica ordinal", type:"variable", correct:false, explanation:"No: los días son numéricos, no categorías ordenadas."},
+      {text: "Muestra", type:"muestra", correct:false, explanation:"No: esto describe una variable cuantitativa."},
+      {text: "Población", type:"poblacion", correct:false, explanation:"No: no es la población."}
+    ]
+  },
+  {
+    scenario: "Quieres conocer la prevalencia de hipertensión en pacientes de la UCI neonatal en 2024. ¿Cuál sería la población correcta?",
+    options: [
+      {text: "Todos los recién nacidos atendidos en la UCI neonatal del Hospital Universitario en 2024", type:"poblacion", correct:true, explanation:"Correcto: la población son todos los recién nacidos en esa unidad y periodo."},
+      {text: "100 recién nacidos elegidos por conveniencia", type:"muestra',", correct:false, explanation:"Esto sería una muestra; además 'conveniencia' puede introducir sesgo."},
+      {text: "La variable 'presión arterial' en adultos", type:"variable", correct:false, explanation:"No corresponde al objeto del estudio neonatal."},
+      {text: "Todos los pacientes adultos con hipertensión", type:"poblacion", correct:false, explanation:"No: no son recién nacidos ni de la UCI neonatal."}
+    ]
+  },
+  {
+    scenario: "Se mide 'número de episodios de hipotensión durante la estancia' — ¿qué tipo de variable es?",
+    options: [
+      {text: "Variable cuantitativa discreta (conteo)", type:"variable", correct:true, explanation:"Correcto: es un conteo (0,1,2...) y por tanto discreta."},
+      {text: "Variable continua", type:"variable", correct:false, explanation:"No: los conteos son discretos."},
+      {text: "Muestra", type:"muestra", correct:false, explanation:"No: es una variable medida."},
+      {text: "Población", type:"poblacion", correct:false, explanation:"No: es una variable definida por episodios."}
+    ]
+  },
+  {
+    scenario: "Quieres estimar la proporción de profesionales de enfermería que aplicaron un protocolo nuevo en la UCI el mes pasado. Si la población son 120 enfermeras, ¿qué sería una muestra adecuada?",
+    options: [
+      {text: "Seleccionar aleatoriamente 40 enfermeras de las 120", type:"muestra", correct:true, explanation:"Correcto: un subconjunto aleatorio de la población es una muestra adecuada."},
+      {text: "Encuestar solo a 20 enfermeras del turno nocturno", type:"muestra", correct:false, explanation:"Sería sesgado si el turno nocturno no es representativo."},
+      {text: "La proporción que cumple el protocolo", type:"variable", correct:false, explanation:"Eso es la medida (variable), no la muestra."},
+      {text: "Todas las enfermeras del país", type:"poblacion", correct:false, explanation:"No: muy amplio y no corresponde a la población objetivo."}
+    ]
+  },
+  {
+    scenario: "En un estudio piloto se toma una 'muestra' pequeña para verificar procedimientos de recolección antes de aplicar el estudio completo. ¿Cuál es la finalidad del piloto?",
+    options: [
+      {text: "Evaluar y ajustar métodos de recolección y detección de variables antes del estudio mayor", type:"muestra", correct:true, explanation:"Correcto: un piloto prueba el método y detecta fallas."},
+      {text: "Definir la población final del estudio", type:"poblacion',", correct:false, explanation:"No: la población suele definirse por los objetivos; el piloto prueba procedimientos."},
+      {text: "Cambiar las variables principales", type:"variable", correct:false, explanation:"Se pueden ajustar variables, pero la finalidad principal es probar procedimientos."},
+      {text: "Aumentar el sesgo del estudio", type:"muestra", correct:false, explanation:"No: el objetivo no es aumentar sesgo."}
+    ]
+  }
+];
+
+/* ====== Lógica del juego ====== */
+let currentIndex = 0;
+let correct = 0;
+let incorrect = 0;
+let answered = Array(QUESTIONS.length).fill(false);
+
+const qTitle = document.getElementById('qTitle');
+const progressTxt = document.getElementById('progressTxt');
+const scenarioText = document.getElementById('scenarioText');
+const optionsBox = document.getElementById('optionsBox');
+const nextBtn = document.getElementById('nextBtn');
+const reviewBtn = document.getElementById('reviewBtn');
+const restartBtn = document.getElementById('restartBtn');
+const correctCount = document.getElementById('correctCount');
+const incorrectCount = document.getElementById('incorrectCount');
+const explanationText = document.getElementById('explanationText');
+const finalBox = document.getElementById('finalBox');
+const finalMessage = document.getElementById('finalMessage');
+
+function safeHTML(s){ return s.replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+
+function renderQuestion(i){
+  currentIndex = i;
+  const item = QUESTIONS[i];
+  qTitle.innerHTML = `Pregunta ${i+1}`;
+  progressTxt.textContent = `Pregunta ${i+1} / ${QUESTIONS.length}`;
+  scenarioText.innerHTML = item.scenario;
+  optionsBox.innerHTML = '';
+  explanationText.innerHTML = 'Selecciona una opción para ver la explicación relacionada con población, muestra o variable.';
+
+  item.options.forEach((opt, idx) => {
+    const div = document.createElement('div');
+    div.className = 'option';
+    div.setAttribute('role','button');
+    div.setAttribute('tabindex','0');
+    div.dataset.idx = idx;
+    div.innerHTML = `<strong style="min-width:18px;display:inline-block">${String.fromCharCode(65+idx)}.</strong> <div style="flex:1">${opt.text}</div>`;
+    optionsBox.appendChild(div);
+
+    // If already answered, show state
+    if(answered[i]){
+      const chosen = QUESTIONS[i]._chosen;
+      div.dataset.selected = (QUESTIONS[i]._chosenIndex == idx);
+      if(opt.correct) div.classList.add('correct');
+      if(QUESTIONS[i]._chosenIndex == idx && !opt.correct) div.classList.add('incorrect');
+      div.style.pointerEvents='none';
+    } else {
+      div.addEventListener('click', ()=> handleSelect(i, idx, div));
+      div.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') handleSelect(i, idx, div); });
+    }
+  });
+
+  // Next button state
+  nextBtn.disabled = !answered[i];
+}
+
+function handleSelect(qIndex, optIndex, divElement){
+  if(answered[qIndex]) return;
+  const opt = QUESTIONS[qIndex].options[optIndex];
+  // mark chosen
+  QUESTIONS[qIndex]._chosen = opt;
+  QUESTIONS[qIndex]._chosenIndex = optIndex;
+  answered[qIndex] = true;
+
+  // Apply visuals
+  const children = optionsBox.querySelectorAll('.option');
+  children.forEach((c, idx)=>{
+    c.style.pointerEvents='none';
+    const o = QUESTIONS[qIndex].options[idx];
+    if(o.correct){ c.classList.add('correct'); }
+    if(idx === optIndex && !o.correct){ c.classList.add('incorrect'); }
+  });
+
+  // Update counters
+  if(opt.correct){
+    correct++;
+    correctCount.textContent = correct;
+  } else {
+    incorrect++;
+    incorrectCount.textContent = incorrect;
+  }
+
+  // Show explanation
+  explanationText.innerHTML = opt.explanation || 'Explicación no disponible.';
+  // enable next
+  nextBtn.disabled = false;
+
+  // If last question answered, show final summary
+  if(answered.every(Boolean)){
+    showFinal();
+  }
+}
+
+nextBtn.addEventListener('click', ()=>{
+  const next = Math.min(currentIndex+1, QUESTIONS.length-1);
+  // find next unanswered if exists
+  let found = -1;
+  for(let i=currentIndex+1;i<QUESTIONS.length;i++){
+    if(!answered[i]){ found=i; break; }
+  }
+  if(found === -1){
+    // either next sequential or wrap to first
+    renderQuestion(next);
+  } else {
+    renderQuestion(found);
+  }
+});
+
+reviewBtn.addEventListener('click', ()=>{
+  // Review: show a list of questions with chosen vs correct
+  let html = '<div style="text-align:left;color:var(--muted)">';
+  QUESTIONS.forEach((q, idx)=>{
+    const chosenIndex = q._chosenIndex;
+    const chosenText = (typeof chosenIndex === 'number') ? q.options[chosenIndex].text : '<em>No respondida</em>';
+    const correctOpt = q.options.find(o=>o.correct);
+    html += `<p style="margin:8px 0"><strong>P${idx+1}:</strong> ${stripTags(q.scenario).slice(0,100)}...<br>
+      <strong>Tu respuesta:</strong> ${stripTags(chosenText)}<br>
+      <strong>Correcta:</strong> ${stripTags(correctOpt.text)}</p>`;
+  });
+  html += '</div>';
+  finalMessage.innerHTML = html;
+});
+
+restartBtn.addEventListener('click', ()=>{
+  if(!confirm('¿Deseas reiniciar el juego desde el principio?')) return;
+  currentIndex = 0; correct = 0; incorrect = 0;
+  answered = Array(QUESTIONS.length).fill(false);
+  QUESTIONS.forEach(q=>{ delete q._chosen; delete q._chosenIndex; });
+  correctCount.textContent = '0';
+  incorrectCount.textContent = '0';
+  finalMessage.textContent = 'Avanza por las preguntas para ver tu resultado final.';
+  renderQuestion(0);
+});
+
+/* Final summary */
+function showFinal(){
+  const total = QUESTIONS.length;
+  const perc = Math.round((correct/total)*100);
+  let msg = '';
+  if(perc >= 60){
+    msg = `<div style="color:var(--success);font-weight:800">¡Muy bien! Tu puntaje es ${perc}% (${correct}/${total})</div>`;
+  } else {
+    msg = `<div style="color:var(--danger);font-weight:800">¡Inténtalo nuevamente, tú puedes! Puntaje ${perc}% (${correct}/${total})</div>`;
+  }
+  // also provide short guidance
+  msg += `<div style="margin-top:8px;color:var(--muted);font-size:13px">Resumen: Población = conjunto completo objetivo; Muestra = subconjunto seleccionado; Variable = característica medida (p. ej. edad, presión arterial, presencia de infección).</div>`;
+  finalMessage.innerHTML = msg;
+}
+
+/* Utility to strip tags for review panel */
+function stripTags(s){ return s.replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim(); }
+
+/* Shuffle questions order for variability (optional - stable for now).
+   If you want to randomize, uncomment the shuffle line below.
+*/
+function shuffleArray(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+}
+// shuffleArray(QUESTIONS);
+
+/* Init */
+renderQuestion(0);
+
+</script>
+</body>
+</html>

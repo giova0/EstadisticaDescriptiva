@@ -35,8 +35,8 @@ def mostrar_inicio(page: ft.Page) -> None:
             ft.Container(height=30),
             ft.Column(
                 [
-                    ft.ElevatedButton("FASES", style=button_style, on_click=lambda e: page.go("/fases")),
-                    ft.ElevatedButton("OVAs", style=button_style, on_click=lambda e: page.go("/ovas_principal")),
+                    ft.ElevatedButton("FASES DEL CURSO DE BIOESTADÍSTICA", style=button_style, on_click=lambda e: page.go("/fases")),
+                    ft.ElevatedButton("AMBIENTES VIRTUALES", style=button_style, on_click=lambda e: page.go("/ovas_principal")),
                 ],
                 spacing=12,
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -367,7 +367,7 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
             import webbrowser
             import os
             
-            html_path = str(base_dir / "ova2_poblacion_muestra_variables.html")
+            html_path = str(base_dir / "Población_muestra2.html")
             
             # Verificar que el archivo existe
             if os.path.exists(html_path):
@@ -2387,6 +2387,117 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
         page.add(ft.Text(f"Error al cargar la OVA: {err}", color=ft.Colors.RED))
         page.update()
 
+def abrir_juego(page: ft.Page, clave: str) -> None:
+    page.clean()
+    try:
+        base_dir = Path(__file__).resolve().parent
+
+        if clave == "1":
+            import webbrowser
+            import os
+            
+            html_path = str(base_dir / "Muestras1.html")
+            
+            if os.path.exists(html_path):
+                webbrowser.open(f"file:///{html_path}")
+                
+                page.add(
+                    ft.Column([
+                        ft.Row([
+                            ft.ElevatedButton(
+                                "◀ Volver a Juegos",
+                                on_click=lambda e: page.go("/clasificacion_variables"),
+                                style=ft.ButtonStyle(
+                                    color=ft.Colors.WHITE,
+                                    bgcolor=ft.Colors.GREY_700,
+                                )
+                            )
+                        ], alignment=ft.MainAxisAlignment.START),
+                        ft.Container(height=50),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Icon(
+                                    ft.Icons.OPEN_IN_BROWSER,
+                                    size=80,
+                                    color=ft.Colors.BLUE
+                                ),
+                                ft.Text(
+                                    "Juego 1: Triage de Variables",
+                                    size=24,
+                                    weight=ft.FontWeight.BOLD,
+                                    color=ft.Colors.BLUE,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=20),
+                                ft.Text(
+                                    "El juego se ha abierto en tu navegador predeterminado.",
+                                    size=16,
+                                    color=ft.Colors.GREY_700,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=30),
+                                ft.ElevatedButton(
+                                    "🔄 Abrir nuevamente",
+                                    on_click=lambda e: webbrowser.open(f"file:///{html_path}"),
+                                    style=ft.ButtonStyle(
+                                        color=ft.Colors.WHITE,
+                                        bgcolor=ft.Colors.BLUE_700,
+                                    )
+                                )
+                            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                            alignment=ft.alignment.center
+                        )
+                    ])
+                )
+            else:
+                # Mostrar error si el archivo no existe
+                page.add(
+                    ft.Column([
+                        ft.Row([
+                            ft.ElevatedButton(
+                                "◀ Volver a Juegos",
+                                on_click=lambda e: page.go("/clasificacion_variables"),
+                                style=ft.ButtonStyle(
+                                    color=ft.Colors.WHITE,
+                                    bgcolor=ft.Colors.GREY_700,
+                                )
+                            )
+                        ], alignment=ft.MainAxisAlignment.START),
+                        ft.Container(height=50),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Icon(
+                                    ft.Icons.ERROR,
+                                    size=80,
+                                    color=ft.Colors.RED
+                                ),
+                                ft.Text(
+                                    "Error: Archivo no encontrado",
+                                    size=24,
+                                    weight=ft.FontWeight.BOLD,
+                                    color=ft.Colors.RED,
+                                    text_align=ft.TextAlign.CENTER
+                                ),
+                                ft.Container(height=20),
+                                ft.Text(
+                                    f"No se pudo encontrar el archivo: {html_path}",
+                                    size=14,
+                                    color=ft.Colors.GREY_600,
+                                    text_align=ft.TextAlign.CENTER
+                                )
+                            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                            alignment=ft.alignment.center
+                        )
+                    ])
+                )
+            
+            page.update()
+            return
+        
+    except Exception as err:
+        traceback.print_exc()
+        page.add(ft.Text(f"Error al cargar el juego: {err}", color=ft.Colors.RED))
+        page.update()
 
 def mostrar_fases(page: ft.Page) -> None:
     page.clean()
@@ -2471,7 +2582,8 @@ def mostrar_ovas_principal(page: ft.Page) -> None:
             ft.Column(
                 [
                     ft.ElevatedButton("Historia", style=button_style, on_click=None),
-                    ft.ElevatedButton("Hospital", style=button_style, on_click=lambda e: page.go("/hospital")),
+                    ft.ElevatedButton("Administración del Hospital", style=button_style, on_click=lambda e: page.go("/hospital")),
+                    ft.ElevatedButton("Farmacia", style=button_style, on_click=None),
                 ],
                 spacing=12,
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -2593,8 +2705,8 @@ def mostrar_unidades_especializadas(page: ft.Page) -> None:
         ),
         ft.Column(
             [
-                ft.ElevatedButton("Población, Muestra y Variables", style=button_style, on_click=None),
-                ft.ElevatedButton("Clasificación de Variables", style=button_style, on_click=None),
+                ft.ElevatedButton("Población, Muestra y Variables", style=button_style, on_click=lambda e: page.go("/ova/2")),
+                ft.ElevatedButton("Clasificación de Variables", style=button_style, on_click=lambda e: page.go("/clasificacion_variables")),
                 ft.ElevatedButton("◀ Volver", on_click=volver_pizarra, style=button_style),
             ],
             alignment=ft.MainAxisAlignment.CENTER,
@@ -2603,6 +2715,58 @@ def mostrar_unidades_especializadas(page: ft.Page) -> None:
     ])
 
     page.add(contenido)
+    page.update()
+
+def mostrar_clasificacion_variables_juegos(page: ft.Page) -> None:
+    page.clean()
+    page.title = "Clasificación de Variables - Juegos"
+    page.theme_mode = ft.ThemeMode.LIGHT
+    page.bgcolor = "#f0f0f0"
+
+    button_style = ft.ButtonStyle(
+        color=ft.Colors.WHITE,
+        bgcolor=ft.Colors.BLUE_700,
+        text_style=ft.TextStyle(size=14, weight=ft.FontWeight.BOLD),
+        shape=ft.RoundedRectangleBorder(radius=6),
+        elevation=2,
+    )
+
+    def volver_unidades(e):
+        page.go("/unidades_especializadas")
+
+    contenido = ft.Column(
+        [
+            ft.Text(
+                "Juegos de Clasificación de Variables",
+                size=26,
+                weight=ft.FontWeight.BOLD,
+                color=ft.Colors.BLUE,
+                text_align=ft.TextAlign.CENTER,
+            ),
+            ft.Container(height=30),
+            ft.Column(
+                [
+                    ft.ElevatedButton("Juego 1", style=button_style, on_click=lambda e: page.go("/juego/1")),
+                    ft.ElevatedButton("Juego 2", style=button_style, on_click=None),
+                    ft.ElevatedButton("Juego 3", style=button_style, on_click=None),
+                ],
+                spacing=12,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            ft.Container(height=40),
+            ft.ElevatedButton("◀ Volver", on_click=volver_unidades, style=button_style),
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+    )
+
+    page.add(
+        ft.Container(
+            bgcolor="#f8f9fa",
+            content=contenido,
+            alignment=ft.alignment.center,
+        )
+    )
     page.update()
 
 def mostrar_investigacion(page: ft.Page) -> None:
@@ -2876,6 +3040,8 @@ def route_change(page: ft.Page):
         mostrar_unidades_especializadas(page)
     elif page.route == "/investigacion":
         mostrar_investigacion(page)
+    elif page.route == "/clasificacion_variables":
+        mostrar_clasificacion_variables_juegos(page)
     elif page.route == "/ovas":
         mostrar_menu_ovas(page)
     elif page.route == "/fase2":
@@ -2887,6 +3053,9 @@ def route_change(page: ft.Page):
     elif page.route.startswith("/ova/"):
         clave = page.route.split("/ova/")[-1]
         abrir_ova(page, clave)
+    elif page.route.startswith("/juego/"):
+        clave = page.route.split("/juego/")[-1]
+        abrir_juego(page, clave)
     else:
         # Ruta por defecto: cargar la pantalla de inicio desde inicio.py
         page.clean()
