@@ -2581,8 +2581,8 @@ def mostrar_ovas_principal(page: ft.Page) -> None:
             ft.Container(height=30),
             ft.Column(
                 [
-                    ft.ElevatedButton("Historia", style=button_style, on_click=None),
-                    ft.ElevatedButton("Administración del Hospital", style=button_style, on_click=lambda e: page.go("/hospital")),
+                    ft.ElevatedButton("Hospital", style=button_style, on_click=lambda e: page.go("/hospital")),
+                    
                     ft.ElevatedButton("Farmacia", style=button_style, on_click=None),
                 ],
                 spacing=12,
@@ -2667,6 +2667,14 @@ def mostrar_pizarra(page: ft.Page) -> None:
         ),
         ft.Column(
             [
+                ft.Text(
+                    "Recepción / admisiones",
+                    size=26,
+                    weight=ft.FontWeight.BOLD,
+                    color=ft.Colors.BLUE,
+                    text_align=ft.TextAlign.CENTER,
+                ),
+                ft.Container(height=30),
                 ft.ElevatedButton("Unidades especializadas", style=button_style, on_click=lambda e: page.go("/unidades_especializadas")),
                 ft.ElevatedButton("Investigación", style=button_style, on_click=lambda e: page.go("/investigacion")),
                 ft.ElevatedButton("◀ Volver", on_click=volver_hospital, style=button_style),
@@ -2705,6 +2713,14 @@ def mostrar_unidades_especializadas(page: ft.Page) -> None:
         ),
         ft.Column(
             [
+                ft.Text(
+                    "Salas de hospitalización",
+                    size=26,
+                    weight=ft.FontWeight.BOLD,
+                    color=ft.Colors.BLUE,
+                    text_align=ft.TextAlign.CENTER,
+                ),
+                ft.Container(height=30),
                 ft.ElevatedButton("Población, Muestra y Variables", style=button_style, on_click=lambda e: page.go("/ova/2")),
                 ft.ElevatedButton("Clasificación de Variables", style=button_style, on_click=lambda e: page.go("/clasificacion_variables")),
                 ft.ElevatedButton("◀ Volver", on_click=volver_pizarra, style=button_style),
