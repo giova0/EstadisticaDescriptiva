@@ -1,6 +1,7 @@
 import flet as ft
 
 def main(page: ft.Page):
+    page.clean()
     page.title = "Curso de Estadística"
     page.theme_mode = ft.ThemeMode.DARK
     page.bgcolor = "#1a1a1a"
@@ -36,7 +37,7 @@ def main(page: ft.Page):
     
     def comenzar_aventura(e):
         """Función para comenzar la aventura"""
-        page.go("/estadistica")
+        page.go("/")
     
     def mostrar_ayuda(e):
         """Función para mostrar ayuda"""
@@ -93,7 +94,7 @@ def main(page: ft.Page):
         avatares = [
             {"nombre": "Medicina", "icono": ft.Icons.SHIELD, "color": ft.Colors.RED_700},
             {"nombre": "Enfermería", "icono": ft.Icons.AUTO_FIX_HIGH, "color": ft.Colors.PURPLE_700},
-            {"nombre": "Fisioterapia", "icono": ft.Icons.NATURE_PEOPLE, "color": ft.Colors.GREEN_700},
+            {"nombre": "Optometría", "icono": ft.Icons.VISIBILITY, "color": ft.Colors.GREEN_700},
             {"nombre": "Odontología", "icono": ft.Icons.PSYCHOLOGY, "color": ft.Colors.BLUE_GREY_700},
         ]
         
@@ -129,13 +130,13 @@ def main(page: ft.Page):
                     ),
                     alignment=ft.alignment.center
                 )
-            elif avatar["nombre"] == "Fisioterapia":
+            elif avatar["nombre"] == "Optometría":
                 contenido_imagen = ft.Container(
                     width=50,
                     height=50,
                     border_radius=25,
                     content=ft.Image(
-                        src="https://i.postimg.cc/13fztHRz/fisioterapia-2.png",
+                        src="https://i.postimg.cc/sf9px0Hq/optometra1.png",
                         width=50,
                         height=50,
                         fit=ft.ImageFit.COVER,
