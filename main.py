@@ -23,7 +23,7 @@ def mostrar_inicio(page: ft.Page) -> None:
     def volver_inicio(e):
         page.go("/inicio_cover")
 
-    contenido = ft.Column(
+    contenido_botones = ft.Column(
         [
             ft.Text(
                 "Bioestadística para Ciencias de la Salud UAN",
@@ -48,13 +48,21 @@ def mostrar_inicio(page: ft.Page) -> None:
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
     )
 
-    page.add(
+    contenido_stack = ft.Stack([
+        ft.Image(
+            src="https://i.postimg.cc/fLFk4sSL/bioestadistica1.png",
+            width=page.window_width,
+            height=page.window_height,
+            fit=ft.ImageFit.COVER,
+        ),
         ft.Container(
-            bgcolor="#f8f9fa",
-            content=contenido,
+            content=contenido_botones,
             alignment=ft.alignment.center,
-        )
-    )
+            expand=True
+        ),
+    ])
+
+    page.add(contenido_stack)
     page.update()
 
 
@@ -247,6 +255,65 @@ def abrir_ova(page: ft.Page, clave: str) -> None:
                         )
                     ])
                 )
+            
+            page.update()
+            return
+        if clave == "historia_bioestadistica":
+            # Abrir la URL de la historia de la bioestadística en el navegador del sistema
+            import webbrowser
+
+            url = "https://mgx.dev/chat/20e285a3d5a14931ad2495ddd8dcd3d1"
+            webbrowser.open(url)
+
+            # Mostrar mensaje de confirmación en la aplicación
+            page.add(
+                ft.Column([
+                    ft.Row([
+                        ft.ElevatedButton(
+                            "◀ Volver a Salas de Hospitalización",
+                            on_click=lambda e: page.go("/unidades_especializadas"),
+                            style=ft.ButtonStyle(
+                                color=ft.Colors.WHITE,
+                                bgcolor=ft.Colors.GREY_700,
+                            )
+                        )
+                    ], alignment=ft.MainAxisAlignment.START),
+                    ft.Container(height=50),
+                    ft.Container(
+                        content=ft.Column([
+                            ft.Icon(
+                                ft.Icons.OPEN_IN_BROWSER,
+                                size=80,
+                                color=ft.Colors.INDIGO
+                            ),
+                            ft.Text(
+                                "Historia de la Bioestadística",
+                                size=24,
+                                weight=ft.FontWeight.BOLD,
+                                color=ft.Colors.INDIGO,
+                                text_align=ft.TextAlign.CENTER
+                            ),
+                            ft.Container(height=20),
+                            ft.Text(
+                                "La página se ha abierto en tu navegador predeterminado.",
+                                size=16,
+                                color=ft.Colors.GREY_700,
+                                text_align=ft.TextAlign.CENTER
+                            ),
+                            ft.Container(height=30),
+                            ft.ElevatedButton(
+                                "🔄 Abrir nuevamente",
+                                on_click=lambda e: webbrowser.open(url),
+                                style=ft.ButtonStyle(
+                                    color=ft.Colors.WHITE,
+                                    bgcolor=ft.Colors.INDIGO_700,
+                                )
+                            )
+                        ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                        alignment=ft.alignment.center
+                    )
+                ])
+            )
             
             page.update()
             return
@@ -2569,39 +2636,46 @@ def mostrar_ovas_principal(page: ft.Page) -> None:
     def volver_inicio(e):
         page.go("/")
 
-    contenido = ft.Column(
-        [
-            ft.Text(
-                "OVAs",
-                size=26,
-                weight=ft.FontWeight.BOLD,
-                color=ft.Colors.BLUE,
-                text_align=ft.TextAlign.CENTER,
-            ),
-            ft.Container(height=30),
-            ft.Column(
-                [
-                    ft.ElevatedButton("Hospital", style=button_style, on_click=lambda e: page.go("/hospital")),
-                    
-                    ft.ElevatedButton("Farmacia", style=button_style, on_click=None),
-                ],
-                spacing=12,
-                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-            ),
-            ft.Container(height=40),
-            ft.ElevatedButton("◀ Volver", on_click=volver_inicio, style=button_style),
-        ],
-        alignment=ft.MainAxisAlignment.CENTER,
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-    )
-
-    page.add(
-        ft.Container(
-            bgcolor="#f8f9fa",
-            content=contenido,
-            alignment=ft.alignment.center,
+    contenido_botones = ft.Column(
+            [
+                ft.Text(
+                    "OVAs",
+                    size=26,
+                    weight=ft.FontWeight.BOLD,
+                    color=ft.Colors.BLUE_800,
+                    text_align=ft.TextAlign.CENTER,
+                ),
+                ft.Container(height=30),
+                ft.Column(
+                    [
+                        ft.ElevatedButton("Hospital", style=button_style, on_click=lambda e: page.go("/hospital")),
+                        ft.ElevatedButton("Farmacia", style=button_style, on_click=lambda e: page.go("/farmacia")),
+                    ],
+                    spacing=12,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                ),
+                ft.Container(height=40),
+                ft.ElevatedButton("◀ Volver", on_click=volver_inicio, style=button_style),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         )
-    )
+
+    contenido = ft.Stack([
+        ft.Image(
+            src="https://i.postimg.cc/nrR2fCYm/descanso1.png",
+            width=page.window_width,
+            height=page.window_height,
+            fit=ft.ImageFit.COVER,
+        ),
+        ft.Container(
+            content=contenido_botones,
+            alignment=ft.alignment.center,
+            expand=True
+            ),
+    ])
+
+    page.add(contenido)
     page.update()
 
 def mostrar_hospital(page: ft.Page) -> None:
@@ -2632,6 +2706,98 @@ def mostrar_hospital(page: ft.Page) -> None:
             [
                 ft.ElevatedButton("Ingresar al Hospital", style=button_style, on_click=lambda e: page.go("/pizarra")),
                 ft.ElevatedButton("◀ Volver", on_click=volver_ovas, style=button_style),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        )
+    ])
+
+    page.add(contenido)
+    page.update()
+
+def mostrar_farmacia(page: ft.Page) -> None:
+    page.clean()
+    page.title = "Farmacia"
+    page.theme_mode = ft.ThemeMode.LIGHT
+    page.bgcolor = "#f0f0f0"
+
+    button_style = ft.ButtonStyle(
+        color=ft.Colors.WHITE,
+        bgcolor=ft.Colors.BLUE_700,
+        text_style=ft.TextStyle(size=14, weight=ft.FontWeight.BOLD),
+        shape=ft.RoundedRectangleBorder(radius=6),
+        elevation=2,
+    )
+
+    def volver_ovas(e):
+        page.go("/ovas_principal")
+
+    contenido = ft.Stack([
+        ft.Image(
+            src="https://i.postimg.cc/nh7z6NnV/Farmacia2.jpg",
+            width=page.window_width,
+            height=page.window_height,
+            fit=ft.ImageFit.COVER,
+        ),
+        ft.Column(
+            [
+                ft.Text(
+                    "Farmacia",
+                    size=26,
+                    weight=ft.FontWeight.BOLD,
+                    color=ft.Colors.BLUE_800,
+                    text_align=ft.TextAlign.CENTER,
+                ),
+                ft.Container(height=30),
+                ft.ElevatedButton("Farmacia_1", style=button_style, on_click=lambda e: page.go("/farmacia_1")),
+                ft.ElevatedButton("Farmacia_2", style=button_style, on_click=None),
+                ft.ElevatedButton("◀ Volver", on_click=volver_ovas, style=button_style),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        )
+    ])
+
+    page.add(contenido)
+    page.update()
+
+def mostrar_farmacia_1(page: ft.Page) -> None:
+    page.clean()
+    page.title = "Farmacia 1"
+    page.theme_mode = ft.ThemeMode.LIGHT
+    page.bgcolor = "#f0f0f0"
+
+    button_style = ft.ButtonStyle(
+        color=ft.Colors.WHITE,
+        bgcolor=ft.Colors.BLUE_700,
+        text_style=ft.TextStyle(size=14, weight=ft.FontWeight.BOLD),
+        shape=ft.RoundedRectangleBorder(radius=6),
+        elevation=2,
+    )
+
+    def volver_farmacia(e):
+        page.go("/farmacia")
+
+    contenido = ft.Stack([
+        ft.Image(
+            src="https://i.postimg.cc/cJBJJYKV/Farmacia3.png",
+            width=page.window_width,
+            height=page.window_height,
+            fit=ft.ImageFit.COVER,
+        ),
+        ft.Column(
+            [
+                ft.Text(
+                    "Farmacia 1",
+                    size=26,
+                    weight=ft.FontWeight.BOLD,
+                    color=ft.Colors.BLUE_800,
+                    text_align=ft.TextAlign.CENTER,
+                ),
+                ft.Container(height=30),
+                ft.ElevatedButton("Farmacia_A", style=button_style, on_click=None),
+                ft.ElevatedButton("Farmacia_B", style=button_style, on_click=None),
+                ft.ElevatedButton("◀ Volver", on_click=volver_farmacia, style=button_style),
             ],
             alignment=ft.MainAxisAlignment.CENTER,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -2721,6 +2887,7 @@ def mostrar_unidades_especializadas(page: ft.Page) -> None:
                     text_align=ft.TextAlign.CENTER,
                 ),
                 ft.Container(height=30),
+                ft.ElevatedButton("Historia de la BioEstadística", style=button_style, on_click=lambda e: page.go("/ova/historia_bioestadistica")),
                 ft.ElevatedButton("Población, Muestra y Variables", style=button_style, on_click=lambda e: page.go("/ova/2")),
                 ft.ElevatedButton("Clasificación de Variables", style=button_style, on_click=lambda e: page.go("/clasificacion_variables")),
                 ft.ElevatedButton("◀ Volver", on_click=volver_pizarra, style=button_style),
@@ -2750,7 +2917,7 @@ def mostrar_clasificacion_variables_juegos(page: ft.Page) -> None:
     def volver_unidades(e):
         page.go("/unidades_especializadas")
 
-    contenido = ft.Column(
+    contenido_botones = ft.Column(
         [
             ft.Text(
                 "Juegos de Clasificación de Variables",
@@ -2763,8 +2930,14 @@ def mostrar_clasificacion_variables_juegos(page: ft.Page) -> None:
             ft.Column(
                 [
                     ft.ElevatedButton("Juego 1", style=button_style, on_click=lambda e: page.go("/juego/1")),
-                    ft.ElevatedButton("Juego 2", style=button_style, on_click=None),
-                    ft.ElevatedButton("Juego 3", style=button_style, on_click=None),
+                    ft.ElevatedButton(
+                        "Juego 2", 
+                        style=button_style, 
+                        on_click=lambda e: page.launch_url("https://mgx.dev/chat/bae3ed154bab4e128c6c4bc25d5ffe1c")),
+                    ft.ElevatedButton(
+                        "Juego 3", 
+                        style=button_style, 
+                        on_click=lambda e: page.launch_url("https://mgx.dev/chat/076f9e14545546918293a391646bef9f")),
                 ],
                 spacing=12,
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -2776,13 +2949,21 @@ def mostrar_clasificacion_variables_juegos(page: ft.Page) -> None:
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
     )
 
-    page.add(
+    contenido_stack = ft.Stack([
+        ft.Image(
+            src="https://i.postimg.cc/L6mnZmKc/clasificacion-Variables1.png",
+            width=page.window_width,
+            height=page.window_height,
+            fit=ft.ImageFit.COVER,
+        ),
         ft.Container(
-            bgcolor="#f8f9fa",
-            content=contenido,
+            content=contenido_botones,
             alignment=ft.alignment.center,
-        )
-    )
+            expand=True
+        ),
+    ])
+
+    page.add(contenido_stack)
     page.update()
 
 def mostrar_investigacion(page: ft.Page) -> None:
@@ -3050,6 +3231,10 @@ def route_change(page: ft.Page):
         mostrar_ovas_principal(page)
     elif page.route == "/hospital":
         mostrar_hospital(page)
+    elif page.route == "/farmacia":
+        mostrar_farmacia(page)
+    elif page.route == "/farmacia_1":
+        mostrar_farmacia_1(page)
     elif page.route == "/pizarra":
         mostrar_pizarra(page)
     elif page.route == "/unidades_especializadas":
