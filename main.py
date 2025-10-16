@@ -2649,7 +2649,7 @@ def mostrar_ovas_principal(page: ft.Page) -> None:
                 ft.Column(
                     [
                         ft.ElevatedButton("Hospital", style=button_style, on_click=lambda e: page.go("/hospital")),
-                        ft.ElevatedButton("Farmacia", style=button_style, on_click=lambda e: page.go("/farmacia")),
+                        ft.ElevatedButton("Consultorio Odontológico", style=button_style, on_click=lambda e: page.go("/consultorio_odontologico")),
                     ],
                     spacing=12,
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -2715,7 +2715,7 @@ def mostrar_hospital(page: ft.Page) -> None:
     page.add(contenido)
     page.update()
 
-def mostrar_farmacia(page: ft.Page) -> None:
+def mostrar_consultorio_odontologico(page: ft.Page) -> None:
     page.clean()
     page.title = "Farmacia"
     page.theme_mode = ft.ThemeMode.LIGHT
@@ -3220,6 +3220,104 @@ def mostrar_fase2(page: ft.Page) -> None:
     page.update()
 
 
+def mostrar_consultorio_odontologico(page: ft.Page) -> None:
+    page.clean()
+    import webbrowser
+    import os
+    base_dir = Path(__file__).resolve().parent
+    html_path = str(base_dir / "consultorio.html")
+    if os.path.exists(html_path):
+        webbrowser.open(f"file:///{html_path}")
+        page.add(
+            ft.Column([
+                ft.Row([
+                    ft.ElevatedButton(
+                        "◀ Volver a Ambientes Virtuales",
+                        on_click=lambda e: page.go("/ovas_principal"),
+                        style=ft.ButtonStyle(
+                            color=ft.Colors.WHITE,
+                            bgcolor=ft.Colors.GREY_700,
+                        )
+                    )
+                ], alignment=ft.MainAxisAlignment.START),
+                ft.Container(height=50),
+                ft.Container(
+                    content=ft.Column([
+                        ft.Icon(
+                            ft.Icons.OPEN_IN_BROWSER,
+                            size=80,
+                            color=ft.Colors.INDIGO
+                        ),
+                        ft.Text(
+                            "Consultorio Odontológico",
+                            size=24,
+                            weight=ft.FontWeight.BOLD,
+                            color=ft.Colors.INDIGO,
+                            text_align=ft.TextAlign.CENTER
+                        ),
+                        ft.Container(height=20),
+                        ft.Text(
+                            "La página se ha abierto en tu navegador predeterminado.",
+                            size=16,
+                            color=ft.Colors.GREY_700,
+                            text_align=ft.TextAlign.CENTER
+                        ),
+                        ft.Container(height=30),
+                        ft.ElevatedButton(
+                            "🔄 Abrir nuevamente",
+                            on_click=lambda e: webbrowser.open(f"file:///{html_path}"),
+                            style=ft.ButtonStyle(
+                                color=ft.Colors.WHITE,
+                                bgcolor=ft.Colors.INDIGO_700,
+                            )
+                        )
+                    ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                    alignment=ft.alignment.center
+                )
+            ])
+        )
+    else:
+        page.add(
+            ft.Column([
+                ft.Row([
+                    ft.ElevatedButton(
+                        "◀ Volver a Ambientes Virtuales",
+                        on_click=lambda e: page.go("/ovas_principal"),
+                        style=ft.ButtonStyle(
+                            color=ft.Colors.WHITE,
+                            bgcolor=ft.Colors.GREY_700,
+                        )
+                    )
+                ], alignment=ft.MainAxisAlignment.START),
+                ft.Container(height=50),
+                ft.Container(
+                    content=ft.Column([
+                        ft.Icon(
+                            ft.Icons.ERROR,
+                            size=80,
+                            color=ft.Colors.RED
+                        ),
+                        ft.Text(
+                            "Error: Archivo no encontrado",
+                            size=24,
+                            weight=ft.FontWeight.BOLD,
+                            color=ft.Colors.RED,
+                            text_align=ft.TextAlign.CENTER
+                        ),
+                        ft.Container(height=20),
+                        ft.Text(
+                            f"No se pudo encontrar el archivo: {html_path}",
+                            size=14,
+                            color=ft.Colors.GREY_600,
+                            text_align=ft.TextAlign.CENTER
+                        )
+                    ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                    alignment=ft.alignment.center
+                )
+            ])
+        )
+    page.update()
+
 def route_change(page: ft.Page):
     if page.route == "/inicio_cover":
         inicio.main(page)
@@ -3239,6 +3337,8 @@ def route_change(page: ft.Page):
         mostrar_pizarra(page)
     elif page.route == "/unidades_especializadas":
         mostrar_unidades_especializadas(page)
+    elif page.route == "/consultorio_odontologico":
+        mostrar_consultorio_odontologico(page)
     elif page.route == "/investigacion":
         mostrar_investigacion(page)
     elif page.route == "/clasificacion_variables":
