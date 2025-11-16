@@ -3,6 +3,7 @@ import inicio
 from importlib.util import spec_from_file_location, module_from_spec
 from pathlib import Path
 import inspect
+import socket
 import traceback
 
 
@@ -2649,7 +2650,7 @@ def mostrar_ovas_principal(page: ft.Page) -> None:
                 ft.Column(
                     [
                         ft.ElevatedButton("Hospital", style=button_style, on_click=lambda e: page.go("/hospital")),
-                        ft.ElevatedButton("Consultorio Odontológico", style=button_style, on_click=lambda e: page.go("/consultorio_odontologico")),
+                        ft.ElevatedButton("Farmacia", style=button_style, on_click=lambda e: page.go("/farmacia")),
                     ],
                     spacing=12,
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -2715,7 +2716,7 @@ def mostrar_hospital(page: ft.Page) -> None:
     page.add(contenido)
     page.update()
 
-def mostrar_consultorio_odontologico(page: ft.Page) -> None:
+def mostrar_farmacia(page: ft.Page) -> None:
     page.clean()
     page.title = "Farmacia"
     page.theme_mode = ft.ThemeMode.LIGHT
@@ -3220,104 +3221,6 @@ def mostrar_fase2(page: ft.Page) -> None:
     page.update()
 
 
-def mostrar_consultorio_odontologico(page: ft.Page) -> None:
-    page.clean()
-    import webbrowser
-    import os
-    base_dir = Path(__file__).resolve().parent
-    html_path = str(base_dir / "consultorio.html")
-    if os.path.exists(html_path):
-        webbrowser.open(f"file:///{html_path}")
-        page.add(
-            ft.Column([
-                ft.Row([
-                    ft.ElevatedButton(
-                        "◀ Volver a Ambientes Virtuales",
-                        on_click=lambda e: page.go("/ovas_principal"),
-                        style=ft.ButtonStyle(
-                            color=ft.Colors.WHITE,
-                            bgcolor=ft.Colors.GREY_700,
-                        )
-                    )
-                ], alignment=ft.MainAxisAlignment.START),
-                ft.Container(height=50),
-                ft.Container(
-                    content=ft.Column([
-                        ft.Icon(
-                            ft.Icons.OPEN_IN_BROWSER,
-                            size=80,
-                            color=ft.Colors.INDIGO
-                        ),
-                        ft.Text(
-                            "Consultorio Odontológico",
-                            size=24,
-                            weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.INDIGO,
-                            text_align=ft.TextAlign.CENTER
-                        ),
-                        ft.Container(height=20),
-                        ft.Text(
-                            "La página se ha abierto en tu navegador predeterminado.",
-                            size=16,
-                            color=ft.Colors.GREY_700,
-                            text_align=ft.TextAlign.CENTER
-                        ),
-                        ft.Container(height=30),
-                        ft.ElevatedButton(
-                            "🔄 Abrir nuevamente",
-                            on_click=lambda e: webbrowser.open(f"file:///{html_path}"),
-                            style=ft.ButtonStyle(
-                                color=ft.Colors.WHITE,
-                                bgcolor=ft.Colors.INDIGO_700,
-                            )
-                        )
-                    ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    alignment=ft.alignment.center
-                )
-            ])
-        )
-    else:
-        page.add(
-            ft.Column([
-                ft.Row([
-                    ft.ElevatedButton(
-                        "◀ Volver a Ambientes Virtuales",
-                        on_click=lambda e: page.go("/ovas_principal"),
-                        style=ft.ButtonStyle(
-                            color=ft.Colors.WHITE,
-                            bgcolor=ft.Colors.GREY_700,
-                        )
-                    )
-                ], alignment=ft.MainAxisAlignment.START),
-                ft.Container(height=50),
-                ft.Container(
-                    content=ft.Column([
-                        ft.Icon(
-                            ft.Icons.ERROR,
-                            size=80,
-                            color=ft.Colors.RED
-                        ),
-                        ft.Text(
-                            "Error: Archivo no encontrado",
-                            size=24,
-                            weight=ft.FontWeight.BOLD,
-                            color=ft.Colors.RED,
-                            text_align=ft.TextAlign.CENTER
-                        ),
-                        ft.Container(height=20),
-                        ft.Text(
-                            f"No se pudo encontrar el archivo: {html_path}",
-                            size=14,
-                            color=ft.Colors.GREY_600,
-                            text_align=ft.TextAlign.CENTER
-                        )
-                    ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    alignment=ft.alignment.center
-                )
-            ])
-        )
-    page.update()
-
 def route_change(page: ft.Page):
     if page.route == "/inicio_cover":
         inicio.main(page)
@@ -3337,8 +3240,6 @@ def route_change(page: ft.Page):
         mostrar_pizarra(page)
     elif page.route == "/unidades_especializadas":
         mostrar_unidades_especializadas(page)
-    elif page.route == "/consultorio_odontologico":
-        mostrar_consultorio_odontologico(page)
     elif page.route == "/investigacion":
         mostrar_investigacion(page)
     elif page.route == "/clasificacion_variables":
@@ -3365,5 +3266,40 @@ def route_change(page: ft.Page):
 
 
 
+def _is_port_free(port: int) -> bool:
+    # Intentamos enlazar tanto en IPv4 como IPv6 (si está disponible)
+    for family in (socket.AF_INET, socket.AF_INET6):
+        s = None
+        try:
+            s = socket.socket(family, socket.SOCK_STREAM)
+            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            if family == socket.AF_INET6:
+                # permitir dual-stack si es soportado
+                try:
+                    s.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
+                except Exception:
+                    pass
+            s.bind(("", port))
+        except OSError:
+            if s:
+                s.close()
+            return False
+        finally:
+            if s:
+                s.close()
+    return True
+
+
 if __name__ == "__main__":
-    ft.app(target=app_main, view=ft.AppView.WEB_BROWSER, port=8083)
+    # Intentar arrancar en el primer puerto libre (8083..8093)
+    start_port = 8083
+    end_port = 8093
+    for p in range(start_port, end_port + 1):
+        if _is_port_free(p):
+            print(f"Puerto {p} libre. Iniciando Flet en ese puerto...")
+            ft.app(target=app_main, view=ft.AppView.WEB_BROWSER, port=p)
+            break
+        else:
+            print(f"Puerto {p} ocupado, probando el siguiente...")
+    else:
+        raise RuntimeError(f"No se pudo iniciar la aplicación: ningún puerto libre en {start_port}-{end_port}.")
