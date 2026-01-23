@@ -1,0 +1,1195 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 5 - Visualización Avanzada de Datos Biomédicos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .module-hidden { display: none; }
+        .progress-bar { transition: width 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg border-b-4 border-blue-600">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">OVA 5 - Visualización Avanzada de Datos</h1>
+                    <p class="text-lg text-gray-600 mt-2">Bioestadística para Ciencias de la Salud - UAN</p>
+                </div>
+                <div class="text-right">
+                    <div class="bg-blue-100 px-4 py-2 rounded-lg">
+                        <p class="text-sm text-blue-800 font-semibold">Duración: 3 horas académicas</p>
+                        <p class="text-sm text-blue-600">Modalidad: 80% Virtual - 20% Presencial</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-gray-700">Progreso del módulo</span>
+                <span class="text-sm text-gray-500" id="progress-text">0%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-600 h-2 rounded-full progress-bar" style="width: 0%" id="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-8 overflow-x-auto py-4">
+                <button class="nav-btn active px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="intro">Introducción</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="histogramas">Histogramas</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="poligonos">Polígonos de Frecuencia</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="barras">Gráficos de Barras</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="sectores">Gráficos de Sectores</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="ejercicios">Ejercicios</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="evaluacion">Evaluación</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <!-- Introducción -->
+        <div id="intro" class="module fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Objetivos de Aprendizaje</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-3">Al finalizar esta OVA, podrás:</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start"><span class="text-blue-600 mr-2">✓</span>Crear e interpretar histogramas de variables biomédicas</li>
+                            <li class="flex items-start"><span class="text-blue-600 mr-2">✓</span>Construir polígonos de frecuencia para datos continuos</li>
+                            <li class="flex items-start"><span class="text-blue-600 mr-2">✓</span>Diseñar gráficos de barras para datos epidemiológicos</li>
+                            <li class="flex items-start"><span class="text-blue-600 mr-2">✓</span>Elaborar gráficos de sectores para proporciones en salud</li>
+                            <li class="flex items-start"><span class="text-blue-600 mr-2">✓</span>Seleccionar el tipo de gráfico apropiado según el tipo de datos</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-green-800 mb-3">Competencias Desarrolladas:</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start"><span class="text-green-600 mr-2">📊</span>Visualización efectiva de datos clínicos</li>
+                            <li class="flex items-start"><span class="text-green-600 mr-2">🔍</span>Interpretación crítica de gráficos médicos</li>
+                            <li class="flex items-start"><span class="text-green-600 mr-2">💡</span>Comunicación visual de resultados</li>
+                            <li class="flex items-start"><span class="text-green-600 mr-2">⚕️</span>Aplicación en epidemiología y salud pública</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Importancia de la Visualización en Ciencias de la Salud</h2>
+                <div class="prose max-w-none text-gray-700">
+                    <p class="text-lg mb-4">La visualización de datos es fundamental en las ciencias de la salud porque permite:</p>
+                    <div class="grid md:grid-cols-3 gap-6 mt-6">
+                        <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-400">
+                            <h4 class="font-semibold text-red-800 mb-2">Detección de Patrones</h4>
+                            <p class="text-sm text-gray-700">Identificar tendencias epidemiológicas, brotes de enfermedades y factores de riesgo.</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">
+                            <h4 class="font-semibold text-yellow-800 mb-2">Comunicación Efectiva</h4>
+                            <p class="text-sm text-gray-700">Transmitir resultados complejos a profesionales de la salud y público general.</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-400">
+                            <h4 class="font-semibold text-purple-800 mb-2">Toma de Decisiones</h4>
+                            <p class="text-sm text-gray-700">Apoyar decisiones clínicas y políticas de salud pública basadas en evidencia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Histogramas -->
+        <div id="histogramas" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Histogramas en Datos Biomédicos</h2>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Conceptos Fundamentales</h3>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <p class="text-gray-700 mb-3"><strong>Definición:</strong> Un histograma es una representación gráfica de la distribución de frecuencias de una variable continua, dividida en intervalos o clases.</p>
+                            <p class="text-gray-700"><strong>Uso en Medicina:</strong> Ideal para mostrar la distribución de variables como edad, peso, presión arterial, niveles de glucosa, etc.</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-800 mb-2">Elementos Clave:</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• <strong>Eje X:</strong> Intervalos de la variable (clases)</li>
+                                <li>• <strong>Eje Y:</strong> Frecuencia absoluta o relativa</li>
+                                <li>• <strong>Barras:</strong> Sin separación entre ellas</li>
+                                <li>• <strong>Ancho:</strong> Constante para todos los intervalos</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Ejemplo: Distribución de IMC en Pacientes</h3>
+                        <canvas id="histogramChart" width="400" height="300"></canvas>
+                        <div class="mt-4 text-sm text-gray-600">
+                            <p><strong>Interpretación:</strong> El histograma muestra que la mayoría de pacientes tienen un IMC entre 22-28 kg/m², con una distribución ligeramente sesgada hacia valores más altos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Ejercicio Interactivo: Construye tu Histograma</h3>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Selecciona el número de intervalos (bins):</label>
+                        <input type="range" id="binsSlider" min="5" max="20" value="10" class="w-full mb-4">
+                        <span id="binsValue" class="text-sm text-gray-600">10 intervalos</span>
+                        
+                        <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-2">Datos: Niveles de Colesterol (mg/dL)</h4>
+                            <p class="text-sm text-gray-600">150, 180, 220, 190, 210, 240, 170, 200, 230, 160, 195, 225, 185, 205, 175, 215, 235, 165, 190, 220, 180, 200, 210, 170, 230, 195, 185, 225, 205, 175</p>
+                        </div>
+                    </div>
+                    <div>
+                        <canvas id="interactiveHistogram" width="400" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Polígonos de Frecuencia -->
+        <div id="poligonos" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Polígonos de Frecuencia</h2>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">¿Qué son los Polígonos de Frecuencia?</h3>
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <p class="text-gray-700 mb-3"><strong>Definición:</strong> Gráfico de líneas que conecta los puntos medios de las barras de un histograma, mostrando la forma de la distribución.</p>
+                            <p class="text-gray-700"><strong>Ventaja:</strong> Permite comparar fácilmente múltiples distribuciones en el mismo gráfico.</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-800 mb-2">Aplicaciones Clínicas:</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Comparar distribuciones de edad entre grupos</li>
+                                <li>• Analizar patrones temporales de síntomas</li>
+                                <li>• Evaluar efectividad de tratamientos</li>
+                                <li>• Estudiar variaciones estacionales de enfermedades</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Ejemplo: Presión Arterial por Grupo de Edad</h3>
+                        <canvas id="polygonChart" width="400" height="300"></canvas>
+                        <div class="mt-4 text-sm text-gray-600">
+                            <p><strong>Interpretación:</strong> Se observa que la presión arterial sistólica tiende a aumentar con la edad, con mayor variabilidad en adultos mayores.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Comparación: Histograma vs Polígono de Frecuencia</h3>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-medium text-gray-700 mb-3">Glucosa en Ayunas - Histograma</h4>
+                        <canvas id="glucoseHistogram" width="400" height="250"></canvas>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-medium text-gray-700 mb-3">Glucosa en Ayunas - Polígono</h4>
+                        <canvas id="glucosePolygon" width="400" height="250"></canvas>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 bg-yellow-50 rounded-lg">
+                    <p class="text-gray-700"><strong>Observación:</strong> Ambos gráficos muestran la misma información, pero el polígono de frecuencia facilita la identificación de la forma de la distribución y permite superponer múltiples grupos para comparación.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos de Barras -->
+        <div id="barras" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Gráficos de Barras en Epidemiología</h2>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Características y Usos</h3>
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <p class="text-gray-700 mb-3"><strong>Propósito:</strong> Representar frecuencias de variables categóricas o discretas.</p>
+                            <p class="text-gray-700"><strong>Diferencia con histogramas:</strong> Las barras están separadas, indicando categorías discretas.</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-red-800 mb-2">Aplicaciones Epidemiológicas:</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Incidencia de enfermedades por región</li>
+                                <li>• Distribución de casos por grupo demográfico</li>
+                                <li>• Comparación de tasas de mortalidad</li>
+                                <li>• Efectividad de intervenciones de salud pública</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Casos de COVID-19 por Departamento</h3>
+                        <canvas id="barChart" width="400" height="300"></canvas>
+                        <div class="mt-4 text-sm text-gray-600">
+                            <p><strong>Interpretación:</strong> Bogotá y Antioquia presentan el mayor número de casos, seguidos por Valle del Cauca, reflejando la densidad poblacional y conectividad urbana.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Gráfico de Barras Agrupadas: Mortalidad por Edad y Sexo</h3>
+                <div class="mb-6">
+                    <canvas id="groupedBarChart" width="800" height="400"></canvas>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-blue-800 mb-2">Ventajas de Barras Agrupadas:</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• Comparación directa entre categorías</li>
+                            <li>• Identificación de patrones por subgrupos</li>
+                            <li>• Visualización clara de diferencias</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-green-800 mb-2">Interpretación Clínica:</h4>
+                        <p class="text-sm text-gray-700">La mortalidad aumenta significativamente con la edad en ambos sexos, con mayor incidencia en hombres en grupos de edad avanzada.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos de Sectores -->
+        <div id="sectores" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Gráficos de Sectores en Salud Pública</h2>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Cuándo Usar Gráficos de Sectores</h3>
+                        <div class="bg-orange-50 p-4 rounded-lg mb-4">
+                            <p class="text-gray-700 mb-3"><strong>Ideal para:</strong> Mostrar proporciones o porcentajes de un total, especialmente cuando hay pocas categorías (≤7).</p>
+                            <p class="text-gray-700"><strong>Limitación:</strong> Difícil comparar sectores de tamaño similar.</p>
+                        </div>
+                        <div class="bg-teal-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-teal-800 mb-2">Usos en Salud Pública:</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Distribución de tipos de cáncer</li>
+                                <li>• Causas de mortalidad</li>
+                                <li>• Cobertura de vacunación</li>
+                                <li>• Distribución del presupuesto en salud</li>
+                                <li>• Prevalencia de factores de riesgo</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Distribución de Enfermedades Crónicas</h3>
+                        <canvas id="pieChart" width="400" height="400"></canvas>
+                        <div class="mt-4 text-sm text-gray-600">
+                            <p><strong>Interpretación:</strong> La hipertensión representa la mayor proporción de enfermedades crónicas (35%), seguida por diabetes (28%) y enfermedades cardiovasculares (22%).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Comparación: Gráfico de Sectores vs Gráfico de Barras</h3>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-medium text-gray-700 mb-3">Tipos de Consulta - Sectores</h4>
+                        <canvas id="consultaPieChart" width="350" height="350"></canvas>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-medium text-gray-700 mb-3">Tipos de Consulta - Barras</h4>
+                        <canvas id="consultaBarChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                    <h4 class="font-semibold text-gray-800 mb-2">¿Cuál elegir?</h4>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+                        <div>
+                            <strong>Gráfico de Sectores:</strong> Mejor para mostrar la relación parte-todo y cuando el enfoque está en las proporciones.
+                        </div>
+                        <div>
+                            <strong>Gráfico de Barras:</strong> Mejor para comparar valores exactos entre categorías y cuando hay muchas categorías.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicios -->
+        <div id="ejercicios" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Ejercicios Prácticos</h2>
+                
+                <!-- Ejercicio 1 -->
+                <div class="mb-8 p-6 bg-blue-50 rounded-lg">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4">Ejercicio 1: Selección del Gráfico Apropiado</h3>
+                    <p class="text-gray-700 mb-4">Para cada situación, selecciona el tipo de gráfico más apropiado:</p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg">
+                            <p class="font-medium text-gray-800 mb-3">1. Mostrar la distribución de pesos de recién nacidos en un hospital:</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center"><input type="radio" name="q1" value="a" class="mr-2"> a) Gráfico de sectores</label>
+                                <label class="flex items-center"><input type="radio" name="q1" value="b" class="mr-2"> b) Histograma</label>
+                                <label class="flex items-center"><input type="radio" name="q1" value="c" class="mr-2"> c) Gráfico de barras</label>
+                            </div>
+                            <div id="feedback1" class="mt-3 p-3 rounded hidden"></div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-lg">
+                            <p class="font-medium text-gray-800 mb-3">2. Comparar la prevalencia de diferentes tipos de cáncer:</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center"><input type="radio" name="q2" value="a" class="mr-2"> a) Polígono de frecuencia</label>
+                                <label class="flex items-center"><input type="radio" name="q2" value="b" class="mr-2"> b) Gráfico de sectores</label>
+                                <label class="flex items-center"><input type="radio" name="q2" value="c" class="mr-2"> c) Histograma</label>
+                            </div>
+                            <div id="feedback2" class="mt-3 p-3 rounded hidden"></div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-lg">
+                            <p class="font-medium text-gray-800 mb-3">3. Analizar la evolución temporal de casos de una enfermedad:</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center"><input type="radio" name="q3" value="a" class="mr-2"> a) Gráfico de sectores</label>
+                                <label class="flex items-center"><input type="radio" name="q3" value="b" class="mr-2"> b) Gráfico de líneas</label>
+                                <label class="flex items-center"><input type="radio" name="q3" value="c" class="mr-2"> c) Histograma</label>
+                            </div>
+                            <div id="feedback3" class="mt-3 p-3 rounded hidden"></div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkAnswers()" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Verificar Respuestas</button>
+                </div>
+
+                <!-- Ejercicio 2 -->
+                <div class="mb-8 p-6 bg-green-50 rounded-lg">
+                    <h3 class="text-xl font-semibold text-green-800 mb-4">Ejercicio 2: Interpretación de Gráficos</h3>
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <div>
+                            <canvas id="exerciseChart" width="400" height="300"></canvas>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-800 mb-3">Basándote en el gráfico, responde:</p>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">¿Cuál es el grupo de edad con mayor incidencia?</label>
+                                    <select id="ageGroup" class="w-full p-2 border rounded-lg">
+                                        <option value="">Selecciona una opción</option>
+                                        <option value="0-20">0-20 años</option>
+                                        <option value="21-40">21-40 años</option>
+                                        <option value="41-60">41-60 años</option>
+                                        <option value="61-80">61-80 años</option>
+                                        <option value="80+">Más de 80 años</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">¿Qué patrón observas en la distribución?</label>
+                                    <textarea id="patternObservation" class="w-full p-2 border rounded-lg" rows="3" placeholder="Describe el patrón que observas..."></textarea>
+                                </div>
+                            </div>
+                            <button onclick="checkInterpretation()" class="mt-4 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">Verificar Interpretación</button>
+                            <div id="interpretationFeedback" class="mt-3 p-3 rounded hidden"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluación -->
+        <div id="evaluacion" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Evaluación Final</h2>
+                
+                <div class="mb-8">
+                    <div class="bg-yellow-50 p-4 rounded-lg mb-6">
+                        <h3 class="text-lg font-semibold text-yellow-800 mb-2">Instrucciones</h3>
+                        <p class="text-gray-700">Completa las siguientes preguntas para evaluar tu comprensión de los conceptos de visualización de datos biomédicos. Necesitas obtener al menos 70% para aprobar.</p>
+                    </div>
+
+                    <form id="evaluationForm" class="space-y-6">
+                        <!-- Pregunta 1 -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-3">1. ¿Cuál es la principal diferencia entre un histograma y un gráfico de barras?</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center"><input type="radio" name="eval1" value="a" class="mr-2"> a) El histograma usa colores diferentes</label>
+                                <label class="flex items-center"><input type="radio" name="eval1" value="b" class="mr-2"> b) En el histograma las barras están juntas, en el gráfico de barras están separadas</label>
+                                <label class="flex items-center"><input type="radio" name="eval1" value="c" class="mr-2"> c) El histograma es solo para datos médicos</label>
+                                <label class="flex items-center"><input type="radio" name="eval1" value="d" class="mr-2"> d) No hay diferencia significativa</label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 2 -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-3">2. ¿Cuándo es más apropiado usar un gráfico de sectores?</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center"><input type="radio" name="eval2" value="a" class="mr-2"> a) Para mostrar tendencias temporales</label>
+                                <label class="flex items-center"><input type="radio" name="eval2" value="b" class="mr-2"> b) Para comparar muchas categorías</label>
+                                <label class="flex items-center"><input type="radio" name="eval2" value="c" class="mr-2"> c) Para mostrar proporciones de un total con pocas categorías</label>
+                                <label class="flex items-center"><input type="radio" name="eval2" value="d" class="mr-2"> d) Para datos continuos</label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 3 -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-3">3. Un polígono de frecuencia es útil para:</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center"><input type="radio" name="eval3" value="a" class="mr-2"> a) Mostrar solo datos categóricos</label>
+                                <label class="flex items-center"><input type="radio" name="eval3" value="b" class="mr-2"> b) Comparar múltiples distribuciones en el mismo gráfico</label>
+                                <label class="flex items-center"><input type="radio" name="eval3" value="c" class="mr-2"> c) Reemplazar completamente los histogramas</label>
+                                <label class="flex items-center"><input type="radio" name="eval3" value="d" class="mr-2"> d) Solo para datos de laboratorio</label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 4 -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-3">4. En epidemiología, los gráficos de barras son especialmente útiles para:</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center"><input type="radio" name="eval4" value="a" class="mr-2"> a) Mostrar distribuciones de variables continuas</label>
+                                <label class="flex items-center"><input type="radio" name="eval4" value="b" class="mr-2"> b) Comparar incidencia entre diferentes regiones o grupos</label>
+                                <label class="flex items-center"><input type="radio" name="eval4" value="c" class="mr-2"> c) Mostrar correlaciones entre variables</label>
+                                <label class="flex items-center"><input type="radio" name="eval4" value="d" class="mr-2"> d) Calcular medidas de tendencia central</label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 5 -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-3">5. ¿Qué información NO se puede obtener directamente de un histograma?</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center"><input type="radio" name="eval5" value="a" class="mr-2"> a) La forma de la distribución</label>
+                                <label class="flex items-center"><input type="radio" name="eval5" value="b" class="mr-2"> b) La frecuencia de cada intervalo</label>
+                                <label class="flex items-center"><input type="radio" name="eval5" value="c" class="mr-2"> c) La correlación con otra variable</label>
+                                <label class="flex items-center"><input type="radio" name="eval5" value="d" class="mr-2"> d) La concentración de datos en ciertos rangos</label>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center">
+                            <button type="button" onclick="submitEvaluation()" class="bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 transition-colors font-semibold">Enviar Evaluación</button>
+                        </div>
+                    </form>
+
+                    <div id="evaluationResult" class="mt-6 p-4 rounded-lg hidden">
+                        <div id="scoreDisplay" class="text-center mb-4"></div>
+                        <div id="detailedFeedback"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Recursos Adicionales</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Manual de R para Bioestadística</li>
+                        <li>• Datasets de práctica</li>
+                        <li>• Tutoriales de visualización</li>
+                        <li>• Casos clínicos reales</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Próxima OVA</h3>
+                    <p class="text-gray-300">OVA 6: Estadísticas Descriptivas Básicas</p>
+                    <p class="text-sm text-gray-400 mt-2">Medidas de tendencia central y posición en datos clínicos</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contacto</h3>
+                    <p class="text-gray-300">Universidad Antonio Nariño</p>
+                    <p class="text-gray-300">Facultad de Ciencias de la Salud</p>
+                    <p class="text-gray-300">Campus Virtual UAN</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Variables globales
+        let currentModule = 'intro';
+        let completedModules = new Set();
+        let charts = {};
+
+        // Datos simulados para los gráficos
+        const imcData = [18.5, 19.2, 20.1, 21.3, 22.5, 23.1, 23.8, 24.2, 24.9, 25.3, 25.8, 26.2, 26.7, 27.1, 27.5, 28.0, 28.4, 28.9, 29.2, 29.8, 30.1, 30.5, 31.2, 31.8, 32.3, 32.9, 33.5, 34.1, 34.8, 35.2];
+        const colesterolData = [150, 180, 220, 190, 210, 240, 170, 200, 230, 160, 195, 225, 185, 205, 175, 215, 235, 165, 190, 220, 180, 200, 210, 170, 230, 195, 185, 225, 205, 175];
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeNavigation();
+            createCharts();
+            updateProgress();
+        });
+
+        // Navegación entre módulos
+        function initializeNavigation() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const module = btn.dataset.module;
+                    showModule(module);
+                    updateNavigation(btn);
+                });
+            });
+        }
+
+        function showModule(moduleId) {
+            // Ocultar todos los módulos
+            document.querySelectorAll('.module').forEach(module => {
+                module.classList.add('module-hidden');
+            });
+            
+            // Mostrar el módulo seleccionado
+            const targetModule = document.getElementById(moduleId);
+            if (targetModule) {
+                targetModule.classList.remove('module-hidden');
+                targetModule.classList.add('fade-in');
+                currentModule = moduleId;
+                completedModules.add(moduleId);
+                updateProgress();
+            }
+        }
+
+        function updateNavigation(activeBtn) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-600', 'text-white');
+                btn.classList.add('text-gray-600', 'hover:bg-gray-100');
+            });
+            activeBtn.classList.add('active', 'bg-blue-600', 'text-white');
+            activeBtn.classList.remove('text-gray-600', 'hover:bg-gray-100');
+        }
+
+        function updateProgress() {
+            const totalModules = 7;
+            const progress = (completedModules.size / totalModules) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = Math.round(progress) + '%';
+        }
+
+        // Creación de gráficos
+        function createCharts() {
+            createHistogram();
+            createInteractiveHistogram();
+            createPolygonChart();
+            createGlucoseCharts();
+            createBarChart();
+            createGroupedBarChart();
+            createPieChart();
+            createConsultaCharts();
+            createExerciseChart();
+        }
+
+        function createHistogram() {
+            const ctx = document.getElementById('histogramChart').getContext('2d');
+            const bins = createHistogramBins(imcData, 8);
+            
+            charts.histogram = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: bins.labels,
+                    datasets: [{
+                        label: 'Frecuencia',
+                        data: bins.frequencies,
+                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Distribución de IMC en Pacientes (n=30)'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'IMC (kg/m²)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Frecuencia'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function createInteractiveHistogram() {
+            const ctx = document.getElementById('interactiveHistogram').getContext('2d');
+            const slider = document.getElementById('binsSlider');
+            const binsValue = document.getElementById('binsValue');
+            
+            function updateHistogram() {
+                const numBins = parseInt(slider.value);
+                binsValue.textContent = numBins + ' intervalos';
+                
+                const bins = createHistogramBins(colesterolData, numBins);
+                
+                if (charts.interactiveHistogram) {
+                    charts.interactiveHistogram.destroy();
+                }
+                
+                charts.interactiveHistogram = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: bins.labels,
+                        datasets: [{
+                            label: 'Frecuencia',
+                            data: bins.frequencies,
+                            backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Niveles de Colesterol - Histograma Interactivo'
+                            },
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Colesterol (mg/dL)'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Frecuencia'
+                                },
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+            
+            slider.addEventListener('input', updateHistogram);
+            updateHistogram();
+        }
+
+        function createPolygonChart() {
+            const ctx = document.getElementById('polygonChart').getContext('2d');
+            
+            charts.polygon = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['20-30', '31-40', '41-50', '51-60', '61-70', '71-80'],
+                    datasets: [{
+                        label: 'Presión Sistólica Promedio',
+                        data: [118, 122, 128, 135, 142, 148],
+                        borderColor: 'rgba(239, 68, 68, 1)',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Presión Arterial Sistólica por Grupo de Edad'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Grupo de Edad (años)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Presión Sistólica (mmHg)'
+                            },
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+        }
+
+        function createGlucoseCharts() {
+            const glucoseData = [85, 92, 98, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180, 185];
+            const bins = createHistogramBins(glucoseData, 6);
+            
+            // Histograma
+            const histCtx = document.getElementById('glucoseHistogram').getContext('2d');
+            charts.glucoseHist = new Chart(histCtx, {
+                type: 'bar',
+                data: {
+                    labels: bins.labels,
+                    datasets: [{
+                        label: 'Frecuencia',
+                        data: bins.frequencies,
+                        backgroundColor: 'rgba(168, 85, 247, 0.7)',
+                        borderColor: 'rgba(168, 85, 247, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+            
+            // Polígono
+            const polyCtx = document.getElementById('glucosePolygon').getContext('2d');
+            charts.glucosePoly = new Chart(polyCtx, {
+                type: 'line',
+                data: {
+                    labels: bins.labels,
+                    datasets: [{
+                        label: 'Frecuencia',
+                        data: bins.frequencies,
+                        borderColor: 'rgba(168, 85, 247, 1)',
+                        backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        function createBarChart() {
+            const ctx = document.getElementById('barChart').getContext('2d');
+            
+            charts.bar = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Bogotá', 'Antioquia', 'Valle', 'Atlántico', 'Santander', 'Cundinamarca'],
+                    datasets: [{
+                        label: 'Casos COVID-19',
+                        data: [45000, 32000, 28000, 18000, 15000, 12000],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.7)',
+                            'rgba(245, 158, 11, 0.7)',
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(168, 85, 247, 0.7)',
+                            'rgba(236, 72, 153, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(245, 158, 11, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(168, 85, 247, 1)',
+                            'rgba(236, 72, 153, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Casos de COVID-19 por Departamento'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Departamento'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Número de Casos'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function createGroupedBarChart() {
+            const ctx = document.getElementById('groupedBarChart').getContext('2d');
+            
+            charts.groupedBar = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['0-20', '21-40', '41-60', '61-80', '80+'],
+                    datasets: [{
+                        label: 'Hombres',
+                        data: [2, 8, 25, 45, 78],
+                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Mujeres',
+                        data: [1, 5, 18, 38, 65],
+                        backgroundColor: 'rgba(236, 72, 153, 0.7)',
+                        borderColor: 'rgba(236, 72, 153, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Mortalidad por Edad y Sexo (por 100,000 habitantes)'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Grupo de Edad (años)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Tasa de Mortalidad'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function createPieChart() {
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            
+            charts.pie = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Hipertensión', 'Diabetes', 'Enf. Cardiovascular', 'Obesidad', 'Otras'],
+                    datasets: [{
+                        data: [35, 28, 22, 10, 5],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(168, 85, 247, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(245, 158, 11, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(168, 85, 247, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Distribución de Enfermedades Crónicas (%)'
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        function createConsultaCharts() {
+            const data = {
+                labels: ['Medicina General', 'Especialidades', 'Urgencias', 'Odontología', 'Psicología'],
+                values: [40, 25, 20, 10, 5]
+            };
+            
+            // Gráfico de sectores
+            const pieCtx = document.getElementById('consultaPieChart').getContext('2d');
+            charts.consultaPie = new Chart(pieCtx, {
+                type: 'pie',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        data: data.values,
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(168, 85, 247, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+            
+            // Gráfico de barras
+            const barCtx = document.getElementById('consultaBarChart').getContext('2d');
+            charts.consultaBar = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Porcentaje',
+                        data: data.values,
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.7)',
+                            'rgba(245, 158, 11, 0.7)',
+                            'rgba(16, 185, 129, 0.7)',
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(168, 85, 247, 0.7)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            max: 50
+                        }
+                    }
+                }
+            });
+        }
+
+        function createExerciseChart() {
+            const ctx = document.getElementById('exerciseChart').getContext('2d');
+            
+            charts.exercise = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['0-20', '21-40', '41-60', '61-80', '80+'],
+                    datasets: [{
+                        label: 'Incidencia',
+                        data: [5, 15, 35, 28, 17],
+                        backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                        borderColor: 'rgba(16, 185, 129, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Incidencia de Enfermedad por Grupo de Edad (%)'
+                        },
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Grupo de Edad (años)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Incidencia (%)'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Funciones auxiliares
+        function createHistogramBins(data, numBins) {
+            const min = Math.min(...data);
+            const max = Math.max(...data);
+            const binWidth = (max - min) / numBins;
+            
+            const bins = [];
+            const frequencies = [];
+            
+            for (let i = 0; i < numBins; i++) {
+                const binStart = min + i * binWidth;
+                const binEnd = min + (i + 1) * binWidth;
+                const binLabel = `${binStart.toFixed(1)}-${binEnd.toFixed(1)}`;
+                
+                const count = data.filter(value => 
+                    value >= binStart && (i === numBins - 1 ? value <= binEnd : value < binEnd)
+                ).length;
+                
+                bins.push(binLabel);
+                frequencies.push(count);
+            }
+            
+            return { labels: bins, frequencies: frequencies };
+        }
+
+        // Funciones de ejercicios
+        function checkAnswers() {
+            const answers = {
+                q1: 'b', // Histograma para distribución de pesos
+                q2: 'b', // Gráfico de sectores para prevalencia de cáncer
+                q3: 'b'  // Gráfico de líneas para evolución temporal
+            };
+            
+            const feedbacks = {
+                q1: {
+                    correct: '¡Correcto! Los histogramas son ideales para mostrar la distribución de variables continuas como el peso.',
+                    incorrect: 'Incorrecto. Para variables continuas como el peso, el histograma es la mejor opción.'
+                },
+                q2: {
+                    correct: '¡Correcto! Los gráficos de sectores son perfectos para mostrar proporciones de diferentes tipos de cáncer.',
+                    incorrect: 'Incorrecto. Para mostrar proporciones de un total, el gráfico de sectores es más apropiado.'
+                },
+                q3: {
+                    correct: '¡Correcto! Los gráficos de líneas son ideales para mostrar tendencias temporales.',
+                    incorrect: 'Incorrecto. Para datos temporales, los gráficos de líneas son la mejor opción.'
+                }
+            };
+            
+            for (let i = 1; i <= 3; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const feedback = document.getElementById(`feedback${i}`);
+                
+                if (selected) {
+                    const isCorrect = selected.value === answers[`q${i}`];
+                    feedback.className = `mt-3 p-3 rounded ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
+                    feedback.textContent = isCorrect ? feedbacks[`q${i}`].correct : feedbacks[`q${i}`].incorrect;
+                    feedback.classList.remove('hidden');
+                }
+            }
+        }
+
+        function checkInterpretation() {
+            const ageGroup = document.getElementById('ageGroup').value;
+            const pattern = document.getElementById('patternObservation').value;
+            const feedback = document.getElementById('interpretationFeedback');
+            
+            let message = '';
+            let isCorrect = true;
+            
+            if (ageGroup === '41-60') {
+                message += '✓ Correcto: El grupo de 41-60 años tiene la mayor incidencia. ';
+            } else {
+                message += '✗ Incorrecto: Revisa el gráfico, el grupo de 41-60 años tiene la mayor incidencia. ';
+                isCorrect = false;
+            }
+            
+            if (pattern.toLowerCase().includes('aumenta') || pattern.toLowerCase().includes('incrementa')) {
+                message += '✓ Bien observado: La incidencia aumenta con la edad hasta los 60 años.';
+            } else {
+                message += 'Considera describir cómo cambia la incidencia con la edad.';
+            }
+            
+            feedback.className = `mt-3 p-3 rounded ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`;
+            feedback.textContent = message;
+            feedback.classList.remove('hidden');
+        }
+
+        function submitEvaluation() {
+            const answers = {
+                eval1: 'b',
+                eval2: 'c',
+                eval3: 'b',
+                eval4: 'b',
+                eval5: 'c'
+            };
+            
+            let correct = 0;
+            const total = Object.keys(answers).length;
+            const feedback = [];
+            
+            for (const [question, correctAnswer] of Object.entries(answers)) {
+                const selected = document.querySelector(`input[name="${question}"]:checked`);
+                if (selected && selected.value === correctAnswer) {
+                    correct++;
+                    feedback.push(`✓ Pregunta ${question.slice(-1)}: Correcto`);
+                } else {
+                    feedback.push(`✗ Pregunta ${question.slice(-1)}: Incorrecto`);
+                }
+            }
+            
+            const score = (correct / total) * 100;
+            const passed = score >= 70;
+            
+            const resultDiv = document.getElementById('evaluationResult');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const detailedFeedback = document.getElementById('detailedFeedback');
+            
+            scoreDisplay.innerHTML = `
+                <h3 class="text-2xl font-bold ${passed ? 'text-green-600' : 'text-red-600'}">
+                    ${passed ? '¡Felicitaciones!' : 'Necesitas repasar'}
+                </h3>
+                <p class="text-lg mt-2">Puntuación: ${correct}/${total} (${score.toFixed(1)}%)</p>
+                <p class="mt-2 ${passed ? 'text-green-600' : 'text-red-600'}">
+                    ${passed ? 'Has aprobado la evaluación' : 'Necesitas al menos 70% para aprobar'}
+                </p>
+            `;
+            
+            detailedFeedback.innerHTML = `
+                <h4 class="font-semibold mb-3">Retroalimentación detallada:</h4>
+                <ul class="space-y-1">
+                    ${feedback.map(item => `<li class="text-sm">${item}</li>`).join('')}
+                </ul>
+            `;
+            
+            resultDiv.className = `mt-6 p-4 rounded-lg ${passed ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`;
+            resultDiv.classList.remove('hidden');
+            
+            // Scroll to results
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

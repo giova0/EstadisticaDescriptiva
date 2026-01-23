@@ -1,0 +1,1627 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 9 - Probabilidad Condicional y Bayes en Medicina Clínica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .section { display: none; }
+        .section.active { display: block; }
+        .calculator-input { transition: all 0.3s ease; }
+        .calculator-input:focus { transform: scale(1.02); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .progress-bar { transition: width 0.5s ease; }
+        .medical-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .bayes-card { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .diagnostic-card { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-blue-900 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold">OVA 9: Probabilidad Condicional y Bayes</h1>
+                    <p class="text-blue-200 mt-2">Aplicaciones en Medicina Clínica y Diagnóstico</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm text-blue-200">Duración: 4 horas académicas</div>
+                    <div class="text-sm text-blue-200">Modalidad: 50% Virtual - 50% Presencial</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center justify-between text-sm text-gray-600 mb-2">
+                <span>Progreso del OVA</span>
+                <span id="progress-text">0%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="progress-bar bg-blue-600 h-2 rounded-full" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-1 overflow-x-auto py-2">
+                <button onclick="showSection('intro')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap bg-blue-600 text-white">Introducción</button>
+                <button onclick="showSection('objectives')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Objetivos</button>
+                <button onclick="showSection('theory')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Teoría</button>
+                <button onclick="showSection('bayes')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Teorema de Bayes</button>
+                <button onclick="showSection('diagnostics')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Pruebas Diagnósticas</button>
+                <button onclick="showSection('calculator')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Calculadora</button>
+                <button onclick="showSection('exercises')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Ejercicios</button>
+                <button onclick="showSection('evaluation')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Evaluación</button>
+                <button onclick="showSection('resources')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:bg-gray-100">Recursos</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Introducción -->
+        <section id="intro" class="section active fade-in">
+            <div class="max-w-4xl mx-auto">
+                <div class="medical-card text-white rounded-xl p-8 mb-8">
+                    <h2 class="text-3xl font-bold mb-4">¡Bienvenido al OVA 9!</h2>
+                    <p class="text-xl leading-relaxed">
+                        En este módulo exploraremos uno de los conceptos más poderosos y aplicados en medicina: 
+                        la probabilidad condicional y el teorema de Bayes. Aprenderás cómo estos conceptos 
+                        fundamentales transforman la práctica clínica moderna.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-stethoscope text-blue-600 text-2xl mr-3"></i>
+                            <h3 class="text-xl font-bold text-gray-800">¿Por qué es importante?</h3>
+                        </div>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Mejora la precisión diagnóstica</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Optimiza la toma de decisiones clínicas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Reduce errores médicos</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Fundamenta la medicina basada en evidencia</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-chart-line text-green-600 text-2xl mr-3"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Lo que aprenderás</h3>
+                        </div>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-500 mt-1 mr-2"></i>
+                                <span>Probabilidad condicional en diagnósticos</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-500 mt-1 mr-2"></i>
+                                <span>Aplicación del teorema de Bayes</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-500 mt-1 mr-2"></i>
+                                <span>Sensibilidad y especificidad</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-500 mt-1 mr-2"></i>
+                                <span>Valores predictivos positivo y negativo</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-lightbulb text-yellow-600 text-xl mr-3"></i>
+                        <h4 class="text-lg font-semibold text-yellow-800">Caso Motivador</h4>
+                    </div>
+                    <p class="mt-2 text-yellow-700">
+                        Un paciente llega a urgencias con síntomas respiratorios. La prueba rápida de COVID-19 
+                        es positiva. ¿Cuál es la probabilidad real de que tenga COVID-19? La respuesta no es 
+                        tan simple como parece y depende de varios factores que exploraremos en este módulo.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objetivos -->
+        <section id="objectives" class="section">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Objetivos de Aprendizaje</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-blue-800 mb-4">Objetivos Generales</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="bg-blue-100 text-blue-800 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
+                                <span class="text-gray-700">Comprender y aplicar el concepto de probabilidad condicional en contextos médicos</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-blue-100 text-blue-800 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
+                                <span class="text-gray-700">Dominar el teorema de Bayes y su aplicación en diagnósticos clínicos</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-blue-100 text-blue-800 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">3</span>
+                                <span class="text-gray-700">Interpretar correctamente sensibilidad, especificidad y valores predictivos</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-green-800 mb-4">Objetivos Específicos</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-600 mt-1 mr-3"></i>
+                                <span class="text-gray-700">Calcular probabilidades condicionales en escenarios clínicos</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-600 mt-1 mr-3"></i>
+                                <span class="text-gray-700">Evaluar la utilidad de pruebas diagnósticas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-600 mt-1 mr-3"></i>
+                                <span class="text-gray-700">Interpretar resultados de pruebas en diferentes poblaciones</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-600 mt-1 mr-3"></i>
+                                <span class="text-gray-700">Comunicar resultados probabilísticos a pacientes</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl p-6">
+                    <h3 class="text-xl font-bold mb-4">Competencias a Desarrollar</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="text-center">
+                            <i class="fas fa-brain text-3xl mb-2"></i>
+                            <h4 class="font-semibold">Pensamiento Crítico</h4>
+                            <p class="text-sm opacity-90">Análisis de información diagnóstica</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-calculator text-3xl mb-2"></i>
+                            <h4 class="font-semibold">Cálculo Aplicado</h4>
+                            <p class="text-sm opacity-90">Aplicación de fórmulas estadísticas</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-comments text-3xl mb-2"></i>
+                            <h4 class="font-semibold">Comunicación</h4>
+                            <p class="text-sm opacity-90">Explicación de conceptos complejos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teoría -->
+        <section id="theory" class="section">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Fundamentos Teóricos</h2>
+
+                <!-- Probabilidad Condicional -->
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-6">Probabilidad Condicional</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-3">Definición</h4>
+                            <p class="text-gray-600 mb-4">
+                                La probabilidad condicional es la probabilidad de que ocurra un evento A, 
+                                dado que ya sabemos que ha ocurrido otro evento B.
+                            </p>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <p class="text-center text-xl font-bold text-blue-800">P(A|B) = P(A ∩ B) / P(B)</p>
+                                <p class="text-center text-sm text-blue-600 mt-2">donde P(B) > 0</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-3">Interpretación Médica</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-semibold mr-3">A</span>
+                                    <span class="text-gray-700">Tener la enfermedad</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-semibold mr-3">B</span>
+                                    <span class="text-gray-700">Resultado positivo en la prueba</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm font-semibold mr-3">P(A|B)</span>
+                                    <span class="text-gray-700">Probabilidad de tener la enfermedad dado un resultado positivo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                        <h5 class="font-semibold text-yellow-800 mb-2">Ejemplo Clínico</h5>
+                        <p class="text-yellow-700">
+                            Si sabemos que un paciente tiene fiebre (evento B), ¿cuál es la probabilidad 
+                            de que tenga una infección bacteriana (evento A)? Esta probabilidad será 
+                            diferente a la probabilidad general de infección bacteriana en la población.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Independencia -->
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-green-800 mb-6">Independencia de Eventos</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-3">Eventos Independientes</h4>
+                            <p class="text-gray-600 mb-4">
+                                Dos eventos son independientes si la ocurrencia de uno no afecta 
+                                la probabilidad del otro.
+                            </p>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <p class="text-center text-lg font-bold text-green-800">P(A|B) = P(A)</p>
+                                <p class="text-center text-sm text-green-600 mt-2">Si A y B son independientes</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-3">En Medicina</h4>
+                            <div class="space-y-3">
+                                <div class="bg-red-50 p-3 rounded-lg">
+                                    <h5 class="font-semibold text-red-800">Dependientes</h5>
+                                    <p class="text-red-700 text-sm">Fumar y cáncer de pulmón</p>
+                                </div>
+                                <div class="bg-green-50 p-3 rounded-lg">
+                                    <h5 class="font-semibold text-green-800">Independientes</h5>
+                                    <p class="text-green-700 text-sm">Color de ojos y presión arterial</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regla de la Multiplicación -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-purple-800 mb-6">Regla de la Multiplicación</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-3">Fórmula General</h4>
+                            <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                                <p class="text-center text-lg font-bold text-purple-800">P(A ∩ B) = P(A|B) × P(B)</p>
+                                <p class="text-center text-sm text-purple-600 mt-2">Probabilidad de intersección</p>
+                            </div>
+                            <p class="text-gray-600">
+                                La probabilidad de que ocurran ambos eventos es el producto de la 
+                                probabilidad condicional por la probabilidad del evento condicionante.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-3">Aplicación Clínica</h4>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-700 mb-2">
+                                    <strong>Ejemplo:</strong> Probabilidad de que un paciente tenga diabetes 
+                                    Y presente síntomas específicos.
+                                </p>
+                                <p class="text-sm text-gray-600">
+                                    P(Diabetes ∩ Síntomas) = P(Síntomas|Diabetes) × P(Diabetes)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teorema de Bayes -->
+        <section id="bayes" class="section">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Teorema de Bayes</h2>
+
+                <div class="bayes-card text-white rounded-xl p-8 mb-8">
+                    <h3 class="text-2xl font-bold mb-4">El Teorema Fundamental del Diagnóstico</h3>
+                    <p class="text-xl leading-relaxed">
+                        El teorema de Bayes nos permite actualizar nuestras creencias sobre la probabilidad 
+                        de una enfermedad cuando obtenemos nueva información diagnóstica.
+                    </p>
+                </div>
+
+                <!-- Fórmula de Bayes -->
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-6">Fórmula de Bayes</h3>
+                    
+                    <div class="text-center mb-8">
+                        <div class="bg-blue-50 p-6 rounded-xl inline-block">
+                            <p class="text-3xl font-bold text-blue-800 mb-2">P(E|T+) = P(T+|E) × P(E) / P(T+)</p>
+                            <p class="text-blue-600">Probabilidad posterior = (Verosimilitud × Probabilidad previa) / Evidencia</p>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">Componentes</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">P(E|T+)</span>
+                                    <span class="text-gray-700">Probabilidad posterior (lo que buscamos)</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">P(T+|E)</span>
+                                    <span class="text-gray-700">Sensibilidad de la prueba</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">P(E)</span>
+                                    <span class="text-gray-700">Prevalencia (probabilidad previa)</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">P(T+)</span>
+                                    <span class="text-gray-700">Probabilidad total de prueba positiva</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">Interpretación Médica</h4>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <p class="text-gray-700 mb-3">
+                                    <strong>E:</strong> Paciente tiene la enfermedad<br>
+                                    <strong>T+:</strong> Prueba diagnóstica positiva
+                                </p>
+                                <p class="text-gray-600 text-sm">
+                                    El teorema nos dice: "Dada una prueba positiva, ¿cuál es la 
+                                    probabilidad real de que el paciente tenga la enfermedad?"
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ejemplo Práctico -->
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-green-800 mb-6">Ejemplo Práctico: Prueba de COVID-19</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">Datos de la Prueba</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Sensibilidad:</span>
+                                    <span class="font-semibold text-green-600">95%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Especificidad:</span>
+                                    <span class="font-semibold text-blue-600">98%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Prevalencia:</span>
+                                    <span class="font-semibold text-purple-600">5%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">Resultado</h4>
+                            <p class="text-gray-700 mb-3">
+                                Un paciente obtiene un resultado <strong class="text-red-600">POSITIVO</strong>
+                            </p>
+                            <p class="text-gray-600 text-sm">
+                                ¿Cuál es la probabilidad real de que tenga COVID-19?
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="text-lg font-semibold text-blue-800 mb-4">Cálculo paso a paso</h4>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span>P(T+|E) = Sensibilidad =</span>
+                                <span class="font-semibold">0.95</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>P(E) = Prevalencia =</span>
+                                <span class="font-semibold">0.05</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>P(T+|¬E) = 1 - Especificidad =</span>
+                                <span class="font-semibold">0.02</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>P(T+) = P(T+|E)×P(E) + P(T+|¬E)×P(¬E) =</span>
+                                <span class="font-semibold">0.0665</span>
+                            </div>
+                            <hr class="border-blue-200">
+                            <div class="flex justify-between text-lg font-bold text-blue-800">
+                                <span>P(E|T+) = (0.95 × 0.05) / 0.0665 =</span>
+                                <span class="text-xl">71.4%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                        <p class="text-yellow-800">
+                            <strong>Interpretación:</strong> Aunque la prueba es positiva, solo hay un 71.4% 
+                            de probabilidad de que el paciente realmente tenga COVID-19. Esto se debe a la 
+                            baja prevalencia de la enfermedad en la población.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Visualización -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-purple-800 mb-6">Visualización del Teorema de Bayes</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <canvas id="bayesChart" width="400" height="300"></canvas>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">Interpretación del Gráfico</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-green-500 rounded mr-3"></div>
+                                    <span>Verdaderos Positivos (Sensibilidad)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-red-500 rounded mr-3"></div>
+                                    <span>Falsos Positivos (1 - Especificidad)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-blue-500 rounded mr-3"></div>
+                                    <span>Verdaderos Negativos (Especificidad)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-orange-500 rounded mr-3"></div>
+                                    <span>Falsos Negativos (1 - Sensibilidad)</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                                <p class="text-gray-700 text-sm">
+                                    El área verde representa los casos donde la prueba es positiva 
+                                    Y el paciente tiene la enfermedad. El teorema de Bayes calcula 
+                                    qué proporción del total de positivos corresponde a esta área.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pruebas Diagnósticas -->
+        <section id="diagnostics" class="section">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Pruebas Diagnósticas</h2>
+
+                <div class="diagnostic-card text-white rounded-xl p-8 mb-8">
+                    <h3 class="text-2xl font-bold mb-4">Evaluación de Pruebas Médicas</h3>
+                    <p class="text-xl leading-relaxed">
+                        Toda prueba diagnóstica debe evaluarse en términos de su capacidad para 
+                        identificar correctamente a los enfermos y a los sanos.
+                    </p>
+                </div>
+
+                <!-- Tabla 2x2 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-6">Tabla de Contingencia 2×2</h3>
+                    
+                    <div class="overflow-x-auto mb-6">
+                        <table class="w-full border-collapse border border-gray-300">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-300 p-4 text-center" rowspan="2">Resultado de la Prueba</th>
+                                    <th class="border border-gray-300 p-4 text-center" colspan="2">Estado Real del Paciente</th>
+                                    <th class="border border-gray-300 p-4 text-center" rowspan="2">Total</th>
+                                </tr>
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-300 p-4 text-center bg-red-100">Enfermo</th>
+                                    <th class="border border-gray-300 p-4 text-center bg-green-100">Sano</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-gray-300 p-4 text-center font-semibold bg-red-50">Positivo</td>
+                                    <td class="border border-gray-300 p-4 text-center bg-green-200 font-bold">VP<br><span class="text-sm font-normal">(Verdaderos Positivos)</span></td>
+                                    <td class="border border-gray-300 p-4 text-center bg-red-200 font-bold">FP<br><span class="text-sm font-normal">(Falsos Positivos)</span></td>
+                                    <td class="border border-gray-300 p-4 text-center">VP + FP</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 p-4 text-center font-semibold bg-green-50">Negativo</td>
+                                    <td class="border border-gray-300 p-4 text-center bg-red-200 font-bold">FN<br><span class="text-sm font-normal">(Falsos Negativos)</span></td>
+                                    <td class="border border-gray-300 p-4 text-center bg-green-200 font-bold">VN<br><span class="text-sm font-normal">(Verdaderos Negativos)</span></td>
+                                    <td class="border border-gray-300 p-4 text-center">FN + VN</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="border border-gray-300 p-4 text-center font-semibold">Total</td>
+                                    <td class="border border-gray-300 p-4 text-center font-semibold">VP + FN</td>
+                                    <td class="border border-gray-300 p-4 text-center font-semibold">FP + VN</td>
+                                    <td class="border border-gray-300 p-4 text-center font-semibold">n</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-green-800 mb-2">Resultados Correctos</h4>
+                            <ul class="text-sm text-green-700 space-y-1">
+                                <li><strong>VP:</strong> Prueba positiva en paciente enfermo</li>
+                                <li><strong>VN:</strong> Prueba negativa en paciente sano</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-red-800 mb-2">Errores Diagnósticos</h4>
+                            <ul class="text-sm text-red-700 space-y-1">
+                                <li><strong>FP:</strong> Prueba positiva en paciente sano</li>
+                                <li><strong>FN:</strong> Prueba negativa en paciente enfermo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Métricas de Rendimiento -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <!-- Sensibilidad y Especificidad -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-blue-800 mb-4">Sensibilidad y Especificidad</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-2">Sensibilidad</h4>
+                                <p class="text-blue-700 text-sm mb-2">Capacidad de detectar la enfermedad cuando está presente</p>
+                                <div class="text-center">
+                                    <p class="text-lg font-bold text-blue-800">Sensibilidad = VP / (VP + FN)</p>
+                                    <p class="text-sm text-blue-600">Proporción de enfermos correctamente identificados</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-green-800 mb-2">Especificidad</h4>
+                                <p class="text-green-700 text-sm mb-2">Capacidad de descartar la enfermedad cuando no está presente</p>
+                                <div class="text-center">
+                                    <p class="text-lg font-bold text-green-800">Especificidad = VN / (VN + FP)</p>
+                                    <p class="text-sm text-green-600">Proporción de sanos correctamente identificados</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Valores Predictivos -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-purple-800 mb-4">Valores Predictivos</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-purple-800 mb-2">Valor Predictivo Positivo (VPP)</h4>
+                                <p class="text-purple-700 text-sm mb-2">Probabilidad de enfermedad dado un resultado positivo</p>
+                                <div class="text-center">
+                                    <p class="text-lg font-bold text-purple-800">VPP = VP / (VP + FP)</p>
+                                    <p class="text-sm text-purple-600">¿Qué tan confiable es un resultado positivo?</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-orange-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-orange-800 mb-2">Valor Predictivo Negativo (VPN)</h4>
+                                <p class="text-orange-700 text-sm mb-2">Probabilidad de no enfermedad dado un resultado negativo</p>
+                                <div class="text-center">
+                                    <p class="text-lg font-bold text-orange-800">VPN = VN / (VN + FN)</p>
+                                    <p class="text-sm text-orange-600">¿Qué tan confiable es un resultado negativo?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Factores que Afectan los Valores Predictivos -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-red-800 mb-6">Efecto de la Prevalencia</h3>
+                    
+                    <div class="mb-6">
+                        <p class="text-gray-700 mb-4">
+                            Los valores predictivos dependen fuertemente de la prevalencia de la enfermedad 
+                            en la población estudiada, mientras que la sensibilidad y especificidad son 
+                            características intrínsecas de la prueba.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-red-50 p-4 rounded-lg text-center">
+                            <h4 class="font-semibold text-red-800 mb-2">Baja Prevalencia (1%)</h4>
+                            <div class="text-sm text-red-700">
+                                <p>Sensibilidad: 95%</p>
+                                <p>Especificidad: 95%</p>
+                                <p class="font-bold text-lg mt-2">VPP: 16%</p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg text-center">
+                            <h4 class="font-semibold text-yellow-800 mb-2">Prevalencia Media (10%)</h4>
+                            <div class="text-sm text-yellow-700">
+                                <p>Sensibilidad: 95%</p>
+                                <p>Especificidad: 95%</p>
+                                <p class="font-bold text-lg mt-2">VPP: 68%</p>
+                            </div>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg text-center">
+                            <h4 class="font-semibold text-green-800 mb-2">Alta Prevalencia (50%)</h4>
+                            <div class="text-sm text-green-700">
+                                <p>Sensibilidad: 95%</p>
+                                <p>Especificidad: 95%</p>
+                                <p class="font-bold text-lg mt-2">VPP: 95%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                        <p class="text-blue-800">
+                            <strong>Implicación Clínica:</strong> Una misma prueba puede tener diferentes 
+                            valores predictivos según la población en la que se aplique. Es crucial 
+                            considerar el contexto clínico y epidemiológico.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculadora -->
+        <section id="calculator" class="section">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Calculadora Interactiva</h2>
+
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-6">Calculadora de Bayes y Métricas Diagnósticas</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Inputs -->
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">Parámetros de la Prueba</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Sensibilidad (%)</label>
+                                    <input type="number" id="sensitivity" class="calculator-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="95" min="0" max="100">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Especificidad (%)</label>
+                                    <input type="number" id="specificity" class="calculator-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="98" min="0" max="100">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Prevalencia (%)</label>
+                                    <input type="number" id="prevalence" class="calculator-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="5" min="0" max="100">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Tamaño de la población</label>
+                                    <input type="number" id="population" class="calculator-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="10000" min="100">
+                                </div>
+                                <button onclick="calculateMetrics()" class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200 font-semibold">
+                                    Calcular Métricas
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Resultados -->
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">Resultados</h4>
+                            <div id="results" class="space-y-4">
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <p class="text-gray-600 text-center">Ingrese los parámetros y haga clic en "Calcular Métricas"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de Contingencia Dinámica -->
+                    <div class="mt-8">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Tabla de Contingencia</h4>
+                        <div id="contingencyTable" class="overflow-x-auto">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Barras -->
+                    <div class="mt-8">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Visualización de Resultados</h4>
+                        <canvas id="metricsChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ejercicios -->
+        <section id="exercises" class="section">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Ejercicios Prácticos</h2>
+
+                <!-- Ejercicio 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4">Ejercicio 1: Prueba de Embarazo</h3>
+                    <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                        <p class="text-gray-700">
+                            Una prueba de embarazo tiene una sensibilidad del 99% y una especificidad del 95%. 
+                            Si se aplica a una población donde la prevalencia de embarazo es del 20%, 
+                            ¿cuál es la probabilidad de que una mujer esté realmente embarazada si la prueba es positiva?
+                        </p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-3">Datos:</h4>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li>• Sensibilidad: 99%</li>
+                                <li>• Especificidad: 95%</li>
+                                <li>• Prevalencia: 20%</li>
+                            </ul>
+                            
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tu respuesta (%):</label>
+                                <input type="number" id="exercise1Answer" class="w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="Ingresa tu respuesta">
+                                <button onclick="checkExercise1()" class="mt-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+                                    Verificar Respuesta
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <div id="exercise1Result" class="bg-gray-50 p-4 rounded-lg">
+                                <p class="text-gray-600 text-center">Ingresa tu respuesta para ver la solución</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h3 class="text-xl font-bold text-green-800 mb-4">Ejercicio 2: Screening de Diabetes</h3>
+                    <div class="bg-green-50 p-6 rounded-lg mb-6">
+                        <p class="text-gray-700">
+                            En un programa de screening para diabetes, se obtuvieron los siguientes resultados 
+                            en una muestra de 1000 personas:
+                        </p>
+                        <div class="mt-4 grid grid-cols-2 gap-4 text-sm">
+                            <div>• Diabéticos con prueba positiva: 85</div>
+                            <div>• Diabéticos con prueba negativa: 15</div>
+                            <div>• No diabéticos con prueba positiva: 50</div>
+                            <div>• No diabéticos con prueba negativa: 850</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-3">Calcula:</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm text-gray-600">Sensibilidad (%):</label>
+                                    <input type="number" id="ex2Sensitivity" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600">Especificidad (%):</label>
+                                    <input type="number" id="ex2Specificity" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600">VPP (%):</label>
+                                    <input type="number" id="ex2VPP" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600">VPN (%):</label>
+                                    <input type="number" id="ex2VPN" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                </div>
+                                <button onclick="checkExercise2()" class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+                                    Verificar Respuestas
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <div id="exercise2Result" class="bg-gray-50 p-4 rounded-lg">
+                                <p class="text-gray-600 text-center">Completa los cálculos para ver la solución</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-purple-800 mb-4">Ejercicio 3: Caso Clínico Integrado</h3>
+                    <div class="bg-purple-50 p-6 rounded-lg mb-6">
+                        <p class="text-gray-700 mb-4">
+                            <strong>Caso:</strong> María, de 45 años, acude a consulta con dolor torácico. 
+                            El médico considera la posibilidad de infarto agudo de miocardio (IAM).
+                        </p>
+                        <div class="text-sm text-gray-600">
+                            <p><strong>Datos epidemiológicos:</strong></p>
+                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                <li>Prevalencia de IAM en mujeres de 45 años con dolor torácico: 2%</li>
+                                <li>Troponina: Sensibilidad 95%, Especificidad 90%</li>
+                                <li>ECG: Sensibilidad 70%, Especificidad 95%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-800 mb-2">Pregunta 1:</h4>
+                            <p class="text-yellow-700 text-sm mb-3">
+                                Si la troponina es positiva, ¿cuál es la probabilidad de IAM?
+                            </p>
+                            <div class="flex items-center space-x-3">
+                                <input type="number" id="ex3Q1" class="px-3 py-2 border border-gray-300 rounded-lg text-sm" placeholder="%">
+                                <button onclick="checkExercise3Q1()" class="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition duration-200 text-sm">
+                                    Verificar
+                                </button>
+                            </div>
+                            <div id="ex3Q1Result" class="mt-2"></div>
+                        </div>
+                        
+                        <div class="bg-orange-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-orange-800 mb-2">Pregunta 2:</h4>
+                            <p class="text-orange-700 text-sm mb-3">
+                                Si tanto la troponina como el ECG son positivos (asumiendo independencia), 
+                                ¿cuál sería la nueva probabilidad de IAM?
+                            </p>
+                            <div class="flex items-center space-x-3">
+                                <input type="number" id="ex3Q2" class="px-3 py-2 border border-gray-300 rounded-lg text-sm" placeholder="%">
+                                <button onclick="checkExercise3Q2()" class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition duration-200 text-sm">
+                                    Verificar
+                                </button>
+                            </div>
+                            <div id="ex3Q2Result" class="mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluación -->
+        <section id="evaluation" class="section">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Evaluación Formativa</h2>
+
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-6">Quiz de Autoevaluación</h3>
+                    
+                    <div id="quiz-container">
+                        <!-- Pregunta 1 -->
+                        <div class="quiz-question mb-8 p-6 bg-gray-50 rounded-lg">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">1. ¿Qué representa la sensibilidad de una prueba diagnóstica?</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center">
+                                    <input type="radio" name="q1" value="a" class="mr-3">
+                                    <span>La probabilidad de que la prueba sea positiva en pacientes sanos</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q1" value="b" class="mr-3">
+                                    <span>La probabilidad de que la prueba sea positiva en pacientes enfermos</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q1" value="c" class="mr-3">
+                                    <span>La probabilidad de que la prueba sea negativa en pacientes sanos</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q1" value="d" class="mr-3">
+                                    <span>La probabilidad de enfermedad dado un resultado positivo</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 2 -->
+                        <div class="quiz-question mb-8 p-6 bg-gray-50 rounded-lg">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">2. El teorema de Bayes nos permite calcular:</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center">
+                                    <input type="radio" name="q2" value="a" class="mr-3">
+                                    <span>La sensibilidad de una prueba</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q2" value="b" class="mr-3">
+                                    <span>La especificidad de una prueba</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q2" value="c" class="mr-3">
+                                    <span>La probabilidad posterior dado nueva evidencia</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q2" value="d" class="mr-3">
+                                    <span>La prevalencia de una enfermedad</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 3 -->
+                        <div class="quiz-question mb-8 p-6 bg-gray-50 rounded-lg">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">3. ¿Qué factor afecta más significativamente el valor predictivo positivo?</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center">
+                                    <input type="radio" name="q3" value="a" class="mr-3">
+                                    <span>La sensibilidad de la prueba</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q3" value="b" class="mr-3">
+                                    <span>La especificidad de la prueba</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q3" value="c" class="mr-3">
+                                    <span>La prevalencia de la enfermedad</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q3" value="d" class="mr-3">
+                                    <span>El tamaño de la muestra</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 4 -->
+                        <div class="quiz-question mb-8 p-6 bg-gray-50 rounded-lg">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">4. Una prueba con alta sensibilidad es especialmente útil para:</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center">
+                                    <input type="radio" name="q4" value="a" class="mr-3">
+                                    <span>Confirmar un diagnóstico</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q4" value="b" class="mr-3">
+                                    <span>Descartar una enfermedad (screening)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q4" value="c" class="mr-3">
+                                    <span>Reducir falsos positivos</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q4" value="d" class="mr-3">
+                                    <span>Aumentar la especificidad</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 5 -->
+                        <div class="quiz-question mb-8 p-6 bg-gray-50 rounded-lg">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">5. Si una prueba tiene sensibilidad 90% y especificidad 95%, y la prevalencia es 1%, el VPP será aproximadamente:</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center">
+                                    <input type="radio" name="q5" value="a" class="mr-3">
+                                    <span>90%</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q5" value="b" class="mr-3">
+                                    <span>95%</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q5" value="c" class="mr-3">
+                                    <span>15%</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="q5" value="d" class="mr-3">
+                                    <span>50%</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button onclick="submitQuiz()" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-semibold">
+                                Enviar Respuestas
+                            </button>
+                        </div>
+
+                        <div id="quiz-results" class="mt-8 hidden">
+                            <!-- Los resultados se mostrarán aquí -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recursos -->
+        <section id="resources" class="section">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Recursos Adicionales</h2>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Lecturas Recomendadas -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-blue-800 mb-4">📚 Lecturas Recomendadas</h3>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-start">
+                                <i class="fas fa-book text-blue-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Epidemiología Clínica</strong><br>
+                                    <span class="text-gray-600">Fletcher, R. H., Fletcher, S. W. (2019)</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-book text-blue-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Bioestadística Médica</strong><br>
+                                    <span class="text-gray-600">Dawson, B., Trapp, R. G. (2018)</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-book text-blue-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Evidence-Based Medicine</strong><br>
+                                    <span class="text-gray-600">Straus, S. E., et al. (2019)</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Herramientas Online -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-green-800 mb-4">🔧 Herramientas Online</h3>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-start">
+                                <i class="fas fa-calculator text-green-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Calculadora de Bayes</strong><br>
+                                    <span class="text-gray-600">Para cálculos rápidos de probabilidades</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chart-bar text-green-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Simuladores de Pruebas Diagnósticas</strong><br>
+                                    <span class="text-gray-600">Visualización interactiva de conceptos</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-database text-green-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Datasets de Práctica</strong><br>
+                                    <span class="text-gray-600">Datos reales anonimizados para ejercicios</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Videos Educativos -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-purple-800 mb-4">🎥 Videos Educativos</h3>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-start">
+                                <i class="fas fa-play-circle text-purple-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Teorema de Bayes Explicado</strong><br>
+                                    <span class="text-gray-600">Conceptos básicos con ejemplos médicos</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-play-circle text-purple-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Interpretación de Pruebas Diagnósticas</strong><br>
+                                    <span class="text-gray-600">Casos clínicos paso a paso</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-play-circle text-purple-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Errores Comunes en Diagnóstico</strong><br>
+                                    <span class="text-gray-600">Cómo evitar interpretaciones incorrectas</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Casos Clínicos -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-red-800 mb-4">🏥 Casos Clínicos</h3>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-start">
+                                <i class="fas fa-user-md text-red-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Screening de Cáncer</strong><br>
+                                    <span class="text-gray-600">Aplicación de Bayes en oncología</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-user-md text-red-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Diagnóstico de Enfermedades Infecciosas</strong><br>
+                                    <span class="text-gray-600">COVID-19, VIH, tuberculosis</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-user-md text-red-600 mt-1 mr-3"></i>
+                                <div>
+                                    <strong>Medicina de Urgencias</strong><br>
+                                    <span class="text-gray-600">Toma de decisiones rápidas</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Resumen del OVA -->
+                <div class="mt-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-4">🎯 Resumen del OVA</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-2">Conceptos Clave</h4>
+                            <ul class="text-sm space-y-1 opacity-90">
+                                <li>• Probabilidad condicional</li>
+                                <li>• Teorema de Bayes</li>
+                                <li>• Sensibilidad y especificidad</li>
+                                <li>• Valores predictivos</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Habilidades Desarrolladas</h4>
+                            <ul class="text-sm space-y-1 opacity-90">
+                                <li>• Cálculo de probabilidades</li>
+                                <li>• Interpretación de pruebas</li>
+                                <li>• Análisis crítico</li>
+                                <li>• Comunicación de resultados</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Aplicaciones Clínicas</h4>
+                            <ul class="text-sm space-y-1 opacity-90">
+                                <li>• Diagnóstico médico</li>
+                                <li>• Screening poblacional</li>
+                                <li>• Medicina basada en evidencia</li>
+                                <li>• Toma de decisiones</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Próximos Pasos -->
+                <div class="mt-8 bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">🚀 Próximos Pasos</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-blue-800 mb-3">En el Siguiente OVA</h4>
+                            <p class="text-gray-700 text-sm mb-3">
+                                Continuaremos con distribuciones de probabilidad discretas, 
+                                explorando modelos binomiales y de Poisson en contextos médicos.
+                            </p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Variables aleatorias discretas</li>
+                                <li>• Distribución binomial</li>
+                                <li>• Distribución de Poisson</li>
+                                <li>• Aplicaciones en epidemiología</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-green-800 mb-3">Para Profundizar</h4>
+                            <p class="text-gray-700 text-sm mb-3">
+                                Te recomendamos practicar con casos reales y explorar 
+                                herramientas avanzadas de análisis estadístico.
+                            </p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Software estadístico (R, SPSS)</li>
+                                <li>• Análisis de datasets reales</li>
+                                <li>• Curvas ROC</li>
+                                <li>• Meta-análisis diagnóstico</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-xl font-bold mb-2">OVA 9 - Probabilidad Condicional y Bayes</h3>
+            <p class="text-gray-400 mb-4">Bioestadística para Ciencias de la Salud - Universidad Antonio Nariño</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <span>Duración: 4 horas académicas</span>
+                <span>•</span>
+                <span>Modalidad: Blended Learning</span>
+                <span>•</span>
+                <span>Nivel: Intermedio</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Variables globales
+        let currentSection = 'intro';
+        let completedSections = new Set(['intro']);
+        let bayesChart = null;
+        let metricsChart = null;
+
+        // Navegación entre secciones
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Actualizar navegación
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('text-gray-600', 'hover:bg-gray-100');
+            });
+            
+            event.target.classList.remove('text-gray-600', 'hover:bg-gray-100');
+            event.target.classList.add('bg-blue-600', 'text-white');
+            
+            // Marcar sección como completada
+            completedSections.add(sectionId);
+            currentSection = sectionId;
+            
+            // Actualizar barra de progreso
+            updateProgress();
+            
+            // Inicializar gráficos si es necesario
+            if (sectionId === 'bayes' && !bayesChart) {
+                initBayesChart();
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Actualizar barra de progreso
+        function updateProgress() {
+            const totalSections = 9;
+            const progress = (completedSections.size / totalSections) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = Math.round(progress) + '%';
+        }
+
+        // Inicializar gráfico de Bayes
+        function initBayesChart() {
+            const ctx = document.getElementById('bayesChart').getContext('2d');
+            bayesChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Verdaderos Positivos', 'Falsos Positivos', 'Verdaderos Negativos', 'Falsos Negativos'],
+                    datasets: [{
+                        data: [47.5, 19, 931, 2.5], // Ejemplo con prevalencia 5%
+                        backgroundColor: ['#10B981', '#EF4444', '#3B82F6', '#F59E0B'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Distribución de Resultados (Población: 1000)'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Calculadora de métricas
+        function calculateMetrics() {
+            const sensitivity = parseFloat(document.getElementById('sensitivity').value) / 100;
+            const specificity = parseFloat(document.getElementById('specificity').value) / 100;
+            const prevalence = parseFloat(document.getElementById('prevalence').value) / 100;
+            const population = parseInt(document.getElementById('population').value);
+
+            // Cálculos
+            const diseased = Math.round(population * prevalence);
+            const healthy = population - diseased;
+            
+            const truePositives = Math.round(diseased * sensitivity);
+            const falseNegatives = diseased - truePositives;
+            const trueNegatives = Math.round(healthy * specificity);
+            const falsePositives = healthy - trueNegatives;
+            
+            const totalPositives = truePositives + falsePositives;
+            const totalNegatives = falseNegatives + trueNegatives;
+            
+            // Valores predictivos
+            const ppv = totalPositives > 0 ? (truePositives / totalPositives) * 100 : 0;
+            const npv = totalNegatives > 0 ? (trueNegatives / totalNegatives) * 100 : 0;
+            
+            // Probabilidad posterior (Bayes)
+            const posteriorProb = ppv;
+
+            // Mostrar resultados
+            const resultsHTML = `
+                <div class="space-y-4">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h5 class="font-semibold text-blue-800 mb-2">Teorema de Bayes</h5>
+                        <p class="text-2xl font-bold text-blue-800">${posteriorProb.toFixed(1)}%</p>
+                        <p class="text-sm text-blue-600">Probabilidad de enfermedad dado resultado positivo</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <p class="text-lg font-bold text-green-800">${ppv.toFixed(1)}%</p>
+                            <p class="text-sm text-green-600">VPP</p>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg text-center">
+                            <p class="text-lg font-bold text-purple-800">${npv.toFixed(1)}%</p>
+                            <p class="text-sm text-purple-600">VPN</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-yellow-50 p-3 rounded-lg text-center">
+                            <p class="text-lg font-bold text-yellow-800">${(sensitivity * 100).toFixed(1)}%</p>
+                            <p class="text-sm text-yellow-600">Sensibilidad</p>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg text-center">
+                            <p class="text-lg font-bold text-orange-800">${(specificity * 100).toFixed(1)}%</p>
+                            <p class="text-sm text-orange-600">Especificidad</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('results').innerHTML = resultsHTML;
+
+            // Crear tabla de contingencia
+            const tableHTML = `
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="border border-gray-300 p-3" rowspan="2">Resultado Prueba</th>
+                            <th class="border border-gray-300 p-3" colspan="2">Estado Real</th>
+                            <th class="border border-gray-300 p-3" rowspan="2">Total</th>
+                        </tr>
+                        <tr class="bg-gray-100">
+                            <th class="border border-gray-300 p-3 bg-red-100">Enfermo</th>
+                            <th class="border border-gray-300 p-3 bg-green-100">Sano</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 p-3 font-semibold bg-red-50">Positivo</td>
+                            <td class="border border-gray-300 p-3 text-center bg-green-200 font-bold">${truePositives}</td>
+                            <td class="border border-gray-300 p-3 text-center bg-red-200 font-bold">${falsePositives}</td>
+                            <td class="border border-gray-300 p-3 text-center font-semibold">${totalPositives}</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 p-3 font-semibold bg-green-50">Negativo</td>
+                            <td class="border border-gray-300 p-3 text-center bg-red-200 font-bold">${falseNegatives}</td>
+                            <td class="border border-gray-300 p-3 text-center bg-green-200 font-bold">${trueNegatives}</td>
+                            <td class="border border-gray-300 p-3 text-center font-semibold">${totalNegatives}</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="border border-gray-300 p-3 font-semibold">Total</td>
+                            <td class="border border-gray-300 p-3 text-center font-semibold">${diseased}</td>
+                            <td class="border border-gray-300 p-3 text-center font-semibold">${healthy}</td>
+                            <td class="border border-gray-300 p-3 text-center font-semibold">${population}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            
+            document.getElementById('contingencyTable').innerHTML = tableHTML;
+
+            // Actualizar gráfico de métricas
+            updateMetricsChart(sensitivity * 100, specificity * 100, ppv, npv);
+        }
+
+        // Actualizar gráfico de métricas
+        function updateMetricsChart(sens, spec, ppv, npv) {
+            const ctx = document.getElementById('metricsChart').getContext('2d');
+            
+            if (metricsChart) {
+                metricsChart.destroy();
+            }
+            
+            metricsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Sensibilidad', 'Especificidad', 'VPP', 'VPN'],
+                    datasets: [{
+                        label: 'Porcentaje (%)',
+                        data: [sens, spec, ppv, npv],
+                        backgroundColor: ['#3B82F6', '#10B981', '#8B5CF6', '#F59E0B'],
+                        borderColor: ['#1D4ED8', '#059669', '#7C3AED', '#D97706'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Métricas de Rendimiento Diagnóstico'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Ejercicios
+        function checkExercise1() {
+            const answer = parseFloat(document.getElementById('exercise1Answer').value);
+            const correct = 83.2; // Respuesta correcta calculada
+            
+            let resultHTML = '';
+            if (Math.abs(answer - correct) < 2) {
+                resultHTML = `
+                    <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
+                        <h5 class="font-semibold text-green-800 mb-2">¡Correcto! 🎉</h5>
+                        <p class="text-green-700 text-sm mb-3">Tu respuesta (${answer}%) está muy cerca del valor correcto (${correct}%).</p>
+                        <div class="text-sm text-green-600">
+                            <strong>Solución:</strong><br>
+                            P(Embarazo|Positivo) = (0.99 × 0.20) / [(0.99 × 0.20) + (0.05 × 0.80)]<br>
+                            = 0.198 / (0.198 + 0.04) = 0.198 / 0.238 = 83.2%
+                        </div>
+                    </div>
+                `;
+            } else {
+                resultHTML = `
+                    <div class="bg-red-50 border border-red-200 p-4 rounded-lg">
+                        <h5 class="font-semibold text-red-800 mb-2">Incorrecto</h5>
+                        <p class="text-red-700 text-sm mb-3">La respuesta correcta es ${correct}%.</p>
+                        <div class="text-sm text-red-600">
+                            <strong>Recuerda:</strong> Usa el teorema de Bayes:<br>
+                            P(E|T+) = P(T+|E) × P(E) / P(T+)
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('exercise1Result').innerHTML = resultHTML;
+        }
+
+        function checkExercise2() {
+            const sens = parseFloat(document.getElementById('ex2Sensitivity').value);
+            const spec = parseFloat(document.getElementById('ex2Specificity').value);
+            const vpp = parseFloat(document.getElementById('ex2VPP').value);
+            const vpn = parseFloat(document.getElementById('ex2VPN').value);
+            
+            // Respuestas correctas
+            const correctSens = 85; // 85/100
+            const correctSpec = 94.4; // 850/900
+            const correctVPP = 63.0; // 85/135
+            const correctVPN = 98.3; // 850/865
+            
+            let resultHTML = '<div class="space-y-3">';
+            
+            // Verificar cada respuesta
+            const checks = [
+                {value: sens, correct: correctSens, name: 'Sensibilidad'},
+                {value: spec, correct: correctSpec, name: 'Especificidad'},
+                {value: vpp, correct: correctVPP, name: 'VPP'},
+                {value: vpn, correct: correctVPN, name: 'VPN'}
+            ];
+            
+            checks.forEach(check => {
+                const isCorrect = Math.abs(check.value - check.correct) < 2;
+                const color = isCorrect ? 'green' : 'red';
+                const icon = isCorrect ? '✓' : '✗';
+                
+                resultHTML += `
+                    <div class="flex justify-between items-center p-2 bg-${color}-50 rounded">
+                        <span class="text-${color}-800">${check.name}: ${check.value}%</span>
+                        <span class="text-${color}-600">${icon} (Correcto: ${check.correct.toFixed(1)}%)</span>
+                    </div>
+                `;
+            });
+            
+            resultHTML += '</div>';
+            document.getElementById('exercise2Result').innerHTML = resultHTML;
+        }
+
+        function checkExercise3Q1() {
+            const answer = parseFloat(document.getElementById('ex3Q1').value);
+            const correct = 17.4; // Calculado con Bayes
+            
+            let resultHTML = '';
+            if (Math.abs(answer - correct) < 2) {
+                resultHTML = `<div class="text-green-600 text-sm">✓ Correcto: ${correct}%</div>`;
+            } else {
+                resultHTML = `<div class="text-red-600 text-sm">✗ Incorrecto. Respuesta: ${correct}%</div>`;
+            }
+            
+            document.getElementById('ex3Q1Result').innerHTML = resultHTML;
+        }
+
+        function checkExercise3Q2() {
+            const answer = parseFloat(document.getElementById('ex3Q2').value);
+            const correct = 70.0; // Aproximado con pruebas combinadas
+            
+            let resultHTML = '';
+            if (Math.abs(answer - correct) < 5) {
+                resultHTML = `<div class="text-green-600 text-sm">✓ Correcto: ~${correct}%</div>`;
+            } else {
+                resultHTML = `<div class="text-red-600 text-sm">✗ Incorrecto. Respuesta: ~${correct}%</div>`;
+            }
+            
+            document.getElementById('ex3Q2Result').innerHTML = resultHTML;
+        }
+
+        // Quiz de evaluación
+        function submitQuiz() {
+            const answers = {
+                q1: 'b', // Sensibilidad es P(T+|E)
+                q2: 'c', // Bayes calcula probabilidad posterior
+                q3: 'c', // Prevalencia afecta más al VPP
+                q4: 'b', // Alta sensibilidad para screening
+                q5: 'c'  // VPP bajo con baja prevalencia
+            };
+            
+            let score = 0;
+            let totalQuestions = Object.keys(answers).length;
+            let resultHTML = '<div class="space-y-4">';
+            
+            for (let question in answers) {
+                const userAnswer = document.querySelector(`input[name="${question}"]:checked`);
+                const isCorrect = userAnswer && userAnswer.value === answers[question];
+                
+                if (isCorrect) score++;
+                
+                const color = isCorrect ? 'green' : 'red';
+                const icon = isCorrect ? '✓' : '✗';
+                
+                resultHTML += `
+                    <div class="flex items-center p-3 bg-${color}-50 rounded-lg">
+                        <span class="text-${color}-600 font-bold mr-3">${icon}</span>
+                        <span class="text-${color}-800">Pregunta ${question.slice(1)}: ${isCorrect ? 'Correcta' : 'Incorrecta'}</span>
+                    </div>
+                `;
+            }
+            
+            const percentage = (score / totalQuestions) * 100;
+            let gradeColor = 'red';
+            let gradeText = 'Necesita mejorar';
+            
+            if (percentage >= 80) {
+                gradeColor = 'green';
+                gradeText = 'Excelente';
+            } else if (percentage >= 60) {
+                gradeColor = 'yellow';
+                gradeText = 'Bueno';
+            }
+            
+            resultHTML += `
+                <div class="bg-${gradeColor}-100 border border-${gradeColor}-300 p-6 rounded-lg text-center">
+                    <h4 class="text-2xl font-bold text-${gradeColor}-800 mb-2">${percentage}%</h4>
+                    <p class="text-${gradeColor}-700">${gradeText} - ${score}/${totalQuestions} respuestas correctas</p>
+                </div>
+            `;
+            
+            resultHTML += '</div>';
+            
+            document.getElementById('quiz-results').innerHTML = resultHTML;
+            document.getElementById('quiz-results').classList.remove('hidden');
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            // Event listeners para inputs de calculadora
+            ['sensitivity', 'specificity', 'prevalence', 'population'].forEach(id => {
+                document.getElementById(id).addEventListener('input', function() {
+                    // Auto-calcular después de un breve delay
+                    clearTimeout(this.timeout);
+                    this.timeout = setTimeout(calculateMetrics, 500);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

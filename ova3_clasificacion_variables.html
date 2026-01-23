@@ -1,0 +1,1210 @@
+
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 3 - Clasificación de Variables en Ciencias de la Salud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .variable-card { transition: all 0.3s ease; }
+        .variable-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .progress-ring { transform: rotate(-90deg); }
+        .progress-ring-circle { transition: stroke-dashoffset 0.35s; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="navbar bg-white shadow-lg sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                    <i class="fas fa-bars text-xl"></i>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a onclick="showSection('intro')">Introducción</a></li>
+                    <li><a onclick="showSection('teoria')">Teoría</a></li>
+                    <li><a onclick="showSection('escalas')">Escalas</a></li>
+                    <li><a onclick="showSection('ejercicios')">Ejercicios</a></li>
+                    <li><a onclick="showSection('casos')">Casos Clínicos</a></li>
+                    <li><a onclick="showSection('evaluacion')">Evaluación</a></li>
+                </ul>
+            </div>
+            <a class="btn btn-ghost text-xl font-bold text-primary">
+                <i class="fas fa-chart-bar mr-2"></i>
+                OVA 3 - Variables
+            </a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a onclick="showSection('intro')" class="nav-link">Introducción</a></li>
+                <li><a onclick="showSection('teoria')" class="nav-link">Teoría</a></li>
+                <li><a onclick="showSection('escalas')" class="nav-link">Escalas</a></li>
+                <li><a onclick="showSection('ejercicios')" class="nav-link">Ejercicios</a></li>
+                <li><a onclick="showSection('casos')" class="nav-link">Casos Clínicos</a></li>
+                <li><a onclick="showSection('evaluacion')" class="nav-link">Evaluación</a></li>
+            </ul>
+        </div>
+        <div class="navbar-end">
+            <div class="flex items-center space-x-4">
+                <div class="radial-progress text-primary" style="--value:0;" id="progressIndicator">0%</div>
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><a onclick="resetProgress()">Reiniciar Progreso</a></li>
+                        <li><a onclick="exportProgress()">Exportar Progreso</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Introducción -->
+        <section id="intro" class="section-content fade-in">
+            <div class="hero bg-white rounded-3xl shadow-xl p-8 mb-8">
+                <div class="hero-content text-center">
+                    <div class="max-w-4xl">
+                        <h1 class="text-5xl font-bold text-primary mb-6">
+                            <i class="fas fa-microscope mr-4"></i>
+                            Clasificación de Variables
+                        </h1>
+                        <h2 class="text-2xl font-semibold text-secondary mb-4">
+                            En Ciencias de la Salud
+                        </h2>
+                        <p class="text-lg text-gray-600 mb-8">
+                            Aprende a identificar, clasificar y aplicar diferentes tipos de variables en investigación biomédica y práctica clínica.
+                        </p>
+                        
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="card bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-xl">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-clock text-3xl mb-2"></i>
+                                    <h3 class="card-title justify-center">Duración</h3>
+                                    <p>3 horas académicas</p>
+                                </div>
+                            </div>
+                            <div class="card bg-gradient-to-br from-green-500 to-green-600 text-white shadow-xl">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-laptop text-3xl mb-2"></i>
+                                    <h3 class="card-title justify-center">Modalidad</h3>
+                                    <p>50% Virtual - 50% Presencial</p>
+                                </div>
+                            </div>
+                            <div class="card bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-xl">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-target text-3xl mb-2"></i>
+                                    <h3 class="card-title justify-center">Tipo</h3>
+                                    <p>Aplicativa/Práctica</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-2xl p-6 mb-8">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Objetivos de Aprendizaje</h3>
+                            <div class="grid md:grid-cols-2 gap-4 text-left">
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Distinguir entre variables cualitativas y cuantitativas en contextos de salud</span>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Identificar escalas de medición en instrumentos clínicos</span>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Aplicar clasificaciones en procesos de investigación</span>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Analizar casos clínicos reales con diferentes tipos de variables</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="showSection('teoria')" class="btn btn-primary btn-lg">
+                            <i class="fas fa-play mr-2"></i>
+                            Comenzar OVA
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teoría -->
+        <section id="teoria" class="section-content hidden">
+            <div class="card bg-white shadow-xl mb-8">
+                <div class="card-body">
+                    <h2 class="card-title text-3xl text-primary mb-6">
+                        <i class="fas fa-book-open mr-3"></i>
+                        Fundamentos Teóricos
+                    </h2>
+                    
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <!-- Variables Cualitativas -->
+                        <div class="variable-card bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 border border-pink-200">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-tags text-white text-xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-pink-700">Variables Cualitativas</h3>
+                            </div>
+                            
+                            <p class="text-gray-700 mb-4">
+                                Representan características o atributos que no pueden ser medidos numéricamente de forma natural.
+                            </p>
+                            
+                            <div class="space-y-4">
+                                <div class="bg-white rounded-lg p-4 border-l-4 border-pink-400">
+                                    <h4 class="font-semibold text-pink-700 mb-2">Nominales</h4>
+                                    <p class="text-sm text-gray-600 mb-2">Sin orden específico</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="badge badge-outline badge-sm">Tipo de sangre</span>
+                                        <span class="badge badge-outline badge-sm">Género</span>
+                                        <span class="badge badge-outline badge-sm">Diagnóstico</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg p-4 border-l-4 border-pink-400">
+                                    <h4 class="font-semibold text-pink-700 mb-2">Ordinales</h4>
+                                    <p class="text-sm text-gray-600 mb-2">Con orden jerárquico</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="badge badge-outline badge-sm">Grado de dolor</span>
+                                        <span class="badge badge-outline badge-sm">Estadio del cáncer</span>
+                                        <span class="badge badge-outline badge-sm">Nivel educativo</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Variables Cuantitativas -->
+                        <div class="variable-card bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-200">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-calculator text-white text-xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-blue-700">Variables Cuantitativas</h3>
+                            </div>
+                            
+                            <p class="text-gray-700 mb-4">
+                                Representan cantidades numéricas que pueden ser medidas y sometidas a operaciones matemáticas.
+                            </p>
+                            
+                            <div class="space-y-4">
+                                <div class="bg-white rounded-lg p-4 border-l-4 border-blue-400">
+                                    <h4 class="font-semibold text-blue-700 mb-2">Discretas</h4>
+                                    <p class="text-sm text-gray-600 mb-2">Valores enteros, contables</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="badge badge-outline badge-sm">Número de hijos</span>
+                                        <span class="badge badge-outline badge-sm">Consultas médicas</span>
+                                        <span class="badge badge-outline badge-sm">Hospitalizaciones</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg p-4 border-l-4 border-blue-400">
+                                    <h4 class="font-semibold text-blue-700 mb-2">Continuas</h4>
+                                    <p class="text-sm text-gray-600 mb-2">Valores decimales, medibles</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="badge badge-outline badge-sm">Peso</span>
+                                        <span class="badge badge-outline badge-sm">Presión arterial</span>
+                                        <span class="badge badge-outline badge-sm">Temperatura</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-6 border border-yellow-200">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-lightbulb text-yellow-600 text-2xl mr-3"></i>
+                            <h3 class="text-xl font-bold text-yellow-800">Punto Clave</h3>
+                        </div>
+                        <p class="text-gray-700">
+                            La correcta clasificación de variables es fundamental para seleccionar las técnicas estadísticas apropiadas 
+                            en investigación biomédica y para interpretar correctamente los resultados clínicos.
+                        </p>
+                    </div>
+
+                    <div class="card-actions justify-between mt-8">
+                        <button onclick="showSection('intro')" class="btn btn-outline">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Anterior
+                        </button>
+                        <button onclick="showSection('escalas')" class="btn btn-primary">
+                            Escalas de Medición
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Escalas de Medición -->
+        <section id="escalas" class="section-content hidden">
+            <div class="card bg-white shadow-xl mb-8">
+                <div class="card-body">
+                    <h2 class="card-title text-3xl text-primary mb-6">
+                        <i class="fas fa-ruler mr-3"></i>
+                        Escalas de Medición en Instrumentos Clínicos
+                    </h2>
+
+                    <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                        <div class="space-y-6">
+                            <!-- Escala Nominal -->
+                            <div class="card bg-gradient-to-r from-red-50 to-pink-50 border border-red-200">
+                                <div class="card-body">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center mr-3">
+                                            <span class="text-white font-bold">N</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-red-700">Escala Nominal</h3>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">Categorías sin orden jerárquico</p>
+                                    <div class="bg-white rounded-lg p-3">
+                                        <h4 class="font-semibold mb-2">Ejemplos Clínicos:</h4>
+                                        <ul class="text-sm space-y-1">
+                                            <li>• Grupo sanguíneo (A, B, AB, O)</li>
+                                            <li>• Sexo (Masculino, Femenino)</li>
+                                            <li>• Tipo de tratamiento</li>
+                                            <li>• Presencia/ausencia de síntomas</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Escala Ordinal -->
+                            <div class="card bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-200">
+                                <div class="card-body">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-3">
+                                            <span class="text-white font-bold">O</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-orange-700">Escala Ordinal</h3>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">Categorías con orden jerárquico</p>
+                                    <div class="bg-white rounded-lg p-3">
+                                        <h4 class="font-semibold mb-2">Ejemplos Clínicos:</h4>
+                                        <ul class="text-sm space-y-1">
+                                            <li>• Escala de dolor (1-10)</li>
+                                            <li>• Grado de disnea</li>
+                                            <li>• Estadio tumoral (I, II, III, IV)</li>
+                                            <li>• Nivel de conciencia (Glasgow)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <!-- Escala de Intervalo -->
+                            <div class="card bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200">
+                                <div class="card-body">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                                            <span class="text-white font-bold">I</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-blue-700">Escala de Intervalo</h3>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">Distancias iguales, sin cero absoluto</p>
+                                    <div class="bg-white rounded-lg p-3">
+                                        <h4 class="font-semibold mb-2">Ejemplos Clínicos:</h4>
+                                        <ul class="text-sm space-y-1">
+                                            <li>• Temperatura corporal (°C)</li>
+                                            <li>• Escalas psicométricas</li>
+                                            <li>• Índices de calidad de vida</li>
+                                            <li>• Puntuaciones de tests cognitivos</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Escala de Razón -->
+                            <div class="card bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200">
+                                <div class="card-body">
+                                    <div class="flex items-center mb-3">
+                                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                            <span class="text-white font-bold">R</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-green-700">Escala de Razón</h3>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">Distancias iguales con cero absoluto</p>
+                                    <div class="bg-white rounded-lg p-3">
+                                        <h4 class="font-semibold mb-2">Ejemplos Clínicos:</h4>
+                                        <ul class="text-sm space-y-1">
+                                            <li>• Peso corporal (kg)</li>
+                                            <li>• Presión arterial (mmHg)</li>
+                                            <li>• Frecuencia cardíaca (lpm)</li>
+                                            <li>• Concentración de glucosa</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla Comparativa -->
+                    <div class="overflow-x-auto mb-8">
+                        <table class="table table-zebra w-full">
+                            <thead>
+                                <tr class="bg-primary text-white">
+                                    <th>Escala</th>
+                                    <th>Orden</th>
+                                    <th>Distancia</th>
+                                    <th>Cero Absoluto</th>
+                                    <th>Operaciones Permitidas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold text-red-600">Nominal</td>
+                                    <td><i class="fas fa-times text-red-500"></i></td>
+                                    <td><i class="fas fa-times text-red-500"></i></td>
+                                    <td><i class="fas fa-times text-red-500"></i></td>
+                                    <td>Frecuencias, moda</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold text-orange-600">Ordinal</td>
+                                    <td><i class="fas fa-check text-green-500"></i></td>
+                                    <td><i class="fas fa-times text-red-500"></i></td>
+                                    <td><i class="fas fa-times text-red-500"></i></td>
+                                    <td>Mediana, percentiles</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold text-blue-600">Intervalo</td>
+                                    <td><i class="fas fa-check text-green-500"></i></td>
+                                    <td><i class="fas fa-check text-green-500"></i></td>
+                                    <td><i class="fas fa-times text-red-500"></i></td>
+                                    <td>Media, desviación estándar</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold text-green-600">Razón</td>
+                                    <td><i class="fas fa-check text-green-500"></i></td>
+                                    <td><i class="fas fa-check text-green-500"></i></td>
+                                    <td><i class="fas fa-check text-green-500"></i></td>
+                                    <td>Todas las operaciones</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-actions justify-between">
+                        <button onclick="showSection('teoria')" class="btn btn-outline">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Anterior
+                        </button>
+                        <button onclick="showSection('ejercicios')" class="btn btn-primary">
+                            Ejercicios Prácticos
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ejercicios Interactivos -->
+        <section id="ejercicios" class="section-content hidden">
+            <div class="card bg-white shadow-xl mb-8">
+                <div class="card-body">
+                    <h2 class="card-title text-3xl text-primary mb-6">
+                        <i class="fas fa-puzzle-piece mr-3"></i>
+                        Ejercicios Interactivos
+                    </h2>
+
+                    <div class="mb-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold">Progreso de Ejercicios</h3>
+                            <span class="text-sm text-gray-600" id="exerciseProgress">0/10 completados</span>
+                        </div>
+                        <progress class="progress progress-primary w-full" value="0" max="10" id="exerciseProgressBar"></progress>
+                    </div>
+
+                    <!-- Ejercicio Actual -->
+                    <div id="currentExercise" class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-lg font-semibold" id="exerciseTitle">Ejercicio 1 de 10</h4>
+                            <div class="badge badge-primary" id="exerciseType">Clasificación</div>
+                        </div>
+                        
+                        <div id="exerciseContent">
+                            <p class="text-gray-700 mb-4" id="exerciseQuestion">
+                                Clasifica la siguiente variable: "Edad del paciente en años"
+                            </p>
+                            
+                            <div class="grid grid-cols-2 gap-4" id="exerciseOptions">
+                                <button class="btn btn-outline exercise-option" data-answer="cualitativa-nominal">
+                                    Cualitativa Nominal
+                                </button>
+                                <button class="btn btn-outline exercise-option" data-answer="cualitativa-ordinal">
+                                    Cualitativa Ordinal
+                                </button>
+                                <button class="btn btn-outline exercise-option" data-answer="cuantitativa-discreta">
+                                    Cuantitativa Discreta
+                                </button>
+                                <button class="btn btn-outline exercise-option" data-answer="cuantitativa-continua">
+                                    Cuantitativa Continua
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="exerciseFeedback" class="mt-4 hidden">
+                            <div class="alert" id="feedbackAlert">
+                                <i class="fas fa-check-circle"></i>
+                                <span id="feedbackText">¡Correcto! La edad es una variable cuantitativa continua.</span>
+                            </div>
+                            <div class="mt-4">
+                                <button onclick="nextExercise()" class="btn btn-primary">
+                                    Siguiente Ejercicio
+                                    <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen de Resultados -->
+                    <div id="exerciseResults" class="hidden bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6">
+                        <div class="text-center">
+                            <i class="fas fa-trophy text-yellow-500 text-4xl mb-4"></i>
+                            <h3 class="text-2xl font-bold text-green-700 mb-4">¡Ejercicios Completados!</h3>
+                            <div class="stats stats-vertical lg:stats-horizontal shadow">
+                                <div class="stat">
+                                    <div class="stat-title">Respuestas Correctas</div>
+                                    <div class="stat-value text-green-600" id="correctAnswers">0</div>
+                                    <div class="stat-desc">de 10 preguntas</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-title">Porcentaje</div>
+                                    <div class="stat-value text-blue-600" id="percentage">0%</div>
+                                    <div class="stat-desc">de aciertos</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-title">Calificación</div>
+                                    <div class="stat-value text-purple-600" id="grade">-</div>
+                                    <div class="stat-desc">sobre 5.0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions justify-between mt-8">
+                        <button onclick="showSection('escalas')" class="btn btn-outline">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Anterior
+                        </button>
+                        <button onclick="showSection('casos')" class="btn btn-primary" id="nextSectionBtn" disabled>
+                            Casos Clínicos
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Casos Clínicos -->
+        <section id="casos" class="section-content hidden">
+            <div class="card bg-white shadow-xl mb-8">
+                <div class="card-body">
+                    <h2 class="card-title text-3xl text-primary mb-6">
+                        <i class="fas fa-user-md mr-3"></i>
+                        Casos Clínicos Prácticos
+                    </h2>
+
+                    <div class="tabs tabs-boxed mb-6">
+                        <a class="tab tab-active" onclick="showCase(1)">Caso 1: Diabetes</a>
+                        <a class="tab" onclick="showCase(2)">Caso 2: Hipertensión</a>
+                        <a class="tab" onclick="showCase(3)">Caso 3: Oncología</a>
+                    </div>
+
+                    <!-- Caso 1: Diabetes -->
+                    <div id="case1" class="case-content">
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6">
+                            <h3 class="text-xl font-bold text-blue-700 mb-4">
+                                <i class="fas fa-heartbeat mr-2"></i>
+                                Estudio de Diabetes Tipo 2
+                            </h3>
+                            <p class="text-gray-700 mb-4">
+                                Un hospital está realizando un estudio sobre factores asociados con diabetes tipo 2. 
+                                Se recolectaron los siguientes datos de 200 pacientes:
+                            </p>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Variables Recolectadas:</h4>
+                                    <ul class="space-y-2 text-sm">
+                                        <li class="flex justify-between">
+                                            <span>• Edad (años)</span>
+                                            <span class="badge badge-sm" id="var1-type">?</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>• Sexo (M/F)</span>
+                                            <span class="badge badge-sm" id="var2-type">?</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>• IMC (kg/m²)</span>
+                                            <span class="badge badge-sm" id="var3-type">?</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>• Nivel educativo (Primaria/Secundaria/Superior)</span>
+                                            <span class="badge badge-sm" id="var4-type">?</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>• Glucosa en ayunas (mg/dL)</span>
+                                            <span class="badge badge-sm" id="var5-type">?</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>• Número de consultas anuales</span>
+                                            <span class="badge badge-sm" id="var6-type">?</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Clasificar Variables:</h4>
+                                    <div class="space-y-3">
+                                        <select class="select select-bordered w-full select-sm" onchange="classifyVariable(1, this.value)">
+                                            <option value="">Edad (años)</option>
+                                            <option value="cuant-cont">Cuantitativa Continua</option>
+                                            <option value="cuant-disc">Cuantitativa Discreta</option>
+                                            <option value="cual-ord">Cualitativa Ordinal</option>
+                                            <option value="cual-nom">Cualitativa Nominal</option>
+                                        </select>
+                                        <select class="select select-bordered w-full select-sm" onchange="classifyVariable(2, this.value)">
+                                            <option value="">Sexo (M/F)</option>
+                                            <option value="cuant-cont">Cuantitativa Continua</option>
+                                            <option value="cuant-disc">Cuantitativa Discreta</option>
+                                            <option value="cual-ord">Cualitativa Ordinal</option>
+                                            <option value="cual-nom">Cualitativa Nominal</option>
+                                        </select>
+                                        <select class="select select-bordered w-full select-sm" onchange="classifyVariable(3, this.value)">
+                                            <option value="">IMC (kg/m²)</option>
+                                            <option value="cuant-cont">Cuantitativa Continua</option>
+                                            <option value="cuant-disc">Cuantitativa Discreta</option>
+                                            <option value="cual-ord">Cualitativa Ordinal</option>
+                                            <option value="cual-nom">Cualitativa Nominal</option>
+                                        </select>
+                                        <select class="select select-bordered w-full select-sm" onchange="classifyVariable(4, this.value)">
+                                            <option value="">Nivel educativo</option>
+                                            <option value="cuant-cont">Cuantitativa Continua</option>
+                                            <option value="cuant-disc">Cuantitativa Discreta</option>
+                                            <option value="cual-ord">Cualitativa Ordinal</option>
+                                            <option value="cual-nom">Cualitativa Nominal</option>
+                                        </select>
+                                        <select class="select select-bordered w-full select-sm" onchange="classifyVariable(5, this.value)">
+                                            <option value="">Glucosa en ayunas</option>
+                                            <option value="cuant-cont">Cuantitativa Continua</option>
+                                            <option value="cuant-disc">Cuantitativa Discreta</option>
+                                            <option value="cual-ord">Cualitativa Ordinal</option>
+                                            <option value="cual-nom">Cualitativa Nominal</option>
+                                        </select>
+                                        <select class="select select-bordered w-full select-sm" onchange="classifyVariable(6, this.value)">
+                                            <option value="">Número de consultas</option>
+                                            <option value="cuant-cont">Cuantitativa Continua</option>
+                                            <option value="cuant-disc">Cuantitativa Discreta</option>
+                                            <option value="cual-ord">Cualitativa Ordinal</option>
+                                            <option value="cual-nom">Cualitativa Nominal</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <button onclick="checkCaseAnswers(1)" class="btn btn-primary">
+                                    <i class="fas fa-check mr-2"></i>
+                                    Verificar Respuestas
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Caso 2: Hipertensión -->
+                    <div id="case2" class="case-content hidden">
+                        <div class="bg-gradient-to-r from-red-50 to-pink-50 rounded-2xl p-6 mb-6">
+                            <h3 class="text-xl font-bold text-red-700 mb-4">
+                                <i class="fas fa-heart mr-2"></i>
+                                Estudio de Hipertensión Arterial
+                            </h3>
+                            <p class="text-gray-700 mb-4">
+                                Se está evaluando la efectividad de diferentes tratamientos para hipertensión arterial 
+                                en una muestra de 150 pacientes durante 6 meses.
+                            </p>
+                            
+                            <div class="bg-white rounded-lg p-4 mb-4">
+                                <h4 class="font-semibold mb-3">Datos del Estudio:</h4>
+                                <div class="grid md:grid-cols-3 gap-4 text-sm">
+                                    <div>
+                                        <strong>Variables Demográficas:</strong>
+                                        <ul class="mt-2 space-y-1">
+                                            <li>• Edad del paciente</li>
+                                            <li>• Estado civil</li>
+                                            <li>• Ocupación</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <strong>Variables Clínicas:</strong>
+                                        <ul class="mt-2 space-y-1">
+                                            <li>• Presión sistólica (mmHg)</li>
+                                            <li>• Presión diastólica (mmHg)</li>
+                                            <li>• Grado de hipertensión (I, II, III)</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <strong>Variables de Tratamiento:</strong>
+                                        <ul class="mt-2 space-y-1">
+                                            <li>• Tipo de medicamento</li>
+                                            <li>• Dosis diaria (mg)</li>
+                                            <li>• Adherencia al tratamiento (%)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Analiza cada variable y determina su tipo y escala de medición más apropiada.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Caso 3: Oncología -->
+                    <div id="case3" class="case-content hidden">
+                        <div class="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl p-6 mb-6">
+                            <h3 class="text-xl font-bold text-purple-700 mb-4">
+                                <i class="fas fa-ribbon mr-2"></i>
+                                Registro Oncológico Hospitalario
+                            </h3>
+                            <p class="text-gray-700 mb-4">
+                                Un hospital está implementando un sistema de registro para pacientes oncológicos. 
+                                Necesita clasificar correctamente las variables para el análisis estadístico.
+                            </p>
+                            
+                            <div class="bg-white rounded-lg p-4 mb-4">
+                                <h4 class="font-semibold mb-3">Variables del Registro:</h4>
+                                <div class="overflow-x-auto">
+                                    <table class="table table-zebra w-full">
+                                        <thead>
+                                            <tr>
+                                                <th>Variable</th>
+                                                <th>Ejemplo de Valores</th>
+                                                <th>Tipo</th>
+                                                <th>Escala</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Tipo de cáncer</td>
+                                                <td>Mama, Pulmón, Colon, Próstata</td>
+                                                <td class="font-mono text-sm">?</td>
+                                                <td class="font-mono text-sm">?</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Estadio TNM</td>
+                                                <td>I, II, III, IV</td>
+                                                <td class="font-mono text-sm">?</td>
+                                                <td class="font-mono text-sm">?</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tamaño del tumor</td>
+                                                <td>2.5 cm, 4.1 cm, 1.8 cm</td>
+                                                <td class="font-mono text-sm">?</td>
+                                                <td class="font-mono text-sm">?</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Número de ganglios</td>
+                                                <td>0, 3, 7, 12</td>
+                                                <td class="font-mono text-sm">?</td>
+                                                <td class="font-mono text-sm">?</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Supervivencia</td>
+                                                <td>24 meses, 36 meses, 48 meses</td>
+                                                <td class="font-mono text-sm">?</td>
+                                                <td class="font-mono text-sm">?</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions justify-between">
+                        <button onclick="showSection('ejercicios')" class="btn btn-outline">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Anterior
+                        </button>
+                        <button onclick="showSection('evaluacion')" class="btn btn-primary">
+                            Evaluación Final
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluación -->
+        <section id="evaluacion" class="section-content hidden">
+            <div class="card bg-white shadow-xl mb-8">
+                <div class="card-body">
+                    <h2 class="card-title text-3xl text-primary mb-6">
+                        <i class="fas fa-clipboard-check mr-3"></i>
+                        Evaluación Final
+                    </h2>
+
+                    <div class="alert alert-info mb-6">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <h3 class="font-bold">Instrucciones</h3>
+                            <p>Responde las siguientes preguntas sobre clasificación de variables. Tienes 20 minutos para completar la evaluación.</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">Tiempo restante:</span>
+                            <span class="countdown font-mono text-2xl" id="countdown">
+                                <span style="--value:20;"></span>:
+                                <span style="--value:0;"></span>
+                            </span>
+                        </div>
+                        <progress class="progress progress-warning w-full" value="100" max="100" id="timeProgress"></progress>
+                    </div>
+
+                    <div id="evaluationQuestions">
+                        <!-- Las preguntas se generarán dinámicamente -->
+                    </div>
+
+                    <div class="card-actions justify-center mt-8">
+                        <button onclick="submitEvaluation()" class="btn btn-success btn-lg" id="submitBtn">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Enviar Evaluación
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer footer-center p-10 bg-primary text-primary-content">
+        <aside>
+            <i class="fas fa-university text-4xl mb-4"></i>
+            <p class="font-bold">
+                Universidad Antonio Nariño - UAN
+                <br>
+                Bioestadística para Ciencias de la Salud
+            </p>
+            <p>OVA 3 - Clasificación de Variables © 2024</p>
+        </aside>
+    </footer>
+
+    <script>
+        // Estado global de la aplicación
+        let currentSection = 'intro';
+        let exerciseIndex = 0;
+        let correctExercises = 0;
+        let caseAnswers = {};
+        let evaluationStartTime = null;
+        let evaluationTimer = null;
+
+        // Datos de ejercicios
+        const exercises = [
+            {
+                question: "Clasifica la siguiente variable: 'Edad del paciente en años'",
+                options: ["Cualitativa Nominal", "Cualitativa Ordinal", "Cuantitativa Discreta", "Cuantitativa Continua"],
+                correct: "Cuantitativa Continua",
+                explanation: "La edad es una variable cuantitativa continua porque puede tomar cualquier valor decimal y tiene un cero absoluto."
+            },
+            {
+                question: "¿Qué tipo de variable es 'Grupo sanguíneo (A, B, AB, O)'?",
+                options: ["Cualitativa Nominal", "Cualitativa Ordinal", "Cuantitativa Discreta", "Cuantitativa Continua"],
+                correct: "Cualitativa Nominal",
+                explanation: "El grupo sanguíneo es una variable cualitativa nominal porque representa categorías sin orden jerárquico."
+            },
+            {
+                question: "La variable 'Grado de dolor en escala 1-10' es:",
+                options: ["Cualitativa Nominal", "Cualitativa Ordinal", "Cuantitativa Discreta", "Cuantitativa Continua"],
+                correct: "Cualitativa Ordinal",
+                explanation: "Aunque use números, representa categorías ordenadas de intensidad de dolor, por lo que es cualitativa ordinal."
+            },
+            {
+                question: "¿Cómo clasificarías 'Número de hospitalizaciones en el último año'?",
+                options: ["Cualitativa Nominal", "Cualitativa Ordinal", "Cuantitativa Discreta", "Cuantitativa Continua"],
+                correct: "Cuantitativa Discreta",
+                explanation: "Es cuantitativa discreta porque representa conteos (números enteros) que pueden ser sometidos a operaciones matemáticas."
+            },
+            {
+                question: "La variable 'Presión arterial sistólica en mmHg' es:",
+                options: ["Cualitativa Nominal", "Cualitativa Ordinal", "Cuantitativa Discreta", "Cuantitativa Continua"],
+                correct: "Cuantitativa Continua",
+                explanation: "La presión arterial es cuantitativa continua porque puede tomar valores decimales y tiene un cero absoluto."
+            },
+            {
+                question: "¿Qué tipo de variable es 'Estado civil (Soltero, Casado, Divorciado, Viudo)'?",
+                options: ["Cualitativa Nominal", "Cualitativa Ordinal", "Cuantitativa Discreta", "Cuantitativa Continua"],
+                correct: "Cualitativa Nominal",
+                explanation: "El estado civil representa categorías sin orden jerárquico, por lo que es cualitativa nominal."
+            },
+            {
+                question: "La variable 'Estadio del cáncer (I, II, III, IV)' se clasifica como:",
+                options: ["Cualitativa Nominal", "Cualitativa Ordinal", "Cuantitativa Discreta", "Cuantitativa Continua"],
+                correct: "Cualitativa Ordinal",
+                explanation: "Los estadios del cáncer representan categorías con un orden jerárquico claro de severidad."
+            },
+            {
+                question: "¿Cómo clasificarías 'Peso corporal en kilogramos'?",
+                options: ["Cualitativa Nominal", "Cualitativa Ordinal", "Cuantitativa Discreta", "Cuantitativa Continua"],
+                correct: "Cuantitativa Continua",
+                explanation: "El peso es cuantitativa continua porque puede medirse con precisión decimal y tiene un cero absoluto."
+            },
+            {
+                question: "La variable 'Tipo de tratamiento (Farmacológico, Quirúrgico, Radioterapia)' es:",
+                options: ["Cualitativa Nominal", "Cualitativa Ordinal", "Cuantitativa Discreta", "Cuantitativa Continua"],
+                correct: "Cualitativa Nominal",
+                explanation: "Los tipos de tratamiento son categorías sin orden jerárquico específico."
+            },
+            {
+                question: "¿Qué tipo de variable es 'Número de síntomas presentes'?",
+                options: ["Cualitativa Nominal", "Cualitativa Ordinal", "Cuantitativa Discreta", "Cuantitativa Continua"],
+                correct: "Cuantitativa Discreta",
+                explanation: "Es cuantitativa discreta porque representa un conteo de elementos que puede ser sometido a operaciones matemáticas."
+            }
+        ];
+
+        // Respuestas correctas para casos clínicos
+        const caseCorrectAnswers = {
+            1: {
+                1: "cuant-cont", // Edad
+                2: "cual-nom",   // Sexo
+                3: "cuant-cont", // IMC
+                4: "cual-ord",   // Nivel educativo
+                5: "cuant-cont", // Glucosa
+                6: "cuant-disc"  // Número de consultas
+            }
+        };
+
+        // Funciones de navegación
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.remove('hidden');
+            document.getElementById(sectionId).classList.add('fade-in');
+            
+            // Actualizar navegación activa
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            currentSection = sectionId;
+            updateProgress();
+            
+            // Inicializar sección específica
+            if (sectionId === 'ejercicios') {
+                initializeExercises();
+            } else if (sectionId === 'evaluacion') {
+                initializeEvaluation();
+            }
+        }
+
+        function updateProgress() {
+            const sections = ['intro', 'teoria', 'escalas', 'ejercicios', 'casos', 'evaluacion'];
+            const currentIndex = sections.indexOf(currentSection);
+            const progress = Math.round((currentIndex / (sections.length - 1)) * 100);
+            
+            document.getElementById('progressIndicator').style.setProperty('--value', progress);
+            document.getElementById('progressIndicator').textContent = progress + '%';
+        }
+
+        // Funciones de ejercicios
+        function initializeExercises() {
+            exerciseIndex = 0;
+            correctExercises = 0;
+            showCurrentExercise();
+        }
+
+        function showCurrentExercise() {
+            if (exerciseIndex >= exercises.length) {
+                showExerciseResults();
+                return;
+            }
+
+            const exercise = exercises[exerciseIndex];
+            document.getElementById('exerciseTitle').textContent = `Ejercicio ${exerciseIndex + 1} de ${exercises.length}`;
+            document.getElementById('exerciseQuestion').textContent = exercise.question;
+            
+            const optionsContainer = document.getElementById('exerciseOptions');
+            optionsContainer.innerHTML = '';
+            
+            exercise.options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'btn btn-outline exercise-option';
+                button.textContent = option;
+                button.onclick = () => checkExerciseAnswer(option);
+                optionsContainer.appendChild(button);
+            });
+            
+            document.getElementById('exerciseFeedback').classList.add('hidden');
+            updateExerciseProgress();
+        }
+
+        function checkExerciseAnswer(selectedAnswer) {
+            const exercise = exercises[exerciseIndex];
+            const isCorrect = selectedAnswer === exercise.correct;
+            
+            if (isCorrect) {
+                correctExercises++;
+            }
+            
+            // Mostrar feedback
+            const feedbackAlert = document.getElementById('feedbackAlert');
+            const feedbackText = document.getElementById('feedbackText');
+            
+            if (isCorrect) {
+                feedbackAlert.className = 'alert alert-success';
+                feedbackAlert.innerHTML = '<i class="fas fa-check-circle"></i>';
+                feedbackText.textContent = `¡Correcto! ${exercise.explanation}`;
+            } else {
+                feedbackAlert.className = 'alert alert-error';
+                feedbackAlert.innerHTML = '<i class="fas fa-times-circle"></i>';
+                feedbackText.textContent = `Incorrecto. La respuesta correcta es: ${exercise.correct}. ${exercise.explanation}`;
+            }
+            
+            document.getElementById('exerciseFeedback').classList.remove('hidden');
+            
+            // Deshabilitar opciones
+            document.querySelectorAll('.exercise-option').forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === exercise.correct) {
+                    btn.classList.add('btn-success');
+                } else if (btn.textContent === selectedAnswer && !isCorrect) {
+                    btn.classList.add('btn-error');
+                }
+            });
+        }
+
+        function nextExercise() {
+            exerciseIndex++;
+            showCurrentExercise();
+        }
+
+        function updateExerciseProgress() {
+            const progress = exerciseIndex;
+            document.getElementById('exerciseProgress').textContent = `${progress}/${exercises.length} completados`;
+            document.getElementById('exerciseProgressBar').value = progress;
+        }
+
+        function showExerciseResults() {
+            document.getElementById('currentExercise').classList.add('hidden');
+            document.getElementById('exerciseResults').classList.remove('hidden');
+            
+            const percentage = Math.round((correctExercises / exercises.length) * 100);
+            const grade = (correctExercises / exercises.length) * 5;
+            
+            document.getElementById('correctAnswers').textContent = correctExercises;
+            document.getElementById('percentage').textContent = percentage + '%';
+            document.getElementById('grade').textContent = grade.toFixed(1);
+            
+            // Habilitar siguiente sección
+            document.getElementById('nextSectionBtn').disabled = false;
+        }
+
+        // Funciones de casos clínicos
+        function showCase(caseNumber) {
+            document.querySelectorAll('.case-content').forEach(case_ => {
+                case_.classList.add('hidden');
+            });
+            document.getElementById(`case${caseNumber}`).classList.remove('hidden');
+            
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('tab-active');
+            });
+            event.target.classList.add('tab-active');
+        }
+
+        function classifyVariable(varNumber, classification) {
+            if (!caseAnswers[1]) caseAnswers[1] = {};
+            caseAnswers[1][varNumber] = classification;
+            
+            // Actualizar badge
+            const badge = document.getElementById(`var${varNumber}-type`);
+            if (classification) {
+                const types = {
+                    'cuant-cont': 'Cuant. Continua',
+                    'cuant-disc': 'Cuant. Discreta',
+                    'cual-ord': 'Cual. Ordinal',
+                    'cual-nom': 'Cual. Nominal'
+                };
+                badge.textContent = types[classification];
+                badge.className = 'badge badge-sm badge-primary';
+            }
+        }
+
+        function checkCaseAnswers(caseNumber) {
+            const userAnswers = caseAnswers[caseNumber] || {};
+            const correctAnswers = caseCorrectAnswers[caseNumber];
+            let correct = 0;
+            let total = Object.keys(correctAnswers).length;
+            
+            for (let varNum in correctAnswers) {
+                const badge = document.getElementById(`var${varNum}-type`);
+                if (userAnswers[varNum] === correctAnswers[varNum]) {
+                    badge.className = 'badge badge-sm badge-success';
+                    correct++;
+                } else {
+                    badge.className = 'badge badge-sm badge-error';
+                }
+            }
+            
+            const percentage = Math.round((correct / total) * 100);
+            alert(`Resultado: ${correct}/${total} correctas (${percentage}%)`);
+        }
+
+        // Funciones de evaluación
+        function initializeEvaluation() {
+            generateEvaluationQuestions();
+            startEvaluationTimer();
+        }
+
+        function generateEvaluationQuestions() {
+            const questions = [
+                {
+                    question: "En un estudio sobre factores de riesgo cardiovascular, ¿cómo clasificarías la variable 'Nivel de colesterol en mg/dL'?",
+                    options: ["Cualitativa nominal", "Cualitativa ordinal", "Cuantitativa discreta", "Cuantitativa continua"],
+                    correct: 3
+                },
+                {
+                    question: "La variable 'Grado de satisfacción del paciente (Muy insatisfecho, Insatisfecho, Neutral, Satisfecho, Muy satisfecho)' es:",
+                    options: ["Cualitativa nominal", "Cualitativa ordinal", "Cuantitativa discreta", "Cuantitativa continua"],
+                    correct: 1
+                },
+                {
+                    question: "¿Qué escala de medición corresponde a la variable 'Temperatura corporal en grados Celsius'?",
+                    options: ["Nominal", "Ordinal", "Intervalo", "Razón"],
+                    correct: 2
+                },
+                {
+                    question: "En un registro hospitalario, la variable 'Número de días de estancia' se clasifica como:",
+                    options: ["Cualitativa nominal", "Cualitativa ordinal", "Cuantitativa discreta", "Cuantitativa continua"],
+                    correct: 2
+                },
+                {
+                    question: "¿Cuál de las siguientes variables tiene escala de razón?",
+                    options: ["Grado de dolor (1-10)", "Temperatura en °C", "Peso en kg", "Nivel socioeconómico"],
+                    correct: 2
+                }
+            ];
+            
+            const container = document.getElementById('evaluationQuestions');
+            container.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'card bg-base-100 shadow-md mb-4';
+                questionDiv.innerHTML = `
+                    <div class="card-body">
+                        <h3 class="card-title text-lg">Pregunta ${index + 1}</h3>
+                        <p class="mb-4">${q.question}</p>
+                        <div class="space-y-2">
+                            ${q.options.map((option, optIndex) => `
+                                <label class="label cursor-pointer justify-start">
+                                    <input type="radio" name="q${index}" value="${optIndex}" class="radio radio-primary mr-3">
+                                    <span class="label-text">${option}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function startEvaluationTimer() {
+            evaluationStartTime = Date.now();
+            let timeLeft = 20 * 60; // 20 minutos en segundos
+            
+            evaluationTimer = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                document.querySelector('.countdown span:first-child').style.setProperty('--value', minutes);
+                document.querySelector('.countdown span:last-child').style.setProperty('--value', seconds);
+                
+                const progress = (timeLeft / (20 * 60)) * 100;
+                document.getElementById('timeProgress').value = progress;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(evaluationTimer);
+                    submitEvaluation();
+                }
+            }, 1000);
+        }
+
+        function submitEvaluation() {
+            clearInterval(evaluationTimer);
+            
+            // Recopilar respuestas
+            const answers = [];
+            for (let i = 0; i < 5; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                answers.push(selected ? parseInt(selected.value) : -1);
+            }
+            
+            // Calcular puntuación
+            const correctAnswers = [3, 1, 2, 2, 2];
+            let score = 0;
+            answers.forEach((answer, index) => {
+                if (answer === correctAnswers[index]) score++;
+            });
+            
+            const percentage = (score / 5) * 100;
+            const grade = (score / 5) * 5;
+            
+            alert(`Evaluación completada!\nRespuestas correctas: ${score}/5\nPorcentaje: ${percentage}%\nCalificación: ${grade.toFixed(1)}/5.0`);
+        }
+
+        // Funciones de utilidad
+        function resetProgress() {
+            if (confirm('¿Estás seguro de que quieres reiniciar todo el progreso?')) {
+                exerciseIndex = 0;
+                correctExercises = 0;
+                caseAnswers = {};
+                showSection('intro');
+            }
+        }
+
+        function exportProgress() {
+            const progress = {
+                currentSection,
+                exerciseProgress: correctExercises,
+                caseAnswers,
+                timestamp: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(progress, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ova3_progreso.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('intro');
+        });
+    </script>
+</body>
+</html>

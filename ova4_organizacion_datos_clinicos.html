@@ -1,0 +1,1404 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 4 - Organización de Datos Clínicos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .interactive-element { transition: all 0.3s ease; }
+        .interactive-element:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg border-b-4 border-blue-600">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-blue-600 text-white p-3 rounded-full">
+                        <i class="fas fa-chart-bar text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-800">OVA 4 - Organización de Datos Clínicos</h1>
+                        <p class="text-gray-600">Bioestadística para Ciencias de la Salud - UAN</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-gray-600">Semana 4 | Duración: 4 horas académicas</p>
+                    <p class="text-sm text-blue-600 font-semibold">70% Virtual - 30% Presencial</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow-sm">
+        <div class="container mx-auto px-6">
+            <div class="flex space-x-8 overflow-x-auto">
+                <button onclick="showTab('intro')" class="tab-btn py-4 px-6 text-blue-600 border-b-2 border-blue-600 font-semibold whitespace-nowrap">
+                    <i class="fas fa-home mr-2"></i>Introducción
+                </button>
+                <button onclick="showTab('discretas')" class="tab-btn py-4 px-6 text-gray-600 hover:text-blue-600 whitespace-nowrap">
+                    <i class="fas fa-table mr-2"></i>Variables Discretas
+                </button>
+                <button onclick="showTab('continuas')" class="tab-btn py-4 px-6 text-gray-600 hover:text-blue-600 whitespace-nowrap">
+                    <i class="fas fa-chart-line mr-2"></i>Variables Continuas
+                </button>
+                <button onclick="showTab('graficas')" class="tab-btn py-4 px-6 text-gray-600 hover:text-blue-600 whitespace-nowrap">
+                    <i class="fas fa-chart-pie mr-2"></i>Gráficas Estadísticas
+                </button>
+                <button onclick="showTab('laboratorio')" class="tab-btn py-4 px-6 text-gray-600 hover:text-blue-600 whitespace-nowrap">
+                    <i class="fas fa-flask mr-2"></i>Laboratorio Virtual
+                </button>
+                <button onclick="showTab('ejercicios')" class="tab-btn py-4 px-6 text-gray-600 hover:text-blue-600 whitespace-nowrap">
+                    <i class="fas fa-tasks mr-2"></i>Ejercicios
+                </button>
+                <button onclick="showTab('evaluacion')" class="tab-btn py-4 px-6 text-gray-600 hover:text-blue-600 whitespace-nowrap">
+                    <i class="fas fa-clipboard-check mr-2"></i>Evaluación
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Introducción -->
+        <div id="intro" class="tab-content active fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Bienvenido a la OVA 4: Organización de Datos Clínicos</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Objetivos de Aprendizaje</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                <span>Construir tablas de frecuencia para variables discretas y continuas en contextos clínicos</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                <span>Crear e interpretar gráficas estadísticas apropiadas para investigación médica</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                <span>Utilizar software estadístico para visualización de datos biomédicos</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                <span>Aplicar técnicas de organización de datos a casos reales de salud</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Contenidos del Módulo</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-table text-blue-500"></i>
+                                <span>Tablas de frecuencia para variables discretas y continuas</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-chart-bar text-blue-500"></i>
+                                <span>Gráficas estadísticas en investigación médica</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-code text-blue-500"></i>
+                                <span>Software estadístico (R/Python) para visualización</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-database text-blue-500"></i>
+                                <span>Datasets: signos vitales y distribuciones de edad</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-6 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg">
+                    <h4 class="font-semibold text-yellow-800 mb-2">
+                        <i class="fas fa-lightbulb mr-2"></i>Importancia en Ciencias de la Salud
+                    </h4>
+                    <p class="text-yellow-700">
+                        La organización adecuada de datos clínicos es fundamental para la toma de decisiones médicas basadas en evidencia. 
+                        Las tablas de frecuencia y gráficas estadísticas nos permiten identificar patrones, tendencias y anomalías en los datos 
+                        de pacientes, facilitando diagnósticos más precisos y tratamientos más efectivos.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Variables Discretas -->
+        <div id="discretas" class="tab-content">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Tablas de Frecuencia para Variables Discretas</h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Conceptos Fundamentales</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-blue-50 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-2">Variable Discreta</h4>
+                                <p class="text-blue-700">Variable que toma valores específicos y contables. En medicina: número de hijos, días de hospitalización, número de síntomas.</p>
+                            </div>
+                            <div class="p-4 bg-green-50 rounded-lg">
+                                <h4 class="font-semibold text-green-800 mb-2">Frecuencia Absoluta (fi)</h4>
+                                <p class="text-green-700">Número de veces que aparece cada valor en el conjunto de datos.</p>
+                            </div>
+                            <div class="p-4 bg-purple-50 rounded-lg">
+                                <h4 class="font-semibold text-purple-800 mb-2">Frecuencia Relativa (hi)</h4>
+                                <p class="text-purple-700">Proporción de cada valor respecto al total: hi = fi / n</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Ejemplo: Días de Hospitalización</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <table class="w-full text-sm">
+                                <thead class="bg-blue-600 text-white">
+                                    <tr>
+                                        <th class="p-2 text-left">Días</th>
+                                        <th class="p-2 text-center">Frecuencia (fi)</th>
+                                        <th class="p-2 text-center">Frecuencia Relativa (hi)</th>
+                                        <th class="p-2 text-center">Porcentaje (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-discreta" class="divide-y divide-gray-200">
+                                    <!-- Se llenará con JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <canvas id="chart-discreta" class="mt-4" width="400" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h3 class="text-xl font-semibold text-blue-600 mb-4">Calculadora Interactiva - Variables Discretas</h3>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Ingrese datos separados por comas:</label>
+                                <textarea id="datos-discretos" class="w-full p-3 border border-gray-300 rounded-lg" rows="4" 
+                                    placeholder="Ejemplo: 1,2,1,3,2,1,4,2,3,1,2,1">1,2,1,3,2,1,4,2,3,1,2,1,5,2,3,1,2,4,3,2</textarea>
+                                <button onclick="calcularDiscreta()" class="mt-3 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                                    <i class="fas fa-calculator mr-2"></i>Calcular Tabla
+                                </button>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Resultado:</h4>
+                                <div id="resultado-discreto" class="bg-white p-4 rounded border min-h-32">
+                                    <p class="text-gray-500 italic">Los resultados aparecerán aquí...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Variables Continuas -->
+        <div id="continuas" class="tab-content">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Tablas de Frecuencia para Variables Continuas</h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Conceptos Clave</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-blue-50 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-2">Variable Continua</h4>
+                                <p class="text-blue-700">Variable que puede tomar cualquier valor dentro de un rango. En medicina: peso, altura, presión arterial, temperatura.</p>
+                            </div>
+                            <div class="p-4 bg-green-50 rounded-lg">
+                                <h4 class="font-semibold text-green-800 mb-2">Intervalos de Clase</h4>
+                                <p class="text-green-700">Rangos de valores que agrupan los datos continuos. Número de intervalos ≈ √n o regla de Sturges.</p>
+                            </div>
+                            <div class="p-4 bg-purple-50 rounded-lg">
+                                <h4 class="font-semibold text-purple-800 mb-2">Marca de Clase</h4>
+                                <p class="text-purple-700">Punto medio de cada intervalo, usado para representar el intervalo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Ejemplo: Presión Arterial Sistólica</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <table class="w-full text-sm">
+                                <thead class="bg-green-600 text-white">
+                                    <tr>
+                                        <th class="p-2 text-left">Intervalo (mmHg)</th>
+                                        <th class="p-2 text-center">Marca</th>
+                                        <th class="p-2 text-center">fi</th>
+                                        <th class="p-2 text-center">hi</th>
+                                        <th class="p-2 text-center">%</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-continua" class="divide-y divide-gray-200">
+                                    <!-- Se llenará con JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <canvas id="chart-continua" class="mt-4" width="400" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h3 class="text-xl font-semibold text-blue-600 mb-4">Calculadora de Intervalos</h3>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="grid md:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Valor Mínimo:</label>
+                                <input type="number" id="min-continua" class="w-full p-2 border border-gray-300 rounded" value="90">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Valor Máximo:</label>
+                                <input type="number" id="max-continua" class="w-full p-2 border border-gray-300 rounded" value="180">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Número de Intervalos:</label>
+                                <input type="number" id="num-intervalos" class="w-full p-2 border border-gray-300 rounded" value="6">
+                            </div>
+                        </div>
+                        <button onclick="calcularIntervalos()" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">
+                            <i class="fas fa-calculator mr-2"></i>Generar Intervalos
+                        </button>
+                        <div id="resultado-intervalos" class="mt-4 bg-white p-4 rounded border">
+                            <p class="text-gray-500 italic">Los intervalos aparecerán aquí...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficas Estadísticas -->
+        <div id="graficas" class="tab-content">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Gráficas Estadísticas en Investigación Médica</h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Tipos de Gráficas</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-blue-50 rounded-lg interactive-element cursor-pointer" onclick="mostrarGrafica('barras')">
+                                <h4 class="font-semibold text-blue-800 mb-2">
+                                    <i class="fas fa-chart-bar mr-2"></i>Gráfico de Barras
+                                </h4>
+                                <p class="text-blue-700">Para variables categóricas. Ideal para comparar frecuencias de diferentes grupos o categorías.</p>
+                            </div>
+                            <div class="p-4 bg-green-50 rounded-lg interactive-element cursor-pointer" onclick="mostrarGrafica('histograma')">
+                                <h4 class="font-semibold text-green-800 mb-2">
+                                    <i class="fas fa-chart-area mr-2"></i>Histograma
+                                </h4>
+                                <p class="text-green-700">Para variables continuas. Muestra la distribución de frecuencias en intervalos.</p>
+                            </div>
+                            <div class="p-4 bg-purple-50 rounded-lg interactive-element cursor-pointer" onclick="mostrarGrafica('sectores')">
+                                <h4 class="font-semibold text-purple-800 mb-2">
+                                    <i class="fas fa-chart-pie mr-2"></i>Gráfico de Sectores
+                                </h4>
+                                <p class="text-purple-700">Para mostrar proporciones del total. Útil para composición de muestras.</p>
+                            </div>
+                            <div class="p-4 bg-red-50 rounded-lg interactive-element cursor-pointer" onclick="mostrarGrafica('lineas')">
+                                <h4 class="font-semibold text-red-800 mb-2">
+                                    <i class="fas fa-chart-line mr-2"></i>Gráfico de Líneas
+                                </h4>
+                                <p class="text-red-700">Para datos temporales. Ideal para mostrar evolución de síntomas o tratamientos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Visualización Interactiva</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <canvas id="chart-interactivo" width="400" height="300"></canvas>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <p id="descripcion-grafica" class="text-gray-600 italic">Haga clic en los tipos de gráficas para ver ejemplos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-lg">
+                    <h4 class="font-semibold text-yellow-800 mb-3">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>Consideraciones Éticas en Visualización Médica
+                    </h4>
+                    <ul class="text-yellow-700 space-y-2">
+                        <li>• Evitar gráficas que puedan malinterpretar los datos</li>
+                        <li>• Usar escalas apropiadas que no exageren diferencias</li>
+                        <li>• Incluir intervalos de confianza cuando sea relevante</li>
+                        <li>• Respetar la confidencialidad de los datos de pacientes</li>
+                        <li>• Proporcionar contexto clínico adecuado</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Laboratorio Virtual -->
+        <div id="laboratorio" class="tab-content">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Laboratorio Virtual de Estadística</h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Dataset: Signos Vitales en Emergencias</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-semibold">Datos Simulados (n=50)</span>
+                                <button onclick="generarDatos()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                                    <i class="fas fa-sync-alt mr-2"></i>Generar Nuevos Datos
+                                </button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-xs">
+                                    <thead class="bg-blue-600 text-white">
+                                        <tr>
+                                            <th class="p-2">ID</th>
+                                            <th class="p-2">Edad</th>
+                                            <th class="p-2">Sistólica</th>
+                                            <th class="p-2">Diastólica</th>
+                                            <th class="p-2">FC</th>
+                                            <th class="p-2">Temp</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabla-datos" class="divide-y divide-gray-200 text-center">
+                                        <!-- Se llenará con JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <button onclick="analizarVariable('edad')" class="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700">
+                                <i class="fas fa-user mr-2"></i>Analizar Distribución de Edad
+                            </button>
+                            <button onclick="analizarVariable('sistolica')" class="w-full bg-red-600 text-white p-3 rounded-lg hover:bg-red-700">
+                                <i class="fas fa-heartbeat mr-2"></i>Analizar Presión Sistólica
+                            </button>
+                            <button onclick="analizarVariable('fc')" class="w-full bg-purple-600 text-white p-3 rounded-lg hover:bg-purple-700">
+                                <i class="fas fa-heart mr-2"></i>Analizar Frecuencia Cardíaca
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Análisis Estadístico</h3>
+                        <div id="panel-analisis" class="bg-gray-50 p-4 rounded-lg mb-4 min-h-64">
+                            <p class="text-gray-500 italic text-center mt-8">Seleccione una variable para analizar</p>
+                        </div>
+                        
+                        <div class="bg-white border rounded-lg p-4">
+                            <h4 class="font-semibold mb-3">Estadísticas Descriptivas</h4>
+                            <div id="estadisticas" class="grid grid-cols-2 gap-4 text-sm">
+                                <div class="text-center p-2 bg-blue-50 rounded">
+                                    <div class="font-semibold text-blue-600">Media</div>
+                                    <div id="media">--</div>
+                                </div>
+                                <div class="text-center p-2 bg-green-50 rounded">
+                                    <div class="font-semibold text-green-600">Mediana</div>
+                                    <div id="mediana">--</div>
+                                </div>
+                                <div class="text-center p-2 bg-purple-50 rounded">
+                                    <div class="font-semibold text-purple-600">Mínimo</div>
+                                    <div id="minimo">--</div>
+                                </div>
+                                <div class="text-center p-2 bg-red-50 rounded">
+                                    <div class="font-semibold text-red-600">Máximo</div>
+                                    <div id="maximo">--</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicios -->
+        <div id="ejercicios" class="tab-content">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Ejercicios Interactivos</h2>
+                
+                <div class="space-y-8">
+                    <!-- Ejercicio 1 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">
+                            <i class="fas fa-question-circle mr-2"></i>Ejercicio 1: Clasificación de Variables
+                        </h3>
+                        <p class="mb-4">Clasifique las siguientes variables médicas como discretas o continuas:</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="space-y-3">
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <div class="flex justify-between items-center">
+                                        <span>Número de cirugías previas</span>
+                                        <select class="border rounded p-1" data-respuesta="discreta">
+                                            <option value="">Seleccionar</option>
+                                            <option value="discreta">Discreta</option>
+                                            <option value="continua">Continua</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <div class="flex justify-between items-center">
+                                        <span>Peso corporal (kg)</span>
+                                        <select class="border rounded p-1" data-respuesta="continua">
+                                            <option value="">Seleccionar</option>
+                                            <option value="discreta">Discreta</option>
+                                            <option value="continua">Continua</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <div class="flex justify-between items-center">
+                                        <span>Número de hijos</span>
+                                        <select class="border rounded p-1" data-respuesta="discreta">
+                                            <option value="">Seleccionar</option>
+                                            <option value="discreta">Discreta</option>
+                                            <option value="continua">Continua</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <div class="flex justify-between items-center">
+                                        <span>Temperatura corporal (°C)</span>
+                                        <select class="border rounded p-1" data-respuesta="continua">
+                                            <option value="">Seleccionar</option>
+                                            <option value="discreta">Discreta</option>
+                                            <option value="continua">Continua</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <div class="flex justify-between items-center">
+                                        <span>Días de hospitalización</span>
+                                        <select class="border rounded p-1" data-respuesta="discreta">
+                                            <option value="">Seleccionar</option>
+                                            <option value="discreta">Discreta</option>
+                                            <option value="continua">Continua</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <div class="flex justify-between items-center">
+                                        <span>Nivel de glucosa (mg/dL)</span>
+                                        <select class="border rounded p-1" data-respuesta="continua">
+                                            <option value="">Seleccionar</option>
+                                            <option value="discreta">Discreta</option>
+                                            <option value="continua">Continua</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="verificarEjercicio1()" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                            <i class="fas fa-check mr-2"></i>Verificar Respuestas
+                        </button>
+                        <div id="resultado-ejercicio1" class="mt-4"></div>
+                    </div>
+
+                    <!-- Ejercicio 2 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-green-600 mb-4">
+                            <i class="fas fa-calculator mr-2"></i>Ejercicio 2: Cálculo de Frecuencias
+                        </h3>
+                        <p class="mb-4">Dados los siguientes datos de número de consultas médicas por paciente en un mes:</p>
+                        <div class="bg-gray-100 p-4 rounded-lg mb-4 font-mono text-center">
+                            2, 1, 3, 2, 1, 4, 2, 1, 3, 2, 1, 2, 3, 1, 2
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold mb-3">Complete la tabla de frecuencias:</h4>
+                                <table class="w-full border border-gray-300">
+                                    <thead class="bg-green-600 text-white">
+                                        <tr>
+                                            <th class="p-2 border">Consultas</th>
+                                            <th class="p-2 border">Frecuencia</th>
+                                            <th class="p-2 border">Porcentaje</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="p-2 border text-center">1</td>
+                                            <td class="p-2 border"><input type="number" class="w-full text-center" id="freq1"></td>
+                                            <td class="p-2 border"><input type="number" class="w-full text-center" id="perc1" step="0.1">%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border text-center">2</td>
+                                            <td class="p-2 border"><input type="number" class="w-full text-center" id="freq2"></td>
+                                            <td class="p-2 border"><input type="number" class="w-full text-center" id="perc2" step="0.1">%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border text-center">3</td>
+                                            <td class="p-2 border"><input type="number" class="w-full text-center" id="freq3"></td>
+                                            <td class="p-2 border"><input type="number" class="w-full text-center" id="perc3" step="0.1">%</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border text-center">4</td>
+                                            <td class="p-2 border"><input type="number" class="w-full text-center" id="freq4"></td>
+                                            <td class="p-2 border"><input type="number" class="w-full text-center" id="perc4" step="0.1">%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-3">Preguntas de análisis:</h4>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">¿Cuál es el valor más frecuente?</label>
+                                        <select id="moda" class="w-full border rounded p-2">
+                                            <option value="">Seleccionar</option>
+                                            <option value="1">1 consulta</option>
+                                            <option value="2">2 consultas</option>
+                                            <option value="3">3 consultas</option>
+                                            <option value="4">4 consultas</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">¿Qué porcentaje de pacientes tuvo 2 o más consultas?</label>
+                                        <input type="number" id="porcentaje-2mas" class="w-full border rounded p-2" step="0.1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="verificarEjercicio2()" class="mt-4 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">
+                            <i class="fas fa-check mr-2"></i>Verificar Respuestas
+                        </button>
+                        <div id="resultado-ejercicio2" class="mt-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluación -->
+        <div id="evaluacion" class="tab-content">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Evaluación del Módulo</h2>
+                
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg mb-8">
+                    <h3 class="font-semibold text-blue-800 mb-2">Instrucciones</h3>
+                    <p class="text-blue-700">Complete la siguiente evaluación para verificar su comprensión de los conceptos de organización de datos clínicos. Debe obtener al menos 70% para aprobar.</p>
+                </div>
+
+                <form id="evaluacion-form" class="space-y-6">
+                    <!-- Pregunta 1 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h4 class="font-semibold mb-3">1. ¿Cuál es la principal diferencia entre una variable discreta y una continua en el contexto médico?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q1" value="a" class="text-blue-600">
+                                <span>Las discretas son numéricas y las continuas son categóricas</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q1" value="b" class="text-blue-600">
+                                <span>Las discretas toman valores específicos contables, las continuas pueden tomar cualquier valor en un rango</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q1" value="c" class="text-blue-600">
+                                <span>No hay diferencia, ambas son iguales</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h4 class="font-semibold mb-3">2. Para una variable continua como la presión arterial, ¿qué método de organización es más apropiado?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q2" value="a" class="text-blue-600">
+                                <span>Lista simple de todos los valores</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q2" value="b" class="text-blue-600">
+                                <span>Tabla de frecuencias con intervalos de clase</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q2" value="c" class="text-blue-600">
+                                <span>Solo gráfico de sectores</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 3 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h4 class="font-semibold mb-3">3. Si tenemos 100 pacientes y 25 tienen hipertensión, ¿cuál es la frecuencia relativa de hipertensión?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q3" value="a" class="text-blue-600">
+                                <span>25</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q3" value="b" class="text-blue-600">
+                                <span>0.25</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q3" value="c" class="text-blue-600">
+                                <span>75</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 4 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h4 class="font-semibold mb-3">4. ¿Qué tipo de gráfica es más apropiada para mostrar la evolución de la temperatura de un paciente durante una semana?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q4" value="a" class="text-blue-600">
+                                <span>Gráfico de sectores</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q4" value="b" class="text-blue-600">
+                                <span>Gráfico de líneas</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q4" value="c" class="text-blue-600">
+                                <span>Histograma</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 5 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h4 class="font-semibold mb-3">5. En el contexto de la ética médica, ¿cuál es una consideración importante al crear gráficas con datos de pacientes?</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q5" value="a" class="text-blue-600">
+                                <span>Usar colores llamativos</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q5" value="b" class="text-blue-600">
+                                <span>Respetar la confidencialidad y evitar malinterpretaciones</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" name="q5" value="c" class="text-blue-600">
+                                <span>Incluir todos los datos personales</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="button" onclick="evaluarRespuestas()" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 text-lg">
+                            <i class="fas fa-check-circle mr-2"></i>Enviar Evaluación
+                        </button>
+                    </div>
+                </form>
+
+                <div id="resultado-evaluacion" class="mt-8"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="font-semibold mb-4">OVA 4 - Organización de Datos Clínicos</h3>
+                    <p class="text-gray-300">Bioestadística para Ciencias de la Salud</p>
+                    <p class="text-gray-300">Universidad Antonio Nariño (UAN)</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Recursos Adicionales</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><i class="fas fa-book mr-2"></i>Manual de R para Bioestadística</li>
+                        <li><i class="fas fa-video mr-2"></i>Tutoriales de Visualización</li>
+                        <li><i class="fas fa-database mr-2"></i>Datasets de Práctica</li>
+                        <li><i class="fas fa-question-circle mr-2"></i>FAQ y Soporte</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Contacto</h3>
+                    <p class="text-gray-300">Campus Virtual UAN</p>
+                    <p class="text-gray-300">Soporte técnico disponible 24/7</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Variables globales
+        let datosSignosVitales = [];
+        let chartInteractivo = null;
+
+        // Función para cambiar tabs
+        function showTab(tabName) {
+            // Ocultar todos los contenidos
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remover clase activa de todos los botones
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+                btn.classList.add('text-gray-600');
+            });
+            
+            // Mostrar contenido seleccionado
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activar botón seleccionado
+            event.target.classList.remove('text-gray-600');
+            event.target.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+        }
+
+        // Inicializar datos y gráficas al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            inicializarTablaDiscreta();
+            inicializarTablaContinua();
+            generarDatos();
+        });
+
+        // Función para inicializar tabla de variables discretas
+        function inicializarTablaDiscreta() {
+            const datos = [1,2,1,3,2,1,4,2,3,1,2,1,5,2,3,1,2,4,3,2];
+            const frecuencias = {};
+            
+            datos.forEach(valor => {
+                frecuencias[valor] = (frecuencias[valor] || 0) + 1;
+            });
+            
+            const total = datos.length;
+            const tbody = document.getElementById('tabla-discreta');
+            tbody.innerHTML = '';
+            
+            Object.keys(frecuencias).sort((a,b) => a-b).forEach(valor => {
+                const fi = frecuencias[valor];
+                const hi = (fi / total).toFixed(3);
+                const porcentaje = (hi * 100).toFixed(1);
+                
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-2 text-center font-medium">${valor}</td>
+                        <td class="p-2 text-center">${fi}</td>
+                        <td class="p-2 text-center">${hi}</td>
+                        <td class="p-2 text-center">${porcentaje}%</td>
+                    </tr>
+                `;
+            });
+            
+            // Crear gráfica
+            const ctx = document.getElementById('chart-discreta').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(frecuencias).sort((a,b) => a-b),
+                    datasets: [{
+                        label: 'Frecuencia',
+                        data: Object.keys(frecuencias).sort((a,b) => a-b).map(k => frecuencias[k]),
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Distribución de Días de Hospitalización'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Frecuencia'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Días'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Función para inicializar tabla de variables continuas
+        function inicializarTablaContinua() {
+            const intervalos = [
+                {rango: '90-105', marca: 97.5, fi: 8, hi: 0.16, porcentaje: 16},
+                {rango: '105-120', marca: 112.5, fi: 15, hi: 0.30, porcentaje: 30},
+                {rango: '120-135', marca: 127.5, fi: 12, hi: 0.24, porcentaje: 24},
+                {rango: '135-150', marca: 142.5, fi: 10, hi: 0.20, porcentaje: 20},
+                {rango: '150-165', marca: 157.5, fi: 3, hi: 0.06, porcentaje: 6},
+                {rango: '165-180', marca: 172.5, fi: 2, hi: 0.04, porcentaje: 4}
+            ];
+            
+            const tbody = document.getElementById('tabla-continua');
+            tbody.innerHTML = '';
+            
+            intervalos.forEach(intervalo => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-2 text-left font-medium">${intervalo.rango}</td>
+                        <td class="p-2 text-center">${intervalo.marca}</td>
+                        <td class="p-2 text-center">${intervalo.fi}</td>
+                        <td class="p-2 text-center">${intervalo.hi.toFixed(2)}</td>
+                        <td class="p-2 text-center">${intervalo.porcentaje}%</td>
+                    </tr>
+                `;
+            });
+            
+            // Crear histograma
+            const ctx = document.getElementById('chart-continua').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: intervalos.map(i => i.rango),
+                    datasets: [{
+                        label: 'Frecuencia',
+                        data: intervalos.map(i => i.fi),
+                        backgroundColor: 'rgba(34, 197, 94, 0.8)',
+                        borderColor: 'rgba(34, 197, 94, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Distribución de Presión Arterial Sistólica'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Frecuencia'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Presión Sistólica (mmHg)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Función para calcular tabla de frecuencias discretas
+        function calcularDiscreta() {
+            const input = document.getElementById('datos-discretos').value;
+            const datos = input.split(',').map(x => parseInt(x.trim())).filter(x => !isNaN(x));
+            
+            if (datos.length === 0) {
+                document.getElementById('resultado-discreto').innerHTML = '<p class="text-red-500">Por favor ingrese datos válidos</p>';
+                return;
+            }
+            
+            const frecuencias = {};
+            datos.forEach(valor => {
+                frecuencias[valor] = (frecuencias[valor] || 0) + 1;
+            });
+            
+            const total = datos.length;
+            let html = '<table class="w-full text-sm border border-gray-300">';
+            html += '<thead class="bg-blue-600 text-white"><tr><th class="p-2 border">Valor</th><th class="p-2 border">fi</th><th class="p-2 border">hi</th><th class="p-2 border">%</th></tr></thead><tbody>';
+            
+            Object.keys(frecuencias).sort((a,b) => a-b).forEach(valor => {
+                const fi = frecuencias[valor];
+                const hi = (fi / total).toFixed(3);
+                const porcentaje = (hi * 100).toFixed(1);
+                
+                html += `<tr><td class="p-2 border text-center">${valor}</td><td class="p-2 border text-center">${fi}</td><td class="p-2 border text-center">${hi}</td><td class="p-2 border text-center">${porcentaje}%</td></tr>`;
+            });
+            
+            html += '</tbody></table>';
+            html += `<p class="mt-2 text-sm text-gray-600">Total de datos: ${total}</p>`;
+            
+            document.getElementById('resultado-discreto').innerHTML = html;
+        }
+
+        // Función para calcular intervalos
+        function calcularIntervalos() {
+            const min = parseFloat(document.getElementById('min-continua').value);
+            const max = parseFloat(document.getElementById('max-continua').value);
+            const numIntervalos = parseInt(document.getElementById('num-intervalos').value);
+            
+            if (isNaN(min) || isNaN(max) || isNaN(numIntervalos) || min >= max || numIntervalos <= 0) {
+                document.getElementById('resultado-intervalos').innerHTML = '<p class="text-red-500">Por favor ingrese valores válidos</p>';
+                return;
+            }
+            
+            const amplitud = (max - min) / numIntervalos;
+            let html = '<table class="w-full text-sm border border-gray-300">';
+            html += '<thead class="bg-green-600 text-white"><tr><th class="p-2 border">Intervalo</th><th class="p-2 border">Límite Inferior</th><th class="p-2 border">Límite Superior</th><th class="p-2 border">Marca de Clase</th></tr></thead><tbody>';
+            
+            for (let i = 0; i < numIntervalos; i++) {
+                const limInf = min + (i * amplitud);
+                const limSup = min + ((i + 1) * amplitud);
+                const marca = (limInf + limSup) / 2;
+                
+                html += `<tr><td class="p-2 border text-center">[${limInf.toFixed(1)}, ${limSup.toFixed(1)})</td><td class="p-2 border text-center">${limInf.toFixed(1)}</td><td class="p-2 border text-center">${limSup.toFixed(1)}</td><td class="p-2 border text-center">${marca.toFixed(1)}</td></tr>`;
+            }
+            
+            html += '</tbody></table>';
+            html += `<p class="mt-2 text-sm text-gray-600">Amplitud de cada intervalo: ${amplitud.toFixed(2)}</p>`;
+            
+            document.getElementById('resultado-intervalos').innerHTML = html;
+        }
+
+        // Función para mostrar diferentes tipos de gráficas
+        function mostrarGrafica(tipo) {
+            const ctx = document.getElementById('chart-interactivo').getContext('2d');
+            
+            if (chartInteractivo) {
+                chartInteractivo.destroy();
+            }
+            
+            let config = {};
+            let descripcion = '';
+            
+            switch(tipo) {
+                case 'barras':
+                    config = {
+                        type: 'bar',
+                        data: {
+                            labels: ['Cardiología', 'Neurología', 'Pediatría', 'Ginecología', 'Medicina Interna'],
+                            datasets: [{
+                                label: 'Número de Pacientes',
+                                data: [45, 32, 28, 38, 52],
+                                backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6']
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Distribución de Pacientes por Especialidad'
+                                }
+                            }
+                        }
+                    };
+                    descripcion = 'Gráfico de barras mostrando la distribución de pacientes por especialidad médica';
+                    break;
+                    
+                case 'histograma':
+                    config = {
+                        type: 'bar',
+                        data: {
+                            labels: ['18-30', '31-40', '41-50', '51-60', '61-70', '71-80'],
+                            datasets: [{
+                                label: 'Frecuencia',
+                                data: [12, 18, 25, 22, 15, 8],
+                                backgroundColor: 'rgba(34, 197, 94, 0.8)',
+                                borderColor: 'rgba(34, 197, 94, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Histograma de Edades de Pacientes'
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Edad (años)'
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Frecuencia'
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    descripcion = 'Histograma mostrando la distribución de edades en intervalos';
+                    break;
+                    
+                case 'sectores':
+                    config = {
+                        type: 'pie',
+                        data: {
+                            labels: ['Hipertensión', 'Diabetes', 'Obesidad', 'Otros'],
+                            datasets: [{
+                                data: [35, 25, 20, 20],
+                                backgroundColor: ['#EF4444', '#F59E0B', '#8B5CF6', '#6B7280']
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Distribución de Diagnósticos Principales'
+                                },
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
+                        }
+                    };
+                    descripcion = 'Gráfico de sectores mostrando la proporción de diferentes diagnósticos';
+                    break;
+                    
+                case 'lineas':
+                    config = {
+                        type: 'line',
+                        data: {
+                            labels: ['Día 1', 'Día 2', 'Día 3', 'Día 4', 'Día 5', 'Día 6', 'Día 7'],
+                            datasets: [{
+                                label: 'Temperatura (°C)',
+                                data: [38.5, 38.2, 37.8, 37.5, 37.2, 37.0, 36.8],
+                                borderColor: '#EF4444',
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Evolución de Temperatura Corporal'
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Temperatura (°C)'
+                                    },
+                                    min: 36,
+                                    max: 39
+                                }
+                            }
+                        }
+                    };
+                    descripcion = 'Gráfico de líneas mostrando la evolución temporal de la temperatura';
+                    break;
+            }
+            
+            chartInteractivo = new Chart(ctx, config);
+            document.getElementById('descripcion-grafica').textContent = descripcion;
+        }
+
+        // Función para generar datos simulados
+        function generarDatos() {
+            datosSignosVitales = [];
+            for (let i = 1; i <= 50; i++) {
+                datosSignosVitales.push({
+                    id: `P${i.toString().padStart(3, '0')}`,
+                    edad: Math.floor(Math.random() * 60) + 18,
+                    sistolica: Math.floor(Math.random() * 60) + 100,
+                    diastolica: Math.floor(Math.random() * 40) + 60,
+                    fc: Math.floor(Math.random() * 60) + 60,
+                    temp: (Math.random() * 3 + 36).toFixed(1)
+                });
+            }
+            
+            actualizarTablaDatos();
+        }
+
+        // Función para actualizar tabla de datos
+        function actualizarTablaDatos() {
+            const tbody = document.getElementById('tabla-datos');
+            tbody.innerHTML = '';
+            
+            datosSignosVitales.slice(0, 10).forEach(paciente => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-1 text-xs">${paciente.id}</td>
+                        <td class="p-1 text-xs">${paciente.edad}</td>
+                        <td class="p-1 text-xs">${paciente.sistolica}</td>
+                        <td class="p-1 text-xs">${paciente.diastolica}</td>
+                        <td class="p-1 text-xs">${paciente.fc}</td>
+                        <td class="p-1 text-xs">${paciente.temp}</td>
+                    </tr>
+                `;
+            });
+            
+            if (datosSignosVitales.length > 10) {
+                tbody.innerHTML += `<tr><td colspan="6" class="p-2 text-center text-gray-500 italic">... y ${datosSignosVitales.length - 10} registros más</td></tr>`;
+            }
+        }
+
+        // Función para analizar variables
+        function analizarVariable(variable) {
+            let datos = [];
+            let titulo = '';
+            let unidad = '';
+            
+            switch(variable) {
+                case 'edad':
+                    datos = datosSignosVitales.map(p => p.edad);
+                    titulo = 'Distribución de Edad';
+                    unidad = 'años';
+                    break;
+                case 'sistolica':
+                    datos = datosSignosVitales.map(p => p.sistolica);
+                    titulo = 'Distribución de Presión Sistólica';
+                    unidad = 'mmHg';
+                    break;
+                case 'fc':
+                    datos = datosSignosVitales.map(p => p.fc);
+                    titulo = 'Distribución de Frecuencia Cardíaca';
+                    unidad = 'ppm';
+                    break;
+            }
+            
+            // Calcular estadísticas
+            const media = (datos.reduce((a, b) => a + b, 0) / datos.length).toFixed(1);
+            const mediana = calcularMediana(datos).toFixed(1);
+            const minimo = Math.min(...datos);
+            const maximo = Math.max(...datos);
+            
+            // Actualizar estadísticas
+            document.getElementById('media').textContent = `${media} ${unidad}`;
+            document.getElementById('mediana').textContent = `${mediana} ${unidad}`;
+            document.getElementById('minimo').textContent = `${minimo} ${unidad}`;
+            document.getElementById('maximo').textContent = `${maximo} ${unidad}`;
+            
+            // Crear histograma
+            const intervalos = crearIntervalos(datos, 6);
+            const ctx = document.getElementById('panel-analisis');
+            ctx.innerHTML = '<canvas id="chart-analisis" width="400" height="200"></canvas>';
+            
+            const chartCtx = document.getElementById('chart-analisis').getContext('2d');
+            new Chart(chartCtx, {
+                type: 'bar',
+                data: {
+                    labels: intervalos.labels,
+                    datasets: [{
+                        label: 'Frecuencia',
+                        data: intervalos.frecuencias,
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: titulo
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Frecuencia'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: unidad
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Función auxiliar para calcular mediana
+        function calcularMediana(datos) {
+            const sorted = [...datos].sort((a, b) => a - b);
+            const mid = Math.floor(sorted.length / 2);
+            return sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+        }
+
+        // Función auxiliar para crear intervalos
+        function crearIntervalos(datos, numIntervalos) {
+            const min = Math.min(...datos);
+            const max = Math.max(...datos);
+            const amplitud = (max - min) / numIntervalos;
+            
+            const intervalos = [];
+            const frecuencias = [];
+            
+            for (let i = 0; i < numIntervalos; i++) {
+                const limInf = min + (i * amplitud);
+                const limSup = min + ((i + 1) * amplitud);
+                const label = `${limInf.toFixed(0)}-${limSup.toFixed(0)}`;
+                
+                const count = datos.filter(d => d >= limInf && (i === numIntervalos - 1 ? d <= limSup : d < limSup)).length;
+                
+                intervalos.push(label);
+                frecuencias.push(count);
+            }
+            
+            return { labels: intervalos, frecuencias: frecuencias };
+        }
+
+        // Función para verificar ejercicio 1
+        function verificarEjercicio1() {
+            const respuestas = document.querySelectorAll('#ejercicios select[data-respuesta]');
+            let correctas = 0;
+            let total = respuestas.length;
+            let html = '<div class="mt-4 p-4 rounded-lg">';
+            
+            respuestas.forEach((select, index) => {
+                const respuestaCorrecta = select.getAttribute('data-respuesta');
+                const respuestaUsuario = select.value;
+                const variable = select.parentElement.querySelector('span').textContent;
+                
+                if (respuestaUsuario === respuestaCorrecta) {
+                    correctas++;
+                    html += `<div class="flex items-center space-x-2 text-green-600 mb-2">
+                        <i class="fas fa-check-circle"></i>
+                        <span><strong>${variable}:</strong> Correcto (${respuestaCorrecta})</span>
+                    </div>`;
+                } else {
+                    html += `<div class="flex items-center space-x-2 text-red-600 mb-2">
+                        <i class="fas fa-times-circle"></i>
+                        <span><strong>${variable}:</strong> Incorrecto. Respuesta correcta: ${respuestaCorrecta}</span>
+                    </div>`;
+                }
+            });
+            
+            const porcentaje = (correctas / total * 100).toFixed(0);
+            const color = porcentaje >= 70 ? 'green' : 'red';
+            
+            html += `<div class="mt-4 p-3 bg-${color}-50 border border-${color}-200 rounded">
+                <strong class="text-${color}-800">Resultado: ${correctas}/${total} (${porcentaje}%)</strong>
+            </div></div>`;
+            
+            document.getElementById('resultado-ejercicio1').innerHTML = html;
+        }
+
+        // Función para verificar ejercicio 2
+        function verificarEjercicio2() {
+            const datos = [2, 1, 3, 2, 1, 4, 2, 1, 3, 2, 1, 2, 3, 1, 2];
+            const frecuenciasCorrectas = {1: 5, 2: 6, 3: 3, 4: 1};
+            const total = 15;
+            
+            let html = '<div class="mt-4 p-4 rounded-lg">';
+            let correctas = 0;
+            let totalPreguntas = 0;
+            
+            // Verificar frecuencias
+            for (let i = 1; i <= 4; i++) {
+                const freq = parseInt(document.getElementById(`freq${i}`).value) || 0;
+                const perc = parseFloat(document.getElementById(`perc${i}`).value) || 0;
+                const frecCorrecta = frecuenciasCorrectas[i];
+                const percCorrecto = (frecCorrecta / total * 100);
+                
+                totalPreguntas += 2;
+                
+                if (freq === frecCorrecta) {
+                    correctas++;
+                    html += `<div class="text-green-600 mb-1"><i class="fas fa-check"></i> Frecuencia ${i}: Correcto (${frecCorrecta})</div>`;
+                } else {
+                    html += `<div class="text-red-600 mb-1"><i class="fas fa-times"></i> Frecuencia ${i}: Incorrecto. Correcto: ${frecCorrecta}</div>`;
+                }
+                
+                if (Math.abs(perc - percCorrecto) < 0.1) {
+                    correctas++;
+                    html += `<div class="text-green-600 mb-2"><i class="fas fa-check"></i> Porcentaje ${i}: Correcto (${percCorrecto.toFixed(1)}%)</div>`;
+                } else {
+                    html += `<div class="text-red-600 mb-2"><i class="fas fa-times"></i> Porcentaje ${i}: Incorrecto. Correcto: ${percCorrecto.toFixed(1)}%</div>`;
+                }
+            }
+            
+            // Verificar moda
+            const moda = document.getElementById('moda').value;
+            totalPreguntas++;
+            if (moda === '1') {
+                correctas++;
+                html += `<div class="text-green-600 mb-1"><i class="fas fa-check"></i> Moda: Correcto (1 consulta)</div>`;
+            } else {
+                html += `<div class="text-red-600 mb-1"><i class="fas fa-times"></i> Moda: Incorrecto. Correcto: 1 consulta</div>`;
+            }
+            
+            // Verificar porcentaje 2 o más
+            const porc2mas = parseFloat(document.getElementById('porcentaje-2mas').value) || 0;
+            const porc2masCorrect = ((6 + 3 + 1) / 15 * 100); // 66.7%
+            totalPreguntas++;
+            if (Math.abs(porc2mas - porc2masCorrect) < 1) {
+                correctas++;
+                html += `<div class="text-green-600 mb-2"><i class="fas fa-check"></i> Porcentaje 2+ consultas: Correcto (${porc2masCorrect.toFixed(1)}%)</div>`;
+            } else {
+                html += `<div class="text-red-600 mb-2"><i class="fas fa-times"></i> Porcentaje 2+ consultas: Incorrecto. Correcto: ${porc2masCorrect.toFixed(1)}%</div>`;
+            }
+            
+            const porcentaje = (correctas / totalPreguntas * 100).toFixed(0);
+            const color = porcentaje >= 70 ? 'green' : 'red';
+            
+            html += `<div class="mt-4 p-3 bg-${color}-50 border border-${color}-200 rounded">
+                <strong class="text-${color}-800">Resultado: ${correctas}/${totalPreguntas} (${porcentaje}%)</strong>
+            </div></div>`;
+            
+            document.getElementById('resultado-ejercicio2').innerHTML = html;
+        }
+
+        // Función para evaluar respuestas finales
+        function evaluarRespuestas() {
+            const respuestasCorrectas = {
+                q1: 'b',
+                q2: 'b', 
+                q3: 'b',
+                q4: 'b',
+                q5: 'b'
+            };
+            
+            let correctas = 0;
+            let total = Object.keys(respuestasCorrectas).length;
+            let html = '<div class="p-6 rounded-lg border">';
+            
+            Object.keys(respuestasCorrectas).forEach((pregunta, index) => {
+                const respuestaUsuario = document.querySelector(`input[name="${pregunta}"]:checked`)?.value;
+                const respuestaCorrecta = respuestasCorrectas[pregunta];
+                
+                if (respuestaUsuario === respuestaCorrecta) {
+                    correctas++;
+                    html += `<div class="flex items-center space-x-2 text-green-600 mb-2">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Pregunta ${index + 1}: Correcto</span>
+                    </div>`;
+                } else {
+                    html += `<div class="flex items-center space-x-2 text-red-600 mb-2">
+                        <i class="fas fa-times-circle"></i>
+                        <span>Pregunta ${index + 1}: Incorrecto</span>
+                    </div>`;
+                }
+            });
+            
+            const porcentaje = (correctas / total * 100).toFixed(0);
+            const aprobado = porcentaje >= 70;
+            const color = aprobado ? 'green' : 'red';
+            const mensaje = aprobado ? '¡Felicitaciones! Has aprobado el módulo.' : 'Necesitas repasar los conceptos. Revisa el material y vuelve a intentar.';
+            
+            html += `<div class="mt-6 p-4 bg-${color}-50 border border-${color}-200 rounded-lg">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-${color}-600 mb-2">${porcentaje}%</div>
+                    <div class="text-${color}-800 font-semibold mb-2">Puntuación: ${correctas}/${total}</div>
+                    <div class="text-${color}-700">${mensaje}</div>
+                </div>
+            </div></div>`;
+            
+            document.getElementById('resultado-evaluacion').innerHTML = html;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1320 @@
+
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 15: Inferencia Estadística Básica - Bioestadística UAN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .pulse-slow { animation: pulse 3s infinite; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .medical-pattern { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f0f9ff' fill-opacity='0.1'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm0 0c0 11.046 8.954 20 20 20s20-8.954 20-20-8.954-20-20-20-20 8.954-20 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .confidence-interval { 
+            background: linear-gradient(90deg, transparent 0%, #3b82f6 45%, #3b82f6 55%, transparent 100%);
+            height: 4px;
+            position: relative;
+        }
+        .confidence-interval::before,
+        .confidence-interval::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            width: 2px;
+            height: 8px;
+            background: #3b82f6;
+        }
+        .confidence-interval::before { left: 45%; }
+        .confidence-interval::after { right: 45%; }
+    </style>
+</head>
+<body class="bg-base-100">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold">OVA 15: Inferencia Estadística Básica</h1>
+                    <p class="text-blue-100 mt-2">Bioestadística para Ciencias de la Salud - UAN</p>
+                </div>
+                <div class="text-right">
+                    <div class="badge badge-secondary badge-lg">Semana 13</div>
+                    <p class="text-sm mt-1">Duración: 4 horas académicas</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-1 overflow-x-auto py-2">
+                <button class="nav-btn btn btn-sm btn-primary" data-section="intro">Introducción</button>
+                <button class="nav-btn btn btn-sm btn-ghost" data-section="conceptos">Conceptos</button>
+                <button class="nav-btn btn btn-sm btn-ghost" data-section="intervalos">Intervalos</button>
+                <button class="nav-btn btn btn-sm btn-ghost" data-section="interpretacion">Interpretación</button>
+                <button class="nav-btn btn btn-sm btn-ghost" data-section="calculadora">Calculadora</button>
+                <button class="nav-btn btn btn-sm btn-ghost" data-section="ejercicios">Ejercicios</button>
+                <button class="nav-btn btn btn-sm btn-ghost" data-section="evaluacion">Evaluación</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Introducción -->
+        <section id="intro" class="section-content fade-in">
+            <div class="hero medical-pattern rounded-lg mb-8">
+                <div class="hero-content text-center bg-white bg-opacity-90 rounded-lg p-8">
+                    <div class="max-w-md">
+                        <i class="fas fa-chart-line text-6xl text-primary mb-4"></i>
+                        <h2 class="text-4xl font-bold text-primary">¡Bienvenido!</h2>
+                        <p class="py-6">En esta OVA aprenderás los fundamentos de la inferencia estadística, incluyendo estimación puntual, intervalos de confianza y su interpretación clínica.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-primary">
+                            <i class="fas fa-target"></i>
+                            Objetivos de Aprendizaje
+                        </h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Distinguir entre estimación puntual y por intervalo</li>
+                            <li>Calcular intervalos de confianza para medias y proporciones</li>
+                            <li>Interpretar intervalos de confianza en contexto clínico</li>
+                            <li>Aplicar conceptos en ensayos clínicos reales</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-secondary">
+                            <i class="fas fa-clock"></i>
+                            Estructura del Contenido
+                        </h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>Teoría</span>
+                                <span class="badge badge-primary">50%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Práctica</span>
+                                <span class="badge badge-secondary">50%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Modalidad</span>
+                                <span class="badge badge-accent">60% Virtual</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fase III Context -->
+            <div class="alert alert-info mt-8">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <h4 class="font-bold">Contexto: Fase III - Inferencia Estadística</h4>
+                    <p>Esta OVA forma parte de la Fase III del curso, donde aplicamos los conocimientos de estadística descriptiva y probabilidad para hacer inferencias sobre poblaciones a partir de muestras.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conceptos Fundamentales -->
+        <section id="conceptos" class="section-content hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Estimación Puntual vs. Por Intervalo</h2>
+                <p class="text-lg text-gray-600">Fundamentos de la inferencia estadística</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <div class="card bg-gradient-to-br from-blue-50 to-blue-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-blue-700">
+                            <i class="fas fa-crosshairs"></i>
+                            Estimación Puntual
+                        </h3>
+                        <p class="mb-4">Un solo valor numérico que se utiliza para estimar un parámetro poblacional desconocido.</p>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb"></i>
+                            <div>
+                                <h4 class="font-bold">Ejemplo Clínico:</h4>
+                                <p>La presión arterial promedio en una muestra de 100 pacientes es 128 mmHg. Este valor (128) es nuestra estimación puntual de la presión arterial promedio poblacional.</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h4 class="font-semibold mb-2">Características:</h4>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Proporciona un valor específico</li>
+                                <li>Fácil de comunicar</li>
+                                <li>No indica incertidumbre</li>
+                                <li>Probabilidad de ser exacto = 0</li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p class="text-sm"><strong>Fórmula:</strong> $\hat{\theta} = $ estimador del parámetro $\theta$</p>
+                            <p class="text-sm">Ejemplo: $\bar{x} = 128$ mmHg (estimación de $\mu$)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-gradient-to-br from-green-50 to-green-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-green-700">
+                            <i class="fas fa-arrows-alt-h"></i>
+                            Estimación por Intervalo
+                        </h3>
+                        <p class="mb-4">Un rango de valores que probablemente contiene el parámetro poblacional, con un nivel de confianza específico.</p>
+                        
+                        <div class="alert alert-success">
+                            <i class="fas fa-lightbulb"></i>
+                            <div>
+                                <h4 class="font-bold">Ejemplo Clínico:</h4>
+                                <p>Con 95% de confianza, la presión arterial promedio poblacional está entre 124.2 y 131.8 mmHg.</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h4 class="font-semibold mb-2">Características:</h4>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Proporciona un rango de valores</li>
+                                <li>Incluye medida de incertidumbre</li>
+                                <li>Más informativo que estimación puntual</li>
+                                <li>Probabilidad conocida de contener el parámetro</li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                            <p class="text-sm"><strong>Fórmula:</strong> $\hat{\theta} \pm E$</p>
+                            <p class="text-sm">Donde $E$ = margen de error</p>
+                            <p class="text-sm">Ejemplo: $128 \pm 3.8$ mmHg</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparación Visual -->
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h3 class="card-title text-purple-700">
+                        <i class="fas fa-balance-scale"></i>
+                        Comparación Visual
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-8 mt-4">
+                        <div class="text-center">
+                            <h4 class="font-bold mb-4">Estimación Puntual</h4>
+                            <div class="relative h-16 bg-gray-200 rounded-lg flex items-center justify-center">
+                                <div class="w-2 h-8 bg-blue-600 rounded"></div>
+                                <span class="absolute -bottom-6 text-sm">128 mmHg</span>
+                            </div>
+                            <p class="text-sm mt-8 text-gray-600">Un solo valor, sin información sobre incertidumbre</p>
+                        </div>
+                        <div class="text-center">
+                            <h4 class="font-bold mb-4">Estimación por Intervalo</h4>
+                            <div class="relative h-16 bg-gray-200 rounded-lg flex items-center justify-center">
+                                <div class="confidence-interval w-32"></div>
+                                <span class="absolute -bottom-6 text-sm">124.2 - 131.8 mmHg</span>
+                            </div>
+                            <p class="text-sm mt-8 text-gray-600">Rango de valores con nivel de confianza del 95%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Intervalos de Confianza -->
+        <section id="intervalos" class="section-content hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Intervalos de Confianza</h2>
+                <p class="text-lg text-gray-600">Cálculo e interpretación para medias y proporciones</p>
+            </div>
+
+            <!-- Intervalo para la Media -->
+            <div class="card bg-base-100 shadow-xl mb-8">
+                <div class="card-body">
+                    <h3 class="card-title text-blue-700">
+                        <i class="fas fa-calculator"></i>
+                        Intervalo de Confianza para la Media (μ)
+                    </h3>
+                    
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-3">Cuando σ es conocida (distribución Z):</h4>
+                            <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                                <p class="text-center text-lg">$$IC = \bar{x} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}$$</p>
+                            </div>
+                            
+                            <h4 class="font-semibold mb-3">Cuando σ es desconocida (distribución t):</h4>
+                            <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                                <p class="text-center text-lg">$$IC = \bar{x} \pm t_{\alpha/2,n-1} \cdot \frac{s}{\sqrt{n}}$$</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold mb-3">Componentes:</h4>
+                            <ul class="space-y-2">
+                                <li><strong>$\bar{x}$:</strong> Media muestral</li>
+                                <li><strong>$z_{\alpha/2}$ o $t_{\alpha/2}$:</strong> Valor crítico</li>
+                                <li><strong>$\sigma$ o $s$:</strong> Desviación estándar poblacional o muestral</li>
+                                <li><strong>$n$:</strong> Tamaño de muestra</li>
+                                <li><strong>$\alpha$:</strong> Nivel de significancia (1 - nivel de confianza)</li>
+                            </ul>
+                            
+                            <div class="alert alert-info mt-4">
+                                <i class="fas fa-info-circle"></i>
+                                <div>
+                                    <h5 class="font-bold">Valores críticos comunes:</h5>
+                                    <p>95% confianza: $z_{0.025} = 1.96$</p>
+                                    <p>99% confianza: $z_{0.005} = 2.58$</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intervalo para la Proporción -->
+            <div class="card bg-base-100 shadow-xl mb-8">
+                <div class="card-body">
+                    <h3 class="card-title text-green-700">
+                        <i class="fas fa-percentage"></i>
+                        Intervalo de Confianza para la Proporción (p)
+                    </h3>
+                    
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-3">Fórmula general:</h4>
+                            <div class="bg-green-50 p-4 rounded-lg mb-4">
+                                <p class="text-center text-lg">$$IC = \hat{p} \pm z_{\alpha/2} \cdot \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$</p>
+                            </div>
+                            
+                            <h4 class="font-semibold mb-3">Condiciones de aplicación:</h4>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>$n\hat{p} \geq 5$</li>
+                                <li>$n(1-\hat{p}) \geq 5$</li>
+                                <li>Muestra aleatoria</li>
+                                <li>Independencia de observaciones</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold mb-3">Ejemplo clínico:</h4>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <p><strong>Problema:</strong> En un ensayo clínico, 72 de 200 pacientes respondieron positivamente al tratamiento.</p>
+                                <p class="mt-2"><strong>Datos:</strong></p>
+                                <ul class="list-disc list-inside ml-4">
+                                    <li>$n = 200$</li>
+                                    <li>$x = 72$</li>
+                                    <li>$\hat{p} = 72/200 = 0.36$</li>
+                                    <li>Confianza = 95%</li>
+                                </ul>
+                                <p class="mt-2"><strong>IC 95%:</strong> $0.36 \pm 1.96 \sqrt{\frac{0.36 \times 0.64}{200}}$</p>
+                                <p><strong>Resultado:</strong> [0.293, 0.427] o [29.3%, 42.7%]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Factores que Afectan el Intervalo -->
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h3 class="card-title text-purple-700">
+                        <i class="fas fa-sliders-h"></i>
+                        Factores que Afectan la Amplitud del Intervalo
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 mt-4">
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <i class="fas fa-expand-arrows-alt text-2xl text-purple-600 mb-2"></i>
+                            <h4 class="font-bold">Nivel de Confianza</h4>
+                            <p class="text-sm">↑ Confianza = ↑ Amplitud</p>
+                            <p class="text-xs text-gray-600">Mayor certeza requiere intervalo más amplio</p>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <i class="fas fa-users text-2xl text-purple-600 mb-2"></i>
+                            <h4 class="font-bold">Tamaño de Muestra</h4>
+                            <p class="text-sm">↑ n = ↓ Amplitud</p>
+                            <p class="text-xs text-gray-600">Más datos = mayor precisión</p>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <i class="fas fa-chart-line text-2xl text-purple-600 mb-2"></i>
+                            <h4 class="font-bold">Variabilidad</h4>
+                            <p class="text-sm">↑ σ = ↑ Amplitud</p>
+                            <p class="text-xs text-gray-600">Mayor variabilidad = menor precisión</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interpretación Clínica -->
+        <section id="interpretacion" class="section-content hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Interpretación Clínica</h2>
+                <p class="text-lg text-gray-600">Cómo interpretar correctamente los intervalos de confianza</p>
+            </div>
+
+            <!-- Interpretación Correcta -->
+            <div class="card bg-base-100 shadow-xl mb-8">
+                <div class="card-body">
+                    <h3 class="card-title text-green-700">
+                        <i class="fas fa-check-circle"></i>
+                        Interpretación Correcta
+                    </h3>
+                    
+                    <div class="alert alert-success mb-4">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <h4 class="font-bold">Definición correcta:</h4>
+                            <p>"Tenemos 95% de confianza de que el verdadero parámetro poblacional se encuentra dentro del intervalo calculado."</p>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-3 text-green-600">✅ Interpretaciones correctas:</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span>"Estamos 95% confiados de que la media poblacional está entre 124.2 y 131.8 mmHg"</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span>"Si repitiéramos el estudio 100 veces, aproximadamente 95 intervalos contendrían el verdadero parámetro"</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span>"El intervalo [124.2, 131.8] es compatible con los datos observados al nivel de confianza del 95%"</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold mb-3 text-red-600">❌ Interpretaciones incorrectas:</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-red-500 mt-1 mr-2"></i>
+                                    <span>"Hay 95% de probabilidad de que la media poblacional esté en el intervalo"</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-red-500 mt-1 mr-2"></i>
+                                    <span>"95% de los datos están en el intervalo"</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-red-500 mt-1 mr-2"></i>
+                                    <span>"El parámetro varía dentro del intervalo"</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Casos Clínicos -->
+            <div class="grid lg:grid-cols-2 gap-6 mb-8">
+                <div class="card bg-blue-50 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-blue-700">
+                            <i class="fas fa-heartbeat"></i>
+                            Caso 1: Eficacia de Medicamento
+                        </h3>
+                        
+                        <div class="bg-white p-4 rounded-lg mb-4">
+                            <p><strong>Contexto:</strong> Ensayo clínico de un nuevo antihipertensivo</p>
+                            <p><strong>Resultado:</strong> Reducción promedio de 12.5 mmHg</p>
+                            <p><strong>IC 95%:</strong> [8.2, 16.8] mmHg</p>
+                        </div>
+                        
+                        <h4 class="font-semibold mb-2">Interpretación clínica:</h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li>El medicamento reduce significativamente la presión arterial</li>
+                            <li>La reducción verdadera está probablemente entre 8.2 y 16.8 mmHg</li>
+                            <li>Como el intervalo no incluye 0, hay evidencia de eficacia</li>
+                            <li>La reducción mínima esperada (8.2 mmHg) es clínicamente relevante</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card bg-green-50 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-green-700">
+                            <i class="fas fa-pills"></i>
+                            Caso 2: Tasa de Respuesta
+                        </h3>
+                        
+                        <div class="bg-white p-4 rounded-lg mb-4">
+                            <p><strong>Contexto:</strong> Nuevo tratamiento para depresión</p>
+                            <p><strong>Resultado:</strong> 68% de pacientes respondieron</p>
+                            <p><strong>IC 95%:</strong> [61.2%, 74.8%]</p>
+                        </div>
+                        
+                        <h4 class="font-semibold mb-2">Interpretación clínica:</h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li>La tasa de respuesta verdadera está entre 61.2% y 74.8%</li>
+                            <li>Incluso en el escenario más conservador (61.2%), la eficacia es alta</li>
+                            <li>Se puede comparar con tratamientos estándar</li>
+                            <li>Información útil para decisiones clínicas y regulatorias</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consideraciones Especiales -->
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h3 class="card-title text-orange-700">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Consideraciones Especiales en Medicina
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mt-4">
+                        <div>
+                            <h4 class="font-semibold mb-3">Relevancia Clínica vs. Estadística:</h4>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>Un intervalo puede no incluir 0 (significativo estadísticamente) pero ser clínicamente irrelevante</li>
+                                <li>Considerar la magnitud del efecto, no solo la significancia</li>
+                                <li>Evaluar si la diferencia mínima es clínicamente importante</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold mb-3">Comunicación con Pacientes:</h4>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>Usar lenguaje simple y evitar términos técnicos</li>
+                                <li>Enfocarse en el rango de resultados esperados</li>
+                                <li>Explicar la incertidumbre inherente en las estimaciones</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculadora de Intervalos -->
+        <section id="calculadora" class="section-content hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Calculadora de Intervalos de Confianza</h2>
+                <p class="text-lg text-gray-600">Herramienta interactiva para calcular intervalos</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Calculadora para Media -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-blue-700">
+                            <i class="fas fa-calculator"></i>
+                            Intervalo para la Media
+                        </h3>
+                        
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Media muestral (x̄)</span>
+                            </label>
+                            <input type="number" id="media_muestral" class="input input-bordered" placeholder="Ej: 128" step="0.01">
+                        </div>
+                        
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Desviación estándar (s)</span>
+                            </label>
+                            <input type="number" id="desviacion_std" class="input input-bordered" placeholder="Ej: 15" step="0.01">
+                        </div>
+                        
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Tamaño de muestra (n)</span>
+                            </label>
+                            <input type="number" id="tamano_muestra" class="input input-bordered" placeholder="Ej: 100" min="1">
+                        </div>
+                        
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Nivel de confianza</span>
+                            </label>
+                            <select id="nivel_confianza" class="select select-bordered">
+                                <option value="90">90%</option>
+                                <option value="95" selected>95%</option>
+                                <option value="99">99%</option>
+                            </select>
+                        </div>
+                        
+                        <button id="calcular_media" class="btn btn-primary btn-block mt-4">
+                            <i class="fas fa-calculator"></i>
+                            Calcular Intervalo
+                        </button>
+                        
+                        <div id="resultado_media" class="mt-4 p-4 bg-blue-50 rounded-lg hidden">
+                            <h4 class="font-bold mb-2">Resultado:</h4>
+                            <p id="intervalo_media" class="text-lg font-mono"></p>
+                            <p id="interpretacion_media" class="text-sm mt-2"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculadora para Proporción -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-green-700">
+                            <i class="fas fa-percentage"></i>
+                            Intervalo para la Proporción
+                        </h3>
+                        
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Número de éxitos (x)</span>
+                            </label>
+                            <input type="number" id="num_exitos" class="input input-bordered" placeholder="Ej: 72" min="0">
+                        </div>
+                        
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Tamaño de muestra (n)</span>
+                            </label>
+                            <input type="number" id="tamano_muestra_prop" class="input input-bordered" placeholder="Ej: 200" min="1">
+                        </div>
+                        
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Nivel de confianza</span>
+                            </label>
+                            <select id="nivel_confianza_prop" class="select select-bordered">
+                                <option value="90">90%</option>
+                                <option value="95" selected>95%</option>
+                                <option value="99">99%</option>
+                            </select>
+                        </div>
+                        
+                        <button id="calcular_proporcion" class="btn btn-success btn-block mt-4">
+                            <i class="fas fa-calculator"></i>
+                            Calcular Intervalo
+                        </button>
+                        
+                        <div id="resultado_proporcion" class="mt-4 p-4 bg-green-50 rounded-lg hidden">
+                            <h4 class="font-bold mb-2">Resultado:</h4>
+                            <p id="proporcion_muestral" class="text-sm"></p>
+                            <p id="intervalo_proporcion" class="text-lg font-mono"></p>
+                            <p id="interpretacion_proporcion" class="text-sm mt-2"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visualización -->
+            <div class="card bg-base-100 shadow-xl mt-8">
+                <div class="card-body">
+                    <h3 class="card-title text-purple-700">
+                        <i class="fas fa-chart-bar"></i>
+                        Visualización del Intervalo
+                    </h3>
+                    <canvas id="intervalChart" width="400" height="200"></canvas>
+                    <div id="chart_explanation" class="mt-4 text-sm text-gray-600 hidden">
+                        <p>El gráfico muestra la distribución muestral y el intervalo de confianza calculado.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ejercicios -->
+        <section id="ejercicios" class="section-content hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Ejercicios Prácticos</h2>
+                <p class="text-lg text-gray-600">Aplica los conceptos de inferencia estadística</p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Ejercicio 1 -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-blue-700">
+                            <i class="fas fa-question-circle"></i>
+                            Ejercicio 1: Interpretación de Intervalos
+                        </h3>
+                        <p class="mb-4">Lee el siguiente resultado y selecciona la interpretación correcta:</p>
+                        
+                        <div class="alert alert-info mb-4">
+                            <i class="fas fa-file-medical"></i>
+                            <div>
+                                <p><strong>Resultado:</strong> En un estudio sobre la efectividad de un nuevo analgésico, se encontró que el tiempo promedio de alivio del dolor fue de 45 minutos con un intervalo de confianza del 95%: [38.2, 51.8] minutos.</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <label class="flex items-center p-3 bg-base-200 rounded-lg cursor-pointer hover:bg-base-300">
+                                <input type="radio" name="ejercicio1" value="a" class="radio radio-primary mr-3">
+                                <span>Hay 95% de probabilidad de que el tiempo promedio poblacional esté entre 38.2 y 51.8 minutos</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-base-200 rounded-lg cursor-pointer hover:bg-base-300">
+                                <input type="radio" name="ejercicio1" value="b" class="radio radio-primary mr-3">
+                                <span>Estamos 95% confiados de que el tiempo promedio poblacional está entre 38.2 y 51.8 minutos</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-base-200 rounded-lg cursor-pointer hover:bg-base-300">
+                                <input type="radio" name="ejercicio1" value="c" class="radio radio-primary mr-3">
+                                <span>95% de los pacientes tendrán alivio del dolor entre 38.2 y 51.8 minutos</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-base-200 rounded-lg cursor-pointer hover:bg-base-300">
+                                <input type="radio" name="ejercicio1" value="d" class="radio radio-primary mr-3">
+                                <span>El tiempo promedio varía entre 38.2 y 51.8 minutos</span>
+                            </label>
+                        </div>
+                        
+                        <button onclick="verificarEjercicio1()" class="btn btn-primary mt-4">Verificar Respuesta</button>
+                        <div id="feedback1" class="mt-4 hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 2 -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-green-700">
+                            <i class="fas fa-calculator"></i>
+                            Ejercicio 2: Cálculo de Intervalo
+                        </h3>
+                        <p class="mb-4">Calcula el intervalo de confianza del 95% para la siguiente situación:</p>
+                        
+                        <div class="alert alert-info mb-4">
+                            <i class="fas fa-file-medical"></i>
+                            <div>
+                                <p><strong>Situación:</strong> En una muestra de 64 pacientes, la glucosa promedio en ayunas fue de 110 mg/dL con una desviación estándar de 16 mg/dL.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Límite inferior:</span>
+                                </label>
+                                <input type="number" id="ejercicio2_inferior" class="input input-bordered" placeholder="mg/dL" step="0.1">
+                            </div>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Límite superior:</span>
+                                </label>
+                                <input type="number" id="ejercicio2_superior" class="input input-bordered" placeholder="mg/dL" step="0.1">
+                            </div>
+                        </div>
+                        
+                        <button onclick="verificarEjercicio2()" class="btn btn-primary mt-4">Verificar Respuesta</button>
+                        <div id="feedback2" class="mt-4 hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 3 -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-purple-700">
+                            <i class="fas fa-chart-line"></i>
+                            Ejercicio 3: Análisis de Resultados
+                        </h3>
+                        <p class="mb-4">Analiza los siguientes intervalos de confianza y responde:</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-bold">Tratamiento A</h4>
+                                <p>Reducción de presión arterial</p>
+                                <p>IC 95%: [2.1, 8.7] mmHg</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-bold">Tratamiento B</h4>
+                                <p>Reducción de presión arterial</p>
+                                <p>IC 95%: [-1.2, 6.8] mmHg</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div>
+                                <p class="font-semibold mb-2">¿Cuál tratamiento muestra evidencia clara de eficacia?</p>
+                                <select id="ejercicio3_eficacia" class="select select-bordered w-full">
+                                    <option value="">Seleccionar...</option>
+                                    <option value="a">Tratamiento A</option>
+                                    <option value="b">Tratamiento B</option>
+                                    <option value="c">Ambos</option>
+                                    <option value="d">Ninguno</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <p class="font-semibold mb-2">¿Por qué?</p>
+                                <textarea id="ejercicio3_justificacion" class="textarea textarea-bordered w-full" placeholder="Explica tu razonamiento..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <button onclick="verificarEjercicio3()" class="btn btn-primary mt-4">Verificar Respuesta</button>
+                        <div id="feedback3" class="mt-4 hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluación -->
+        <section id="evaluacion" class="section-content hidden">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Evaluación Final</h2>
+                <p class="text-lg text-gray-600">Demuestra tu comprensión de la inferencia estadística</p>
+            </div>
+
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="card-title">Quiz de Conocimientos</h3>
+                        <div class="badge badge-primary badge-lg">
+                            <span id="preguntaActual">1</span> / <span id="totalPreguntas">5</span>
+                        </div>
+                    </div>
+
+                    <div id="quizContainer">
+                        <!-- Las preguntas se cargarán dinámicamente -->
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button id="anteriorBtn" class="btn btn-outline" disabled>
+                            <i class="fas fa-arrow-left"></i>
+                            Anterior
+                        </button>
+                        <button id="siguienteBtn" class="btn btn-primary">
+                            Siguiente
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <div id="resultadosQuiz" class="mt-6 hidden">
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4 class="font-bold">¡Evaluación Completada!</h4>
+                                <p>Tu puntuación: <span id="puntuacionFinal" class="font-bold"></span></p>
+                                <p id="mensajeFinal"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h4 class="font-bold mb-2">Retroalimentación:</h4>
+                            <div id="retroalimentacion"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-base-200 text-center py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <p class="text-base-content/70">
+                <i class="fas fa-university"></i>
+                Universidad Antonio Nariño - Bioestadística para Ciencias de la Salud
+            </p>
+            <p class="text-sm mt-2">OVA 15: Inferencia Estadística Básica | Fase III - Semana 13</p>
+        </div>
+    </footer>
+
+    <script>
+        // Variables globales
+        let currentSection = 'intro';
+        let intervalChart = null;
+        let preguntaActualIndex = 0;
+        let respuestasQuiz = [];
+        
+        // Preguntas del quiz
+        const preguntasQuiz = [
+            {
+                pregunta: "¿Cuál es la principal diferencia entre estimación puntual y por intervalo?",
+                opciones: [
+                    "La estimación puntual es más precisa",
+                    "La estimación por intervalo proporciona información sobre la incertidumbre",
+                    "No hay diferencia práctica",
+                    "La estimación puntual siempre es correcta"
+                ],
+                correcta: 1,
+                explicacion: "La estimación por intervalo proporciona un rango de valores plausibles junto con una medida de incertidumbre (nivel de confianza), mientras que la estimación puntual solo da un valor específico sin información sobre su precisión."
+            },
+            {
+                pregunta: "¿Qué significa un intervalo de confianza del 95%?",
+                opciones: [
+                    "95% de los datos están en el intervalo",
+                    "Hay 95% de probabilidad de que el parámetro esté en el intervalo",
+                    "Si repitiéramos el estudio muchas veces, 95% de los intervalos contendrían el parámetro verdadero",
+                    "El parámetro varía dentro del intervalo 95% del tiempo"
+                ],
+                correcta: 2,
+                explicacion: "Un intervalo de confianza del 95% significa que si repitiéramos el procedimiento de muestreo y cálculo del intervalo muchas veces, aproximadamente 95% de esos intervalos contendrían el verdadero parámetro poblacional."
+            },
+            {
+                pregunta: "¿Qué factor NO afecta la amplitud de un intervalo de confianza?",
+                opciones: [
+                    "El nivel de confianza",
+                    "El tamaño de la muestra",
+                    "La variabilidad de los datos",
+                    "El valor de la media muestral"
+                ],
+                correcta: 3,
+                explicacion: "El valor específico de la media muestral no afecta la amplitud del intervalo de confianza. La amplitud depende del nivel de confianza, el tamaño de muestra y la variabilidad de los datos."
+            },
+            {
+                pregunta: "En un ensayo clínico, el IC 95% para la diferencia de medias es [-2.1, 8.7]. ¿Qué se puede concluir?",
+                opciones: [
+                    "Hay evidencia clara de diferencia significativa",
+                    "No hay evidencia de diferencia significativa",
+                    "Los resultados son inconcluyentes",
+                    "Se necesita más información"
+                ],
+                correcta: 2,
+                explicacion: "Como el intervalo incluye el 0 (valor de no diferencia), no hay evidencia estadísticamente significativa de diferencia entre los grupos al nivel de confianza del 95%."
+            },
+            {
+                pregunta: "¿Cuándo se debe usar la distribución t en lugar de la distribución normal para intervalos de confianza?",
+                opciones: [
+                    "Cuando n > 30",
+                    "Cuando la desviación estándar poblacional es desconocida",
+                    "Cuando se trabaja con proporciones",
+                    "Siempre se debe usar la distribución normal"
+                ],
+                correcta: 1,
+                explicacion: "Se usa la distribución t cuando la desviación estándar poblacional es desconocida y se estima con la desviación estándar muestral, especialmente con muestras pequeñas."
+            }
+        ];
+
+        // Navegación entre secciones
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const section = btn.dataset.section;
+                showSection(section);
+                updateNavigation(btn);
+            });
+        });
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+            document.getElementById(sectionId).classList.add('fade-in');
+            currentSection = sectionId;
+        }
+
+        function updateNavigation(activeBtn) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-ghost');
+            });
+            activeBtn.classList.remove('btn-ghost');
+            activeBtn.classList.add('btn-primary');
+        }
+
+        // Calculadora de intervalos de confianza
+        document.getElementById('calcular_media').addEventListener('click', function() {
+            const media = parseFloat(document.getElementById('media_muestral').value);
+            const desviacion = parseFloat(document.getElementById('desviacion_std').value);
+            const n = parseInt(document.getElementById('tamano_muestra').value);
+            const confianza = parseInt(document.getElementById('nivel_confianza').value);
+
+            if (isNaN(media) || isNaN(desviacion) || isNaN(n) || n <= 0) {
+                alert('Por favor, ingresa valores válidos');
+                return;
+            }
+
+            // Valores críticos aproximados
+            const valoresCriticos = {
+                90: 1.645,
+                95: 1.96,
+                99: 2.576
+            };
+
+            // Si n < 30, usar distribución t (aproximación)
+            let valorCritico = valoresCriticos[confianza];
+            if (n < 30) {
+                const factorT = {
+                    90: 1.1,
+                    95: 1.15,
+                    99: 1.3
+                };
+                valorCritico *= factorT[confianza];
+            }
+
+            const errorEstandar = desviacion / Math.sqrt(n);
+            const margenError = valorCritico * errorEstandar;
+            const limiteInferior = media - margenError;
+            const limiteSuperior = media + margenError;
+
+            document.getElementById('intervalo_media').textContent = 
+                `[${limiteInferior.toFixed(2)}, ${limiteSuperior.toFixed(2)}]`;
+            
+            document.getElementById('interpretacion_media').textContent = 
+                `Tenemos ${confianza}% de confianza de que la media poblacional está entre ${limiteInferior.toFixed(2)} y ${limiteSuperior.toFixed(2)}.`;
+            
+            document.getElementById('resultado_media').classList.remove('hidden');
+
+            // Crear gráfico
+            createIntervalChart(media, limiteInferior, limiteSuperior, 'Media');
+        });
+
+        document.getElementById('calcular_proporcion').addEventListener('click', function() {
+            const exitos = parseInt(document.getElementById('num_exitos').value);
+            const n = parseInt(document.getElementById('tamano_muestra_prop').value);
+            const confianza = parseInt(document.getElementById('nivel_confianza_prop').value);
+
+            if (isNaN(exitos) || isNaN(n) || n <= 0 || exitos < 0 || exitos > n) {
+                alert('Por favor, ingresa valores válidos');
+                return;
+            }
+
+            const p = exitos / n;
+            
+            // Verificar condiciones
+            if (n * p < 5 || n * (1 - p) < 5) {
+                alert('Advertencia: Las condiciones para usar la aproximación normal pueden no cumplirse (np < 5 o n(1-p) < 5)');
+            }
+
+            const valoresCriticos = {
+                90: 1.645,
+                95: 1.96,
+                99: 2.576
+            };
+
+            const valorCritico = valoresCriticos[confianza];
+            const errorEstandar = Math.sqrt((p * (1 - p)) / n);
+            const margenError = valorCritico * errorEstandar;
+            const limiteInferior = Math.max(0, p - margenError);
+            const limiteSuperior = Math.min(1, p + margenError);
+
+            document.getElementById('proporcion_muestral').textContent = 
+                `Proporción muestral: ${(p * 100).toFixed(1)}%`;
+            
+            document.getElementById('intervalo_proporcion').textContent = 
+                `[${(limiteInferior * 100).toFixed(1)}%, ${(limiteSuperior * 100).toFixed(1)}%]`;
+            
+            document.getElementById('interpretacion_proporcion').textContent = 
+                `Tenemos ${confianza}% de confianza de que la proporción poblacional está entre ${(limiteInferior * 100).toFixed(1)}% y ${(limiteSuperior * 100).toFixed(1)}%.`;
+            
+            document.getElementById('resultado_proporcion').classList.remove('hidden');
+
+            // Crear gráfico
+            createIntervalChart(p * 100, limiteInferior * 100, limiteSuperior * 100, 'Proporción (%)');
+        });
+
+        function createIntervalChart(estimate, lower, upper, label) {
+            const ctx = document.getElementById('intervalChart').getContext('2d');
+            
+            if (intervalChart) {
+                intervalChart.destroy();
+            }
+
+            const range = upper - lower;
+            const center = (upper + lower) / 2;
+            const xMin = center - range * 1.5;
+            const xMax = center + range * 1.5;
+
+            intervalChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Estimación Puntual',
+                        data: [{x: estimate, y: 1}],
+                        backgroundColor: 'red',
+                        borderColor: 'red',
+                        pointRadius: 8,
+                        pointStyle: 'triangle'
+                    }, {
+                        label: 'Intervalo de Confianza',
+                        data: [{x: lower, y: 1}, {x: upper, y: 1}],
+                        backgroundColor: 'blue',
+                        borderColor: 'blue',
+                        pointRadius: 6,
+                        showLine: true,
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: label
+                            },
+                            min: xMin,
+                            max: xMax
+                        },
+                        y: {
+                            display: false,
+                            min: 0.5,
+                            max: 1.5
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.datasetIndex === 0) {
+                                        return `Estimación: ${context.parsed.x.toFixed(2)}`;
+                                    } else {
+                                        return `Límite: ${context.parsed.x.toFixed(2)}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            document.getElementById('chart_explanation').classList.remove('hidden');
+        }
+
+        // Ejercicios
+        function verificarEjercicio1() {
+            const respuesta = document.querySelector('input[name="ejercicio1"]:checked');
+            
+            if (!respuesta) {
+                alert('Por favor selecciona una respuesta');
+                return;
+            }
+
+            let feedback = "<div class='alert alert-info'><h4 class='font-bold'>Retroalimentación:</h4>";
+            
+            if (respuesta.value === 'b') {
+                feedback += "<p>✅ <strong>Correcto!</strong> Esta es la interpretación correcta de un intervalo de confianza.</p>";
+                feedback += "<p>Un intervalo de confianza del 95% significa que tenemos 95% de confianza de que el parámetro poblacional verdadero se encuentra dentro del intervalo calculado.</p>";
+            } else {
+                feedback += "<p>❌ <strong>Incorrecto.</strong> La respuesta correcta es la opción b.</p>";
+                if (respuesta.value === 'a') {
+                    feedback += "<p>Esta interpretación es incorrecta porque trata al parámetro como una variable aleatoria, cuando en realidad es un valor fijo desconocido.</p>";
+                } else if (respuesta.value === 'c') {
+                    feedback += "<p>Esta interpretación confunde el intervalo de confianza con un intervalo de predicción para valores individuales.</p>";
+                } else if (respuesta.value === 'd') {
+                    feedback += "<p>El parámetro poblacional es un valor fijo, no varía.</p>";
+                }
+            }
+            
+            feedback += "</div>";
+            
+            document.getElementById('feedback1').innerHTML = feedback;
+            document.getElementById('feedback1').classList.remove('hidden');
+        }
+
+        function verificarEjercicio2() {
+            const inferior = parseFloat(document.getElementById('ejercicio2_inferior').value);
+            const superior = parseFloat(document.getElementById('ejercicio2_superior').value);
+            
+            if (isNaN(inferior) || isNaN(superior)) {
+                alert('Por favor ingresa ambos valores');
+                return;
+            }
+
+            // Cálculo correcto: n=64, media=110, s=16, confianza=95%
+            const media = 110;
+            const s = 16;
+            const n = 64;
+            const z = 1.96; // Para 95% de confianza
+            
+            const errorEstandar = s / Math.sqrt(n);
+            const margenError = z * errorEstandar;
+            const limiteInferiorCorrecto = media - margenError; // 106.08
+            const limiteSuperiorCorrecto = media + margenError; // 113.92
+            
+            let feedback = "<div class='alert alert-info'><h4 class='font-bold'>Retroalimentación:</h4>";
+            
+            const tolerancia = 0.5;
+            const inferiorCorrecto = Math.abs(inferior - limiteInferiorCorrecto) <= tolerancia;
+            const superiorCorrecto = Math.abs(superior - limiteSuperiorCorrecto) <= tolerancia;
+            
+            if (inferiorCorrecto && superiorCorrecto) {
+                feedback += "<p>✅ <strong>Correcto!</strong> El intervalo de confianza del 95% es aproximadamente [106.1, 113.9] mg/dL.</p>";
+            } else {
+                feedback += "<p>❌ <strong>Incorrecto.</strong></p>";
+                feedback += `<p><strong>Cálculo:</strong></p>`;
+                feedback += `<p>Error estándar = s/√n = 16/√64 = 16/8 = 2</p>`;
+                feedback += `<p>Margen de error = 1.96 × 2 = 3.92</p>`;
+                feedback += `<p>IC 95% = 110 ± 3.92 = [106.08, 113.92] mg/dL</p>`;
+            }
+            
+            feedback += "</div>";
+            
+            document.getElementById('feedback2').innerHTML = feedback;
+            document.getElementById('feedback2').classList.remove('hidden');
+        }
+
+        function verificarEjercicio3() {
+            const eficacia = document.getElementById('ejercicio3_eficacia').value;
+            const justificacion = document.getElementById('ejercicio3_justificacion').value.toLowerCase();
+            
+            if (!eficacia) {
+                alert('Por favor selecciona una respuesta');
+                return;
+            }
+
+            let feedback = "<div class='alert alert-info'><h4 class='font-bold'>Retroalimentación:</h4>";
+            
+            if (eficacia === 'a') {
+                feedback += "<p>✅ <strong>Correcto!</strong> El Tratamiento A muestra evidencia clara de eficacia.</p>";
+                feedback += "<p><strong>Explicación:</strong> El IC del Tratamiento A [2.1, 8.7] no incluye el 0, lo que indica una reducción estadísticamente significativa. El Tratamiento B [−1.2, 6.8] incluye el 0, por lo que no hay evidencia estadísticamente significativa de eficacia.</p>";
+                
+                if (justificacion.includes('cero') || justificacion.includes('0') || justificacion.includes('significativ')) {
+                    feedback += "<p>✅ Tu justificación es correcta. Identificaste correctamente que la inclusión del 0 en el intervalo es clave para determinar la significancia estadística.</p>";
+                }
+            } else {
+                feedback += "<p>❌ <strong>Incorrecto.</strong> La respuesta correcta es el Tratamiento A.</p>";
+                feedback += "<p>Un intervalo de confianza que no incluye el 0 (valor de no efecto) proporciona evidencia de eficacia estadísticamente significativa.</p>";
+            }
+            
+            feedback += "</div>";
+            
+            document.getElementById('feedback3').innerHTML = feedback;
+            document.getElementById('feedback3').classList.remove('hidden');
+        }
+
+        // Quiz final
+        function cargarPregunta(index) {
+            const pregunta = preguntasQuiz[index];
+            const container = document.getElementById('quizContainer');
+            
+            let html = `
+                <div class="mb-6">
+                    <h4 class="text-lg font-bold mb-4">${pregunta.pregunta}</h4>
+                    <div class="space-y-2">
+            `;
+            
+            pregunta.opciones.forEach((opcion, i) => {
+                html += `
+                    <label class="flex items-center p-3 bg-base-200 rounded-lg cursor-pointer hover:bg-base-300">
+                        <input type="radio" name="pregunta${index}" value="${i}" class="radio radio-primary mr-3">
+                        <span>${opcion}</span>
+                    </label>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+            
+            // Actualizar contador
+            document.getElementById('preguntaActual').textContent = index + 1;
+            document.getElementById('totalPreguntas').textContent = preguntasQuiz.length;
+            
+            // Actualizar botones
+            document.getElementById('anteriorBtn').disabled = index === 0;
+            document.getElementById('siguienteBtn').textContent = index === preguntasQuiz.length - 1 ? 'Finalizar' : 'Siguiente';
+            
+            // Restaurar respuesta previa si existe
+            if (respuestasQuiz[index] !== undefined) {
+                const radio = document.querySelector(`input[name="pregunta${index}"][value="${respuestasQuiz[index]}"]`);
+                if (radio) radio.checked = true;
+            }
+        }
+
+        function guardarRespuesta() {
+            const radio = document.querySelector(`input[name="pregunta${preguntaActualIndex}"]:checked`);
+            if (radio) {
+                respuestasQuiz[preguntaActualIndex] = parseInt(radio.value);
+            }
+        }
+
+        function calcularResultados() {
+            let correctas = 0;
+            let retroalimentacion = "";
+            
+            preguntasQuiz.forEach((pregunta, index) => {
+                const respuestaUsuario = respuestasQuiz[index];
+                const esCorrecta = respuestaUsuario === pregunta.correcta;
+                
+                if (esCorrecta) correctas++;
+                
+                retroalimentacion += `
+                    <div class="mb-4 p-4 rounded-lg ${esCorrecta ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'} border">
+                        <p class="font-bold">${index + 1}. ${pregunta.pregunta}</p>
+                        <p class="${esCorrecta ? 'text-green-700' : 'text-red-700'}">
+                            ${esCorrecta ? '✅ Correcto' : '❌ Incorrecto'}
+                        </p>
+                        <p class="text-sm mt-2">${pregunta.explicacion}</p>
+                    </div>
+                `;
+            });
+            
+            const porcentaje = Math.round((correctas / preguntasQuiz.length) * 100);
+            let mensaje = "";
+            
+            if (porcentaje >= 80) {
+                mensaje = "¡Excelente! Has demostrado un dominio sólido de la inferencia estadística.";
+            } else if (porcentaje >= 60) {
+                mensaje = "Buen trabajo. Revisa los conceptos donde tuviste dificultades.";
+            } else {
+                mensaje = "Necesitas repasar los conceptos de inferencia estadística. Te recomendamos revisar el material nuevamente.";
+            }
+            
+            document.getElementById('puntuacionFinal').textContent = `${correctas}/${preguntasQuiz.length} (${porcentaje}%)`;
+            document.getElementById('mensajeFinal').textContent = mensaje;
+            document.getElementById('retroalimentacion').innerHTML = retroalimentacion;
+            
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.querySelector('.flex.justify-between').classList.add('hidden');
+            document.getElementById('resultadosQuiz').classList.remove('hidden');
+        }
+
+        // Event listeners para el quiz
+        document.getElementById('siguienteBtn').addEventListener('click', function() {
+            guardarRespuesta();
+            
+            if (preguntaActualIndex < preguntasQuiz.length - 1) {
+                preguntaActualIndex++;
+                cargarPregunta(preguntaActualIndex);
+            } else {
+                calcularResultados();
+            }
+        });
+
+        document.getElementById('anteriorBtn').addEventListener('click', function() {
+            guardarRespuesta();
+            
+            if (preguntaActualIndex > 0) {
+                preguntaActualIndex--;
+                cargarPregunta(preguntaActualIndex);
+            }
+        });
+
+        // Inicializar quiz cuando se carga la sección de evaluación
+        document.querySelector('[data-section="evaluacion"]').addEventListener('click', function() {
+            if (document.getElementById('quizContainer').innerHTML === '') {
+                cargarPregunta(0);
+            }
+        });
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('intro');
+            
+            // Renderizar MathJax después de cargar la página
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>

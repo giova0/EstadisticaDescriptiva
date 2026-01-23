@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Juego: Historia de la Bioestadística (OVA)</title>
+<style>
+  :root{
+    --bg:#0f1724;
+    --card:#0b1220;
+    --accent:#2dd4bf;
+    --muted:#9aa4b2;
+    --glass: rgba(255,255,255,0.04);
+  }
+  *{box-sizing:border-box;font-family:Inter,system-ui,Arial,Helvetica,sans-serif}
+  body{margin:0;min-height:100vh;background:linear-gradient(180deg,var(--bg),#071020);color:#e6eef6;padding:18px;display:flex;flex-direction:column;align-items:center}
+  .wrap{width:100%;max-width:1100px}
+  header{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+  h1{font-size:20px;margin:0}
+  p.lead{margin:0;color:var(--muted);font-size:13px}
+  .game{display:grid;grid-template-columns: 1fr 380px;gap:16px}
+  @media (max-width:900px){.game{grid-template-columns:1fr}}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:10px;padding:16px;box-shadow:0 8px 24px rgba(2,6,23,0.6)}
+  /* timeline area */
+  #timeline-area{min-height:420px;padding:12px}
+  #timeline{height:120px;border-radius:8px;background:var(--glass);position:relative;margin-bottom:12px;display:flex;align-items:center;justify-content:center}
+  #line{position:absolute;left:8%;right:8%;height:4px;background:linear-gradient(90deg,var(--muted),var(--accent));border-radius:4px}
+  .tick{position:absolute;top:54px;width:2px;height:36px;background:rgba(255,255,255,0.06);display:flex;flex-direction:column;align-items:center}
+  .tick label{font-size:11px;color:var(--muted);transform:translateY(46px);white-space:nowrap}
+  .pool{display:flex;flex-wrap:wrap;gap:8px;padding:8px;background:transparent}
+  .card-event{background:#071827;color:#dff7f1;padding:10px;border-radius:8px;cursor:grab;border:1px solid rgba(255,255,255,0.03);min-width:150px}
+  .card-event[draggable="true"]:active{cursor:grabbing}
+  .slot{height:54px;border:2px dashed rgba(255,255,255,0.04);border-radius:8px;padding:6px;display:flex;align-items:center;justify-content:center;min-width:140px}
+  .slot.filled{border-style:solid;background:rgba(255,255,255,0.02)}
+  .info{font-size:13px;color:var(--muted);margin-bottom:8px}
+  /* side panel */
+  .side{display:flex;flex-direction:column;gap:12px}
+  .status{display:flex;gap:8px;align-items:center;justify-content:space-between}
+  .progress{height:10px;background:#071720;border-radius:8px;overflow:hidden}
+  .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#60a5fa);width:0%}
+  .btn{background:var(--accent);color:#05201f;padding:10px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
+  .btn.secondary{background:#12202a;color:#aeead9}
+  .q-card{padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:8px}
+  footer{margin-top:14px;color:var(--muted);font-size:13px;text-align:center}
+  .hidden{display:none}
+  .result-ok{color:#7fffdf}
+  .result-bad{color:#ff9b9b}
+  small.tip{color:var(--muted);display:block;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Juego: Historia de la Bioestadística</h1>
+      <p class="lead">Arrastra eventos a la línea de tiempo y responde preguntas. Ideal como OVA para LMS.</p>
+    </div>
+    <div style="margin-left:auto;color:var(--muted);font-size:13px">
+      Autor: Adri · Formato: HTML/JS (sin dependencias)
+    </div>
+  </header>
+
+  <main class="game">
+    <section class="card" id="left">
+      <div id="timeline-area">
+        <div class="info">Arrastra los eventos desde la "Reserva" hacia los huecos (marcados en la línea de tiempo).</div>
+        <div id="timeline">
+          <div id="line"></div>
+          <!-- ticks will be injected -->
+        </div>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px">
+          <button class="btn" id="checkBtn">Revisar posicionamiento</button>
+          <button class="btn secondary" id="resetBtn">Reiniciar</button>
+          <div style="margin-left:auto;color:var(--muted);font-size:13px">Puntos: <strong id="score">0</strong></div>
+        </div>
+
+        <div class="info">Reserva de eventos</div>
+        <div class="pool" id="pool"></div>
+      </div>
+    </section>
+
+    <aside class="card side">
+      <div class="status">
+        <div>
+          <div style="font-size:13px;color:var(--muted)">Progreso</div>
+          <div class="progress" aria-hidden="true"><i id="progBar"></i></div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:13px;color:var(--muted)">Intentos</div>
+          <div id="attempts">0</div>
+        </div>
+      </div>
+
+      <div class="q-card" id="quiz-area">
+        <div style="font-weight:700">Mini-quiz</div>
+        <div id="question" style="margin-top:8px">—</div>
+        <div id="answers" style="margin-top:8px;display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+
+      <div class="q-card">
+        <div style="font-weight:700">Puntuación y envío</div>
+        <div style="margin-top:8px;color:var(--muted)">Tu puntuación se guarda localmente. Cuando lo quieras, puedes enviar el resultado al LMS (si la plataforma lo permite).</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button id="sendLms" class="btn secondary">Enviar al LMS</button>
+          <button id="clearSave" class="btn">Borrar progreso</button>
+        </div>
+        <small class="tip">Si tu LMS no acepta `postMessage`, puedes pedir al administrador que habilite la recepción de postMessage o exportar como SCORM con una herramienta externa.</small>
+      </div>
+
+      <div class="q-card" id="finalCard" style="display:none">
+        <div style="font-weight:800">Resultado final</div>
+        <div id="finalText" style="margin-top:8px"></div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button id="playAgain" class="btn">Jugar otra vez</button>
+        </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <footer class="card" style="margin-top:12px">
+  </footer>
+</div>
+
+<script>
+/*
+  Juego: Historia de la Bioestadística
+  - timelineSlots: años/periodos con respuestas correctas
+  - eventsPool: items a arrastrar
+  - Preguntas (quiz) para reforzar
+  - Guarda en localStorage
+  - Envío al LMS vía postMessage (placeholder)
+*/
+
+const timelineSlots = [
+  {id:'s1', label:'Siglo XVII', year:1680, hint:'Orígenes con probabilidad matemática'},
+  {id:'s2', label:'Siglo XVIII', year:1763, hint:'Trabajo con datos y estimación'},
+  {id:'s3', label:'Siglo XIX', year:1875, hint:'Aplicaciones a población y salud pública'},
+  {id:'s4', label:'Principios S. XX', year:1900, hint:'Estadística moderna y muestreo'},
+  {id:'s5', label:'Mediados S. XX', year:1950, hint:'Desarrollo de bioestadística como disciplina'},
+  {id:'s6', label:'Finales S. XX', year:1990, hint:'Computación y análisis avanzado'}
+];
+
+const eventsPoolInit = [
+  {id:'e1', text:'Primeros teoremas de probabilidad (Pascal-Fermat)', slot:'s1'},
+  {id:'e2', text:'Métodos de estimación y muestreo (Laplace)', slot:'s2'},
+  {id:'e3', text:'Crecimiento de estadísticas en salud pública (John Snow)', slot:'s3'},
+  {id:'e4', text:'Formalización de teoría estadística (Fisher)', slot:'s4'},
+  {id:'e5', text:'Bioestadística como área en instituciones médicas', slot:'s5'},
+  {id:'e6', text:'Aparición de paquetes estadísticos y bioinformática', slot:'s6'}
+];
+
+const quizQuestions = [
+  {q:'¿Quién es famoso por introducir métodos de muestreo en salud pública?', options:['Ronald Fisher','John Snow','Blaise Pascal'], a:1},
+  {q:'¿En qué siglo surgieron los primeros teoremas de probabilidad formalizados?', options:['XVII','XIX','XX'], a:0},
+  {q:'¿Qué avance impulsó el uso de bioestadística a finales del siglo XX?', options:['Internet','Computación y software estadístico','La imprenta'], a:1}
+];
+
+// state
+let state = {
+  placed: {}, // slotId -> eventId
+  pool: [...eventsPoolInit],
+  score: 0,
+  attempts: 0,
+  quizIndex: 0
+};
+
+const poolEl = document.getElementById('pool');
+const timelineEl = document.getElementById('timeline');
+const progBar = document.getElementById('progBar');
+const scoreEl = document.getElementById('score');
+const attemptsEl = document.getElementById('attempts');
+const checkBtn = document.getElementById('checkBtn');
+const resetBtn = document.getElementById('resetBtn');
+const questionEl = document.getElementById('question');
+const answersEl = document.getElementById('answers');
+const finalCard = document.getElementById('finalCard');
+const finalText = document.getElementById('finalText');
+const sendLms = document.getElementById('sendLms');
+const clearSave = document.getElementById('clearSave');
+const playAgain = document.getElementById('playAgain');
+
+// create timeline ticks and slots
+function renderTimeline(){
+  // clear ticks
+  timelineEl.querySelectorAll('.tick').forEach(n=>n.remove());
+  timelineSlots.forEach((s,i)=>{
+    const tick = document.createElement('div');
+    tick.className = 'tick';
+    tick.style.left = `${8 + (84/(timelineSlots.length-1))*i}%`;
+    tick.innerHTML = `<div class="slot" data-slot="${s.id}" id="${s.id}">${s.label}</div>`;
+    timelineEl.appendChild(tick);
+  });
+  // add slot dragover/drop listeners
+  timelineEl.querySelectorAll('.slot').forEach(slot=>{
+    slot.addEventListener('dragover', ev=>ev.preventDefault());
+    slot.addEventListener('drop', handleDropOnSlot);
+  });
+}
+
+function renderPool(){
+  poolEl.innerHTML = '';
+  state.pool.forEach(ev=>{
+    const d = document.createElement('div');
+    d.className = 'card-event';
+    d.setAttribute('draggable','true');
+    d.setAttribute('data-id',ev.id);
+    d.textContent = ev.text;
+    d.addEventListener('dragstart', e=>{
+      e.dataTransfer.setData('text/plain',ev.id);
+      setTimeout(()=>d.style.opacity='0.5',0);
+    });
+    d.addEventListener('dragend', ()=>d.style.opacity='1');
+    poolEl.appendChild(d);
+  });
+}
+
+function handleDropOnSlot(e){
+  e.preventDefault();
+  const slotEl = e.currentTarget;
+  const slotId = slotEl.dataset.slot;
+  const eventId = e.dataTransfer.getData('text/plain');
+  if(!eventId) return;
+  // remove event from pool
+  if(!state.pool.find(x=>x.id===eventId)){
+    // maybe moving between slots — allow swapping
+    // find existing slot that contains this event
+    for(const s in state.placed){
+      if(state.placed[s]===eventId){
+        delete state.placed[s];
+        document.getElementById(s).classList.remove('filled');
+      }
+    }
+  } else {
+    state.pool = state.pool.filter(x=>x.id!==eventId);
+  }
+  // if slot had previous event, return it to pool
+  if(state.placed[slotId]){
+    const prev = eventsPoolInit.find(x=>x.id===state.placed[slotId]);
+    if(prev) state.pool.push(prev);
+  }
+  state.placed[slotId] = eventId;
+  updateUI();
+}
+
+function updateUI(){
+  // render slots content
+  timelineSlots.forEach(s=>{
+    const slotEl = document.getElementById(s.id);
+    const evtId = state.placed[s.id];
+    if(evtId){
+      slotEl.classList.add('filled');
+      const ev = eventsPoolInit.find(x=>x.id===evtId);
+      slotEl.textContent = ev ? ev.text : 'Evento';
+      slotEl.style.cursor = 'pointer';
+      slotEl.onclick = ()=>{ // allow removing
+        // move back to pool
+        if(ev) state.pool.push(ev);
+        delete state.placed[s.id];
+        slotEl.classList.remove('filled');
+        slotEl.textContent = s.label;
+        updateUI();
+      };
+    } else {
+      slotEl.classList.remove('filled');
+      slotEl.textContent = s.label;
+      slotEl.onclick = null;
+    }
+  });
+  renderPool();
+  // progress
+  const filled = Object.keys(state.placed).length;
+  const pct = Math.round((filled/timelineSlots.length)*100);
+  progBar.style.width = pct + '%';
+  // score & attempts
+  scoreEl.textContent = state.score;
+  attemptsEl.textContent = state.attempts;
+  // save
+  saveState();
+}
+
+function checkPlacement(){
+  state.attempts++;
+  let correct = 0;
+  timelineSlots.forEach(s=>{
+    const placed = state.placed[s.id];
+    if(placed){
+      const ev = eventsPoolInit.find(x=>x.id===placed);
+      if(ev && ev.slot===s.id) correct++;
+    }
+  });
+  // scoring: +10 per correct, -2 per wrong placed
+  const totalPlaced = Object.keys(state.placed).length;
+  const wrong = totalPlaced - correct;
+  state.score += correct*10 - Math.max(0,wrong)*2;
+  if(state.score < 0) state.score = 0;
+  // show short feedback
+  alert(`Colocaste ${correct} eventos correctamente de ${timelineSlots.length}. Puntos actuales: ${state.score}`);
+  // trigger a quiz after each check
+  nextQuiz();
+  updateUI();
+  // if all correct -> finish
+  if(correct === timelineSlots.length){
+    finishGame();
+  }
+}
+
+function nextQuiz(){
+  const q = quizQuestions[state.quizIndex % quizQuestions.length];
+  state.quizIndex++;
+  questionEl.textContent = q.q;
+  answersEl.innerHTML = '';
+  q.options.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'btn secondary';
+    btn.style.textAlign = 'left';
+    btn.textContent = opt;
+    btn.addEventListener('click', ()=>{
+      if(i===q.a){
+        state.score += 5;
+        alert('Respuesta correcta +5 puntos!');
+      } else {
+        alert('Respuesta incorrecta.');
+      }
+      updateUI();
+    });
+    answersEl.appendChild(btn);
+  });
+}
+
+function finishGame(){
+  finalCard.style.display = 'block';
+  finalText.innerHTML = `<div>Has completado el timeline. Puntuación final: <strong>${state.score}</strong></div>
+  <div style="margin-top:8px;color:var(--muted)">Intentos: ${state.attempts}</div>`;
+  // send automatically to parent (best effort)
+  sendScoreToLMS();
+}
+
+// persistence
+const STORAGE_KEY = 'bioestad-juego-v1';
+function saveState(){
+  const toSave = {
+    placed: state.placed,
+    poolIds: state.pool.map(x=>x.id),
+    score: state.score,
+    attempts: state.attempts,
+    quizIndex: state.quizIndex
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+}
+function loadState(){
+  const s = localStorage.getItem(STORAGE_KEY);
+  if(!s) return;
+  try{
+    const o = JSON.parse(s);
+    state.placed = o.placed || {};
+    state.pool = (o.poolIds || []).map(id=> eventsPoolInit.find(e=>e.id===id)).filter(Boolean);
+    state.score = o.score||0;
+    state.attempts = o.attempts||0;
+    state.quizIndex = o.quizIndex||0;
+  }catch(e){console.warn('No se pudo cargar estado',e)}
+}
+
+// send score to LMS (postMessage placeholder) — LMS should listen to messages from iframe/child
+function sendScoreToLMS(){
+  const payload = {type:'game-score', score: state.score, attempts: state.attempts, max: timelineSlots.length*10};
+  // Try postMessage to parent
+  try{
+    parent.postMessage(payload, '*');
+    console.log('Mensaje enviado al parent:', payload);
+    alert('Puntuación enviada al LMS (postMessage). Si no funciona, tu LMS puede no aceptar mensajes desde iframes.');
+  }catch(e){
+    console.warn('No se pudo enviar al LMS',e);
+    alert('No fue posible enviar la puntuación al LMS desde aquí.');
+  }
+  // Placeholder: si quieres integrar SCORM, reemplaza esta función por llamadas a la API SCORM (LMSInitialize, LMSSetValue, etc.).
+}
+
+function resetGame(){
+  if(!confirm('¿Reiniciar el juego y borrar colocaciones actuales?')) return;
+  state.pool = [...eventsPoolInit];
+  state.placed = {};
+  state.score = 0;
+  state.attempts = 0;
+  state.quizIndex = 0;
+  finalCard.style.display = 'none';
+  updateUI();
+}
+
+// clear save
+function clearSaveState(){
+  if(!confirm('Borrar progreso guardado localmente?')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  resetGame();
+}
+
+// allow dragging from slots back to pool via dragstart
+function enableSlotDragFromSlot(){
+  timelineSlots.forEach(s=>{
+    const slotEl = document.getElementById(s.id);
+    slotEl.addEventListener('dragstart', function(e){
+      // start dragging if it contains an event
+      const evtId = state.placed[s.id];
+      if(!evtId){ e.preventDefault(); return; }
+      e.dataTransfer.setData('text/plain', evtId);
+      // remove from slot immediately (so user can drop somewhere else)
+      delete state.placed[s.id];
+      updateUI();
+    });
+  });
+}
+
+// initial setup
+function init(){
+  loadState();
+  renderTimeline();
+  renderPool();
+  enableSlotDragFromSlot();
+  updateUI();
+  // events
+  checkBtn.addEventListener('click', checkPlacement);
+  resetBtn.addEventListener('click', resetGame);
+  sendLms.addEventListener('click', sendScoreToLMS);
+  clearSave.addEventListener('click', clearSaveState);
+  playAgain.addEventListener('click', ()=>{
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  });
+  // kick off first quiz question
+  nextQuiz();
+}
+
+init();
+
+/* Accessibility & keyboard support (basic):
+   - Clicking a slot clears it (already implemented).
+   - Pool items can be clicked to show info.
+*/
+poolEl.addEventListener('click', e=>{
+  const el = e.target.closest('.card-event');
+  if(!el) return;
+  const id = el.dataset.id;
+  const ev = eventsPoolInit.find(x=>x.id===id);
+  if(ev) alert(ev.text + "\\n\nConsejo: arrástralo al hueco que creas correspondiente.");
+});
+</script>
+</body>
+</html>

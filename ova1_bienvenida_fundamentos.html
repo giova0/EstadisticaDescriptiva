@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 1 - Bienvenida y Fundamentos de Bioestadística</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .interactive-element {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold">Bioestadística para Ciencias de la Salud</h1>
+                    <p class="text-blue-100">Universidad Antonio Nariño - Modalidad Blended</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm">OVA 1 - Semana 1</p>
+                    <p class="text-xs">Duración: 2 horas académicas</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="bg-white shadow-sm">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between text-sm text-gray-600 mb-2">
+                <span>Progreso del OVA</span>
+                <span id="progress-text">0%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progress-bar" class="progress-bar bg-blue-600 h-2 rounded-full" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="container mx-auto px-6">
+            <div class="flex space-x-8 overflow-x-auto">
+                <button onclick="showSection('welcome')"
+                    class="nav-btn py-4 px-2 border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap">Bienvenida</button>
+                <button onclick="showSection('introduction')"
+                    class="nav-btn py-4 px-2 border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap">Introducción</button>
+                <button onclick="showSection('history')"
+                    class="nav-btn py-4 px-2 border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap">Historia</button>
+                <button onclick="showSection('importance')"
+                    class="nav-btn py-4 px-2 border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap">Importancia</button>
+                <button onclick="showSection('uses-abuses')"
+                    class="nav-btn py-4 px-2 border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap">Usos
+                    y Abusos</button>
+                <button onclick="showSection('video')"
+                    class="nav-btn py-4 px-2 border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap">Video</button>
+                <button onclick="showSection('activities')"
+                    class="nav-btn py-4 px-2 border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap">Actividades</button>
+                <button onclick="showSection('reflection')"
+                    class="nav-btn py-4 px-2 border-b-2 border-transparent hover:border-blue-500 whitespace-nowrap">Reflexión</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+
+        <!-- Welcome Section -->
+        <section id="welcome" class="section fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">¡Bienvenido a Bioestadística!</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Embárcate en un viaje fascinante por el mundo de la estadística aplicada a las ciencias de la salud.
+                    Descubre cómo los datos pueden salvar vidas y transformar la medicina moderna.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="card-hover bg-white rounded-lg shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Análisis de Datos</h3>
+                    <p class="text-gray-600">Aprende a interpretar datos clínicos y tomar decisiones basadas en
+                        evidencia</p>
+                </div>
+
+                <div class="card-hover bg-white rounded-lg shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Salud Pública</h3>
+                    <p class="text-gray-600">Comprende cómo la estadística mejora la salud de poblaciones enteras</p>
+                </div>
+
+                <div class="card-hover bg-white rounded-lg shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Investigación</h3>
+                    <p class="text-gray-600">Desarrolla habilidades para diseñar y evaluar estudios clínicos</p>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 rounded-lg p-6 mb-8">
+                <h3 class="text-xl font-semibold text-blue-800 mb-4">Objetivos de Aprendizaje</h3>
+                <ul class="space-y-2 text-blue-700">
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2">✓</span>
+                        Comprender la importancia de la bioestadística en las ciencias de la salud
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2">✓</span>
+                        Conocer la evolución histórica de la estadística médica
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2">✓</span>
+                        Identificar aplicaciones prácticas en investigación clínica
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2">✓</span>
+                        Reconocer usos apropiados e inapropiados de la estadística en medicina
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introduction" class="section hidden">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Introducción al Curso y Metodología Blended</h2>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600">Modalidad Blended Learning</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-blue-600 font-bold">70%</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Actividades Virtuales</p>
+                                <p class="text-sm text-gray-600">OVAs interactivos, datasets, simulaciones</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-green-600 font-bold">30%</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Actividades Presenciales</p>
+                                <p class="text-sm text-gray-600">Talleres, laboratorios, evaluaciones</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-green-600">Estructura del Curso</h3>
+                    <div class="space-y-3">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <p class="font-semibold">Fase I (Semanas 1-5)</p>
+                            <p class="text-sm text-gray-600">Estadística Descriptiva - 7 OVAs</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <p class="font-semibold">Fase II (Semanas 6-12)</p>
+                            <p class="text-sm text-gray-600">Probabilidad - 8 OVAs</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <p class="font-semibold">Fase III (Semanas 13-15)</p>
+                            <p class="text-sm text-gray-600">Inferencia Estadística - 4 OVAs</p>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <p class="font-semibold">Fase IV (Semana 16)</p>
+                            <p class="text-sm text-gray-600">Síntesis e Integración - 1 OVA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6">
+                <h3 class="text-xl font-semibold mb-4">¿Qué hace especial nuestro enfoque?</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold mb-2">Casos Reales</h4>
+                        <p class="text-sm text-gray-600">Datasets anonimizados de hospitales y estudios clínicos reales
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold mb-2">Aprendizaje Activo</h4>
+                        <p class="text-sm text-gray-600">Simulaciones interactivas y herramientas de visualización</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold mb-2">Colaboración</h4>
+                        <p class="text-sm text-gray-600">Foros de discusión y trabajo en equipo multidisciplinario</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section id="history" class="section hidden">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Historia de la Bioestadística en Ciencias de la Salud</h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <div class="relative">
+                    <!-- Timeline -->
+                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-blue-300"></div>
+
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <div
+                                class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-6 relative z-10">
+                                1662
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-blue-600">John Graunt - Primeros Estudios
+                                    Demográficos</h3>
+                                <p class="text-gray-600 mt-2">Publicó "Natural and Political Observations upon the Bills
+                                    of Mortality", considerado el primer trabajo de estadística médica. Analizó patrones
+                                    de mortalidad en Londres y estableció las bases de la epidemiología moderna.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div
+                                class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mr-6 relative z-10">
+                                1747
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-green-600">James Lind - Primer Ensayo Clínico
+                                    Controlado</h3>
+                                <p class="text-gray-600 mt-2">Realizó el famoso experimento sobre el escorbuto en
+                                    marineros, comparando diferentes tratamientos. Este estudio sentó las bases para los
+                                    ensayos clínicos controlados modernos.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div
+                                class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-6 relative z-10">
+                                1854
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-purple-600">John Snow - Epidemiología del Cólera
+                                </h3>
+                                <p class="text-gray-600 mt-2">Utilizó mapas y análisis estadístico para identificar la
+                                    fuente del brote de cólera en Londres. Su trabajo demostró el poder de la
+                                    estadística espacial en salud pública.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div
+                                class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center text-white font-bold mr-6 relative z-10">
+                                1920s
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-red-600">Ronald Fisher - Estadística Moderna</h3>
+                                <p class="text-gray-600 mt-2">Desarrolló conceptos fundamentales como el diseño
+                                    experimental, análisis de varianza y pruebas de significancia. Sus métodos
+                                    revolucionaron la investigación médica.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div
+                                class="w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold mr-6 relative z-10">
+                                1948
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-indigo-600">Ensayo del Estreptomicina</h3>
+                                <p class="text-gray-600 mt-2">Primer ensayo clínico randomizado controlado moderno para
+                                    tratar la tuberculosis. Estableció el estándar de oro para la evaluación de
+                                    tratamientos médicos.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div
+                                class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold mr-6 relative z-10">
+                                Hoy
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-yellow-600">Era del Big Data y IA</h3>
+                                <p class="text-gray-600 mt-2">La bioestadística moderna integra inteligencia artificial,
+                                    machine learning y análisis de grandes volúmenes de datos para medicina
+                                    personalizada y salud poblacional.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-blue-800 mb-4">Reflexión Histórica</h3>
+                <p class="text-blue-700 mb-4">
+                    La evolución de la bioestadística refleja nuestra creciente comprensión de que las decisiones
+                    médicas deben basarse en evidencia sólida.
+                    Cada avance histórico ha contribuido a salvar millones de vidas y mejorar la calidad de la atención
+                    médica.
+                </p>
+                <div class="interactive-element bg-blue-100 rounded-lg p-4 cursor-pointer"
+                    onclick="toggleHistoryQuiz()">
+                    <p class="font-semibold text-blue-800">💡 ¿Sabías que...?</p>
+                    <p class="text-blue-700">Haz clic para descubrir datos curiosos sobre la historia de la
+                        bioestadística</p>
+                </div>
+                <div id="history-quiz" class="hidden mt-4 space-y-2">
+                    <div class="bg-white rounded p-3 border-l-4 border-blue-500">
+                        <p class="text-sm"><strong>Dato curioso 1:</strong> Florence Nightingale fue pionera en el uso
+                            de gráficos estadísticos para mostrar las causas de mortalidad en hospitales militares.</p>
+                    </div>
+                    <div class="bg-white rounded p-3 border-l-4 border-green-500">
+                        <p class="text-sm"><strong>Dato curioso 2:</strong> El término "estadística" proviene del latín
+                            "statisticum" que significa "del estado", ya que inicialmente se usaba para recopilar datos
+                            gubernamentales.</p>
+                    </div>
+                    <div class="bg-white rounded p-3 border-l-4 border-purple-500">
+                        <p class="text-sm"><strong>Dato curioso 3:</strong> El primer uso documentado de un placebo en
+                            un ensayo clínico fue en 1799 por John Haygarth.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Importance Section -->
+        <section id="importance" class="section hidden">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Importancia y Aplicaciones en Investigación Clínica</h2>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-green-600">¿Por qué es crucial la bioestadística?</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-green-600 text-sm font-bold">1</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Toma de Decisiones Basada en Evidencia</p>
+                                <p class="text-sm text-gray-600">Permite evaluar objetivamente la efectividad de
+                                    tratamientos y intervenciones médicas</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-green-600 text-sm font-bold">2</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Identificación de Factores de Riesgo</p>
+                                <p class="text-sm text-gray-600">Ayuda a identificar qué factores aumentan o disminuyen
+                                    el riesgo de enfermedades</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-green-600 text-sm font-bold">3</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Optimización de Recursos</p>
+                                <p class="text-sm text-gray-600">Permite asignar recursos de salud de manera más
+                                    eficiente y efectiva</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600">Aplicaciones Prácticas</h3>
+                    <div class="space-y-3">
+                        <div class="bg-blue-50 rounded-lg p-3">
+                            <p class="font-semibold text-blue-800">Ensayos Clínicos</p>
+                            <p class="text-sm text-blue-600">Diseño, análisis e interpretación de estudios para nuevos
+                                medicamentos</p>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-3">
+                            <p class="font-semibold text-green-800">Epidemiología</p>
+                            <p class="text-sm text-green-600">Estudio de patrones de enfermedad en poblaciones</p>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-3">
+                            <p class="font-semibold text-purple-800">Diagnóstico</p>
+                            <p class="text-sm text-purple-600">Evaluación de precisión de pruebas diagnósticas</p>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-3">
+                            <p class="font-semibold text-red-800">Salud Pública</p>
+                            <p class="text-sm text-red-600">Análisis de políticas de salud y programas de prevención</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Infographic -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-6 text-center">Impacto de la Bioestadística en la Medicina Moderna
+                </h3>
+                <div class="grid md:grid-cols-4 gap-6 text-center">
+                    <div class="interactive-element" onclick="showImpactDetail('vaccines')">
+                        <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold">Vacunas</h4>
+                        <p class="text-2xl font-bold text-blue-600">95%</p>
+                        <p class="text-sm text-gray-600">Reducción en enfermedades prevenibles</p>
+                    </div>
+
+                    <div class="interactive-element" onclick="showImpactDetail('cancer')">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold">Cáncer</h4>
+                        <p class="text-2xl font-bold text-green-600">67%</p>
+                        <p class="text-sm text-gray-600">Mejora en supervivencia a 5 años</p>
+                    </div>
+
+                    <div class="interactive-element" onclick="showImpactDetail('drugs')">
+                        <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold">Medicamentos</h4>
+                        <p class="text-2xl font-bold text-purple-600">12</p>
+                        <p class="text-sm text-gray-600">Años promedio de desarrollo</p>
+                    </div>
+
+                    <div class="interactive-element" onclick="showImpactDetail('precision')">
+                        <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold">Medicina Personalizada</h4>
+                        <p class="text-2xl font-bold text-red-600">85%</p>
+                        <p class="text-sm text-gray-600">Precisión en tratamientos dirigidos</p>
+                    </div>
+                </div>
+
+                <div id="impact-detail" class="hidden mt-6 p-4 bg-gray-50 rounded-lg">
+                    <div id="impact-content"></div>
+                </div>
+            </div>
+
+            <!-- Case Study -->
+            <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6">
+                <h3 class="text-xl font-semibold mb-4">Caso de Estudio: COVID-19 y Bioestadística</h3>
+                <p class="text-gray-700 mb-4">
+                    La pandemia de COVID-19 demostró la importancia crítica de la bioestadística en la respuesta a
+                    emergencias de salud pública.
+                    Desde el modelado epidemiológico hasta la evaluación de vacunas, la estadística fue fundamental
+                    para:
+                </p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-sm">Modelar la propagación del virus</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-sm">Evaluar la efectividad de medidas de salud pública</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-sm">Diseñar ensayos clínicos para vacunas</span>
+                        </li>
+                    </ul>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">✓</span>
+                            <span class="text-sm">Analizar datos de vigilancia epidemiológica</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">✓</span>
+                            <span class="text-sm">Comunicar riesgos a la población</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">✓</span>
+                            <span class="text-sm">Optimizar la distribución de recursos</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Uses and Abuses Section -->
+        <section id="uses-abuses" class="section hidden">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Usos y Abusos de la Estadística en Medicina</h2>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <!-- Good Uses -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
+                    <h3 class="text-xl font-semibold mb-4 text-green-600 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Usos Apropiados
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-green-800">Ensayos Clínicos Rigurosos</h4>
+                            <p class="text-sm text-green-700 mt-1">Diseño apropiado con grupos control, randomización y
+                                cegamiento cuando es posible</p>
+                            <div class="mt-2 text-xs text-green-600">
+                                ✓ Tamaño de muestra calculado<br>
+                                ✓ Criterios de inclusión/exclusión claros<br>
+                                ✓ Análisis por intención de tratar
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-green-800">Metaanálisis y Revisiones Sistemáticas</h4>
+                            <p class="text-sm text-green-700 mt-1">Síntesis cuantitativa de múltiples estudios para
+                                obtener evidencia más robusta</p>
+                            <div class="mt-2 text-xs text-green-600">
+                                ✓ Búsqueda sistemática de literatura<br>
+                                ✓ Evaluación de calidad de estudios<br>
+                                ✓ Análisis de heterogeneidad
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-green-800">Vigilancia Epidemiológica</h4>
+                            <p class="text-sm text-green-700 mt-1">Monitoreo continuo de patrones de enfermedad para
+                                detectar brotes y tendencias</p>
+                            <div class="mt-2 text-xs text-green-600">
+                                ✓ Sistemas de reporte estandarizados<br>
+                                ✓ Análisis de tendencias temporales<br>
+                                ✓ Detección temprana de anomalías
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bad Uses -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500">
+                    <h3 class="text-xl font-semibold mb-4 text-red-600 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z">
+                            </path>
+                        </svg>
+                        Abusos Comunes
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-red-800">Cherry Picking (Selección Sesgada)</h4>
+                            <p class="text-sm text-red-700 mt-1">Presentar solo los resultados que apoyan una hipótesis,
+                                ignorando evidencia contraria</p>
+                            <div class="mt-2 text-xs text-red-600">
+                                ✗ Reportar solo estudios positivos<br>
+                                ✗ Omitir análisis de subgrupos negativos<br>
+                                ✗ Publicación selectiva de resultados
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-red-800">P-Hacking</h4>
+                            <p class="text-sm text-red-700 mt-1">Manipular análisis hasta obtener resultados
+                                estadísticamente significativos</p>
+                            <div class="mt-2 text-xs text-red-600">
+                                ✗ Múltiples comparaciones sin corrección<br>
+                                ✗ Cambiar hipótesis post-hoc<br>
+                                ✗ Excluir datos "problemáticos"
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-red-800">Confusión de Correlación y Causalidad</h4>
+                            <p class="text-sm text-red-700 mt-1">Asumir que una asociación estadística implica una
+                                relación causal</p>
+                            <div class="mt-2 text-xs text-red-600">
+                                ✗ Ignorar variables confusoras<br>
+                                ✗ Causalidad inversa<br>
+                                ✗ Terceras variables no consideradas
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Examples -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-6">Ejemplos Interactivos: ¿Uso Apropiado o Abuso?</h3>
+                <div class="space-y-4">
+                    <div class="border rounded-lg p-4 cursor-pointer hover:bg-gray-50" onclick="toggleExample(1)">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-semibold">Ejemplo 1: Estudio de Medicamento X</h4>
+                            <span class="text-blue-500">Haz clic para analizar →</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">
+                            "El medicamento X mostró una reducción del 50% en el riesgo relativo de muerte en pacientes
+                            con enfermedad Y"
+                        </p>
+                        <div id="example-1" class="hidden mt-4 p-4 bg-blue-50 rounded">
+                            <p class="text-sm"><strong>Análisis:</strong> Esta afirmación puede ser engañosa sin
+                                contexto adicional:</p>
+                            <ul class="text-sm mt-2 space-y-1">
+                                <li>• ¿Cuál era el riesgo absoluto inicial?</li>
+                                <li>• ¿Cuántos pacientes se necesitaron estudiar?</li>
+                                <li>• ¿Hubo efectos secundarios significativos?</li>
+                                <li>• <strong>Lección:</strong> Siempre reportar riesgo absoluto junto con riesgo
+                                    relativo</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="border rounded-lg p-4 cursor-pointer hover:bg-gray-50" onclick="toggleExample(2)">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-semibold">Ejemplo 2: Correlación Espuria</h4>
+                            <span class="text-blue-500">Haz clic para analizar →</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">
+                            "Los países con mayor consumo de chocolate tienen más premios Nobel per cápita"
+                        </p>
+                        <div id="example-2" class="hidden mt-4 p-4 bg-yellow-50 rounded">
+                            <p class="text-sm"><strong>Análisis:</strong> Este es un ejemplo clásico de correlación
+                                espuria:</p>
+                            <ul class="text-sm mt-2 space-y-1">
+                                <li>• La variable confusora es el desarrollo económico</li>
+                                <li>• Países más ricos consumen más chocolate Y tienen mejor educación/investigación
+                                </li>
+                                <li>• <strong>Lección:</strong> Correlación no implica causalidad</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="border rounded-lg p-4 cursor-pointer hover:bg-gray-50" onclick="toggleExample(3)">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-semibold">Ejemplo 3: Sesgo de Supervivencia</h4>
+                            <span class="text-blue-500">Haz clic para analizar →</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">
+                            "Los pacientes que completan nuestro tratamiento tienen una tasa de curación del 90%"
+                        </p>
+                        <div id="example-3" class="hidden mt-4 p-4 bg-red-50 rounded">
+                            <p class="text-sm"><strong>Análisis:</strong> Posible sesgo de supervivencia:</p>
+                            <ul class="text-sm mt-2 space-y-1">
+                                <li>• ¿Qué pasó con los pacientes que no completaron el tratamiento?</li>
+                                <li>• ¿Abandonaron por efectos adversos o falta de eficacia?</li>
+                                <li>• <strong>Lección:</strong> Usar análisis por intención de tratar</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ethical Guidelines -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6">
+                <h3 class="text-xl font-semibold mb-4">Principios Éticos en Bioestadística</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold mb-2">Transparencia</h4>
+                        <p class="text-sm text-gray-600">Reportar métodos, limitaciones y conflictos de interés
+                            claramente</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold mb-2">Integridad</h4>
+                        <p class="text-sm text-gray-600">Mantener honestidad en el análisis y presentación de resultados
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold mb-2">Responsabilidad</h4>
+                        <p class="text-sm text-gray-600">Considerar el impacto social y clínico de los hallazgos
+                            estadísticos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section id="video" class="section hidden">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Video Introductorio: El Poder de los Datos en Medicina
+            </h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <!-- Simulated Video Player -->
+                <div class="relative bg-gray-900 rounded-lg overflow-hidden" style="aspect-ratio: 16/9;">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-red-700 transition-colors"
+                                onclick="playVideo()">
+                                <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Bioestadística: Salvando Vidas con Datos</h3>
+                            <p class="text-gray-300">Duración: 15 minutos | Haz clic para reproducir</p>
+                        </div>
+                    </div>
+
+                    <!-- Video Content (Hidden initially) -->
+                    <div id="video-content"
+                        class="hidden absolute inset-0 bg-gradient-to-br from-blue-900 to-purple-900 p-8 overflow-y-auto">
+                        <div class="text-white space-y-6">
+                            <div class="text-center mb-8">
+                                <h3 class="text-2xl font-bold mb-2">🎬 Video: El Poder de los Datos en Medicina</h3>
+                                <div class="w-full bg-gray-700 rounded-full h-2 mb-4">
+                                    <div id="video-progress"
+                                        class="bg-red-600 h-2 rounded-full transition-all duration-1000"
+                                        style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div id="video-segment-1" class="video-segment">
+                                <h4 class="text-lg font-semibold text-yellow-300 mb-3">📊 Introducción: ¿Por qué
+                                    importan los datos?</h4>
+                                <p class="mb-4">Cada día, los profesionales de la salud toman miles de decisiones que
+                                    pueden salvar vidas. Pero, ¿cómo sabemos qué tratamiento es más efectivo? ¿Cómo
+                                    identificamos factores de riesgo? La respuesta está en los datos y su análisis
+                                    estadístico.</p>
+                                <div class="bg-blue-800 rounded-lg p-4 mb-4">
+                                    <p class="text-sm"><strong>Dato impactante:</strong> Se estima que el 80% de las
+                                        decisiones médicas se basan en algún tipo de evidencia estadística.</p>
+                                </div>
+                            </div>
+
+                            <div id="video-segment-2" class="video-segment hidden">
+                                <h4 class="text-lg font-semibold text-green-300 mb-3">🏥 Caso Real: El Descubrimiento de
+                                    la Penicilina</h4>
+                                <p class="mb-4">Alexander Fleming descubrió la penicilina por accidente en 1928, pero
+                                    fueron los bioestadísticos quienes demostraron su efectividad. Los ensayos clínicos
+                                    controlados mostraron una reducción del 90% en la mortalidad por infecciones
+                                    bacterianas.</p>
+                                <div class="grid grid-cols-2 gap-4 mb-4">
+                                    <div class="bg-red-800 rounded p-3 text-center">
+                                        <p class="text-2xl font-bold">40%</p>
+                                        <p class="text-sm">Mortalidad antes</p>
+                                    </div>
+                                    <div class="bg-green-800 rounded p-3 text-center">
+                                        <p class="text-2xl font-bold">4%</p>
+                                        <p class="text-sm">Mortalidad después</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="video-segment-3" class="video-segment hidden">
+                                <h4 class="text-lg font-semibold text-purple-300 mb-3">🔬 Metodología Científica en
+                                    Acción</h4>
+                                <p class="mb-4">La bioestadística no solo analiza datos, sino que guía cómo
+                                    recopilarlos. El diseño experimental apropiado es crucial para obtener conclusiones
+                                    válidas.</p>
+                                <div class="space-y-2 mb-4">
+                                    <div class="flex items-center">
+                                        <span class="w-4 h-4 bg-yellow-500 rounded-full mr-3"></span>
+                                        <span>Formulación de hipótesis</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="w-4 h-4 bg-blue-500 rounded-full mr-3"></span>
+                                        <span>Diseño del estudio</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="w-4 h-4 bg-green-500 rounded-full mr-3"></span>
+                                        <span>Recolección de datos</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="w-4 h-4 bg-purple-500 rounded-full mr-3"></span>
+                                        <span>Análisis estadístico</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="w-4 h-4 bg-red-500 rounded-full mr-3"></span>
+                                        <span>Interpretación y aplicación</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="video-segment-4" class="video-segment hidden">
+                                <h4 class="text-lg font-semibold text-red-300 mb-3">⚠️ Cuidado con las Trampas
+                                    Estadísticas</h4>
+                                <p class="mb-4">No toda estadística es buena estadística. Aprende a identificar
+                                    manipulaciones comunes y sesgos que pueden llevar a conclusiones erróneas.</p>
+                                <div class="bg-red-800 rounded-lg p-4 mb-4">
+                                    <p class="text-sm"><strong>Ejemplo:</strong> "El 100% de los pacientes que tomaron
+                                        nuestro medicamento sobrevivieron"... pero solo se estudió a 3 pacientes con
+                                        síntomas leves.</p>
+                                </div>
+                            </div>
+
+                            <div id="video-segment-5" class="video-segment hidden">
+                                <h4 class="text-lg font-semibold text-cyan-300 mb-3">🚀 El Futuro: Big Data y IA en
+                                    Medicina</h4>
+                                <p class="mb-4">La bioestadística moderna integra inteligencia artificial, machine
+                                    learning y análisis de grandes volúmenes de datos para revolucionar la medicina
+                                    personalizada.</p>
+                                <div class="grid grid-cols-3 gap-2 mb-4 text-center text-xs">
+                                    <div class="bg-cyan-800 rounded p-2">
+                                        <p class="font-bold">Genómica</p>
+                                        <p>Tratamientos personalizados</p>
+                                    </div>
+                                    <div class="bg-cyan-800 rounded p-2">
+                                        <p class="font-bold">Wearables</p>
+                                        <p>Monitoreo continuo</p>
+                                    </div>
+                                    <div class="bg-cyan-800 rounded p-2">
+                                        <p class="font-bold">IA Diagnóstica</p>
+                                        <p>Detección temprana</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-8">
+                                <button onclick="restartVideo()"
+                                    class="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg transition-colors">
+                                    🔄 Reiniciar Video
+                                </button>
+                                <button onclick="closeVideo()"
+                                    class="bg-gray-600 hover:bg-gray-700 px-6 py-2 rounded-lg ml-4 transition-colors">
+                                    ✕ Cerrar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Discussion Points -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600">Puntos Clave del Video</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-blue-600 text-xs font-bold">1</span>
+                            </span>
+                            <span class="text-sm">La bioestadística es fundamental para la medicina basada en
+                                evidencia</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-blue-600 text-xs font-bold">2</span>
+                            </span>
+                            <span class="text-sm">El diseño experimental apropiado es tan importante como el
+                                análisis</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-blue-600 text-xs font-bold">3</span>
+                            </span>
+                            <span class="text-sm">Debemos ser críticos con las afirmaciones estadísticas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                <span class="text-blue-600 text-xs font-bold">4</span>
+                            </span>
+                            <span class="text-sm">La tecnología está transformando la bioestadística</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-green-600">Preguntas de Reflexión</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <p class="font-semibold text-sm">¿Cómo ha cambiado la medicina con la estadística?</p>
+                            <p class="text-xs text-gray-600 mt-1">Piensa en ejemplos específicos de tu área de interés
+                            </p>
+                        </div>
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <p class="font-semibold text-sm">¿Qué riesgos ves en el mal uso de estadísticas?</p>
+                            <p class="text-xs text-gray-600 mt-1">Considera el impacto en pacientes y políticas de salud
+                            </p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <p class="font-semibold text-sm">¿Cómo te preparas para el futuro de la bioestadística?</p>
+                            <p class="text-xs text-gray-600 mt-1">Reflexiona sobre habilidades y conocimientos
+                                necesarios</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activities Section -->
+        <section id="activities" class="section hidden">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Actividades Interactivas</h2>
+
+            <!-- Forum Simulation -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-blue-600">Foro de Presentación Virtual</h3>
+                <p class="text-gray-600 mb-6">Comparte tu presentación con tus compañeros de clase. Esta actividad
+                    simula un foro de discusión donde puedes conocer a otros estudiantes.</p>
+
+                <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                    <h4 class="font-semibold text-blue-800 mb-2">Instrucciones:</h4>
+                    <ol class="text-sm text-blue-700 space-y-1">
+                        <li>1. Completa tu presentación personal</li>
+                        <li>2. Comparte tu experiencia previa con estadística</li>
+                        <li>3. Menciona tus expectativas del curso</li>
+                        <li>4. Lee y comenta las presentaciones de al menos 2 compañeros</li>
+                    </ol>
+                </div>
+
+                <form class="space-y-4" onsubmit="submitPresentation(event)">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre y Programa Académico</label>
+                        <input type="text"
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Ej: María García - Medicina">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Experiencia previa con
+                            estadística</label>
+                        <textarea
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            rows="3"
+                            placeholder="Describe brevemente tu experiencia previa con estadística o matemáticas..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">¿Qué esperas aprender en este
+                            curso?</label>
+                        <textarea
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            rows="3" placeholder="Comparte tus expectativas y objetivos personales..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Área de interés en ciencias de la
+                            salud</label>
+                        <select
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Selecciona tu área de interés</option>
+                            <option value="medicina-general">Medicina General</option>
+                            <option value="enfermeria">Enfermería</option>
+                            <option value="salud-publica">Salud Pública</option>
+                            <option value="epidemiologia">Epidemiología</option>
+                            <option value="investigacion">Investigación Clínica</option>
+                            <option value="farmacia">Farmacia</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                        Publicar Presentación
+                    </button>
+                </form>
+
+                <!-- Simulated Forum Posts -->
+                <div id="forum-posts" class="mt-8 space-y-4">
+                    <h4 class="font-semibold text-gray-800 mb-4">Presentaciones de Compañeros:</h4>
+
+                    <div class="border rounded-lg p-4 bg-gray-50">
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">
+                                JM
+                            </div>
+                            <div class="flex-1">
+                                <h5 class="font-semibold text-gray-800">Juan Martínez - Medicina</h5>
+                                <p class="text-sm text-gray-600 mt-1">Hace 2 horas</p>
+                                <p class="text-sm mt-2">¡Hola a todos! Soy estudiante de medicina de 4to semestre. Mi
+                                    experiencia con estadística es básica, solo lo que vimos en bachillerato. Espero
+                                    aprender a interpretar estudios clínicos y entender mejor la evidencia médica. Me
+                                    interesa especialmente la cardiología.</p>
+                                <button class="text-blue-600 text-sm mt-2 hover:underline">Responder</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded-lg p-4 bg-gray-50">
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold">
+                                AR
+                            </div>
+                            <div class="flex-1">
+                                <h5 class="font-semibold text-gray-800">Ana Rodríguez - Enfermería</h5>
+                                <p class="text-sm text-gray-600 mt-1">Hace 1 hora</p>
+                                <p class="text-sm mt-2">Hola compañeros! Vengo de enfermería y aunque he trabajado con
+                                    datos de pacientes, nunca he hecho análisis estadístico formal. Quiero aprender a
+                                    evaluar la efectividad de intervenciones de enfermería y contribuir a la
+                                    investigación en cuidados.</p>
+                                <button class="text-blue-600 text-sm mt-2 hover:underline">Responder</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded-lg p-4 bg-gray-50">
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                                CL
+                            </div>
+                            <div class="flex-1">
+                                <h5 class="font-semibold text-gray-800">Carlos López - Salud Pública</h5>
+                                <p class="text-sm text-gray-600 mt-1">Hace 30 minutos</p>
+                                <p class="text-sm mt-2">¡Saludos! Trabajo en salud pública y manejo algunos conceptos
+                                    estadísticos básicos. Mi objetivo es profundizar en análisis epidemiológico y
+                                    evaluación de programas de salud. Espero que podamos colaborar en proyectos durante
+                                    el semestre.</p>
+                                <button class="text-blue-600 text-sm mt-2 hover:underline">Responder</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Quiz -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-green-600">Quiz Interactivo: Conceptos Básicos</h3>
+                <p class="text-gray-600 mb-6">Pon a prueba tu comprensión inicial de los conceptos presentados en esta
+                    OVA.</p>
+
+                <div id="quiz-container">
+                    <div class="quiz-question" data-question="1">
+                        <h4 class="font-semibold mb-4">Pregunta 1 de 5</h4>
+                        <p class="mb-4">¿Cuál fue el primer trabajo considerado de estadística médica?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q1" value="a" class="mr-3">
+                                <span>Los estudios de Pasteur sobre microorganismos</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q1" value="b" class="mr-3">
+                                <span>"Natural and Political Observations upon the Bills of Mortality" de John
+                                    Graunt</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q1" value="c" class="mr-3">
+                                <span>Los experimentos de Fleming con penicilina</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q1" value="d" class="mr-3">
+                                <span>El ensayo del estreptomicina en 1948</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question hidden" data-question="2">
+                        <h4 class="font-semibold mb-4">Pregunta 2 de 5</h4>
+                        <p class="mb-4">¿Qué porcentaje del curso de bioestadística corresponde a actividades virtuales?
+                        </p>
+                        <div class="space-y-2">
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q2" value="a" class="mr-3">
+                                <span>50%</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q2" value="b" class="mr-3">
+                                <span>60%</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q2" value="c" class="mr-3">
+                                <span>70%</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q2" value="d" class="mr-3">
+                                <span>80%</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question hidden" data-question="3">
+                        <h4 class="font-semibold mb-4">Pregunta 3 de 5</h4>
+                        <p class="mb-4">¿Cuál es un ejemplo de abuso estadístico común?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q3" value="a" class="mr-3">
+                                <span>Usar intervalos de confianza</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q3" value="b" class="mr-3">
+                                <span>Cherry picking (selección sesgada de datos)</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q3" value="c" class="mr-3">
+                                <span>Reportar el tamaño de muestra</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q3" value="d" class="mr-3">
+                                <span>Usar grupos control</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question hidden" data-question="4">
+                        <h4 class="font-semibold mb-4">Pregunta 4 de 5</h4>
+                        <p class="mb-4">¿Quién realizó el primer ensayo clínico controlado conocido?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q4" value="a" class="mr-3">
+                                <span>John Snow</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q4" value="b" class="mr-3">
+                                <span>James Lind</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q4" value="c" class="mr-3">
+                                <span>Ronald Fisher</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q4" value="d" class="mr-3">
+                                <span>Alexander Fleming</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question hidden" data-question="5">
+                        <h4 class="font-semibold mb-4">Pregunta 5 de 5</h4>
+                        <p class="mb-4">¿Cuál es un principio ético fundamental en bioestadística?</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q5" value="a" class="mr-3">
+                                <span>Maximizar el valor p</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q5" value="b" class="mr-3">
+                                <span>Transparencia en métodos y limitaciones</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q5" value="c" class="mr-3">
+                                <span>Usar solo datos que apoyen la hipótesis</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50">
+                                <input type="radio" name="q5" value="d" class="mr-3">
+                                <span>Evitar grupos control</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="quiz-results" class="hidden">
+                        <h4 class="font-semibold mb-4 text-green-600">¡Quiz Completado!</h4>
+                        <div id="score-display" class="text-center mb-6">
+                            <div class="text-4xl font-bold text-green-600 mb-2">-/5</div>
+                            <p class="text-gray-600">Respuestas correctas</p>
+                        </div>
+                        <div id="feedback" class="space-y-3"></div>
+                        <button onclick="restartQuiz()"
+                            class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors font-semibold mt-6">
+                            Reintentar Quiz
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-6">
+                    <button id="prev-btn" onclick="previousQuestion()"
+                        class="bg-gray-500 text-white py-2 px-6 rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50"
+                        disabled>
+                        ← Anterior
+                    </button>
+                    <button id="next-btn" onclick="nextQuestion()"
+                        class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors">
+                        Siguiente →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Knowledge Check -->
+            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6">
+                <h3 class="text-xl font-semibold mb-4 text-purple-600">Verificación de Conocimientos</h3>
+                <p class="text-gray-700 mb-6">Antes de continuar, asegúrate de haber comprendido estos conceptos clave:
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="space-y-3">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="mr-3 w-5 h-5 text-purple-600">
+                            <span class="text-sm">Entiendo la importancia de la bioestadística en medicina</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="mr-3 w-5 h-5 text-purple-600">
+                            <span class="text-sm">Conozco hitos históricos de la estadística médica</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="mr-3 w-5 h-5 text-purple-600">
+                            <span class="text-sm">Puedo identificar aplicaciones en investigación clínica</span>
+                        </label>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="mr-3 w-5 h-5 text-purple-600">
+                            <span class="text-sm">Reconozco usos apropiados e inapropiados de estadística</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="mr-3 w-5 h-5 text-purple-600">
+                            <span class="text-sm">Comprendo la estructura del curso blended</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="mr-3 w-5 h-5 text-purple-600">
+                            <span class="text-sm">Estoy preparado para las siguientes OVAs</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reflection Section -->
+        <section id="reflection" class="section hidden">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Reflexión Personal</h2>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-blue-600">Actividad de Reflexión Escrita</h3>
+                <p class="text-gray-600 mb-6">
+                    Esta actividad te ayudará a consolidar lo aprendido y establecer conexiones personales con el
+                    contenido.
+                    Tómate tu tiempo para reflexionar profundamente sobre cada pregunta.
+                </p>
+
+                <form class="space-y-6" onsubmit="submitReflection(event)">
+                    <div class="bg-blue-50 rounded-lg p-4">
+                        <h4 class="font-semibold text-blue-800 mb-3">1. Experiencias Previas con Estadística</h4>
+                        <p class="text-sm text-blue-700 mb-3">
+                            Reflexiona sobre tus experiencias anteriores con estadística, matemáticas o análisis de
+                            datos.
+                            ¿Qué recuerdas? ¿Cómo te sentiste? ¿Qué desafíos enfrentaste?
+                        </p>
+                        <textarea
+                            class="w-full p-4 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            rows="4"
+                            placeholder="Describe tus experiencias previas, tanto positivas como negativas. Sé honesto sobre tus sentimientos y percepciones..."></textarea>
+                    </div>
+
+                    <div class="bg-green-50 rounded-lg p-4">
+                        <h4 class="font-semibold text-green-800 mb-3">2. Cambio de Perspectiva</h4>
+                        <p class="text-sm text-green-700 mb-3">
+                            Después de completar esta OVA, ¿ha cambiado tu perspectiva sobre la estadística en medicina?
+                            ¿Qué aspectos te sorprendieron o te resultaron más interesantes?
+                        </p>
+                        <textarea
+                            class="w-full p-4 border border-green-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            rows="4"
+                            placeholder="Comparte cómo ha evolucionado tu comprensión y qué nuevas perspectivas has ganado..."></textarea>
+                    </div>
+
+                    <div class="bg-purple-50 rounded-lg p-4">
+                        <h4 class="font-semibold text-purple-800 mb-3">3. Aplicaciones en tu Área de Interés</h4>
+                        <p class="text-sm text-purple-700 mb-3">
+                            Piensa en tu área específica de las ciencias de la salud. ¿Cómo podrías aplicar los
+                            conceptos
+                            de bioestadística en tu futura práctica profesional?
+                        </p>
+                        <textarea
+                            class="w-full p-4 border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            rows="4"
+                            placeholder="Describe aplicaciones específicas en tu área de interés. Sé creativo y piensa en ejemplos concretos..."></textarea>
+                    </div>
+
+                    <div class="bg-yellow-50 rounded-lg p-4">
+                        <h4 class="font-semibold text-yellow-800 mb-3">4. Desafíos y Oportunidades</h4>
+                        <p class="text-sm text-yellow-700 mb-3">
+                            ¿Qué desafíos anticipas en tu aprendizaje de bioestadística? ¿Qué oportunidades ves para
+                            tu crecimiento profesional?
+                        </p>
+                        <textarea
+                            class="w-full p-4 border border-yellow-200 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                            rows="4"
+                            placeholder="Identifica desafíos potenciales y cómo planeas abordarlos. También menciona las oportunidades que ves..."></textarea>
+                    </div>
+
+                    <div class="bg-red-50 rounded-lg p-4">
+                        <h4 class="font-semibold text-red-800 mb-3">5. Compromiso Personal</h4>
+                        <p class="text-sm text-red-700 mb-3">
+                            Establece un compromiso personal para tu aprendizaje en este curso. ¿Qué acciones
+                            específicas
+                            tomarás para maximizar tu aprendizaje?
+                        </p>
+                        <textarea
+                            class="w-full p-4 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                            rows="4"
+                            placeholder="Define metas específicas y estrategias concretas para tu éxito en el curso..."></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit"
+                            class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-8 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all font-semibold">
+                            Enviar Reflexión
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Reflection Guidelines -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-green-600">Consejos para una Buena Reflexión</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Sé honesto:</strong> No hay respuestas correctas o incorrectas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Sé específico:</strong> Usa ejemplos concretos cuando sea posible</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Conecta ideas:</strong> Relaciona conceptos con tu experiencia</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Piensa críticamente:</strong> Cuestiona y analiza profundamente</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✓</span>
+                            <span><strong>Mira hacia adelante:</strong> Considera implicaciones futuras</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600">Próximos Pasos</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h4 class="font-semibold">OVA 2 - Población, Muestra y Variables</h4>
+                            <p class="text-sm text-gray-600">Semana 2 | Modalidad: 60% Virtual - 40% Presencial</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-semibold">Preparación Recomendada</h4>
+                            <p class="text-sm text-gray-600">Revisa conceptos básicos de muestreo y tipos de variables
+                            </p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h4 class="font-semibold">Recursos Adicionales</h4>
+                            <p class="text-sm text-gray-600">Consulta la biblioteca virtual para lecturas
+                                complementarias</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completion Certificate -->
+            <div class="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-6 mt-8 text-center">
+                <div class="max-w-md mx-auto">
+                    <div class="w-20 h-20 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-yellow-800 mb-2">¡Felicitaciones!</h3>
+                    <p class="text-yellow-700 mb-4">Has completado exitosamente la OVA 1 - Bienvenida y Fundamentos de
+                        Bioestadística</p>
+                    <button onclick="generateCertificate()"
+                        class="bg-yellow-600 text-white py-2 px-6 rounded-lg hover:bg-yellow-700 transition-colors font-semibold">
+                        Generar Certificado de Completación
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Universidad Antonio Nariño</h3>
+                    <p class="text-gray-300 text-sm">Facultad de Ciencias de la Salud</p>
+                    <p class="text-gray-300 text-sm">Programa de Bioestadística</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Recursos</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="#" class="hover:text-white">Campus Virtual UAN</a></li>
+                        <li><a href="#" class="hover:text-white">Biblioteca Digital</a></li>
+                        <li><a href="#" class="hover:text-white">Soporte Técnico</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contacto</h3>
+                    <p class="text-gray-300 text-sm">bioestadistica@uan.edu.co</p>
+                    <p class="text-gray-300 text-sm">Ext. 1234</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 Universidad Antonio Nariño. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let currentSection = 'welcome';
+        let currentQuestion = 1;
+        let quizAnswers = {};
+        let videoSegment = 1;
+        let videoInterval;
+
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+
+            // Update navigation
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('border-blue-500', 'text-blue-600');
+                btn.classList.add('border-transparent');
+            });
+
+            event.target.classList.add('border-blue-500', 'text-blue-600');
+
+            currentSection = sectionId;
+            updateProgress();
+        }
+
+        // Progress tracking
+        function updateProgress() {
+            const sections = ['welcome', 'introduction', 'history', 'importance', 'uses-abuses', 'video', 'activities', 'reflection'];
+            const currentIndex = sections.indexOf(currentSection);
+            const progress = ((currentIndex + 1) / sections.length) * 100;
+
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = Math.round(progress) + '%';
+        }
+
+        // History section interactions
+        function toggleHistoryQuiz() {
+            const quiz = document.getElementById('history-quiz');
+            quiz.classList.toggle('hidden');
+        }
+
+        // Importance section interactions
+        function showImpactDetail(type) {
+            const detailDiv = document.getElementById('impact-detail');
+            const contentDiv = document.getElementById('impact-content');
+
+            const content = {
+                vaccines: {
+                    title: "Impacto de las Vacunas",
+                    text: "Las vacunas han sido una de las intervenciones de salud pública más exitosas. La bioestadística fue crucial para demostrar su efectividad y seguridad a través de ensayos clínicos rigurosos.",
+                    stats: "Enfermedades como la polio se redujeron en un 99.9% gracias a programas de vacunación basados en evidencia estadística."
+                },
+                cancer: {
+                    title: "Avances en Tratamiento del Cáncer",
+                    text: "Los análisis estadísticos de supervivencia han revolucionado el tratamiento del cáncer, permitiendo identificar terapias más efectivas y personalizar tratamientos.",
+                    stats: "La supervivencia a 5 años para muchos tipos de cáncer ha mejorado dramáticamente gracias a ensayos clínicos bien diseñados."
+                },
+                drugs: {
+                    title: "Desarrollo de Medicamentos",
+                    text: "El proceso de desarrollo de medicamentos depende completamente de la bioestadística, desde estudios preclínicos hasta ensayos clínicos de fase III.",
+                    stats: "Se requieren en promedio 12 años y múltiples fases de ensayos estadísticamente rigurosos para aprobar un nuevo medicamento."
+                },
+                precision: {
+                    title: "Medicina Personalizada",
+                    text: "La medicina de precisión utiliza análisis estadísticos complejos de datos genómicos y clínicos para personalizar tratamientos.",
+                    stats: "Los tratamientos dirigidos basados en biomarcadores muestran tasas de respuesta significativamente superiores."
+                }
+            };
+
+            const info = content[type];
+            contentDiv.innerHTML = `
+                <h4 class="font-semibold text-lg mb-3">${info.title}</h4>
+                <p class="text-gray-700 mb-3">${info.text}</p>
+                <div class="bg-blue-100 rounded-lg p-3">
+                    <p class="text-sm text-blue-800"><strong>Dato clave:</strong> ${info.stats}</p>
+                </div>
+            `;
+
+            detailDiv.classList.remove('hidden');
+        }
+
+        // Uses and abuses section
+        function toggleExample(exampleNum) {
+            const example = document.getElementById(`example-${exampleNum}`);
+            example.classList.toggle('hidden');
+        }
+
+        // Video section
+        function playVideo() {
+            document.getElementById('video-content').classList.remove('hidden');
+            videoSegment = 1;
+            showVideoSegment(1);
+            startVideoProgress();
+        }
+
+        function showVideoSegment(segment) {
+            document.querySelectorAll('.video-segment').forEach(seg => {
+                seg.classList.add('hidden');
+            });
+            document.getElementById(`video-segment-${segment}`).classList.remove('hidden');
+        }
+
+        function startVideoProgress() {
+            let progress = 0;
+            videoInterval = setInterval(() => {
+                progress += 2;
+                document.getElementById('video-progress').style.width = progress + '%';
+
+                if (progress >= 20 && videoSegment === 1) {
+                    videoSegment = 2;
+                    showVideoSegment(2);
+                } else if (progress >= 40 && videoSegment === 2) {
+                    videoSegment = 3;
+                    showVideoSegment(3);
+                } else if (progress >= 60 && videoSegment === 3) {
+                    videoSegment = 4;
+                    showVideoSegment(4);
+                } else if (progress >= 80 && videoSegment === 4) {
+                    videoSegment = 5;
+                    showVideoSegment(5);
+                } else if (progress >= 100) {
+                    clearInterval(videoInterval);
+                }
+            }, 200);
+        }
+
+        function restartVideo() {
+            clearInterval(videoInterval);
+            videoSegment = 1;
+            showVideoSegment(1);
+            document.getElementById('video-progress').style.width = '0%';
+            startVideoProgress();
+        }
+
+        function closeVideo() {
+            clearInterval(videoInterval);
+            document.getElementById('video-content').classList.add('hidden');
+        }
+
+        // Forum activities
+        function submitPresentation(event) {
+            event.preventDefault();
+            alert('¡Presentación enviada exitosamente! Tu participación ha sido registrada en el foro virtual.');
+        }
+
+        // Quiz functionality
+        function nextQuestion() {
+            const currentQ = document.querySelector(`[data-question="${currentQuestion}"]`);
+            const selectedAnswer = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+
+            if (selectedAnswer) {
+                quizAnswers[`q${currentQuestion}`] = selectedAnswer.value;
+
+                if (currentQuestion < 5) {
+                    currentQ.classList.add('hidden');
+                    currentQuestion++;
+                    document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('hidden');
+
+                    document.getElementById('prev-btn').disabled = false;
+                    if (currentQuestion === 5) {
+                        document.getElementById('next-btn').textContent = 'Finalizar Quiz';
+                    }
+                } else {
+                    // Show results
+                    showQuizResults();
+                }
+            } else {
+                alert('Por favor selecciona una respuesta antes de continuar.');
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 1) {
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('hidden');
+                currentQuestion--;
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('hidden');
+
+                if (currentQuestion === 1) {
+                    document.getElementById('prev-btn').disabled = true;
+                }
+                document.getElementById('next-btn').textContent = 'Siguiente →';
+            }
+        }
+
+        function showQuizResults() {
+            document.querySelectorAll('.quiz-question').forEach(q => q.classList.add('hidden'));
+            document.getElementById('quiz-results').classList.remove('hidden');
+            document.getElementById('prev-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+
+            // Correct answers
+            const correctAnswers = {
+                q1: 'b', // John Graunt
+                q2: 'c', // 70%
+                q3: 'b', // Cherry picking
+                q4: 'b', // James Lind
+                q5: 'b'  // Transparency
+            };
+
+            let score = 0;
+            const feedback = [];
+
+            for (let i = 1; i <= 5; i++) {
+                if (quizAnswers[`q${i}`] === correctAnswers[`q${i}`]) {
+                    score++;
+                    feedback.push(`<div class="text-green-600 text-sm">✓ Pregunta ${i}: Correcto</div>`);
+                } else {
+                    feedback.push(`<div class="text-red-600 text-sm">✗ Pregunta ${i}: Incorrecto</div>`);
+                }
+            }
+
+            document.getElementById('score-display').querySelector('.text-4xl').textContent = `${score}/5`;
+            document.getElementById('feedback').innerHTML = feedback.join('');
+
+            // Update progress based on score
+            if (score >= 4) {
+                document.getElementById('feedback').innerHTML += '<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mt-4">¡Excelente trabajo! Has demostrado una comprensión sólida de los conceptos básicos.</div>';
+            } else if (score >= 3) {
+                document.getElementById('feedback').innerHTML += '<div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mt-4">Buen trabajo. Te recomendamos revisar algunos conceptos antes de continuar.</div>';
+            } else {
+                document.getElementById('feedback').innerHTML += '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">Te recomendamos revisar el contenido de la OVA antes de continuar con el curso.</div>';
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestion = 1;
+            quizAnswers = {};
+
+            document.querySelectorAll('.quiz-question').forEach(q => q.classList.add('hidden'));
+            document.querySelector('[data-question="1"]').classList.remove('hidden');
+            document.getElementById('quiz-results').classList.add('hidden');
+
+            document.getElementById('prev-btn').style.display = 'inline-block';
+            document.getElementById('next-btn').style.display = 'inline-block';
+            document.getElementById('prev-btn').disabled = true;
+            document.getElementById('next-btn').textContent = 'Siguiente →';
+
+            // Clear all radio buttons
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+        }
+
+        // Reflection activities
+        function submitReflection(event) {
+            event.preventDefault();
+            alert('¡Reflexión enviada exitosamente! Tu trabajo ha sido guardado y será revisado por el instructor.');
+        }
+
+        function generateCertificate() {
+            alert('¡Certificado generado! Se ha enviado una copia a tu correo electrónico institucional.');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function () {
+            updateProgress();
+
+            // Set initial navigation state
+            document.querySelector('.nav-btn').classList.add('border-blue-500', 'text-blue-600');
+        });
+    </script>
+</body>
+
+</html>

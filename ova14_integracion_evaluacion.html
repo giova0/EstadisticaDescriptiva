@@ -1,0 +1,1520 @@
+
+import flet as ft
+import math
+import random
+import time
+import threading
+from datetime import datetime, timedelta
+
+class OVA14Bioestadistica:
+    def __init__(self):
+        self.current_section = 0
+        self.exam_timer = None
+        self.exam_time_left = 5400  # 90 minutes in seconds
+        self.exam_started = False
+        
+        # Secciones de la OVA
+        self.sections = [
+            "Resumen", "Distribución Normal", "Teorema Límite Central", 
+            "Estandarización", "Modelado", "Evaluación", "Casos Clínicos", "Preparación"
+        ]
+        
+        # Preguntas de práctica
+        self.practice_questions = [
+            {
+                "question": "La presión arterial sistólica en adultos sanos sigue una distribución normal con μ = 120 mmHg y σ = 15 mmHg. ¿Cuál es la probabilidad de que un adulto seleccionado aleatoriamente tenga una presión sistólica mayor a 140 mmHg?",
+                "options": [
+                    "a) 0.0918 (9.18%)",
+                    "b) 0.1587 (15.87%)", 
+                    "c) 0.0918 (9.18%)",
+                    "d) 0.2266 (22.66%)"
+                ],
+                "correct": 0,
+                "explanation": "1. Calcular Z-score: Z = (140 - 120) / 15 = 1.33\n2. P(Z > 1.33) = 1 - P(Z ≤ 1.33) = 1 - 0.9082 = 0.0918\n3. Por lo tanto, hay un 9.18% de probabilidad."
+            },
+            {
+                "question": "Se toman muestras de 36 pacientes para medir su IMC. Si la población tiene μ = 25 kg/m² y σ = 4 kg/m², ¿cuál es la probabilidad de que la media muestral esté entre 24 y 26 kg/m²?",
+                "options": [
+                    "a) 0.6826 (68.26%)",
+                    "b) 0.8664 (86.64%)",
+                    "c) 0.9544 (95.44%)",
+                    "d) 0.7745 (77.45%)"
+                ],
+                "correct": 1,
+                "explanation": "1. Error estándar: σ_x̄ = 4/√36 = 4/6 = 0.667\n2. Z₁ = (24-25)/0.667 = -1.5, Z₂ = (26-25)/0.667 = 1.5\n3. P(-1.5 < Z < 1.5) = P(Z < 1.5) - P(Z < -1.5) = 0.9332 - 0.0668 = 0.8664"
+            }
+        ]
+
+    def main(self, page: ft.Page):
+        page.title = "OVA 14 - Integración y Evaluación Parcial III"
+        page.theme_mode = ft.ThemeMode.LIGHT
+        page.padding = 0
+        page.scroll = ft.ScrollMode.AUTO
+        
+        # Variables de la página
+        self.page = page
+        
+        # Crear componentes principales
+        self.create_header()
+        self.create_progress_bar()
+        self.create_navigation()
+        self.create_content_area()
+        
+        # Layout principal
+        page.add(
+            ft.Column([
+                self.header,
+                self.progress_container,
+                self.navigation,
+                self.content_area
+            ], spacing=0)
+        )
+        
+        # Mostrar sección inicial
+        self.show_section(0)
+
+    def create_header(self):
+        self.header = ft.Container(
+            content=ft.Row([
+                ft.Column([
+                    ft.Text("Bioestadística para Ciencias de la Salud", 
+                           size=24, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+                    ft.Text("Universidad Antonio Nariño - Modalidad Blended", 
+                           size=14, color=ft.colors.WHITE70)
+                ], expand=True),
+                ft.Column([
+                    ft.Text("OVA 14 - Semanas 11-12", size=12, color=ft.colors.WHITE),
+                    ft.Text("Duración: 3 horas académicas", size=10, color=ft.colors.WHITE70),
+                    ft.Text("Modalidad: 30% Virtual - 70% Presencial", size=10, color=ft.colors.WHITE70)
+                ])
+            ]),
+            gradient=ft.LinearGradient([ft.colors.PURPLE_700, ft.colors.BLUE_700]),
+            padding=20,
+            height=100
+        )
+
+    def create_progress_bar(self):
+        self.progress_bar = ft.ProgressBar(value=0, height=4, color=ft.colors.PURPLE_600)
+        self.progress_text = ft.Text("0%", size=12)
+        
+        self.progress_container = ft.Container(
+            content=ft.Column([
+                ft.Row([
+                    ft.Text("Progreso del OVA", size=12),
+                    self.progress_text
+                ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+                self.progress_bar
+            ]),
+            padding=ft.padding.symmetric(horizontal=20, vertical=10),
+            bgcolor=ft.colors.WHITE,
+            border=ft.border.only(bottom=ft.BorderSide(1, ft.colors.GREY_300))
+        )
+
+    def create_navigation(self):
+        nav_buttons = []
+        for i, section in enumerate(self.sections):
+            btn = ft.TextButton(
+                text=section,
+                on_click=lambda e, idx=i: self.show_section(idx),
+                style=ft.ButtonStyle(
+                    color=ft.colors.GREY_700,
+                    overlay_color=ft.colors.PURPLE_50
+                )
+            )
+            nav_buttons.append(btn)
+        
+        self.navigation = ft.Container(
+            content=ft.Row(nav_buttons, scroll=ft.ScrollMode.AUTO),
+            padding=ft.padding.symmetric(horizontal=20, vertical=10),
+            bgcolor=ft.colors.WHITE,
+            border=ft.border.only(bottom=ft.BorderSide(1, ft.colors.GREY_300))
+        )
+
+    def create_content_area(self):
+        self.content_area = ft.Container(
+            content=ft.Column([], scroll=ft.ScrollMode.AUTO),
+            padding=20,
+            expand=True
+        )
+
+    def update_progress(self):
+        progress = (self.current_section + 1) / len(self.sections)
+        self.progress_bar.value = progress
+        self.progress_text.value = f"{int(progress * 100)}%"
+        self.page.update()
+
+    def show_section(self, section_index):
+        self.current_section = section_index
+        self.update_progress()
+        
+        # Limpiar contenido actual
+        self.content_area.content.controls.clear()
+        
+        # Mostrar sección correspondiente
+        if section_index == 0:
+            self.show_overview_section()
+        elif section_index == 1:
+            self.show_normal_review_section()
+        elif section_index == 2:
+            self.show_central_limit_section()
+        elif section_index == 3:
+            self.show_standardization_section()
+        elif section_index == 4:
+            self.show_modeling_section()
+        elif section_index == 5:
+            self.show_evaluation_section()
+        elif section_index == 6:
+            self.show_clinical_cases_section()
+        elif section_index == 7:
+            self.show_preparation_section()
+        
+        self.page.update()
+
+    def show_overview_section(self):
+        content = ft.Column([
+            # Título principal
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("OVA 14: Integración y Evaluación Parcial III", 
+                           size=32, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
+                    ft.Text("Consolidemos nuestros conocimientos sobre distribución normal y preparémonos para la inferencia estadística. Esta OVA integra conceptos fundamentales y evalúa tu comprensión a través de modelado probabilístico.",
+                           size=16, text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_700)
+                ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                margin=ft.margin.only(bottom=30)
+            ),
+            
+            # Cards de características
+            ft.Row([
+                self.create_feature_card("📊", "Integración", 
+                                       "Conecta conceptos de probabilidad con aplicaciones biomédicas"),
+                self.create_feature_card("✅", "Evaluación", 
+                                       "Demuestra tu dominio de la distribución normal y sus aplicaciones"),
+                self.create_feature_card("⚡", "Preparación", 
+                                       "Prepárate para la inferencia estadística en la siguiente fase")
+            ], wrap=True),
+            
+            # Objetivos de aprendizaje
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Objetivos de la OVA 14", size=20, weight=ft.FontWeight.BOLD),
+                    ft.Row([
+                        ft.Column([
+                            self.create_objective("Consolidar conocimientos sobre la distribución normal"),
+                            self.create_objective("Aplicar el teorema del límite central en contextos biomédicos"),
+                            self.create_objective("Dominar la estandarización de variables")
+                        ], expand=True),
+                        ft.Column([
+                            self.create_objective("Realizar modelado probabilístico avanzado"),
+                            self.create_objective("Resolver casos clínicos complejos"),
+                            self.create_objective("Prepararse para la inferencia estadística")
+                        ], expand=True)
+                    ])
+                ]),
+                bgcolor=ft.colors.PURPLE_50,
+                padding=20,
+                border_radius=10,
+                margin=ft.margin.only(top=20)
+            ),
+            
+            # Progreso de la fase
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Progreso en la Fase II: Probabilidad", size=18, weight=ft.FontWeight.BOLD),
+                    ft.Row([
+                        ft.Text("OVAs Completadas", size=14),
+                        ft.Text("13/14", size=14, color=ft.colors.GREY_600)
+                    ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+                    ft.ProgressBar(value=0.93, height=6, color=ft.colors.PURPLE_600),
+                    ft.Row([
+                        self.create_phase_indicator("OVAs 8-10", ft.colors.GREEN_500),
+                        self.create_phase_indicator("OVAs 11-12", ft.colors.GREEN_500),
+                        self.create_phase_indicator("OVA 13", ft.colors.GREEN_500),
+                        self.create_phase_indicator("OVA 14", ft.colors.PURPLE_500)
+                    ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(top=20)
+            )
+        ])
+        
+        self.content_area.content.controls.append(content)
+
+    def create_feature_card(self, icon, title, description):
+        return ft.Container(
+            content=ft.Column([
+                ft.Text(icon, size=40, text_align=ft.TextAlign.CENTER),
+                ft.Text(title, size=16, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
+                ft.Text(description, size=12, text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_700)
+            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+            bgcolor=ft.colors.WHITE,
+            padding=20,
+            border_radius=10,
+            width=300,
+            height=200,
+            shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+            margin=10
+        )
+
+    def create_objective(self, text):
+        return ft.Row([
+            ft.Text("✓", color=ft.colors.PURPLE_600, weight=ft.FontWeight.BOLD),
+            ft.Text(text, size=14, expand=True)
+        ])
+
+    def create_phase_indicator(self, text, color):
+        return ft.Column([
+            ft.Container(
+                width=12,
+                height=12,
+                bgcolor=color,
+                border_radius=6
+            ),
+            ft.Text(text, size=10, text_align=ft.TextAlign.CENTER)
+        ], horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+
+    def show_normal_review_section(self):
+        content = ft.Column([
+            ft.Text("Repaso: Distribución Normal en Biomedicina", 
+                   size=28, weight=ft.FontWeight.BOLD, margin=ft.margin.only(bottom=20)),
+            
+            ft.Row([
+                # Propiedades fundamentales
+                ft.Container(
+                    content=ft.Column([
+                        ft.Text("Propiedades Fundamentales", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600),
+                        self.create_property_item("Simetría", "La curva es simétrica respecto a la media μ", ft.colors.BLUE_500),
+                        self.create_property_item("Forma de Campana", "Unimodal con colas que se extienden al infinito", ft.colors.GREEN_500),
+                        self.create_property_item("Parámetros", "Definida completamente por μ (media) y σ (desviación estándar)", ft.colors.PURPLE_500),
+                        self.create_property_item("Regla 68-95-99.7", "68% dentro de 1σ, 95% dentro de 2σ, 99.7% dentro de 3σ", ft.colors.RED_500)
+                    ]),
+                    bgcolor=ft.colors.WHITE,
+                    padding=20,
+                    border_radius=10,
+                    shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                    expand=True,
+                    margin=ft.margin.only(right=10)
+                ),
+                
+                # Visualización interactiva
+                ft.Container(
+                    content=ft.Column([
+                        ft.Text("Visualización Interactiva", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600),
+                        ft.Column([
+                            ft.Text("Media (μ):", size=12, weight=ft.FontWeight.W_500),
+                            ft.Slider(
+                                min=-3, max=3, value=0, divisions=60,
+                                label="μ = {value}",
+                                on_change=self.update_normal_curve
+                            ),
+                            ft.Text("Desviación Estándar (σ):", size=12, weight=ft.FontWeight.W_500),
+                            ft.Slider(
+                                min=0.5, max=3, value=1, divisions=25,
+                                label="σ = {value}",
+                                on_change=self.update_normal_curve
+                            )
+                        ]),
+                        ft.Container(
+                            content=ft.Text("Gráfico de la distribución normal", 
+                                          text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_600),
+                            bgcolor=ft.colors.GREY_100,
+                            padding=20,
+                            border_radius=5,
+                            height=200,
+                            alignment=ft.alignment.center
+                        )
+                    ]),
+                    bgcolor=ft.colors.WHITE,
+                    padding=20,
+                    border_radius=10,
+                    shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                    expand=True,
+                    margin=ft.margin.only(left=10)
+                )
+            ], wrap=True),
+            
+            # Aplicaciones médicas
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Aplicaciones Médicas de la Distribución Normal", 
+                           size=18, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
+                    ft.Row([
+                        self.create_medical_app_card("👤", "Medidas Antropométricas", "Altura, peso, IMC", ft.colors.BLUE_50),
+                        self.create_medical_app_card("❤️", "Signos Vitales", "Presión arterial, frecuencia cardíaca", ft.colors.GREEN_50),
+                        self.create_medical_app_card("🧪", "Valores de Laboratorio", "Glucosa, colesterol, hemoglobina", ft.colors.PURPLE_50)
+                    ], wrap=True, alignment=ft.MainAxisAlignment.CENTER)
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(top=20)
+            ),
+            
+            # Fórmulas clave
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Fórmulas Clave", size=18, weight=ft.FontWeight.BOLD),
+                    ft.Row([
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Text("Función de Densidad", weight=ft.FontWeight.BOLD),
+                                ft.Text("f(x) = (1/σ√2π) × e^(-½((x-μ)/σ)²)", 
+                                       size=12, text_align=ft.TextAlign.CENTER)
+                            ]),
+                            bgcolor=ft.colors.WHITE,
+                            padding=15,
+                            border_radius=5,
+                            expand=True,
+                            margin=ft.margin.only(right=5)
+                        ),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Text("Estandarización", weight=ft.FontWeight.BOLD),
+                                ft.Text("Z = (X - μ) / σ", 
+                                       size=12, text_align=ft.TextAlign.CENTER)
+                            ]),
+                            bgcolor=ft.colors.WHITE,
+                            padding=15,
+                            border_radius=5,
+                            expand=True,
+                            margin=ft.margin.only(left=5)
+                        )
+                    ])
+                ]),
+                bgcolor=ft.colors.BLUE_50,
+                padding=20,
+                border_radius=10,
+                margin=ft.margin.only(top=20)
+            )
+        ])
+        
+        self.content_area.content.controls.append(content)
+
+    def create_property_item(self, title, description, color):
+        return ft.Container(
+            content=ft.Column([
+                ft.Text(title, weight=ft.FontWeight.BOLD),
+                ft.Text(description, size=12, color=ft.colors.GREY_600)
+            ]),
+            border=ft.border.only(left=ft.BorderSide(4, color)),
+            padding=ft.padding.only(left=10),
+            margin=ft.margin.only(bottom=10)
+        )
+
+    def create_medical_app_card(self, icon, title, description, bg_color):
+        return ft.Container(
+            content=ft.Column([
+                ft.Text(icon, size=30, text_align=ft.TextAlign.CENTER),
+                ft.Text(title, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
+                ft.Text(description, size=12, text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_600)
+            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+            bgcolor=bg_color,
+            padding=15,
+            border_radius=10,
+            width=200,
+            height=120,
+            margin=5
+        )
+
+    def update_normal_curve(self, e):
+        # En una implementación real, aquí se actualizaría el gráfico
+        pass
+
+    def show_central_limit_section(self):
+        content = ft.Column([
+            ft.Text("Teorema del Límite Central", 
+                   size=28, weight=ft.FontWeight.BOLD, margin=ft.margin.only(bottom=20)),
+            
+            # Enunciado del teorema
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Enunciado del Teorema", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600),
+                    ft.Container(
+                        content=ft.Text(
+                            "Para muestras suficientemente grandes (n ≥ 30), la distribución de las medias muestrales se aproxima a una distribución normal, independientemente de la forma de la población original.",
+                            color=ft.colors.BLUE_800, weight=ft.FontWeight.W_500
+                        ),
+                        bgcolor=ft.colors.BLUE_50,
+                        padding=15,
+                        border_radius=5
+                    ),
+                    ft.Row([
+                        ft.Column([
+                            ft.Text("Media de las Medias", weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
+                            ft.Text("μx̄ = μ", size=20, weight=ft.FontWeight.BOLD, 
+                                   color=ft.colors.BLUE_600, text_align=ft.TextAlign.CENTER),
+                            ft.Text("La media de la distribución muestral es igual a la media poblacional", 
+                                   size=12, color=ft.colors.GREY_600, text_align=ft.TextAlign.CENTER)
+                        ], expand=True),
+                        ft.Column([
+                            ft.Text("Error Estándar", weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
+                            ft.Text("σx̄ = σ/√n", size=20, weight=ft.FontWeight.BOLD, 
+                                   color=ft.colors.GREEN_600, text_align=ft.TextAlign.CENTER),
+                            ft.Text("La desviación estándar disminuye con el tamaño de muestra", 
+                                   size=12, color=ft.colors.GREY_600, text_align=ft.TextAlign.CENTER)
+                        ], expand=True),
+                        ft.Column([
+                            ft.Text("Distribución", weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
+                            ft.Text("X̄ ~ N(μ, σ/√n)", size=20, weight=ft.FontWeight.BOLD, 
+                                   color=ft.colors.PURPLE_600, text_align=ft.TextAlign.CENTER),
+                            ft.Text("Las medias muestrales siguen una distribución normal", 
+                                   size=12, color=ft.colors.GREY_600, text_align=ft.TextAlign.CENTER)
+                        ], expand=True)
+                    ])
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(bottom=20)
+            ),
+            
+            # Simulación interactiva
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Simulación Interactiva", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600),
+                    ft.Row([
+                        ft.Column([
+                            ft.Text("Parámetros de Simulación", weight=ft.FontWeight.BOLD),
+                            ft.Dropdown(
+                                label="Distribución Poblacional",
+                                options=[
+                                    ft.dropdown.Option("Uniforme"),
+                                    ft.dropdown.Option("Exponencial"),
+                                    ft.dropdown.Option("Normal"),
+                                    ft.dropdown.Option("Bimodal")
+                                ],
+                                value="Uniforme"
+                            ),
+                            ft.Column([
+                                ft.Text("Tamaño de Muestra (n): 30", size=12),
+                                ft.Slider(min=5, max=100, value=30, divisions=19, on_change=self.update_sample_size)
+                            ]),
+                            ft.Column([
+                                ft.Text("Número de Muestras: 500", size=12),
+                                ft.Slider(min=100, max=1000, value=500, divisions=9, on_change=self.update_num_samples)
+                            ]),
+                            ft.ElevatedButton("Ejecutar Simulación", 
+                                            on_click=self.run_clt_simulation,
+                                            bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                        ], expand=True),
+                        ft.Column([
+                            ft.Text("Resultados", weight=ft.FontWeight.BOLD),
+                            ft.Container(
+                                content=ft.Text("Ejecute la simulación para ver los resultados", 
+                                               text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_600),
+                                bgcolor=ft.colors.GREY_100,
+                                padding=20,
+                                border_radius=5,
+                                height=250,
+                                alignment=ft.alignment.center
+                            ),
+                            ft.Container(
+                                content=ft.Text("", size=12, color=ft.colors.GREY_600),
+                                ref=ft.Ref[ft.Container]()
+                            )
+                        ], expand=True)
+                    ])
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(bottom=20)
+            ),
+            
+            # Aplicaciones clínicas
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Aplicaciones Clínicas del TLC", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_600),
+                    ft.Row([
+                        ft.Column([
+                            self.create_clinical_app("Estudios Epidemiológicos", 
+                                                    "Permite estimar parámetros poblacionales a partir de muestras grandes, como la prevalencia de enfermedades en poblaciones.",
+                                                    ft.colors.BLUE_500),
+                            self.create_clinical_app("Ensayos Clínicos", 
+                                                    "Justifica el uso de pruebas estadísticas basadas en normalidad incluso cuando los datos individuales no son normales.",
+                                                    ft.colors.GREEN_500)
+                        ], expand=True),
+                        ft.Column([
+                            self.create_clinical_app("Control de Calidad", 
+                                                    "En laboratorios clínicos para monitorear la precisión de equipos y procedimientos analíticos.",
+                                                    ft.colors.PURPLE_500),
+                            self.create_clinical_app("Intervalos de Confianza", 
+                                                    "Base teórica para construir intervalos de confianza para medias poblacionales en estudios médicos.",
+                                                    ft.colors.RED_500)
+                        ], expand=True)
+                    ])
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300)
+            )
+        ])
+        
+        self.content_area.content.controls.append(content)
+
+    def create_clinical_app(self, title, description, color):
+        return ft.Container(
+            content=ft.Column([
+                ft.Text(title, weight=ft.FontWeight.BOLD, color=color),
+                ft.Text(description, size=12, color=ft.colors.GREY_600)
+            ]),
+            border=ft.border.only(left=ft.BorderSide(4, color)),
+            padding=ft.padding.only(left=10),
+            margin=ft.margin.only(bottom=15)
+        )
+
+    def update_sample_size(self, e):
+        # Actualizar texto del tamaño de muestra
+        pass
+
+    def update_num_samples(self, e):
+        # Actualizar texto del número de muestras
+        pass
+
+    def run_clt_simulation(self, e):
+        self.page.show_snack_bar(
+            ft.SnackBar(content=ft.Text("Simulación ejecutada. En una implementación real se mostrarían los resultados gráficos."))
+        )
+
+    def show_standardization_section(self):
+        content = ft.Column([
+            ft.Text("Estandarización de Variables Biomédicas", 
+                   size=28, weight=ft.FontWeight.BOLD, margin=ft.margin.only(bottom=20)),
+            
+            ft.Row([
+                # Proceso de estandarización
+                ft.Container(
+                    content=ft.Column([
+                        ft.Text("Proceso de Estandarización", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Text("Paso 1: Identificar Parámetros", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                ft.Text("Determinar la media (μ) y desviación estándar (σ) de la población", 
+                                       size=12, color=ft.colors.BLUE_700)
+                            ]),
+                            bgcolor=ft.colors.BLUE_50,
+                            padding=10,
+                            border_radius=5,
+                            margin=ft.margin.only(bottom=10)
+                        ),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Text("Paso 2: Aplicar Fórmula", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                                ft.Text("Z = (X - μ) / σ", size=16, text_align=ft.TextAlign.CENTER)
+                            ]),
+                            bgcolor=ft.colors.GREEN_50,
+                            padding=10,
+                            border_radius=5,
+                            margin=ft.margin.only(bottom=10)
+                        ),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Text("Paso 3: Interpretar", weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_800),
+                                ft.Text("Z indica cuántas desviaciones estándar está X de la media", 
+                                       size=12, color=ft.colors.PURPLE_700)
+                            ]),
+                            bgcolor=ft.colors.PURPLE_50,
+                            padding=10,
+                            border_radius=5
+                        )
+                    ]),
+                    bgcolor=ft.colors.WHITE,
+                    padding=20,
+                    border_radius=10,
+                    shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                    expand=True,
+                    margin=ft.margin.only(right=10)
+                ),
+                
+                # Calculadora de Z-scores
+                ft.Container(
+                    content=ft.Column([
+                        ft.Text("Calculadora de Z-scores", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600),
+                        ft.TextField(label="Valor observado (X)", hint_text="Ej: 120", ref=ft.Ref[ft.TextField]()),
+                        ft.TextField(label="Media poblacional (μ)", hint_text="Ej: 100", ref=ft.Ref[ft.TextField]()),
+                        ft.TextField(label="Desviación estándar (σ)", hint_text="Ej: 15", ref=ft.Ref[ft.TextField]()),
+                        ft.ElevatedButton("Calcular Z-score", 
+                                        on_click=self.calculate_z_score,
+                                        bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Text("", size=24, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER, ref=ft.Ref[ft.Text]()),
+                                ft.Text("", size=12, color=ft.colors.GREY_600, text_align=ft.TextAlign.CENTER, ref=ft.Ref[ft.Text]())
+                            ]),
+                            bgcolor=ft.colors.GREY_50,
+                            padding=15,
+                            border_radius=5,
+                            visible=False,
+                            ref=ft.Ref[ft.Container]()
+                        )
+                    ]),
+                    bgcolor=ft.colors.WHITE,
+                    padding=20,
+                    border_radius=10,
+                    shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                    expand=True,
+                    margin=ft.margin.only(left=10)
+                )
+            ], wrap=True),
+            
+            # Ejemplos médicos
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Ejemplos Médicos de Estandarización", 
+                           size=18, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
+                    ft.Row([
+                        self.create_medical_example("Presión Arterial Sistólica", 
+                                                   "Adultos sanos", "120 mmHg", "15 mmHg",
+                                                   "Paciente con 150 mmHg", "Z = (150-120)/15 = 2.0",
+                                                   "2 DE por encima de la media", ft.colors.BLUE_50),
+                        self.create_medical_example("Índice de Masa Corporal", 
+                                                   "Adultos 20-60 años", "24.5 kg/m²", "4.2 kg/m²",
+                                                   "Paciente con IMC 32.9", "Z = (32.9-24.5)/4.2 = 2.0",
+                                                   "Obesidad significativa", ft.colors.GREEN_50),
+                        self.create_medical_example("Glucosa en Ayunas", 
+                                                   "Adultos no diabéticos", "90 mg/dL", "10 mg/dL",
+                                                   "Paciente con 110 mg/dL", "Z = (110-90)/10 = 2.0",
+                                                   "Glucosa elevada", ft.colors.PURPLE_50)
+                    ], wrap=True, alignment=ft.MainAxisAlignment.CENTER)
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(top=20)
+            )
+        ])
+        
+        self.content_area.content.controls.append(content)
+
+    def create_medical_example(self, title, population, mu, sigma, example, calculation, interpretation, bg_color):
+        return ft.Container(
+            content=ft.Column([
+                ft.Text(title, weight=ft.FontWeight.BOLD, size=14),
+                ft.Text(f"Población: {population}", size=12),
+                ft.Text(f"μ = {mu}", size=12),
+                ft.Text(f"σ = {sigma}", size=12),
+                ft.Container(
+                    content=ft.Column([
+                        ft.Text(f"Ejemplo: {example}", size=12),
+                        ft.Text(calculation, size=12),
+                        ft.Text(f"Interpretación: {interpretation}", size=12, color=ft.colors.BLUE_600)
+                    ]),
+                    bgcolor=ft.colors.WHITE,
+                    padding=8,
+                    border_radius=3,
+                    margin=ft.margin.only(top=8)
+                )
+            ]),
+            bgcolor=bg_color,
+            padding=15,
+            border_radius=10,
+            width=280,
+            margin=5
+        )
+
+    def calculate_z_score(self, e):
+        try:
+            # En una implementación real, obtendríamos los valores de los TextFields
+            # Por ahora, usamos valores de ejemplo
+            x = 120
+            mu = 100
+            sigma = 15
+            
+            z = (x - mu) / sigma
+            
+            # Mostrar resultado (referencias a los controles necesarios)
+            self.page.show_snack_bar(
+                ft.SnackBar(content=ft.Text(f"Z-score calculado: {z:.3f}"))
+            )
+        except:
+            self.page.show_snack_bar(
+                ft.SnackBar(content=ft.Text("Por favor ingrese valores válidos"))
+            )
+
+    def show_modeling_section(self):
+        content = ft.Column([
+            ft.Text("Modelado Probabilístico Avanzado", 
+                   size=28, weight=ft.FontWeight.BOLD, margin=ft.margin.only(bottom=20)),
+            
+            # Proyecto de modelado
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Proyecto de Modelado: Análisis de Datos Antropométricos", 
+                           size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600),
+                    ft.Container(
+                        content=ft.Text(
+                            "Escenario: Tienes acceso a un dataset con mediciones antropométricas de 1200 pacientes. Tu tarea es modelar la distribución de estas variables y hacer predicciones clínicas.",
+                            color=ft.colors.BLUE_800
+                        ),
+                        bgcolor=ft.colors.BLUE_50,
+                        padding=15,
+                        border_radius=5
+                    ),
+                    ft.Row([
+                        ft.Column([
+                            ft.Text("Dataset: mediciones_antropometricas.csv", weight=ft.FontWeight.BOLD),
+                            ft.Container(
+                                content=ft.Column([
+                                    ft.Text("Variables incluidas:", weight=ft.FontWeight.BOLD),
+                                    ft.Text("• Altura (cm): μ = 168.5, σ = 9.2", size=12),
+                                    ft.Text("• Peso (kg): μ = 72.3, σ = 12.8", size=12),
+                                    ft.Text("• IMC (kg/m²): μ = 25.4, σ = 4.1", size=12),
+                                    ft.Text("• Circunferencia cintura (cm): μ = 85.2, σ = 11.5", size=12),
+                                    ft.Text("• Edad (años): μ = 42.7, σ = 15.3", size=12)
+                                ]),
+                                bgcolor=ft.colors.GREY_50,
+                                padding=15,
+                                border_radius=5
+                            )
+                        ], expand=True),
+                        ft.Column([
+                            ft.Text("Herramientas de Análisis", weight=ft.FontWeight.BOLD),
+                            ft.ElevatedButton("Generar Muestra Aleatoria", 
+                                            on_click=self.generate_sample_data,
+                                            bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE),
+                            ft.ElevatedButton("Prueba de Normalidad", 
+                                            on_click=self.test_normality,
+                                            bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE),
+                            ft.ElevatedButton("Calcular Probabilidades", 
+                                            on_click=self.calculate_probabilities,
+                                            bgcolor=ft.colors.PURPLE_600, color=ft.colors.WHITE)
+                        ], expand=True)
+                    ])
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(bottom=20)
+            ),
+            
+            # Calculadora de probabilidades clínicas
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Calculadora de Probabilidades Clínicas", 
+                           size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600),
+                    ft.Row([
+                        ft.Column([
+                            ft.Text("Parámetros del Problema", weight=ft.FontWeight.BOLD),
+                            ft.Dropdown(
+                                label="Variable de interés",
+                                options=[
+                                    ft.dropdown.Option("Altura (cm)"),
+                                    ft.dropdown.Option("Peso (kg)"),
+                                    ft.dropdown.Option("IMC (kg/m²)"),
+                                    ft.dropdown.Option("Circunferencia cintura (cm)")
+                                ],
+                                value="Altura (cm)"
+                            ),
+                            ft.Dropdown(
+                                label="Tipo de probabilidad",
+                                options=[
+                                    ft.dropdown.Option("P(X < valor)"),
+                                    ft.dropdown.Option("P(X > valor)"),
+                                    ft.dropdown.Option("P(valor1 < X < valor2)")
+                                ],
+                                value="P(X < valor)"
+                            ),
+                            ft.TextField(label="Valor", hint_text="Ingrese el valor"),
+                            ft.ElevatedButton("Calcular Probabilidad", 
+                                            on_click=self.calculate_clinical_probability,
+                                            bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                        ], expand=True),
+                        ft.Column([
+                            ft.Text("Resultado", weight=ft.FontWeight.BOLD),
+                            ft.Container(
+                                content=ft.Text("Seleccione los parámetros y haga clic en 'Calcular Probabilidad'", 
+                                               text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_500),
+                                bgcolor=ft.colors.GREY_50,
+                                padding=20,
+                                border_radius=5,
+                                height=200,
+                                alignment=ft.alignment.center
+                            )
+                        ], expand=True)
+                    ])
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(bottom=20)
+            ),
+            
+            # Ejercicio avanzado
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Ejercicio Avanzado: Modelo Predictivo", 
+                           size=18, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_600),
+                    ft.Container(
+                        content=ft.Text(
+                            "Desafío: Desarrolla un modelo para predecir la probabilidad de que un paciente tenga sobrepeso (IMC > 25) basándose en su altura y edad.",
+                            color=ft.colors.PURPLE_800
+                        ),
+                        bgcolor=ft.colors.PURPLE_50,
+                        padding=15,
+                        border_radius=5
+                    ),
+                    ft.Row([
+                        ft.Column([
+                            ft.Text("Datos del Paciente", weight=ft.FontWeight.BOLD),
+                            ft.Row([
+                                ft.TextField(label="Altura (cm)", hint_text="170", expand=True),
+                                ft.TextField(label="Edad (años)", hint_text="35", expand=True)
+                            ]),
+                            ft.ElevatedButton("Calcular Riesgo de Sobrepeso", 
+                                            on_click=self.predict_overweight,
+                                            bgcolor=ft.colors.PURPLE_600, color=ft.colors.WHITE)
+                        ], expand=2),
+                        ft.Column([
+                            ft.Text("Interpretación", weight=ft.FontWeight.BOLD),
+                            self.create_risk_interpretation("Bajo Riesgo (< 30%)", "Mantener hábitos saludables", ft.colors.GREEN_50),
+                            self.create_risk_interpretation("Riesgo Moderado (30-60%)", "Monitoreo y prevención", ft.colors.YELLOW_50),
+                            self.create_risk_interpretation("Alto Riesgo (> 60%)", "Intervención necesaria", ft.colors.RED_50)
+                        ], expand=1)
+                    ])
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300)
+            )
+        ])
+        
+        self.content_area.content.controls.append(content)
+
+    def create_risk_interpretation(self, level, description, bg_color):
+        return ft.Container(
+            content=ft.Column([
+                ft.Text(level, weight=ft.FontWeight.BOLD, size=12),
+                ft.Text(description, size=11, color=ft.colors.GREY_700)
+            ]),
+            bgcolor=bg_color,
+            padding=8,
+            border_radius=5,
+            margin=ft.margin.only(bottom=5)
+        )
+
+    def generate_sample_data(self, e):
+        self.page.show_snack_bar(
+            ft.SnackBar(content=ft.Text("Muestra aleatoria generada. En una implementación real se mostraría el histograma."))
+        )
+
+    def test_normality(self, e):
+        self.page.show_snack_bar(
+            ft.SnackBar(content=ft.Text("Prueba de normalidad ejecutada. Se aplicarían pruebas como Shapiro-Wilk."))
+        )
+
+    def calculate_probabilities(self, e):
+        self.page.show_snack_bar(
+            ft.SnackBar(content=ft.Text("Calculadora de probabilidades activada."))
+        )
+
+    def calculate_clinical_probability(self, e):
+        # Simulación de cálculo de probabilidad
+        probability = random.uniform(0.1, 0.9)
+        self.page.show_snack_bar(
+            ft.SnackBar(content=ft.Text(f"Probabilidad calculada: {probability:.2%}"))
+        )
+
+    def predict_overweight(self, e):
+        # Simulación de predicción de sobrepeso
+        risk = random.uniform(0.2, 0.8)
+        self.page.show_snack_bar(
+            ft.SnackBar(content=ft.Text(f"Riesgo de sobrepeso: {risk:.1%}"))
+        )
+
+    def show_evaluation_section(self):
+        content = ft.Column([
+            ft.Text("Evaluación Parcial III", 
+                   size=28, weight=ft.FontWeight.BOLD, margin=ft.margin.only(bottom=20)),
+            
+            # Información del examen
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Tercer Parcial: Distribución Normal y Aplicaciones", 
+                           size=20, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_600, text_align=ft.TextAlign.CENTER),
+                    ft.Text("Tiempo límite: 90 minutos | 20 preguntas | Valor: 30% de la nota final", 
+                           color=ft.colors.GREY_600, text_align=ft.TextAlign.CENTER),
+                    
+                    # Instrucciones
+                    ft.Container(
+                        content=ft.Row([
+                            ft.Icon(ft.icons.WARNING, color=ft.colors.YELLOW_600),
+                            ft.Column([
+                                ft.Text("Instrucciones:", weight=ft.FontWeight.BOLD, color=ft.colors.YELLOW_800),
+                                ft.Text("Lee cuidadosamente cada pregunta. Puedes usar calculadora y tablas de distribución normal. Muestra todos los cálculos en las preguntas de desarrollo.",
+                                       size=12, color=ft.colors.YELLOW_700)
+                            ], expand=True)
+                        ]),
+                        bgcolor=ft.colors.YELLOW_50,
+                        padding=15,
+                        border_radius=5,
+                        border=ft.border.only(left=ft.BorderSide(4, ft.colors.YELLOW_500))
+                    ),
+                    
+                    # Botones de acción
+                    ft.Row([
+                        ft.ElevatedButton("Iniciar Examen", 
+                                        on_click=self.start_exam,
+                                        bgcolor=ft.colors.PURPLE_600, color=ft.colors.WHITE),
+                        ft.ElevatedButton("Vista Previa", 
+                                        on_click=self.show_exam_preview,
+                                        bgcolor=ft.colors.GREY_600, color=ft.colors.WHITE)
+                    ], alignment=ft.MainAxisAlignment.CENTER),
+                    
+                    # Timer del examen
+                    ft.Container(
+                        content=ft.Column([
+                            ft.Text("Tiempo restante: 90:00", 
+                                   color=ft.colors.RED_800, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
+                            ft.ProgressBar(value=1.0, height=4, color=ft.colors.RED_600)
+                        ]),
+                        bgcolor=ft.colors.RED_50,
+                        padding=15,
+                        border_radius=5,
+                        visible=False,
+                        ref=ft.Ref[ft.Container]()
+                    )
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(bottom=20)
+            ),
+            
+            # Vista previa del examen
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Temas del Examen", weight=ft.FontWeight.BOLD),
+                    ft.Row([
+                        ft.Column([
+                            ft.Text("Sección A: Conceptos Teóricos (40%)", 
+                                   weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600),
+                            ft.Text("• Propiedades de la distribución normal", size=12),
+                            ft.Text("• Teorema del límite central", size=12),
+                            ft.Text("• Estandarización de variables", size=12),
+                            ft.Text("• Interpretación de Z-scores", size=12),
+                            ft.Text("• Cálculo de probabilidades", size=12)
+                        ], expand=True),
+                        ft.Column([
+                            ft.Text("Sección B: Aplicaciones Clínicas (60%)", 
+                                   weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600),
+                            ft.Text("• Análisis de variables antropométricas", size=12),
+                            ft.Text("• Interpretación de valores de laboratorio", size=12),
+                            ft.Text("• Evaluación de signos vitales", size=12),
+                            ft.Text("• Modelado probabilístico", size=12),
+                            ft.Text("• Casos clínicos integrados", size=12)
+                        ], expand=True)
+                    ])
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                visible=False,
+                ref=ft.Ref[ft.Container]()
+            ),
+            
+            # Preguntas de práctica
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Preguntas de Práctica", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600),
+                    *[self.create_practice_question(i, q) for i, q in enumerate(self.practice_questions)]
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300)
+            )
+        ])
+        
+        self.content_area.content.controls.append(content)
+
+    def create_practice_question(self, index, question):
+        return ft.Container(
+            content=ft.Column([
+                ft.Text(f"Pregunta {index + 1}: {question['question'][:50]}...", 
+                       weight=ft.FontWeight.BOLD),
+                ft.Text(question["question"], size=12, color=ft.colors.GREY_700),
+                ft.Column([
+                    ft.RadioListTile(
+                        value=i,
+                        title=ft.Text(option, size=12),
+                        group_value=None
+                    ) for i, option in enumerate(question["options"])
+                ]),
+                ft.ElevatedButton(f"Verificar Respuesta", 
+                                on_click=lambda e, idx=index: self.check_practice_answer(idx),
+                                bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE),
+                ft.Container(
+                    content=ft.Column([
+                        ft.Text("Solución:", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                        ft.Text(question["explanation"], size=12, color=ft.colors.BLUE_700)
+                    ]),
+                    bgcolor=ft.colors.BLUE_50,
+                    padding=10,
+                    border_radius=5,
+                    visible=False,
+                    ref=ft.Ref[ft.Container]()
+                )
+            ]),
+            border=ft.border.all(1, ft.colors.GREY_300),
+            padding=15,
+            border_radius=5,
+            margin=ft.margin.only(bottom=15)
+        )
+
+    def start_exam(self, e):
+        def confirm_start(e):
+            if e.control.text == "Sí":
+                self.exam_started = True
+                self.page.show_snack_bar(
+                    ft.SnackBar(content=ft.Text("Examen iniciado. El cronómetro está corriendo."))
+                )
+                self.start_exam_timer()
+            self.page.close(dlg)
+
+        dlg = ft.AlertDialog(
+            modal=True,
+            title=ft.Text("Confirmar inicio de examen"),
+            content=ft.Text("¿Estás seguro de que quieres iniciar el examen? Una vez iniciado, el tiempo comenzará a correr."),
+            actions=[
+                ft.TextButton("Sí", on_click=confirm_start),
+                ft.TextButton("No", on_click=lambda e: self.page.close(dlg))
+            ]
+        )
+        self.page.open(dlg)
+
+    def show_exam_preview(self, e):
+        # Toggle visibility of exam preview
+        pass
+
+    def start_exam_timer(self):
+        def update_timer():
+            while self.exam_time_left > 0 and self.exam_started:
+                time.sleep(1)
+                self.exam_time_left -= 1
+                minutes = self.exam_time_left // 60
+                seconds = self.exam_time_left % 60
+                # Update timer display
+                
+            if self.exam_time_left <= 0:
+                self.page.show_snack_bar(
+                    ft.SnackBar(content=ft.Text("Tiempo agotado. El examen se ha enviado automáticamente."))
+                )
+        
+        threading.Thread(target=update_timer, daemon=True).start()
+
+    def check_practice_answer(self, question_index):
+        question = self.practice_questions[question_index]
+        self.page.show_snack_bar(
+            ft.SnackBar(content=ft.Text(f"Respuesta correcta: {question['options'][question['correct']]}"))
+        )
+
+    def show_clinical_cases_section(self):
+        content = ft.Column([
+            ft.Text("Casos Clínicos Integrados", 
+                   size=28, weight=ft.FontWeight.BOLD, margin=ft.margin.only(bottom=20)),
+            
+            # Caso 1: Evaluación del crecimiento pediátrico
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Caso 1: Evaluación del Crecimiento Pediátrico", 
+                           size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600),
+                    ft.Row([
+                        ft.Column([
+                            ft.Container(
+                                content=ft.Column([
+                                    ft.Text("Presentación del Caso", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_800),
+                                    ft.Text("Paciente: Niña de 8 años", size=12, color=ft.colors.BLUE_700),
+                                    ft.Text("Motivo de consulta: Evaluación de crecimiento", size=12, color=ft.colors.BLUE_700),
+                                    ft.Text("Altura actual: 115 cm", size=12, color=ft.colors.BLUE_700),
+                                    ft.Text("Peso actual: 22 kg", size=12, color=ft.colors.BLUE_700)
+                                ]),
+                                bgcolor=ft.colors.BLUE_50,
+                                padding=15,
+                                border_radius=5
+                            ),
+                            ft.Container(
+                                content=ft.Column([
+                                    ft.Text("Datos Poblacionales (Niñas 8 años)", weight=ft.FontWeight.BOLD),
+                                    ft.Text("Altura: μ = 127 cm, σ = 5.5 cm", size=12),
+                                    ft.Text("Peso: μ = 26.5 kg, σ = 4.2 kg", size=12)
+                                ]),
+                                bgcolor=ft.colors.GREY_50,
+                                padding=15,
+                                border_radius=5,
+                                margin=ft.margin.only(top=10)
+                            )
+                        ], expand=True),
+                        ft.Column([
+                            ft.Text("Análisis Estadístico", weight=ft.FontWeight.BOLD),
+                            ft.ElevatedButton("Realizar Análisis", 
+                                            on_click=self.analyze_pediatric_case,
+                                            bgcolor=ft.colors.BLUE_600, color=ft.colors.WHITE),
+                            ft.Container(
+                                content=ft.Column([
+                                    ft.Text("Resultados del análisis aparecerán aquí", 
+                                           text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_600)
+                                ]),
+                                bgcolor=ft.colors.GREY_50,
+                                padding=15,
+                                border_radius=5,
+                                height=150,
+                                alignment=ft.alignment.center,
+                                ref=ft.Ref[ft.Container]()
+                            )
+                        ], expand=True)
+                    ]),
+                    ft.Column([
+                        ft.Text("Preguntas de Análisis", weight=ft.FontWeight.BOLD),
+                        ft.TextField(
+                            label="1. ¿Cómo interpretarías los Z-scores calculados en el contexto pediátrico?",
+                            multiline=True,
+                            min_lines=2
+                        ),
+                        ft.TextField(
+                            label="2. ¿Qué recomendaciones darías a los padres basándote en este análisis?",
+                            multiline=True,
+                            min_lines=2
+                        )
+                    ])
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(bottom=20)
+            ),
+            
+            # Caso 2: Interpretación de valores de laboratorio
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Caso 2: Interpretación de Valores de Laboratorio", 
+                           size=18, weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600),
+                    ft.Row([
+                        ft.Column([
+                            ft.Container(
+                                content=ft.Column([
+                                    ft.Text("Presentación del Caso", weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_800),
+                                    ft.Text("Paciente: Hombre de 45 años", size=12, color=ft.colors.GREEN_700),
+                                    ft.Text("Motivo: Chequeo ejecutivo anual", size=12, color=ft.colors.GREEN_700),
+                                    ft.Text("Resultados de laboratorio:", size=12, color=ft.colors.GREEN_700),
+                                    ft.Text("• Colesterol total: 240 mg/dL", size=12, color=ft.colors.GREEN_700),
+                                    ft.Text("• Glucosa en ayunas: 110 mg/dL", size=12, color=ft.colors.GREEN_700),
+                                    ft.Text("• Presión sistólica: 145 mmHg", size=12, color=ft.colors.GREEN_700),
+                                    ft.Text("• IMC: 28.5 kg/m²", size=12, color=ft.colors.GREEN_700)
+                                ]),
+                                bgcolor=ft.colors.GREEN_50,
+                                padding=15,
+                                border_radius=5
+                            )
+                        ], expand=True),
+                        ft.Column([
+                            ft.Container(
+                                content=ft.Column([
+                                    ft.Text("Valores de Referencia Poblacional", weight=ft.FontWeight.BOLD),
+                                    ft.Text("Colesterol: μ = 200 mg/dL, σ = 25 mg/dL", size=12),
+                                    ft.Text("Glucosa: μ = 90 mg/dL, σ = 10 mg/dL", size=12),
+                                    ft.Text("Presión sistólica: μ = 120 mmHg, σ = 15 mmHg", size=12),
+                                    ft.Text("IMC: μ = 24.5 kg/m², σ = 4.2 kg/m²", size=12)
+                                ]),
+                                bgcolor=ft.colors.GREY_50,
+                                padding=15,
+                                border_radius=5
+                            )
+                        ], expand=True)
+                    ]),
+                    ft.ElevatedButton("Analizar Valores de Laboratorio", 
+                                    on_click=self.analyze_lab_values,
+                                    bgcolor=ft.colors.GREEN_600, color=ft.colors.WHITE)
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(bottom=20)
+            ),
+            
+            # Caso 3: Estudio poblacional
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Caso 3: Estudio Poblacional de Hipertensión", 
+                           size=18, weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_600),
+                    ft.Container(
+                        content=ft.Text(
+                            "Escenario: Eres epidemiólogo en el Ministerio de Salud. Necesitas analizar datos de un estudio poblacional sobre hipertensión arterial en adultos colombianos para establecer políticas de salud pública.",
+                            color=ft.colors.PURPLE_800
+                        ),
+                        bgcolor=ft.colors.PURPLE_50,
+                        padding=15,
+                        border_radius=5
+                    ),
+                    ft.Row([
+                        self.create_stat_card("Muestra Total", "15,000", "Adultos 18-65 años"),
+                        self.create_stat_card("Presión Sistólica", "μ = 125 mmHg\nσ = 18 mmHg", ""),
+                        self.create_stat_card("Criterio HTA", "≥ 140 mmHg", "Sistólica")
+                    ], alignment=ft.MainAxisAlignment.CENTER),
+                    ft.Column([
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Text("Pregunta 1: Prevalencia de Hipertensión", weight=ft.FontWeight.BOLD),
+                                ft.Text("Calcula el porcentaje de la población que se esperaría que tenga hipertensión arterial (presión sistólica ≥ 140 mmHg) según este modelo.", 
+                                       size=12, color=ft.colors.GREY_700),
+                                ft.ElevatedButton("Calcular Prevalencia", 
+                                                on_click=self.calculate_hypertension_prevalence,
+                                                bgcolor=ft.colors.PURPLE_600, color=ft.colors.WHITE)
+                            ]),
+                            border=ft.border.all(1, ft.colors.GREY_300),
+                            padding=15,
+                            border_radius=5,
+                            margin=ft.margin.only(bottom=10)
+                        ),
+                        ft.Container(
+                            content=ft.Column([
+                                ft.Text("Pregunta 2: Impacto en Salud Pública", weight=ft.FontWeight.BOLD),
+                                ft.Text("Si Colombia tiene aproximadamente 35 millones de adultos en este rango de edad, ¿cuántas personas requerirían tratamiento antihipertensivo?", 
+                                       size=12, color=ft.colors.GREY_700),
+                                ft.Row([
+                                    ft.TextField(label="Población adulta Colombia", value="35000000", read_only=True, expand=True),
+                                    ft.ElevatedButton("Calcular Necesidades", 
+                                                    on_click=self.calculate_treatment_needs,
+                                                    bgcolor=ft.colors.PURPLE_600, color=ft.colors.WHITE)
+                                ])
+                            ]),
+                            border=ft.border.all(1, ft.colors.GREY_300),
+                            padding=15,
+                            border_radius=5
+                        )
+                    ])
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300)
+            )
+        ])
+        
+        self.content_area.content.controls.append(content)
+
+    def create_stat_card(self, title, value, subtitle):
+        return ft.Container(
+            content=ft.Column([
+                ft.Text(title, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
+                ft.Text(value, size=16, weight=ft.FontWeight.BOLD, 
+                       color=ft.colors.PURPLE_600, text_align=ft.TextAlign.CENTER),
+                ft.Text(subtitle, size=12, color=ft.colors.GREY_600, text_align=ft.TextAlign.CENTER)
+            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+            bgcolor=ft.colors.WHITE,
+            border=ft.border.all(1, ft.colors.GREY_300),
+            padding=15,
+            border_radius=5,
+            width=200,
+            margin=5
+        )
+
+    def analyze_pediatric_case(self, e):
+        # Cálculos del caso pediátrico
+        height_z = (115 - 127) / 5.5  # -2.18
+        weight_z = (22 - 26.5) / 4.2  # -1.07
+        
+        self.page.show_snack_bar(
+            ft.SnackBar(content=ft.Text(f"Análisis completado. Z-score altura: {height_z:.2f}, Z-score peso: {weight_z:.2f}"))
+        )
+
+    def analyze_lab_values(self, e):
+        self.page.show_snack_bar(
+            ft.SnackBar(content=ft.Text("Análisis de laboratorio completado. Múltiples factores de riesgo identificados."))
+        )
+
+    def calculate_hypertension_prevalence(self, e):
+        # Cálculo de prevalencia de hipertensión
+        mu = 125
+        sigma = 18
+        threshold = 140
+        z = (threshold - mu) / sigma  # 0.833
+        # P(X >= 140) ≈ 20.2%
+        
+        self.page.show_snack_bar(
+            ft.SnackBar(content=ft.Text("Prevalencia calculada: aproximadamente 20.2% de la población tendría hipertensión."))
+        )
+
+    def calculate_treatment_needs(self, e):
+        population = 35000000
+        prevalence = 0.202
+        affected = int(population * prevalence)
+        
+        self.page.show_snack_bar(
+            ft.SnackBar(content=ft.Text(f"Aproximadamente {affected:,} personas requerirían tratamiento antihipertensivo."))
+        )
+
+    def show_preparation_section(self):
+        content = ft.Column([
+            ft.Text("Preparación para Inferencia Estadística", 
+                   size=28, weight=ft.FontWeight.BOLD, margin=ft.margin.only(bottom=20)),
+            
+            # Felicitaciones
+            ft.Container(
+                content=ft.Column([
+                    ft.Container(
+                        content=ft.Icon(ft.icons.BOLT, size=40, color=ft.colors.WHITE),
+                        bgcolor=ft.colors.PURPLE_600,
+                        padding=10,
+                        border_radius=20,
+                        width=60,
+                        height=60,
+                        alignment=ft.alignment.center
+                    ),
+                    ft.Text("¡Felicitaciones!", size=24, weight=ft.FontWeight.BOLD),
+                    ft.Text("Has completado la Fase II: Probabilidad. Ahora estás listo para adentrarte en el fascinante mundo de la inferencia estadística, donde aprenderás a hacer conclusiones sobre poblaciones basándote en muestras.",
+                           text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_700)
+                ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                margin=ft.margin.only(bottom=30)
+            ),
+            
+            # Resumen de la fase
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Resumen de la Fase II: Probabilidad", 
+                           size=18, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
+                    ft.Row([
+                        self.create_phase_summary_card("📊", "Fundamentos", "Teoría de conjuntos, probabilidad básica y condicional"),
+                        self.create_phase_summary_card("📈", "Distribuciones Discretas", "Binomial, Poisson y sus aplicaciones médicas"),
+                        self.create_phase_summary_card("📉", "Distribución Normal", "Propiedades, estandarización y teorema del límite central"),
+                        self.create_phase_summary_card("✅", "Integración", "Modelado probabilístico y casos clínicos complejos")
+                    ], wrap=True, alignment=ft.MainAxisAlignment.CENTER)
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(bottom=20)
+            ),
+            
+            # Qué sigue
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Fase III: Inferencia Estadística", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600),
+                    ft.Text("En las próximas semanas (13-15), exploraremos cómo usar muestras para hacer inferencias sobre poblaciones. Los conceptos de probabilidad que has dominado serán la base para entender intervalos de confianza y pruebas de hipótesis.",
+                           color=ft.colors.GREY_700),
+                    ft.Row([
+                        ft.Column([
+                            ft.Text("OVA 15: Estimación e Intervalos de Confianza", 
+                                   weight=ft.FontWeight.BOLD, color=ft.colors.GREEN_600),
+                            ft.Text("• Estimación puntual vs. por intervalo", size=12),
+                            ft.Text("• Intervalos de confianza para medias y proporciones", size=12),
+                            ft.Text("• Interpretación clínica de intervalos", size=12)
+                        ], expand=True),
+                        ft.Column([
+                            ft.Text("OVAs 16-18: Pruebas de Hipótesis", 
+                                   weight=ft.FontWeight.BOLD, color=ft.colors.PURPLE_600),
+                            ft.Text("• Planteamiento de hipótesis en investigación", size=12),
+                            ft.Text("• Errores Tipo I y Tipo II en medicina", size=12),
+                            ft.Text("• Pruebas específicas para ciencias de la salud", size=12)
+                        ], expand=True)
+                    ])
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(bottom=20)
+            ),
+            
+            # Verificación de prerrequisitos
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Verificación de Prerrequisitos", size=18, weight=ft.FontWeight.BOLD, color=ft.colors.RED_600),
+                    ft.Text("Antes de continuar a la Fase III, asegúrate de dominar estos conceptos fundamentales:",
+                           color=ft.colors.GREY_700),
+                    ft.Row([
+                        ft.Column([
+                            ft.Checkbox(label="Comprendo las propiedades de la distribución normal"),
+                            ft.Checkbox(label="Puedo calcular y interpretar Z-scores"),
+                            ft.Checkbox(label="Entiendo el teorema del límite central"),
+                            ft.Checkbox(label="Puedo calcular probabilidades usando la distribución normal")
+                        ], expand=True),
+                        ft.Column([
+                            ft.Checkbox(label="Comprendo el concepto de error estándar"),
+                            ft.Checkbox(label="Puedo interpretar resultados en contextos clínicos"),
+                            ft.Checkbox(label="Domino el modelado probabilístico básico"),
+                            ft.Checkbox(label="Puedo resolver casos clínicos integrados")
+                        ], expand=True)
+                    ])
+                ]),
+                bgcolor=ft.colors.WHITE,
+                padding=20,
+                border_radius=10,
+                shadow=ft.BoxShadow(blur_radius=5, color=ft.colors.GREY_300),
+                margin=ft.margin.only(bottom=20)
+            ),
+            
+            # Recursos para la preparación
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("Recursos para la Preparación", size=18, weight=ft.FontWeight.BOLD),
+                    ft.Row([
+                        self.create_resource_card("📚", "Lecturas Recomendadas", 
+                                                 ["Capítulo 8: Distribuciones muestrales",
+                                                  "Capítulo 9: Estimación por intervalos",
+                                                  "Artículos sobre intervalos de confianza en medicina"]),
+                        self.create_resource_card("🔧", "Herramientas", 
+                                                 ["Calculadora de distribución normal",
+                                                  "Tablas estadísticas",
+                                                  "Software R/Python (opcional)"]),
+                        self.create_resource_card("💡", "Práctica Adicional", 
+                                                 ["Ejercicios de probabilidad normal",
+                                                  "Casos clínicos adicionales",
+                                                  "Simulaciones interactivas"])
+                    ], wrap=True, alignment=ft.MainAxisAlignment.CENTER)
+                ]),
+                bgcolor=ft.colors.BLUE_50,
+                padding=20,
+                border_radius=10
+            )
+        ])
+        
+        self.content_area.content.controls.append(content)
+
+    def create_phase_summary_card(self, icon, title, description):
+        return ft.Container(
+            content=ft.Column([
+                ft.Text(icon, size=30, text_align=ft.TextAlign.CENTER),
+                ft.Text(title, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
+                ft.Text(description, size=12, text_align=ft.TextAlign.CENTER, color=ft.colors.GREY_600)
+            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+            width=200,
+            height=120,
+            margin=5
+        )
+
+    def create_resource_card(self, icon, title, items):
+        return ft.Container(
+            content=ft.Column([
+                ft.Text(f"{icon} {title}", weight=ft.FontWeight.BOLD, color=ft.colors.BLUE_600),
+                ft.Column([
+                    ft.Text(f"• {item}", size=12) for item in items
+                ])
+            ]),
+            bgcolor=ft.colors.WHITE,
+            padding=15,
+            border_radius=5,
+            width=250,
+            margin=5
+        )
+
+def main(page: ft.Page):
+    app = OVA14Bioestadistica()
+    app.main(page)
+
+if __name__ == "__main__":
+    ft.app(target=main, view=ft.WEB_BROWSER, port=8080)

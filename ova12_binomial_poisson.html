@@ -1,0 +1,924 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 12 - Distribución Binomial y Poisson</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-button.active { background-color: #3b82f6; color: white; }
+        .medical-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover:hover { transform: translateY(-2px); transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="medical-gradient text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold">OVA 12 - Distribuciones Binomial y Poisson</h1>
+                    <p class="text-blue-100 mt-2">Bioestadística para Ciencias de la Salud - UAN</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm">Fase II: Probabilidad</p>
+                    <p class="text-sm">Semanas 9-10</p>
+                    <p class="text-sm">Duración: 4 horas académicas</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow-md sticky top-0 z-10">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-1 overflow-x-auto">
+                <button class="tab-button px-4 py-3 text-sm font-medium rounded-t-lg whitespace-nowrap active" onclick="showTab('introduccion')">
+                    📚 Introducción
+                </button>
+                <button class="tab-button px-4 py-3 text-sm font-medium rounded-t-lg whitespace-nowrap" onclick="showTab('binomial')">
+                    🎯 Distribución Binomial
+                </button>
+                <button class="tab-button px-4 py-3 text-sm font-medium rounded-t-lg whitespace-nowrap" onclick="showTab('poisson')">
+                    📊 Distribución Poisson
+                </button>
+                <button class="tab-button px-4 py-3 text-sm font-medium rounded-t-lg whitespace-nowrap" onclick="showTab('simuladores')">
+                    🧮 Simuladores
+                </button>
+                <button class="tab-button px-4 py-3 text-sm font-medium rounded-t-lg whitespace-nowrap" onclick="showTab('ejercicios')">
+                    💡 Ejercicios
+                </button>
+                <button class="tab-button px-4 py-3 text-sm font-medium rounded-t-lg whitespace-nowrap" onclick="showTab('evaluacion')">
+                    ✅ Evaluación
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        
+        <!-- Introducción Tab -->
+        <div id="introduccion" class="tab-content active">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">🎯 Objetivos de Aprendizaje</h2>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>Comprender los modelos binomiales en efectividad de tratamientos médicos</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>Aplicar procesos de Poisson en estudios epidemiológicos</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>Analizar eventos adversos en farmacovigilancia</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>Calcular probabilidades en contextos clínicos reales</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">📋 Contenido del OVA</h2>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h3 class="font-semibold text-blue-700">Distribución Binomial</h3>
+                            <p class="text-sm text-gray-600">Efectividad de tratamientos, ensayos clínicos</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h3 class="font-semibold text-green-700">Distribución Poisson</h3>
+                            <p class="text-sm text-gray-600">Epidemiología, eventos raros en salud</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h3 class="font-semibold text-purple-700">Farmacovigilancia</h3>
+                            <p class="text-sm text-gray-600">Análisis de eventos adversos medicamentosos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">🏥 Contexto Clínico</h2>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    En las ciencias de la salud, las distribuciones binomial y Poisson son fundamentales para:
+                </p>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-white rounded-lg p-4 shadow">
+                        <h3 class="font-semibold text-blue-700 mb-2">🎯 Ensayos Clínicos</h3>
+                        <p class="text-sm">Evaluar la efectividad de nuevos tratamientos y medicamentos</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 shadow">
+                        <h3 class="font-semibold text-green-700 mb-2">📈 Epidemiología</h3>
+                        <p class="text-sm">Modelar la ocurrencia de enfermedades y brotes epidémicos</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 shadow">
+                        <h3 class="font-semibold text-red-700 mb-2">⚠️ Seguridad</h3>
+                        <p class="text-sm">Monitorear eventos adversos y efectos secundarios</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Distribución Binomial Tab -->
+        <div id="binomial" class="tab-content">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h2 class="text-2xl font-bold text-blue-800 mb-4">🎯 Distribución Binomial en Medicina</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3">📖 Definición y Características</h3>
+                        <p class="text-gray-700 mb-4">
+                            La distribución binomial modela el número de éxitos en una secuencia de ensayos independientes, 
+                            cada uno con la misma probabilidad de éxito.
+                        </p>
+                        
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-blue-800 mb-2">Parámetros:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li><strong>n:</strong> Número de ensayos (pacientes, tratamientos)</li>
+                                <li><strong>p:</strong> Probabilidad de éxito (efectividad del tratamiento)</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2">Función de Probabilidad:</h4>
+                            <p class="text-center">$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3">🏥 Aplicaciones Médicas</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-semibold text-blue-700">Efectividad de Vacunas</h4>
+                                <p class="text-sm text-gray-600">
+                                    Si una vacuna tiene 85% de efectividad, ¿cuál es la probabilidad de que 
+                                    8 de 10 pacientes vacunados estén protegidos?
+                                </p>
+                            </div>
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h4 class="font-semibold text-green-700">Respuesta a Tratamientos</h4>
+                                <p class="text-sm text-gray-600">
+                                    Evaluar cuántos pacientes responderán positivamente a un nuevo medicamento
+                                </p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-semibold text-purple-700">Pruebas Diagnósticas</h4>
+                                <p class="text-sm text-gray-600">
+                                    Calcular la probabilidad de resultados positivos en screening masivo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejemplo Práctico Binomial -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-green-800 mb-4">💡 Ejemplo Práctico: Efectividad de Antibiótico</h3>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <p class="mb-4">
+                        <strong>Caso:</strong> Un nuevo antibiótico tiene una efectividad del 80% para tratar infecciones urinarias. 
+                        Se administra a 15 pacientes. ¿Cuál es la probabilidad de que exactamente 12 pacientes se curen?
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold mb-2">Datos:</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>n = 15 pacientes</li>
+                                <li>p = 0.80 (80% efectividad)</li>
+                                <li>k = 12 éxitos</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Cálculo:</h4>
+                            <p class="text-sm">$$P(X = 12) = \binom{15}{12} (0.8)^{12} (0.2)^{3}$$</p>
+                            <p class="text-sm mt-2"><strong>Resultado:</strong> P(X = 12) ≈ 0.2501 (25.01%)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Distribución Poisson Tab -->
+        <div id="poisson" class="tab-content">
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h2 class="text-2xl font-bold text-green-800 mb-4">📊 Distribución Poisson en Epidemiología</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3">📖 Definición y Características</h3>
+                        <p class="text-gray-700 mb-4">
+                            La distribución Poisson modela el número de eventos que ocurren en un intervalo 
+                            fijo de tiempo o espacio, cuando estos eventos son raros e independientes.
+                        </p>
+                        
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-green-800 mb-2">Parámetro:</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li><strong>λ (lambda):</strong> Tasa promedio de ocurrencia del evento</li>
+                                <li><strong>Media = Varianza = λ</strong></li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2">Función de Probabilidad:</h4>
+                            <p class="text-center">$$P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}$$</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-3">🏥 Aplicaciones en Salud Pública</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-red-500 pl-4">
+                                <h4 class="font-semibold text-red-700">Brotes Epidémicos</h4>
+                                <p class="text-sm text-gray-600">
+                                    Modelar el número de casos nuevos de una enfermedad por día/semana
+                                </p>
+                            </div>
+                            <div class="border-l-4 border-orange-500 pl-4">
+                                <h4 class="font-semibold text-orange-700">Eventos Adversos</h4>
+                                <p class="text-sm text-gray-600">
+                                    Frecuencia de reacciones adversas graves a medicamentos
+                                </p>
+                            </div>
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-semibold text-blue-700">Emergencias Médicas</h4>
+                                <p class="text-sm text-gray-600">
+                                    Llegadas de pacientes a urgencias, llamadas de ambulancia
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejemplo Práctico Poisson -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-orange-800 mb-4">💡 Ejemplo Práctico: Eventos Adversos Medicamentosos</h3>
+                <div class="bg-orange-50 p-4 rounded-lg">
+                    <p class="mb-4">
+                        <strong>Caso:</strong> En un hospital, se reportan en promedio 3 eventos adversos graves 
+                        por medicamentos cada semana. ¿Cuál es la probabilidad de que en una semana específica 
+                        ocurran exactamente 5 eventos adversos?
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold mb-2">Datos:</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>λ = 3 eventos/semana</li>
+                                <li>k = 5 eventos</li>
+                                <li>Período: 1 semana</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Cálculo:</h4>
+                            <p class="text-sm">$$P(X = 5) = \frac{e^{-3} \cdot 3^5}{5!}$$</p>
+                            <p class="text-sm mt-2"><strong>Resultado:</strong> P(X = 5) ≈ 0.1008 (10.08%)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Simuladores Tab -->
+        <div id="simuladores" class="tab-content">
+            <div class="grid md:grid-cols-2 gap-6">
+                
+                <!-- Simulador Binomial -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4">🎯 Calculadora Binomial</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Número de ensayos (n):</label>
+                            <input type="number" id="binomial-n" value="20" min="1" max="100" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Probabilidad de éxito (p):</label>
+                            <input type="number" id="binomial-p" value="0.8" min="0" max="1" step="0.01"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Número de éxitos (k):</label>
+                            <input type="number" id="binomial-k" value="16" min="0"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <button onclick="calculateBinomial()" 
+                                class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200">
+                            Calcular Probabilidad
+                        </button>
+                        <div id="binomial-result" class="mt-4 p-3 bg-blue-50 rounded-md hidden">
+                            <p class="text-sm font-medium text-blue-800">Resultado:</p>
+                            <p id="binomial-probability" class="text-lg font-bold text-blue-900"></p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <canvas id="binomial-chart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+
+                <!-- Simulador Poisson -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-green-800 mb-4">📊 Calculadora Poisson</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Tasa promedio (λ):</label>
+                            <input type="number" id="poisson-lambda" value="3" min="0.1" step="0.1"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Número de eventos (k):</label>
+                            <input type="number" id="poisson-k" value="5" min="0"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                        </div>
+                        <button onclick="calculatePoisson()" 
+                                class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition duration-200">
+                            Calcular Probabilidad
+                        </button>
+                        <div id="poisson-result" class="mt-4 p-3 bg-green-50 rounded-md hidden">
+                            <p class="text-sm font-medium text-green-800">Resultado:</p>
+                            <p id="poisson-probability" class="text-lg font-bold text-green-900"></p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <canvas id="poisson-chart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparador de Distribuciones -->
+            <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-purple-800 mb-4">🔄 Comparador de Distribuciones</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-gray-700 mb-2">Cuándo usar Binomial:</h4>
+                        <ul class="text-sm space-y-1 text-gray-600">
+                            <li>• Número fijo de ensayos</li>
+                            <li>• Cada ensayo tiene dos resultados posibles</li>
+                            <li>• Probabilidad constante de éxito</li>
+                            <li>• Ensayos independientes</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-700 mb-2">Cuándo usar Poisson:</h4>
+                        <ul class="text-sm space-y-1 text-gray-600">
+                            <li>• Eventos raros en tiempo/espacio fijo</li>
+                            <li>• Tasa promedio conocida</li>
+                            <li>• Eventos independientes</li>
+                            <li>• No hay límite superior de eventos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicios Tab -->
+        <div id="ejercicios" class="tab-content">
+            <div class="space-y-6">
+                
+                <!-- Ejercicio 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4">💡 Ejercicio 1: Efectividad de Vacuna COVID-19</h3>
+                    <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                        <p class="mb-3">
+                            Una vacuna contra COVID-19 tiene una efectividad del 95%. En un grupo de 50 personas vacunadas 
+                            que se exponen al virus, ¿cuál es la probabilidad de que exactamente 47 estén protegidas?
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Tu respuesta:</label>
+                                <input type="number" id="ejercicio1-respuesta" step="0.0001" placeholder="0.0000"
+                                       class="w-full px-3 py-2 border rounded-md">
+                            </div>
+                            <div class="flex items-end">
+                                <button onclick="checkExercise1()" 
+                                        class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                                    Verificar
+                                </button>
+                            </div>
+                        </div>
+                        <div id="ejercicio1-feedback" class="mt-3 hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-green-800 mb-4">💡 Ejercicio 2: Llegadas a Urgencias</h3>
+                    <div class="bg-green-50 p-4 rounded-lg mb-4">
+                        <p class="mb-3">
+                            En el servicio de urgencias de un hospital llegan en promedio 4 pacientes por hora durante la noche. 
+                            ¿Cuál es la probabilidad de que en una hora específica lleguen exactamente 6 pacientes?
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Tu respuesta:</label>
+                                <input type="number" id="ejercicio2-respuesta" step="0.0001" placeholder="0.0000"
+                                       class="w-full px-3 py-2 border rounded-md">
+                            </div>
+                            <div class="flex items-end">
+                                <button onclick="checkExercise2()" 
+                                        class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+                                    Verificar
+                                </button>
+                            </div>
+                        </div>
+                        <div id="ejercicio2-feedback" class="mt-3 hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-purple-800 mb-4">💡 Ejercicio 3: Análisis Comparativo</h3>
+                    <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                        <p class="mb-3">
+                            Un medicamento tiene una tasa de éxito del 85% en el tratamiento de hipertensión. 
+                            Si se administra a 25 pacientes, ¿cuál es la probabilidad de que al menos 20 respondan positivamente?
+                        </p>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Tipo de distribución a usar:</label>
+                                <select id="ejercicio3-distribucion" class="w-full px-3 py-2 border rounded-md">
+                                    <option value="">Selecciona...</option>
+                                    <option value="binomial">Binomial</option>
+                                    <option value="poisson">Poisson</option>
+                                </select>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Tu respuesta:</label>
+                                    <input type="number" id="ejercicio3-respuesta" step="0.0001" placeholder="0.0000"
+                                           class="w-full px-3 py-2 border rounded-md">
+                                </div>
+                                <div class="flex items-end">
+                                    <button onclick="checkExercise3()" 
+                                            class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700">
+                                        Verificar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ejercicio3-feedback" class="mt-3 hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluación Tab -->
+        <div id="evaluacion" class="tab-content">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">✅ Evaluación Final</h2>
+                
+                <form id="evaluacion-form" class="space-y-6">
+                    <!-- Pregunta 1 -->
+                    <div class="border-b pb-4">
+                        <h3 class="text-lg font-semibold mb-3">1. ¿Cuál es la principal diferencia entre las distribuciones binomial y Poisson?</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q1" value="a" class="mr-2">
+                                <span>La binomial es para eventos continuos, Poisson para discretos</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q1" value="b" class="mr-2">
+                                <span>La binomial tiene número fijo de ensayos, Poisson modela eventos raros</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q1" value="c" class="mr-2">
+                                <span>No hay diferencias significativas entre ambas</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="border-b pb-4">
+                        <h3 class="text-lg font-semibold mb-3">2. En un ensayo clínico con 100 pacientes y 80% de efectividad, ¿qué distribución usarías?</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q2" value="a" class="mr-2">
+                                <span>Poisson, porque hay muchos pacientes</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q2" value="b" class="mr-2">
+                                <span>Binomial, porque hay número fijo de ensayos con probabilidad constante</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q2" value="c" class="mr-2">
+                                <span>Normal, porque la muestra es grande</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 3 -->
+                    <div class="border-b pb-4">
+                        <h3 class="text-lg font-semibold mb-3">3. ¿Cuál es un ejemplo típico de aplicación de Poisson en salud pública?</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q3" value="a" class="mr-2">
+                                <span>Efectividad de un tratamiento en 50 pacientes</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q3" value="b" class="mr-2">
+                                <span>Número de casos de una enfermedad rara por mes</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q3" value="c" class="mr-2">
+                                <span>Peso promedio de recién nacidos</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 4 -->
+                    <div class="border-b pb-4">
+                        <h3 class="text-lg font-semibold mb-3">4. En farmacovigilancia, si ocurren 2 eventos adversos graves por mes en promedio, ¿qué distribución modelaría la probabilidad de 0 eventos en un mes?</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="q4" value="a" class="mr-2">
+                                <span>Binomial con n=30 y p=2/30</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q4" value="b" class="mr-2">
+                                <span>Poisson con λ=2</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="q4" value="c" class="mr-2">
+                                <span>Normal con μ=2</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="evaluateQuiz()" 
+                            class="w-full bg-indigo-600 text-white py-3 px-6 rounded-md hover:bg-indigo-700 transition duration-200 font-semibold">
+                        Enviar Evaluación
+                    </button>
+                </form>
+
+                <div id="quiz-results" class="mt-6 hidden">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-2">Resultados:</h3>
+                        <p id="quiz-score" class="text-xl font-bold"></p>
+                        <div id="quiz-feedback" class="mt-3 space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Universidad Antonio Nariño - Bioestadística para Ciencias de la Salud</p>
+            <p class="text-sm text-gray-400 mt-2">OVA 12: Distribuciones Binomial y Poisson</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Mathematical functions
+        function factorial(n) {
+            if (n <= 1) return 1;
+            return n * factorial(n - 1);
+        }
+
+        function combination(n, k) {
+            return factorial(n) / (factorial(k) * factorial(n - k));
+        }
+
+        function binomialProbability(n, k, p) {
+            return combination(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
+        }
+
+        function poissonProbability(k, lambda) {
+            return (Math.pow(Math.E, -lambda) * Math.pow(lambda, k)) / factorial(k);
+        }
+
+        // Binomial calculator
+        function calculateBinomial() {
+            const n = parseInt(document.getElementById('binomial-n').value);
+            const p = parseFloat(document.getElementById('binomial-p').value);
+            const k = parseInt(document.getElementById('binomial-k').value);
+            
+            if (k > n) {
+                alert('El número de éxitos no puede ser mayor que el número de ensayos');
+                return;
+            }
+            
+            const probability = binomialProbability(n, k, p);
+            
+            document.getElementById('binomial-result').classList.remove('hidden');
+            document.getElementById('binomial-probability').textContent = 
+                `P(X = ${k}) = ${probability.toFixed(6)} (${(probability * 100).toFixed(4)}%)`;
+            
+            // Create chart
+            createBinomialChart(n, p);
+        }
+
+        // Poisson calculator
+        function calculatePoisson() {
+            const lambda = parseFloat(document.getElementById('poisson-lambda').value);
+            const k = parseInt(document.getElementById('poisson-k').value);
+            
+            const probability = poissonProbability(k, lambda);
+            
+            document.getElementById('poisson-result').classList.remove('hidden');
+            document.getElementById('poisson-probability').textContent = 
+                `P(X = ${k}) = ${probability.toFixed(6)} (${(probability * 100).toFixed(4)}%)`;
+            
+            // Create chart
+            createPoissonChart(lambda);
+        }
+
+        // Chart creation functions
+        function createBinomialChart(n, p) {
+            const ctx = document.getElementById('binomial-chart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (window.binomialChart) {
+                window.binomialChart.destroy();
+            }
+            
+            const labels = [];
+            const data = [];
+            
+            for (let i = 0; i <= Math.min(n, 20); i++) {
+                labels.push(i);
+                data.push(binomialProbability(n, i, p));
+            }
+            
+            window.binomialChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Probabilidad',
+                        data: data,
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Probabilidad'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Número de éxitos'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: `Distribución Binomial (n=${n}, p=${p})`
+                        }
+                    }
+                }
+            });
+        }
+
+        function createPoissonChart(lambda) {
+            const ctx = document.getElementById('poisson-chart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (window.poissonChart) {
+                window.poissonChart.destroy();
+            }
+            
+            const labels = [];
+            const data = [];
+            
+            const maxK = Math.min(Math.ceil(lambda + 3 * Math.sqrt(lambda)), 20);
+            
+            for (let i = 0; i <= maxK; i++) {
+                labels.push(i);
+                data.push(poissonProbability(i, lambda));
+            }
+            
+            window.poissonChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Probabilidad',
+                        data: data,
+                        backgroundColor: 'rgba(34, 197, 94, 0.6)',
+                        borderColor: 'rgba(34, 197, 94, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Probabilidad'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Número de eventos'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: `Distribución Poisson (λ=${lambda})`
+                        }
+                    }
+                }
+            });
+        }
+
+        // Exercise checking functions
+        function checkExercise1() {
+            const userAnswer = parseFloat(document.getElementById('ejercicio1-respuesta').value);
+            const correctAnswer = binomialProbability(50, 47, 0.95);
+            const tolerance = 0.001;
+            
+            const feedback = document.getElementById('ejercicio1-feedback');
+            feedback.classList.remove('hidden');
+            
+            if (Math.abs(userAnswer - correctAnswer) < tolerance) {
+                feedback.innerHTML = `
+                    <div class="text-green-700 bg-green-100 p-3 rounded">
+                        <strong>¡Correcto!</strong> La respuesta es ${correctAnswer.toFixed(6)}
+                        <br><small>Usaste: Binomial con n=50, p=0.95, k=47</small>
+                    </div>
+                `;
+            } else {
+                feedback.innerHTML = `
+                    <div class="text-red-700 bg-red-100 p-3 rounded">
+                        <strong>Incorrecto.</strong> La respuesta correcta es ${correctAnswer.toFixed(6)}
+                        <br><small>Recuerda: P(X=k) = C(n,k) × p^k × (1-p)^(n-k)</small>
+                    </div>
+                `;
+            }
+        }
+
+        function checkExercise2() {
+            const userAnswer = parseFloat(document.getElementById('ejercicio2-respuesta').value);
+            const correctAnswer = poissonProbability(6, 4);
+            const tolerance = 0.001;
+            
+            const feedback = document.getElementById('ejercicio2-feedback');
+            feedback.classList.remove('hidden');
+            
+            if (Math.abs(userAnswer - correctAnswer) < tolerance) {
+                feedback.innerHTML = `
+                    <div class="text-green-700 bg-green-100 p-3 rounded">
+                        <strong>¡Correcto!</strong> La respuesta es ${correctAnswer.toFixed(6)}
+                        <br><small>Usaste: Poisson con λ=4, k=6</small>
+                    </div>
+                `;
+            } else {
+                feedback.innerHTML = `
+                    <div class="text-red-700 bg-red-100 p-3 rounded">
+                        <strong>Incorrecto.</strong> La respuesta correcta es ${correctAnswer.toFixed(6)}
+                        <br><small>Recuerda: P(X=k) = e^(-λ) × λ^k / k!</small>
+                    </div>
+                `;
+            }
+        }
+
+        function checkExercise3() {
+            const distribution = document.getElementById('ejercicio3-distribucion').value;
+            const userAnswer = parseFloat(document.getElementById('ejercicio3-respuesta').value);
+            
+            // Calculate P(X >= 20) = 1 - P(X <= 19) for binomial
+            let correctAnswer = 0;
+            for (let i = 20; i <= 25; i++) {
+                correctAnswer += binomialProbability(25, i, 0.85);
+            }
+            
+            const feedback = document.getElementById('ejercicio3-feedback');
+            feedback.classList.remove('hidden');
+            
+            if (distribution === 'binomial' && Math.abs(userAnswer - correctAnswer) < 0.01) {
+                feedback.innerHTML = `
+                    <div class="text-green-700 bg-green-100 p-3 rounded">
+                        <strong>¡Excelente!</strong> Elegiste la distribución correcta (Binomial) y la respuesta es aproximadamente ${correctAnswer.toFixed(4)}
+                        <br><small>Es binomial porque hay número fijo de ensayos (25) con probabilidad constante (0.85)</small>
+                    </div>
+                `;
+            } else if (distribution !== 'binomial') {
+                feedback.innerHTML = `
+                    <div class="text-red-700 bg-red-100 p-3 rounded">
+                        <strong>Distribución incorrecta.</strong> Debe ser Binomial porque hay 25 ensayos fijos con probabilidad constante.
+                        <br><small>La respuesta correcta es ${correctAnswer.toFixed(4)}</small>
+                    </div>
+                `;
+            } else {
+                feedback.innerHTML = `
+                    <div class="text-orange-700 bg-orange-100 p-3 rounded">
+                        <strong>Distribución correcta, pero revisa el cálculo.</strong> La respuesta es ${correctAnswer.toFixed(4)}
+                        <br><small>Tip: Calcula P(X ≥ 20) = P(X=20) + P(X=21) + ... + P(X=25)</small>
+                    </div>
+                `;
+            }
+        }
+
+        // Quiz evaluation
+        function evaluateQuiz() {
+            const answers = {
+                q1: 'b',
+                q2: 'b', 
+                q3: 'b',
+                q4: 'b'
+            };
+            
+            let score = 0;
+            const feedback = [];
+            
+            for (let question in answers) {
+                const selected = document.querySelector(`input[name="${question}"]:checked`);
+                if (selected && selected.value === answers[question]) {
+                    score++;
+                    feedback.push(`<span class="text-green-600">✓ Pregunta ${question.slice(1)}: Correcto</span>`);
+                } else {
+                    feedback.push(`<span class="text-red-600">✗ Pregunta ${question.slice(1)}: Incorrecto</span>`);
+                }
+            }
+            
+            const percentage = (score / Object.keys(answers).length) * 100;
+            
+            document.getElementById('quiz-results').classList.remove('hidden');
+            document.getElementById('quiz-score').textContent = 
+                `Puntuación: ${score}/${Object.keys(answers).length} (${percentage.toFixed(1)}%)`;
+            document.getElementById('quiz-feedback').innerHTML = feedback.join('<br>');
+            
+            // Add performance message
+            let performanceMessage = '';
+            if (percentage >= 90) {
+                performanceMessage = '<div class="text-green-700 bg-green-100 p-3 rounded mt-3"><strong>¡Excelente!</strong> Dominas muy bien los conceptos.</div>';
+            } else if (percentage >= 70) {
+                performanceMessage = '<div class="text-blue-700 bg-blue-100 p-3 rounded mt-3"><strong>Bien!</strong> Tienes una buena comprensión de los temas.</div>';
+            } else {
+                performanceMessage = '<div class="text-orange-700 bg-orange-100 p-3 rounded mt-3"><strong>Necesitas repasar.</strong> Revisa los contenidos teóricos nuevamente.</div>';
+            }
+            
+            document.getElementById('quiz-feedback').innerHTML += performanceMessage;
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize MathJax
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+            
+            // Create initial charts
+            calculateBinomial();
+            calculatePoisson();
+        });
+    </script>
+</body>
+</html>

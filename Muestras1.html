@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Triage de Variables — UCI (Juego educativo)</title>
+<style>
+  :root{
+    --bg: #ffffff;
+    --panel: #f8f9fa;
+    --accent: #007bff;
+    --accent2: #fd7e14;
+    --muted: #6c757d;
+    --good: #28a745;
+    --bad: #dc3545;
+    --glass: rgba(0,0,0,0.03);
+  }
+  *{box-sizing:border-box;font-family:Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;}
+  body{margin:0;background:var(--bg);color:#212529;padding:20px;}
+  .container{max-width:1100px;margin:0 auto;}
+  header{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+  .logo{width:64px;height:64px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#0056b3);display:flex;align-items:center;justify-content:center;font-weight:800;color:white;text-shadow:0 1px 0 rgba(0,0,0,0.2)}
+  header h1{margin:0;font-size:20px}
+  header p{margin:0;color:var(--muted);font-size:13px}
+
+  /* Instruction box */
+  .instructions{
+    border:2px dashed rgba(0,0,0,0.1);
+    padding:14px;border-radius:10px;background:var(--glass);position:relative;margin-bottom:16px;
+  }
+  .instructions:before{
+    content:"TRIAGE - INSTRUCCIONES";
+    position:absolute;left:12px;top:-12px;background:var(--panel);padding:6px 10px;border-radius:6px;color:var(--accent);font-weight:700;font-size:12px;border:1px solid rgba(0,0,0,0.1);
+  }
+  .instructions ul{margin:8px 0 0 18px;color:var(--muted);font-size:14px}
+  .instructions li{margin:6px 0}
+
+  .game-grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+  @media (max-width:980px){ .game-grid{grid-template-columns:1fr;} }
+
+  .panel{
+    background:var(--panel);
+    border-radius:10px;padding:16px;border:1px solid rgba(0,0,0,0.1);box-shadow:0 4px 8px rgba(0,0,0,0.05);
+  }
+
+  /* Main triage area */
+  .triage-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .case-card{background:#ffffff;padding:14px;border-radius:8px;border-left:5px solid var(--accent);margin-bottom:12px; border: 1px solid rgba(0,0,0,0.1);}
+  .case-title{font-size:16px;margin:0 0 6px 0;color:var(--accent2);font-weight:700}
+  .case-text{font-size:15px;color:#212529;margin:0}
+
+  .timer-bar{
+    height:10px;background:rgba(0,0,0,0.1);border-radius:6px;overflow:hidden;margin-top:12px;
+  }
+  .timer-fill{height:100%;background:linear-gradient(90deg,var(--good),var(--accent2));width:100%;transition:width 0.2s linear;}
+
+  .options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  .opt{
+    background:#ffffff;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);cursor:pointer;transition:all .15s;
+  }
+  .opt:hover{transform:translateY(-4px);box-shadow:0 10px 20px rgba(0,0,0,0.1)}
+  .opt.correct{border-color:var(--good);background:#d4edda; color: #155724;}
+  .opt.incorrect{border-color:var(--bad);background:#f8d7da; color: #721c24;}
+
+  .feedback{margin-top:12px;padding:10px;border-radius:8px;background:var(--glass);color:var(--muted);font-size:14px;min-height:48px}
+
+  /* Side panel (counters, score, history) */
+  .side-top{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+  .stat{flex:1;padding:10px;border-radius:8px;background:var(--glass);border:1px solid rgba(0,0,0,0.1);text-align:center}
+  .stat h3{margin:0;font-size:18px}
+  .stat p{margin:0;font-size:13px;color:var(--muted)}
+
+  .history{max-height:300px;overflow:auto;padding:8px;display:flex;flex-direction:column;gap:8px}
+  .hist-item{padding:8px;border-radius:6px;background:var(--glass);border:1px solid rgba(0,0,0,0.1);font-size:13px;color:var(--muted)}
+
+  .controls{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  button{background:var(--accent);color:white;border:0;padding:10px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+  button.secondary{background:var(--muted);color:white;}
+  button.warn{background:var(--accent2);color:white}
+
+  .final{margin-top:10px;padding:12px;border-radius:8px;text-align:center;font-weight:700}
+  .final.good{background:#d4edda;color:var(--good)}
+  .final.bad{background:#f8d7da;color:var(--bad)}
+
+  footer{margin-top:16px;color:var(--muted);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+  <div class="container" role="application" aria-label="Triage de Variables UCI">
+    <header>
+      <div class="logo" aria-hidden="true">UCI</div>
+      <div>
+        <h1>Triage de Variables — Unidad de Cuidados Intensivos</h1>
+        <p>Modo rol: eres médico de triage. Clasifica variables antes de que llegue la siguiente ficha.</p>
+      </div>
+    </header>
+
+    <div class="instructions" aria-live="polite">
+      <h2 style="margin:0 0 6px 0;color:var(--accent)">Cómo jugar</h2>
+      <ul>
+        <li>Lee la ficha clínica que aparece como informe del paciente.</li>
+        <li>Tienes <strong>10 segundos</strong> para escoger qué tipo de variable es: <em>Nominal, Ordinal, Discreta, Continua</em>.</li>
+        <li>Acierto = <strong>+10</strong> puntos; Error o tiempo = <strong>-5</strong> puntos (no baja de 0). También se registran correctas e incorrectas.</li>
+        <li>Al final verás tu porcentaje de aciertos y un mensaje según tu desempeño (≥ 60% es aprobado).</li>
+      </ul>
+    </div>
+
+    <div class="game-grid">
+      <!-- Main -->
+      <div class="panel" aria-live="polite">
+        <div class="triage-header">
+          <div style="font-weight:700">Sala de triage — Paciente actual</div>
+          <div style="color:var(--muted)">Tiempo por ficha: <strong>10 s</strong></div>
+        </div>
+
+        <div class="case-card" id="caseCard" tabindex="0">
+          <div class="case-title" id="caseTitle">Informe clínico</div>
+          <div class="case-text" id="caseText">Cargando ficha...</div>
+
+          <div class="timer-bar" aria-hidden="true" title="Tiempo restante">
+            <div class="timer-fill" id="timerFill"></div>
+          </div>
+        </div>
+
+        <div class="options" id="optionsBox" role="list">
+          <!-- 4 opciones -->
+        </div>
+
+        <div class="feedback" id="feedback">Buena suerte, doctor/a. Selecciona una opción cuando estés listo.</div>
+
+        <div class="controls">
+          <button id="nextBtn" class="secondary" disabled>Ficha siguiente</button>
+          <button id="pauseBtn" class="secondary">Pausar</button>
+          <button id="restartBtn" class="warn">Reiniciar</button>
+          <button onclick="window.close()">Volver a la App</button>
+        </div>
+
+        <div id="finalPanel" class="final" style="display:none;margin-top:12px"></div>
+      </div>
+
+      <!-- Side -->
+      <aside class="panel" aria-hidden="false">
+        <div class="side-top">
+          <div class="stat">
+            <h3 id="correctCount">0</h3>
+            <p>Correctas</p>
+          </div>
+          <div class="stat">
+            <h3 id="incorrectCount">0</h3>
+            <p>Incorrectas</p>
+          </div>
+          <div class="stat">
+            <h3 id="score">0</h3>
+            <p>Diagnóstico rápido</p>
+          </div>
+        </div>
+
+        <div style="font-weight:700;margin-bottom:8px;color:var(--accent2)">Historial de fichas</div>
+        <div class="history" id="historyBox" aria-live="polite">
+          <!-- historial breve -->
+        </div>
+
+        <div style="margin-top:12px;color:var(--muted);font-size:13px">
+          Consejos rápidos:
+          <ul style="margin:8px 0 0 16px">
+            <li>Nominal = nombres o categorías sin orden (p. ej. grupo sanguíneo).</li>
+            <li>Ordinal = categorías con orden (p. ej. escala de dolor leve/mod/alto).</li>
+            <li>Discreta = conteos (p. ej. número de transfusiones).</li>
+            <li>Continua = medida con decimal/intervalos (p. ej. presión arterial, peso).</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      *Este juego es un recurso didáctico. Puedes integrarlo en Google Sites vía iframe o como archivo HTML.
+    </footer>
+  </div>
+
+<script>
+/* ===========================
+   Datos de fichas (preguntas)
+   Cada ficha: {case, answer: 'Nominal'|'Ordinal'|'Discreta'|'Continua', explanation}
+   =========================== */
+const CASES = [
+  { case: "Frecuencia cardíaca = 120 lpm", answer:"Continua", explanation:"La frecuencia cardíaca es una medida cuantitativa que puede tomar decimales según instrumento y se trata como continua." },
+  { case: "Grupo sanguíneo = O+", answer:"Nominal", explanation:"Grupo sanguíneo es una categoría sin orden (nominal)." },
+  { case: "Escala de dolor = moderado", answer:"Ordinal", explanation:"La escala (leve, moderado, severo) tiene orden: es ordinal." },
+  { case: "Número de transfusiones durante la estancia = 2", answer:"Discreta", explanation:"Conteo de eventos (0,1,2...) → variable discreta." },
+  { case: "Presión arterial sistólica = 135 mmHg", answer:"Continua", explanation:"Presión arterial es una medida numérica continua (puede medirse con decimales)." },
+  { case: "Sexo del paciente = Femenino", answer:"Nominal", explanation:"Sexo es una categoría sin orden → nominal." },
+  { case: "Nivel de conciencia (Glasgow) = 8", answer:"Ordinal", explanation:"Escala de Glasgow tiene puntuaciones con orden; se interpreta como ordinal." },
+  { case: "Número de episodios de hipotensión = 3", answer:"Discreta", explanation:"Conteo de episodios → discreta." },
+  { case: "Temperatura corporal = 37.2 °C", answer:"Continua", explanation:"Temperatura es una medida continua." },
+  { case: "Tipo de respirador usado (ventilador vs CPAP vs máscara)", answer:"Nominal", explanation:"Categorías sin orden → nominal." },
+  { case: "Escala de sedación = 1 (leve), 2 (moderado), 3 (intenso)", answer:"Ordinal", explanation:"Escala con orden → ordinal." },
+  { case: "Número de días en UCI = 7", answer:"Discreta", explanation:"Conteo de días (si bien tiempo es medible, en días se cuenta → discreta en este contexto)." }
+];
+
+/* ===== estado del juego ===== */
+let indexOrder = [];     // orden en el que aparecerán las fichas (aleatorio)
+let currentIdx = 0;      // índice dentro de indexOrder
+let correct = 0;
+let incorrect = 0;
+let score = 0;
+let answeredCount = 0;
+let timer = null;
+const TIME_PER_CASE = 10; // segundos
+let timeLeft = TIME_PER_CASE;
+let paused = false;
+
+/* ===== elementos DOM ===== */
+const caseTitle = document.getElementById('caseTitle');
+const caseText = document.getElementById('caseText');
+const timerFill = document.getElementById('timerFill');
+const optionsBox = document.getElementById('optionsBox');
+const feedback = document.getElementById('feedback');
+const nextBtn = document.getElementById('nextBtn');
+const pauseBtn = document.getElementById('pauseBtn');
+const restartBtn = document.getElementById('restartBtn');
+const correctCount = document.getElementById('correctCount');
+const incorrectCount = document.getElementById('incorrectCount');
+const scoreEl = document.getElementById('score');
+const historyBox = document.getElementById('historyBox');
+const finalPanel = document.getElementById('finalPanel');
+
+/* ===== utilidades ===== */
+function shuffleArray(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+}
+
+/* Preparar orden aleatorio de fichas */
+function prepareCases(){
+  indexOrder = Array.from({length: CASES.length}, (_,i)=>i);
+  shuffleArray(indexOrder);
+  currentIdx = 0;
+  correct = 0; incorrect = 0; score = 0; answeredCount = 0;
+  updateStats();
+  historyBox.innerHTML = "";
+  finalPanel.style.display = 'none';
+}
+
+/* Renderizar ficha actual */
+function renderCurrent(){
+  const realIndex = indexOrder[currentIdx];
+  const c = CASES[realIndex];
+  caseTitle.textContent = `Ficha ${currentIdx+1} / ${CASES.length}`;
+  caseText.innerHTML = c.case;
+  // Opciones fijas
+  const options = ["Nominal","Ordinal","Discreta","Continua"];
+  optionsBox.innerHTML = "";
+  options.forEach(opt=>{
+    const d = document.createElement('div');
+    d.className = 'opt';
+    d.textContent = opt;
+    d.tabIndex = 0;
+    d.setAttribute('role','button');
+    d.onclick = ()=> choose(opt);
+    d.onkeydown = (e)=>{ if(e.key === 'Enter' || e.key === ' ') choose(opt); };
+    optionsBox.appendChild(d);
+  });
+  feedback.textContent = "Clasifica la variable (tienes 10 segundos).";
+  nextBtn.disabled = true;
+  resetTimer();
+  startTimer();
+}
+
+/* Timer */
+function resetTimer(){
+  clearInterval(timer);
+  timeLeft = TIME_PER_CASE;
+  updateTimerUI();
+}
+function startTimer(){
+  timer = setInterval(()=>{
+    if(paused) return;
+    timeLeft -= 0.1; // decrement in tenths for smooth fill
+    if(timeLeft <= 0){
+      timeLeft = 0;
+      updateTimerUI();
+      clearInterval(timer);
+      // marcar como incorrecta por tiempo
+      handleTimeout();
+    } else {
+      updateTimerUI();
+    }
+  }, 100);
+}
+function updateTimerUI(){
+  const pct = Math.max(0,(timeLeft / TIME_PER_CASE) * 100);
+  timerFill.style.width = pct + "%";
+  // color transition: green -> orange -> red
+  if(pct > 60) timerFill.style.background = 'linear-gradient(90deg,var(--good),var(--accent2))';
+  else if(pct > 30) timerFill.style.background = 'orange';
+  else timerFill.style.background = 'linear-gradient(90deg,#ff7b7b,#ef4444)';
+}
+
+/* Cuando el jugador elige una opción */
+function choose(selected){
+  if(timer === null) return; // no activo
+  clearInterval(timer);
+  // bloquear opciones
+  const opts = optionsBox.querySelectorAll('.opt');
+  opts.forEach(o=> o.onclick = null);
+  const realIndex = indexOrder[currentIdx];
+  const c = CASES[realIndex];
+  const correctAnswer = c.answer;
+  answeredCount++;
+  if(selected === correctAnswer){
+    // acierto
+    correct++;
+    score += 10;
+    feedback.textContent = "✅ Correcto. " + c.explanation;
+    // marcar visual
+    opts.forEach(o=>{
+      if(o.textContent === selected) o.classList.add('correct');
+      if(o.textContent === correctAnswer) o.classList.add('correct');
+    });
+  } else {
+    // error
+    incorrect++;
+    score -= 5;
+    if(score < 0) score = 0;
+    feedback.textContent = "❌ Incorrecto. " + c.explanation;
+    opts.forEach(o=>{
+      if(o.textContent === selected) o.classList.add('incorrect');
+      if(o.textContent === correctAnswer) o.classList.add('correct');
+    });
+  }
+  // actualizar historial breve
+  addHistoryEntry(c.case, selected, correctAnswer);
+  updateStats();
+  nextBtn.disabled = false;
+  timer = null;
+}
+
+/* Si el tiempo se agota */
+function handleTimeout(){
+  const opts = optionsBox.querySelectorAll('.opt');
+  opts.forEach(o=> o.onclick = null);
+  const realIndex = indexOrder[currentIdx];
+  const c = CASES[realIndex];
+  answeredCount++;
+  incorrect++;
+  score -= 5; if(score < 0) score = 0;
+  feedback.textContent = "⏱️ Tiempo agotado. " + c.explanation;
+  // marcar la correcta
+  opts.forEach(o=>{
+    if(o.textContent === c.answer) o.classList.add('correct');
+  });
+  addHistoryEntry(c.case, 'Sin respuesta (tiempo)', c.answer);
+  updateStats();
+  nextBtn.disabled = false;
+  timer = null;
+}
+
+/* Siguiente ficha */
+nextBtn.onclick = ()=>{
+  currentIdx++;
+  if(currentIdx >= indexOrder.length){
+    endGame();
+  } else {
+    renderCurrent();
+  }
+};
+
+/* Pausar / reanudar */
+pauseBtn.onclick = ()=>{
+  paused = !paused;
+  pauseBtn.textContent = paused ? 'Reanudar' : 'Pausar';
+  if(!paused && timer === null && timeLeft > 0){
+    startTimer();
+  }
+};
+
+/* Reiniciar */
+restartBtn.onclick = ()=>{
+  if(!confirm('¿Deseas reiniciar el juego?')) return;
+  prepareCases();
+  renderCurrent();
+};
+
+/* Actualizar contadores */
+function updateStats(){
+  correctCount.textContent = correct;
+  incorrectCount.textContent = incorrect;
+  scoreEl.textContent = score;
+}
+
+/* Historial */
+function addHistoryEntry(text, chosen, correctAns){
+  const div = document.createElement('div');
+  div.className = 'hist-item';
+  div.innerHTML = `<strong>${text}</strong><br><small>Tu: <em>${chosen}</em> • Correcta: <em>${correctAns}</em></small>`;
+  historyBox.prepend(div);
+  // mantener sólo últimas 12
+  while(historyBox.children.length > 12) historyBox.removeChild(historyBox.lastChild);
+}
+
+/* Final */
+function endGame(){
+  clearInterval(timer);
+  // porcentaje aciertos = correct / total *100
+  const total = CASES.length;
+  // compute digit-by-digit safe:
+  // correct_num = correct
+  // total_num = total
+  // perc = Math.round((correct / total) * 100)
+  const perc = Math.round((correct / total) * 100);
+  finalPanel.style.display = 'block';
+  if(perc >= 60){
+    finalPanel.className = 'final good';
+    finalPanel.textContent = `¡Excelente doctor/a! Tu equipo confía en ti. Puntaje ${perc}% (${correct}/${total}). Diagnóstico rápido: ${score} pts.`;
+  } else {
+    finalPanel.className = 'final bad';
+    finalPanel.textContent = `Necesitas más práctica, doctor/a. ¡Tú puedes! Puntaje ${perc}% (${correct}/${total}). Diagnóstico rápido: ${score} pts.`;
+  }
+  // bloquear controles
+  nextBtn.disabled = true;
+  pauseBtn.disabled = true;
+}
+
+/* Inicialización */
+prepareCases();
+renderCurrent();
+
+/* Seguridad: si el usuario cierra la pestaña, limpiar timer */
+window.addEventListener('beforeunload', ()=>{ clearInterval(timer); });
+
+</script>
+</body>
+</html>

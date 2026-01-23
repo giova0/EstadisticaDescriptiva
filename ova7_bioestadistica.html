@@ -1,0 +1,1340 @@
+
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 7 - Integración y Evaluación Parcial I - Bioestadística UAN</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-base-100">
+    <!-- Header -->
+    <div class="navbar bg-primary text-primary-content shadow-lg">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"></path>
+                    </svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-base-content">
+                    <li><a onclick="showSection('welcome')">Inicio</a></li>
+                    <li><a onclick="showSection('evaluation')">Evaluación</a></li>
+                    <li><a onclick="showSection('tools')">Herramientas</a></li>
+                    <li><a onclick="showSection('project')">Proyecto</a></li>
+                    <li><a onclick="showSection('results')">Resultados</a></li>
+                </ul>
+            </div>
+            <a class="btn btn-ghost text-xl">
+                <i class="fas fa-chart-line mr-2"></i>
+                OVA 7 - Bioestadística UAN
+            </a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a onclick="showSection('welcome')" class="nav-link">Inicio</a></li>
+                <li><a onclick="showSection('evaluation')" class="nav-link">Evaluación</a></li>
+                <li><a onclick="showSection('tools')" class="nav-link">Herramientas</a></li>
+                <li><a onclick="showSection('project')" class="nav-link">Proyecto</a></li>
+                <li><a onclick="showSection('results')" class="nav-link">Resultados</a></li>
+            </ul>
+        </div>
+        <div class="navbar-end">
+            <div class="badge badge-secondary">Semana 5</div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="w-full bg-base-200 h-2">
+        <div id="progressBar" class="bg-primary h-2 transition-all duration-300" style="width: 0%"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-4">
+        <!-- Welcome Section -->
+        <div id="welcome" class="section">
+            <div class="hero min-h-screen bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl">
+                <div class="hero-content text-center">
+                    <div class="max-w-4xl">
+                        <h1 class="text-5xl font-bold mb-6">
+                            <i class="fas fa-graduation-cap text-primary mr-4"></i>
+                            OVA 7: Integración y Evaluación Parcial I
+                        </h1>
+                        <p class="text-xl mb-8">Estadística Descriptiva - Bioestadística para Ciencias de la Salud</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="card bg-base-100 shadow-xl">
+                                <div class="card-body">
+                                    <h2 class="card-title text-primary">
+                                        <i class="fas fa-info-circle"></i>
+                                        Información General
+                                    </h2>
+                                    <ul class="text-left space-y-2">
+                                        <li><strong>Tipo:</strong> Evaluativa/Síntesis</li>
+                                        <li><strong>Duración:</strong> 2 horas académicas</li>
+                                        <li><strong>Modalidad:</strong> 30% Virtual - 70% Presencial</li>
+                                        <li><strong>Fase:</strong> I - Estadística Descriptiva</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="card bg-base-100 shadow-xl">
+                                <div class="card-body">
+                                    <h2 class="card-title text-secondary">
+                                        <i class="fas fa-tasks"></i>
+                                        Objetivos
+                                    </h2>
+                                    <ul class="text-left space-y-2">
+                                        <li>• Evaluar conocimientos de estadística descriptiva</li>
+                                        <li>• Aplicar técnicas de análisis de datos</li>
+                                        <li>• Interpretar resultados estadísticos</li>
+                                        <li>• Realizar proyecto aplicado</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mb-8">
+                            <i class="fas fa-lightbulb"></i>
+                            <div>
+                                <h3 class="font-bold">Instrucciones</h3>
+                                <p>Complete todas las secciones: evaluación teórica, uso de herramientas de análisis y proyecto aplicado. Su calificación se calculará automáticamente.</p>
+                            </div>
+                        </div>
+
+                        <button onclick="showSection('evaluation')" class="btn btn-primary btn-lg">
+                            <i class="fas fa-play mr-2"></i>
+                            Comenzar Evaluación
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluation Section -->
+        <div id="evaluation" class="section hidden">
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title text-2xl mb-6">
+                        <i class="fas fa-clipboard-check text-primary mr-2"></i>
+                        Evaluación Teórica
+                    </h2>
+                    
+                    <div class="alert alert-warning mb-6">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3 class="font-bold">Tiempo estimado: 45 minutos</h3>
+                            <p>Responda todas las preguntas. Cada pregunta vale 2 puntos (Total: 40 puntos)</p>
+                        </div>
+                    </div>
+
+                    <div id="quiz-container">
+                        <!-- Quiz questions will be generated here -->
+                    </div>
+
+                    <div class="card-actions justify-end mt-6">
+                        <button onclick="submitQuiz()" class="btn btn-primary">
+                            <i class="fas fa-check mr-2"></i>
+                            Enviar Evaluación
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Section -->
+        <div id="tools" class="section hidden">
+            <div class="grid lg:grid-cols-2 gap-6">
+                <!-- Data Upload Tool -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            <i class="fas fa-upload text-primary mr-2"></i>
+                            Carga de Datos
+                        </h2>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Seleccionar archivo CSV</span>
+                            </label>
+                            <input type="file" id="csvFile" accept=".csv" class="file-input file-input-bordered file-input-primary w-full" onchange="loadCSV()">
+                        </div>
+                        <div class="divider">O</div>
+                        <button onclick="loadSampleData()" class="btn btn-outline btn-primary">
+                            <i class="fas fa-database mr-2"></i>
+                            Usar Datos de Ejemplo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Statistics Calculator -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            <i class="fas fa-calculator text-secondary mr-2"></i>
+                            Calculadora Estadística
+                        </h2>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Ingrese datos (separados por comas)</span>
+                            </label>
+                            <textarea id="manualData" class="textarea textarea-bordered" placeholder="Ej: 12, 15, 18, 20, 22, 25, 28"></textarea>
+                        </div>
+                        <button onclick="calculateStats()" class="btn btn-secondary mt-4">
+                            <i class="fas fa-play mr-2"></i>
+                            Calcular
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Display -->
+            <div id="dataDisplay" class="mt-6 hidden">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            <i class="fas fa-table text-accent mr-2"></i>
+                            Datos Cargados
+                        </h2>
+                        <div class="overflow-x-auto">
+                            <table id="dataTable" class="table table-zebra w-full">
+                                <!-- Data will be displayed here -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Results -->
+            <div id="statsResults" class="mt-6 hidden">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="stat bg-primary text-primary-content rounded-lg">
+                        <div class="stat-figure">
+                            <i class="fas fa-chart-line text-2xl"></i>
+                        </div>
+                        <div class="stat-title">Media</div>
+                        <div id="mean" class="stat-value">0</div>
+                    </div>
+                    <div class="stat bg-secondary text-secondary-content rounded-lg">
+                        <div class="stat-figure">
+                            <i class="fas fa-chart-bar text-2xl"></i>
+                        </div>
+                        <div class="stat-title">Mediana</div>
+                        <div id="median" class="stat-value">0</div>
+                    </div>
+                    <div class="stat bg-accent text-accent-content rounded-lg">
+                        <div class="stat-figure">
+                            <i class="fas fa-chart-pie text-2xl"></i>
+                        </div>
+                        <div class="stat-title">Moda</div>
+                        <div id="mode" class="stat-value">0</div>
+                    </div>
+                    <div class="stat bg-info text-info-content rounded-lg">
+                        <div class="stat-figure">
+                            <i class="fas fa-expand-arrows-alt text-2xl"></i>
+                        </div>
+                        <div class="stat-title">Rango</div>
+                        <div id="range" class="stat-value">0</div>
+                    </div>
+                    <div class="stat bg-warning text-warning-content rounded-lg">
+                        <div class="stat-figure">
+                            <i class="fas fa-square-root-alt text-2xl"></i>
+                        </div>
+                        <div class="stat-title">Desv. Estándar</div>
+                        <div id="stdDev" class="stat-value">0</div>
+                    </div>
+                    <div class="stat bg-error text-error-content rounded-lg">
+                        <div class="stat-figure">
+                            <i class="fas fa-square text-2xl"></i>
+                        </div>
+                        <div class="stat-title">Varianza</div>
+                        <div id="variance" class="stat-value">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div id="chartsContainer" class="mt-6 hidden">
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h2 class="card-title">Histograma</h2>
+                            <canvas id="histogramChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h2 class="card-title">Diagrama de Caja</h2>
+                            <canvas id="boxplotChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Section -->
+        <div id="project" class="section hidden">
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title text-2xl mb-6">
+                        <i class="fas fa-project-diagram text-primary mr-2"></i>
+                        Proyecto Aplicado: Análisis de Resultados de Laboratorio
+                    </h2>
+                    
+                    <div class="alert alert-info mb-6">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <h3 class="font-bold">Contexto del Proyecto</h3>
+                            <p>Analice los resultados de laboratorio de 100 pacientes hospitalizados. Debe realizar un análisis descriptivo completo e interpretar los resultados desde una perspectiva clínica.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <div class="card bg-base-200">
+                            <div class="card-body">
+                                <h3 class="card-title">Dataset: Resultados de Laboratorio</h3>
+                                <p class="text-sm mb-4">Variables incluidas:</p>
+                                <ul class="text-sm space-y-1">
+                                    <li>• <strong>Hemoglobina (g/dL):</strong> 8.5 - 18.2</li>
+                                    <li>• <strong>Glucosa (mg/dL):</strong> 65 - 350</li>
+                                    <li>• <strong>Creatinina (mg/dL):</strong> 0.5 - 4.8</li>
+                                    <li>• <strong>Colesterol (mg/dL):</strong> 120 - 280</li>
+                                </ul>
+                                <button onclick="loadProjectData()" class="btn btn-primary mt-4">
+                                    <i class="fas fa-download mr-2"></i>
+                                    Cargar Dataset
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card bg-base-200">
+                            <div class="card-body">
+                                <h3 class="card-title">Tareas del Proyecto</h3>
+                                <div class="space-y-2">
+                                    <div class="form-control">
+                                        <label class="label cursor-pointer">
+                                            <span class="label-text">1. Calcular estadísticas descriptivas</span>
+                                            <input type="checkbox" id="task1" class="checkbox checkbox-primary" />
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label cursor-pointer">
+                                            <span class="label-text">2. Crear visualizaciones apropiadas</span>
+                                            <input type="checkbox" id="task2" class="checkbox checkbox-primary" />
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label cursor-pointer">
+                                            <span class="label-text">3. Interpretar resultados clínicamente</span>
+                                            <input type="checkbox" id="task3" class="checkbox checkbox-primary" />
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label cursor-pointer">
+                                            <span class="label-text">4. Identificar valores atípicos</span>
+                                            <input type="checkbox" id="task4" class="checkbox checkbox-primary" />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Analysis Area -->
+                    <div id="projectAnalysis" class="mt-6 hidden">
+                        <div class="card bg-base-100 shadow-xl">
+                            <div class="card-body">
+                                <h3 class="card-title">Análisis del Proyecto</h3>
+                                <div id="projectCharts" class="grid lg:grid-cols-2 gap-4 mt-4">
+                                    <!-- Charts will be generated here -->
+                                </div>
+                                
+                                <div class="mt-6">
+                                    <h4 class="text-lg font-semibold mb-4">Interpretación Clínica</h4>
+                                    <textarea id="clinicalInterpretation" class="textarea textarea-bordered w-full h-32" placeholder="Escriba su interpretación clínica de los resultados..."></textarea>
+                                </div>
+
+                                <div class="card-actions justify-end mt-4">
+                                    <button onclick="submitProject()" class="btn btn-primary">
+                                        <i class="fas fa-check mr-2"></i>
+                                        Enviar Proyecto
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="section hidden">
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title text-2xl mb-6">
+                        <i class="fas fa-trophy text-primary mr-2"></i>
+                        Resultados de la Evaluación
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="stat bg-primary text-primary-content rounded-lg">
+                            <div class="stat-figure">
+                                <i class="fas fa-clipboard-check text-2xl"></i>
+                            </div>
+                            <div class="stat-title">Evaluación Teórica</div>
+                            <div id="quizScore" class="stat-value">0/40</div>
+                            <div class="stat-desc">Puntos obtenidos</div>
+                        </div>
+                        <div class="stat bg-secondary text-secondary-content rounded-lg">
+                            <div class="stat-figure">
+                                <i class="fas fa-tools text-2xl"></i>
+                            </div>
+                            <div class="stat-title">Uso de Herramientas</div>
+                            <div id="toolsScore" class="stat-value">0/30</div>
+                            <div class="stat-desc">Puntos obtenidos</div>
+                        </div>
+                        <div class="stat bg-accent text-accent-content rounded-lg">
+                            <div class="stat-figure">
+                                <i class="fas fa-project-diagram text-2xl"></i>
+                            </div>
+                            <div class="stat-title">Proyecto Aplicado</div>
+                            <div id="projectScore" class="stat-value">0/30</div>
+                            <div class="stat-desc">Puntos obtenidos</div>
+                        </div>
+                    </div>
+
+                    <div class="card bg-gradient-to-r from-primary to-secondary text-white">
+                        <div class="card-body text-center">
+                            <h3 class="text-2xl font-bold">Calificación Final</h3>
+                            <div id="finalGrade" class="text-6xl font-bold my-4">0.0</div>
+                            <div id="gradeStatus" class="text-xl">Pendiente</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <h3 class="text-lg font-semibold mb-4">Retroalimentación Detallada</h3>
+                        <div id="feedback" class="space-y-4">
+                            <!-- Feedback will be generated here -->
+                        </div>
+                    </div>
+
+                    <div class="card-actions justify-center mt-6">
+                        <button onclick="generateCertificate()" class="btn btn-primary">
+                            <i class="fas fa-certificate mr-2"></i>
+                            Generar Certificado
+                        </button>
+                        <button onclick="exportResults()" class="btn btn-outline btn-primary">
+                            <i class="fas fa-download mr-2"></i>
+                            Exportar Resultados
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded mt-10">
+        <div>
+            <div class="grid grid-flow-col gap-4">
+                <i class="fas fa-university text-2xl text-primary"></i>
+            </div>
+            <p class="font-bold">
+                Universidad Antonio Nariño - UAN
+                <br>Bioestadística para Ciencias de la Salud
+            </p>
+            <p>OVA 7 - Integración y Evaluación Parcial I</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let currentData = [];
+        let quizAnswers = {};
+        let quizScore = 0;
+        let toolsScore = 0;
+        let projectScore = 0;
+        let currentSection = 'welcome';
+
+        // Quiz questions
+        const quizQuestions = [
+            {
+                id: 1,
+                question: "¿Cuál es la diferencia principal entre población y muestra en un estudio clínico?",
+                options: [
+                    "No hay diferencia, son términos sinónimos",
+                    "La población es el conjunto completo de individuos de interés, la muestra es un subconjunto representativo",
+                    "La muestra siempre es más grande que la población",
+                    "La población solo incluye pacientes enfermos"
+                ],
+                correct: 1
+            },
+            {
+                id: 2,
+                question: "¿Qué tipo de variable es la 'presión arterial sistólica' medida en mmHg?",
+                options: [
+                    "Cualitativa nominal",
+                    "Cualitativa ordinal",
+                    "Cuantitativa discreta",
+                    "Cuantitativa continua"
+                ],
+                correct: 3
+            },
+            {
+                id: 3,
+                question: "En un histograma de frecuencias, ¿qué representa el área de cada barra?",
+                options: [
+                    "La frecuencia absoluta de la clase",
+                    "La frecuencia relativa de la clase",
+                    "El punto medio de la clase",
+                    "La amplitud de la clase"
+                ],
+                correct: 1
+            },
+            {
+                id: 4,
+                question: "¿Cuál es la medida de tendencia central más apropiada para datos con distribución asimétrica?",
+                options: [
+                    "Media aritmética",
+                    "Mediana",
+                    "Moda",
+                    "Media geométrica"
+                ],
+                correct: 1
+            },
+            {
+                id: 5,
+                question: "Si en un dataset de glucemia los valores son: 85, 90, 95, 100, 105, 110, 115 mg/dL, ¿cuál es la mediana?",
+                options: [
+                    "95 mg/dL",
+                    "100 mg/dL",
+                    "105 mg/dL",
+                    "97.5 mg/dL"
+                ],
+                correct: 1
+            },
+            {
+                id: 6,
+                question: "¿Qué indica un coeficiente de variación del 15% en mediciones de hemoglobina?",
+                options: [
+                    "Alta variabilidad relativa",
+                    "Baja variabilidad relativa",
+                    "Variabilidad moderada",
+                    "Error en las mediciones"
+                ],
+                correct: 2
+            },
+            {
+                id: 7,
+                question: "En un diagrama de caja (boxplot), ¿qué representa la línea dentro de la caja?",
+                options: [
+                    "La media",
+                    "La mediana",
+                    "La moda",
+                    "El rango intercuartílico"
+                ],
+                correct: 1
+            },
+            {
+                id: 8,
+                question: "¿Cuál es la principal ventaja de usar percentiles en el análisis de datos clínicos?",
+                options: [
+                    "Son más fáciles de calcular",
+                    "Permiten comparar valores individuales con la distribución poblacional",
+                    "Siempre son más precisos que la media",
+                    "No se ven afectados por el tamaño de muestra"
+                ],
+                correct: 1
+            },
+            {
+                id: 9,
+                question: "Si la desviación estándar de los niveles de colesterol es 25 mg/dL y la media es 200 mg/dL, ¿cuál es el coeficiente de variación?",
+                options: [
+                    "8%",
+                    "12.5%",
+                    "15%",
+                    "25%"
+                ],
+                correct: 1
+            },
+            {
+                id: 10,
+                question: "¿Qué tipo de gráfico es más apropiado para mostrar la distribución de una variable categórica como 'tipo de sangre'?",
+                options: [
+                    "Histograma",
+                    "Diagrama de dispersión",
+                    "Gráfico de barras",
+                    "Diagrama de caja"
+                ],
+                correct: 2
+            },
+            {
+                id: 11,
+                question: "En estadística descriptiva, ¿qué mide la curtosis?",
+                options: [
+                    "La simetría de la distribución",
+                    "La dispersión de los datos",
+                    "El apuntamiento de la distribución",
+                    "La tendencia central"
+                ],
+                correct: 2
+            },
+            {
+                id: 12,
+                question: "¿Cuál es la interpretación correcta de un rango intercuartílico (RIC) de 20 mg/dL en niveles de glucosa?",
+                options: [
+                    "El 50% central de los datos tiene una amplitud de 20 mg/dL",
+                    "Todos los datos están dentro de 20 mg/dL de la media",
+                    "La desviación estándar es 20 mg/dL",
+                    "El 25% de los datos está por debajo de 20 mg/dL"
+                ],
+                correct: 0
+            },
+            {
+                id: 13,
+                question: "¿Qué característica tiene una distribución normal estándar?",
+                options: [
+                    "Media = 1, Desviación estándar = 0",
+                    "Media = 0, Desviación estándar = 1",
+                    "Media = 100, Desviación estándar = 15",
+                    "Media = 50, Desviación estándar = 10"
+                ],
+                correct: 1
+            },
+            {
+                id: 14,
+                question: "En un estudio de presión arterial, ¿qué indica que la distribución sea bimodal?",
+                options: [
+                    "Hay dos grupos distintos en la población",
+                    "Los datos están mal recolectados",
+                    "La muestra es muy pequeña",
+                    "Hay muchos valores atípicos"
+                ],
+                correct: 0
+            },
+            {
+                id: 15,
+                question: "¿Cuál es la principal limitación de usar solo la media para describir un conjunto de datos clínicos?",
+                options: [
+                    "Es difícil de calcular",
+                    "No proporciona información sobre la variabilidad",
+                    "Solo funciona con muestras grandes",
+                    "No es aplicable a datos médicos"
+                ],
+                correct: 1
+            },
+            {
+                id: 16,
+                question: "¿Qué representa el percentil 90 en una distribución de valores de creatinina?",
+                options: [
+                    "El 90% de los valores están por encima de este punto",
+                    "El 90% de los valores están por debajo de este punto",
+                    "Es el valor más alto de la distribución",
+                    "Es 9 veces la mediana"
+                ],
+                correct: 1
+            },
+            {
+                id: 17,
+                question: "En el contexto de bioestadística, ¿qué es un outlier o valor atípico?",
+                options: [
+                    "Un valor que está exactamente en la media",
+                    "Un valor que se desvía significativamente del patrón general de los datos",
+                    "El valor más frecuente en el dataset",
+                    "Un valor que está en el percentil 50"
+                ],
+                correct: 1
+            },
+            {
+                id: 18,
+                question: "¿Cuál es la ventaja principal de usar la mediana sobre la media en datos con valores extremos?",
+                options: [
+                    "Es más fácil de calcular",
+                    "Es menos sensible a valores atípicos",
+                    "Siempre es mayor que la media",
+                    "Funciona mejor con muestras pequeñas"
+                ],
+                correct: 1
+            },
+            {
+                id: 19,
+                question: "¿Qué información proporciona la varianza en el análisis de datos clínicos?",
+                options: [
+                    "La tendencia central de los datos",
+                    "La forma de la distribución",
+                    "La dispersión o variabilidad de los datos",
+                    "El número de observaciones"
+                ],
+                correct: 2
+            },
+            {
+                id: 20,
+                question: "En un estudio de IMC (Índice de Masa Corporal), ¿qué tipo de escala de medición se está utilizando?",
+                options: [
+                    "Nominal",
+                    "Ordinal",
+                    "Intervalo",
+                    "Razón"
+                ],
+                correct: 3
+            }
+        ];
+
+        // Sample laboratory data
+        const sampleLabData = [
+            {id: 1, hemoglobina: 14.2, glucosa: 95, creatinina: 1.1, colesterol: 180},
+            {id: 2, hemoglobina: 12.8, glucosa: 110, creatinina: 0.9, colesterol: 220},
+            {id: 3, hemoglobina: 15.1, glucosa: 88, creatinina: 1.3, colesterol: 195},
+            {id: 4, hemoglobina: 13.5, glucosa: 125, creatinina: 1.0, colesterol: 240},
+            {id: 5, hemoglobina: 11.9, glucosa: 102, creatinina: 0.8, colesterol: 165},
+            {id: 6, hemoglobina: 16.3, glucosa: 78, creatinina: 1.4, colesterol: 210},
+            {id: 7, hemoglobina: 14.7, glucosa: 115, creatinina: 1.2, colesterol: 185},
+            {id: 8, hemoglobina: 13.2, glucosa: 92, creatinina: 0.7, colesterol: 175},
+            {id: 9, hemoglobina: 15.8, glucosa: 108, creatinina: 1.5, colesterol: 255},
+            {id: 10, hemoglobina: 12.4, glucosa: 98, creatinina: 0.9, colesterol: 190}
+        ];
+
+        // Initialize the application
+        function init() {
+            generateQuiz();
+            showSection('welcome');
+        }
+
+        // Navigation functions
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.remove('hidden');
+            currentSection = sectionName;
+            
+            // Update navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Update progress bar
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const sections = ['welcome', 'evaluation', 'tools', 'project', 'results'];
+            const currentIndex = sections.indexOf(currentSection);
+            const progress = ((currentIndex + 1) / sections.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // Quiz functions
+        function generateQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+            
+            quizQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'card bg-base-200 mb-4';
+                questionDiv.innerHTML = `
+                    <div class="card-body">
+                        <h3 class="card-title text-lg">Pregunta ${index + 1}</h3>
+                        <p class="mb-4">${q.question}</p>
+                        <div class="space-y-2">
+                            ${q.options.map((option, optIndex) => `
+                                <label class="label cursor-pointer justify-start">
+                                    <input type="radio" name="q${q.id}" value="${optIndex}" class="radio radio-primary mr-3" onchange="saveAnswer(${q.id}, ${optIndex})">
+                                    <span class="label-text">${option}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function saveAnswer(questionId, answerIndex) {
+            quizAnswers[questionId] = answerIndex;
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            quizQuestions.forEach(q => {
+                if (quizAnswers[q.id] === q.correct) {
+                    score += 2;
+                }
+            });
+            
+            quizScore = score;
+            document.getElementById('quizScore').textContent = `${score}/40`;
+            
+            // Show success message
+            const toast = document.createElement('div');
+            toast.className = 'toast toast-top toast-end';
+            toast.innerHTML = `
+                <div class="alert alert-success">
+                    <span>Evaluación enviada correctamente. Puntuación: ${score}/40</span>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+            
+            // Move to tools section
+            setTimeout(() => showSection('tools'), 1500);
+        }
+
+        // Data analysis functions
+        function loadCSV() {
+            const file = document.getElementById('csvFile').files[0];
+            if (file) {
+                Papa.parse(file, {
+                    header: true,
+                    complete: function(results) {
+                        currentData = results.data;
+                        displayData();
+                        toolsScore = Math.min(toolsScore + 10, 30);
+                        document.getElementById('toolsScore').textContent = `${toolsScore}/30`;
+                    }
+                });
+            }
+        }
+
+        function loadSampleData() {
+            // Generate more sample data
+            currentData = [];
+            for (let i = 1; i <= 50; i++) {
+                currentData.push({
+                    id: i,
+                    edad: Math.floor(Math.random() * 60) + 20,
+                    hemoglobina: (Math.random() * 8 + 10).toFixed(1),
+                    glucosa: Math.floor(Math.random() * 150) + 70,
+                    presion_sistolica: Math.floor(Math.random() * 60) + 100,
+                    colesterol: Math.floor(Math.random() * 100) + 150
+                });
+            }
+            displayData();
+            toolsScore = Math.min(toolsScore + 5, 30);
+            document.getElementById('toolsScore').textContent = `${toolsScore}/30`;
+        }
+
+        function displayData() {
+            const table = document.getElementById('dataTable');
+            const display = document.getElementById('dataDisplay');
+            
+            if (currentData.length === 0) return;
+            
+            // Show first 10 rows
+            const headers = Object.keys(currentData[0]);
+            const displayData = currentData.slice(0, 10);
+            
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        ${headers.map(h => `<th>${h}</th>`).join('')}
+                    </tr>
+                </thead>
+                <tbody>
+                    ${displayData.map(row => `
+                        <tr>
+                            ${headers.map(h => `<td>${row[h]}</td>`).join('')}
+                        </tr>
+                    `).join('')}
+                </tbody>
+            `;
+            
+            display.classList.remove('hidden');
+            
+            // Auto-calculate stats for numeric columns
+            const numericColumns = headers.filter(h => 
+                currentData.some(row => !isNaN(parseFloat(row[h])))
+            );
+            
+            if (numericColumns.length > 0) {
+                calculateStatsForColumn(numericColumns[0]);
+            }
+        }
+
+        function calculateStats() {
+            const input = document.getElementById('manualData').value;
+            if (!input.trim()) return;
+            
+            const data = input.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
+            if (data.length === 0) return;
+            
+            displayStats(data);
+            createCharts(data);
+            toolsScore = Math.min(toolsScore + 15, 30);
+            document.getElementById('toolsScore').textContent = `${toolsScore}/30`;
+        }
+
+        function calculateStatsForColumn(columnName) {
+            const data = currentData.map(row => parseFloat(row[columnName])).filter(x => !isNaN(x));
+            if (data.length === 0) return;
+            
+            displayStats(data);
+            createCharts(data);
+            toolsScore = Math.min(toolsScore + 10, 30);
+            document.getElementById('toolsScore').textContent = `${toolsScore}/30`;
+        }
+
+        function displayStats(data) {
+            const stats = calculateDescriptiveStats(data);
+            
+            document.getElementById('mean').textContent = stats.mean.toFixed(2);
+            document.getElementById('median').textContent = stats.median.toFixed(2);
+            document.getElementById('mode').textContent = stats.mode;
+            document.getElementById('range').textContent = stats.range.toFixed(2);
+            document.getElementById('stdDev').textContent = stats.stdDev.toFixed(2);
+            document.getElementById('variance').textContent = stats.variance.toFixed(2);
+            
+            document.getElementById('statsResults').classList.remove('hidden');
+        }
+
+        function calculateDescriptiveStats(data) {
+            const sorted = [...data].sort((a, b) => a - b);
+            const n = data.length;
+            
+            // Mean
+            const mean = data.reduce((sum, x) => sum + x, 0) / n;
+            
+            // Median
+            const median = n % 2 === 0 
+                ? (sorted[n/2 - 1] + sorted[n/2]) / 2 
+                : sorted[Math.floor(n/2)];
+            
+            // Mode
+            const frequency = {};
+            data.forEach(x => frequency[x] = (frequency[x] || 0) + 1);
+            const maxFreq = Math.max(...Object.values(frequency));
+            const modes = Object.keys(frequency).filter(x => frequency[x] === maxFreq);
+            const mode = modes.length === n ? 'No hay moda' : modes.join(', ');
+            
+            // Range
+            const range = Math.max(...data) - Math.min(...data);
+            
+            // Variance and Standard Deviation
+            const variance = data.reduce((sum, x) => sum + Math.pow(x - mean, 2), 0) / (n - 1);
+            const stdDev = Math.sqrt(variance);
+            
+            return { mean, median, mode, range, variance, stdDev };
+        }
+
+        function createCharts(data) {
+            createHistogram(data);
+            createBoxplot(data);
+            document.getElementById('chartsContainer').classList.remove('hidden');
+        }
+
+        function createHistogram(data) {
+            const ctx = document.getElementById('histogramChart').getContext('2d');
+            
+            // Create bins
+            const min = Math.min(...data);
+            const max = Math.max(...data);
+            const binCount = Math.ceil(Math.sqrt(data.length));
+            const binWidth = (max - min) / binCount;
+            
+            const bins = Array(binCount).fill(0);
+            const labels = [];
+            
+            for (let i = 0; i < binCount; i++) {
+                const binStart = min + i * binWidth;
+                const binEnd = min + (i + 1) * binWidth;
+                labels.push(`${binStart.toFixed(1)}-${binEnd.toFixed(1)}`);
+                
+                data.forEach(value => {
+                    if (value >= binStart && (value < binEnd || i === binCount - 1)) {
+                        bins[i]++;
+                    }
+                });
+            }
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Frecuencia',
+                        data: bins,
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Distribución de Frecuencias'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Frecuencia'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Intervalos'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createBoxplot(data) {
+            const ctx = document.getElementById('boxplotChart').getContext('2d');
+            const sorted = [...data].sort((a, b) => a - b);
+            const n = sorted.length;
+            
+            const q1 = sorted[Math.floor(n * 0.25)];
+            const median = sorted[Math.floor(n * 0.5)];
+            const q3 = sorted[Math.floor(n * 0.75)];
+            const min = sorted[0];
+            const max = sorted[n - 1];
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Datos'],
+                    datasets: [{
+                        label: 'Mínimo',
+                        data: [min],
+                        backgroundColor: 'rgba(239, 68, 68, 0.6)'
+                    }, {
+                        label: 'Q1',
+                        data: [q1],
+                        backgroundColor: 'rgba(245, 158, 11, 0.6)'
+                    }, {
+                        label: 'Mediana',
+                        data: [median],
+                        backgroundColor: 'rgba(34, 197, 94, 0.6)'
+                    }, {
+                        label: 'Q3',
+                        data: [q3],
+                        backgroundColor: 'rgba(168, 85, 247, 0.6)'
+                    }, {
+                        label: 'Máximo',
+                        data: [max],
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Resumen de Cinco Números'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Valores'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Project functions
+        function loadProjectData() {
+            // Generate realistic laboratory data
+            const labData = [];
+            for (let i = 1; i <= 100; i++) {
+                labData.push({
+                    id: `P${i.toString().padStart(3, '0')}`,
+                    hemoglobina: (Math.random() * 9.7 + 8.5).toFixed(1),
+                    glucosa: Math.floor(Math.random() * 285 + 65),
+                    creatinina: (Math.random() * 4.3 + 0.5).toFixed(1),
+                    colesterol: Math.floor(Math.random() * 160 + 120)
+                });
+            }
+            
+            currentData = labData;
+            displayProjectData();
+            document.getElementById('projectAnalysis').classList.remove('hidden');
+            
+            // Mark first task as completed
+            document.getElementById('task1').checked = true;
+            projectScore = Math.min(projectScore + 7, 30);
+            document.getElementById('projectScore').textContent = `${projectScore}/30`;
+        }
+
+        function displayProjectData() {
+            const container = document.getElementById('projectCharts');
+            container.innerHTML = '';
+            
+            const variables = ['hemoglobina', 'glucosa', 'creatinina', 'colesterol'];
+            const titles = ['Hemoglobina (g/dL)', 'Glucosa (mg/dL)', 'Creatinina (mg/dL)', 'Colesterol (mg/dL)'];
+            
+            variables.forEach((variable, index) => {
+                const data = currentData.map(row => parseFloat(row[variable]));
+                const stats = calculateDescriptiveStats(data);
+                
+                const chartDiv = document.createElement('div');
+                chartDiv.className = 'card bg-base-100 shadow-lg';
+                chartDiv.innerHTML = `
+                    <div class="card-body">
+                        <h4 class="card-title">${titles[index]}</h4>
+                        <canvas id="projectChart${index}"></canvas>
+                        <div class="stats stats-vertical lg:stats-horizontal mt-4">
+                            <div class="stat">
+                                <div class="stat-title">Media</div>
+                                <div class="stat-value text-sm">${stats.mean.toFixed(2)}</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-title">Mediana</div>
+                                <div class="stat-value text-sm">${stats.median.toFixed(2)}</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-title">Desv. Est.</div>
+                                <div class="stat-value text-sm">${stats.stdDev.toFixed(2)}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(chartDiv);
+                
+                // Create chart after DOM update
+                setTimeout(() => {
+                    createProjectChart(`projectChart${index}`, data, titles[index]);
+                }, 100);
+            });
+            
+            // Mark second task as completed
+            document.getElementById('task2').checked = true;
+            projectScore = Math.min(projectScore + 8, 30);
+            document.getElementById('projectScore').textContent = `${projectScore}/30`;
+        }
+
+        function createProjectChart(canvasId, data, title) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map((_, i) => i + 1),
+                    datasets: [{
+                        label: title,
+                        data: data,
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: `Distribución de ${title}`
+                        }
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: title
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Paciente'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function submitProject() {
+            const interpretation = document.getElementById('clinicalInterpretation').value;
+            
+            if (interpretation.trim().length < 100) {
+                alert('La interpretación clínica debe tener al menos 100 caracteres.');
+                return;
+            }
+            
+            // Mark remaining tasks as completed
+            document.getElementById('task3').checked = true;
+            document.getElementById('task4').checked = true;
+            projectScore = 30;
+            document.getElementById('projectScore').textContent = `${projectScore}/30`;
+            
+            // Calculate final results
+            calculateFinalResults();
+            
+            // Show success message
+            const toast = document.createElement('div');
+            toast.className = 'toast toast-top toast-end';
+            toast.innerHTML = `
+                <div class="alert alert-success">
+                    <span>Proyecto enviado correctamente!</span>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+            
+            // Move to results section
+            setTimeout(() => showSection('results'), 1500);
+        }
+
+        function calculateFinalResults() {
+            const totalScore = quizScore + toolsScore + projectScore;
+            const finalGrade = (totalScore / 100) * 5;
+            
+            document.getElementById('finalGrade').textContent = finalGrade.toFixed(1);
+            
+            let status = '';
+            let statusClass = '';
+            
+            if (finalGrade >= 4.5) {
+                status = 'Excelente';
+                statusClass = 'text-success';
+            } else if (finalGrade >= 4.0) {
+                status = 'Sobresaliente';
+                statusClass = 'text-info';
+            } else if (finalGrade >= 3.5) {
+                status = 'Aceptable';
+                statusClass = 'text-warning';
+            } else if (finalGrade >= 3.0) {
+                status = 'Insuficiente';
+                statusClass = 'text-error';
+            } else {
+                status = 'Deficiente';
+                statusClass = 'text-error';
+            }
+            
+            const statusElement = document.getElementById('gradeStatus');
+            statusElement.textContent = status;
+            statusElement.className = `text-xl ${statusClass}`;
+            
+            generateFeedback(finalGrade);
+        }
+
+        function generateFeedback(grade) {
+            const feedback = document.getElementById('feedback');
+            let feedbackContent = '';
+            
+            if (grade >= 4.5) {
+                feedbackContent = `
+                    <div class="alert alert-success">
+                        <i class="fas fa-trophy"></i>
+                        <div>
+                            <h4 class="font-bold">¡Excelente trabajo!</h4>
+                            <p>Ha demostrado un dominio excepcional de los conceptos de estadística descriptiva. Su análisis es riguroso y su interpretación clínica es apropiada.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (grade >= 4.0) {
+                feedbackContent = `
+                    <div class="alert alert-info">
+                        <i class="fas fa-star"></i>
+                        <div>
+                            <h4 class="font-bold">Muy buen desempeño</h4>
+                            <p>Muestra una comprensión sólida de los conceptos estadísticos. Continúe practicando la interpretación clínica de resultados.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (grade >= 3.5) {
+                feedbackContent = `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <h4 class="font-bold">Desempeño aceptable</h4>
+                            <p>Comprende los conceptos básicos pero necesita reforzar la aplicación práctica y el uso de herramientas estadísticas.</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                feedbackContent = `
+                    <div class="alert alert-error">
+                        <i class="fas fa-times-circle"></i>
+                        <div>
+                            <h4 class="font-bold">Necesita mejorar</h4>
+                            <p>Se recomienda revisar los conceptos fundamentales de estadística descriptiva y practicar más con datasets reales.</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            feedback.innerHTML = feedbackContent;
+        }
+
+        function generateCertificate() {
+            const finalGrade = parseFloat(document.getElementById('finalGrade').textContent);
+            
+            if (finalGrade < 3.0) {
+                alert('Debe obtener una calificación mínima de 3.0 para generar el certificado.');
+                return;
+            }
+            
+            // Create certificate content
+            const certificateWindow = window.open('', '_blank');
+            certificateWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Certificado - OVA 7</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+                        .certificate { border: 5px solid #3B82F6; padding: 50px; margin: 20px; }
+                        .title { font-size: 36px; color: #3B82F6; margin-bottom: 30px; }
+                        .content { font-size: 18px; line-height: 1.6; }
+                        .grade { font-size: 48px; color: #10B981; font-weight: bold; }
+                    </style>
+                </head>
+                <body>
+                    <div class="certificate">
+                        <h1 class="title">CERTIFICADO DE COMPLETACIÓN</h1>
+                        <div class="content">
+                            <p>Se certifica que el estudiante ha completado exitosamente</p>
+                            <h2>OVA 7 - Integración y Evaluación Parcial I</h2>
+                            <p>Bioestadística para Ciencias de la Salud</p>
+                            <p>Universidad Antonio Nariño</p>
+                            <div class="grade">${finalGrade}</div>
+                            <p>Fecha: ${new Date().toLocaleDateString()}</p>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `);
+        }
+
+        function exportResults() {
+            const results = {
+                evaluacion_teorica: quizScore,
+                uso_herramientas: toolsScore,
+                proyecto_aplicado: projectScore,
+                calificacion_final: parseFloat(document.getElementById('finalGrade').textContent),
+                fecha: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(results, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = 'resultados_ova7.json';
+            link.click();
+        }
+
+        // Initialize the application when the page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

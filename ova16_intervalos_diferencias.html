@@ -1,0 +1,1854 @@
+
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 16 - Intervalos para Diferencias en Ciencias de la Salud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .formula-card { transition: all 0.3s ease; }
+        .formula-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .confidence-interval { background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%); }
+        .comparison-visual { background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="navbar bg-white shadow-lg sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                    <i class="fas fa-bars text-xl"></i>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a onclick="showSection('intro')">Introducción</a></li>
+                    <li><a onclick="showSection('teoria')">Teoría</a></li>
+                    <li><a onclick="showSection('medias')">Diferencias de Medias</a></li>
+                    <li><a onclick="showSection('proporciones')">Diferencias de Proporciones</a></li>
+                    <li><a onclick="showSection('ejercicios')">Ejercicios</a></li>
+                    <li><a onclick="showSection('casos')">Casos Clínicos</a></li>
+                    <li><a onclick="showSection('evaluacion')">Evaluación</a></li>
+                </ul>
+            </div>
+            <a class="btn btn-ghost text-xl font-bold text-primary">
+                <i class="fas fa-chart-line mr-2"></i>
+                OVA 16 - Intervalos
+            </a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a onclick="showSection('intro')" class="nav-link">Introducción</a></li>
+                <li><a onclick="showSection('teoria')" class="nav-link">Teoría</a></li>
+                <li><a onclick="showSection('medias')" class="nav-link">Medias</a></li>
+                <li><a onclick="showSection('proporciones')" class="nav-link">Proporciones</a></li>
+                <li><a onclick="showSection('ejercicios')" class="nav-link">Ejercicios</a></li>
+                <li><a onclick="showSection('casos')" class="nav-link">Casos Clínicos</a></li>
+                <li><a onclick="showSection('evaluacion')" class="nav-link">Evaluación</a></li>
+            </ul>
+        </div>
+        <div class="navbar-end">
+            <div class="flex items-center space-x-4">
+                <div class="radial-progress text-primary" style="--value:0;" id="progressIndicator">0%</div>
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><a onclick="openCalculator()">Calculadora IC</a></li>
+                        <li><a onclick="resetProgress()">Reiniciar Progreso</a></li>
+                        <li><a onclick="exportProgress()">Exportar Progreso</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Introducción -->
+        <section id="intro" class="section-content fade-in">
+            <div class="hero bg-white rounded-3xl shadow-xl p-8 mb-8">
+                <div class="hero-content text-center">
+                    <div class="max-w-4xl">
+                        <h1 class="text-5xl font-bold text-primary mb-6">
+                            <i class="fas fa-balance-scale mr-4"></i>
+                            Intervalos para Diferencias
+                        </h1>
+                        <h2 class="text-2xl font-semibold text-secondary mb-4">
+                            Comparaciones en Ciencias de la Salud
+                        </h2>
+                        <p class="text-lg text-gray-600 mb-8">
+                            Aprende a construir e interpretar intervalos de confianza para diferencias entre grupos, 
+                            fundamental para la comparación de tratamientos y análisis clínicos.
+                        </p>
+                        
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="card bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-xl">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-clock text-3xl mb-2"></i>
+                                    <h3 class="card-title justify-center">Duración</h3>
+                                    <p>3 horas académicas</p>
+                                </div>
+                            </div>
+                            <div class="card bg-gradient-to-br from-green-500 to-green-600 text-white shadow-xl">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-laptop text-3xl mb-2"></i>
+                                    <h3 class="card-title justify-center">Modalidad</h3>
+                                    <p>70% Virtual - 30% Presencial</p>
+                                </div>
+                            </div>
+                            <div class="card bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-xl">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-chart-bar text-3xl mb-2"></i>
+                                    <h3 class="card-title justify-center">Tipo</h3>
+                                    <p>Comparativa/Analítica</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-2xl p-6 mb-8">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Objetivos de Aprendizaje</h3>
+                            <div class="grid md:grid-cols-2 gap-4 text-left">
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Construir intervalos de confianza para diferencias de medias</span>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Calcular intervalos para diferencias de proporciones</span>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Interpretar resultados en contextos clínicos</span>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Aplicar comparaciones en estudios de tratamientos</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visualización conceptual -->
+                        <div class="bg-white rounded-2xl p-6 mb-8 shadow-lg">
+                            <h3 class="text-xl font-bold mb-4">Concepto Visual: Comparación de Grupos</h3>
+                            <div class="flex justify-center">
+                                <canvas id="conceptChart" width="600" height="300"></canvas>
+                            </div>
+                        </div>
+
+                        <button onclick="showSection('teoria')" class="btn btn-primary btn-lg">
+                            <i class="fas fa-play mr-2"></i>
+                            Comenzar OVA
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teoría -->
+        <section id="teoria" class="section-content hidden">
+            <div class="card bg-white shadow-xl mb-8">
+                <div class="card-body">
+                    <h2 class="card-title text-3xl text-primary mb-6">
+                        <i class="fas fa-book-open mr-3"></i>
+                        Fundamentos Teóricos
+                    </h2>
+                    
+                    <!-- Concepto Principal -->
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 mb-8">
+                        <h3 class="text-2xl font-bold text-blue-800 mb-4">
+                            <i class="fas fa-lightbulb mr-2"></i>
+                            ¿Qué son los Intervalos para Diferencias?
+                        </h3>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Los intervalos de confianza para diferencias nos permiten estimar el rango de valores 
+                            plausibles para la diferencia real entre dos grupos o tratamientos. Son fundamentales 
+                            en investigación clínica para determinar si existe una diferencia significativa y 
+                            cuál es la magnitud de esa diferencia.
+                        </p>
+                    </div>
+
+                    <!-- Tipos de Comparaciones -->
+                    <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                        <div class="formula-card bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-calculator text-white text-xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-green-700">Diferencias de Medias</h3>
+                            </div>
+                            
+                            <p class="text-gray-700 mb-4">
+                                Comparación de promedios entre dos grupos independientes o pareados.
+                            </p>
+                            
+                            <div class="bg-white rounded-lg p-4 mb-4">
+                                <h4 class="font-semibold text-green-700 mb-2">Fórmula General:</h4>
+                                <div class="text-center bg-gray-50 p-3 rounded">
+                                    $$(\bar{x}_1 - \bar{x}_2) \pm t_{\alpha/2} \cdot SE(\bar{x}_1 - \bar{x}_2)$$
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-2">
+                                <h4 class="font-semibold text-green-700">Aplicaciones Clínicas:</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Comparar presión arterial entre tratamientos</li>
+                                    <li>• Diferencias en tiempo de recuperación</li>
+                                    <li>• Comparación de niveles de glucosa</li>
+                                    <li>• Efectividad de medicamentos</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="formula-card bg-gradient-to-br from-purple-50 to-violet-50 rounded-2xl p-6 border border-purple-200">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-percentage text-white text-xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-purple-700">Diferencias de Proporciones</h3>
+                            </div>
+                            
+                            <p class="text-gray-700 mb-4">
+                                Comparación de tasas o porcentajes entre dos grupos.
+                            </p>
+                            
+                            <div class="bg-white rounded-lg p-4 mb-4">
+                                <h4 class="font-semibold text-purple-700 mb-2">Fórmula General:</h4>
+                                <div class="text-center bg-gray-50 p-3 rounded">
+                                    $$(p_1 - p_2) \pm z_{\alpha/2} \cdot SE(p_1 - p_2)$$
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-2">
+                                <h4 class="font-semibold text-purple-700">Aplicaciones Clínicas:</h4>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Tasas de curación entre tratamientos</li>
+                                    <li>• Incidencia de efectos adversos</li>
+                                    <li>• Prevalencia de enfermedades</li>
+                                    <li>• Éxito de procedimientos quirúrgicos</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interpretación -->
+                    <div class="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-6 mb-8 border border-yellow-200">
+                        <h3 class="text-xl font-bold text-yellow-800 mb-4">
+                            <i class="fas fa-search mr-2"></i>
+                            Interpretación de Intervalos para Diferencias
+                        </h3>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold text-green-600 mb-2">
+                                    <i class="fas fa-arrow-right mr-1"></i>
+                                    IC no incluye 0
+                                </h4>
+                                <p class="text-sm">Existe diferencia significativa entre los grupos</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold text-red-600 mb-2">
+                                    <i class="fas fa-circle mr-1"></i>
+                                    IC incluye 0
+                                </h4>
+                                <p class="text-sm">No hay evidencia de diferencia significativa</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold text-blue-600 mb-2">
+                                    <i class="fas fa-ruler mr-1"></i>
+                                    Amplitud del IC
+                                </h4>
+                                <p class="text-sm">Indica la precisión de la estimación</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions justify-between mt-8">
+                        <button onclick="showSection('intro')" class="btn btn-outline">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Anterior
+                        </button>
+                        <button onclick="showSection('medias')" class="btn btn-primary">
+                            Diferencias de Medias
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diferencias de Medias -->
+        <section id="medias" class="section-content hidden">
+            <div class="card bg-white shadow-xl mb-8">
+                <div class="card-body">
+                    <h2 class="card-title text-3xl text-primary mb-6">
+                        <i class="fas fa-chart-line mr-3"></i>
+                        Intervalos para Diferencias de Medias
+                    </h2>
+
+                    <!-- Casos de Aplicación -->
+                    <div class="tabs tabs-boxed mb-6">
+                        <a class="tab tab-active" onclick="showMediasCase('independientes')">Grupos Independientes</a>
+                        <a class="tab" onclick="showMediasCase('pareados')">Datos Pareados</a>
+                        <a class="tab" onclick="showMediasCase('calculadora')">Calculadora</a>
+                    </div>
+
+                    <!-- Grupos Independientes -->
+                    <div id="medias-independientes" class="medias-case-content">
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6">
+                            <h3 class="text-xl font-bold text-blue-700 mb-4">
+                                <i class="fas fa-users mr-2"></i>
+                                Comparación de Grupos Independientes
+                            </h3>
+                            
+                            <div class="grid lg:grid-cols-2 gap-6">
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Fórmulas y Condiciones</h4>
+                                    
+                                    <div class="space-y-4">
+                                        <div class="bg-gray-50 p-3 rounded">
+                                            <h5 class="font-semibold text-sm mb-2">Varianzas Iguales (Pooled):</h5>
+                                            <div class="text-center">
+                                                $$SE = s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}$$
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="bg-gray-50 p-3 rounded">
+                                            <h5 class="font-semibold text-sm mb-2">Varianzas Diferentes (Welch):</h5>
+                                            <div class="text-center">
+                                                $$SE = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$$
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Ejemplo Clínico</h4>
+                                    <div class="space-y-3">
+                                        <div class="bg-blue-50 p-3 rounded">
+                                            <h5 class="font-semibold text-blue-700">Estudio: Presión Arterial</h5>
+                                            <p class="text-sm mt-1">Comparación de dos antihipertensivos</p>
+                                        </div>
+                                        
+                                        <div class="grid grid-cols-2 gap-3 text-sm">
+                                            <div>
+                                                <strong>Medicamento A:</strong><br>
+                                                n₁ = 30<br>
+                                                x̄₁ = 125 mmHg<br>
+                                                s₁ = 12 mmHg
+                                            </div>
+                                            <div>
+                                                <strong>Medicamento B:</strong><br>
+                                                n₂ = 32<br>
+                                                x̄₂ = 118 mmHg<br>
+                                                s₂ = 15 mmHg
+                                            </div>
+                                        </div>
+                                        
+                                        <button onclick="calculateMeansExample()" class="btn btn-sm btn-primary w-full">
+                                            Calcular IC 95%
+                                        </button>
+                                        
+                                        <div id="meansResult" class="hidden bg-green-50 p-3 rounded">
+                                            <h6 class="font-semibold text-green-700">Resultado:</h6>
+                                            <p class="text-sm" id="meansResultText"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Datos Pareados -->
+                    <div id="medias-pareados" class="medias-case-content hidden">
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 mb-6">
+                            <h3 class="text-xl font-bold text-green-700 mb-4">
+                                <i class="fas fa-link mr-2"></i>
+                                Datos Pareados (Antes-Después)
+                            </h3>
+                            
+                            <div class="grid lg:grid-cols-2 gap-6">
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Metodología</h4>
+                                    
+                                    <div class="space-y-4">
+                                        <div class="bg-gray-50 p-3 rounded">
+                                            <h5 class="font-semibold text-sm mb-2">Diferencias Pareadas:</h5>
+                                            <div class="text-center">
+                                                $$d_i = x_{i,después} - x_{i,antes}$$
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="bg-gray-50 p-3 rounded">
+                                            <h5 class="font-semibold text-sm mb-2">Intervalo de Confianza:</h5>
+                                            <div class="text-center">
+                                                $$\bar{d} \pm t_{\alpha/2,n-1} \cdot \frac{s_d}{\sqrt{n}}$$
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Ejemplo: Tratamiento Fisioterapia</h4>
+                                    <div class="space-y-3">
+                                        <div class="bg-green-50 p-3 rounded">
+                                            <h5 class="font-semibold text-green-700">Dolor antes vs después</h5>
+                                            <p class="text-sm mt-1">Escala 0-10, n=20 pacientes</p>
+                                        </div>
+                                        
+                                        <div class="text-sm">
+                                            <strong>Diferencias calculadas:</strong><br>
+                                            d̄ = -2.3 puntos<br>
+                                            s_d = 1.8 puntos<br>
+                                            n = 20 pacientes
+                                        </div>
+                                        
+                                        <button onclick="calculatePairedExample()" class="btn btn-sm btn-primary w-full">
+                                            Calcular IC 95%
+                                        </button>
+                                        
+                                        <div id="pairedResult" class="hidden bg-green-50 p-3 rounded">
+                                            <h6 class="font-semibold text-green-700">Resultado:</h6>
+                                            <p class="text-sm" id="pairedResultText"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculadora -->
+                    <div id="medias-calculadora" class="medias-case-content hidden">
+                        <div class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-2xl p-6 mb-6">
+                            <h3 class="text-xl font-bold text-purple-700 mb-4">
+                                <i class="fas fa-calculator mr-2"></i>
+                                Calculadora Interactiva
+                            </h3>
+                            
+                            <div class="grid lg:grid-cols-2 gap-6">
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Datos del Grupo 1</h4>
+                                    <div class="space-y-3">
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text">Media (x̄₁)</span>
+                                            </label>
+                                            <input type="number" id="mean1" class="input input-bordered" placeholder="Ej: 125">
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text">Desviación Estándar (s₁)</span>
+                                            </label>
+                                            <input type="number" id="sd1" class="input input-bordered" placeholder="Ej: 12">
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text">Tamaño de muestra (n₁)</span>
+                                            </label>
+                                            <input type="number" id="n1" class="input input-bordered" placeholder="Ej: 30">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Datos del Grupo 2</h4>
+                                    <div class="space-y-3">
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text">Media (x̄₂)</span>
+                                            </label>
+                                            <input type="number" id="mean2" class="input input-bordered" placeholder="Ej: 118">
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text">Desviación Estándar (s₂)</span>
+                                            </label>
+                                            <input type="number" id="sd2" class="input input-bordered" placeholder="Ej: 15">
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text">Tamaño de muestra (n₂)</span>
+                                            </label>
+                                            <input type="number" id="n2" class="input input-bordered" placeholder="Ej: 32">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 text-center">
+                                <div class="form-control w-fit mx-auto mb-4">
+                                    <label class="label">
+                                        <span class="label-text">Nivel de Confianza</span>
+                                    </label>
+                                    <select id="confidenceLevel" class="select select-bordered">
+                                        <option value="90">90%</option>
+                                        <option value="95" selected>95%</option>
+                                        <option value="99">99%</option>
+                                    </select>
+                                </div>
+                                
+                                <button onclick="calculateCustomMeans()" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-calculator mr-2"></i>
+                                    Calcular Intervalo
+                                </button>
+                                
+                                <div id="customResult" class="hidden mt-6 bg-blue-50 p-4 rounded-lg">
+                                    <h5 class="font-semibold text-blue-700 mb-2">Resultado del Cálculo:</h5>
+                                    <div id="customResultContent"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions justify-between mt-8">
+                        <button onclick="showSection('teoria')" class="btn btn-outline">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Anterior
+                        </button>
+                        <button onclick="showSection('proporciones')" class="btn btn-primary">
+                            Diferencias de Proporciones
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diferencias de Proporciones -->
+        <section id="proporciones" class="section-content hidden">
+            <div class="card bg-white shadow-xl mb-8">
+                <div class="card-body">
+                    <h2 class="card-title text-3xl text-primary mb-6">
+                        <i class="fas fa-percentage mr-3"></i>
+                        Intervalos para Diferencias de Proporciones
+                    </h2>
+
+                    <div class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-2xl p-6 mb-8">
+                        <h3 class="text-xl font-bold text-purple-700 mb-4">
+                            <i class="fas fa-chart-pie mr-2"></i>
+                            Comparación de Tasas y Porcentajes
+                        </h3>
+                        
+                        <div class="grid lg:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold mb-3">Metodología</h4>
+                                
+                                <div class="space-y-4">
+                                    <div class="bg-gray-50 p-3 rounded">
+                                        <h5 class="font-semibold text-sm mb-2">Diferencia de Proporciones:</h5>
+                                        <div class="text-center">
+                                            $$\hat{p}_1 - \hat{p}_2$$
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-gray-50 p-3 rounded">
+                                        <h5 class="font-semibold text-sm mb-2">Error Estándar:</h5>
+                                        <div class="text-center">
+                                            $$SE = \sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n_1} + \frac{\hat{p}_2(1-\hat{p}_2)}{n_2}}$$
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-gray-50 p-3 rounded">
+                                        <h5 class="font-semibold text-sm mb-2">Intervalo de Confianza:</h5>
+                                        <div class="text-center">
+                                            $$(\hat{p}_1 - \hat{p}_2) \pm z_{\alpha/2} \cdot SE$$
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold mb-3">Aplicaciones Clínicas</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-start space-x-2">
+                                        <i class="fas fa-check text-green-500 mt-1"></i>
+                                        <span class="text-sm">Tasas de curación entre tratamientos</span>
+                                    </div>
+                                    <div class="flex items-start space-x-2">
+                                        <i class="fas fa-check text-green-500 mt-1"></i>
+                                        <span class="text-sm">Incidencia de efectos adversos</span>
+                                    </div>
+                                    <div class="flex items-start space-x-2">
+                                        <i class="fas fa-check text-green-500 mt-1"></i>
+                                        <span class="text-sm">Éxito de procedimientos quirúrgicos</span>
+                                    </div>
+                                    <div class="flex items-start space-x-2">
+                                        <i class="fas fa-check text-green-500 mt-1"></i>
+                                        <span class="text-sm">Prevalencia de enfermedades</span>
+                                    </div>
+                                    <div class="flex items-start space-x-2">
+                                        <i class="fas fa-check text-green-500 mt-1"></i>
+                                        <span class="text-sm">Respuesta a vacunas</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo Práctico -->
+                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 mb-8">
+                        <h3 class="text-xl font-bold text-green-700 mb-4">
+                            <i class="fas fa-flask mr-2"></i>
+                            Ejemplo: Eficacia de Vacunas
+                        </h3>
+                        
+                        <div class="grid lg:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold mb-3">Datos del Estudio</h4>
+                                <div class="space-y-3">
+                                    <div class="bg-green-50 p-3 rounded">
+                                        <h5 class="font-semibold text-green-700">Vacuna A</h5>
+                                        <p class="text-sm">180 inmunizados de 200 vacunados</p>
+                                        <p class="text-sm font-mono">p₁ = 180/200 = 0.90</p>
+                                    </div>
+                                    
+                                    <div class="bg-blue-50 p-3 rounded">
+                                        <h5 class="font-semibold text-blue-700">Vacuna B</h5>
+                                        <p class="text-sm">165 inmunizados de 200 vacunados</p>
+                                        <p class="text-sm font-mono">p₂ = 165/200 = 0.825</p>
+                                    </div>
+                                    
+                                    <div class="bg-gray-50 p-3 rounded">
+                                        <h5 class="font-semibold">Diferencia Observada</h5>
+                                        <p class="text-sm font-mono">p₁ - p₂ = 0.90 - 0.825 = 0.075</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold mb-3">Cálculo del Intervalo</h4>
+                                <div class="space-y-3">
+                                    <button onclick="calculateProportionsExample()" class="btn btn-primary w-full">
+                                        Calcular IC 95%
+                                    </button>
+                                    
+                                    <div id="proportionsResult" class="hidden">
+                                        <div class="bg-blue-50 p-3 rounded">
+                                            <h5 class="font-semibold text-blue-700">Resultado:</h5>
+                                            <p class="text-sm" id="proportionsResultText"></p>
+                                        </div>
+                                        
+                                        <div class="bg-yellow-50 p-3 rounded mt-3">
+                                            <h5 class="font-semibold text-yellow-700">Interpretación:</h5>
+                                            <p class="text-sm" id="proportionsInterpretation"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculadora de Proporciones -->
+                    <div class="bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl p-6 mb-8">
+                        <h3 class="text-xl font-bold text-orange-700 mb-4">
+                            <i class="fas fa-calculator mr-2"></i>
+                            Calculadora de Proporciones
+                        </h3>
+                        
+                        <div class="grid lg:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold mb-3">Grupo 1</h4>
+                                <div class="space-y-3">
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text">Éxitos (x₁)</span>
+                                        </label>
+                                        <input type="number" id="success1" class="input input-bordered" placeholder="Ej: 180">
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text">Total (n₁)</span>
+                                        </label>
+                                        <input type="number" id="total1" class="input input-bordered" placeholder="Ej: 200">
+                                    </div>
+                                    <div class="bg-gray-50 p-2 rounded">
+                                        <span class="text-sm">Proporción: <span id="prop1Display">-</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold mb-3">Grupo 2</h4>
+                                <div class="space-y-3">
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text">Éxitos (x₂)</span>
+                                        </label>
+                                        <input type="number" id="success2" class="input input-bordered" placeholder="Ej: 165">
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text">Total (n₂)</span>
+                                        </label>
+                                        <input type="number" id="total2" class="input input-bordered" placeholder="Ej: 200">
+                                    </div>
+                                    <div class="bg-gray-50 p-2 rounded">
+                                        <span class="text-sm">Proporción: <span id="prop2Display">-</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <button onclick="calculateCustomProportions()" class="btn btn-primary btn-lg">
+                                <i class="fas fa-calculator mr-2"></i>
+                                Calcular Intervalo 95%
+                            </button>
+                            
+                            <div id="customProportionsResult" class="hidden mt-6 bg-blue-50 p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-700 mb-2">Resultado:</h5>
+                                <div id="customProportionsContent"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions justify-between mt-8">
+                        <button onclick="showSection('medias')" class="btn btn-outline">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Anterior
+                        </button>
+                        <button onclick="showSection('ejercicios')" class="btn btn-primary">
+                            Ejercicios Prácticos
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ejercicios -->
+        <section id="ejercicios" class="section-content hidden">
+            <div class="card bg-white shadow-xl mb-8">
+                <div class="card-body">
+                    <h2 class="card-title text-3xl text-primary mb-6">
+                        <i class="fas fa-puzzle-piece mr-3"></i>
+                        Ejercicios Prácticos
+                    </h2>
+
+                    <div class="mb-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold">Progreso de Ejercicios</h3>
+                            <span class="text-sm text-gray-600" id="exerciseProgress">0/8 completados</span>
+                        </div>
+                        <progress class="progress progress-primary w-full" value="0" max="8" id="exerciseProgressBar"></progress>
+                    </div>
+
+                    <!-- Ejercicio Actual -->
+                    <div id="currentExercise" class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-lg font-semibold" id="exerciseTitle">Ejercicio 1 de 8</h4>
+                            <div class="badge badge-primary" id="exerciseType">Intervalos</div>
+                        </div>
+                        
+                        <div id="exerciseContent">
+                            <!-- El contenido se generará dinámicamente -->
+                        </div>
+
+                        <div id="exerciseFeedback" class="mt-4 hidden">
+                            <div class="alert" id="feedbackAlert">
+                                <i class="fas fa-check-circle"></i>
+                                <span id="feedbackText"></span>
+                            </div>
+                            <div class="mt-4">
+                                <button onclick="nextExercise()" class="btn btn-primary">
+                                    Siguiente Ejercicio
+                                    <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen de Resultados -->
+                    <div id="exerciseResults" class="hidden bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6">
+                        <div class="text-center">
+                            <i class="fas fa-trophy text-yellow-500 text-4xl mb-4"></i>
+                            <h3 class="text-2xl font-bold text-green-700 mb-4">¡Ejercicios Completados!</h3>
+                            <div class="stats stats-vertical lg:stats-horizontal shadow">
+                                <div class="stat">
+                                    <div class="stat-title">Respuestas Correctas</div>
+                                    <div class="stat-value text-green-600" id="correctAnswers">0</div>
+                                    <div class="stat-desc">de 8 preguntas</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-title">Porcentaje</div>
+                                    <div class="stat-value text-blue-600" id="percentage">0%</div>
+                                    <div class="stat-desc">de aciertos</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-title">Calificación</div>
+                                    <div class="stat-value text-purple-600" id="grade">-</div>
+                                    <div class="stat-desc">sobre 5.0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions justify-between mt-8">
+                        <button onclick="showSection('proporciones')" class="btn btn-outline">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Anterior
+                        </button>
+                        <button onclick="showSection('casos')" class="btn btn-primary" id="nextSectionBtn" disabled>
+                            Casos Clínicos
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Casos Clínicos -->
+        <section id="casos" class="section-content hidden">
+            <div class="card bg-white shadow-xl mb-8">
+                <div class="card-body">
+                    <h2 class="card-title text-3xl text-primary mb-6">
+                        <i class="fas fa-user-md mr-3"></i>
+                        Casos Clínicos Prácticos
+                    </h2>
+
+                    <div class="tabs tabs-boxed mb-6">
+                        <a class="tab tab-active" onclick="showCase(1)">Caso 1: Antihipertensivos</a>
+                        <a class="tab" onclick="showCase(2)">Caso 2: Analgésicos</a>
+                        <a class="tab" onclick="showCase(3)">Caso 3: Vacunas</a>
+                    </div>
+
+                    <!-- Caso 1: Antihipertensivos -->
+                    <div id="case1" class="case-content">
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6">
+                            <h3 class="text-xl font-bold text-blue-700 mb-4">
+                                <i class="fas fa-heartbeat mr-2"></i>
+                                Comparación de Antihipertensivos
+                            </h3>
+                            <p class="text-gray-700 mb-4">
+                                Un estudio clínico comparó la efectividad de dos medicamentos antihipertensivos 
+                                midiendo la reducción de la presión arterial sistólica después de 8 semanas de tratamiento.
+                            </p>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Datos del Estudio:</h4>
+                                    <div class="space-y-3">
+                                        <div class="bg-blue-50 p-3 rounded">
+                                            <h5 class="font-semibold text-blue-700">Medicamento A (Enalapril)</h5>
+                                            <ul class="text-sm mt-1 space-y-1">
+                                                <li>• n₁ = 45 pacientes</li>
+                                                <li>• Reducción promedio: 18.5 mmHg</li>
+                                                <li>• Desviación estándar: 6.2 mmHg</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-green-50 p-3 rounded">
+                                            <h5 class="font-semibold text-green-700">Medicamento B (Losartán)</h5>
+                                            <ul class="text-sm mt-1 space-y-1">
+                                                <li>• n₂ = 42 pacientes</li>
+                                                <li>• Reducción promedio: 15.8 mmHg</li>
+                                                <li>• Desviación estándar: 5.9 mmHg</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Análisis Requerido:</h4>
+                                    <div class="space-y-3">
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text">1. Diferencia de medias:</span>
+                                            </label>
+                                            <input type="number" step="0.1" id="case1_diff" class="input input-bordered input-sm" placeholder="x̄₁ - x̄₂">
+                                        </div>
+                                        
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text">2. Error estándar (aprox):</span>
+                                            </label>
+                                            <input type="number" step="0.01" id="case1_se" class="input input-bordered input-sm" placeholder="SE">
+                                        </div>
+                                        
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text">3. IC 95% límite inferior:</span>
+                                            </label>
+                                            <input type="number" step="0.1" id="case1_lower" class="input input-bordered input-sm" placeholder="Límite inferior">
+                                        </div>
+                                        
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text">4. IC 95% límite superior:</span>
+                                            </label>
+                                            <input type="number" step="0.1" id="case1_upper" class="input input-bordered input-sm" placeholder="Límite superior">
+                                        </div>
+                                        
+                                        <button onclick="checkCase1Answers()" class="btn btn-primary btn-sm w-full">
+                                            <i class="fas fa-check mr-2"></i>
+                                            Verificar Respuestas
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="case1Result" class="hidden mt-6 bg-yellow-50 p-4 rounded-lg">
+                                <h5 class="font-semibold text-yellow-700 mb-2">Interpretación Clínica:</h5>
+                                <p class="text-sm" id="case1Interpretation"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Caso 2: Analgésicos -->
+                    <div id="case2" class="case-content hidden">
+                        <div class="bg-gradient-to-r from-red-50 to-pink-50 rounded-2xl p-6 mb-6">
+                            <h3 class="text-xl font-bold text-red-700 mb-4">
+                                <i class="fas fa-pills mr-2"></i>
+                                Efectividad de Analgésicos
+                            </h3>
+                            <p class="text-gray-700 mb-4">
+                                Se evaluó la proporción de pacientes que experimentaron alivio completo del dolor 
+                                con dos analgésicos diferentes en un estudio de urgencias.
+                            </p>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Resultados del Estudio:</h4>
+                                    <div class="space-y-3">
+                                        <div class="bg-red-50 p-3 rounded">
+                                            <h5 class="font-semibold text-red-700">Ibuprofeno</h5>
+                                            <ul class="text-sm mt-1 space-y-1">
+                                                <li>• 78 de 100 pacientes con alivio completo</li>
+                                                <li>• Proporción: p₁ = 0.78</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-orange-50 p-3 rounded">
+                                            <h5 class="font-semibold text-orange-700">Paracetamol</h5>
+                                            <ul class="text-sm mt-1 space-y-1">
+                                                <li>• 65 de 95 pacientes con alivio completo</li>
+                                                <li>• Proporción: p₂ = 0.684</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Pregunta de Investigación:</h4>
+                                    <p class="text-sm mb-3">
+                                        ¿Existe diferencia significativa en la efectividad entre los dos analgésicos?
+                                    </p>
+                                    
+                                    <button onclick="solveCase2()" class="btn btn-primary w-full">
+                                        <i class="fas fa-calculator mr-2"></i>
+                                        Calcular IC para Diferencia
+                                    </button>
+                                    
+                                    <div id="case2Result" class="hidden mt-4">
+                                        <div class="bg-blue-50 p-3 rounded">
+                                            <h5 class="font-semibold text-blue-700">Resultado:</h5>
+                                            <p class="text-sm" id="case2ResultText"></p>
+                                        </div>
+                                        
+                                        <div class="bg-green-50 p-3 rounded mt-3">
+                                            <h5 class="font-semibold text-green-700">Conclusión:</h5>
+                                            <p class="text-sm" id="case2Conclusion"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Caso 3: Vacunas -->
+                    <div id="case3" class="case-content hidden">
+                        <div class="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl p-6 mb-6">
+                            <h3 class="text-xl font-bold text-purple-700 mb-4">
+                                <i class="fas fa-syringe mr-2"></i>
+                                Eficacia de Vacunas COVID-19
+                            </h3>
+                            <p class="text-gray-700 mb-4">
+                                Comparación de la eficacia de dos vacunas COVID-19 basada en datos de ensayos clínicos 
+                                fase III, midiendo la prevención de infección sintomática.
+                            </p>
+                            
+                            <div class="bg-white rounded-lg p-4 mb-4">
+                                <h4 class="font-semibold mb-3">Datos de Eficacia:</h4>
+                                <div class="overflow-x-auto">
+                                    <table class="table table-zebra w-full">
+                                        <thead>
+                                            <tr>
+                                                <th>Vacuna</th>
+                                                <th>Participantes</th>
+                                                <th>Casos COVID-19</th>
+                                                <th>Eficacia</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="font-semibold">Vacuna A</td>
+                                                <td>21,720</td>
+                                                <td>8</td>
+                                                <td>95.0%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-semibold">Vacuna B</td>
+                                                <td>15,000</td>
+                                                <td>11</td>
+                                                <td>94.1%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle"></i>
+                                <div>
+                                    <h4 class="font-bold">Ejercicio de Reflexión</h4>
+                                    <p>Analiza si la diferencia observada en eficacia (0.9%) es clínicamente significativa 
+                                    considerando los intervalos de confianza y el contexto de salud pública.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions justify-between">
+                        <button onclick="showSection('ejercicios')" class="btn btn-outline">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Anterior
+                        </button>
+                        <button onclick="showSection('evaluacion')" class="btn btn-primary">
+                            Evaluación Final
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluación -->
+        <section id="evaluacion" class="section-content hidden">
+            <div class="card bg-white shadow-xl mb-8">
+                <div class="card-body">
+                    <h2 class="card-title text-3xl text-primary mb-6">
+                        <i class="fas fa-clipboard-check mr-3"></i>
+                        Evaluación Final
+                    </h2>
+
+                    <div class="alert alert-info mb-6">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <h3 class="font-bold">Instrucciones</h3>
+                            <p>Responde las siguientes preguntas sobre intervalos de confianza para diferencias. Tienes 25 minutos para completar la evaluación.</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">Tiempo restante:</span>
+                            <span class="countdown font-mono text-2xl" id="countdown">
+                                <span style="--value:25;"></span>:
+                                <span style="--value:0;"></span>
+                            </span>
+                        </div>
+                        <progress class="progress progress-warning w-full" value="100" max="100" id="timeProgress"></progress>
+                    </div>
+
+                    <div id="evaluationQuestions">
+                        <!-- Las preguntas se generarán dinámicamente -->
+                    </div>
+
+                    <div class="card-actions justify-center mt-8">
+                        <button onclick="submitEvaluation()" class="btn btn-success btn-lg" id="submitBtn">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Enviar Evaluación
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer footer-center p-10 bg-primary text-primary-content">
+        <aside>
+            <i class="fas fa-university text-4xl mb-4"></i>
+            <p class="font-bold">
+                Universidad Antonio Nariño - UAN
+                <br>
+                Bioestadística para Ciencias de la Salud
+            </p>
+            <p>OVA 16 - Intervalos para Diferencias © 2024</p>
+        </aside>
+    </footer>
+
+    <!-- Modal Calculadora -->
+    <dialog id="calculatorModal" class="modal">
+        <div class="modal-box w-11/12 max-w-2xl">
+            <h3 class="font-bold text-lg mb-4">Calculadora de Intervalos de Confianza</h3>
+            
+            <div class="tabs tabs-boxed mb-4">
+                <a class="tab tab-active" onclick="switchCalcTab('means')">Diferencias de Medias</a>
+                <a class="tab" onclick="switchCalcTab('proportions')">Diferencias de Proporciones</a>
+            </div>
+            
+            <div id="calcContent">
+                <!-- Contenido dinámico de la calculadora -->
+            </div>
+            
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn">Cerrar</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+    <script>
+        // Estado global de la aplicación
+        let currentSection = 'intro';
+        let exerciseIndex = 0;
+        let correctExercises = 0;
+        let evaluationStartTime = null;
+        let evaluationTimer = null;
+
+        // Datos de ejercicios
+        const exercises = [
+            {
+                type: "calculation",
+                question: "Dos grupos de pacientes recibieron diferentes tratamientos. Grupo A: n=30, x̄=125, s=12. Grupo B: n=32, x̄=118, s=15. ¿Cuál es la diferencia de medias?",
+                options: ["7", "5", "10", "3"],
+                correct: 0,
+                explanation: "La diferencia de medias es x̄₁ - x̄₂ = 125 - 118 = 7"
+            },
+            {
+                type: "interpretation",
+                question: "Un IC 95% para la diferencia de medias es (-2.5, 8.3). ¿Qué conclusión es correcta?",
+                options: [
+                    "Hay diferencia significativa",
+                    "No hay evidencia de diferencia significativa",
+                    "El grupo 1 es definitivamente mejor",
+                    "Los datos son insuficientes"
+                ],
+                correct: 1,
+                explanation: "Como el intervalo incluye 0, no hay evidencia de diferencia significativa al nivel del 5%"
+            },
+            {
+                type: "proportions",
+                question: "En un estudio, el grupo A tuvo 80/100 éxitos y el grupo B 70/100. ¿Cuál es la diferencia de proporciones?",
+                options: ["0.10", "0.15", "0.05", "0.20"],
+                correct: 0,
+                explanation: "p₁ - p₂ = 0.80 - 0.70 = 0.10"
+            },
+            {
+                type: "clinical",
+                question: "Un IC 95% para diferencia de tasas de curación es (0.05, 0.25). ¿Qué significa clínicamente?",
+                options: [
+                    "No hay diferencia entre tratamientos",
+                    "El tratamiento 1 es significativamente mejor",
+                    "El tratamiento 2 es mejor",
+                    "Los resultados no son concluyentes"
+                ],
+                correct: 1,
+                explanation: "Como el intervalo no incluye 0 y es positivo, el tratamiento 1 es significativamente mejor"
+            },
+            {
+                type: "formula",
+                question: "Para calcular el IC de diferencia de medias con varianzas iguales, ¿qué distribución se usa?",
+                options: ["Normal estándar", "t de Student", "Chi-cuadrado", "F de Fisher"],
+                correct: 1,
+                explanation: "Se usa la distribución t de Student cuando las varianzas poblacionales son desconocidas"
+            },
+            {
+                type: "assumption",
+                question: "¿Cuál es un supuesto importante para intervalos de diferencia de proporciones?",
+                options: [
+                    "Normalidad de los datos",
+                    "Tamaños de muestra grandes (np ≥ 5)",
+                    "Varianzas iguales",
+                    "Datos pareados"
+                ],
+                correct: 1,
+                explanation: "Para proporciones se requiere que np ≥ 5 y n(1-p) ≥ 5 para usar aproximación normal"
+            },
+            {
+                type: "paired",
+                question: "En un estudio antes-después con n=20, d̄=-3.2, sd=2.1. ¿Qué valor t se usa para IC 95%?",
+                options: ["1.96", "2.093", "2.086", "1.729"],
+                correct: 1,
+                explanation: "Con n=20, gl=19, y α=0.05, t₀.₀₂₅,₁₉ = 2.093"
+            },
+            {
+                type: "application",
+                question: "¿Cuándo es más apropiado usar intervalos para diferencias que pruebas de hipótesis?",
+                options: [
+                    "Nunca, las pruebas son mejores",
+                    "Solo con muestras pequeñas",
+                    "Cuando interesa la magnitud del efecto",
+                    "Solo con datos no normales"
+                ],
+                correct: 2,
+                explanation: "Los intervalos proporcionan información sobre la magnitud y dirección del efecto, no solo significancia"
+            }
+        ];
+
+        // Funciones de navegación
+        function showSection(sectionId) {
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            document.getElementById(sectionId).classList.remove('hidden');
+            document.getElementById(sectionId).classList.add('fade-in');
+            
+            currentSection = sectionId;
+            updateProgress();
+            
+            if (sectionId === 'intro') {
+                createConceptChart();
+            } else if (sectionId === 'ejercicios') {
+                initializeExercises();
+            } else if (sectionId === 'evaluacion') {
+                initializeEvaluation();
+            }
+        }
+
+        function updateProgress() {
+            const sections = ['intro', 'teoria', 'medias', 'proporciones', 'ejercicios', 'casos', 'evaluacion'];
+            const currentIndex = sections.indexOf(currentSection);
+            const progress = Math.round((currentIndex / (sections.length - 1)) * 100);
+            
+            document.getElementById('progressIndicator').style.setProperty('--value', progress);
+            document.getElementById('progressIndicator').textContent = progress + '%';
+        }
+
+        // Gráfico conceptual
+        function createConceptChart() {
+            const ctx = document.getElementById('conceptChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Grupo A',
+                        data: Array.from({length: 20}, () => ({
+                            x: Math.random() * 2 + 1,
+                            y: Math.random() * 10 + 15
+                        })),
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                        borderColor: 'rgb(59, 130, 246)'
+                    }, {
+                        label: 'Grupo B',
+                        data: Array.from({length: 20}, () => ({
+                            x: Math.random() * 2 + 4,
+                            y: Math.random() * 10 + 12
+                        })),
+                        backgroundColor: 'rgba(16, 185, 129, 0.6)',
+                        borderColor: 'rgb(16, 185, 129)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Comparación Visual de Dos Grupos'
+                        },
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Grupos'
+                            },
+                            min: 0,
+                            max: 6
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Valores Medidos'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Funciones para diferencias de medias
+        function showMediasCase(caseType) {
+            document.querySelectorAll('.medias-case-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(`medias-${caseType}`).classList.remove('hidden');
+            
+            document.querySelectorAll('#medias .tab').forEach(tab => {
+                tab.classList.remove('tab-active');
+            });
+            event.target.classList.add('tab-active');
+        }
+
+        function calculateMeansExample() {
+            // Datos del ejemplo
+            const n1 = 30, x1 = 125, s1 = 12;
+            const n2 = 32, x2 = 118, s2 = 15;
+            
+            // Cálculos
+            const diff = x1 - x2;
+            const sp = Math.sqrt(((n1-1)*s1*s1 + (n2-1)*s2*s2) / (n1+n2-2));
+            const se = sp * Math.sqrt(1/n1 + 1/n2);
+            const df = n1 + n2 - 2;
+            const t = 2.000; // t crítico aproximado para df=60, α=0.05
+            
+            const margin = t * se;
+            const lower = diff - margin;
+            const upper = diff + margin;
+            
+            document.getElementById('meansResult').classList.remove('hidden');
+            document.getElementById('meansResultText').textContent = 
+                `IC 95%: (${lower.toFixed(2)}, ${upper.toFixed(2)}) mmHg. 
+                La diferencia promedio es ${diff} mmHg con un margen de error de ±${margin.toFixed(2)} mmHg.`;
+        }
+
+        function calculatePairedExample() {
+            // Datos del ejemplo
+            const n = 20, dbar = -2.3, sd = 1.8;
+            const t = 2.093; // t crítico para df=19, α=0.05
+            
+            const se = sd / Math.sqrt(n);
+            const margin = t * se;
+            const lower = dbar - margin;
+            const upper = dbar + margin;
+            
+            document.getElementById('pairedResult').classList.remove('hidden');
+            document.getElementById('pairedResultText').textContent = 
+                `IC 95%: (${lower.toFixed(2)}, ${upper.toFixed(2)}) puntos. 
+                La reducción promedio del dolor es significativa ya que el intervalo no incluye 0.`;
+        }
+
+        function calculateCustomMeans() {
+            const mean1 = parseFloat(document.getElementById('mean1').value);
+            const sd1 = parseFloat(document.getElementById('sd1').value);
+            const n1 = parseInt(document.getElementById('n1').value);
+            const mean2 = parseFloat(document.getElementById('mean2').value);
+            const sd2 = parseFloat(document.getElementById('sd2').value);
+            const n2 = parseInt(document.getElementById('n2').value);
+            const confidence = parseInt(document.getElementById('confidenceLevel').value);
+            
+            if (isNaN(mean1) || isNaN(sd1) || isNaN(n1) || isNaN(mean2) || isNaN(sd2) || isNaN(n2)) {
+                alert('Por favor, complete todos los campos con valores válidos.');
+                return;
+            }
+            
+            const diff = mean1 - mean2;
+            const sp = Math.sqrt(((n1-1)*sd1*sd1 + (n2-1)*sd2*sd2) / (n1+n2-2));
+            const se = sp * Math.sqrt(1/n1 + 1/n2);
+            const df = n1 + n2 - 2;
+            
+            // Valores t críticos aproximados
+            const tValues = {
+                90: df > 30 ? 1.645 : 1.697,
+                95: df > 30 ? 1.96 : 2.000,
+                99: df > 30 ? 2.576 : 2.660
+            };
+            
+            const t = tValues[confidence];
+            const margin = t * se;
+            const lower = diff - margin;
+            const upper = diff + margin;
+            
+            document.getElementById('customResult').classList.remove('hidden');
+            document.getElementById('customResultContent').innerHTML = `
+                <div class="space-y-2">
+                    <p><strong>Diferencia de medias:</strong> ${diff.toFixed(3)}</p>
+                    <p><strong>Error estándar:</strong> ${se.toFixed(3)}</p>
+                    <p><strong>Grados de libertad:</strong> ${df}</p>
+                    <p><strong>IC ${confidence}%:</strong> (${lower.toFixed(3)}, ${upper.toFixed(3)})</p>
+                    <p class="text-sm mt-2">
+                        <strong>Interpretación:</strong> 
+                        ${Math.abs(lower) < 0.001 && Math.abs(upper) < 0.001 ? 
+                            'El intervalo incluye 0, no hay evidencia de diferencia significativa.' :
+                            (lower > 0 ? 'Hay evidencia de que el grupo 1 tiene valores significativamente mayores.' :
+                             upper < 0 ? 'Hay evidencia de que el grupo 1 tiene valores significativamente menores.' :
+                             'El intervalo incluye 0, no hay evidencia de diferencia significativa.')}
+                    </p>
+                </div>
+            `;
+        }
+
+        // Funciones para diferencias de proporciones
+        function calculateProportionsExample() {
+            const n1 = 200, x1 = 180, p1 = x1/n1;
+            const n2 = 200, x2 = 165, p2 = x2/n2;
+            
+            const diff = p1 - p2;
+            const se = Math.sqrt(p1*(1-p1)/n1 + p2*(1-p2)/n2);
+            const z = 1.96; // z crítico para 95%
+            
+            const margin = z * se;
+            const lower = diff - margin;
+            const upper = diff + margin;
+            
+            document.getElementById('proportionsResult').classList.remove('hidden');
+            document.getElementById('proportionsResultText').textContent = 
+                `IC 95%: (${lower.toFixed(3)}, ${upper.toFixed(3)})`;
+            
+            document.getElementById('proportionsInterpretation').textContent = 
+                `Como el intervalo no incluye 0 y es completamente positivo, hay evidencia estadísticamente significativa de que la Vacuna A es más efectiva que la Vacuna B. La diferencia en efectividad está entre ${(lower*100).toFixed(1)}% y ${(upper*100).toFixed(1)}%.`;
+        }
+
+        function calculateCustomProportions() {
+            const success1 = parseInt(document.getElementById('success1').value);
+            const total1 = parseInt(document.getElementById('total1').value);
+            const success2 = parseInt(document.getElementById('success2').value);
+            const total2 = parseInt(document.getElementById('total2').value);
+            
+            if (isNaN(success1) || isNaN(total1) || isNaN(success2) || isNaN(total2)) {
+                alert('Por favor, complete todos los campos con valores válidos.');
+                return;
+            }
+            
+            if (success1 > total1 || success2 > total2) {
+                alert('El número de éxitos no puede ser mayor que el total.');
+                return;
+            }
+            
+            const p1 = success1 / total1;
+            const p2 = success2 / total2;
+            const diff = p1 - p2;
+            
+            const se = Math.sqrt(p1*(1-p1)/total1 + p2*(1-p2)/total2);
+            const z = 1.96;
+            
+            const margin = z * se;
+            const lower = diff - margin;
+            const upper = diff + margin;
+            
+            // Actualizar displays de proporciones
+            document.getElementById('prop1Display').textContent = p1.toFixed(3);
+            document.getElementById('prop2Display').textContent = p2.toFixed(3);
+            
+            document.getElementById('customProportionsResult').classList.remove('hidden');
+            document.getElementById('customProportionsContent').innerHTML = `
+                <div class="space-y-2">
+                    <p><strong>Proporción Grupo 1:</strong> ${p1.toFixed(3)} (${(p1*100).toFixed(1)}%)</p>
+                    <p><strong>Proporción Grupo 2:</strong> ${p2.toFixed(3)} (${(p2*100).toFixed(1)}%)</p>
+                    <p><strong>Diferencia:</strong> ${diff.toFixed(3)}</p>
+                    <p><strong>Error estándar:</strong> ${se.toFixed(3)}</p>
+                    <p><strong>IC 95%:</strong> (${lower.toFixed(3)}, ${upper.toFixed(3)})</p>
+                    <p class="text-sm mt-2">
+                        <strong>Interpretación:</strong> 
+                        ${Math.abs(lower) < 0.001 && Math.abs(upper) < 0.001 ? 
+                            'El intervalo incluye 0, no hay evidencia de diferencia significativa.' :
+                            (lower > 0 ? 'Hay evidencia de que el grupo 1 tiene una proporción significativamente mayor.' :
+                             upper < 0 ? 'Hay evidencia de que el grupo 1 tiene una proporción significativamente menor.' :
+                             'El intervalo incluye 0, no hay evidencia de diferencia significativa.')}
+                    </p>
+                </div>
+            `;
+        }
+
+        // Actualizar displays de proporciones en tiempo real
+        document.addEventListener('DOMContentLoaded', function() {
+            ['success1', 'total1', 'success2', 'total2'].forEach(id => {
+                document.getElementById(id).addEventListener('input', function() {
+                    const success1 = parseInt(document.getElementById('success1').value) || 0;
+                    const total1 = parseInt(document.getElementById('total1').value) || 1;
+                    const success2 = parseInt(document.getElementById('success2').value) || 0;
+                    const total2 = parseInt(document.getElementById('total2').value) || 1;
+                    
+                    document.getElementById('prop1Display').textContent = 
+                        total1 > 0 ? (success1/total1).toFixed(3) : '-';
+                    document.getElementById('prop2Display').textContent = 
+                        total2 > 0 ? (success2/total2).toFixed(3) : '-';
+                });
+            });
+        });
+
+        // Funciones de ejercicios
+        function initializeExercises() {
+            exerciseIndex = 0;
+            correctExercises = 0;
+            showCurrentExercise();
+        }
+
+        function showCurrentExercise() {
+            if (exerciseIndex >= exercises.length) {
+                showExerciseResults();
+                return;
+            }
+
+            const exercise = exercises[exerciseIndex];
+            document.getElementById('exerciseTitle').textContent = `Ejercicio ${exerciseIndex + 1} de ${exercises.length}`;
+            
+            const content = document.getElementById('exerciseContent');
+            content.innerHTML = `
+                <p class="text-gray-700 mb-4">${exercise.question}</p>
+                <div class="grid grid-cols-1 gap-3">
+                    ${exercise.options.map((option, index) => `
+                        <button class="btn btn-outline exercise-option text-left justify-start" 
+                                onclick="checkExerciseAnswer(${index})">
+                            ${String.fromCharCode(65 + index)}. ${option}
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+            
+            document.getElementById('exerciseFeedback').classList.add('hidden');
+            updateExerciseProgress();
+        }
+
+        function checkExerciseAnswer(selectedIndex) {
+            const exercise = exercises[exerciseIndex];
+            const isCorrect = selectedIndex === exercise.correct;
+            
+            if (isCorrect) {
+                correctExercises++;
+            }
+            
+            const feedbackAlert = document.getElementById('feedbackAlert');
+            const feedbackText = document.getElementById('feedbackText');
+            
+            if (isCorrect) {
+                feedbackAlert.className = 'alert alert-success';
+                feedbackAlert.innerHTML = '<i class="fas fa-check-circle"></i>';
+                feedbackText.textContent = `¡Correcto! ${exercise.explanation}`;
+            } else {
+                feedbackAlert.className = 'alert alert-error';
+                feedbackAlert.innerHTML = '<i class="fas fa-times-circle"></i>';
+                feedbackText.textContent = `Incorrecto. ${exercise.explanation}`;
+            }
+            
+            document.getElementById('exerciseFeedback').classList.remove('hidden');
+            
+            document.querySelectorAll('.exercise-option').forEach((btn, index) => {
+                btn.disabled = true;
+                if (index === exercise.correct) {
+                    btn.classList.add('btn-success');
+                } else if (index === selectedIndex && !isCorrect) {
+                    btn.classList.add('btn-error');
+                }
+            });
+        }
+
+        function nextExercise() {
+            exerciseIndex++;
+            showCurrentExercise();
+        }
+
+        function updateExerciseProgress() {
+            const progress = exerciseIndex;
+            document.getElementById('exerciseProgress').textContent = `${progress}/${exercises.length} completados`;
+            document.getElementById('exerciseProgressBar').value = progress;
+        }
+
+        function showExerciseResults() {
+            document.getElementById('currentExercise').classList.add('hidden');
+            document.getElementById('exerciseResults').classList.remove('hidden');
+            
+            const percentage = Math.round((correctExercises / exercises.length) * 100);
+            const grade = (correctExercises / exercises.length) * 5;
+            
+            document.getElementById('correctAnswers').textContent = correctExercises;
+            document.getElementById('percentage').textContent = percentage + '%';
+            document.getElementById('grade').textContent = grade.toFixed(1);
+            
+            document.getElementById('nextSectionBtn').disabled = false;
+        }
+
+        // Funciones de casos clínicos
+        function showCase(caseNumber) {
+            document.querySelectorAll('.case-content').forEach(case_ => {
+                case_.classList.add('hidden');
+            });
+            document.getElementById(`case${caseNumber}`).classList.remove('hidden');
+            
+            document.querySelectorAll('#casos .tab').forEach(tab => {
+                tab.classList.remove('tab-active');
+            });
+            event.target.classList.add('tab-active');
+        }
+
+        function checkCase1Answers() {
+            const diff = parseFloat(document.getElementById('case1_diff').value);
+            const se = parseFloat(document.getElementById('case1_se').value);
+            const lower = parseFloat(document.getElementById('case1_lower').value);
+            const upper = parseFloat(document.getElementById('case1_upper').value);
+            
+            // Respuestas correctas aproximadas
+            const correctDiff = 2.7;
+            const correctSE = 1.3;
+            const correctLower = 0.1;
+            const correctUpper = 5.3;
+            
+            let feedback = "Respuestas: ";
+            let allCorrect = true;
+            
+            if (Math.abs(diff - correctDiff) < 0.5) {
+                feedback += "✓ Diferencia correcta. ";
+            } else {
+                feedback += "✗ Diferencia incorrecta (correcta: 2.7). ";
+                allCorrect = false;
+            }
+            
+            if (Math.abs(se - correctSE) < 0.3) {
+                feedback += "✓ Error estándar correcto. ";
+            } else {
+                feedback += "✗ Error estándar incorrecto (aprox: 1.3). ";
+                allCorrect = false;
+            }
+            
+            document.getElementById('case1Result').classList.remove('hidden');
+            document.getElementById('case1Interpretation').textContent = 
+                feedback + (allCorrect ? 
+                "El IC sugiere que el Enalapril es significativamente más efectivo que el Losartán para reducir la presión arterial." :
+                "Revisa los cálculos. El Enalapril muestra mayor reducción promedio.");
+        }
+
+        function solveCase2() {
+            const p1 = 78/100;
+            const p2 = 65/95;
+            const n1 = 100, n2 = 95;
+            
+            const diff = p1 - p2;
+            const se = Math.sqrt(p1*(1-p1)/n1 + p2*(1-p2)/n2);
+            const z = 1.96;
+            
+            const margin = z * se;
+            const lower = diff - margin;
+            const upper = diff + margin;
+            
+            document.getElementById('case2Result').classList.remove('hidden');
+            document.getElementById('case2ResultText').textContent = 
+                `IC 95% para la diferencia: (${lower.toFixed(3)}, ${upper.toFixed(3)})`;
+            
+            document.getElementById('case2Conclusion').textContent = 
+                lower > 0 ? 
+                "Hay evidencia estadísticamente significativa de que el Ibuprofeno es más efectivo que el Paracetamol." :
+                "No hay evidencia de diferencia significativa entre los analgésicos.";
+        }
+
+        // Funciones de evaluación
+        function initializeEvaluation() {
+            generateEvaluationQuestions();
+            startEvaluationTimer();
+        }
+
+        function generateEvaluationQuestions() {
+            const questions = [
+                {
+                    question: "Un IC 95% para la diferencia de medias entre dos tratamientos es (-1.2, 4.8). ¿Cuál es la conclusión correcta?",
+                    options: [
+                        "El tratamiento 1 es significativamente mejor",
+                        "El tratamiento 2 es significativamente mejor", 
+                        "No hay evidencia de diferencia significativa",
+                        "Los datos son insuficientes"
+                    ],
+                    correct: 2
+                },
+                {
+                    question: "Para calcular un IC de diferencia de proporciones, ¿qué condición debe cumplirse?",
+                    options: [
+                        "n₁ = n₂",
+                        "np ≥ 5 y n(1-p) ≥ 5 para ambos grupos",
+                        "Las proporciones deben ser iguales",
+                        "Solo se puede usar con muestras pequeñas"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "En un estudio pareado con n=25, ¿qué distribución se usa para el IC?",
+                    options: [
+                        "Normal estándar",
+                        "t con 24 grados de libertad",
+                        "t con 25 grados de libertad", 
+                        "Chi-cuadrado"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Un IC 99% será _______ que un IC 95% para la misma diferencia.",
+                    options: [
+                        "más estrecho",
+                        "más amplio",
+                        "igual de amplio",
+                        "no se puede determinar"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "¿Cuál es la principal ventaja de los intervalos de confianza sobre las pruebas de hipótesis?",
+                    options: [
+                        "Son más fáciles de calcular",
+                        "Proporcionan información sobre la magnitud del efecto",
+                        "Siempre dan resultados significativos",
+                        "No requieren supuestos"
+                    ],
+                    correct: 1
+                }
+            ];
+            
+            const container = document.getElementById('evaluationQuestions');
+            container.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'card bg-base-100 shadow-md mb-4';
+                questionDiv.innerHTML = `
+                    <div class="card-body">
+                        <h3 class="card-title text-lg">Pregunta ${index + 1}</h3>
+                        <p class="mb-4">${q.question}</p>
+                        <div class="space-y-2">
+                            ${q.options.map((option, optIndex) => `
+                                <label class="label cursor-pointer justify-start">
+                                    <input type="radio" name="q${index}" value="${optIndex}" class="radio radio-primary mr-3">
+                                    <span class="label-text">${option}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function startEvaluationTimer() {
+            evaluationStartTime = Date.now();
+            let timeLeft = 25 * 60;
+            
+            evaluationTimer = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                document.querySelector('.countdown span:first-child').style.setProperty('--value', minutes);
+                document.querySelector('.countdown span:last-child').style.setProperty('--value', seconds);
+                
+                const progress = (timeLeft / (25 * 60)) * 100;
+                document.getElementById('timeProgress').value = progress;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(evaluationTimer);
+                    submitEvaluation();
+                }
+            }, 1000);
+        }
+
+        function submitEvaluation() {
+            clearInterval(evaluationTimer);
+            
+            const answers = [];
+            for (let i = 0; i < 5; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                answers.push(selected ? parseInt(selected.value) : -1);
+            }
+            
+            const correctAnswers = [2, 1, 1, 1, 1];
+            let score = 0;
+            answers.forEach((answer, index) => {
+                if (answer === correctAnswers[index]) score++;
+            });
+            
+            const percentage = (score / 5) * 100;
+            const grade = (score / 5) * 5;
+            
+            alert(`Evaluación completada!\nRespuestas correctas: ${score}/5\nPorcentaje: ${percentage}%\nCalificación: ${grade.toFixed(1)}/5.0`);
+        }
+
+        // Funciones de utilidad
+        function openCalculator() {
+            document.getElementById('calculatorModal').showModal();
+            switchCalcTab('means');
+        }
+
+        function switchCalcTab(type) {
+            const content = document.getElementById('calcContent');
+            
+            if (type === 'means') {
+                content.innerHTML = `
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold mb-2">Grupo 1</h4>
+                            <input type="number" placeholder="Media" class="input input-bordered input-sm w-full mb-2">
+                            <input type="number" placeholder="Desv. Estándar" class="input input-bordered input-sm w-full mb-2">
+                            <input type="number" placeholder="n" class="input input-bordered input-sm w-full">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Grupo 2</h4>
+                            <input type="number" placeholder="Media" class="input input-bordered input-sm w-full mb-2">
+                            <input type="number" placeholder="Desv. Estándar" class="input input-bordered input-sm w-full mb-2">
+                            <input type="number" placeholder="n" class="input input-bordered input-sm w-full">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-full mt-4">Calcular IC</button>
+                `;
+            } else {
+                content.innerHTML = `
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold mb-2">Grupo 1</h4>
+                            <input type="number" placeholder="Éxitos" class="input input-bordered input-sm w-full mb-2">
+                            <input type="number" placeholder="Total" class="input input-bordered input-sm w-full">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Grupo 2</h4>
+                            <input type="number" placeholder="Éxitos" class="input input-bordered input-sm w-full mb-2">
+                            <input type="number" placeholder="Total" class="input input-bordered input-sm w-full">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-full mt-4">Calcular IC</button>
+                `;
+            }
+        }
+
+        function resetProgress() {
+            if (confirm('¿Estás seguro de que quieres reiniciar todo el progreso?')) {
+                exerciseIndex = 0;
+                correctExercises = 0;
+                showSection('intro');
+            }
+        }
+
+        function exportProgress() {
+            const progress = {
+                currentSection,
+                exerciseProgress: correctExercises,
+                timestamp: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(progress, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ova16_progreso.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('intro');
+            
+            // Renderizar MathJax después de cargar
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1651 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>OVA 18 - Pruebas Específicas para Ciencias de la Salud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .module-hidden { display: none; }
+        .progress-bar { transition: width 0.3s ease; }
+        .calculator-result { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .clinical-case { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg border-b-4 border-indigo-600">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">OVA 18 - Pruebas Específicas para Ciencias de la Salud</h1>
+                    <p class="text-lg text-gray-600 mt-2">Bioestadística para Ciencias de la Salud - UAN</p>
+                </div>
+                <div class="text-right">
+                    <div class="bg-indigo-100 px-4 py-2 rounded-lg">
+                        <p class="text-sm text-indigo-800 font-semibold">Duración: 4 horas académicas</p>
+                        <p class="text-sm text-indigo-600">Modalidad: 40% Virtual - 60% Presencial</p>
+                        <p class="text-xs text-indigo-500 mt-1">Semana 15 - Fase III: Inferencia Estadística</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-gray-700">Progreso del módulo</span>
+                <span class="text-sm text-gray-500" id="progress-text">0%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-indigo-600 h-2 rounded-full progress-bar" style="width: 0%" id="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-8 overflow-x-auto py-4">
+                <button class="nav-btn active px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="intro">Introducción</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="z-t-tests">Z-test y T-test</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="proporciones">Pruebas de Proporciones</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="comparaciones">Comparaciones Múltiples</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="calculadoras">Calculadoras</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="casos-clinicos">Casos Clínicos</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="ejercicios">Ejercicios</button>
+                <button class="nav-btn px-4 py-2 rounded-lg font-medium whitespace-nowrap" data-module="evaluacion">Evaluación</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <!-- Introducción -->
+        <div id="intro" class="module fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Objetivos de Aprendizaje</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-indigo-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-indigo-800 mb-3">Al finalizar esta OVA, podrás:</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start"><span class="text-indigo-600 mr-2">✓</span>Aplicar pruebas z y t para medias en contextos clínicos</li>
+                            <li class="flex items-start"><span class="text-indigo-600 mr-2">✓</span>Realizar pruebas de hipótesis para proporciones en salud</li>
+                            <li class="flex items-start"><span class="text-indigo-600 mr-2">✓</span>Implementar corrección de Bonferroni en comparaciones múltiples</li>
+                            <li class="flex items-start"><span class="text-indigo-600 mr-2">✓</span>Interpretar resultados estadísticos en investigación médica</li>
+                            <li class="flex items-start"><span class="text-indigo-600 mr-2">✓</span>Seleccionar la prueba apropiada según el diseño del estudio</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-green-800 mb-3">Competencias Clínicas:</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start"><span class="text-green-600 mr-2">🔬</span>Análisis de ensayos clínicos</li>
+                            <li class="flex items-start"><span class="text-green-600 mr-2">📊</span>Evaluación de efectividad de tratamientos</li>
+                            <li class="flex items-start"><span class="text-green-600 mr-2">⚕️</span>Interpretación de estudios epidemiológicos</li>
+                            <li class="flex items-start"><span class="text-green-600 mr-2">🧪</span>Análisis de datos de laboratorio</li>
+                            <li class="flex items-start"><span class="text-green-600 mr-2">📈</span>Toma de decisiones basada en evidencia</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Contexto Clínico de las Pruebas de Hipótesis</h2>
+                <div class="prose max-w-none text-gray-700">
+                    <p class="text-lg mb-4">Las pruebas de hipótesis son fundamentales en la investigación médica para:</p>
+                    <div class="grid md:grid-cols-3 gap-6 mt-6">
+                        <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-400">
+                            <h4 class="font-semibold text-red-800 mb-2">Ensayos Clínicos</h4>
+                            <p class="text-sm text-gray-700">Evaluar la eficacia de nuevos tratamientos comparados con placebo o tratamiento estándar.</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">
+                            <h4 class="font-semibold text-yellow-800 mb-2">Estudios Epidemiológicos</h4>
+                            <p class="text-sm text-gray-700">Determinar asociaciones entre factores de riesgo y enfermedades en poblaciones.</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-400">
+                            <h4 class="font-semibold text-purple-800 mb-2">Diagnóstico Clínico</h4>
+                            <p class="text-sm text-gray-700">Comparar valores de laboratorio con rangos de referencia normales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl shadow-lg p-8 text-white">
+                <h2 class="text-2xl font-bold mb-4">Importancia en la Práctica Médica</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">Medicina Basada en Evidencia</h3>
+                        <p class="text-sm opacity-90">Las pruebas estadísticas proporcionan el rigor científico necesario para validar intervenciones médicas y establecer guías de práctica clínica.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3">Control de Errores</h3>
+                        <p class="text-sm opacity-90">La corrección por comparaciones múltiples evita conclusiones erróneas cuando se realizan múltiples pruebas simultáneas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Z-test y T-test -->
+        <div id="z-t-tests" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Pruebas Z y T para Medias</h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-4">Prueba Z (Z-test)</h3>
+                        <div class="space-y-3">
+                            <p class="text-sm text-gray-700"><strong>Cuándo usar:</strong> Cuando σ (desviación estándar poblacional) es conocida y n ≥ 30</p>
+                            <p class="text-sm text-gray-700"><strong>Fórmula:</strong></p>
+                            <div class="bg-white p-3 rounded border text-center">
+                                $$Z = \frac{\bar{x} - \mu_0}{\sigma/\sqrt{n}}$$
+                            </div>
+                            <div class="bg-blue-100 p-3 rounded">
+                                <p class="text-xs text-blue-800"><strong>Ejemplo clínico:</strong> Comparar la presión arterial promedio de un grupo de pacientes con el valor poblacional conocido.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-green-800 mb-4">Prueba T (T-test)</h3>
+                        <div class="space-y-3">
+                            <p class="text-sm text-gray-700"><strong>Cuándo usar:</strong> Cuando σ es desconocida o n < 30</p>
+                            <p class="text-sm text-gray-700"><strong>Fórmula:</strong></p>
+                            <div class="bg-white p-3 rounded border text-center">
+                                $$t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}$$
+                            </div>
+                            <div class="bg-green-100 p-3 rounded">
+                                <p class="text-xs text-green-800"><strong>Ejemplo clínico:</strong> Evaluar si un nuevo medicamento reduce significativamente los niveles de colesterol.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Tipos de Pruebas T</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded border">
+                            <h4 class="font-semibold text-gray-800 mb-2">Una muestra</h4>
+                            <p class="text-sm text-gray-600">Comparar la media de una muestra con un valor conocido</p>
+                            <p class="text-xs text-blue-600 mt-2">Ej: ¿La glucosa promedio difiere de 100 mg/dL?</p>
+                        </div>
+                        <div class="bg-white p-4 rounded border">
+                            <h4 class="font-semibold text-gray-800 mb-2">Dos muestras independientes</h4>
+                            <p class="text-sm text-gray-600">Comparar medias de dos grupos independientes</p>
+                            <p class="text-xs text-blue-600 mt-2">Ej: Comparar presión arterial entre hombres y mujeres</p>
+                        </div>
+                        <div class="bg-white p-4 rounded border">
+                            <h4 class="font-semibold text-gray-800 mb-2">Muestras pareadas</h4>
+                            <p class="text-sm text-gray-600">Comparar medidas antes y después en los mismos sujetos</p>
+                            <p class="text-xs text-blue-600 mt-2">Ej: Peso antes y después de un tratamiento</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-400">
+                    <h3 class="text-lg font-semibold text-yellow-800 mb-3">Supuestos de las Pruebas</h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li>• <strong>Normalidad:</strong> Los datos deben seguir una distribución normal</li>
+                        <li>• <strong>Independencia:</strong> Las observaciones deben ser independientes</li>
+                        <li>• <strong>Homocedasticidad:</strong> (Para dos muestras) Varianzas iguales entre grupos</li>
+                        <li>• <strong>Nivel de medición:</strong> Variable dependiente debe ser continua</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6">Ejemplo Práctico: Eficacia de un Antihipertensivo</h3>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <div class="bg-red-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-red-800 mb-2">Contexto del Estudio</h4>
+                            <p class="text-sm text-gray-700">Un nuevo medicamento antihipertensivo se prueba en 25 pacientes. Se mide la presión arterial sistólica antes y después del tratamiento.</p>
+                        </div>
+                        <div class="bg-white border rounded p-4">
+                            <h4 class="font-semibold mb-2">Datos del Estudio</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• <strong>n:</strong> 25 pacientes</li>
+                                <li>• <strong>Media antes:</strong> 145 mmHg</li>
+                                <li>• <strong>Media después:</strong> 138 mmHg</li>
+                                <li>• <strong>Desviación estándar de diferencias:</strong> 8.5 mmHg</li>
+                                <li>• <strong>α:</strong> 0.05</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-800 mb-3">Solución Paso a Paso</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="bg-white p-3 rounded border">
+                                    <strong>1. Hipótesis:</strong><br>
+                                    H₀: μd = 0 (no hay diferencia)<br>
+                                    H₁: μd ≠ 0 (hay diferencia)
+                                </div>
+                                <div class="bg-white p-3 rounded border">
+                                    <strong>2. Estadístico de prueba:</strong><br>
+                                    t = (7 - 0) / (8.5/√25) = 4.12
+                                </div>
+                                <div class="bg-white p-3 rounded border">
+                                    <strong>3. Valor crítico:</strong><br>
+                                    t₀.₀₂₅,₂₄ = ±2.064
+                                </div>
+                                <div class="bg-green-100 p-3 rounded border border-green-300">
+                                    <strong>4. Conclusión:</strong><br>
+                                    Como |4.12| > 2.064, rechazamos H₀.<br>
+                                    El medicamento es efectivo (p < 0.001).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pruebas de Proporciones -->
+        <div id="proporciones" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Pruebas de Hipótesis para Proporciones</h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-purple-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-purple-800 mb-4">Una Proporción</h3>
+                        <div class="space-y-3">
+                            <p class="text-sm text-gray-700"><strong>Cuándo usar:</strong> Comparar una proporción observada con un valor esperado</p>
+                            <p class="text-sm text-gray-700"><strong>Fórmula:</strong></p>
+                            <div class="bg-white p-3 rounded border text-center">
+                                $$Z = \frac{\hat{p} - p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}$$
+                            </div>
+                            <div class="bg-purple-100 p-3 rounded">
+                                <p class="text-xs text-purple-800"><strong>Ejemplo:</strong> ¿La tasa de curación de un tratamiento es mayor al 80%?</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-orange-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-orange-800 mb-4">Dos Proporciones</h3>
+                        <div class="space-y-3">
+                            <p class="text-sm text-gray-700"><strong>Cuándo usar:</strong> Comparar proporciones entre dos grupos independientes</p>
+                            <p class="text-sm text-gray-700"><strong>Fórmula:</strong></p>
+                            <div class="bg-white p-3 rounded border text-center">
+                                $$Z = \frac{\hat{p_1} - \hat{p_2}}{\sqrt{\hat{p}(1-\hat{p})(\frac{1}{n_1} + \frac{1}{n_2})}}$$
+                            </div>
+                            <div class="bg-orange-100 p-3 rounded">
+                                <p class="text-xs text-orange-800"><strong>Ejemplo:</strong> Comparar tasas de infección entre dos hospitales</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Aplicaciones Clínicas Comunes</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-3">Estudios de Eficacia</h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li>• Tasa de respuesta a tratamientos</li>
+                                <li>• Proporción de pacientes curados</li>
+                                <li>• Efectividad de vacunas</li>
+                                <li>• Tasas de supervivencia</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-3">Estudios Epidemiológicos</h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li>• Prevalencia de enfermedades</li>
+                                <li>• Incidencia de eventos adversos</li>
+                                <li>• Factores de riesgo</li>
+                                <li>• Comparación entre poblaciones</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-400">
+                    <h3 class="text-lg font-semibold text-blue-800 mb-3">Condiciones de Aplicación</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold text-blue-700 mb-2">Supuestos Necesarios:</h4>
+                            <ul class="space-y-1 text-sm text-gray-700">
+                                <li>• Muestreo aleatorio</li>
+                                <li>• Observaciones independientes</li>
+                                <li>• np ≥ 5 y n(1-p) ≥ 5</li>
+                                <li>• Población grande (n < 10% de N)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-blue-700 mb-2">Alternativas si no se cumplen:</h4>
+                            <ul class="space-y-1 text-sm text-gray-700">
+                                <li>• Prueba exacta de Fisher</li>
+                                <li>• Corrección de continuidad</li>
+                                <li>• Métodos no paramétricos</li>
+                                <li>• Intervalos de confianza exactos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6">Caso Práctico: Comparación de Tratamientos</h3>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <div class="clinical-case text-white p-6 rounded-lg mb-4">
+                            <h4 class="font-semibold mb-2">Estudio Clínico</h4>
+                            <p class="text-sm opacity-90">Se compara la efectividad de dos antibióticos para tratar infecciones respiratorias. Se quiere determinar si hay diferencia significativa en las tasas de curación.</p>
+                        </div>
+                        <div class="bg-white border rounded p-4">
+                            <h4 class="font-semibold mb-2">Datos del Estudio</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-gray-100">
+                                        <tr>
+                                            <th class="p-2 text-left">Tratamiento</th>
+                                            <th class="p-2 text-center">Curados</th>
+                                            <th class="p-2 text-center">Total</th>
+                                            <th class="p-2 text-center">Proporción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-t">
+                                            <td class="p-2">Antibiótico A</td>
+                                            <td class="p-2 text-center">85</td>
+                                            <td class="p-2 text-center">100</td>
+                                            <td class="p-2 text-center">0.85</td>
+                                        </tr>
+                                        <tr class="border-t">
+                                            <td class="p-2">Antibiótico B</td>
+                                            <td class="p-2 text-center">78</td>
+                                            <td class="p-2 text-center">100</td>
+                                            <td class="p-2 text-center">0.78</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-green-800 mb-3">Análisis Estadístico</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="bg-white p-3 rounded border">
+                                    <strong>1. Hipótesis:</strong><br>
+                                    H₀: p₁ = p₂ (no hay diferencia)<br>
+                                    H₁: p₁ ≠ p₂ (hay diferencia)
+                                </div>
+                                <div class="bg-white p-3 rounded border">
+                                    <strong>2. Proporción combinada:</strong><br>
+                                    p̂ = (85+78)/(100+100) = 0.815
+                                </div>
+                                <div class="bg-white p-3 rounded border">
+                                    <strong>3. Estadístico Z:</strong><br>
+                                    Z = (0.85-0.78)/√[0.815×0.185×(1/100+1/100)]<br>
+                                    Z = 1.27
+                                </div>
+                                <div class="bg-yellow-100 p-3 rounded border border-yellow-300">
+                                    <strong>4. Conclusión:</strong><br>
+                                    Como |1.27| < 1.96, no rechazamos H₀.<br>
+                                    No hay diferencia significativa (p = 0.204).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparaciones Múltiples -->
+        <div id="comparaciones" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Comparaciones Múltiples y Corrección de Bonferroni</h2>
+                
+                <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-400 mb-8">
+                    <h3 class="text-lg font-semibold text-red-800 mb-3">El Problema de las Comparaciones Múltiples</h3>
+                    <p class="text-gray-700 mb-4">Cuando realizamos múltiples pruebas de hipótesis simultáneamente, la probabilidad de cometer al menos un Error Tipo I (falso positivo) aumenta dramáticamente.</p>
+                    <div class="bg-white p-4 rounded border">
+                        <p class="text-sm text-gray-700 mb-2"><strong>Probabilidad de Error Tipo I familiar:</strong></p>
+                        <div class="text-center">
+                            $$\alpha_{familiar} = 1 - (1-\alpha)^k$$
+                        </div>
+                        <p class="text-xs text-gray-600 mt-2">Donde k = número de comparaciones</p>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-4">Corrección de Bonferroni</h3>
+                        <div class="space-y-3">
+                            <p class="text-sm text-gray-700"><strong>Método:</strong> Dividir α por el número de comparaciones</p>
+                            <div class="bg-white p-3 rounded border text-center">
+                                $$\alpha_{ajustado} = \frac{\alpha}{k}$$
+                            </div>
+                            <div class="bg-blue-100 p-3 rounded">
+                                <p class="text-xs text-blue-800"><strong>Ventaja:</strong> Método simple y conservador</p>
+                                <p class="text-xs text-blue-800"><strong>Desventaja:</strong> Puede ser demasiado conservador</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-green-800 mb-4">Otros Métodos de Corrección</h3>
+                        <div class="space-y-3">
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li><strong>Holm-Bonferroni:</strong> Menos conservador que Bonferroni</li>
+                                <li><strong>Benjamini-Hochberg:</strong> Control de tasa de falso descubrimiento</li>
+                                <li><strong>Tukey HSD:</strong> Para comparaciones post-hoc en ANOVA</li>
+                                <li><strong>Dunnett:</strong> Para comparar múltiples grupos con control</li>
+                            </ul>
+                            <div class="bg-green-100 p-3 rounded">
+                                <p class="text-xs text-green-800">La elección del método depende del contexto y objetivos del estudio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-50 p-6 rounded-lg mb-6">
+                    <h3 class="text-lg font-semibold text-yellow-800 mb-4">Ejemplo: Inflación del Error Tipo I</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm bg-white rounded border">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="p-3 text-left">Número de Comparaciones</th>
+                                    <th class="p-3 text-center">α individual (0.05)</th>
+                                    <th class="p-3 text-center">α familiar (sin corrección)</th>
+                                    <th class="p-3 text-center">α Bonferroni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t">
+                                    <td class="p-3">1</td>
+                                    <td class="p-3 text-center">0.050</td>
+                                    <td class="p-3 text-center">0.050</td>
+                                    <td class="p-3 text-center">0.050</td>
+                                </tr>
+                                <tr class="border-t bg-gray-50">
+                                    <td class="p-3">3</td>
+                                    <td class="p-3 text-center">0.050</td>
+                                    <td class="p-3 text-center">0.143</td>
+                                    <td class="p-3 text-center">0.017</td>
+                                </tr>
+                                <tr class="border-t">
+                                    <td class="p-3">5</td>
+                                    <td class="p-3 text-center">0.050</td>
+                                    <td class="p-3 text-center">0.226</td>
+                                    <td class="p-3 text-center">0.010</td>
+                                </tr>
+                                <tr class="border-t bg-gray-50">
+                                    <td class="p-3">10</td>
+                                    <td class="p-3 text-center">0.050</td>
+                                    <td class="p-3 text-center">0.401</td>
+                                    <td class="p-3 text-center">0.005</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-400">
+                    <h3 class="text-lg font-semibold text-purple-800 mb-3">Aplicaciones en Investigación Médica</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-purple-700 mb-2">Ensayos Clínicos:</h4>
+                            <ul class="space-y-1 text-sm text-gray-700">
+                                <li>• Múltiples endpoints primarios</li>
+                                <li>• Análisis por subgrupos</li>
+                                <li>• Comparaciones con múltiples controles</li>
+                                <li>• Análisis interinos múltiples</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-purple-700 mb-2">Estudios Observacionales:</h4>
+                            <ul class="space-y-1 text-sm text-gray-700">
+                                <li>• Múltiples factores de riesgo</li>
+                                <li>• Comparaciones entre múltiples grupos</li>
+                                <li>• Análisis de múltiples outcomes</li>
+                                <li>• Estudios exploratorios</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6">Caso Práctico: Estudio de Múltiples Biomarcadores</h3>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <div class="clinical-case text-white p-6 rounded-lg mb-4">
+                            <h4 class="font-semibold mb-2">Estudio de Biomarcadores</h4>
+                            <p class="text-sm opacity-90">Un estudio evalúa 6 biomarcadores diferentes para predecir riesgo cardiovascular. Se comparan los niveles entre pacientes con y sin eventos cardiovasculares.</p>
+                        </div>
+                        <div class="bg-white border rounded p-4">
+                            <h4 class="font-semibold mb-2">Resultados de las Pruebas</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-gray-100">
+                                        <tr>
+                                            <th class="p-2 text-left">Biomarcador</th>
+                                            <th class="p-2 text-center">Valor p</th>
+                                            <th class="p-2 text-center">Significativo (α=0.05)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-t">
+                                            <td class="p-2">CRP</td>
+                                            <td class="p-2 text-center">0.012</td>
+                                            <td class="p-2 text-center text-green-600">Sí</td>
+                                        </tr>
+                                        <tr class="border-t bg-gray-50">
+                                            <td class="p-2">IL-6</td>
+                                            <td class="p-2 text-center">0.034</td>
+                                            <td class="p-2 text-center text-green-600">Sí</td>
+                                        </tr>
+                                        <tr class="border-t">
+                                            <td class="p-2">TNF-α</td>
+                                            <td class="p-2 text-center">0.089</td>
+                                            <td class="p-2 text-center text-red-600">No</td>
+                                        </tr>
+                                        <tr class="border-t bg-gray-50">
+                                            <td class="p-2">BNP</td>
+                                            <td class="p-2 text-center">0.003</td>
+                                            <td class="p-2 text-center text-green-600">Sí</td>
+                                        </tr>
+                                        <tr class="border-t">
+                                            <td class="p-2">Troponina</td>
+                                            <td class="p-2 text-center">0.156</td>
+                                            <td class="p-2 text-center text-red-600">No</td>
+                                        </tr>
+                                        <tr class="border-t bg-gray-50">
+                                            <td class="p-2">D-dímero</td>
+                                            <td class="p-2 text-center">0.047</td>
+                                            <td class="p-2 text-center text-green-600">Sí</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-orange-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-orange-800 mb-3">Aplicando Corrección de Bonferroni</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="bg-white p-3 rounded border">
+                                    <strong>α ajustado:</strong><br>
+                                    α = 0.05 / 6 = 0.0083
+                                </div>
+                                <div class="bg-white p-3 rounded border">
+                                    <strong>Resultados corregidos:</strong><br>
+                                    • CRP: p=0.012 > 0.0083 → No significativo<br>
+                                    • IL-6: p=0.034 > 0.0083 → No significativo<br>
+                                    • BNP: p=0.003 < 0.0083 → Significativo<br>
+                                    • D-dímero: p=0.047 > 0.0083 → No significativo
+                                </div>
+                                <div class="bg-red-100 p-3 rounded border border-red-300">
+                                    <strong>Conclusión:</strong><br>
+                                    Solo BNP mantiene significancia estadística después de la corrección por comparaciones múltiples.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg mt-4">
+                            <h4 class="font-semibold text-blue-800 mb-2">Interpretación Clínica</h4>
+                            <p class="text-sm text-gray-700">La corrección de Bonferroni ayuda a identificar los biomarcadores con evidencia más sólida, reduciendo la probabilidad de falsos positivos en estudios exploratorios.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculadoras -->
+        <div id="calculadoras" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Calculadoras Estadísticas Interactivas</h2>
+                
+                <!-- Calculadora T-test -->
+                <div class="bg-blue-50 p-6 rounded-lg mb-8">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4">Calculadora: Prueba T para Una Muestra</h3>
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Media de la muestra (x̄)</label>
+                                    <input type="number" id="t-sample-mean" class="w-full p-2 border rounded-lg" placeholder="Ej: 120" step="0.01">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Media poblacional (μ₀)</label>
+                                    <input type="number" id="t-pop-mean" class="w-full p-2 border rounded-lg" placeholder="Ej: 115" step="0.01">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Desviación estándar (s)</label>
+                                    <input type="number" id="t-std-dev" class="w-full p-2 border rounded-lg" placeholder="Ej: 8.5" step="0.01">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Tamaño de muestra (n)</label>
+                                    <input type="number" id="t-sample-size" class="w-full p-2 border rounded-lg" placeholder="Ej: 25" min="1">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nivel de significancia (α)</label>
+                                    <select id="t-alpha" class="w-full p-2 border rounded-lg">
+                                        <option value="0.05">0.05</option>
+                                        <option value="0.01">0.01</option>
+                                        <option value="0.10">0.10</option>
+                                    </select>
+                                </div>
+                                <button onclick="calculateTTest()" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                    Calcular Prueba T
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <div id="t-test-result" class="calculator-result text-white p-6 rounded-lg hidden">
+                                <h4 class="font-semibold mb-3">Resultados de la Prueba T</h4>
+                                <div id="t-test-output" class="space-y-2 text-sm"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculadora Proporciones -->
+                <div class="bg-green-50 p-6 rounded-lg mb-8">
+                    <h3 class="text-xl font-semibold text-green-800 mb-4">Calculadora: Prueba de Proporciones</h3>
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Número de éxitos (x)</label>
+                                    <input type="number" id="prop-successes" class="w-full p-2 border rounded-lg" placeholder="Ej: 85" min="0">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Tamaño de muestra (n)</label>
+                                    <input type="number" id="prop-sample-size" class="w-full p-2 border rounded-lg" placeholder="Ej: 100" min="1">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Proporción esperada (p₀)</label>
+                                    <input type="number" id="prop-expected" class="w-full p-2 border rounded-lg" placeholder="Ej: 0.80" step="0.01" min="0" max="1">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nivel de significancia (α)</label>
+                                    <select id="prop-alpha" class="w-full p-2 border rounded-lg">
+                                        <option value="0.05">0.05</option>
+                                        <option value="0.01">0.01</option>
+                                        <option value="0.10">0.10</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de prueba</label>
+                                    <select id="prop-test-type" class="w-full p-2 border rounded-lg">
+                                        <option value="two-tailed">Bilateral (≠)</option>
+                                        <option value="greater">Unilateral derecha (>)</option>
+                                        <option value="less">Unilateral izquierda (<)</option>
+                                    </select>
+                                </div>
+                                <button onclick="calculatePropTest()" class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">
+                                    Calcular Prueba de Proporción
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <div id="prop-test-result" class="calculator-result text-white p-6 rounded-lg hidden">
+                                <h4 class="font-semibold mb-3">Resultados de la Prueba de Proporción</h4>
+                                <div id="prop-test-output" class="space-y-2 text-sm"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculadora Bonferroni -->
+                <div class="bg-purple-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-purple-800 mb-4">Calculadora: Corrección de Bonferroni</h3>
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nivel de significancia original (α)</label>
+                                    <input type="number" id="bonf-alpha" class="w-full p-2 border rounded-lg" value="0.05" step="0.001" min="0" max="1">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Número de comparaciones (k)</label>
+                                    <input type="number" id="bonf-comparisons" class="w-full p-2 border rounded-lg" placeholder="Ej: 6" min="1">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Valores p (separados por comas)</label>
+                                    <textarea id="bonf-pvalues" class="w-full p-2 border rounded-lg" rows="3" placeholder="Ej: 0.012, 0.034, 0.089, 0.003, 0.156, 0.047"></textarea>
+                                </div>
+                                <button onclick="calculateBonferroni()" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">
+                                    Aplicar Corrección de Bonferroni
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <div id="bonf-result" class="calculator-result text-white p-6 rounded-lg hidden">
+                                <h4 class="font-semibold mb-3">Resultados de la Corrección</h4>
+                                <div id="bonf-output" class="space-y-2 text-sm"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Casos Clínicos -->
+        <div id="casos-clinicos" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Casos Clínicos Interactivos</h2>
+                
+                <!-- Caso 1: Ensayo Clínico -->
+                <div class="clinical-case text-white p-6 rounded-lg mb-8">
+                    <h3 class="text-xl font-semibold mb-4">Caso 1: Eficacia de un Nuevo Antidiabético</h3>
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold mb-3">Contexto del Estudio</h4>
+                            <p class="text-sm opacity-90 mb-4">Un laboratorio farmacéutico desarrolló un nuevo medicamento para diabetes tipo 2. Se realizó un ensayo clínico randomizado controlado para evaluar su eficacia comparado con el tratamiento estándar.</p>
+                            
+                            <h4 class="font-semibold mb-2">Datos del Estudio</h4>
+                            <div class="bg-white bg-opacity-20 p-4 rounded">
+                                <ul class="text-sm space-y-1">
+                                    <li>• <strong>Diseño:</strong> Ensayo clínico aleatorizado</li>
+                                    <li>• <strong>Participantes:</strong> 200 pacientes con diabetes tipo 2</li>
+                                    <li>• <strong>Grupos:</strong> Nuevo medicamento (n=100) vs Estándar (n=100)</li>
+                                    <li>• <strong>Variable principal:</strong> Reducción de HbA1c a 6 meses</li>
+                                    <li>• <strong>Objetivo:</strong> Demostrar superioridad (diferencia ≥ 0.5%)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-3">Resultados</h4>
+                            <div class="bg-white bg-opacity-20 p-4 rounded mb-4">
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <strong>Nuevo Medicamento:</strong><br>
+                                        Media: -1.8% HbA1c<br>
+                                        DE: 0.9%<br>
+                                        n: 100
+                                    </div>
+                                    <div>
+                                        <strong>Tratamiento Estándar:</strong><br>
+                                        Media: -1.2% HbA1c<br>
+                                        DE: 0.8%<br>
+                                        n: 100
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <h4 class="font-semibold">Pregunta de Análisis:</h4>
+                                <p class="text-sm opacity-90">¿Es el nuevo medicamento significativamente superior al tratamiento estándar?</p>
+                                
+                                <button onclick="showCase1Solution()" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded transition-colors">
+                                    Ver Análisis Completo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="case1-solution" class="mt-6 bg-white bg-opacity-10 p-4 rounded hidden">
+                        <h4 class="font-semibold mb-3">Solución Paso a Paso</h4>
+                        <div class="grid lg:grid-cols-2 gap-6 text-sm">
+                            <div>
+                                <div class="bg-white bg-opacity-20 p-3 rounded mb-3">
+                                    <strong>1. Planteamiento de Hipótesis:</strong><br>
+                                    H₀: μ₁ - μ₂ ≤ 0.5 (no superioridad)<br>
+                                    H₁: μ₁ - μ₂ > 0.5 (superioridad)
+                                </div>
+                                <div class="bg-white bg-opacity-20 p-3 rounded">
+                                    <strong>2. Selección de Prueba:</strong><br>
+                                    Prueba t para dos muestras independientes<br>
+                                    (muestras grandes, varianzas similares)
+                                </div>
+                            </div>
+                            <div>
+                                <div class="bg-white bg-opacity-20 p-3 rounded mb-3">
+                                    <strong>3. Cálculos:</strong><br>
+                                    Diferencia observada: 1.8 - 1.2 = 0.6%<br>
+                                    Error estándar: √[(0.9²/100) + (0.8²/100)] = 0.12<br>
+                                    t = (0.6 - 0.5) / 0.12 = 0.83
+                                </div>
+                                <div class="bg-green-200 bg-opacity-30 p-3 rounded">
+                                    <strong>4. Conclusión:</strong><br>
+                                    t = 0.83 < t₀.₀₅,₁₉₈ = 1.65<br>
+                                    No se demuestra superioridad (p = 0.204)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caso 2: Estudio Epidemiológico -->
+                <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-400 mb-8">
+                    <h3 class="text-xl font-semibold text-orange-800 mb-4">Caso 2: Factores de Riesgo Cardiovascular</h3>
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold text-orange-700 mb-3">Contexto del Estudio</h4>
+                            <p class="text-sm text-gray-700 mb-4">Un estudio de cohorte prospectivo evaluó múltiples factores de riesgo para enfermedad cardiovascular en una población de 5000 adultos seguidos durante 10 años.</p>
+                            
+                            <div class="bg-white p-4 rounded border">
+                                <h4 class="font-semibold mb-2">Factores Evaluados</h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• Hipertensión arterial</li>
+                                    <li>• Diabetes mellitus</li>
+                                    <li>• Tabaquismo</li>
+                                    <li>• Obesidad (IMC ≥ 30)</li>
+                                    <li>• Dislipidemia</li>
+                                    <li>• Sedentarismo</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-orange-700 mb-3">Resultados (Valores p)</h4>
+                            <div class="bg-white p-4 rounded border">
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-sm">
+                                        <thead class="bg-gray-100">
+                                            <tr>
+                                                <th class="p-2 text-left">Factor de Riesgo</th>
+                                                <th class="p-2 text-center">Valor p</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="border-t">
+                                                <td class="p-2">Hipertensión</td>
+                                                <td class="p-2 text-center">0.001</td>
+                                            </tr>
+                                            <tr class="border-t bg-gray-50">
+                                                <td class="p-2">Diabetes</td>
+                                                <td class="p-2 text-center">0.003</td>
+                                            </tr>
+                                            <tr class="border-t">
+                                                <td class="p-2">Tabaquismo</td>
+                                                <td class="p-2 text-center">0.012</td>
+                                            </tr>
+                                            <tr class="border-t bg-gray-50">
+                                                <td class="p-2">Obesidad</td>
+                                                <td class="p-2 text-center">0.045</td>
+                                            </tr>
+                                            <tr class="border-t">
+                                                <td class="p-2">Dislipidemia</td>
+                                                <td class="p-2 text-center">0.089</td>
+                                            </tr>
+                                            <tr class="border-t bg-gray-50">
+                                                <td class="p-2">Sedentarismo</td>
+                                                <td class="p-2 text-center">0.156</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <button onclick="showCase2Solution()" class="mt-4 bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition-colors">
+                                Aplicar Corrección de Bonferroni
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="case2-solution" class="mt-6 bg-orange-100 p-4 rounded hidden">
+                        <h4 class="font-semibold text-orange-800 mb-3">Análisis con Corrección de Bonferroni</h4>
+                        <div class="grid lg:grid-cols-2 gap-6 text-sm">
+                            <div>
+                                <div class="bg-white p-3 rounded border mb-3">
+                                    <strong>α ajustado:</strong><br>
+                                    α = 0.05 / 6 = 0.0083
+                                </div>
+                                <div class="bg-white p-3 rounded border">
+                                    <strong>Factores significativos:</strong><br>
+                                    • Hipertensión: p = 0.001 < 0.0083 ✓<br>
+                                    • Diabetes: p = 0.003 < 0.0083 ✓<br>
+                                    • Otros: p > 0.0083 ✗
+                                </div>
+                            </div>
+                            <div>
+                                <div class="bg-green-100 p-3 rounded border">
+                                    <strong>Interpretación Clínica:</strong><br>
+                                    Después de ajustar por comparaciones múltiples, solo la hipertensión y diabetes mantienen asociación significativa con enfermedad cardiovascular.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caso 3: Análisis de Laboratorio -->
+                <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-400">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4">Caso 3: Valores de Referencia de Laboratorio</h3>
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold text-blue-700 mb-3">Contexto del Estudio</h4>
+                            <p class="text-sm text-gray-700 mb-4">Un laboratorio clínico quiere validar si los niveles de creatinina en una población local difieren significativamente de los valores de referencia internacionales (1.0 mg/dL para hombres).</p>
+                            
+                            <div class="bg-white p-4 rounded border">
+                                <h4 class="font-semibold mb-2">Datos de la Muestra</h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• <strong>n:</strong> 150 hombres adultos sanos</li>
+                                    <li>• <strong>Media:</strong> 1.08 mg/dL</li>
+                                    <li>• <strong>Desviación estándar:</strong> 0.25 mg/dL</li>
+                                    <li>• <strong>Valor de referencia:</strong> 1.0 mg/dL</li>
+                                    <li>• <strong>Nivel de significancia:</strong> α = 0.05</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-blue-700 mb-3">Pregunta de Investigación</h4>
+                            <p class="text-sm text-gray-700 mb-4">¿Los niveles de creatinina en la población local difieren significativamente del valor de referencia internacional?</p>
+                            
+                            <button onclick="showCase3Solution()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+                                Realizar Análisis Estadístico
+                            </button>
+                            
+                            <div id="case3-solution" class="mt-4 bg-blue-100 p-4 rounded hidden">
+                                <h4 class="font-semibold text-blue-800 mb-3">Análisis Estadístico</h4>
+                                <div class="space-y-3 text-sm">
+                                    <div class="bg-white p-3 rounded border">
+                                        <strong>Prueba apropiada:</strong> t-test para una muestra<br>
+                                        (n > 30, σ desconocida)
+                                    </div>
+                                    <div class="bg-white p-3 rounded border">
+                                        <strong>Estadístico t:</strong><br>
+                                        t = (1.08 - 1.0) / (0.25/√150) = 3.92
+                                    </div>
+                                    <div class="bg-white p-3 rounded border">
+                                        <strong>Valor crítico:</strong> t₀.₀₂₅,₁₄₉ = ±1.976
+                                    </div>
+                                    <div class="bg-green-100 p-3 rounded border border-green-300">
+                                        <strong>Conclusión:</strong><br>
+                                        Como |3.92| > 1.976, rechazamos H₀.<br>
+                                        Los niveles locales difieren significativamente (p < 0.001).
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicios -->
+        <div id="ejercicios" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Ejercicios Prácticos</h2>
+                
+                <!-- Ejercicio 1 -->
+                <div class="mb-8 p-6 bg-blue-50 rounded-lg">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-4">Ejercicio 1: Selección de Pruebas Estadísticas</h3>
+                    <p class="text-gray-700 mb-4">Para cada escenario, selecciona la prueba estadística más apropiada:</p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg">
+                            <p class="font-medium text-gray-800 mb-3">1. Comparar la presión arterial promedio antes y después de un tratamiento en 30 pacientes:</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center"><input type="radio" name="ex1q1" value="a" class="mr-2"> a) Z-test para una muestra</label>
+                                <label class="flex items-center"><input type="radio" name="ex1q1" value="b" class="mr-2"> b) T-test para muestras pareadas</label>
+                                <label class="flex items-center"><input type="radio" name="ex1q1" value="c" class="mr-2"> c) T-test para dos muestras independientes</label>
+                                <label class="flex items-center"><input type="radio" name="ex1q1" value="d" class="mr-2"> d) Prueba de proporciones</label>
+                            </div>
+                            <div id="ex1q1-feedback" class="mt-3 p-3 rounded hidden"></div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-lg">
+                            <p class="font-medium text-gray-800 mb-3">2. Evaluar si la tasa de curación de un medicamento (85%) es superior al 80%:</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center"><input type="radio" name="ex1q2" value="a" class="mr-2"> a) T-test para una muestra</label>
+                                <label class="flex items-center"><input type="radio" name="ex1q2" value="b" class="mr-2"> b) Z-test para una proporción</label>
+                                <label class="flex items-center"><input type="radio" name="ex1q2" value="c" class="mr-2"> c) T-test para dos muestras</label>
+                                <label class="flex items-center"><input type="radio" name="ex1q2" value="d" class="mr-2"> d) Chi-cuadrado</label>
+                            </div>
+                            <div id="ex1q2-feedback" class="mt-3 p-3 rounded hidden"></div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-lg">
+                            <p class="font-medium text-gray-800 mb-3">3. Comparar los niveles de colesterol entre hombres y mujeres (muestras independientes):</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center"><input type="radio" name="ex1q3" value="a" class="mr-2"> a) T-test para muestras pareadas</label>
+                                <label class="flex items-center"><input type="radio" name="ex1q3" value="b" class="mr-2"> b) T-test para dos muestras independientes</label>
+                                <label class="flex items-center"><input type="radio" name="ex1q3" value="c" class="mr-2"> c) Z-test para proporciones</label>
+                                <label class="flex items-center"><input type="radio" name="ex1q3" value="d" class="mr-2"> d) Prueba de una proporción</label>
+                            </div>
+                            <div id="ex1q3-feedback" class="mt-3 p-3 rounded hidden"></div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="checkExercise1()" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Verificar Respuestas</button>
+                </div>
+
+                <!-- Ejercicio 2 -->
+                <div class="mb-8 p-6 bg-green-50 rounded-lg">
+                    <h3 class="text-xl font-semibold text-green-800 mb-4">Ejercicio 2: Cálculo de Corrección de Bonferroni</h3>
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <div>
+                            <div class="bg-white p-4 rounded-lg border">
+                                <h4 class="font-semibold text-gray-800 mb-3">Escenario:</h4>
+                                <p class="text-sm text-gray-700 mb-3">Un estudio evalúa 8 biomarcadores diferentes para predecir mortalidad. Los valores p obtenidos son:</p>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• Biomarcador 1: p = 0.008</li>
+                                    <li>• Biomarcador 2: p = 0.023</li>
+                                    <li>• Biomarcador 3: p = 0.041</li>
+                                    <li>• Biomarcador 4: p = 0.002</li>
+                                    <li>• Biomarcador 5: p = 0.067</li>
+                                    <li>• Biomarcador 6: p = 0.015</li>
+                                    <li>• Biomarcador 7: p = 0.089</li>
+                                    <li>• Biomarcador 8: p = 0.134</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">¿Cuál es el α ajustado con Bonferroni (α original = 0.05)?</label>
+                                    <input type="number" id="ex2-alpha" class="w-full p-2 border rounded-lg" placeholder="Ej: 0.00625" step="0.00001">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">¿Cuántos biomarcadores mantienen significancia?</label>
+                                    <input type="number" id="ex2-significant" class="w-full p-2 border rounded-lg" placeholder="Número" min="0" max="8">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">¿Cuáles biomarcadores son significativos? (números separados por comas)</label>
+                                    <input type="text" id="ex2-which" class="w-full p-2 border rounded-lg" placeholder="Ej: 1, 4">
+                                </div>
+                                <button onclick="checkExercise2()" class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">
+                                    Verificar Respuestas
+                                </button>
+                                <div id="ex2-feedback" class="p-3 rounded hidden"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 3 -->
+                <div class="p-6 bg-purple-50 rounded-lg">
+                    <h3 class="text-xl font-semibold text-purple-800 mb-4">Ejercicio 3: Interpretación de Resultados</h3>
+                    <div class="bg-white p-4 rounded-lg border mb-4">
+                        <h4 class="font-semibold text-gray-800 mb-3">Resultados de un Ensayo Clínico:</h4>
+                        <p class="text-sm text-gray-700 mb-3">Se evaluó la eficacia de un nuevo analgésico comparado con placebo. Los resultados fueron:</p>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• <strong>Grupo tratamiento:</strong> n=50, reducción promedio del dolor = 4.2 puntos, DE = 1.8</li>
+                            <li>• <strong>Grupo placebo:</strong> n=50, reducción promedio del dolor = 2.1 puntos, DE = 1.5</li>
+                            <li>• <strong>Estadístico t:</strong> 6.45</li>
+                            <li>• <strong>Valor p:</strong> < 0.001</li>
+                            <li>• <strong>IC 95% para la diferencia:</strong> [1.46, 2.74]</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-medium text-gray-800 mb-2">¿Cuál es la conclusión estadística correcta?</p>
+                            <div class="space-y-2">
+                                <label class="flex items-start"><input type="radio" name="ex3q1" value="a" class="mr-2 mt-1"> a) No hay diferencia significativa entre los grupos</label>
+                                <label class="flex items-start"><input type="radio" name="ex3q1" value="b" class="mr-2 mt-1"> b) El nuevo analgésico es significativamente más efectivo que el placebo</label>
+                                <label class="flex items-start"><input type="radio" name="ex3q1" value="c" class="mr-2 mt-1"> c) El placebo es más efectivo que el tratamiento</label>
+                                <label class="flex items-start"><input type="radio" name="ex3q1" value="d" class="mr-2 mt-1"> d) No se puede determinar sin más información</label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <p class="font-medium text-gray-800 mb-2">¿Cuál es la interpretación clínica más apropiada?</p>
+                            <div class="space-y-2">
+                                <label class="flex items-start"><input type="radio" name="ex3q2" value="a" class="mr-2 mt-1"> a) La diferencia es estadísticamente significativa pero clínicamente irrelevante</label>
+                                <label class="flex items-start"><input type="radio" name="ex3q2" value="b" class="mr-2 mt-1"> b) La diferencia es tanto estadística como clínicamente significativa</label>
+                                <label class="flex items-start"><input type="radio" name="ex3q2" value="c" class="mr-2 mt-1"> c) Se necesitan más estudios para confirmar la eficacia</label>
+                                <label class="flex items-start"><input type="radio" name="ex3q2" value="d" class="mr-2 mt-1"> d) Los resultados son inconsistentes</label>
+                            </div>
+                        </div>
+                        
+                        <button onclick="checkExercise3()" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors">Verificar Interpretación</button>
+                        <div id="ex3-feedback" class="mt-3 p-3 rounded hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluación -->
+        <div id="evaluacion" class="module module-hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Evaluación Final</h2>
+                
+                <div class="mb-8">
+                    <div class="bg-yellow-50 p-4 rounded-lg mb-6">
+                        <h3 class="text-lg font-semibold text-yellow-800 mb-2">Instrucciones</h3>
+                        <p class="text-gray-700">Completa las siguientes preguntas para evaluar tu comprensión de las pruebas específicas para ciencias de la salud. Necesitas obtener al menos 70% para aprobar.</p>
+                    </div>
+
+                    <form id="evaluationForm" class="space-y-6">
+                        <!-- Pregunta 1 -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-3">1. ¿Cuándo es apropiado usar una prueba Z en lugar de una prueba t?</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-start"><input type="radio" name="eval1" value="a" class="mr-2 mt-1"> a) Cuando el tamaño de muestra es pequeño (n < 30)</label>
+                                <label class="flex items-start"><input type="radio" name="eval1" value="b" class="mr-2 mt-1"> b) Cuando la desviación estándar poblacional es conocida y n ≥ 30</label>
+                                <label class="flex items-start"><input type="radio" name="eval1" value="c" class="mr-2 mt-1"> c) Cuando se comparan proporciones</label>
+                                <label class="flex items-start"><input type="radio" name="eval1" value="d" class="mr-2 mt-1"> d) Cuando los datos no siguen distribución normal</label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 2 -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-3">2. En una prueba de proporciones, ¿cuál es el supuesto más importante para usar la aproximación normal?</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-start"><input type="radio" name="eval2" value="a" class="mr-2 mt-1"> a) La muestra debe ser aleatoria</label>
+                                <label class="flex items-start"><input type="radio" name="eval2" value="b" class="mr-2 mt-1"> b) np ≥ 5 y n(1-p) ≥ 5</label>
+                                <label class="flex items-start"><input type="radio" name="eval2" value="c" class="mr-2 mt-1"> c) La población debe ser infinita</label>
+                                <label class="flex items-start"><input type="radio" name="eval2" value="d" class="mr-2 mt-1"> d) Las observaciones deben ser dependientes</label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 3 -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-3">3. ¿Por qué es necesaria la corrección de Bonferroni en comparaciones múltiples?</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-start"><input type="radio" name="eval3" value="a" class="mr-2 mt-1"> a) Para aumentar el poder estadístico</label>
+                                <label class="flex items-start"><input type="radio" name="eval3" value="b" class="mr-2 mt-1"> b) Para controlar la tasa de error Tipo I familiar</label>
+                                <label class="flex items-start"><input type="radio" name="eval3" value="c" class="mr-2 mt-1"> c) Para reducir el tamaño de muestra necesario</label>
+                                <label class="flex items-start"><input type="radio" name="eval3" value="d" class="mr-2 mt-1"> d) Para mejorar la normalidad de los datos</label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 4 -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-3">4. Si realizas 5 comparaciones con α = 0.05, ¿cuál sería el α ajustado con Bonferroni?</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center"><input type="radio" name="eval4" value="a" class="mr-2"> a) 0.01</label>
+                                <label class="flex items-center"><input type="radio" name="eval4" value="b" class="mr-2"> b) 0.05</label>
+                                <label class="flex items-center"><input type="radio" name="eval4" value="c" class="mr-2"> c) 0.25</label>
+                                <label class="flex items-center"><input type="radio" name="eval4" value="d" class="mr-2"> d) 0.005</label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 5 -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-3">5. En un ensayo clínico, se obtiene p = 0.03 para la diferencia entre tratamiento y placebo. ¿Cuál es la interpretación correcta?</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-start"><input type="radio" name="eval5" value="a" class="mr-2 mt-1"> a) Hay 3% de probabilidad de que el tratamiento sea efectivo</label>
+                                <label class="flex items-start"><input type="radio" name="eval5" value="b" class="mr-2 mt-1"> b) Hay 3% de probabilidad de observar esta diferencia o mayor si no hay efecto real</label>
+                                <label class="flex items-start"><input type="radio" name="eval5" value="c" class="mr-2 mt-1"> c) El tratamiento es 97% efectivo</label>
+                                <label class="flex items-start"><input type="radio" name="eval5" value="d" class="mr-2 mt-1"> d) Se necesita repetir el estudio</label>
+                            </div>
+                        </div>
+
+                        <!-- Pregunta 6 -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800 mb-3">6. ¿Cuál es la principal ventaja de usar pruebas t pareadas en estudios clínicos?</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-start"><input type="radio" name="eval6" value="a" class="mr-2 mt-1"> a) Requiere menor tamaño de muestra</label>
+                                <label class="flex items-start"><input type="radio" name="eval6" value="b" class="mr-2 mt-1"> b) Controla la variabilidad individual entre sujetos</label>
+                                <label class="flex items-start"><input type="radio" name="eval6" value="c" class="mr-2 mt-1"> c) No requiere supuestos de normalidad</label>
+                                <label class="flex items-start"><input type="radio" name="eval6" value="d" class="mr-2 mt-1"> d) Es más fácil de calcular</label>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center">
+                            <button type="button" onclick="submitEvaluation()" class="bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 transition-colors font-semibold">Enviar Evaluación</button>
+                        </div>
+                    </form>
+
+                    <div id="evaluationResult" class="mt-6 p-4 rounded-lg hidden">
+                        <div id="scoreDisplay" class="text-center mb-4"></div>
+                        <div id="detailedFeedback"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Recursos Estadísticos</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Tablas de distribución t</li>
+                        <li>• Calculadoras estadísticas</li>
+                        <li>• Software R y SPSS</li>
+                        <li>• Bases de datos médicas</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Próxima OVA</h3>
+                    <p class="text-gray-300">OVA 19: Aplicaciones Integradas</p>
+                    <p class="text-sm text-gray-400 mt-2">Análisis completo de datos clínicos y comunicación de resultados</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Bibliografía</h3>
+                    <ul class="space-y-2 text-gray-300 text-sm">
+                        <li>• Altman DG. Practical Statistics for Medical Research</li>
+                        <li>• Armitage P. Statistical Methods in Medical Research</li>
+                        <li>• Bland M. An Introduction to Medical Statistics</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contacto</h3>
+                    <p class="text-gray-300">Universidad Antonio Nariño</p>
+                    <p class="text-gray-300">Facultad de Ciencias de la Salud</p>
+                    <p class="text-gray-300">Campus Virtual UAN</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Variables globales
+        let currentModule = 'intro';
+        let completedModules = new Set();
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeNavigation();
+            updateProgress();
+            // Renderizar MathJax después de cargar
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+
+        // Navegación entre módulos
+        function initializeNavigation() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const module = btn.dataset.module;
+                    showModule(module);
+                    updateNavigation(btn);
+                });
+            });
+        }
+
+        function showModule(moduleId) {
+            // Ocultar todos los módulos
+            document.querySelectorAll('.module').forEach(module => {
+                module.classList.add('module-hidden');
+            });
+            
+            // Mostrar el módulo seleccionado
+            const targetModule = document.getElementById(moduleId);
+            if (targetModule) {
+                targetModule.classList.remove('module-hidden');
+                targetModule.classList.add('fade-in');
+                currentModule = moduleId;
+                completedModules.add(moduleId);
+                updateProgress();
+                
+                // Re-renderizar MathJax si es necesario
+                if (window.MathJax) {
+                    MathJax.typesetPromise([targetModule]);
+                }
+            }
+        }
+
+        function updateNavigation(activeBtn) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-indigo-600', 'text-white');
+                btn.classList.add('text-gray-600', 'hover:bg-gray-100');
+            });
+            activeBtn.classList.add('active', 'bg-indigo-600', 'text-white');
+            activeBtn.classList.remove('text-gray-600', 'hover:bg-gray-100');
+        }
+
+        function updateProgress() {
+            const totalModules = 8;
+            const progress = (completedModules.size / totalModules) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = Math.round(progress) + '%';
+        }
+
+        // Funciones de calculadoras
+        function calculateTTest() {
+            const sampleMean = parseFloat(document.getElementById('t-sample-mean').value);
+            const popMean = parseFloat(document.getElementById('t-pop-mean').value);
+            const stdDev = parseFloat(document.getElementById('t-std-dev').value);
+            const sampleSize = parseInt(document.getElementById('t-sample-size').value);
+            const alpha = parseFloat(document.getElementById('t-alpha').value);
+
+            if (isNaN(sampleMean) || isNaN(popMean) || isNaN(stdDev) || isNaN(sampleSize)) {
+                alert('Por favor, completa todos los campos con valores válidos.');
+                return;
+            }
+
+            const standardError = stdDev / Math.sqrt(sampleSize);
+            const tStatistic = (sampleMean - popMean) / standardError;
+            const degreesOfFreedom = sampleSize - 1;
+            
+            // Valor crítico aproximado (bilateral)
+            let criticalValue;
+            if (alpha === 0.05) {
+                if (degreesOfFreedom >= 30) criticalValue = 1.96;
+                else if (degreesOfFreedom >= 20) criticalValue = 2.086;
+                else if (degreesOfFreedom >= 10) criticalValue = 2.228;
+                else criticalValue = 2.571;
+            } else if (alpha === 0.01) {
+                if (degreesOfFreedom >= 30) criticalValue = 2.576;
+                else if (degreesOfFreedom >= 20) criticalValue = 2.845;
+                else if (degreesOfFreedom >= 10) criticalValue = 3.169;
+                else criticalValue = 3.707;
+            } else {
+                criticalValue = 1.645; // Para α = 0.10
+            }
+
+            const isSignificant = Math.abs(tStatistic) > criticalValue;
+            
+            const resultDiv = document.getElementById('t-test-result');
+            const outputDiv = document.getElementById('t-test-output');
+            
+            outputDiv.innerHTML = `
+                <div><strong>Estadístico t:</strong> ${tStatistic.toFixed(4)}</div>
+                <div><strong>Grados de libertad:</strong> ${degreesOfFreedom}</div>
+                <div><strong>Error estándar:</strong> ${standardError.toFixed(4)}</div>
+                <div><strong>Valor crítico (±):</strong> ${criticalValue.toFixed(3)}</div>
+                <div><strong>Resultado:</strong> ${isSignificant ? 'Significativo' : 'No significativo'}</div>
+                <div class="mt-2 p-2 rounded ${isSignificant ? 'bg-green-200 bg-opacity-30' : 'bg-red-200 bg-opacity-30'}">
+                    <strong>Conclusión:</strong> ${isSignificant ? 'Rechazamos H₀' : 'No rechazamos H₀'}
+                </div>
+            `;
+            
+            resultDiv.classList.remove('hidden');
+        }
+
+        function calculatePropTest() {
+            const successes = parseInt(document.getElementById('prop-successes').value);
+            const sampleSize = parseInt(document.getElementById('prop-sample-size').value);
+            const expectedProp = parseFloat(document.getElementById('prop-expected').value);
+            const alpha = parseFloat(document.getElementById('prop-alpha').value);
+            const testType = document.getElementById('prop-test-type').value;
+
+            if (isNaN(successes) || isNaN(sampleSize) || isNaN(expectedProp)) {
+                alert('Por favor, completa todos los campos con valores válidos.');
+                return;
+            }
+
+            const sampleProp = successes / sampleSize;
+            const standardError = Math.sqrt((expectedProp * (1 - expectedProp)) / sampleSize);
+            const zStatistic = (sampleProp - expectedProp) / standardError;
+            
+            let criticalValue, pValue;
+            if (testType === 'two-tailed') {
+                criticalValue = alpha === 0.05 ? 1.96 : (alpha === 0.01 ? 2.576 : 1.645);
+                pValue = 2 * (1 - normalCDF(Math.abs(zStatistic)));
+            } else {
+                criticalValue = alpha === 0.05 ? 1.645 : (alpha === 0.01 ? 2.326 : 1.282);
+                pValue = 1 - normalCDF(Math.abs(zStatistic));
+            }
+
+            const isSignificant = (testType === 'two-tailed') ? 
+                Math.abs(zStatistic) > criticalValue : 
+                Math.abs(zStatistic) > criticalValue;
+            
+            const resultDiv = document.getElementById('prop-test-result');
+            const outputDiv = document.getElementById('prop-test-output');
+            
+            outputDiv.innerHTML = `
+                <div><strong>Proporción muestral:</strong> ${sampleProp.toFixed(4)} (${(sampleProp*100).toFixed(1)}%)</div>
+                <div><strong>Estadístico Z:</strong> ${zStatistic.toFixed(4)}</div>
+                <div><strong>Error estándar:</strong> ${standardError.toFixed(4)}</div>
+                <div><strong>Valor crítico:</strong> ±${criticalValue.toFixed(3)}</div>
+                <div><strong>Valor p (aprox):</strong> ${pValue.toFixed(4)}</div>
+                <div><strong>Resultado:</strong> ${isSignificant ? 'Significativo' : 'No significativo'}</div>
+                <div class="mt-2 p-2 rounded ${isSignificant ? 'bg-green-200 bg-opacity-30' : 'bg-red-200 bg-opacity-30'}">
+                    <strong>Conclusión:</strong> ${isSignificant ? 'Rechazamos H₀' : 'No rechazamos H₀'}
+                </div>
+            `;
+            
+            resultDiv.classList.remove('hidden');
+        }
+
+        function calculateBonferroni() {
+            const originalAlpha = parseFloat(document.getElementById('bonf-alpha').value);
+            const numComparisons = parseInt(document.getElementById('bonf-comparisons').value);
+            const pValuesText = document.getElementById('bonf-pvalues').value;
+
+            if (isNaN(originalAlpha) || isNaN(numComparisons)) {
+                alert('Por favor, completa el nivel de significancia y número de comparaciones.');
+                return;
+            }
+
+            const adjustedAlpha = originalAlpha / numComparisons;
+            let pValues = [];
+            
+            if (pValuesText.trim()) {
+                pValues = pValuesText.split(',').map(p => parseFloat(p.trim())).filter(p => !isNaN(p));
+            }
+
+            const resultDiv = document.getElementById('bonf-result');
+            const outputDiv = document.getElementById('bonf-output');
+            
+            let output = `
+                <div><strong>α original:</strong> ${originalAlpha}</div>
+                <div><strong>Número de comparaciones:</strong> ${numComparisons}</div>
+                <div><strong>α ajustado (Bonferroni):</strong> ${adjustedAlpha.toFixed(6)}</div>
+                <div><strong>α familiar sin corrección:</strong> ${(1 - Math.pow(1 - originalAlpha, numComparisons)).toFixed(4)}</div>
+            `;
+
+            if (pValues.length > 0) {
+                output += '<div class="mt-3"><strong>Análisis de valores p:</strong></div>';
+                const significantCount = pValues.filter(p => p < adjustedAlpha).length;
+                
+                pValues.forEach((p, index) => {
+                    const isSignificant = p < adjustedAlpha;
+                    output += `<div class="text-xs ${isSignificant ? 'text-green-200' : 'text-red-200'}">
+                        Comparación ${index + 1}: p = ${p.toFixed(4)} ${isSignificant ? '✓' : '✗'}
+                    </div>`;
+                });
+                
+                output += `<div class="mt-2 p-2 rounded bg-white bg-opacity-20">
+                    <strong>Resumen:</strong> ${significantCount} de ${pValues.length} comparaciones mantienen significancia
+                </div>`;
+            }
+            
+            outputDiv.innerHTML = output;
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Función auxiliar para aproximar la CDF normal
+        function normalCDF(x) {
+            return 0.5 * (1 + erf(x / Math.sqrt(2)));
+        }
+
+        function erf(x) {
+            // Aproximación de la función error
+            const a1 =  0.254829592;
+            const a2 = -0.284496736;
+            const a3 =  1.421413741;
+            const a4 = -1.453152027;
+            const a5 =  1.061405429;
+            const p  =  0.3275911;
+
+            const sign = x < 0 ? -1 : 1;
+            x = Math.abs(x);
+
+            const t = 1.0 / (1.0 + p * x);
+            const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+
+            return sign * y;
+        }
+
+        // Funciones para casos clínicos
+        function showCase1Solution() {
+            document.getElementById('case1-solution').classList.toggle('hidden');
+        }
+
+        function showCase2Solution() {
+            document.getElementById('case2-solution').classList.toggle('hidden');
+        }
+
+        function showCase3Solution() {
+            document.getElementById('case3-solution').classList.toggle('hidden');
+        }
+
+        // Funciones de ejercicios
+        function checkExercise1() {
+            const answers = {
+                ex1q1: 'b', // T-test pareadas
+                ex1q2: 'b', // Z-test para proporción
+                ex1q3: 'b'  // T-test dos muestras independientes
+            };
+            
+            const feedbacks = {
+                ex1q1: {
+                    correct: '¡Correcto! Para comparar medidas antes y después en los mismos pacientes, usamos t-test para muestras pareadas.',
+                    incorrect: 'Incorrecto. Para medidas antes y después en los mismos sujetos, la prueba apropiada es t-test para muestras pareadas.'
+                },
+                ex1q2: {
+                    correct: '¡Correcto! Para comparar una proporción observada con un valor esperado, usamos z-test para una proporción.',
+                    incorrect: 'Incorrecto. Para evaluar si una proporción difiere de un valor esperado, usamos z-test para una proporción.'
+                },
+                ex1q3: {
+                    correct: '¡Correcto! Para comparar medias entre dos grupos independientes, usamos t-test para dos muestras independientes.',
+                    incorrect: 'Incorrecto. Para comparar medias entre grupos independientes, la prueba apropiada es t-test para dos muestras independientes.'
+                }
+            };
+            
+            for (let i = 1; i <= 3; i++) {
+                const selected = document.querySelector(`input[name="ex1q${i}"]:checked`);
+                const feedback = document.getElementById(`ex1q${i}-feedback`);
+                
+                if (selected) {
+                    const isCorrect = selected.value === answers[`ex1q${i}`];
+                    feedback.className = `mt-3 p-3 rounded ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
+                    feedback.textContent = isCorrect ? feedbacks[`ex1q${i}`].correct : feedbacks[`ex1q${i}`].incorrect;
+                    feedback.classList.remove('hidden');
+                }
+            }
+        }
+
+        function checkExercise2() {
+            const alphaAdjusted = parseFloat(document.getElementById('ex2-alpha').value);
+            const significantCount = parseInt(document.getElementById('ex2-significant').value);
+            const whichSignificant = document.getElementById('ex2-which').value;
+            
+            const correctAlpha = 0.05 / 8; // 0.00625
+            const correctCount = 2; // Biomarcadores 1 y 4
+            const correctWhich = "1, 4";
+            
+            const feedback = document.getElementById('ex2-feedback');
+            let message = '';
+            let allCorrect = true;
+            
+            if (Math.abs(alphaAdjusted - correctAlpha) < 0.00001) {
+                message += '✓ α ajustado correcto (0.00625). ';
+            } else {
+                message += '✗ α ajustado incorrecto. Debería ser 0.05/8 = 0.00625. ';
+                allCorrect = false;
+            }
+            
+            if (significantCount === correctCount) {
+                message += '✓ Número de biomarcadores significativos correcto (2). ';
+            } else {
+                message += '✗ Número incorrecto. Solo 2 biomarcadores tienen p < 0.00625. ';
+                allCorrect = false;
+            }
+            
+            if (whichSignificant.replace(/\s/g, '') === correctWhich.replace(/\s/g, '')) {
+                message += '✓ Biomarcadores identificados correctamente (1 y 4).';
+            } else {
+                message += '✗ Biomarcadores incorrectos. Solo el 1 (p=0.008) y 4 (p=0.002) son < 0.00625.';
+                allCorrect = false;
+            }
+            
+            feedback.className = `p-3 rounded ${allCorrect ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`;
+            feedback.textContent = message;
+            feedback.classList.remove('hidden');
+        }
+
+        function checkExercise3() {
+            const q1Answer = document.querySelector('input[name="ex3q1"]:checked');
+            const q2Answer = document.querySelector('input[name="ex3q2"]:checked');
+            
+            const feedback = document.getElementById('ex3-feedback');
+            let message = '';
+            let correctCount = 0;
+            
+            if (q1Answer && q1Answer.value === 'b') {
+                message += '✓ Conclusión estadística correcta: El nuevo analgésico es significativamente más efectivo. ';
+                correctCount++;
+            } else {
+                message += '✗ Conclusión estadística incorrecta. Con p < 0.001, hay diferencia significativa a favor del tratamiento. ';
+            }
+            
+            if (q2Answer && q2Answer.value === 'b') {
+                message += '✓ Interpretación clínica correcta: La diferencia es estadística y clínicamente significativa.';
+                correctCount++;
+            } else {
+                message += '✗ Interpretación clínica incorrecta. Una diferencia de 2.1 puntos en dolor es clínicamente relevante.';
+            }
+            
+            const isAllCorrect = correctCount === 2;
+            feedback.className = `mt-3 p-3 rounded ${isAllCorrect ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`;
+            feedback.textContent = message;
+            feedback.classList.remove('hidden');
+        }
+
+        function submitEvaluation() {
+            const answers = {
+                eval1: 'b', // Z-test cuando σ conocida y n≥30
+                eval2: 'b', // np≥5 y n(1-p)≥5
+                eval3: 'b', // Controlar error Tipo I familiar
+                eval4: 'a', // 0.05/5 = 0.01
+                eval5: 'b', // Probabilidad de observar diferencia si H₀ es cierta
+                eval6: 'b'  // Controla variabilidad individual
+            };
+            
+            let correct = 0;
+            const total = Object.keys(answers).length;
+            const feedback = [];
+            
+            for (const [question, correctAnswer] of Object.entries(answers)) {
+                const selected = document.querySelector(`input[name="${question}"]:checked`);
+                if (selected && selected.value === correctAnswer) {
+                    correct++;
+                    feedback.push(`✓ Pregunta ${question.slice(-1)}: Correcto`);
+                } else {
+                    feedback.push(`✗ Pregunta ${question.slice(-1)}: Incorrecto`);
+                }
+            }
+            
+            const score = (correct / total) * 100;
+            const passed = score >= 70;
+            
+            const resultDiv = document.getElementById('evaluationResult');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const detailedFeedback = document.getElementById('detailedFeedback');
+            
+            scoreDisplay.innerHTML = `
+                <h3 class="text-2xl font-bold ${passed ? 'text-green-600' : 'text-red-600'}">
+                    ${passed ? '¡Excelente trabajo!' : 'Necesitas repasar'}
+                </h3>
+                <p class="text-lg mt-2">Puntuación: ${correct}/${total} (${score.toFixed(1)}%)</p>
+                <p class="mt-2 ${passed ? 'text-green-600' : 'text-red-600'}">
+                    ${passed ? 'Has dominado las pruebas específicas para ciencias de la salud' : 'Repasa los conceptos y vuelve a intentar'}
+                </p>
+            `;
+            
+            detailedFeedback.innerHTML = `
+                <h4 class="font-semibold mb-3">Retroalimentación detallada:</h4>
+                <ul class="space-y-1">
+                    ${feedback.map(item => `<li class="text-sm">${item}</li>`).join('')}
+                </ul>
+                <div class="mt-4 p-3 bg-blue-50 rounded">
+                    <p class="text-sm text-blue-800">
+                        <strong>Recomendación:</strong> ${passed ? 
+                            'Continúa con la OVA 19 para aplicar estos conocimientos en casos integrados.' : 
+                            'Revisa los módulos de z-test, t-test, pruebas de proporciones y corrección de Bonferroni antes de continuar.'}
+                    </p>
+                </div>
+            `;
+            
+            resultDiv.className = `mt-6 p-4 rounded-lg ${passed ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`;
+            resultDiv.classList.remove('hidden');
+            
+            // Scroll to results
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
