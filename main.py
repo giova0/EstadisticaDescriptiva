@@ -36,8 +36,11 @@ def mostrar_inicio(page: ft.Page) -> None:
             ft.Container(height=30),
             ft.Column(
                 [
-                    ft.ElevatedButton("FASES DEL CURSO DE BIOESTADÍSTICA", style=button_style, on_click=lambda e: page.go("/fases")),
-                    ft.ElevatedButton("AMBIENTES VIRTUALES", style=button_style, on_click=lambda e: page.go("/ovas_principal")),
+                    ft.ElevatedButton("OVAS", style=button_style, on_click=lambda e: page.go("/ovas")),
+                    ft.ElevatedButton("Análisis de Datos", style=button_style),
+                    ft.ElevatedButton("Gráficos", style=button_style),
+                    ft.ElevatedButton("Reportes", style=button_style),
+                    ft.ElevatedButton("Configuración", style=button_style),
                 ],
                 spacing=12,
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -108,6 +111,67 @@ def mostrar_menu_ovas(page: ft.Page) -> None:
             ],
             alignment=ft.MainAxisAlignment.CENTER,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        )
+    )
+    page.update()
+
+
+def mostrar_analisis_datos(page: ft.Page) -> None:
+    page.clean()
+    page.title = "Análisis de Datos"
+    page.theme_mode = ft.ThemeMode.LIGHT
+    page.bgcolor = "#f0f0f0"
+
+    button_style = ft.ButtonStyle(
+        color=ft.Colors.WHITE,
+        bgcolor=ft.Colors.BLUE_700,
+        text_style=ft.TextStyle(size=14, weight=ft.FontWeight.BOLD),
+        shape=ft.RoundedRectangleBorder(radius=6),
+        elevation=2,
+    )
+
+    def volver_estadistica(e):
+        page.go("/estadistica")
+
+    contenido = ft.Column(
+        [
+            ft.Text(
+                "ANÁLISIS DE DATOS",
+                size=26,
+                weight=ft.FontWeight.BOLD,
+                color=ft.Colors.BLUE,
+                text_align=ft.TextAlign.CENTER,
+            ),
+            ft.Container(height=30),
+            ft.Image(
+                src="https://i.postimg.cc/rmQj4tr8/Campus1.jpg",
+                width=800,
+                height=600,
+                fit=ft.ImageFit.CONTAIN,
+            ),
+            ft.Container(height=30),
+            ft.Row(
+                [
+                    ft.ElevatedButton("Piso 1", style=button_style),
+                    ft.Container(width=20),
+                    ft.ElevatedButton("Piso 2", style=button_style),
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+            ),
+            ft.Container(height=40),
+            ft.ElevatedButton("◀ Volver", on_click=volver_estadistica, style=button_style),
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+    )
+
+    page.add(
+        ft.Container(
+            width=page.window_width,
+            height=page.window_height,
+            bgcolor="#f8f9fa",
+            content=contenido,
+            alignment=ft.alignment.center,
         )
     )
     page.update()
@@ -3246,12 +3310,6 @@ def route_change(page: ft.Page):
         mostrar_clasificacion_variables_juegos(page)
     elif page.route == "/ovas":
         mostrar_menu_ovas(page)
-    elif page.route == "/fase2":
-        mostrar_fase2(page)
-    elif page.route == "/fase3":
-        mostrar_fase3(page)
-    elif page.route == "/fase4":
-        mostrar_fase4(page)
     elif page.route.startswith("/ova/"):
         clave = page.route.split("/ova/")[-1]
         abrir_ova(page, clave)
